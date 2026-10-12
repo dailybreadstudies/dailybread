@@ -1,0 +1,259 @@
+/* Daily Bread Studies — reader styles (based on John's Oct 11 sample layout) */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --paper: #f9f7f4;
+  --card: #ffffff;
+  --ink: #1e1e1e;
+  --ink-soft: #4a4a4a;
+  --muted: #6b6b6b;
+  --accent: #7a6e62;
+  --accent-soft: #a89480;
+  --accent-faint: #b0a090;
+  --rule: #e8e4df;
+  --tint: #f5f0ea;
+  --serif: 'Source Serif 4', 'Merriweather', Georgia, serif;
+  --display: 'Merriweather', Georgia, serif;
+  --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --hebrew: 'SBL Hebrew', 'Noto Serif Hebrew', 'Times New Roman', serif;
+}
+
+body {
+  background: var(--paper);
+  font-family: var(--serif);
+  color: var(--ink);
+  line-height: 1.75;
+  padding: 2.5rem 1rem 5rem;
+  display: flex;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.reader {
+  max-width: 693px;
+  width: 100%;
+  background: var(--card);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+  border-radius: 6px;
+  padding: 3.25rem 3.25rem 3.75rem;
+  position: relative;
+}
+
+h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.005em; }
+
+.he { font-family: var(--hebrew); direction: rtl; unicode-bidi: embed; font-style: normal; }
+
+/* ── Page header ── */
+.page-title {
+  font-size: 1.9rem; font-weight: 300; text-align: center;
+  margin-bottom: 0.5rem; color: #2c2c2c; letter-spacing: -0.015em;
+}
+.page-parsha {
+  text-align: center; font-family: var(--display); font-size: 0.9rem;
+  font-style: italic; color: var(--muted); margin-bottom: 0.35rem;
+}
+.page-parsha .he { font-size: 0.98rem; color: #8a7d70; margin-left: 0.3em; }
+.page-sub {
+  text-align: center; font-size: 0.92rem; font-style: italic; color: #7a7a7a;
+  margin-bottom: 2.25rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--rule);
+}
+.page-sub a { color: inherit; text-decoration: none; white-space: nowrap; }
+.page-sub a:hover { color: #5a4a3a; text-decoration: underline; text-decoration-color: #c9b8a8; }
+
+/* ── Calendar intro ── */
+.calendar-intro { margin: 0 0 2.5rem; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); }
+.calendar-intro p { margin-bottom: 1rem; }
+.calendar-intro p:last-child { margin-bottom: 0; }
+.lead {
+  font-family: var(--sans); font-weight: 700; font-size: 1.02rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-right: 0.2em;
+}
+.history-link {
+  color: var(--ink-soft); text-decoration: underline; text-decoration-color: #c9b8a8;
+  text-underline-offset: 2px; text-decoration-thickness: 1px; white-space: nowrap;
+}
+.history-link:hover { color: #6b5a48; text-decoration-color: #6b5a48; }
+
+/* ── Blessings ── */
+.blessings-section { margin: 0 0 2.75rem; }
+.blessings-title {
+  text-align: center; font-family: var(--display); font-size: 1.02rem; font-style: italic;
+  color: var(--muted); letter-spacing: 0.02em; margin-bottom: 1.5rem;
+}
+.blessing { margin-bottom: 1.55rem; font-size: 1rem; line-height: 1.75; color: #3d3d3d; }
+.blessing .hebrew-blessing {
+  display: block; font-family: var(--hebrew); font-size: 1.38rem; line-height: 2;
+  direction: rtl; text-align: right; margin: 0.65rem 0 0.55rem;
+}
+.blessing .lead-he { font-size: 1.7rem; color: var(--accent); margin-left: 0.15em; }
+.blessing .scripture-quote { font-style: italic; color: #5a5a5a; }
+.blessings-divider { border: none; border-top: 1px solid var(--rule); margin: 2.5rem auto; max-width: 180px; }
+
+/* ── Portion heading ── */
+.division-label {
+  text-align: center; font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-faint); margin-bottom: 1.1rem;
+}
+.division-label .he {
+  font-size: 1.02rem; font-weight: 400; letter-spacing: 0; color: #c9b8a8;
+  margin-left: 0.4em; text-transform: none;
+}
+.chapter-head { font-size: 1.5rem; text-align: center; margin-bottom: 0.3rem; color: #1f1f1f; }
+.chapter-sub {
+  text-align: center; font-size: 1.02rem; font-style: italic; color: var(--muted);
+  margin-bottom: 2rem; font-weight: 300;
+}
+.chapter-head + .scripture { margin-top: 1.7rem; }
+
+/* ── Scripture (BSB) ── */
+.scripture { font-size: 1.1rem; line-height: 1.85; color: #1b1b1b; }
+.scripture p { margin-bottom: 1.05rem; }
+.scripture .m { text-indent: 0; }
+.scripture .pmo, .scripture .pi1 { padding-left: 1.4em; }
+.scripture .pc { text-align: center; }
+
+/* Poetry: hanging lines, second level indented */
+.scripture .q1, .scripture .q2, .scripture .qr, .scripture .li1, .scripture .li2 {
+  margin: 0; padding-left: 2.2em; text-indent: -1.4em;
+}
+.scripture .q2 { padding-left: 3.6em; }
+.scripture .li2 { padding-left: 3.6em; }
+.scripture .qr { text-align: right; font-style: italic; padding-left: 0; text-indent: 0; }
+.scripture .poetry-end { margin-bottom: 1.05rem; }
+.scripture .stanza { height: 0.8rem; }
+.scripture .qa {
+  font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent-faint); margin: 1.2rem 0 0.3rem;
+}
+.scripture .d { font-style: italic; color: #5a5a5a; font-size: 0.98rem; margin-bottom: 0.8rem; }
+
+/* BSB section headings within the reading */
+.scripture .s1 {
+  font-family: var(--display); font-size: 1.02rem; font-weight: 700; color: #3d352e;
+  margin: 1.8rem 0 0.15rem; line-height: 1.4; letter-spacing: 0.005em;
+}
+.scripture .s2 {
+  font-family: var(--display); font-size: 0.95rem; font-style: italic; color: #5a4a3a;
+  margin: 1.4rem 0 0.4rem;
+}
+.scripture .r {
+  font-size: 0.86rem; font-style: italic; color: #8a7d70; margin-bottom: 0.6rem;
+}
+.scripture .ms {
+  text-align: center; font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin: 1.6rem 0 0.2rem;
+}
+.scripture .mr { text-align: center; font-style: italic; font-size: 0.86rem; color: #8a7d70; margin-bottom: 1rem; }
+.scripture > :first-child { margin-top: 0; }
+
+.verse-num {
+  font-size: 0.7em; vertical-align: super; line-height: 0; color: var(--accent-soft);
+  font-weight: 500; margin-right: 0.3em; font-family: var(--sans); text-indent: 0;
+}
+.chapter-num {
+  font-family: var(--display); font-size: 1.6em; line-height: 1; color: var(--accent);
+  margin-right: 0.25em; vertical-align: -0.12em;
+}
+.lord { font-variant: small-caps; letter-spacing: 0.04em; }
+.xt { font-style: normal; }
+
+/* ── BSB footnote markers & popover ── */
+.fn-ref {
+  font: 500 0.66em/1 var(--sans); vertical-align: baseline; position: relative; top: -0.6em;
+  color: #9a7b5c;
+  background: none; border: none; cursor: pointer; padding: 0 0.12em; margin: 0 0.05em;
+  border-radius: 2px; text-indent: 0; font-style: italic;
+}
+.fn-ref:hover, .fn-ref[aria-expanded="true"] { color: #5a4a3a; background: #f0ebe5; }
+.fn-ref:focus-visible { outline: 2px solid #c9b8a8; outline-offset: 1px; }
+
+.fn-pop {
+  position: absolute; z-index: 100; width: min(300px, calc(100% - 2rem));
+  background: #3d352e; color: #f5f0eb; border-radius: 6px; padding: 0.75rem 0.95rem;
+  font: 400 0.86rem/1.55 var(--serif); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+}
+.fn-pop[hidden] { display: none; }
+.fn-pop .fn-pop-ref {
+  display: block; font: 600 0.68rem/1.4 var(--sans); letter-spacing: 0.12em;
+  text-transform: uppercase; color: #c9b8a8; margin-bottom: 0.25rem;
+}
+.fn-pop i { color: #fff; }
+.fn-pop::after {
+  content: ''; position: absolute; left: var(--arrow-x, 50%); margin-left: -6px;
+  border: 6px solid transparent;
+}
+.fn-pop.below::after { bottom: 100%; border-bottom-color: #3d352e; }
+.fn-pop.above::after { top: 100%; border-top-color: #3d352e; }
+
+/* ── Footnote apparatus ── */
+.apparatus { margin-top: 2.25rem; padding-top: 1.15rem; border-top: 1px solid var(--rule); }
+.apparatus-title {
+  font: 600 0.76rem/1.4 var(--sans); text-transform: uppercase; letter-spacing: 0.1em;
+  color: #8a7d70; margin-bottom: 0.85rem;
+}
+.footnote-list p {
+  font-size: 0.88rem; line-height: 1.6; color: var(--ink-soft); margin-bottom: 0.5rem;
+  padding-left: 1.6rem; text-indent: -1.6rem; scroll-margin-top: 1.5rem; border-radius: 4px;
+  transition: background 0.6s;
+}
+.footnote-list p.flash { background: #f5ede2; }
+.footnote-list .fn-label {
+  display: inline-block; width: 1.6rem; text-indent: 0; font: italic 600 0.85em var(--sans);
+  color: #9a7b5c; text-decoration: none;
+}
+.footnote-list .fn-label:hover { color: #5a4a3a; }
+.footnote-list .fn-verse { font-weight: 600; color: var(--accent); margin-right: 0.35em; font-family: var(--sans); font-size: 0.85em; }
+.footnote-list .empty { font-style: italic; color: #8a8a8a; }
+
+/* ── Portions & navigation ── */
+.portion { display: none; }
+.portion.active { display: block; animation: fadeIn 0.3s ease-in; }
+@media (prefers-reduced-motion: reduce) { .portion.active { animation: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.nav-bar {
+  margin-top: 3.25rem; padding-top: 1.7rem; border-top: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: center; gap: 0.9rem;
+}
+.nav-btn {
+  font: 500 0.8rem/1.2 var(--sans); letter-spacing: 0.05em; text-transform: uppercase;
+  color: #8a7d70; background: transparent; border: 1px solid #d4c8b8;
+  padding: 0.65rem 1.25rem; border-radius: 4px; cursor: pointer; transition: all 0.2s;
+}
+.nav-btn:hover:not(:disabled) { background: var(--tint); border-color: var(--accent-soft); color: #5a4a3a; }
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.nav-btn.primary { background: #8a7d70; color: #fff; border-color: #8a7d70; }
+.nav-btn.primary:hover { background: #6b5a48; border-color: #6b5a48; color: #fff; }
+.nav-indicator {
+  font: 500 0.7rem/1.4 var(--sans); letter-spacing: 0.12em; color: var(--accent-soft);
+  text-transform: uppercase; text-align: center;
+}
+.nav-indicator .division-name { display: block; font-size: 0.66rem; letter-spacing: 0.18em; color: var(--accent-faint); margin-top: 0.15em; font-weight: 400; }
+
+.reader-footer { text-align: center; font-size: 0.8rem; color: var(--accent-soft); margin-top: 1.85rem; font-style: italic; }
+.status { text-align: center; color: var(--muted); font-style: italic; padding: 3rem 0; }
+
+@media (max-width: 700px) {
+  body { padding: 1rem 0.5rem 3rem; }
+  .reader { padding: 2rem 1.25rem 2.5rem; }
+  .page-title { font-size: 1.5rem; }
+  .chapter-head { font-size: 1.25rem; }
+  .scripture { font-size: 1.04rem; }
+  .lead { font-size: 0.92rem; }
+  .blessing .hebrew-blessing { font-size: 1.25rem; }
+  .blessing .lead-he { font-size: 1.5rem; }
+  .scripture .q1, .scripture .li1 { padding-left: 1.8em; text-indent: -1.2em; }
+  .scripture .q2, .scripture .li2 { padding-left: 2.8em; }
+  .nav-bar { flex-direction: column; align-items: stretch; }
+  .nav-indicator { order: -1; margin-bottom: 0.5rem; }
+}
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .reader { box-shadow: none; padding: 0; }
+  .portion { display: block !important; page-break-before: always; }
+  .portion:first-of-type { page-break-before: auto; }
+  .nav-bar, .fn-pop { display: none !important; }
+}

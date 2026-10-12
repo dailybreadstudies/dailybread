@@ -3,27 +3,48 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Daily Bread Studies</title>
-  <meta name="description" content="Bible reader and studies for the Daily Bread reading plan: Torah, Prophets, Writings and Apostles">
-  <style>
-    :root { --bg: #faf7f0; --text: #2b2620; --muted: #6b6257; --accent: #8a5a2b; }
-    @media (prefers-color-scheme: dark) {
-      :root { --bg: #1d1a16; --text: #ede6da; --muted: #a89d8e; --accent: #d9a46a; }
-    }
-    body { margin: 0; background: var(--bg); color: var(--text);
-      font-family: Georgia, "Times New Roman", serif; line-height: 1.6; }
-    main { max-width: 640px; margin: 0 auto; padding: 4rem 16px; text-align: center; }
-    h1 { font-size: 2.4rem; margin: 0 0 .5rem; color: var(--accent); }
-    p { color: var(--muted); font-size: 1.1rem; }
-    .sections { margin-top: 2rem; font-variant: small-caps; letter-spacing: .05em; }
-  </style>
+  <title>My Daily Bread Readings</title>
+  <meta name="description" content="Daily Bible readings and studies for the Daily Bread reading plan: Torah, Prophets, Writings and Apostles, in the Berean Standard Bible.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Hebrew:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/reader.css">
 </head>
 <body>
-  <main>
-    <h1>Daily Bread Studies</h1>
-    <p>Bible reader and studies for the Daily Bread reading plan.</p>
-    <p class="sections">Torah · Prophets · Writings · Apostles</p>
-    <p>Coming soon.</p>
-  </main>
+
+<main class="reader" id="reader">
+  <h1 class="page-title">My Daily Bread Readings</h1>
+  <div id="day-header"></div>
+  <div id="portions"><p class="status">Loading today’s readings…</p></div>
+  <p class="reader-footer">
+    Scripture and footnotes from the Berean Standard Bible (BSB), dedicated to the public domain.
+  </p>
+  <div class="fn-pop" id="fn-pop" role="dialog" hidden></div>
+</main>
+
+<!-- Blessings shown before the first portion each day -->
+<template id="blessings-template">
+  <div class="blessings-section">
+    <p class="blessings-title">Blessings</p>
+
+    <div class="blessing">
+      <span class="lead">Blessed</span> are you, Lord our God, King of the universe, who has sanctified us with his commandments and has commanded us to engage in study of the words of Torah. Please, Lord our God, make the words of your Torah sweet in our mouth, and in the mouth of your people, the house of Israel. May we and our descendants, and the descendants of your people, the house of Israel, all know your name and study your Torah for its own sake. Blessed are you, Lord, who teaches Torah to his people Israel.
+      <span class="hebrew-blessing"><span class="lead-he">בָּרוּךְ</span> אַתָּה יי אֱלֹהֵֽינוּ מֶֽלֶךְ הָעוֹלָם, אֲשֶׁר קִדְּשָֽׁנוּ בְּמִצְוֹתָיו, וְצִוָּֽנוּ לַעֲסֹק בְּדִבְרֵי תוֹרָה. וְהַעֲרֶב נָא יי אֱלֹהֵֽינוּ אֶת דִּבְרֵי תוֹרָתְךָ בְּפִֽינוּ, וּבְפִי עַמְּךָ בֵּית יִשְׂרָאֵל, וְנִהְיֶה אֲנַֽחְנוּ וְצֶאֱצָאֵֽינוּ, וְצֶאֱצָאֵי עַמְּךָ בֵּית יִשְׂרָאֵל, כֻּלָּֽנוּ יוֹדְעֵי שְׁמֶֽךָ, וְלוֹמְדֵי תוֹרָתֶֽךָ לִשְׁמָהּ. בָּרוּךְ אַתָּה יי, הַמְלַמֵּד תּוֹרָה לְעַמּוֹ יִשְׂרָאֵל.</span>
+    </div>
+
+    <div class="blessing">
+      <span class="lead">Blessed</span> are you, Lord our God, King of the universe, who gives the Torah of truth and the good news of salvation to his people Israel and to all peoples through his Son, Yeshua the Messiah, our Master. Blessed are you, Lord, giver of the Torah.
+      <span class="hebrew-blessing"><span class="lead-he">בָּרוּךְ</span> אַתָּה יי אֱלֹהֵֽינוּ מֶֽלֶךְ הָעוֹלָם, אֲשֶׁר נוֹתֵן תּוֹרָת אֶמֶת וּבְשׂוֹרַת יְשׁוּעָה לְעַמּוֹ יִשׂרָאֵל וּלְכָל הָעַמִּים עַל־יְדֵי בְּנוֹ יֵשׁוּעַ הַמָשִׁיחַ אֲדֹנֵינוּ.</span>
+    </div>
+
+    <div class="blessing">
+      <span class="scripture-quote">Open my eyes, that I may behold wondrous things from your Torah.</span>
+      <span class="hebrew-blessing">גַּל־עֵינַי וְאַבִּיטָה נִפְלָאוֹת מִתּוֹרָתֶךָ׃</span>
+    </div>
+  </div>
+  <hr class="blessings-divider">
+</template>
+
+<script src="assets/reader.js"></script>
 </body>
 </html>
