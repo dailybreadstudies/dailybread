@@ -280,8 +280,14 @@
       }
     }
     var orig = settings.original !== 'off' && origCache[book.id + ':data'];
-    if (orig) html = renderOriginal(units, orig, multiChapter);
-    return { html: html, notes: notes, titles: titles, originalOnly: !!orig && settings.original === 'only' };
+    var tnotes = [];
+    if (orig) {
+      html = renderOriginal(units, orig, multiChapter);
+      if (orig.n) units.forEach(function (u) {
+        (orig.n[u.c + ':' + u.v] || []).forEach(function (t) { tnotes.push({ ref: u.c + ':' + u.v, html: t }); });
+      });
+    }
+    return { html: html, notes: notes, titles: titles, originalOnly: !!orig && settings.original === 'only', textNotes: tnotes };
   }
 
   // ── Original languages (Hebrew: MAM via Sefaria; Greek: SBLGNT) ──
@@ -337,6 +343,15 @@
     });
     flush();
     return '<div class="orig-only">' + html + '</div>';
+  }
+
+  function renderTextNotes(list) {
+    if (!list || !list.length) return '';
+    return '<div class="apparatus tc-apparatus"><div class="apparatus-title">Greek Textual Notes</div><div class="footnote-list tc-list">' +
+      list.map(function (n) { return '<p><span class="fn-verse">' + n.ref + '</span><span class="tc-note" lang="grc">' + n.html + '</span></p>'; }).join('') +
+      '</div><p class="tc-key">SBLGNT reading first, then the editions that agree; after ] the other readings. ' +
+      'WH Westcott–Hort · Treg Tregelles · NA28 Nestle–Aland 28th ed. · NIV Greek text behind the NIV · RP Robinson–Pierpont (Byzantine) · – omitted · + added. ' +
+      'The marks <span class="tcm-key">⸀ ⸂ ⸃</span> in the Greek show where a note applies.</p></div>';
   }
 
   function renderNotes(notes, refText) {
@@ -397,6 +412,7 @@
         html += '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
           renderNotes(passage.notes, displayRef(r)) + '</div></div>';
       }
+      html += renderTextNotes(passage.textNotes);
       html += '<nav class="nav-bar">' +
         '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
         '<span class="nav-indicator">' + n + ' of ' + total + '<span class="division-name">' + p.label + '</span></span>' +
@@ -951,6 +967,23 @@
     for (var i = 0; i < GROUPS.length; i++) if (GROUPS[i][2].indexOf(id) >= 0) return GROUPS[i];
     return GROUPS[0];
   }
+  // Book names in the Bible browser follow the Hebrew names / Messianic options
+  var HEB_BOOKS = { JOS: 'Yehoshua', RUT: 'Rut', '1SA': '1 Shmuel', '2SA': '2 Shmuel', NEH: 'Nechemyah', EST: 'Ester',
+    JOB: 'Iyov', ISA: 'Yeshayahu', JER: 'Yirmeyahu', EZK: 'Yechezkel', HOS: 'Hoshea', JOL: 'Yoel', OBA: 'Ovadyah',
+    JON: 'Yonah', MIC: 'Michah', NAM: 'Nachum', HAB: 'Chavakuk', ZEP: 'Tzefanyah', HAG: 'Chaggai', ZEC: 'Zecharyah',
+    MAT: 'Mattityahu', JHN: 'Yochanan', '1JN': '1 Yochanan', '2JN': '2 Yochanan', '3JN': '3 Yochanan', JAS: 'Yaakov',
+    JUD: 'Yehudah', '1PE': '1 Kefa', '2PE': '2 Kefa' };
+  var MES_BOOKS = { JAS: 'Jacob', JUD: 'Judah' };
+  function bookLabel(id) {
+    if (settings.hebrewNames && HEB_BOOKS[id]) return HEB_BOOKS[id];
+    if (settings.messianic && MES_BOOKS[id]) return MES_BOOKS[id];
+    return bookName(id);
+  }
+  function labelRef(book, c) {
+    var name = bookLabel(book);
+    if (book === 'PSA' && name === 'Psalms') name = 'Psalm';
+    return name + ' ' + c;
+  }
   function chapterCount(id) {
     var b = bookIndex.filter(function (x) { return x.id === id; })[0];
     return b ? b.chapters : 0;
@@ -973,6 +1006,12 @@
     var key = String(text).toLowerCase().replace(/[\s.]/g, '').replace(/^i{1,3}(?=[a-z])/, function (r) { return r.length; });
     if (!key) return null;
     if (ALIASES[key]) return ALIASES[key];
+    var other = [HEB_BOOKS, MES_BOOKS];
+    for (var oi = 0; oi < other.length; oi++) {
+      for (var oid in other[oi]) {
+        if (other[oi][oid].toLowerCase().replace(/\s/g, '') === key) return oid;
+      }
+    }
     var exact = bookIndex.filter(function (b) { return b.name.toLowerCase().replace(/\s/g, '') === key; })[0];
     if (exact) return exact.id;
     if (/^psalms?$/.test(key)) return 'PSA';
@@ -1057,7 +1096,7 @@
     var n = neighbour(current.book, current.c, dir);
     if (n) loadChapter(n.book, n.c);
   }
-  function chapterLabel(n) { return n ? displayRef({ book: n.book, c1: n.c, v1: 1, c2: n.c, v2: null }) : ''; }
+  function chapterLabel(n) { return n ? labelRef(n.book, n.c) : ''; }
 
   function renderChapter(data, c, v) {
     current = { bible: true, book: data.id, c: c, bookData: data };
@@ -1066,7 +1105,7 @@
     var passage = renderPassage(data, r, 1);
     var g = groupOf(data.id);
     var prev = neighbour(data.id, c, -1), next = neighbour(data.id, c, 1);
-    var ref = displayRef(r);
+    var ref = labelRef(data.id, c);
     document.getElementById('day-header').innerHTML =
       '<p class="bible-back"><button type="button" class="back-today">&larr; Back to today’s Daily Bread</button></p>';
     document.title = ref + ' · Daily Bread Online';
@@ -1079,10 +1118,10 @@
     if (passage.titles.length) html += '<p class="chapter-sub">' + passage.titles.join(' &middot; ') + '</p>';
     html += '<div class="scripture">' + passage.html + '</div>' +
       (passage.originalOnly ? '' : '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
-      renderNotes(passage.notes, ref) + '</div></div>') +
+      renderNotes(passage.notes, ref) + '</div></div>') + renderTextNotes(passage.textNotes) +
       '<nav class="nav-bar">' +
         '<button class="nav-btn" data-chapter="-1"' + (prev ? '' : ' disabled') + '>&larr; ' + (prev ? chapterLabel(prev) : 'Previous') + '</button>' +
-        '<span class="nav-indicator">Bible<span class="division-name">' + escapeAttr(bookName(data.id)) + '</span></span>' +
+        '<span class="nav-indicator">Bible<span class="division-name">' + escapeAttr(bookLabel(data.id)) + '</span></span>' +
         '<button class="nav-btn primary" data-chapter="1"' + (next ? '' : ' disabled') + '>' + (next ? chapterLabel(next) : 'Next') + ' &rarr;</button>' +
       '</nav></section>';
     document.getElementById('portions').innerHTML = html;
@@ -1109,14 +1148,14 @@
       html += '<form class="bp-go" autocomplete="off"><input type="text" class="bp-input" placeholder="Go to… e.g. John 3:16" aria-label="Go to a passage" enterkeyhint="go">' +
         '<button type="submit" class="bp-go-btn">Go</button></form><p class="bp-msg" hidden></p>';
       GROUPS.forEach(function (g) {
-        html += '<p class="bp-group">' + g[0] + ' <span class="he">' + g[1] + '</span></p><div class="bp-books">' +
-          g[2].map(function (id) { return '<button type="button" class="bp-book" data-book="' + id + '">' + escapeAttr(bookName(id)) + '</button>'; }).join('') +
+        html += '<p class="bp-group">' + g[0] + ' <span class="he">' + g[1].replace(/[\u0591-\u05C7]/g, '') + '</span></p><div class="bp-books">' +
+          g[2].map(function (id) { return '<button type="button" class="bp-book" data-book="' + id + '">' + escapeAttr(bookLabel(id)) + '</button>'; }).join('') +
           '</div>';
       });
     } else {
       var n = chapterCount(pickerBook);
       html = '<div class="sp-head"><button type="button" class="bp-back" data-bible-books>&lsaquo; Books</button>' +
-        '<span class="bp-bookname">' + escapeAttr(bookName(pickerBook)) + '</span>' +
+        '<span class="bp-bookname">' + escapeAttr(bookLabel(pickerBook)) + '</span>' +
         '<button type="button" class="sp-close" data-bible-close aria-label="Close">&times;</button></div>' +
         '<div class="bp-chapters">';
       for (var i = 1; i <= n; i++) {
@@ -1173,6 +1212,27 @@
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !biblePanel.hidden) { openBible(false); bibleBtn.focus(); }
+  });
+
+  // Quick "Go to" field beside the Bible button
+  var quick = document.getElementById('quick-go');
+  if (quick && window.matchMedia && window.matchMedia('(max-width: 700px)').matches) {
+    quick.querySelector('input').placeholder = 'Go to…';
+  }
+  if (quick) quick.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var input = quick.querySelector('input');
+    var t = parseTarget(input.value);
+    if (!t) {
+      quick.classList.add('qg-miss');
+      input.setAttribute('aria-invalid', 'true');
+      setTimeout(function () { quick.classList.remove('qg-miss'); }, 900);
+      return;
+    }
+    input.removeAttribute('aria-invalid');
+    input.value = '';
+    input.blur();
+    loadChapter(t.book, t.c, t.v);
   });
 
   // Chapter arrows, back-to-today, and scripture reference previews

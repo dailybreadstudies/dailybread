@@ -11,7 +11,7 @@ derivative (verse numbers aligned to English versification; markup simplified) a
 
 **Greek (Matthew–Revelation):** *SBL Greek New Testament*, copyright 2010 Society of Biblical Literature
 and Logos Bible Software. Source: https://github.com/LogosBible/SBLGNT.
-License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: textual-apparatus markers
-(⸀ ⸁ ⸂ ⸃ ⸄ ⸅) removed; verse numbers aligned to the BSB.
+License: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Includes the SBLGNT apparatus notes
+(`n` in each Greek file) and its markers (⸀ ⸁ ⸂ ⸃ ⸄ ⸅); verse numbers aligned to the BSB.
 
 Rebuild with `tools/build_originals.py`.

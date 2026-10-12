@@ -188,7 +188,8 @@ def build_greek(book, path, report):
     for line in open(path, encoding='utf-8'):
         m = re.match(r'^\S+ (\d+):(\d+)\t(.*)$', line.rstrip('\n'))
         if m:
-            t = re.sub('[⸀-⸅]', '', m.group(3))
+            # keep the apparatus markers, wrapped so the reader can style them
+            t = re.sub('([\u2E00-\u2E05])', r'<span class="tcm">\1</span>', m.group(3))
             grk[(int(m.group(1)), int(m.group(2)))] = re.sub(r'\s+', ' ', t).strip()
     out, used = {}, set()
     for c, vs in bsb_verses(book):
@@ -212,6 +213,26 @@ def build_greek(book, path, report):
     return out
 
 
+def greek_notes(book, app_path):
+    """SBLGNT apparatus → {'c:v': [note, …]} keyed by BSB verse numbers."""
+    owner = {}
+    for (b, c, v), targets in OVERRIDES.items():
+        if b == book:
+            for t in targets:
+                owner.setdefault((t[0], t[1]), f'{c}:{v}')
+    notes, cur = {}, None
+    if not os.path.exists(app_path):
+        return notes
+    for m in re.finditer(r'<verse>[^<]*?(\d+):(\d+)</verse>|<note>([^<]*)</note>', open(app_path, encoding='utf-8').read()):
+        if m.group(1):
+            c, v = int(m.group(1)), int(m.group(2))
+            cur = owner.get((c, v), f'{c}:{v}')
+        elif cur:
+            text = re.sub(r'^\s*(?:•|\d+(?::\d+)?(?:[–-]\d+)?)\s*', '', m.group(3)).strip()
+            notes.setdefault(cur, []).append(html.escape(text, quote=False))
+    return notes
+
+
 def main():
     heb_dir, grk_dir, out_dir = sys.argv[1], sys.argv[2], sys.argv[3]
     os.makedirs(out_dir, exist_ok=True)
@@ -222,7 +243,8 @@ def main():
                   ensure_ascii=False, separators=(',', ':'))
     for book, name in GRK_FILES.items():
         v = build_greek(book, os.path.join(grk_dir, name + '.txt'), report)
-        json.dump({'id': book, 'lang': 'grc', 'v': v}, open(os.path.join(out_dir, book + '.json'), 'w', encoding='utf-8'),
+        n = greek_notes(book, os.path.join(grk_dir, '..', '..', 'sblgntapp', 'xml', name + '.xml'))
+        json.dump({'id': book, 'lang': 'grc', 'v': v, 'n': n}, open(os.path.join(out_dir, book + '.json'), 'w', encoding='utf-8'),
                   ensure_ascii=False, separators=(',', ':'))
     print('\n'.join(report) if report else 'all verses aligned')
     print(f'{len(report)} alignment notes')
