@@ -194,7 +194,7 @@
     header += '<p class="page-sub">' + dateText + (day.hebrewDate ? ' / ' + day.hebrewDate : '') +
       refs.map(function (r, i) { return ' &middot; <a href="#' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join('') + '</p>';
     document.getElementById('day-header').innerHTML = header;
-    document.title = 'Daily Bread · ' + dateText;
+    document.title = 'My Daily Bread Studies · ' + dateText;
 
     // Portions
     var total = day.portions.length;
