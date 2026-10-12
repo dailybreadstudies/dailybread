@@ -282,10 +282,13 @@
     var orig = settings.original !== 'off' && origCache[book.id + ':data'];
     var tnotes = [];
     if (orig) {
-      html = renderOriginal(units, orig, multiChapter);
+      // Greek textual notes, numbered in reading order so the k-th marker opens the k-th note
       if (orig.n) units.forEach(function (u) {
-        (orig.n[u.c + ':' + u.v] || []).forEach(function (t) { tnotes.push({ ref: u.c + ':' + u.v, html: t }); });
+        (orig.n[u.c + ':' + u.v] || []).forEach(function (t) {
+          tnotes.push({ id: 'p' + pIndex + '-tn' + tnotes.length, ref: u.c + ':' + u.v, html: t });
+        });
       });
+      html = renderOriginal(units, orig, multiChapter, tnotes);
     }
     return { html: html, notes: notes, titles: titles, originalOnly: !!orig && settings.original === 'only', textNotes: tnotes };
   }
@@ -299,15 +302,26 @@
     }
     return origCache[id];
   }
-  function origText(orig, key) {
+  function origText(orig, key, link) {
     var t = orig.v[key];
     if (!t) return '';
+    if (link) t = link(t);
     if (orig.lang === 'he' && !settings.cantillation) {
       t = t.replace(/[\u0591-\u05AF\u05BD]/g, '').replace(/\s*\u05C0\s*/g, ' ').replace(/\u2009/g, '');
     }
     return t.replace(/\s{2,}/g, ' ');
   }
-  function renderOriginal(units, orig, multiChapter) {
+  function renderOriginal(units, orig, multiChapter, tnotes) {
+    var markerNo = 0;
+    // Opening apparatus marks (⸀ ⸁ ⸂ ⸄) become buttons that open their note; closing marks stay plain
+    var linkMarks = function (t) {
+      return t.replace(/<span class="tcm">([\u2E00\u2E01\u2E02\u2E04])<\/span>/g, function (all, mk) {
+        var n = tnotes && tnotes[markerNo++];
+        if (!n) return all;
+        return '<button type="button" class="fn-ref tcm-ref" id="' + n.id + '-ref" data-fn="' + n.id +
+          '" aria-label="Greek textual note" aria-expanded="false">' + mk + '</button>';
+      });
+    };
     var lang = orig.lang === 'he' ? 'he' : 'grc';
     var attrs = ' class="vp-orig ' + lang + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '');
     var num = function (u) {
@@ -318,7 +332,7 @@
     var html = '';
     if (settings.original === 'under') {
       units.forEach(function (u) {
-        var o = origText(orig, u.c + ':' + u.v);
+        var o = origText(orig, u.c + ':' + u.v, linkMarks);
         html += '<div class="vp' + (u.v === 0 ? ' vp-title' : '') + '"><p class="vp-en">' + num(u) + u.html + '</p>' +
           (o ? '<p' + attrs + '>' + o + '</p>' : '') + '</div>';
       });
@@ -328,7 +342,7 @@
     var para = '';
     var flush = function () { if (para) html += '<p' + attrs.replace('vp-orig', 'vp-orig vo-para') + '>' + para + '</p>'; para = ''; };
     units.forEach(function (u) {
-      var o = origText(orig, u.c + ':' + u.v);
+      var o = origText(orig, u.c + ':' + u.v, linkMarks);
       if (!o) return;
       var n = u.v === 0 ? '' : '<sup class="verse-num" data-v="' + u.v + '">' + u.v + '</sup>';
       if (u.poetic || u.v === 0) {
@@ -347,9 +361,14 @@
 
   function renderTextNotes(list) {
     if (!list || !list.length) return '';
-    return '<div class="apparatus tc-apparatus"><div class="apparatus-title">Greek Textual Notes</div><div class="footnote-list tc-list">' +
-      list.map(function (n) { return '<p><span class="fn-verse">' + n.ref + '</span><span class="tc-note" lang="grc">' + n.html + '</span></p>'; }).join('') +
-      '</div><p class="tc-key">SBLGNT reading first, then the editions that agree; after ] the other readings. ' +
+    var last = '';
+    return '<div class="apparatus tc-apparatus"><div class="apparatus-title">Greek Textual Notes</div><p class="tc-run">' +
+      list.map(function (n) {
+        var label = n.ref !== last ? '<b class="fn-verse">' + n.ref + '</b>' : '<span class="tc-sep">•</span>';
+        last = n.ref;
+        return '<span class="tc-item" id="' + n.id + '">' + label + '<span class="tc-note" lang="grc">' + n.html + '</span></span>';
+      }).join(' ') +
+      '</p><p class="tc-key">SBLGNT reading first, then the editions that agree; after ] the other readings. ' +
       'WH Westcott–Hort · Treg Tregelles · NA28 Nestle–Aland 28th ed. · NIV Greek text behind the NIV · RP Robinson–Pierpont (Byzantine) · – omitted · + added. ' +
       'The marks <span class="tcm-key">⸀ ⸂ ⸃</span> in the Greek show where a note applies.</p></div>';
   }
@@ -490,6 +509,8 @@
     var clone = row.cloneNode(true);
     var label = clone.querySelector('.fn-label');
     var verse = clone.querySelector('.fn-verse');
+    var sep = clone.querySelector('.tc-sep');
+    if (sep) sep.remove();
     if (label) label.remove();
     var v = verse ? verse.textContent : '';
     if (verse) verse.remove();

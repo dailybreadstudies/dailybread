@@ -325,8 +325,8 @@ html.name-small .lord { text-transform: none; font-variant: small-caps; letter-s
 .nav-indicator .division-name { display: block; font-size: 0.66rem; letter-spacing: 0.18em; color: var(--accent-faint); margin-top: 0.15em; font-weight: 400; }
 
 .reader-footer { margin-top: 3.5rem; padding-top: 1.3rem; border-top: 1px solid var(--rule);
-  font: 400 0.7rem/1.9 var(--sans); color: var(--faint-text); text-align: center; letter-spacing: 0.015em; }
-.reader-footer p { margin: 0 auto 0.55rem; max-width: 34rem; }
+  font: 400 0.7rem/1.9 var(--sans); color: var(--faint-text); text-align: left; letter-spacing: 0.015em; }
+.reader-footer p { margin: 0 0 0.55rem; }
 .status { text-align: center; color: var(--muted); font-style: italic; padding: 3rem 0; }
 
 /* ── Settings button [ A / א ] and panel ── */
@@ -454,7 +454,12 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .tcm { font-size: 0.62em; color: var(--accent-soft); vertical-align: 0.45em; margin: 0 0.05em; font-family: var(--sans); }
 .vp-en .tcm { display: none; }
 .tc-note { font-family: var(--greek), var(--serif); font-size: 1.04em; }
-.tcm-key { font-family: var(--greek), serif; color: var(--accent-soft); letter-spacing: 0.1em; }
+.tc-run { font-size: 0.9rem; line-height: 1.75; color: var(--ink-soft); }
+.tc-item .fn-verse { font: 600 0.8em var(--sans); color: var(--accent); margin-right: 0.3em; }
+.tc-sep { color: var(--accent-faint); margin-right: 0.3em; }
+.tc-item { scroll-margin-top: 1.5rem; border-radius: 3px; transition: background 0.6s; }
+.tcm-ref { font-family: var(--greek), serif; font-style: normal; font-size: 0.62em; color: var(--accent-soft); top: -0.45em; padding: 0 0.1em; }
+.tcm-key { font-family: var(--greek), serif; font-size: 1.3em; color: var(--accent-soft); letter-spacing: 0.12em; }
 .tc-key { font: 400 0.72rem/1.7 var(--sans); color: var(--faint-text); margin-top: 0.7rem; }
 
 /* Quick "Go to" field */
