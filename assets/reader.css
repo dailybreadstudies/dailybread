@@ -133,12 +133,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   margin-bottom: 0.5rem; color: var(--heading); letter-spacing: -0.015em;
 }
 .page-date {
-  text-align: center; font-family: var(--display); font-size: 0.92rem; font-style: italic;
-  color: var(--muted); margin-bottom: 0.25rem;
+  text-align: center; font-family: var(--display); font-size: 1rem; color: var(--accent);
+  margin-bottom: 0.25rem;
 }
 .page-parsha {
-  text-align: center; font-family: var(--display); font-size: 1rem; color: var(--accent);
-  margin-bottom: 0.6rem;
+  text-align: center; font-family: var(--display); font-size: 0.92rem; font-style: italic;
+  color: var(--muted); margin-bottom: 0.6rem;
 }
 .page-refs {
   text-align: center; font-size: 0.9rem; font-style: italic; color: var(--muted);
@@ -212,7 +212,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--accent-faint); margin: 1.2rem 0 0.3rem;
 }
-.scripture .d { font-style: italic; color: var(--ink-soft); font-size: 0.98rem; margin-bottom: 0.8rem; }
+.scripture .d { margin-bottom: 0.5rem; }   /* psalm superscription: same type as the verses */
 
 /* BSB section headings within the reading */
 .scripture .s1 {
