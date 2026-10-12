@@ -47,7 +47,7 @@
 
 <!-- Reading settings: [ A / א ] -->
 <button type="button" class="settings-btn" id="settings-btn" aria-haspopup="dialog" aria-expanded="false"
-        aria-controls="settings-panel" title="Text, language and translation settings">
+        aria-controls="settings-panel" title="Reading settings: text, divine name and wording">
   <span class="sb-en">A</span><span class="sb-sep">/</span><span class="sb-he">א</span>
 </button>
 <div class="settings-panel" id="settings-panel" role="dialog" aria-label="Reading settings" hidden>
@@ -74,8 +74,20 @@
   </div>
 
   <div class="sp-row">
-    <span class="sp-label">Translation</span>
-    <span class="sp-static">Berean Standard Bible</span>
+    <span class="sp-label">Divine name</span>
+    <div class="sp-seg sp-seg-name" role="group" aria-label="Divine name">
+      <button type="button" data-name="lord" aria-pressed="true"><span class="dn-sample">Lord</span></button>
+      <button type="button" data-name="adonai" aria-pressed="false"><span class="dn-sample">Adonai</span></button>
+      <button type="button" data-name="hashem" aria-pressed="false"><span class="dn-sample">HaShem</span></button>
+    </div>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Name style</span>
+    <div class="sp-seg" role="group" aria-label="Divine name style">
+      <button type="button" data-namecase="caps" aria-pressed="true">Full caps</button>
+      <button type="button" data-namecase="small" aria-pressed="false"><span class="sp-smallcaps">Small caps</span></button>
+    </div>
   </div>
 
   <div class="sp-divider"></div>

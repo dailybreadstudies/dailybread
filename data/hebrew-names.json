@@ -2,6 +2,8 @@
   "_about": "Hebrew Names toggle: English (BSB) spelling -> Sephardic transliteration. Conventions: ch = chet/khaf, tz = tsadi, v = vet, f = fe, k = kaf/kuf; aleph/ayin not written. Edit freely; longest names are matched first, whole words only, case-sensitive.",
 
   "Jesus": "Yeshua",
+  "Peter": "Kefa",
+  "Paul": "Shaul",
   "Mary": "Miriam",
   "James": "Yaakov",
   "Judas": "Yehudah",

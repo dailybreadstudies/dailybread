@@ -14,7 +14,7 @@
 
   // ── Settings (remembered per visitor) ────────────────────────
   var SIZES = [100, 112.5, 125, 137.5, 150];          // % of the browser's base size
-  var settings = { size: 1, font: 'serif', messianic: false, hebrewNames: false };
+  var settings = { size: 1, font: 'serif', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -25,6 +25,25 @@
   function applyLook() {
     document.documentElement.style.fontSize = SIZES[settings.size] + '%';
     document.documentElement.classList.toggle('font-sans', settings.font === 'sans');
+    document.documentElement.classList.toggle('name-small', settings.nameCase === 'small');
+    applyDivineName(document);
+  }
+
+  // The BSB prints the Tetragrammaton as LORD (stored as <span class="lord">Lord</span>).
+  // "Lord GOD" (Adonai YHWH) keeps GOD in every setting.
+  function applyDivineName(root) {
+    var word = { lord: 'Lord', adonai: 'Adonai', hashem: 'HaShem' }[settings.divineName] || 'Lord';
+    root.querySelectorAll('.lord').forEach(function (el) {
+      if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
+      if (el.getAttribute('data-orig') !== 'Lord') return;
+      el.textContent = word;
+      if (word === 'Lord') return;
+      // "the LORD said" → "ADONAI said" / "HaShem said": a name takes no article
+      var prev = el.previousSibling;
+      if (prev && prev.nodeType === 3) {
+        prev.nodeValue = prev.nodeValue.replace(/(^|[^A-Za-z])[Tt]he\s+$/, '$1');
+      }
+    });
   }
   applyLook();
 
@@ -306,6 +325,7 @@
     });
     document.getElementById('portions').innerHTML = html;
     applyFilters(document.getElementById('portions'));
+    applyDivineName(document.getElementById('portions'));
     goTo(portionFromHash(), false);
   }
 
@@ -429,6 +449,12 @@
     panel.querySelector('[data-size-label]').textContent = Math.round(SIZES[settings.size]) + '%';
     panel.querySelector('[data-size="-1"]').disabled = settings.size === 0;
     panel.querySelector('[data-size="1"]').disabled = settings.size === SIZES.length - 1;
+    panel.querySelectorAll('[data-name]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-name') === settings.divineName));
+    });
+    panel.querySelectorAll('[data-namecase]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-namecase') === settings.nameCase));
+    });
     panel.querySelectorAll('[data-font]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-font') === settings.font));
     });
@@ -451,6 +477,13 @@
     if (t.hasAttribute('data-close')) { openPanel(false); toggleBtn.focus(); return; }
     if (t.hasAttribute('data-size')) {
       settings.size = Math.max(0, Math.min(SIZES.length - 1, settings.size + (+t.getAttribute('data-size'))));
+      applyLook();
+    } else if (t.hasAttribute('data-name')) {
+      settings.divineName = t.getAttribute('data-name');
+      applyLook();
+      if (current) renderDay(current.day, current.books);   // restores "the" when going back to LORD
+    } else if (t.hasAttribute('data-namecase')) {
+      settings.nameCase = t.getAttribute('data-namecase');
       applyLook();
     } else if (t.hasAttribute('data-font')) {
       settings.font = t.getAttribute('data-font');
