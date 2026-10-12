@@ -287,7 +287,7 @@
     var dateText = new Date(day.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).replace(/,/g, '');
     var header = '<p class="page-date">' + (day.hebrewDate ? day.hebrewDate + ' / ' : '') + dateText + '</p>';
     if (day.parsha) {
-      header += '<p class="page-parsha">Torah Portion: ' + day.parsha.name +
+      header += '<p class="page-parsha">Torah Portion: <em>' + day.parsha.name + '</em>' +
         (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</p>';
     }
     header += '<p class="page-refs">' +
@@ -399,7 +399,7 @@
     if (popFor && popFor !== btn) popFor.setAttribute('aria-expanded', 'false');
     popFor = btn;
     btn.setAttribute('aria-expanded', 'true');
-    pop.innerHTML = '<span class="fn-pop-ref">Footnote ' + btn.textContent + ' · ' + note.verse + '</span>' + note.html;
+    pop.innerHTML = '<sup class="fn-pop-label">' + btn.textContent + '</sup>' + note.html;
     pop.hidden = false;
     var reader = document.getElementById('reader').getBoundingClientRect();
     var b = btn.getBoundingClientRect();

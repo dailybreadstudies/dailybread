@@ -137,7 +137,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   margin-bottom: 0.25rem;
 }
 .page-parsha {
-  text-align: center; font-family: var(--display); font-size: 0.92rem; font-style: italic;
+  text-align: center; font-family: var(--display); font-size: 0.92rem;
   color: var(--muted); margin-bottom: 0.6rem;
 }
 .page-refs {
@@ -264,6 +264,9 @@ html.name-small .lord { text-transform: none; font-variant: small-caps; letter-s
 .fn-pop .fn-pop-ref {
   display: block; font: 600 0.68rem/1.4 var(--sans); letter-spacing: 0.12em;
   text-transform: uppercase; color: var(--accent-faint); margin-bottom: 0.25rem;
+}
+.fn-pop .fn-pop-label {
+  font: italic 600 0.72em/0 var(--sans); color: var(--accent-faint); margin-right: 0.35em; vertical-align: super;
 }
 .fn-pop i { color: var(--pop-ink); }
 .fn-pop::after {
