@@ -30,6 +30,18 @@ Hebcal.com API (Diaspora schedule; set `HEBCAL_ISRAEL = true` in `assets/reader.
 to switch). Shabbat times use the visitor's location if they allow it, otherwise
 Jerusalem, and can be changed to a city. Hebcal data is CC BY 4.0.
 
+## Original languages
+
+`data/orig/<BOOK>.json` holds the Hebrew (Miqra according to the Masorah, CC BY-SA 4.0) and Greek
+(SBL Greek New Testament, CC BY 4.0) aligned to BSB verse numbers — see `data/orig/LICENSE.md`.
+
+```
+git clone --depth 1 --filter=blob:none --sparse https://github.com/bdenckla/MAM-basics /tmp/mam
+git -C /tmp/mam sparse-checkout set MAM-for-Sefaria
+git clone --depth 1 https://github.com/LogosBible/SBLGNT /tmp/sblgnt
+python3 tools/build_originals.py /tmp/mam/MAM-for-Sefaria/csv /tmp/sblgnt/data/sblgnt/text data/orig
+```
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).

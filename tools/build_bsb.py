@@ -116,12 +116,50 @@ def merge(items):
     return out
 
 
+# Verses missing from the examples.bsb source, restored from the official BSB text
+# (biblehub.com/bsb). Each patch: (file, anchor line, occurrence after a given chapter, lines to insert after anchor)
+PATCHES = [
+    # Lamentations 2:1 and its section heading are missing in the source
+    ("25LAMBSB.usfm", "\\c 2", None, [
+        "\\s1 Godʼs Anger over Jerusalem",
+        "\\q1",
+        "\\v 1 How\\f + \\fr 2:1 \\ft This chapter is an acrostic poem, each verse beginning with the successive letters of the Hebrew alphabet.\\f* the Lord has covered the Daughter of Zion",
+        "\\q2 with the cloud of His anger!",
+        "\\q1 He has cast the glory of Israel",
+        "\\q2 from heaven to earth.",
+        "\\q1 He has abandoned His footstool",
+        "\\q2 in the day of His anger.",
+    ]),
+    # Psalm 106:42 — its first line is missing (the second line is present)
+    ("19PSABSB.usfm", "\\q2 and those who hated them ruled over them.", "\\c 106", [
+        "\\q1",
+        "\\v 42 Their enemies oppressed them",
+    ]),
+]
+
+
+def apply_patches(filename, lines):
+    for fname, anchor, after_chapter, insert in PATCHES:
+        if fname != filename:
+            continue
+        start = lines.index(after_chapter) if after_chapter else 0
+        i = lines.index(anchor, start)
+        if fname == "19PSABSB.usfm":
+            # replace the empty \\q1 that follows the anchor with the restored verse line
+            assert lines[i + 1] == "\\q1"
+            lines = lines[:i + 1] + insert + lines[i + 2:]
+        else:
+            lines = lines[:i + 1] + insert + lines[i + 1:]
+    return lines
+
+
 def convert_book(path):
     book_id, name, chapters = None, None, []
     chapter = None
     block = None
     with open(path, encoding="utf-8-sig") as fh:
         lines = [ln.rstrip("\n") for ln in fh]
+    lines = apply_patches(os.path.basename(path), lines)
     for ln in lines:
         if not ln.strip():
             continue

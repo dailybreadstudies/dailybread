@@ -14,7 +14,7 @@
 
   // ── Settings (remembered per visitor) ────────────────────────
   var SIZES = [100, 112.5, 125, 137.5, 150];          // % of the browser's base size
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false, location: null };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -227,6 +227,8 @@
     var html = '';
     var notes = [];
     var titles = [];
+    var units = [];          // one entry per verse, for the original-language views
+    var unit = null;
     var multiChapter = r.c2 > r.c1;
     for (var c = r.c1; c <= r.c2; c++) {
       var ch = book.chapters[c - 1];
@@ -237,7 +239,7 @@
       var blocks = sliceChapter(ch, lo, hi);
       for (var b = 0; b < blocks.length; b++) {
         var bl = blocks[b];
-        if (bl.k === 'b') { html += '<div class="stanza"></div>'; continue; }
+        if (bl.k === 'b') { html += '<div class="stanza"></div>'; if (unit) unit.stanzaAfter = true; continue; }
         if (HEADINGS[bl.k]) {
           // Section titles go under the chapter heading, not inside the text.
           var t = bl.c.join('');
@@ -246,22 +248,29 @@
           continue;
         }
         var inner = '';
+        var poetic = !!POETRY[bl.k];
+        if (unit && typeof bl.c[0] !== 'number') unit.html += poetic ? '<br>' : ' ';   // continuation line
         for (var k = 0; k < bl.c.length; k++) {
           var it = bl.c[k];
           if (typeof it === 'number') {
+            unit = { c: c, v: it, html: '', poetic: poetic, newPara: k === 0 && !POETRY[bl.k] && bl.k !== 'd' };
+            units.push(unit);
             if (it === 0) continue;
             if (inner && !/\s$/.test(inner)) inner += ' ';   // space between verses
             if (it === 1 && multiChapter) inner += '<span class="chapter-num">' + c + '</span>';
             else inner += '<sup class="verse-num" data-v="' + it + '">' + it + '</sup>';
           } else if (typeof it === 'string') {
             inner += it;
+            if (unit) unit.html += it;
           } else if (it && typeof it.f === 'number') {
             var note = ch.n[it.f];
             var id = 'p' + pIndex + '-fn' + notes.length;
             var label = fnLabel(notes.length);
             notes.push({ id: id, label: label, ref: note.r, html: note.h });
-            inner += '<button type="button" class="fn-ref" id="' + id + '-ref" data-fn="' + id +
+            var btnHtml = '<button type="button" class="fn-ref" id="' + id + '-ref" data-fn="' + id +
               '" aria-label="Footnote ' + label + '" aria-expanded="false">' + label + '</button>';
+            inner += btnHtml;
+            if (unit) unit.html += btnHtml;
           }
         }
         var cls = bl.k;
@@ -270,7 +279,64 @@
         html += '<p class="' + cls + '">' + inner + '</p>';
       }
     }
-    return { html: html, notes: notes, titles: titles };
+    var orig = settings.original !== 'off' && origCache[book.id + ':data'];
+    if (orig) html = renderOriginal(units, orig, multiChapter);
+    return { html: html, notes: notes, titles: titles, originalOnly: !!orig && settings.original === 'only' };
+  }
+
+  // ── Original languages (Hebrew: MAM via Sefaria; Greek: SBLGNT) ──
+  var origCache = {};
+  function loadOrig(id) {
+    if (!origCache[id]) {
+      origCache[id] = getJSON('data/orig/' + id + '.json').then(function (d) { origCache[id + ':data'] = d; return d; })
+        .catch(function () { delete origCache[id]; return null; });
+    }
+    return origCache[id];
+  }
+  function origText(orig, key) {
+    var t = orig.v[key];
+    if (!t) return '';
+    if (orig.lang === 'he' && !settings.cantillation) {
+      t = t.replace(/[\u0591-\u05AF\u05BD]/g, '').replace(/\s*\u05C0\s*/g, ' ').replace(/\u2009/g, '');
+    }
+    return t.replace(/\s{2,}/g, ' ');
+  }
+  function renderOriginal(units, orig, multiChapter) {
+    var lang = orig.lang === 'he' ? 'he' : 'grc';
+    var attrs = ' class="vp-orig ' + lang + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '');
+    var num = function (u) {
+      if (u.v === 0) return '';
+      if (u.v === 1 && multiChapter) return '<span class="chapter-num">' + u.c + '</span>';
+      return '<sup class="verse-num" data-v="' + u.v + '">' + u.v + '</sup>';
+    };
+    var html = '';
+    if (settings.original === 'under') {
+      units.forEach(function (u) {
+        var o = origText(orig, u.c + ':' + u.v);
+        html += '<div class="vp' + (u.v === 0 ? ' vp-title' : '') + '"><p class="vp-en">' + num(u) + u.html + '</p>' +
+          (o ? '<p' + attrs + '>' + o + '</p>' : '') + '</div>';
+      });
+      return html;
+    }
+    // Original only: flowing text; poetry one verse per line
+    var para = '';
+    var flush = function () { if (para) html += '<p' + attrs.replace('vp-orig', 'vp-orig vo-para') + '>' + para + '</p>'; para = ''; };
+    units.forEach(function (u) {
+      var o = origText(orig, u.c + ':' + u.v);
+      if (!o) return;
+      var n = u.v === 0 ? '' : '<sup class="verse-num" data-v="' + u.v + '">' + u.v + '</sup>';
+      if (u.poetic || u.v === 0) {
+        flush();
+        html += '<p' + attrs.replace('vp-orig', 'vp-orig vo-line') + '>' + n + o + '</p>';
+        if (u.stanzaAfter) html += '<div class="stanza"></div>';
+        return;
+      }
+      var breakHere = lang === 'he' ? /class="pe"/.test(para.slice(-40)) : u.newPara;
+      if (breakHere) flush();
+      para += (para ? ' ' : '') + n + o;
+    });
+    flush();
+    return '<div class="orig-only">' + html + '</div>';
   }
 
   function renderNotes(notes, refText) {
@@ -327,8 +393,10 @@
       var sub = p.title || passage.titles.join(' &middot; ');
       if (sub) html += '<p class="chapter-sub">' + sub + '</p>';
       html += '<div class="scripture">' + passage.html + '</div>';
-      html += '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
-        renderNotes(passage.notes, displayRef(r)) + '</div></div>';
+      if (!passage.originalOnly) {
+        html += '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
+          renderNotes(passage.notes, displayRef(r)) + '</div></div>';
+      }
       html += '<nav class="nav-bar">' +
         '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
         '<span class="nav-indicator">' + n + ' of ' + total + '<span class="division-name">' + p.label + '</span></span>' +
@@ -481,6 +549,14 @@
     panel.querySelectorAll('[data-namecase]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-namecase') === settings.nameCase));
     });
+    panel.querySelectorAll('[data-orig]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-orig') === settings.original));
+    });
+    panel.querySelectorAll('[data-cant]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String((b.getAttribute('data-cant') === 'on') === !!settings.cantillation));
+    });
+    var cantRow = panel.querySelector('.sp-cant-row');
+    if (cantRow) cantRow.hidden = settings.original === 'off';
     panel.querySelectorAll('[data-theme-opt]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-opt') === settings.theme));
     });
@@ -516,6 +592,12 @@
     } else if (t.hasAttribute('data-namecase')) {
       settings.nameCase = t.getAttribute('data-namecase');
       applyLook();
+    } else if (t.hasAttribute('data-orig')) {
+      settings.original = t.getAttribute('data-orig');
+      rerender();
+    } else if (t.hasAttribute('data-cant')) {
+      settings.cantillation = t.getAttribute('data-cant') === 'on';
+      rerender();
     } else if (t.hasAttribute('data-theme-opt')) {
       settings.theme = t.getAttribute('data-theme-opt');
       applyLook();
@@ -934,14 +1016,22 @@
     }).join('');
   }
 
+  function neededOrig(ids) {
+    if (settings.original === 'off') return Promise.resolve();
+    return Promise.all(ids.map(loadOrig));
+  }
   function rerender() {
     if (!current) return;
-    if (current.bible) renderChapter(current.bookData, current.c, null);
-    else renderDay(current.day, current.books);
+    var ids = current.bible ? [current.book] : Object.keys(current.books);
+    neededOrig(ids).then(function () {
+      if (current.bible) renderChapter(current.bookData, current.c, null);
+      else renderDay(current.day, current.books);
+    });
   }
 
   function loadChapter(book, c, v, replace) {
-    return loadBook(book).then(function (data) {
+    return Promise.all([loadBook(book), neededOrig([book])]).then(function (res) {
+      var data = res[0];
       var url = location.pathname + '?r=' + book + '.' + c + (v ? '.' + v : '');
       if (replace) history.replaceState({ r: book + '.' + c }, '', url);
       else history.pushState({ r: book + '.' + c }, '', url);
@@ -988,8 +1078,8 @@
         '<button type="button" class="day-step" data-chapter="1"' + (next ? '' : ' disabled') + ' aria-label="Next chapter">&rsaquo;</button></h2>';
     if (passage.titles.length) html += '<p class="chapter-sub">' + passage.titles.join(' &middot; ') + '</p>';
     html += '<div class="scripture">' + passage.html + '</div>' +
-      '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
-      renderNotes(passage.notes, ref) + '</div></div>' +
+      (passage.originalOnly ? '' : '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
+      renderNotes(passage.notes, ref) + '</div></div>') +
       '<nav class="nav-bar">' +
         '<button class="nav-btn" data-chapter="-1"' + (prev ? '' : ' disabled') + '>&larr; ' + (prev ? chapterLabel(prev) : 'Previous') + '</button>' +
         '<span class="nav-indicator">Bible<span class="division-name">' + escapeAttr(bookName(data.id)) + '</span></span>' +
@@ -1139,7 +1229,8 @@
     return getJSON('data/days/' + date + '.json').then(function (day) {
       var ids = day.portions.map(function (p) { return parseRef(p.ref).book; })
         .filter(function (v, i, a) { return a.indexOf(v) === i; });
-      return Promise.all(ids.map(loadBook)).then(function (list) {
+      return Promise.all(ids.map(loadBook).concat([neededOrig(ids)])).then(function (list) {
+        list = list.slice(0, ids.length);
         var books = {};
         list.forEach(function (b) { books[b.id] = b; });
         var url = location.pathname + '?d=' + date;

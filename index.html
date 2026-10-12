@@ -21,10 +21,17 @@
   <h1 class="page-title">Daily Bread Online</h1>
   <div id="day-header"></div>
   <div id="portions"><p class="status">Loading today’s readings…</p></div>
-  <p class="reader-footer">
-    Scripture and footnotes from the Berean Standard Bible (BSB), dedicated to the public domain.<br>
-    Jewish calendar and Shabbat times from <a href="https://www.hebcal.com" rel="noopener">Hebcal.com</a> (CC BY 4.0).
-  </p>
+  <footer class="reader-footer">
+    <p>The English text is based on the <strong>Berean Standard Bible (BSB)</strong>, which is in the public domain, with its translation notes.
+      Wording changed by this site’s reading options (divine name, Messianic filter, Hebrew names) is not part of the BSB.</p>
+    <p>Hebrew: <em>Miqra according to the Masorah</em>, from
+      <a href="https://en.wikisource.org/wiki/User:Dovi/Miqra_according_to_the_Masorah#beginning" rel="noopener">Hebrew Wikisource</a>
+      (as published on Sefaria), <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>.
+      Greek: <em>SBL Greek New Testament</em>, copyright 2010 Society of Biblical Literature and Logos Bible Software,
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>; textual-apparatus signs removed.</p>
+    <p>Fonts: SBL Hebrew and SBL Greek, Tiro Typeworks / Society of Biblical Literature.
+      Jewish calendar and Shabbat times: <a href="https://www.hebcal.com" rel="noopener">Hebcal.com</a>, CC BY 4.0.</p>
+  </footer>
   <div class="fn-pop" id="fn-pop" role="dialog" hidden></div>
 </main>
 
@@ -119,6 +126,23 @@
     <div class="sp-seg" role="group" aria-label="Divine name style">
       <button type="button" data-namecase="caps" aria-pressed="true">Full caps</button>
       <button type="button" data-namecase="small" aria-pressed="false"><span class="sp-smallcaps">Small caps</span></button>
+    </div>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Original text</span>
+    <div class="sp-seg sp-seg-name" role="group" aria-label="Original language text">
+      <button type="button" data-orig="off" aria-pressed="true">Off</button>
+      <button type="button" data-orig="under" aria-pressed="false">Under verses</button>
+      <button type="button" data-orig="only" aria-pressed="false">Only</button>
+    </div>
+  </div>
+
+  <div class="sp-row sp-cant-row" hidden>
+    <span class="sp-label">Hebrew marks</span>
+    <div class="sp-seg" role="group" aria-label="Hebrew marks">
+      <button type="button" data-cant="off" aria-pressed="true">Vowels</button>
+      <button type="button" data-cant="on" aria-pressed="false">+ Cantillation</button>
     </div>
   </div>
 

@@ -321,7 +321,10 @@ html.name-small .lord { text-transform: none; font-variant: small-caps; letter-s
 }
 .nav-indicator .division-name { display: block; font-size: 0.66rem; letter-spacing: 0.18em; color: var(--accent-faint); margin-top: 0.15em; font-weight: 400; }
 
-.reader-footer { text-align: center; font-size: 0.8rem; color: var(--accent-soft); margin-top: 1.85rem; font-style: italic; }
+.reader-footer { margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+  font: 400 0.7rem/1.6 var(--sans); color: var(--muted); text-align: center; letter-spacing: 0.01em; }
+.reader-footer p { margin: 0 auto 0.55rem; max-width: 34rem; }
+.reader-footer strong { font-weight: 600; color: var(--ink-soft); }
 .status { text-align: center; color: var(--muted); font-style: italic; padding: 3rem 0; }
 
 /* ── Settings button [ A / א ] and panel ── */
@@ -425,6 +428,24 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .cal-legend { font-size: 11px; color: var(--muted); display: inline-flex; align-items: center; gap: 5px; }
 .cal-legend .cal-dot { position: static; display: inline-block; }
 .cal-nav:focus-visible, .cal-day:focus-visible, .cal-today:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 1px; }
+
+/* Original languages */
+.vp { margin-bottom: 1.15rem; }
+.vp-en { margin: 0 !important; }
+.vp-orig { margin: 0.25rem 0 0 !important; color: var(--ink); }
+.vp-orig.he { font-family: var(--hebrew); direction: rtl; text-align: right; font-size: 1.3em; line-height: 1.95; }
+.vp-orig.grc { font-family: var(--greek); font-size: 1.08em; line-height: 1.8; }
+.vp .pe, .vp .se { display: none; }
+.orig-only .vo-para { margin-bottom: 1.05rem !important; }
+.orig-only .vo-line { margin: 0 !important; }
+.orig-only .pe { display: none; }
+.orig-only .se { display: inline-block; width: 1.5em; color: transparent; }
+.orig-only .verse-num { font-size: 0.55em; }
+.vp-orig.he .verse-num { margin: 0 0 0 0.3em; }
+.kt { font-size: 0.78em; color: var(--muted); }
+.kt::before { content: '('; } .kt::after { content: ') '; }
+.qr::before { content: '['; color: var(--muted); } .qr::after { content: ']'; color: var(--muted); }
+.sp-cant-row[hidden] { display: none; }
 
 /* Bible picker */
 .bible-panel { max-height: min(78vh, 640px); overflow-y: auto; overscroll-behavior: contain; }
