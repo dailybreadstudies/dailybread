@@ -1,10 +1,15 @@
 /* Daily Bread Studies — reader styles (based on John's Oct 11 sample layout) */
 
-/* SBL Hebrew (free for non-commercial use, including web embedding). Upload the
-   font file to assets/fonts/ and it is used automatically; until then Noto Serif Hebrew is used. */
+/* SBL Hebrew & SBL Greek (Tiro Typeworks / SBL), self-hosted unmodified for this
+   non-commercial site; see assets/fonts/LICENSE-SBL-fonts.txt */
 @font-face {
   font-family: 'SBL Hebrew';
-  src: url('fonts/SBL_Hbrw.woff2') format('woff2'), url('fonts/SBL_Hbrw.ttf') format('truetype');
+  src: url('fonts/SBL_Hbrw.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'SBL Greek';
+  src: url('fonts/SBL_grk.ttf') format('truetype');
   font-display: swap;
 }
 
@@ -27,6 +32,7 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --display: 'Merriweather', Georgia, serif;
   --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --hebrew: 'SBL Hebrew', 'Noto Serif Hebrew', 'Times New Roman', serif;
+  --greek: 'SBL Greek', 'Times New Roman', serif;
 }
 
 body {
