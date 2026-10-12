@@ -3,7 +3,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --paper: #f9f7f4;
+  --paper: #ffffff;
   --card: #ffffff;
   --ink: #1e1e1e;
   --ink-soft: #4a4a4a;
@@ -34,10 +34,7 @@ body {
 .reader {
   max-width: 693px;
   width: 100%;
-  background: var(--card);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
-  border-radius: 6px;
-  padding: 3.25rem 3.25rem 3.75rem;
+  padding: 1.5rem 0 3.75rem;
   position: relative;
 }
 
@@ -156,7 +153,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   font-family: var(--display); font-size: 1.6em; line-height: 1; color: var(--accent);
   margin-right: 0.25em; vertical-align: -0.12em;
 }
-.lord { font-variant: small-caps; letter-spacing: 0.04em; }
+.lord { text-transform: uppercase; }   /* the divine name in full capitals: LORD, GOD */
 .xt { font-style: normal; }
 
 /* ── BSB footnote markers & popover ── */
@@ -236,8 +233,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .status { text-align: center; color: var(--muted); font-style: italic; padding: 3rem 0; }
 
 @media (max-width: 700px) {
-  body { padding: 1rem 0.5rem 3rem; }
-  .reader { padding: 2rem 1.25rem 2.5rem; }
+  body { padding: 1rem 16px 3rem; }
+  .reader { padding: 0.5rem 0 2.5rem; }
   .page-title { font-size: 1.5rem; }
   .chapter-head { font-size: 1.25rem; }
   .scripture { font-size: 1.04rem; }

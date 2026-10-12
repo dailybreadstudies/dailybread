@@ -77,6 +77,7 @@
     var out = [];
     var cur = 0;
     var blocks = ch.b;
+    var prevS1 = null;
     for (var i = 0; i < blocks.length; i++) {
       var bl = blocks[i];
       if (HEADINGS[bl.k]) {
@@ -89,6 +90,7 @@
           break;
         }
         if (anchor >= lo && anchor <= hi && (bl.k !== 'b' || out.length)) out.push(bl);
+        else if (bl.k === 's1' && anchor < lo) prevS1 = bl;   // section the reading starts inside
         continue;
       }
       var kept = [];
@@ -103,6 +105,8 @@
     }
     // Drop trailing headings / stanza breaks that introduce verses outside the range
     while (out.length && HEADINGS[out[out.length - 1].k]) out.pop();
+    // If the reading begins in the middle of a section, keep that section's title too
+    if (prevS1 && !(out.length && out[0].k === 's1')) out.unshift(prevS1);
     return out;
   }
 
@@ -121,6 +125,7 @@
   function renderPassage(book, r, pIndex) {
     var html = '';
     var notes = [];
+    var titles = [];
     var multiChapter = r.c2 > r.c1;
     for (var c = r.c1; c <= r.c2; c++) {
       var ch = book.chapters[c - 1];
@@ -133,8 +138,10 @@
         var bl = blocks[b];
         if (bl.k === 'b') { html += '<div class="stanza"></div>'; continue; }
         if (HEADINGS[bl.k]) {
-          var tag = (bl.k === 's1' || bl.k === 's2') ? 'h3' : 'p';
-          html += '<' + tag + ' class="' + bl.k + '">' + bl.c.join('') + '</' + tag + '>';
+          // Section titles go under the chapter heading, not inside the text.
+          var t = bl.c.join('');
+          if (bl.k === 's1' && titles.indexOf(t) < 0) titles.push(t);
+          else if (bl.k === 'qa') html += '<p class="qa">' + t + '</p>';
           continue;
         }
         var inner = '';
@@ -162,12 +169,12 @@
         html += '<p class="' + cls + '">' + inner + '</p>';
       }
     }
-    return { html: html, notes: notes };
+    return { html: html, notes: notes, titles: titles };
   }
 
   function renderNotes(notes, refText) {
     if (!notes.length) {
-      return '<p class="empty">No BSB footnotes for ' + refText + '.</p>';
+      return '<p class="empty">No translation notes for ' + refText + '.</p>';
     }
     return notes.map(function (n) {
       return '<p id="' + n.id + '"><a class="fn-label" href="#' + n.id + '-ref" title="Back to the text">' +
@@ -205,9 +212,10 @@
       }
       html += '<p class="division-label">' + p.label + (p.he ? ' <span class="he">' + p.he + '</span>' : '') + '</p>';
       html += '<h2 class="chapter-head">' + displayRef(r) + '</h2>';
-      if (p.title) html += '<p class="chapter-sub">' + p.title + '</p>';
+      var sub = p.title || passage.titles.join(' &middot; ');
+      if (sub) html += '<p class="chapter-sub">' + sub + '</p>';
       html += '<div class="scripture">' + passage.html + '</div>';
-      html += '<div class="apparatus"><div class="apparatus-title">BSB Footnotes</div><div class="footnote-list">' +
+      html += '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
         renderNotes(passage.notes, displayRef(r)) + '</div></div>';
       html += '<nav class="nav-bar">' +
         '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
