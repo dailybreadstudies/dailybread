@@ -14,7 +14,7 @@
 
   // ── Settings (remembered per visitor) ────────────────────────
   var SIZES = [100, 112.5, 125, 137.5, 150];          // % of the browser's base size
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false, studyNotes: false };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -58,8 +58,14 @@
     if (!keys.length) return function (t) { return t; };
     var re = new RegExp('(?<![A-Za-z\\-])(' + keys.map(function (k) {
       return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    }).join('|') + ')(?![A-Za-z]|-[a-z])', 'g');
-    return function (text) { return text.replace(re, function (m) { return map[m]; }); };
+    }).join('|') + ')(?![A-Za-z]|-[a-z])([’ʼ](?=\\s))?', 'g');
+    // "Jesus’ disciples" → "Yeshua’s disciples" when the new name no longer ends in s
+    return function (text) {
+      return text.replace(re, function (m, name, apos) {
+        var to = map[name];
+        return to + (apos ? (/s$/.test(name) && !/s$/.test(to) ? apos + 's' : apos) : '');
+      });
+    };
   }
 
   var MESSIANIC_WORDS = {
@@ -512,6 +518,56 @@
     return '<div class="orig-only">' + html + '</div>';
   }
 
+  // ── Study Notes (adapted from unfoldingWord Translation Notes, CC BY-SA 4.0) ──
+  var notesCache = {};
+  function loadStudyNotes(book) {
+    if (!notesCache[book]) notesCache[book] = getJSON('data/notes/' + book + '.json').catch(function () { delete notesCache[book]; return {}; });
+    return notesCache[book];
+  }
+  function studyNotesShell(r) {
+    return '<details class="apparatus sn-apparatus" data-sn="' + [r.book, r.c1, r.v1, r.c2, r.v2 === null ? '' : r.v2].join('|') + '"' +
+      (settings.studyNotes ? ' open' : '') + ' hidden><summary class="apparatus-title">Study Notes <span class="sn-count"></span></summary>' +
+      '<div class="footnote-list sn-list"></div></details>';
+  }
+  function fillStudyNotes(root) {
+    root.querySelectorAll('.sn-apparatus').forEach(function (box) {
+      var a = box.getAttribute('data-sn').split('|');
+      var book = a[0], c1 = +a[1], v1 = +a[2], c2 = +a[3], v2 = a[4] === '' ? Infinity : +a[4];
+      loadStudyNotes(book).then(function (data) {
+        var items = [];
+        Object.keys(data).forEach(function (k) {
+          var cv = k.split(':'), c = +cv[0], v = +cv[1];
+          if (c < c1 || c > c2) return;
+          if (c === c1 && v < v1) return;
+          if (c === c2 && v > v2) return;
+          data[k].forEach(function (n) { items.push({ c: c, v: v, q: n[0], t: n[1] }); });
+        });
+        items.sort(function (x, y) { return x.c - y.c || x.v - y.v; });
+        if (!items.length || !document.body.contains(box)) return;
+        var lang = GROUPS[3][2].indexOf(book) >= 0 ? 'grc' : 'he';
+        var last = '';
+        box.querySelector('.sn-list').innerHTML = items.map(function (n) {
+          var ref = n.c + ':' + n.v;
+          var label = ref !== last ? '<span class="fn-verse">' + ref + '</span>' : '<span class="fn-verse sn-same"></span>';
+          last = ref;
+          return '<p class="sn-item">' + label +
+            (n.q ? '<span class="sn-quote ' + lang + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '') + '>' + escapeAttr(n.q) + '</span> ' : '') +
+            '<span class="sn-text">' + n.t + '</span></p>';
+        }).join('');
+        box.querySelector('.sn-count').textContent = '(' + items.length + ')';
+        box.hidden = false;
+        applyFilters(box);
+        applyDivineName(box);
+      });
+    });
+  }
+  document.addEventListener('toggle', function (e) {
+    if (e.target.classList && e.target.classList.contains('sn-apparatus')) {
+      settings.studyNotes = e.target.open;
+      saveSettings();
+    }
+  }, true);
+
   function renderTextNotes(list) {
     if (!list || !list.length) return '';
     var last = '';
@@ -584,6 +640,7 @@
         html += '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
           renderNotes(passage.notes, displayRef(r)) + '</div></div>';
       }
+      html += studyNotesShell(r);
       html += renderTextNotes(passage.textNotes);
       html += '<nav class="nav-bar">' +
         '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
@@ -597,6 +654,7 @@
     document.getElementById('portions').innerHTML = html;
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
+    fillStudyNotes(document.getElementById('portions'));
     goTo(portionFromHash(), false);
     fillToday(day);
   }
@@ -1295,7 +1353,7 @@
     if (passage.titles.length) html += '<p class="chapter-sub">' + passage.titles.join(' &middot; ') + '</p>';
     html += '<div class="scripture">' + passage.html + '</div>' +
       (passage.originalOnly ? '' : '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
-      renderNotes(passage.notes, ref) + '</div></div>') + renderTextNotes(passage.textNotes) +
+      renderNotes(passage.notes, ref) + '</div></div>') + studyNotesShell(r) + renderTextNotes(passage.textNotes) +
       '<nav class="nav-bar">' +
         '<button class="nav-btn" data-chapter="-1"' + (prev ? '' : ' disabled') + '>&larr; ' + (prev ? chapterLabel(prev) : 'Previous') + '</button>' +
         '<span class="nav-indicator">Bible<span class="division-name">' + escapeAttr(bookLabel(data.id)) + '</span></span>' +
@@ -1304,6 +1362,7 @@
     document.getElementById('portions').innerHTML = html;
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
+    fillStudyNotes(document.getElementById('portions'));
     if (v) {
       var mark = document.querySelector('.bible-view .verse-num[data-v="' + v + '"]');
       if (mark) {

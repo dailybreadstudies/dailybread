@@ -42,6 +42,22 @@ git clone --depth 1 https://github.com/LogosBible/SBLGNT /tmp/sblgnt
 python3 tools/build_originals.py /tmp/mam/MAM-for-Sefaria/csv /tmp/sblgnt/data/sblgnt/text data/orig
 ```
 
+## Word study and Study Notes
+
+Word study (`data/words/`) uses STEPBible-Data (TAHOT, TAGNT, TBESH, TBESG; CC BY 4.0), aligned to the text in `data/orig/`:
+
+```
+git clone --depth 1 https://github.com/STEPBible/STEPBible-Data /tmp/step
+python3 tools/build_words.py /tmp/step
+```
+
+Study Notes (`data/notes/`) are adapted from unfoldingWord's Translation Notes (CC BY-SA 4.0; https://git.door43.org/unfoldingWord/en_tn),
+keeping only explanatory notes — see `data/notes/LICENSE.md`:
+
+```
+python3 tools/build_notes.py /path/to/en_tn data/notes
+```
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).
