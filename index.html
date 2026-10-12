@@ -45,6 +45,58 @@
   <hr class="blessings-divider">
 </template>
 
+<!-- Reading settings: [ A / א ] -->
+<button type="button" class="settings-btn" id="settings-btn" aria-haspopup="dialog" aria-expanded="false"
+        aria-controls="settings-panel" title="Text, language and translation settings">
+  <span class="sb-en">A</span><span class="sb-sep">/</span><span class="sb-he">א</span>
+</button>
+<div class="settings-panel" id="settings-panel" role="dialog" aria-label="Reading settings" hidden>
+  <div class="sp-head">
+    <span class="sp-title">Reading settings</span>
+    <button type="button" class="sp-close" data-close aria-label="Close settings">&times;</button>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Text size</span>
+    <div class="sp-stepper">
+      <button type="button" data-size="-1" aria-label="Smaller text"><span class="sp-a-small">A</span></button>
+      <span class="sp-value" data-size-label>113%</span>
+      <button type="button" data-size="1" aria-label="Larger text"><span class="sp-a-large">A</span></button>
+    </div>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Typeface</span>
+    <div class="sp-seg" role="group" aria-label="Typeface">
+      <button type="button" data-font="serif" aria-pressed="true" class="sp-serif">Serif</button>
+      <button type="button" data-font="sans" aria-pressed="false" class="sp-sans">Sans</button>
+    </div>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Translation</span>
+    <span class="sp-static">Berean Standard Bible</span>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="messianic">
+    <span class="sp-switch-text">
+      <span class="sp-switch-title">Messianic filter</span>
+      <span class="sp-switch-sub">Yeshua, Messiah, Torah, immersion, assembly…</span>
+    </span>
+    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+  </button>
+
+  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="hebrewNames">
+    <span class="sp-switch-text">
+      <span class="sp-switch-title">Hebrew names</span>
+      <span class="sp-switch-sub">Yerushalayim, Moshe, Yehoshafat, Yoram…</span>
+    </span>
+    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+  </button>
+</div>
+
 <script src="assets/reader.js"></script>
 </body>
 </html>

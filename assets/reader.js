@@ -10,6 +10,83 @@
 
   var bookCache = {};
   var bookIndex = null;
+  var current = null;   // { day, books } of the page being shown
+
+  // ── Settings (remembered per visitor) ────────────────────────
+  var SIZES = [100, 112.5, 125, 137.5, 150];          // % of the browser's base size
+  var settings = { size: 1, font: 'serif', messianic: false, hebrewNames: false };
+  try {
+    var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
+    Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
+  } catch (e) { /* storage unavailable: use defaults */ }
+  function saveSettings() {
+    try { localStorage.setItem('dbs-settings', JSON.stringify(settings)); } catch (e) { /* ignore */ }
+  }
+  function applyLook() {
+    document.documentElement.style.fontSize = SIZES[settings.size] + '%';
+    document.documentElement.classList.toggle('font-sans', settings.font === 'sans');
+  }
+  applyLook();
+
+  // ── Messianic filter & Hebrew names ─────────────────────────
+  // Whole-word, case-sensitive replacement. A name directly followed by "-lowercase"
+  // (part of an unlisted compound such as Gath-rimmon) is left alone, as is "-law" in "mother-in-law".
+  function wordReplacer(map) {
+    var keys = Object.keys(map).filter(function (k) { return k[0] !== '_' && map[k] !== k; })
+      .sort(function (a, b) { return b.length - a.length; });
+    if (!keys.length) return function (t) { return t; };
+    var re = new RegExp('(?<![A-Za-z\\-])(' + keys.map(function (k) {
+      return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }).join('|') + ')(?![A-Za-z]|-[a-z])', 'g');
+    return function (text) { return text.replace(re, function (m) { return map[m]; }); };
+  }
+
+  var MESSIANIC_WORDS = {
+    'Jesus': 'Yeshua',
+    'Christ': 'Messiah', 'Christs': 'Messiahs',
+    'Law': 'Torah',
+    'church': 'assembly', 'churches': 'assemblies', 'Church': 'Assembly', 'Churches': 'Assemblies',
+    'baptize': 'immerse', 'baptizes': 'immerses', 'baptized': 'immersed', 'baptizing': 'immersing',
+    'Baptize': 'Immerse', 'Baptizes': 'Immerses', 'Baptized': 'Immersed', 'Baptizing': 'Immersing',
+    'baptism': 'immersion', 'baptisms': 'immersions', 'Baptism': 'Immersion', 'Baptisms': 'Immersions',
+    'baptizer': 'immerser', 'Baptizer': 'Immerser', 'Baptist': 'Immerser',
+    'gospel': 'good news', 'Gospel': 'Good news', 'gospels': 'good news',
+    'Judas': 'Judah',
+    'James': 'Jacob',
+    'Mary': 'Miriam',
+    'saints': 'holy ones', 'Saints': 'Holy ones', 'saint': 'holy one', 'Saint': 'Holy one',
+    'Hades': 'Sheol'
+  };
+  var messianicWords = wordReplacer(MESSIANIC_WORDS);
+  // Lower-case "law" becomes Torah when it means God's Law ("the law", "His law"),
+  // but not for other laws ("the law of sin", "a law to themselves", "law of the Medes").
+  var LAW_RE = /(?<![A-Za-z\-])((?:the|The|His|his|My|my|Your|your|our|Our|this|This|that|God[ʼ’']s|Moses[ʼ’']) )law(?![A-Za-z])(?! of (?:sin|the sin|the Spirit|faith|works|my mind|the Medes|the king|succession|the Jews|the Timnite|the house|the temple|the burnt|the grain|the guilt|the peace|the Nazirite|marriage|her husband|liberty|freedom|the land|the Persians))/g;
+  function messianic(text) {
+    text = messianicWords(text);
+    return text.replace(LAW_RE, '$1Torah');
+  }
+  var hebrewNames = function (t) { return t; };
+
+  function transformText(text) {
+    if (settings.messianic) text = messianic(text);
+    if (settings.hebrewNames) text = hebrewNames(text);
+    if (settings.messianic || settings.hebrewNames) {
+      text = text.replace(/\bYeshua Messiah\b/g, 'Yeshua the Messiah');
+    }
+    return text;
+  }
+
+  function applyFilters(root) {
+    if (!settings.messianic && !settings.hebrewNames) return;
+    root.querySelectorAll('.scripture, .chapter-sub, .footnote-list').forEach(function (el) {
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      var node;
+      while ((node = walker.nextNode())) {
+        var t = transformText(node.nodeValue);
+        if (t !== node.nodeValue) node.nodeValue = t;
+      }
+    });
+  }
 
   // ── Data loading ──────────────────────────────────────────────
   function getJSON(url) {
@@ -183,16 +260,17 @@
   }
 
   function renderDay(day, books) {
+    current = { day: day, books: books };
     // Header
     var refs = day.portions.map(function (p) { return parseRef(p.ref); });
-    var header = '';
+    var dateText = new Date(day.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).replace(/,/g, '');
+    var header = '<p class="page-date">' + (day.hebrewDate ? day.hebrewDate + ' / ' : '') + dateText + '</p>';
     if (day.parsha) {
-      header += '<p class="page-parsha">' + day.parsha.en +
-        (day.parsha.he ? ' <span class="he">' + day.parsha.he + '</span>' : '') + '</p>';
+      header += '<p class="page-parsha">Torah Portion: ' + day.parsha.name +
+        (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</p>';
     }
-    var dateText = new Date(day.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
-    header += '<p class="page-sub">' + dateText + (day.hebrewDate ? ' / ' + day.hebrewDate : '') +
-      refs.map(function (r, i) { return ' &middot; <a href="#' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join('') + '</p>';
+    header += '<p class="page-refs">' +
+      refs.map(function (r, i) { return '<a href="#' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join(' &middot; ') + '</p>';
     document.getElementById('day-header').innerHTML = header;
     document.title = 'My Daily Bread Studies · ' + dateText;
 
@@ -227,6 +305,7 @@
       html += '</section>';
     });
     document.getElementById('portions').innerHTML = html;
+    applyFilters(document.getElementById('portions'));
     goTo(portionFromHash(), false);
   }
 
@@ -249,7 +328,7 @@
   document.addEventListener('click', function (e) {
     var go = e.target.closest('[data-go]');
     if (go) { goTo(+go.getAttribute('data-go')); return; }
-    var link = e.target.closest('.page-sub a');
+    var link = e.target.closest('.page-refs a');
     if (link) { e.preventDefault(); goTo(+link.getAttribute('href').slice(1)); return; }
     var back = e.target.closest('.fn-label');
     if (back) {
@@ -267,7 +346,7 @@
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closePop(); return; }
-    if (e.target.closest && e.target.closest('input, textarea')) return;
+    if (e.target.closest && e.target.closest('input, textarea, #settings-panel')) return;
     var current = document.querySelector('.portion.active');
     if (!current) return;
     var id = parseInt(current.id.replace('portion-', ''), 10);
@@ -341,10 +420,62 @@
   }
   window.addEventListener('resize', function () { if (popFor) showPop(popFor); });
 
+
+  // ── Settings menu  [ A / א ] ─────────────────────────────────
+  var panel = document.getElementById('settings-panel');
+  var toggleBtn = document.getElementById('settings-btn');
+
+  function refreshPanel() {
+    panel.querySelector('[data-size-label]').textContent = Math.round(SIZES[settings.size]) + '%';
+    panel.querySelector('[data-size="-1"]').disabled = settings.size === 0;
+    panel.querySelector('[data-size="1"]').disabled = settings.size === SIZES.length - 1;
+    panel.querySelectorAll('[data-font]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-font') === settings.font));
+    });
+    panel.querySelectorAll('[role="switch"]').forEach(function (b) {
+      b.setAttribute('aria-checked', String(!!settings[b.getAttribute('data-setting')]));
+    });
+  }
+
+  function openPanel(open) {
+    panel.hidden = !open;
+    toggleBtn.setAttribute('aria-expanded', String(open));
+    if (open) { refreshPanel(); closePop(); }
+  }
+
+  toggleBtn.addEventListener('click', function (e) { e.stopPropagation(); openPanel(panel.hidden); });
+  panel.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var t = e.target.closest('button');
+    if (!t) return;
+    if (t.hasAttribute('data-close')) { openPanel(false); toggleBtn.focus(); return; }
+    if (t.hasAttribute('data-size')) {
+      settings.size = Math.max(0, Math.min(SIZES.length - 1, settings.size + (+t.getAttribute('data-size'))));
+      applyLook();
+    } else if (t.hasAttribute('data-font')) {
+      settings.font = t.getAttribute('data-font');
+      applyLook();
+    } else if (t.getAttribute('role') === 'switch') {
+      var key = t.getAttribute('data-setting');
+      settings[key] = !settings[key];
+      if (current) renderDay(current.day, current.books);   // re-render with the new wording
+    }
+    saveSettings();
+    refreshPanel();
+  });
+  document.addEventListener('click', function (e) {
+    if (!panel.hidden && !e.target.closest('#settings-panel, #settings-btn')) openPanel(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !panel.hidden) { openPanel(false); toggleBtn.focus(); }
+  });
+
   // ── Start ────────────────────────────────────────────────────
-  Promise.all([getJSON('data/days/index.json'), getJSON('data/bsb/index.json')])
+  Promise.all([getJSON('data/days/index.json'), getJSON('data/bsb/index.json'),
+               getJSON('data/hebrew-names.json').catch(function () { return {}; })])
     .then(function (res) {
       bookIndex = res[1];
+      hebrewNames = wordReplacer(res[2]);
       var date = pickDate(res[0].days);
       return getJSON('data/days/' + date + '.json');
     })
