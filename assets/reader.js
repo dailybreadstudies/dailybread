@@ -149,7 +149,9 @@
     return { book: m[1].toUpperCase(), c1: c1, v1: v1, c2: c2, v2: v2 };
   }
 
+  var NAME_FIX = { SNG: 'Song of Songs', PSA: 'Psalms' };
   function bookName(id) {
+    if (NAME_FIX[id]) return NAME_FIX[id];
     var b = bookIndex.filter(function (x) { return x.id === id; })[0];
     return b ? b.name : id;
   }
@@ -277,7 +279,7 @@
     }
     return notes.map(function (n) {
       return '<p id="' + n.id + '"><a class="fn-label" href="#' + n.id + '-ref" title="Back to the text">' +
-        n.label + '</a><span class="fn-verse">' + escapeAttr(n.ref.replace(/:0$/, ' title')) + '</span>' + n.html + '</p>';
+        n.label + '</a><span class="fn-verse">' + escapeAttr(n.ref.replace(/:0$/, ' title')) + '</span>' + linkRefs(n.html) + '</p>';
     }).join('');
   }
 
@@ -316,7 +318,7 @@
       if (i === 0) {
         html += '<div class="today-box" id="today-box" aria-live="polite"></div>';
         if (day.intro && day.intro.length) {
-          html += '<div class="calendar-intro">' + day.intro.map(function (para) { return '<p>' + para + '</p>'; }).join('') + '</div>';
+          html += '<div class="calendar-intro">' + day.intro.map(function (para) { return '<p>' + linkRefs(para) + '</p>'; }).join('') + '</div>';
         }
         html += document.getElementById('blessings-template').innerHTML;
       }
@@ -375,17 +377,21 @@
     }
     var fn = e.target.closest('.fn-ref');
     if (fn) { togglePop(fn, true); return; }
-    if (!e.target.closest('#fn-pop')) closePop();
+    if (!e.target.closest('#fn-pop, a.sref')) closePop();
   });
 
   window.addEventListener('hashchange', function () { goTo(portionFromHash(), false); });
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closePop(); return; }
-    if (e.target.closest && e.target.closest('input, textarea, select, #settings-panel, #cal-panel')) return;
-    var current = document.querySelector('.portion.active');
-    if (!current) return;
-    var id = parseInt(current.id.replace('portion-', ''), 10);
+    if (e.target.closest && e.target.closest('input, textarea, select, #settings-panel, #cal-panel, #bible-panel')) return;
+    if (current && current.bible) {
+      if (e.key === 'ArrowRight') stepChapter(1); else if (e.key === 'ArrowLeft') stepChapter(-1);
+      return;
+    }
+    var active = document.querySelector('.portion.active');
+    if (!active) return;
+    var id = parseInt(active.id.replace('portion-', ''), 10);
     if (e.key === 'ArrowRight') goTo(id + 1);
     else if (e.key === 'ArrowLeft') goTo(id - 1);
   });
@@ -414,6 +420,10 @@
     popFor = btn;
     btn.setAttribute('aria-expanded', 'true');
     pop.innerHTML = '<sup class="fn-pop-label">' + btn.textContent + '</sup>' + note.html;
+    placePop(btn);
+  }
+
+  function placePop(btn) {
     pop.hidden = false;
     var reader = document.getElementById('reader').getBoundingClientRect();
     var b = btn.getBoundingClientRect();
@@ -502,7 +512,7 @@
     } else if (t.hasAttribute('data-name')) {
       settings.divineName = t.getAttribute('data-name');
       applyLook();
-      if (current) renderDay(current.day, current.books);   // restores "the" when going back to LORD
+      rerender();   // restores "the" when going back to LORD
     } else if (t.hasAttribute('data-namecase')) {
       settings.nameCase = t.getAttribute('data-namecase');
       applyLook();
@@ -515,7 +525,7 @@
     } else if (t.getAttribute('role') === 'switch') {
       var key = t.getAttribute('data-setting');
       settings[key] = !settings[key];
-      if (current) renderDay(current.day, current.books);   // re-render with the new wording
+      rerender();   // re-render with the new wording
     }
     saveSettings();
     refreshPanel();
@@ -734,7 +744,7 @@
       settings.location = { mode: 'auto' };
       saveSettings();
       autoLoc = null;
-      if (current) drawShabbat(current.day.date);
+      if (current && current.day) drawShabbat(current.day.date);
     }
   });
   document.addEventListener('change', function (e) {
@@ -742,7 +752,7 @@
     var c = CITIES[+e.target.value];
     settings.location = { mode: 'city', name: c[0], lat: c[1], lon: c[2], tzid: c[3], b: c[4] };
     saveSettings();
-    if (current) drawShabbat(current.day.date);
+    if (current && current.day) drawShabbat(current.day.date);
   });
 
   // ── Calendar  (Sunday first) ─────────────────────────────────
@@ -758,7 +768,7 @@
     var first = new Date(y, m - 1, 1).getDay();      // 0 = Sunday
     var days = new Date(y, m, 0).getDate();
     var today = todayISO();
-    var selected = current ? current.day.date : '';
+    var selected = current && current.day ? current.day.date : '';
     var html = '<div class="cal-head">' +
       '<button type="button" class="cal-nav" data-cal="-1" aria-label="Previous month">&lsaquo;</button>' +
       '<div class="cal-title"><span class="cal-month">' + MONTH_NAMES[m - 1] + ' ' + y + '</span><span class="cal-hmonth" id="cal-hmonth"></span></div>' +
@@ -809,7 +819,7 @@
   function openCal(open) {
     if (open) {
       openPanel(false);
-      var base = current ? current.day.date : todayISO();
+      var base = current && current.day ? current.day.date : todayISO();
       calMonth = { y: +base.slice(0, 4), m: +base.slice(5, 7) };
       drawCalendar();
       closePop();
@@ -845,6 +855,283 @@
     if (e.key === 'Escape' && !calPanel.hidden) { openCal(false); calBtn.focus(); }
   });
 
+  // ── Bible: browse any chapter (separate from the daily plan) ─
+  // URL ?r=JHN.3 or ?r=JHN.3.16. The daily reading is never changed by browsing.
+  var GROUPS = [
+    ['Torah', 'תּוֹרָה', ['GEN', 'EXO', 'LEV', 'NUM', 'DEU']],
+    ['Prophets', 'נְבִיאִים', ['JOS', 'JDG', '1SA', '2SA', '1KI', '2KI', 'ISA', 'JER', 'EZK', 'HOS', 'JOL', 'AMO', 'OBA',
+      'JON', 'MIC', 'NAM', 'HAB', 'ZEP', 'HAG', 'ZEC', 'MAL']],
+    ['Writings', 'כְּתוּבִים', ['PSA', 'PRO', 'JOB', 'SNG', 'RUT', 'LAM', 'ECC', 'EST', 'DAN', 'EZR', 'NEH', '1CH', '2CH']],
+    ['Apostles', 'שְׁלִיחִים', ['MAT', 'MRK', 'LUK', 'JHN', 'ACT', 'ROM', '1CO', '2CO', 'GAL', 'EPH', 'PHP', 'COL', '1TH',
+      '2TH', '1TI', '2TI', 'TIT', 'PHM', 'HEB', 'JAS', '1PE', '2PE', '1JN', '2JN', '3JN', 'JUD', 'REV']]
+  ];
+  function groupOf(id) {
+    for (var i = 0; i < GROUPS.length; i++) if (GROUPS[i][2].indexOf(id) >= 0) return GROUPS[i];
+    return GROUPS[0];
+  }
+  function chapterCount(id) {
+    var b = bookIndex.filter(function (x) { return x.id === id; })[0];
+    return b ? b.chapters : 0;
+  }
+
+  // Book names people type or that appear in notes → book id
+  var ALIASES = {
+    gen: 'GEN', ge: 'GEN', gn: 'GEN', ex: 'EXO', exod: 'EXO', lev: 'LEV', lv: 'LEV', num: 'NUM', nm: 'NUM', deut: 'DEU', dt: 'DEU',
+    josh: 'JOS', jos: 'JOS', judg: 'JDG', jdg: 'JDG', ru: 'RUT', ps: 'PSA', psa: 'PSA', pss: 'PSA', psalms: 'PSA', prov: 'PRO', pr: 'PRO',
+    eccl: 'ECC', ecc: 'ECC', qoh: 'ECC', song: 'SNG', sos: 'SNG', songofsongs: 'SNG', songofsolomon: 'SNG', isa: 'ISA', is: 'ISA',
+    jer: 'JER', lam: 'LAM', ezek: 'EZK', ezk: 'EZK', dan: 'DAN', hos: 'HOS', joel: 'JOL', am: 'AMO', obad: 'OBA', jon: 'JON',
+    mic: 'MIC', nah: 'NAM', hab: 'HAB', zeph: 'ZEP', hag: 'HAG', zech: 'ZEC', mal: 'MAL',
+    mt: 'MAT', matt: 'MAT', mk: 'MRK', mrk: 'MRK', mar: 'MRK', lk: 'LUK', jn: 'JHN', jhn: 'JHN', ac: 'ACT', rom: 'ROM', ro: 'ROM',
+    gal: 'GAL', eph: 'EPH', phil: 'PHP', php: 'PHP', col: 'COL', tit: 'TIT', phlm: 'PHM', philem: 'PHM', heb: 'HEB',
+    jas: 'JAS', jm: 'JAS', jud: 'JUD', jude: 'JUD', rev: 'REV', re: 'REV', apoc: 'REV',
+    '1sam': '1SA', '2sam': '2SA', '1kgs': '1KI', '2kgs': '2KI', '1chr': '1CH', '2chr': '2CH', '1cor': '1CO', '2cor': '2CO',
+    '1thess': '1TH', '2thess': '2TH', '1tim': '1TI', '2tim': '2TI', '1pet': '1PE', '2pet': '2PE', '1jn': '1JN', '2jn': '2JN', '3jn': '3JN'
+  };
+  function findBook(text) {
+    var key = String(text).toLowerCase().replace(/[\s.]/g, '').replace(/^i{1,3}(?=[a-z])/, function (r) { return r.length; });
+    if (!key) return null;
+    if (ALIASES[key]) return ALIASES[key];
+    var exact = bookIndex.filter(function (b) { return b.name.toLowerCase().replace(/\s/g, '') === key; })[0];
+    if (exact) return exact.id;
+    if (/^psalms?$/.test(key)) return 'PSA';
+    var pre = bookIndex.filter(function (b) {
+      var n = b.name.toLowerCase().replace(/\s/g, '');
+      return n.indexOf(key) === 0 || (NAME_FIX[b.id] || '').toLowerCase().replace(/\s/g, '').indexOf(key) === 0;
+    })[0];
+    return pre ? pre.id : null;
+  }
+
+  // "John 3:16", "jn 3", "1 Cor 13", "JHN.3.16" → { book, c, v }
+  function parseTarget(text) {
+    var m = String(text).trim().match(/^([1-3]?\s*[A-Za-z][A-Za-z .]*?)\s*\.?\s*(\d+)(?:\s*[:.]\s*(\d+))?/);
+    if (!m) return null;
+    var book = findBook(m[1]);
+    if (!book) return null;
+    var c = Math.max(1, Math.min(+m[2], chapterCount(book)));
+    return { book: book, c: c, v: m[3] ? +m[3] : null };
+  }
+
+  // Turn scripture references in note / intro text into tappable links
+  var REF_RE = null;
+  function refRegex() {
+    if (REF_RE) return REF_RE;
+    var names = bookIndex.map(function (b) { return b.name; }).filter(function (n) { return n !== 'Song'; }).concat(['Psalms', 'Song of Songs']);
+    names.sort(function (a, b) { return b.length - a.length; });
+    REF_RE = new RegExp('(?<![A-Za-z])(' + names.map(function (n) { return n.replace(/ /g, '\\s'); }).join('|') +
+      ')\\s(\\d{1,3})(?::(\\d{1,3})(?:[–-](\\d{1,3}))?)?(?![\\d:])', 'g');
+    return REF_RE;
+  }
+  function linkRefs(html) {
+    if (!bookIndex) return html;
+    return String(html).split(/(<[^>]+>)/).map(function (part) {
+      if (part.charAt(0) === '<') return part;
+      return part.replace(refRegex(), function (all, name, c, v1, v2) {
+        var id = findBook(name);
+        if (!id || +c > chapterCount(id)) return all;
+        var target = id + '.' + c + (v1 ? '.' + v1 : '');
+        return '<a class="sref" href="?r=' + target + '" data-ref="' + id + ' ' + c + (v1 ? ':' + v1 + (v2 ? '-' + v2 : '') : '') + '">' + all + '</a>';
+      });
+    }).join('');
+  }
+
+  function rerender() {
+    if (!current) return;
+    if (current.bible) renderChapter(current.bookData, current.c, null);
+    else renderDay(current.day, current.books);
+  }
+
+  function loadChapter(book, c, v, replace) {
+    return loadBook(book).then(function (data) {
+      var url = location.pathname + '?r=' + book + '.' + c + (v ? '.' + v : '');
+      if (replace) history.replaceState({ r: book + '.' + c }, '', url);
+      else history.pushState({ r: book + '.' + c }, '', url);
+      renderChapter(data, c, v);
+      if (!v) window.scrollTo(0, 0);
+    }).catch(function (err) {
+      document.getElementById('portions').innerHTML = '<p class="status">Sorry, that chapter could not be loaded. (' + err.message + ')</p>';
+    });
+  }
+
+  function neighbour(book, c, dir) {
+    var order = bookIndex.map(function (b) { return b.id; });
+    var i = order.indexOf(book);
+    if (dir > 0) {
+      if (c < chapterCount(book)) return { book: book, c: c + 1 };
+      return i < order.length - 1 ? { book: order[i + 1], c: 1 } : null;
+    }
+    if (c > 1) return { book: book, c: c - 1 };
+    return i > 0 ? { book: order[i - 1], c: chapterCount(order[i - 1]) } : null;
+  }
+  function stepChapter(dir) {
+    if (!current || !current.bible) return;
+    var n = neighbour(current.book, current.c, dir);
+    if (n) loadChapter(n.book, n.c);
+  }
+  function chapterLabel(n) { return n ? displayRef({ book: n.book, c1: n.c, v1: 1, c2: n.c, v2: null }) : ''; }
+
+  function renderChapter(data, c, v) {
+    current = { bible: true, book: data.id, c: c, bookData: data };
+    closePop();
+    var r = { book: data.id, c1: c, v1: 1, c2: c, v2: null };
+    var passage = renderPassage(data, r, 1);
+    var g = groupOf(data.id);
+    var prev = neighbour(data.id, c, -1), next = neighbour(data.id, c, 1);
+    var ref = displayRef(r);
+    document.getElementById('day-header').innerHTML =
+      '<p class="bible-back"><button type="button" class="back-today">&larr; Back to today’s Daily Bread</button></p>';
+    document.title = ref + ' · Daily Bread Online';
+    var html = '<section class="portion active bible-view" aria-label="' + escapeAttr(ref) + '">' +
+      '<p class="division-label">' + g[0] + ' <span class="he">' + g[1] + '</span></p>' +
+      '<h2 class="chapter-head chapter-nav">' +
+        '<button type="button" class="day-step" data-chapter="-1"' + (prev ? '' : ' disabled') + ' aria-label="Previous chapter">&lsaquo;</button>' +
+        '<span>' + ref + '</span>' +
+        '<button type="button" class="day-step" data-chapter="1"' + (next ? '' : ' disabled') + ' aria-label="Next chapter">&rsaquo;</button></h2>';
+    if (passage.titles.length) html += '<p class="chapter-sub">' + passage.titles.join(' &middot; ') + '</p>';
+    html += '<div class="scripture">' + passage.html + '</div>' +
+      '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
+      renderNotes(passage.notes, ref) + '</div></div>' +
+      '<nav class="nav-bar">' +
+        '<button class="nav-btn" data-chapter="-1"' + (prev ? '' : ' disabled') + '>&larr; ' + (prev ? chapterLabel(prev) : 'Previous') + '</button>' +
+        '<span class="nav-indicator">Bible<span class="division-name">' + escapeAttr(bookName(data.id)) + '</span></span>' +
+        '<button class="nav-btn primary" data-chapter="1"' + (next ? '' : ' disabled') + '>' + (next ? chapterLabel(next) : 'Next') + ' &rarr;</button>' +
+      '</nav></section>';
+    document.getElementById('portions').innerHTML = html;
+    applyFilters(document.getElementById('portions'));
+    applyDivineName(document.getElementById('portions'));
+    if (v) {
+      var mark = document.querySelector('.bible-view .verse-num[data-v="' + v + '"]');
+      if (mark) {
+        mark.classList.add('verse-target');
+        setTimeout(function () { mark.scrollIntoView({ block: 'center' }); }, 30);
+      }
+    }
+  }
+
+  // Bible picker panel
+  var biblePanel = document.getElementById('bible-panel');
+  var bibleBtn = document.getElementById('bible-btn');
+  var pickerBook = null;
+
+  function drawPicker() {
+    var html = '<div class="sp-head"><span class="sp-title">' + (pickerBook ? '' : 'Bible') + '</span>' +
+      '<button type="button" class="sp-close" data-bible-close aria-label="Close">&times;</button></div>';
+    if (!pickerBook) {
+      html += '<form class="bp-go" autocomplete="off"><input type="text" class="bp-input" placeholder="Go to… e.g. John 3:16" aria-label="Go to a passage" enterkeyhint="go">' +
+        '<button type="submit" class="bp-go-btn">Go</button></form><p class="bp-msg" hidden></p>';
+      GROUPS.forEach(function (g) {
+        html += '<p class="bp-group">' + g[0] + ' <span class="he">' + g[1] + '</span></p><div class="bp-books">' +
+          g[2].map(function (id) { return '<button type="button" class="bp-book" data-book="' + id + '">' + escapeAttr(bookName(id)) + '</button>'; }).join('') +
+          '</div>';
+      });
+    } else {
+      var n = chapterCount(pickerBook);
+      html = '<div class="sp-head"><button type="button" class="bp-back" data-bible-books>&lsaquo; Books</button>' +
+        '<span class="bp-bookname">' + escapeAttr(bookName(pickerBook)) + '</span>' +
+        '<button type="button" class="sp-close" data-bible-close aria-label="Close">&times;</button></div>' +
+        '<div class="bp-chapters">';
+      for (var i = 1; i <= n; i++) {
+        var on = current && current.bible && current.book === pickerBook && current.c === i;
+        html += '<button type="button" class="bp-ch' + (on ? ' is-selected' : '') + '" data-ch="' + i + '">' + i + '</button>';
+      }
+      html += '</div>';
+    }
+    biblePanel.innerHTML = html;
+  }
+
+  function openBible(open) {
+    if (open) {
+      if (!panel.hidden) openPanel(false);
+      if (!calPanel.hidden) openCal(false);
+      pickerBook = null;
+      drawPicker();
+      closePop();
+    }
+    biblePanel.hidden = !open;
+    bibleBtn.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('panel-open', open || !panel.hidden || !calPanel.hidden);
+  }
+
+  bibleBtn.addEventListener('click', function (e) { e.stopPropagation(); openBible(biblePanel.hidden); });
+  biblePanel.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var t = e.target.closest('button');
+    if (!t) return;
+    if (t.hasAttribute('data-bible-close')) { openBible(false); bibleBtn.focus(); return; }
+    if (t.hasAttribute('data-bible-books')) { pickerBook = null; drawPicker(); return; }
+    if (t.hasAttribute('data-book')) {
+      var id = t.getAttribute('data-book');
+      if (chapterCount(id) === 1) { openBible(false); loadChapter(id, 1); return; }
+      pickerBook = id; drawPicker(); biblePanel.scrollTop = 0; return;
+    }
+    if (t.hasAttribute('data-ch')) { openBible(false); loadChapter(pickerBook, +t.getAttribute('data-ch')); }
+  });
+  biblePanel.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var val = biblePanel.querySelector('.bp-input').value;
+    var t = parseTarget(val);
+    if (!t) {
+      var msg = biblePanel.querySelector('.bp-msg');
+      msg.textContent = 'Couldn’t find “' + val + '”. Try a book and chapter, e.g. Romans 8.';
+      msg.hidden = false;
+      return;
+    }
+    openBible(false);
+    loadChapter(t.book, t.c, t.v);
+  });
+  document.addEventListener('click', function (e) {
+    if (!biblePanel.hidden && !e.target.closest('#bible-panel, #bible-btn')) openBible(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !biblePanel.hidden) { openBible(false); bibleBtn.focus(); }
+  });
+
+  // Chapter arrows, back-to-today, and scripture reference previews
+  document.addEventListener('click', function (e) {
+    var ch = e.target.closest('[data-chapter]');
+    if (ch && !ch.disabled) { stepChapter(+ch.getAttribute('data-chapter')); return; }
+    if (e.target.closest('.back-today')) { loadDay(pickDate(planDays, todayISO())); return; }
+    var open = e.target.closest('[data-open]');
+    if (open) { e.preventDefault(); var t = parseTarget(open.getAttribute('data-open')); closePop(); if (t) loadChapter(t.book, t.c, t.v); return; }
+    var sref = e.target.closest('a.sref');
+    if (sref) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;   // open in a new tab as a normal link
+      e.preventDefault();
+      showRefPreview(sref);
+    }
+  }, true);
+
+  function showRefPreview(anchor) {
+    var m = anchor.getAttribute('data-ref').match(/^(\w+) (\d+)(?::(\d+)(?:-(\d+))?)?$/);
+    if (!m) return;
+    var book = m[1], c = +m[2], v1 = m[3] ? +m[3] : 1, v2 = m[4] ? +m[4] : (m[3] ? +m[3] : null);
+    loadBook(book).then(function (data) {
+      var ch = data.chapters[c - 1];
+      if (!ch) return;
+      var hi = v2 || Math.min(v1 + 5, 999);
+      var text = '';
+      sliceChapter(ch, v1, hi).forEach(function (bl) {
+        if (HEADINGS[bl.k]) return;
+        if (text && !/\s$/.test(text)) text += ' ';
+        bl.c.forEach(function (it) {
+          if (typeof it === 'number') { if (it > 0) text += (text ? ' ' : '') + '<sup class="pv-v">' + it + '</sup>'; }
+          else if (typeof it === 'string') text += it;
+        });
+      });
+      var more = !v2 && text ? ' …' : '';
+      var label = m[3] ? displayRef({ book: book, c1: c, v1: v1, c2: c, v2: v2 }) : displayRef({ book: book, c1: c, v1: 1, c2: c, v2: null });
+      pop.innerHTML = '<span class="pv-ref">' + escapeAttr(label) + '</span>' +
+        '<span class="scripture pv-text">' + text.replace(/\s+/g, ' ').trim() + more + '</span>' +
+        '<a class="pv-open" href="?r=' + book + '.' + c + (m[3] ? '.' + v1 : '') + '" data-open="' + book + '.' + c + (m[3] ? '.' + v1 : '') + '">Open ' +
+        escapeAttr(displayRef({ book: book, c1: c, v1: 1, c2: c, v2: null })) + ' &rarr;</a>';
+      applyFilters(pop);
+      applyDivineName(pop);
+      if (popFor) popFor.setAttribute('aria-expanded', 'false');
+      popFor = anchor;
+      pinned = true;
+      placePop(anchor);
+    });
+  }
+
   // ── Loading a day ────────────────────────────────────────────
   var planDays = [];
 
@@ -867,8 +1154,11 @@
   }
 
   window.addEventListener('popstate', function () {
-    var d = new URLSearchParams(location.search).get('d');
-    if (d && planDays.indexOf(d) >= 0 && (!current || current.day.date !== d)) loadDay(d, true);
+    var q = new URLSearchParams(location.search);
+    var r = q.get('r'), d = q.get('d');
+    if (r) { var t = parseTarget(r); if (t) loadChapter(t.book, t.c, t.v, true); return; }
+    if (!d) d = pickDate(planDays);
+    if (planDays.indexOf(d) >= 0 && (!current || !current.day || current.day.date !== d)) loadDay(d, true);
   });
 
   // ── Start ────────────────────────────────────────────────────
@@ -878,6 +1168,9 @@
       planDays = res[0].days.slice().sort();
       bookIndex = res[1];
       hebrewNames = wordReplacer(res[2]);
+      var r = new URLSearchParams(location.search).get('r');
+      var t = r && parseTarget(r);
+      if (t) return loadChapter(t.book, t.c, t.v, true);
       return loadDay(pickDate(planDays), true);
     })
     .catch(function (err) {
@@ -887,6 +1180,6 @@
 
   // Use the visitor's location for Shabbat times if they already allowed it
   if (!settings.location || settings.location.mode === 'auto') {
-    locateMe(false).then(function (l) { if (l && current) drawShabbat(current.day.date); });
+    locateMe(false).then(function (l) { if (l && current && current.day) drawShabbat(current.day.date); });
   }
 })();
