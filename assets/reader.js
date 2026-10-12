@@ -301,7 +301,7 @@
     header += '<p class="page-refs">' +
       refs.map(function (r, i) { return '<a href="#' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join(' &middot; ') + '</p>';
     document.getElementById('day-header').innerHTML = header;
-    document.title = 'Daily Bread Studies · ' + dateText;
+    document.title = 'Daily Bread Online · ' + dateText;
 
     // Portions
     var total = day.portions.length;
