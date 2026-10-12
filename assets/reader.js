@@ -295,6 +295,156 @@
     return { html: html, notes: notes, titles: titles, originalOnly: !!orig && settings.original === 'only', textNotes: tnotes };
   }
 
+  // ── Word study (STEPBible, CC BY 4.0): tap a Hebrew or Greek word ──
+  // Words are split exactly as in tools/build_words.py so the n-th word matches the n-th entry.
+  var HEB_WORD = /[א-ת֑-ׇֽֿׁׂׅׄ͏]+/g;
+  var GRK_WORD = /[Ͱ-Ͽἀ-῿ʼ’]+/g;
+  function wrapWords(html, lang, book, ref) {
+    var re = lang === 'he' ? HEB_WORD : GRK_WORD;
+    var n = 0, skip = 0;
+    return String(html).split(/(<[^>]+>)/).map(function (part) {
+      if (part.charAt(0) === '<') {
+        if (/^<span class="(?:kt|pe|se|tcm)"/.test(part)) skip++;
+        else if (skip && /^<\/span>/.test(part)) skip--;
+        return part;
+      }
+      if (skip) return part;
+      return part.replace(re, function (w) {
+        return '<span class="w" data-w="' + book + '|' + ref + '|' + (n++) + '">' + w + '</span>';
+      });
+    }).join('');
+  }
+
+  var wordCache = {};
+  function loadWords(book) {
+    if (!wordCache[book]) wordCache[book] = getJSON('data/words/' + book + '.json').catch(function () { delete wordCache[book]; return {}; });
+    return wordCache[book];
+  }
+  function loadLex(lang) {
+    var k = 'lex-' + lang;
+    if (!wordCache[k]) wordCache[k] = getJSON('data/words/lex-' + lang + '.json').catch(function () { delete wordCache[k]; return {}; });
+    return wordCache[k];
+  }
+
+  // Grammar codes → plain words
+  var H_STEM = { q: 'Qal', N: 'Niphal', p: 'Piel', P: 'Pual', h: 'Hiphil', H: 'Hophal', t: 'Hithpael', o: 'Polel', O: 'Polal',
+    r: 'Hithpolel', m: 'Poel', M: 'Poal', k: 'Palel', K: 'Pulal', Q: 'Qal passive', l: 'Pilpel', L: 'Polpal', f: 'Hithpalpel',
+    D: 'Nithpael', j: 'Pealal', i: 'Pilel', u: 'Hothpaal', c: 'Tiphil', v: 'Hishtaphel', w: 'Nithpalel', y: 'Nithpoel', z: 'Hithpoel' };
+  var A_STEM = { q: 'Peal', Q: 'Peil', u: 'Hithpeel', p: 'Pael', P: 'Ithpaal', M: 'Hithpaal', a: 'Aphel', h: 'Haphel', s: 'Saphel',
+    e: 'Shaphel', H: 'Hophal', i: 'Ithpeel', t: 'Hishtaphel', v: 'Ishtaphel', w: 'Hithaphel', o: 'Polel', z: 'Ithpoel', r: 'Hithpolel',
+    f: 'Hithpalpel', b: 'Hephal', c: 'Tiphel', m: 'Poel', l: 'Palpel', L: 'Ithpalpel', O: 'Ithpolel', G: 'Ittaphal' };
+  var H_TYPE = { p: 'perfect', q: 'sequential perfect', i: 'imperfect', w: 'sequential imperfect (wayyiqtol)', h: 'cohortative',
+    j: 'jussive', v: 'imperative', r: 'participle (active)', s: 'participle (passive)', a: 'infinitive absolute', c: 'infinitive construct' };
+  var GEN = { m: 'masculine', f: 'feminine', b: 'both genders', c: 'common' };
+  var NUM = { s: 'singular', p: 'plural', d: 'dual' };
+  var STATE = { a: 'absolute', c: 'construct', d: 'determined' };
+  function pgn(s) {
+    var out = [];
+    if (/[123]/.test(s[0])) { out.push({ 1: '1st', 2: '2nd', 3: '3rd' }[s[0]] + ' person'); s = s.slice(1); }
+    if (GEN[s[0]]) { out.push(GEN[s[0]]); s = s.slice(1); }
+    if (NUM[s[0]]) { out.push(NUM[s[0]]); s = s.slice(1); }
+    if (STATE[s[0]]) out.push(STATE[s[0]]);
+    return out;
+  }
+  function hebSeg(seg, aram) {
+    var t = seg[0], r = seg.slice(1);
+    switch (t) {
+      case 'V': return ['verb', (aram ? A_STEM : H_STEM)[r[0]] || '', H_TYPE[r[1]] || ''].concat(pgn(r.slice(2))).filter(Boolean).join(', ');
+      case 'N': return [{ c: 'noun', g: 'gentilic noun', p: 'proper noun', x: 'noun' }[r[0]] || 'noun'].concat(pgn(r.slice(1))).join(', ');
+      case 'A': return [{ a: 'adjective', c: 'number (cardinal)', g: 'gentilic adjective', o: 'number (ordinal)' }[r[0]] || 'adjective'].concat(pgn(r.slice(1))).join(', ');
+      case 'P': return [{ d: 'demonstrative pronoun', f: 'indefinite pronoun', i: 'interrogative pronoun', p: 'personal pronoun', r: 'relative pronoun' }[r[0]] || 'pronoun'].concat(pgn(r.slice(1))).join(', ');
+      case 'S': return [{ d: 'directional ending', h: 'paragogic he', n: 'paragogic nun', p: 'pronoun suffix' }[r[0]] || 'suffix'].concat(pgn(r.slice(1))).join(', ');
+      case 'T': return { a: 'particle of affirmation', d: 'definite article', e: 'particle of exhortation', i: 'interrogative particle',
+        j: 'interjection', m: 'demonstrative particle', n: 'negative particle', o: 'object marker', r: 'relative particle' }[r[0]] || 'particle';
+      case 'R': return r[0] === 'd' ? 'preposition with article' : 'preposition';
+      case 'C': return 'conjunction';
+      case 'D': return 'adverb';
+      default: return '';
+    }
+  }
+  function hebMorph(code) {
+    if (!code) return '';
+    var aram = code[0] === 'A';
+    var segs = code.slice(1).split('/');
+    var parts = segs.map(function (s) { return hebSeg(s, aram); }).filter(Boolean);
+    return (aram ? 'Aramaic · ' : '') + parts.join(' + ');
+  }
+  var G_CASE = { N: 'nominative', G: 'genitive', D: 'dative', A: 'accusative', V: 'vocative' };
+  var G_NUM = { S: 'singular', P: 'plural' };
+  var G_GEN = { M: 'masculine', F: 'feminine', N: 'neuter' };
+  var G_TENSE = { P: 'present', I: 'imperfect', F: 'future', A: 'aorist', R: 'perfect', L: 'pluperfect', '2A': '2nd aorist', '2R': '2nd perfect', '2F': '2nd future', '2L': '2nd pluperfect' };
+  var G_VOICE = { A: 'active', M: 'middle', P: 'passive', E: 'middle/passive', D: 'middle deponent', O: 'passive deponent', N: 'middle/passive deponent', Q: 'impersonal active', X: 'no voice' };
+  var G_MOOD = { I: 'indicative', S: 'subjunctive', O: 'optative', M: 'imperative', N: 'infinitive', P: 'participle', R: 'imperative participle' };
+  var G_POS = { N: 'noun', A: 'adjective', T: 'article', P: 'personal pronoun', R: 'relative pronoun', C: 'reciprocal pronoun',
+    D: 'demonstrative pronoun', K: 'correlative pronoun', I: 'interrogative pronoun', X: 'indefinite pronoun', Q: 'correlative/interrogative pronoun',
+    F: 'reflexive pronoun', S: 'possessive pronoun' };
+  var G_WORD = { CONJ: 'conjunction', PREP: 'preposition', ADV: 'adverb', PRT: 'particle', INJ: 'interjection', HEB: 'Hebrew word', ARAM: 'Aramaic word', COND: 'conditional particle', ARAM_: '' };
+  function cng(s) {
+    var out = [];
+    if (/^[123]/.test(s)) { out.push(s[0] + (s[0] === '1' ? 'st' : s[0] === '2' ? 'nd' : 'rd') + ' person'); s = s.slice(1); }
+    if (G_CASE[s[0]]) { out.push(G_CASE[s[0]]); s = s.slice(1); }
+    if (G_NUM[s[0]]) { out.push(G_NUM[s[0]]); s = s.slice(1); }
+    if (G_GEN[s[0]]) out.push(G_GEN[s[0]]);
+    return out;
+  }
+  function grkMorph(code) {
+    if (!code) return '';
+    var p = code.split('-');
+    var head = p[0];
+    if (G_WORD[head.replace(/-.*/, '')]) return G_WORD[head] + (p[1] ? ' (' + p.slice(1).join('-') + ')' : '');
+    if (head === 'V') {
+      var m = (p[1] || '').match(/^(2?[A-Z])([A-Z])([A-Z])$/);
+      var out = ['verb'];
+      if (m) out.push(G_TENSE[m[1]] || m[1], G_VOICE[m[2]] || m[2], G_MOOD[m[3]] || m[3]);
+      if (p[2]) {
+        var q = p[2];
+        if (/^[123]/.test(q)) out.push(q[0] + (q[0] === '1' ? 'st' : q[0] === '2' ? 'nd' : 'rd') + ' person', G_NUM[q[1]] || '');
+        else out = out.concat(cng(q));
+      }
+      return out.filter(Boolean).join(', ');
+    }
+    var pos = G_POS[head] || head.toLowerCase();
+    var rest = p.slice(1).join('');
+    var extra = /-P$/.test(code) ? ' (proper name)' : '';
+    return [pos].concat(cng(rest.replace(/P$/, '').replace(/^([123])/, '$1'))).join(', ') + extra;
+  }
+
+  function cleanGloss(g) {
+    return escapeAttr(String(g).replace(/\//g, ' ').replace(/[<>]/g, '').replace(/\s+/g, ' ').trim());
+  }
+
+  function showWord(span) {
+    var parts = span.getAttribute('data-w').split('|');
+    var book = parts[0], ref = parts[1], idx = +parts[2];
+    var lang = book && GROUPS[3][2].indexOf(book) >= 0 ? 'grc' : 'he';
+    Promise.all([loadWords(book), loadLex(lang)]).then(function (res) {
+      var e = (res[0][ref] || [])[idx];
+      if (!e) return;
+      var lx = res[1][e[0]] || [];
+      var morph = lang === 'he' ? hebMorph(e[3]) : grkMorph(e[3]);
+      var strongNo = e[0].replace(/^([HG])0*/, '$1');
+      pop.innerHTML =
+        '<span class="wd-head"><span class="wd-lemma ' + lang + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '') + '>' + escapeAttr(lx[0] || span.textContent) + '</span>' +
+        (lx[1] ? '<span class="wd-tr">' + escapeAttr(lx[1]) + '</span>' : '') + '</span>' +
+        (lx[2] ? '<span class="wd-gloss">' + escapeAttr(lx[2]) + '</span>' : '') +
+        '<span class="wd-row"><span class="wd-k">Here</span> ' + cleanGloss(e[1]) + (e[2] ? ' <span class="wd-tr2">(' + escapeAttr(e[2].replace(/\//g, '')) + ')</span>' : '') + '</span>' +
+        (morph ? '<span class="wd-row"><span class="wd-k">Form</span> ' + escapeAttr(morph) + '</span>' : '') +
+        (lx[3] ? '<span class="wd-def">' + escapeAttr(lx[3]) + '</span>' : '') +
+        '<a class="wd-more" href="https://www.stepbible.org/?q=strong=' + e[0] + '" target="_blank" rel="noopener">Strong’s ' + strongNo + ' · STEPBible &rarr;</a>';
+      if (popFor) popFor.setAttribute('aria-expanded', 'false');
+      document.querySelectorAll('.w.w-on').forEach(function (x) { x.classList.remove('w-on'); });
+      span.classList.add('w-on');
+      popFor = span;
+      pinned = true;
+      pop.classList.add('wd-pop');
+      placePop(span);
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var w = e.target.closest && e.target.closest('.w[data-w]');
+    if (w) { showWord(w); }
+  });
+
   // ── Original languages (Hebrew: MAM via Sefaria; Greek: SBLGNT) ──
   var origCache = {};
   function loadOrig(id) {
@@ -308,6 +458,7 @@
     var t = orig.v[key];
     if (!t) return '';
     if (link) t = link(t);
+    t = wrapWords(t, orig.lang === 'he' ? 'he' : 'grc', orig.id, key);
     if (orig.lang === 'he' && !settings.cantillation) {
       t = t.replace(/[\u0591-\u05AF\u05BD]/g, '').replace(/\s*\u05C0\s*/g, ' ').replace(/\u2009/g, '');
     }
@@ -482,7 +633,7 @@
     }
     var fn = e.target.closest('.fn-ref');
     if (fn) { togglePop(fn, true); return; }
-    if (!e.target.closest('#fn-pop, a.sref')) closePop();
+    if (!e.target.closest('#fn-pop, a.sref, .w[data-w]')) closePop();
   });
 
   window.addEventListener('hashchange', function () { goTo(portionFromHash(), false); });
@@ -526,6 +677,7 @@
     if (popFor && popFor !== btn) popFor.setAttribute('aria-expanded', 'false');
     popFor = btn;
     btn.setAttribute('aria-expanded', 'true');
+    pop.classList.remove('wd-pop');
     pop.innerHTML = '<sup class="fn-pop-label">' + btn.textContent + '</sup>' + note.html;
     placePop(btn);
   }
@@ -548,6 +700,8 @@
 
   function closePop() {
     pinned = false;
+    if (pop) pop.classList.remove('wd-pop');
+    document.querySelectorAll('.w.w-on').forEach(function (x) { x.classList.remove('w-on'); });
     if (popFor) popFor.setAttribute('aria-expanded', 'false');
     popFor = null;
     if (pop) pop.hidden = true;
