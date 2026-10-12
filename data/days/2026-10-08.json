@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-08",
+  "hebrewDate": "27 Tishrei 5787",
+  "parsha": {
+    "name": "Beresheet",
+    "meaning": "In the Beginning"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 4:19-22"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JOS 6"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 6"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 5:1-26"
+    }
+  ]
+}

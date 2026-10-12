@@ -12,6 +12,24 @@ Live site: https://dailybreadstudies.github.io/dailybread/
 - `data/bsb/<BOOK>.json` — the whole Berean Standard Bible with its section headings, poetry layout
   and translation footnotes, stored in this repository so the site never depends on an outside API.
 
+## Adding readings from the Daily Bread plan
+
+Paste the plan into `tools/plan-5787.txt` (two lines per day, as printed), then:
+
+```
+python3 tools/make_days.py tools/plan-5787.txt 2026
+```
+
+This writes one file per day in `data/days/`, checks every reference against the BSB,
+and keeps any intro text already written for a day.
+
+## Jewish calendar and Shabbat times
+
+The "Today" box and the calendar's Hebrew dates and holidays come live from the
+Hebcal.com API (Diaspora schedule; set `HEBCAL_ISRAEL = true` in `assets/reader.js`
+to switch). Shabbat times use the visitor's location if they allow it, otherwise
+Jerusalem, and can be changed to a city. Hebcal data is CC BY 4.0.
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).

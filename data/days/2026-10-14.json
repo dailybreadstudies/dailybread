@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-14",
+  "hebrewDate": "3 Cheshvan 5787",
+  "parsha": {
+    "name": "Noach",
+    "meaning": "Noah"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 8:15-9:7"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JOS 11"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 11"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 9"
+    }
+  ]
+}

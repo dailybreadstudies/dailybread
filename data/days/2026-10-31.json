@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-31",
+  "hebrewDate": "20 Cheshvan 5787",
+  "parsha": {
+    "name": "Vayera",
+    "meaning": "And He Appeared"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 22"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "2KI 4:1-37"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 11:8-19"
+    }
+  ]
+}

@@ -22,7 +22,8 @@
   <div id="day-header"></div>
   <div id="portions"><p class="status">Loading today’s readings…</p></div>
   <p class="reader-footer">
-    Scripture and footnotes from the Berean Standard Bible (BSB), dedicated to the public domain.
+    Scripture and footnotes from the Berean Standard Bible (BSB), dedicated to the public domain.<br>
+    Jewish calendar and Shabbat times from <a href="https://www.hebcal.com" rel="noopener">Hebcal.com</a> (CC BY 4.0).
   </p>
   <div class="fn-pop" id="fn-pop" role="dialog" hidden></div>
 </main>
@@ -50,11 +51,21 @@
   <hr class="blessings-divider">
 </template>
 
-<!-- Reading settings: [ A / א ] -->
-<button type="button" class="settings-btn" id="settings-btn" aria-haspopup="dialog" aria-expanded="false"
+<!-- Tools: calendar and reading settings [ A / א ] -->
+<div class="tools">
+<button type="button" class="tool-btn cal-btn" id="cal-btn" aria-haspopup="dialog" aria-expanded="false"
+        aria-controls="cal-panel" title="Calendar: choose a day" aria-label="Calendar">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>
+    <circle cx="8.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/>
+  </svg>
+</button>
+<button type="button" class="tool-btn settings-btn" id="settings-btn" aria-haspopup="dialog" aria-expanded="false"
         aria-controls="settings-panel" title="Reading settings: text, appearance, divine name and wording">
   <span class="sb-en">A</span><span class="sb-sep">/</span><span class="sb-he">א</span>
 </button>
+</div>
+<div class="settings-panel cal-panel" id="cal-panel" role="dialog" aria-label="Calendar" hidden></div>
 <div class="settings-panel" id="settings-panel" role="dialog" aria-label="Reading settings" hidden>
   <div class="sp-head">
     <span class="sp-title">Reading settings</span>

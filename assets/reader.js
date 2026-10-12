@@ -14,7 +14,7 @@
 
   // ── Settings (remembered per visitor) ────────────────────────
   var SIZES = [100, 112.5, 125, 137.5, 150];          // % of the browser's base size
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false, location: null };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -127,8 +127,8 @@
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
 
-  function pickDate(days) {
-    var wanted = new URLSearchParams(location.search).get('d') || todayISO();
+  function pickDate(days, wanted) {
+    wanted = wanted || new URLSearchParams(location.search).get('d') || todayISO();
     if (days.indexOf(wanted) >= 0) return wanted;
     // Otherwise the latest planned day not after the wanted date, else the first one.
     var earlier = days.filter(function (d) { return d <= wanted; });
@@ -151,19 +151,20 @@
 
   function bookName(id) {
     var b = bookIndex.filter(function (x) { return x.id === id; })[0];
-    var name = b ? b.name : id;
-    return name === 'Psalms' ? 'Psalm' : name;
+    return b ? b.name : id;
   }
 
   function displayRef(r) {
-    var s = bookName(r.book) + ' ' + r.c1;
+    var name = bookName(r.book);
+    if (/^Psalms?$/.test(name)) name = r.c1 === r.c2 ? 'Psalm' : 'Psalms';   // Psalm 8, but Psalms 3–4
+    var s = name + ' ' + r.c1;
     var wholeStart = r.v1 === 1;
     if (r.c1 === r.c2) {
       if (r.v2 === null && wholeStart) return s;
       if (r.v2 === null) return s + ':' + r.v1 + '–end';
       return s + ':' + r.v1 + (r.v2 !== r.v1 ? '–' + r.v2 : '');
     }
-    if (wholeStart && r.v2 === null) return bookName(r.book) + ' ' + r.c1 + '–' + r.c2;
+    if (wholeStart && r.v2 === null) return name + ' ' + r.c1 + '–' + r.c2;
     return s + ':' + r.v1 + '–' + r.c2 + ':' + (r.v2 === null ? 'end' : r.v2);
   }
 
@@ -285,7 +286,14 @@
     // Header
     var refs = day.portions.map(function (p) { return parseRef(p.ref); });
     var dateText = new Date(day.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).replace(/,/g, '');
-    var header = '<p class="page-date">' + (day.hebrewDate ? day.hebrewDate + ' / ' : '') + dateText + '</p>';
+    var idx = planDays.indexOf(day.date);
+    var prevDay = idx > 0 ? planDays[idx - 1] : null;
+    var nextDay = idx >= 0 && idx < planDays.length - 1 ? planDays[idx + 1] : null;
+    var header = '<p class="page-date">' +
+      '<button type="button" class="day-step" data-day="' + (prevDay || '') + '"' + (prevDay ? '' : ' disabled') + ' aria-label="Previous day">&lsaquo;</button>' +
+      '<span class="page-date-text">' + (day.hebrewDate ? day.hebrewDate + ' / ' : '') + dateText + '</span>' +
+      '<button type="button" class="day-step" data-day="' + (nextDay || '') + '"' + (nextDay ? '' : ' disabled') + ' aria-label="Next day">&rsaquo;</button>' +
+      '</p>';
     if (day.parsha) {
       header += '<p class="page-parsha">Torah Portion: <em>' + day.parsha.name + '</em>' +
         (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</p>';
@@ -304,6 +312,7 @@
       var n = i + 1;
       html += '<section class="portion" id="portion-' + n + '" aria-label="' + escapeAttr(p.label) + '">';
       if (i === 0) {
+        html += '<div class="today-box" id="today-box" aria-live="polite"></div>';
         if (day.intro && day.intro.length) {
           html += '<div class="calendar-intro">' + day.intro.map(function (para) { return '<p>' + para + '</p>'; }).join('') + '</div>';
         }
@@ -329,6 +338,7 @@
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
     goTo(portionFromHash(), false);
+    fillToday(day);
   }
 
   // ── Navigation ───────────────────────────────────────────────
@@ -348,6 +358,8 @@
   }
 
   document.addEventListener('click', function (e) {
+    var step = e.target.closest('.day-step');
+    if (step && step.getAttribute('data-day')) { loadDay(step.getAttribute('data-day')); return; }
     var go = e.target.closest('[data-go]');
     if (go) { goTo(+go.getAttribute('data-go')); return; }
     var link = e.target.closest('.page-refs a');
@@ -368,7 +380,7 @@
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') { closePop(); return; }
-    if (e.target.closest && e.target.closest('input, textarea, #settings-panel')) return;
+    if (e.target.closest && e.target.closest('input, textarea, select, #settings-panel, #cal-panel')) return;
     var current = document.querySelector('.portion.active');
     if (!current) return;
     var id = parseInt(current.id.replace('portion-', ''), 10);
@@ -469,7 +481,9 @@
   }
 
   function openPanel(open) {
+    if (open && calPanel && !calPanel.hidden) openCal(false);
     panel.hidden = !open;
+    document.body.classList.toggle('panel-open', open || (calPanel && !calPanel.hidden));
     toggleBtn.setAttribute('aria-expanded', String(open));
     if (open) { refreshPanel(); closePop(); }
   }
@@ -511,26 +525,365 @@
     if (e.key === 'Escape' && !panel.hidden) { openPanel(false); toggleBtn.focus(); }
   });
 
-  // ── Start ────────────────────────────────────────────────────
-  Promise.all([getJSON('data/days/index.json'), getJSON('data/bsb/index.json'),
-               getJSON('data/hebrew-names.json').catch(function () { return {}; })])
-    .then(function (res) {
-      bookIndex = res[1];
-      hebrewNames = wordReplacer(res[2]);
-      var date = pickDate(res[0].days);
-      return getJSON('data/days/' + date + '.json');
-    })
-    .then(function (day) {
+  // ── Hebcal: Jewish calendar information (Diaspora schedule) ──
+  // Data from Hebcal.com, CC BY 4.0. One request per month, cached for the visit.
+  // If Hebcal cannot be reached, the page still shows everything from the reading plan.
+  var HEBCAL_ISRAEL = false;      // set true to switch to the Israel schedule
+  var hebcalCache = {};
+
+  function hebcalMonth(y, m) {    // m = 1..12 → Promise<{ 'YYYY-MM-DD': [events] } | null>
+    var key = y + '-' + String(m).padStart(2, '0');
+    if (!hebcalCache[key]) {
+      var last = new Date(y, m, 0).getDate();
+      var url = 'https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&mf=on&ss=on&s=on&o=on&d=on' +
+        '&leyning=off&i=' + (HEBCAL_ISRAEL ? 'on' : 'off') +
+        '&start=' + key + '-01&end=' + key + '-' + last;
+      hebcalCache[key] = fetch(url).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      }).then(function (data) {
+        var byDate = {};
+        (data.items || []).forEach(function (ev) {
+          var d = String(ev.date).slice(0, 10);
+          (byDate[d] = byDate[d] || []).push(ev);
+        });
+        return byDate;
+      }).catch(function () { delete hebcalCache[key]; return null; });
+    }
+    return hebcalCache[key];
+  }
+
+  function hebcalDay(iso) {
+    return hebcalMonth(+iso.slice(0, 4), +iso.slice(5, 7)).then(function (m) { return m ? (m[iso] || []) : null; });
+  }
+
+  function niceTitle(t) {           // Hebcal spells it Bereshit; this site uses Beresheet
+    return String(t).replace(/\bBereshit\b/g, 'Beresheet');
+  }
+
+  // ── Shabbat times by location ────────────────────────────────
+  var CITIES = [
+    ['Jerusalem', 31.7683, 35.2137, 'Asia/Jerusalem', 40],
+    ['Tel Aviv', 32.0853, 34.7818, 'Asia/Jerusalem', 18],
+    ['Haifa', 32.7940, 34.9896, 'Asia/Jerusalem', 30],
+    ['Beersheba', 31.2518, 34.7913, 'Asia/Jerusalem', 18],
+    ['Tiberias', 32.7922, 35.5312, 'Asia/Jerusalem', 18],
+    ['New York', 40.7128, -74.0060, 'America/New_York', 18],
+    ['Atlanta', 33.7490, -84.3880, 'America/New_York', 18],
+    ['Miami', 25.7617, -80.1918, 'America/New_York', 18],
+    ['Chicago', 41.8781, -87.6298, 'America/Chicago', 18],
+    ['Des Moines', 41.5868, -93.6250, 'America/Chicago', 18],
+    ['Dallas', 32.7767, -96.7970, 'America/Chicago', 18],
+    ['Denver', 39.7392, -104.9903, 'America/Denver', 18],
+    ['Los Angeles', 34.0522, -118.2437, 'America/Los_Angeles', 18],
+    ['Toronto', 43.6532, -79.3832, 'America/Toronto', 18],
+    ['São Paulo', -23.5505, -46.6333, 'America/Sao_Paulo', 18],
+    ['London', 51.5074, -0.1278, 'Europe/London', 18],
+    ['Amsterdam', 52.3676, 4.9041, 'Europe/Amsterdam', 18],
+    ['Paris', 48.8566, 2.3522, 'Europe/Paris', 18],
+    ['Berlin', 52.5200, 13.4050, 'Europe/Berlin', 18],
+    ['Copenhagen', 55.6761, 12.5683, 'Europe/Copenhagen', 18],
+    ['Oslo', 59.9139, 10.7522, 'Europe/Oslo', 18],
+    ['Stockholm', 59.3293, 18.0686, 'Europe/Stockholm', 18],
+    ['Helsinki', 60.1699, 24.9384, 'Europe/Helsinki', 18],
+    ['Johannesburg', -26.2041, 28.0473, 'Africa/Johannesburg', 18],
+    ['Sydney', -33.8688, 151.2093, 'Australia/Sydney', 18],
+    ['Melbourne', -37.8136, 144.9631, 'Australia/Melbourne', 18]
+  ];
+  var DEFAULT_LOC = { mode: 'city', name: 'Jerusalem', lat: 31.7683, lon: 35.2137, tzid: 'Asia/Jerusalem', b: 40 };
+  var autoLoc = null;   // position found this visit
+
+  function chosenLocation() {
+    var l = settings.location;
+    if (l && l.mode === 'auto') return autoLoc || null;
+    if (l && l.mode === 'city' && typeof l.lat === 'number') return l;
+    return autoLoc || DEFAULT_LOC;
+  }
+
+  function locateMe(ask) {
+    return new Promise(function (resolve) {
+      if (!navigator.geolocation) return resolve(null);
+      var go = function () {
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          autoLoc = { mode: 'auto', name: 'your location', lat: +pos.coords.latitude.toFixed(4), lon: +pos.coords.longitude.toFixed(4),
+            tzid: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC', b: 18 };
+          resolve(autoLoc);
+        }, function () { resolve(null); }, { maximumAge: 6 * 3600 * 1000, timeout: 10000 });
+      };
+      if (ask) return go();
+      // Without asking: only use the location if this site was already allowed it
+      if (navigator.permissions && navigator.permissions.query) {
+        navigator.permissions.query({ name: 'geolocation' }).then(function (st) {
+          if (st.state === 'granted') go(); else resolve(null);
+        }).catch(function () { resolve(null); });
+      } else resolve(null);
+    });
+  }
+
+  var shabbatCache = {};
+  function shabbatTimes(iso, loc) {
+    var key = iso + '|' + loc.lat + ',' + loc.lon;
+    if (!shabbatCache[key]) {
+      var url = 'https://www.hebcal.com/shabbat?cfg=json&geo=pos&M=on&leyning=off' +
+        '&latitude=' + loc.lat + '&longitude=' + loc.lon + '&tzid=' + encodeURIComponent(loc.tzid) +
+        '&b=' + (loc.b || 18) + '&i=' + (HEBCAL_ISRAEL ? 'on' : 'off') +
+        '&gy=' + +iso.slice(0, 4) + '&gm=' + +iso.slice(5, 7) + '&gd=' + +iso.slice(8, 10);
+      shabbatCache[key] = fetch(url).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      }).then(function (data) {
+        var out = {};
+        (data.items || []).forEach(function (ev) {
+          if (ev.category === 'candles' && !out.candles) out.candles = ev.date;
+          if (ev.category === 'havdalah') out.havdalah = ev.date;
+        });
+        return out;
+      }).catch(function () { delete shabbatCache[key]; return null; });
+    }
+    return shabbatCache[key];
+  }
+
+  function fmtTime(isoDateTime) {   // "2026-10-16T17:21:00+03:00" → "Fri 16 Oct, 17:21" (local to that place)
+    var d = isoDateTime.slice(0, 10);
+    var wd = new Date(d + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(',', '');
+    return wd + ', ' + isoDateTime.slice(11, 16);
+  }
+
+  var CATEGORY_SKIP = { hebdate: 1, parashat: 1 };
+
+  function fillToday(day) {
+    var box = document.getElementById('today-box');
+    if (!box) return;
+    var isShabbat = new Date(day.date + 'T12:00:00').getDay() === 6;
+    var occasion = day.occasion && day.occasion !== 'Shabbat' ? day.occasion : '';
+    function draw(events) {
+      if (!document.body.contains(box)) return;
+      var items = [];
+      (events || []).forEach(function (ev) {
+        if (CATEGORY_SKIP[ev.category] && !(isShabbat && ev.category === 'parashat')) return;
+        items.push({ title: niceTitle(ev.title), he: ev.hebrew || '', memo: ev.memo || '' });
+      });
+      // Occasions from the plan that Hebcal does not list (e.g. Shabbat Machar Chodesh)
+      if (occasion) {
+        var words = occasion.toLowerCase().split(' ').slice(0, 2).join(' ');
+        var match = null;
+        items.forEach(function (it) { if (!match && it.title.toLowerCase().indexOf(words) === 0) match = it; });
+        var dayNo = occasion.match(/\bDay \d\b/);
+        if (match && dayNo) match.title += ' · ' + dayNo[0];          // Rosh Chodesh Cheshvan · Day 1
+        if (!match || !events) items.unshift({ title: occasion, he: '', memo: '' });
+      }
+      var html = '<p class="today-label">' + (day.date === todayISO() ? 'Today' : 'This day') + '</p>';
+      if (items.length) {
+        html += '<ul class="today-list">' + items.map(function (it) {
+          return '<li><span class="today-title">' + escapeAttr(it.title) + '</span>' +
+            (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') +
+            (it.memo ? '<span class="today-memo">' + escapeAttr(it.memo) + '</span>' : '') + '</li>';
+        }).join('') + '</ul>';
+      } else if (events) {
+        html += '<p class="today-quiet">' + escapeAttr(day.hebrewDate || '') + '</p>';
+      }
+      html += '<div class="shabbat-line" id="shabbat-line"></div>';
+      box.innerHTML = html;
+      box.hidden = false;
+      drawShabbat(day.date);
+    }
+    box.hidden = true;
+    hebcalDay(day.date).then(draw);
+  }
+
+  function drawShabbat(iso) {
+    var line = document.getElementById('shabbat-line');
+    if (!line) return;
+    var loc = chosenLocation();
+    var picker = '<button type="button" class="loc-btn" aria-expanded="false" aria-controls="loc-picker">Change</button>' +
+      '<div class="loc-picker" id="loc-picker" hidden>' +
+      '<button type="button" class="loc-auto">&#x1F4CD; Use my location</button>' +
+      '<select class="loc-select" aria-label="Choose a city"><option value="">Choose a city…</option>' +
+      CITIES.map(function (c, i) { return '<option value="' + i + '">' + c[0] + '</option>'; }).join('') +
+      '</select></div>';
+    if (!loc) {   // automatic chosen but position not known yet
+      line.innerHTML = '<span class="shabbat-k">Shabbat times</span> <span class="shabbat-v">finding your location…</span> ' + picker;
+      locateMe(true).then(function (l) {
+        if (!l) { settings.location = null; saveSettings(); }
+        drawShabbat(iso);
+      });
+      return;
+    }
+    line.innerHTML = '<span class="shabbat-k">Shabbat times</span> <span class="shabbat-v">loading…</span> ' + picker;
+    shabbatTimes(iso, loc).then(function (t) {
+      if (!document.body.contains(line)) return;
+      var v = line.querySelector('.shabbat-v');
+      if (!t || !t.candles) { line.hidden = true; return; }
+      v.innerHTML = 'in <strong>' + escapeAttr(loc.name) + '</strong>: ' +
+        'Candle lighting ' + fmtTime(t.candles) + (t.havdalah ? ' &middot; Havdalah ' + fmtTime(t.havdalah) : '');
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.loc-btn');
+    if (btn) {
+      var pk = document.getElementById('loc-picker');
+      pk.hidden = !pk.hidden;
+      btn.setAttribute('aria-expanded', String(!pk.hidden));
+      return;
+    }
+    if (e.target.closest('.loc-auto')) {
+      settings.location = { mode: 'auto' };
+      saveSettings();
+      autoLoc = null;
+      if (current) drawShabbat(current.day.date);
+    }
+  });
+  document.addEventListener('change', function (e) {
+    if (!e.target.classList.contains('loc-select') || e.target.value === '') return;
+    var c = CITIES[+e.target.value];
+    settings.location = { mode: 'city', name: c[0], lat: c[1], lon: c[2], tzid: c[3], b: c[4] };
+    saveSettings();
+    if (current) drawShabbat(current.day.date);
+  });
+
+  // ── Calendar  (Sunday first) ─────────────────────────────────
+  var calPanel = document.getElementById('cal-panel');
+  var calBtn = document.getElementById('cal-btn');
+  var calMonth = null;   // { y, m }
+  var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  function isoOf(y, m, d) { return y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0'); }
+
+  function drawCalendar() {
+    var y = calMonth.y, m = calMonth.m;
+    var first = new Date(y, m - 1, 1).getDay();      // 0 = Sunday
+    var days = new Date(y, m, 0).getDate();
+    var today = todayISO();
+    var selected = current ? current.day.date : '';
+    var html = '<div class="cal-head">' +
+      '<button type="button" class="cal-nav" data-cal="-1" aria-label="Previous month">&lsaquo;</button>' +
+      '<div class="cal-title"><span class="cal-month">' + MONTH_NAMES[m - 1] + ' ' + y + '</span><span class="cal-hmonth" id="cal-hmonth"></span></div>' +
+      '<button type="button" class="cal-nav" data-cal="1" aria-label="Next month">&rsaquo;</button>' +
+      '<button type="button" class="sp-close" data-cal-close aria-label="Close calendar">&times;</button></div>' +
+      '<div class="cal-grid" role="grid">' +
+      ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(function (w, i) {
+        return '<span class="cal-wd' + (i === 6 ? ' cal-sat' : '') + '">' + w + '</span>';
+      }).join('');
+    for (var i = 0; i < first; i++) html += '<span class="cal-empty"></span>';
+    for (var d = 1; d <= days; d++) {
+      var iso = isoOf(y, m, d);
+      var has = planDays.indexOf(iso) >= 0;
+      var cls = 'cal-day' + (has ? ' has-plan' : '') + (iso === today ? ' is-today' : '') + (iso === selected ? ' is-selected' : '') +
+        (new Date(y, m - 1, d).getDay() === 6 ? ' cal-sat' : '');
+      html += '<button type="button" class="' + cls + '" data-date="' + iso + '"' + (has ? '' : ' disabled') +
+        ' aria-label="' + iso + (has ? '' : ' (no reading yet)') + '"><span class="cal-g">' + d + '</span><span class="cal-h"></span><span class="cal-dot"></span></button>';
+    }
+    html += '</div><div class="cal-foot"><button type="button" class="cal-today" data-date="' + today + '">Today</button>' +
+      '<span class="cal-legend"><span class="cal-dot on"></span> holiday or Rosh Chodesh</span></div>';
+    calPanel.innerHTML = html;
+
+    // Hebrew dates and holidays from Hebcal (if reachable)
+    hebcalMonth(y, m).then(function (map) {
+      if (!map || calMonth.y !== y || calMonth.m !== m) return;
+      var hmonths = [], hyear = '';
+      Object.keys(map).forEach(function (iso) {
+        var cell = calPanel.querySelector('.cal-day[data-date="' + iso + '"]');
+        if (!cell) return;
+        map[iso].forEach(function (ev) {
+          if (ev.category === 'hebdate') {
+            var he = String(ev.hebrew || '').split(' ')[0];
+            cell.querySelector('.cal-h').textContent = he;
+            var mm = String(ev.title).match(/of ([A-Za-z' ]+?), (\d{4})/);
+            if (mm && hmonths.indexOf(mm[1]) < 0) hmonths.push(mm[1]);
+            if (mm) hyear = mm[2];
+          } else if (ev.category === 'holiday' || ev.category === 'roshchodesh') {
+            cell.querySelector('.cal-dot').classList.add('on');
+            cell.title = niceTitle(ev.title);
+          }
+        });
+      });
+      var hm = document.getElementById('cal-hmonth');
+      if (hm && hmonths.length) hm.textContent = hmonths.join(' – ') + ' ' + hyear;
+    });
+  }
+
+  function openCal(open) {
+    if (open) {
+      openPanel(false);
+      var base = current ? current.day.date : todayISO();
+      calMonth = { y: +base.slice(0, 4), m: +base.slice(5, 7) };
+      drawCalendar();
+      closePop();
+    }
+    calPanel.hidden = !open;
+    calBtn.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('panel-open', open || !panel.hidden);
+  }
+
+  calBtn.addEventListener('click', function (e) { e.stopPropagation(); openCal(calPanel.hidden); });
+  calPanel.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var t = e.target.closest('button');
+    if (!t) return;
+    if (t.hasAttribute('data-cal-close')) { openCal(false); calBtn.focus(); return; }
+    if (t.hasAttribute('data-cal')) {
+      var m = calMonth.m + (+t.getAttribute('data-cal'));
+      calMonth = { y: calMonth.y + (m > 12 ? 1 : m < 1 ? -1 : 0), m: m > 12 ? 1 : m < 1 ? 12 : m };
+      drawCalendar();
+      return;
+    }
+    if (t.hasAttribute('data-date')) {
+      var iso = t.getAttribute('data-date');
+      if (planDays.indexOf(iso) < 0) iso = pickDate(planDays, iso);
+      openCal(false);
+      loadDay(iso);
+    }
+  });
+  document.addEventListener('click', function (e) {
+    if (!calPanel.hidden && !e.target.closest('#cal-panel, #cal-btn')) openCal(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !calPanel.hidden) { openCal(false); calBtn.focus(); }
+  });
+
+  // ── Loading a day ────────────────────────────────────────────
+  var planDays = [];
+
+  function loadDay(date, replace) {
+    return getJSON('data/days/' + date + '.json').then(function (day) {
       var ids = day.portions.map(function (p) { return parseRef(p.ref).book; })
         .filter(function (v, i, a) { return a.indexOf(v) === i; });
       return Promise.all(ids.map(loadBook)).then(function (list) {
         var books = {};
         list.forEach(function (b) { books[b.id] = b; });
+        var url = location.pathname + '?d=' + date;
+        if (replace) history.replaceState({ d: date }, '', url + location.hash);
+        else { history.pushState({ d: date }, '', url + '#1'); window.scrollTo(0, 0); }
         renderDay(day, books);
       });
+    }).catch(function (err) {
+      document.getElementById('portions').innerHTML =
+        '<p class="status">Sorry, the readings could not be loaded. (' + err.message + ')</p>';
+    });
+  }
+
+  window.addEventListener('popstate', function () {
+    var d = new URLSearchParams(location.search).get('d');
+    if (d && planDays.indexOf(d) >= 0 && (!current || current.day.date !== d)) loadDay(d, true);
+  });
+
+  // ── Start ────────────────────────────────────────────────────
+  Promise.all([getJSON('data/days/index.json'), getJSON('data/bsb/index.json'),
+               getJSON('data/hebrew-names.json').catch(function () { return {}; })])
+    .then(function (res) {
+      planDays = res[0].days.slice().sort();
+      bookIndex = res[1];
+      hebrewNames = wordReplacer(res[2]);
+      return loadDay(pickDate(planDays), true);
     })
     .catch(function (err) {
       document.getElementById('portions').innerHTML =
         '<p class="status">Sorry, the readings could not be loaded. (' + err.message + ')</p>';
     });
+
+  // Use the visitor's location for Shabbat times if they already allowed it
+  if (!settings.location || settings.location.mode === 'auto') {
+    locateMe(false).then(function (l) { if (l && current) drawShabbat(current.day.date); });
+  }
 })();

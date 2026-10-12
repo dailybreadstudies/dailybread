@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-30",
+  "hebrewDate": "19 Cheshvan 5787",
+  "parsha": {
+    "name": "Vayera",
+    "meaning": "And He Appeared"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 21:22-34"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JDG 2"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 25"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 21:1-22"
+    }
+  ]
+}

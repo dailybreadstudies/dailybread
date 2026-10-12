@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-20",
+  "hebrewDate": "9 Cheshvan 5787",
+  "parsha": {
+    "name": "Lech Lecha",
+    "meaning": "Go Forth"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 13:5-18"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JOS 16-17"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 16"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 13:1-30"
+    }
+  ]
+}

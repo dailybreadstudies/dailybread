@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-12",
+  "hebrewDate": "1 Cheshvan 5787",
+  "parsha": {
+    "name": "Noach",
+    "meaning": "Noah"
+  },
+  "occasion": "Rosh Chodesh Day 2",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 7:1-16"
+    },
+    {
+      "label": "Rosh Chodesh",
+      "he": "רֹאשׁ חֹדֶשׁ",
+      "ref": "NUM 28:11-15"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JOS 9"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 9"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 7"
+    }
+  ]
+}
