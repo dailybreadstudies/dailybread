@@ -324,7 +324,6 @@ html.name-small .lord { text-transform: none; font-variant: small-caps; letter-s
 .reader-footer { margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
   font: 400 0.7rem/1.6 var(--sans); color: var(--muted); text-align: center; letter-spacing: 0.01em; }
 .reader-footer p { margin: 0 auto 0.55rem; max-width: 34rem; }
-.reader-footer strong { font-weight: 600; color: var(--ink-soft); }
 .status { text-align: center; color: var(--muted); font-style: italic; padding: 3rem 0; }
 
 /* ── Settings button [ A / א ] and panel ── */
@@ -434,7 +433,8 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .vp-en { margin: 0 !important; }
 .vp-orig { margin: 0.25rem 0 0 !important; color: var(--ink); }
 .vp-orig.he { font-family: var(--hebrew); direction: rtl; text-align: right; font-size: 1.3em; line-height: 1.95; }
-.vp-orig.grc { font-family: var(--greek); font-size: 1.08em; line-height: 1.8; }
+.vp-orig.grc { font-family: var(--greek); font-size: 1.18em; line-height: 1.75; }
+.vp .vp-orig.grc { padding-left: 1.6rem; }   /* indented from the English for easier eye movement */
 .vp .pe, .vp .se { display: none; }
 .orig-only .vo-para { margin-bottom: 1.05rem !important; }
 .orig-only .vo-line { margin: 0 !important; }
