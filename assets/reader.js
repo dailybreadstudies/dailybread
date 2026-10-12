@@ -286,12 +286,14 @@
     // Header
     var refs = day.portions.map(function (p) { return parseRef(p.ref); });
     var dateText = new Date(day.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }).replace(/,/g, '');
+    // Header shows "30 Tishrei / Monday 12 Oct" (years left out)
+    var headDate = new Date(day.date + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short' }).replace(/,/g, '');
     var idx = planDays.indexOf(day.date);
     var prevDay = idx > 0 ? planDays[idx - 1] : null;
     var nextDay = idx >= 0 && idx < planDays.length - 1 ? planDays[idx + 1] : null;
     var header = '<p class="page-date">' +
       '<button type="button" class="day-step" data-day="' + (prevDay || '') + '"' + (prevDay ? '' : ' disabled') + ' aria-label="Previous day">&lsaquo;</button>' +
-      '<span class="page-date-text">' + (day.hebrewDate ? day.hebrewDate + ' / ' : '') + dateText + '</span>' +
+      '<span class="page-date-text">' + (day.hebrewDate ? day.hebrewDate.replace(/\s+\d{4}$/, '') + ' / ' : '') + headDate + '</span>' +
       '<button type="button" class="day-step" data-day="' + (nextDay || '') + '"' + (nextDay ? '' : ' disabled') + ' aria-label="Next day">&rsaquo;</button>' +
       '</p>';
     if (day.parsha) {
