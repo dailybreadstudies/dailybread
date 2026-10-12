@@ -221,6 +221,8 @@
     return s;
   }
 
+  function noNikud(t) { return String(t).replace(/[\u0591-\u05C7]/g, ''); }   // Hebrew without vowels or accents
+
   function escapeAttr(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
 
   function renderPassage(book, r, pIndex) {
@@ -422,7 +424,7 @@
         }
         html += document.getElementById('blessings-template').innerHTML;
       }
-      html += '<p class="division-label">' + p.label + (p.he ? ' <span class="he">' + p.he + '</span>' : '') + '</p>';
+      html += '<p class="division-label">' + p.label + (p.he ? ' <span class="he">' + noNikud(p.he) + '</span>' : '') + '</p>';
       html += '<h2 class="chapter-head">' + displayRef(r) + '</h2>';
       var sub = p.title || passage.titles.join(' &middot; ');
       if (sub) html += '<p class="chapter-sub">' + sub + '</p>';
@@ -1131,7 +1133,7 @@
       '<p class="bible-back"><button type="button" class="back-today">&larr; Back to today’s Daily Bread</button></p>';
     document.title = ref + ' · Daily Bread Online';
     var html = '<section class="portion active bible-view" aria-label="' + escapeAttr(ref) + '">' +
-      '<p class="division-label">' + g[0] + ' <span class="he">' + g[1] + '</span></p>' +
+      '<p class="division-label">' + g[0] + ' <span class="he">' + noNikud(g[1]) + '</span></p>' +
       '<h2 class="chapter-head chapter-nav">' +
         '<button type="button" class="day-step" data-chapter="-1"' + (prev ? '' : ' disabled') + ' aria-label="Previous chapter">&lsaquo;</button>' +
         '<span>' + ref + '</span>' +
