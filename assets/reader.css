@@ -20,17 +20,17 @@
     --ink: #e8e0d5;
     --ink-soft: #c8bdb0;
     --muted: #9b9083;
-    --accent: #d2a06c;
-    --accent-deep: #ebc79d;
-    --accent-soft: #c08c5c;
-    --accent-faint: #a98260;
-    --accent-line: #6e5440;
-    --line-strong: #5c4635;
-    --tint: #2a2119;
+    --accent: #c2a385;
+    --accent-deep: #dfc8b0;
+    --accent-soft: #ab8d72;
+    --accent-faint: #94806e;
+    --accent-line: #5f4f42;
+    --line-strong: #54463a;
+    --tint: #25201b;
     --rule: #2f2720;
-    --pop: #33271c;
+    --pop: #2f2720;
     --pop-ink: #efe6da;
-  --pop-edge: #4d3b2c;
+  --pop-edge: #4a3e34;
     --surface: #211b16;
     --surface-glass: rgba(33, 27, 22, 0.92);
     --on-accent: #1a140f;
@@ -46,17 +46,17 @@
   --ink: #e8e0d5;
   --ink-soft: #c8bdb0;
   --muted: #9b9083;
-  --accent: #d2a06c;
-  --accent-deep: #ebc79d;
-  --accent-soft: #c08c5c;
-  --accent-faint: #a98260;
-  --accent-line: #6e5440;
-  --line-strong: #5c4635;
-  --tint: #2a2119;
+  --accent: #c2a385;
+  --accent-deep: #dfc8b0;
+  --accent-soft: #ab8d72;
+  --accent-faint: #94806e;
+  --accent-line: #5f4f42;
+  --line-strong: #54463a;
+  --tint: #25201b;
   --rule: #2f2720;
-  --pop: #33271c;
+  --pop: #2f2720;
   --pop-ink: #efe6da;
-  --pop-edge: #4d3b2c;
+  --pop-edge: #4a3e34;
   --surface: #211b16;
   --surface-glass: rgba(33, 27, 22, 0.92);
   --on-accent: #1a140f;
@@ -77,24 +77,24 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --ink-soft: #4a4a4a;
   --muted: #6b6b6b;
   /* Earth-brown accent */
-  --accent: #8b5a2b;        /* labels, links, active controls */
-  --accent-deep: #5e3a1a;   /* hover / pressed */
-  --accent-soft: #a8784b;   /* verse numbers, note markers */
-  --accent-faint: #c19a74;  /* division labels */
-  --accent-line: #e2cdb6;   /* light brown lines, Hebrew labels */
-  --line-strong: #dcc5ab;   /* button borders */
-  --tint: #f8f1e9;          /* hover backgrounds */
+  --accent: #7a5c43;        /* labels, links, active controls */
+  --accent-deep: #4e3a2a;   /* hover / pressed */
+  --accent-soft: #977a62;   /* verse numbers, note markers */
+  --accent-faint: #b19b86;  /* division labels */
+  --accent-line: #ddd1c4;   /* light brown lines, Hebrew labels */
+  --line-strong: #d5c8ba;   /* button borders */
+  --tint: #f6f2ec;          /* hover backgrounds */
   --rule: #ece6df;
-  --pop: #3b2716;           /* footnote popup */
+  --pop: #372c23;           /* footnote popup */
   --pop-ink: #f5f0eb;
   --pop-edge: transparent;
   --surface: #ffffff;       /* menu, buttons */
-  --surface-glass: var(--surface-glass);
+  --surface-glass: rgba(255, 255, 255, 0.92);
   --on-accent: #ffffff;     /* text on brown buttons */
-  --verse: var(--verse);         /* verse numbers */
-  --heading: var(--heading);
-  --track: var(--track);         /* switch (off) */
-  --shadow: var(--shadow);
+  --verse: #222222;         /* verse numbers */
+  --heading: #1f1f1f;
+  --track: #d9d2ca;         /* switch (off) */
+  --shadow: rgba(55, 44, 35, 0.14);
   color-scheme: light;
   --serif: 'Source Serif 4', 'Merriweather', Georgia, serif;
   --display: 'Merriweather', Georgia, serif;
@@ -434,24 +434,17 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .day-step:disabled { visibility: hidden; }
 .day-step:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 1px; }
 
-/* Today box (Hebcal) */
-.today-box { margin: 0 0 2.2rem; padding: 1rem 1.15rem; border: 1px solid var(--rule); border-radius: 10px;
-  background: var(--tint); font-size: 0.95rem; line-height: 1.55; }
-.today-label { font: 600 0.68rem/1.4 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
-.today-list { list-style: none; margin: 0 0 0.6rem; }
-.today-list li { margin-bottom: 0.45rem; }
-.today-title { font-weight: 600; color: var(--ink); }
-.today-he { font-size: 1.05em; color: var(--accent); margin-left: 0.3em; }
-.today-memo { display: block; color: var(--ink-soft); font-size: 0.92em; }
-.today-quiet { color: var(--muted); font-style: italic; margin-bottom: 0.6rem; }
-.shabbat-line { font-size: 0.88rem; color: var(--ink-soft); border-top: 1px solid var(--rule); padding-top: 0.6rem; }
-.shabbat-line:first-child { border-top: none; padding-top: 0; }
-.shabbat-k { font: 600 0.68rem/1.4 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-right: 0.3em; }
-.shabbat-v strong { font-weight: 600; color: var(--ink); }
+/* Today information (Hebcal) — set in the same style as the day's introduction */
+.today-box { margin: 0 0 2rem; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); }
+.today-box p { margin-bottom: 0.5rem; }
+.today-box p:last-child { margin-bottom: 0; }
+.today-title { color: var(--ink); }
+.today-he { font-size: 1.05em; color: var(--accent); margin-left: 0.15em; }
+.shabbat-line strong { font-weight: 600; color: var(--ink); }
 .loc-btn { background: none; border: none; padding: 0; margin-left: 0.4em; color: var(--accent); cursor: pointer;
   font: inherit; text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 2px; }
 .loc-btn:hover { color: var(--accent-deep); }
-.loc-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.6rem; }
+.loc-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.5rem; }
 .loc-picker[hidden] { display: none; }
 .loc-auto, .loc-select { height: 34px; border-radius: 8px; border: 1px solid var(--line-strong); background: var(--surface);
   color: var(--ink); font: 13px var(--sans); padding: 0 10px; cursor: pointer; }

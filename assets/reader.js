@@ -632,10 +632,11 @@
         if (!r.ok) throw new Error(r.status);
         return r.json();
       }).then(function (data) {
-        var out = {};
+        var out = { candles: {}, havdalah: {} };      // 'YYYY-MM-DD' → 'HH:MM'
         (data.items || []).forEach(function (ev) {
-          if (ev.category === 'candles' && !out.candles) out.candles = ev.date;
-          if (ev.category === 'havdalah') out.havdalah = ev.date;
+          var d = String(ev.date).slice(0, 10), t = String(ev.date).slice(11, 16);
+          if (ev.category === 'candles' && t) out.candles[d] = t;
+          if (ev.category === 'havdalah' && t) out.havdalah[d] = t;
         });
         return out;
       }).catch(function () { delete shabbatCache[key]; return null; });
@@ -643,20 +644,17 @@
     return shabbatCache[key];
   }
 
-  function fmtTime(isoDateTime) {   // "2026-10-16T17:21:00+03:00" → "Fri 16 Oct, 17:21" (local to that place)
-    var d = isoDateTime.slice(0, 10);
-    var wd = new Date(d + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(',', '');
-    return wd + ', ' + isoDateTime.slice(11, 16);
-  }
-
   var CATEGORY_SKIP = { hebdate: 1, parashat: 1 };
 
+  // "Today" information: shown only when there is something to say
+  // (a holiday, Rosh Chodesh, a special Shabbat, candle lighting or havdalah).
   function fillToday(day) {
     var box = document.getElementById('today-box');
     if (!box) return;
+    box.hidden = true;
     var isShabbat = new Date(day.date + 'T12:00:00').getDay() === 6;
     var occasion = day.occasion && day.occasion !== 'Shabbat' ? day.occasion : '';
-    function draw(events) {
+    hebcalDay(day.date).then(function (events) {
       if (!document.body.contains(box)) return;
       var items = [];
       (events || []).forEach(function (ev) {
@@ -669,53 +667,56 @@
         var match = null;
         items.forEach(function (it) { if (!match && it.title.toLowerCase().indexOf(words) === 0) match = it; });
         var dayNo = occasion.match(/\bDay \d\b/);
-        if (match && dayNo) match.title += ' · ' + dayNo[0];          // Rosh Chodesh Cheshvan · Day 1
+        if (match && dayNo) match.title += ' · ' + dayNo[0];
         if (!match || !events) items.unshift({ title: occasion, he: '', memo: '' });
       }
-      var html = '<p class="today-label">' + (day.date === todayISO() ? 'Today' : 'This day') + '</p>';
-      if (items.length) {
-        html += '<ul class="today-list">' + items.map(function (it) {
-          return '<li><span class="today-title">' + escapeAttr(it.title) + '</span>' +
-            (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') +
-            (it.memo ? '<span class="today-memo">' + escapeAttr(it.memo) + '</span>' : '') + '</li>';
-        }).join('') + '</ul>';
-      } else if (events) {
-        html += '<p class="today-quiet">' + escapeAttr(day.hebrewDate || '') + '</p>';
-      }
-      html += '<div class="shabbat-line" id="shabbat-line"></div>';
+      var label = day.date === todayISO() ? 'Today' : 'This day';
+      var html = items.map(function (it, i) {
+        return '<p>' + (i === 0 ? '<span class="lead">' + label + '</span> ' : '') +
+          '<span class="today-title">' + escapeAttr(it.title) + '</span>' +
+          (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') +
+          (it.memo ? ' — ' + escapeAttr(it.memo.replace(/\s+$/, '')) + (/[.!?]$/.test(it.memo.trim()) ? '' : '.') : '') + '</p>';
+      }).join('');
+      html += '<p class="shabbat-line" id="shabbat-line" hidden></p>';
       box.innerHTML = html;
-      box.hidden = false;
+      box.hidden = !items.length;
       drawShabbat(day.date);
-    }
-    box.hidden = true;
-    hebcalDay(day.date).then(draw);
+    });
   }
 
-  function drawShabbat(iso) {
-    var line = document.getElementById('shabbat-line');
-    if (!line) return;
-    var loc = chosenLocation();
-    var picker = '<button type="button" class="loc-btn" aria-expanded="false" aria-controls="loc-picker">Change</button>' +
-      '<div class="loc-picker" id="loc-picker" hidden>' +
+  function locPicker() {
+    return '<button type="button" class="loc-btn" aria-expanded="false" aria-controls="loc-picker">change</button>' +
+      '<span class="loc-picker" id="loc-picker" hidden>' +
       '<button type="button" class="loc-auto">&#x1F4CD; Use my location</button>' +
       '<select class="loc-select" aria-label="Choose a city"><option value="">Choose a city…</option>' +
       CITIES.map(function (c, i) { return '<option value="' + i + '">' + c[0] + '</option>'; }).join('') +
-      '</select></div>';
-    if (!loc) {   // automatic chosen but position not known yet
-      line.innerHTML = '<span class="shabbat-k">Shabbat times</span> <span class="shabbat-v">finding your location…</span> ' + picker;
+      '</select></span>';
+  }
+
+  // Candle lighting on Friday / erev Yom Tov; havdalah on the evening Shabbat or Yom Tov ends.
+  function drawShabbat(iso) {
+    var line = document.getElementById('shabbat-line');
+    var box = document.getElementById('today-box');
+    if (!line) return;
+    var loc = chosenLocation();
+    if (!loc) {   // "automatic" chosen but position not known yet
       locateMe(true).then(function (l) {
         if (!l) { settings.location = null; saveSettings(); }
         drawShabbat(iso);
       });
       return;
     }
-    line.innerHTML = '<span class="shabbat-k">Shabbat times</span> <span class="shabbat-v">loading…</span> ' + picker;
     shabbatTimes(iso, loc).then(function (t) {
-      if (!document.body.contains(line)) return;
-      var v = line.querySelector('.shabbat-v');
-      if (!t || !t.candles) { line.hidden = true; return; }
-      v.innerHTML = 'in <strong>' + escapeAttr(loc.name) + '</strong>: ' +
-        'Candle lighting ' + fmtTime(t.candles) + (t.havdalah ? ' &middot; Havdalah ' + fmtTime(t.havdalah) : '');
+      if (!document.body.contains(line) || !t) return;
+      var parts = [];
+      if (t.candles[iso]) parts.push('Candle lighting <strong>' + t.candles[iso] + '</strong>');
+      if (t.havdalah[iso]) parts.push('Havdalah <strong>' + t.havdalah[iso] + '</strong>');
+      if (!parts.length) return;
+      var first = box.hidden;
+      line.innerHTML = (first ? '<span class="lead">' + (iso === todayISO() ? 'Today' : 'This day') + '</span> ' : '') +
+        parts.join(' &middot; ') + ' in ' + escapeAttr(loc.name) + ' ' + locPicker();
+      line.hidden = false;
+      box.hidden = false;
     });
   }
 
