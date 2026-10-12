@@ -13,6 +13,60 @@
   font-display: swap;
 }
 
+/* ── Dark mode: follows the device unless the reader picks Light or Dark ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --paper: #17130f;
+    --ink: #e8e0d5;
+    --ink-soft: #c8bdb0;
+    --muted: #9b9083;
+    --accent: #d2a06c;
+    --accent-deep: #ebc79d;
+    --accent-soft: #c08c5c;
+    --accent-faint: #a98260;
+    --accent-line: #6e5440;
+    --line-strong: #5c4635;
+    --tint: #2a2119;
+    --rule: #2f2720;
+    --pop: #33271c;
+    --pop-ink: #efe6da;
+  --pop-edge: #4d3b2c;
+    --surface: #211b16;
+    --surface-glass: rgba(33, 27, 22, 0.92);
+    --on-accent: #1a140f;
+    --verse: #d6cdc1;
+    --heading: #efe7dc;
+    --track: #4a4037;
+    --shadow: rgba(0, 0, 0, 0.45);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #17130f;
+  --ink: #e8e0d5;
+  --ink-soft: #c8bdb0;
+  --muted: #9b9083;
+  --accent: #d2a06c;
+  --accent-deep: #ebc79d;
+  --accent-soft: #c08c5c;
+  --accent-faint: #a98260;
+  --accent-line: #6e5440;
+  --line-strong: #5c4635;
+  --tint: #2a2119;
+  --rule: #2f2720;
+  --pop: #33271c;
+  --pop-ink: #efe6da;
+  --pop-edge: #4d3b2c;
+  --surface: #211b16;
+  --surface-glass: rgba(33, 27, 22, 0.92);
+  --on-accent: #1a140f;
+  --verse: #d6cdc1;
+  --heading: #efe7dc;
+  --track: #4a4037;
+  --shadow: rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { font-size: 112.5%; }   /* 18px base: every size scales up together */
@@ -32,6 +86,16 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --tint: #f8f1e9;          /* hover backgrounds */
   --rule: #ece6df;
   --pop: #3b2716;           /* footnote popup */
+  --pop-ink: #f5f0eb;
+  --pop-edge: transparent;
+  --surface: #ffffff;       /* menu, buttons */
+  --surface-glass: var(--surface-glass);
+  --on-accent: #ffffff;     /* text on brown buttons */
+  --verse: var(--verse);         /* verse numbers */
+  --heading: var(--heading);
+  --track: var(--track);         /* switch (off) */
+  --shadow: var(--shadow);
+  color-scheme: light;
   --serif: 'Source Serif 4', 'Merriweather', Georgia, serif;
   --display: 'Merriweather', Georgia, serif;
   --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
@@ -41,6 +105,7 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
 
 body {
   background: var(--paper);
+  transition: background-color 0.2s, color 0.2s;
   font-family: var(--serif);
   color: var(--ink);
   line-height: 1.75;
@@ -65,7 +130,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 /* ── Page header ── */
 .page-title {
   font-size: 1.9rem; font-weight: 300; text-align: center;
-  margin-bottom: 0.5rem; color: #2c2c2c; letter-spacing: -0.015em;
+  margin-bottom: 0.5rem; color: var(--heading); letter-spacing: -0.015em;
 }
 .page-date {
   text-align: center; font-family: var(--display); font-size: 0.92rem; font-style: italic;
@@ -76,7 +141,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   margin-bottom: 0.6rem;
 }
 .page-refs {
-  text-align: center; font-size: 0.9rem; font-style: italic; color: #7a7a7a;
+  text-align: center; font-size: 0.9rem; font-style: italic; color: var(--muted);
   margin-bottom: 2.25rem; padding-bottom: 1.75rem; border-bottom: 1px solid var(--rule);
 }
 .page-refs a { color: inherit; text-decoration: none; white-space: nowrap; }
@@ -102,13 +167,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   text-align: center; font-family: var(--display); font-size: 1.02rem; font-style: italic;
   color: var(--muted); letter-spacing: 0.02em; margin-bottom: 1.5rem;
 }
-.blessing { margin-bottom: 1.55rem; font-size: 1rem; line-height: 1.75; color: #3d3d3d; }
+.blessing { margin-bottom: 1.55rem; font-size: 1rem; line-height: 1.75; color: var(--ink-soft); }
 .blessing .hebrew-blessing {
   display: block; font-family: var(--hebrew); font-size: 1.38rem; line-height: 2;
   direction: rtl; text-align: right; margin: 0.65rem 0 0.55rem;
 }
 .blessing .lead-he { font-size: 1.7rem; color: var(--accent); margin-left: 0.15em; }
-.blessing .scripture-quote { font-style: italic; color: #5a5a5a; }
+.blessing .scripture-quote { font-style: italic; color: var(--ink-soft); }
 .blessings-divider { border: none; border-top: 1px solid var(--rule); margin: 2.5rem auto; max-width: 180px; }
 
 /* ── Portion heading ── */
@@ -120,7 +185,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   font-size: 1.02rem; font-weight: 400; letter-spacing: 0; color: var(--accent-line);
   margin-left: 0.4em; text-transform: none;
 }
-.chapter-head { font-size: 1.5rem; text-align: center; margin-bottom: 0.3rem; color: #1f1f1f; }
+.chapter-head { font-size: 1.5rem; text-align: center; margin-bottom: 0.3rem; color: var(--heading); }
 .chapter-sub {
   text-align: center; font-size: 1.02rem; font-style: italic; color: var(--muted);
   margin-bottom: 2rem; font-weight: 300;
@@ -128,7 +193,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .chapter-head + .scripture { margin-top: 1.7rem; }
 
 /* ── Scripture (BSB) ── */
-.scripture { font-size: 1.1rem; line-height: 1.85; color: #1b1b1b; }
+.scripture { font-size: 1.1rem; line-height: 1.85; color: var(--ink); }
 .scripture p { margin-bottom: 1.05rem; }
 .scripture .m { text-indent: 0; }
 .scripture .pmo, .scripture .pi1 { padding-left: 1.4em; }
@@ -147,7 +212,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em;
   text-transform: uppercase; color: var(--accent-faint); margin: 1.2rem 0 0.3rem;
 }
-.scripture .d { font-style: italic; color: #5a5a5a; font-size: 0.98rem; margin-bottom: 0.8rem; }
+.scripture .d { font-style: italic; color: var(--ink-soft); font-size: 0.98rem; margin-bottom: 0.8rem; }
 
 /* BSB section headings within the reading */
 .scripture .s1 {
@@ -169,11 +234,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .scripture > :first-child { margin-top: 0; }
 
 .verse-num {
-  font-size: 0.7em; vertical-align: super; line-height: 0; color: #222222;
+  font-size: 0.7em; vertical-align: super; line-height: 0; color: var(--verse);
   font-weight: 500; margin-right: 0.3em; font-family: var(--sans); text-indent: 0;
 }
 .chapter-num {
-  font-family: var(--display); font-size: 1.6em; line-height: 1; color: #222222;
+  font-family: var(--display); font-size: 1.6em; line-height: 1; color: var(--verse);
   margin-right: 0.25em; vertical-align: -0.12em;
 }
 .lord { text-transform: uppercase; }   /* the divine name: full capitals (LORD, ADONAI, HASHEM) */
@@ -192,15 +257,15 @@ html.name-small .lord { text-transform: none; font-variant: small-caps; letter-s
 
 .fn-pop {
   position: absolute; z-index: 100; width: min(300px, calc(100% - 2rem));
-  background: var(--pop); color: #f5f0eb; border-radius: 6px; padding: 0.75rem 0.95rem;
+  background: var(--pop); color: var(--pop-ink); border-radius: 6px; border: 1px solid var(--pop-edge); padding: 0.75rem 0.95rem;
   font: 400 0.86rem/1.55 var(--serif); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
 }
 .fn-pop[hidden] { display: none; }
 .fn-pop .fn-pop-ref {
   display: block; font: 600 0.68rem/1.4 var(--sans); letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--accent-line); margin-bottom: 0.25rem;
+  text-transform: uppercase; color: var(--accent-faint); margin-bottom: 0.25rem;
 }
-.fn-pop i { color: #fff; }
+.fn-pop i { color: var(--pop-ink); }
 .fn-pop::after {
   content: ''; position: absolute; left: var(--arrow-x, 50%); margin-left: -6px;
   border: 6px solid transparent;
@@ -226,7 +291,7 @@ html.name-small .lord { text-transform: none; font-variant: small-caps; letter-s
 }
 .footnote-list .fn-label:hover { color: var(--accent-deep); }
 .footnote-list .fn-verse { font-weight: 600; color: var(--accent); margin-right: 0.35em; font-family: var(--sans); font-size: 0.85em; }
-.footnote-list .empty { font-style: italic; color: #8a8a8a; }
+.footnote-list .empty { font-style: italic; color: var(--muted); }
 
 /* ── Portions & navigation ── */
 .portion { display: none; }
@@ -245,8 +310,8 @@ html.name-small .lord { text-transform: none; font-variant: small-caps; letter-s
 }
 .nav-btn:hover:not(:disabled) { background: var(--tint); border-color: var(--accent-soft); color: var(--accent-deep); }
 .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-.nav-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.nav-btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: #fff; }
+.nav-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.nav-btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--on-accent); }
 .nav-indicator {
   font: 500 0.7rem/1.4 var(--sans); letter-spacing: 0.12em; color: var(--accent-soft);
   text-transform: uppercase; text-align: center;
@@ -264,7 +329,7 @@ html.font-sans .scripture { line-height: 1.8; }
   position: fixed; top: 18px; right: 20px; z-index: 200;
   display: inline-flex; align-items: center; gap: 0.3em;
   height: 38px; padding: 0 0.85rem; border-radius: 19px;
-  background: rgba(255, 255, 255, 0.92); border: 1px solid var(--line-strong);
+  background: var(--surface-glass); border: 1px solid var(--line-strong);
   color: var(--accent); cursor: pointer; font-size: 16px; line-height: 1;
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
   transition: border-color 0.2s, background 0.2s, color 0.2s;
@@ -276,9 +341,9 @@ html.font-sans .scripture { line-height: 1.8; }
 .sb-he { font-family: var(--hebrew); font-size: 19px; position: relative; top: 1px; }
 
 .settings-panel {
-  position: fixed; top: 64px; right: 20px; z-index: 199; width: 320px; max-width: calc(100vw - 32px);
-  background: #fff; border: 1px solid var(--rule); border-radius: 10px;
-  box-shadow: 0 12px 36px rgba(59, 39, 22, 0.14), 0 2px 6px rgba(59, 39, 22, 0.06);
+  position: fixed; top: 64px; right: 20px; z-index: 199; width: 348px; max-width: calc(100vw - 32px);
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+  box-shadow: 0 12px 36px var(--shadow), 0 2px 6px rgba(59, 39, 22, 0.06);
   padding: 14px 18px 10px; font-family: var(--sans); font-size: 14px; color: var(--ink);
 }
 .settings-panel[hidden] { display: none; }
@@ -287,21 +352,21 @@ html.font-sans .scripture { line-height: 1.8; }
 .sp-close { background: none; border: none; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; padding: 2px 4px; border-radius: 4px; }
 .sp-close:hover { color: var(--accent-deep); background: var(--tint); }
 .sp-row { display: flex; justify-content: space-between; align-items: center; min-height: 46px; gap: 12px; }
-.sp-label { color: var(--ink-soft); }
+.sp-label { color: var(--ink-soft); white-space: nowrap; }
 .sp-static { color: var(--muted); font-size: 13px; }
 .sp-stepper { display: inline-flex; align-items: center; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; }
-.sp-stepper button { width: 40px; height: 34px; background: #fff; border: none; cursor: pointer; color: var(--accent); font-family: 'Source Serif 4', Georgia, serif; }
+.sp-stepper button { width: 40px; height: 34px; background: var(--surface); border: none; cursor: pointer; color: var(--accent); font-family: 'Source Serif 4', Georgia, serif; }
 .sp-stepper button:hover:not(:disabled) { background: var(--tint); }
 .sp-stepper button:disabled { color: var(--accent-line); cursor: default; }
 .sp-a-small { font-size: 13px; }
 .sp-a-large { font-size: 19px; }
 .sp-value { min-width: 52px; text-align: center; font-size: 12px; color: var(--muted); border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); line-height: 34px; }
 .sp-seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; }
-.sp-seg button { height: 34px; padding: 0 14px; background: #fff; border: none; cursor: pointer; color: var(--ink-soft); font-size: 14px; }
+.sp-seg button { height: 34px; padding: 0 14px; background: var(--surface); border: none; cursor: pointer; color: var(--ink-soft); font-size: 14px; }
 .sp-seg button + button { border-left: 1px solid var(--line-strong); }
-.sp-seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.sp-seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
 .sp-seg button:hover:not([aria-pressed="true"]) { background: var(--tint); }
-.sp-seg-name button { padding: 0 10px; font-size: 13px; }
+.sp-seg-name button { padding: 0 9px; font-size: 12.5px; }
 .dn-sample { text-transform: uppercase; letter-spacing: 0.02em; }
 html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .sp-smallcaps { font-variant: small-caps; }
@@ -316,7 +381,7 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .sp-switch-text { display: flex; flex-direction: column; gap: 2px; }
 .sp-switch-title { font-size: 14px; color: var(--ink); }
 .sp-switch-sub { font-size: 12px; color: var(--muted); }
-.sp-track { flex: none; width: 40px; height: 24px; border-radius: 12px; background: #d9d2ca; position: relative; transition: background 0.2s; }
+.sp-track { flex: none; width: 40px; height: 24px; border-radius: 12px; background: var(--track); position: relative; transition: background 0.2s; }
 .sp-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.2s; }
 .sp-switch[aria-checked="true"] .sp-track { background: var(--accent); }
 .sp-switch[aria-checked="true"] .sp-thumb { transform: translateX(16px); }
@@ -325,7 +390,7 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 /* Phones: button bottom-right within thumb reach; panel becomes a bottom sheet */
 @media (max-width: 700px) {
   .settings-btn { top: auto; bottom: 18px; right: 16px; height: 44px; padding: 0 1rem; border-radius: 22px;
-    box-shadow: 0 4px 14px rgba(59, 39, 22, 0.14); }
+    box-shadow: 0 4px 14px var(--shadow); }
   .settings-panel { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none;
     border-radius: 14px 14px 0 0; padding: 14px 20px calc(16px + env(safe-area-inset-bottom)); }
   .settings-panel:not([hidden]) { animation: sheetUp 0.22s ease-out; }

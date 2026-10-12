@@ -14,7 +14,7 @@
 
   // ── Settings (remembered per visitor) ────────────────────────
   var SIZES = [100, 112.5, 125, 137.5, 150];          // % of the browser's base size
-  var settings = { size: 1, font: 'serif', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -26,6 +26,8 @@
     document.documentElement.style.fontSize = SIZES[settings.size] + '%';
     document.documentElement.classList.toggle('font-sans', settings.font === 'sans');
     document.documentElement.classList.toggle('name-small', settings.nameCase === 'small');
+    if (settings.theme === 'light' || settings.theme === 'dark') document.documentElement.setAttribute('data-theme', settings.theme);
+    else document.documentElement.removeAttribute('data-theme');
     applyDivineName(document);
   }
 
@@ -455,6 +457,9 @@
     panel.querySelectorAll('[data-namecase]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-namecase') === settings.nameCase));
     });
+    panel.querySelectorAll('[data-theme-opt]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-opt') === settings.theme));
+    });
     panel.querySelectorAll('[data-font]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-font') === settings.font));
     });
@@ -484,6 +489,9 @@
       if (current) renderDay(current.day, current.books);   // restores "the" when going back to LORD
     } else if (t.hasAttribute('data-namecase')) {
       settings.nameCase = t.getAttribute('data-namecase');
+      applyLook();
+    } else if (t.hasAttribute('data-theme-opt')) {
+      settings.theme = t.getAttribute('data-theme-opt');
       applyLook();
     } else if (t.hasAttribute('data-font')) {
       settings.font = t.getAttribute('data-font');
