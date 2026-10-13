@@ -56,9 +56,9 @@ body.dbm-margin .dbm-pin { position: absolute; left: -54px; margin: -1px 0 0; } 
 .dbm-place:hover, .dbm-place:focus-visible { text-decoration-color: var(--accent-soft); outline: none; }
 
 /* ── Side column (wide screens) ── */
-body.dbm-side { padding-left: calc(var(--dbm-panel-left, 48px) + var(--dbm-panel-w, 580px) + 84px); justify-content: flex-start; }
+body.dbm-side { padding-left: calc(var(--dbm-panel-left, 32px) + var(--dbm-panel-w, 640px) + 72px); }
 .dbm-panel {
-  position: fixed; left: var(--dbm-panel-left, 48px); top: 0; z-index: 150; width: var(--dbm-panel-w, 580px);
+  position: fixed; left: var(--dbm-panel-left, 32px); top: 0; z-index: 150; width: var(--dbm-panel-w, 640px);
   height: 100vh; height: 100dvh; overflow-y: auto; overflow-x: hidden; padding: 22px 10px 28px 0; scrollbar-width: thin;
 }
 .dbm-panel:has(.dbm-big) { overflow: visible; z-index: 1000; }
