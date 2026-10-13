@@ -25,12 +25,14 @@
                attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors' },
     sat:     { tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'], maxzoom: 18,
                attribution: 'Imagery © Esri' },
-    glyphs:  'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf'
+    glyphs:  'https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf',
+    /* Rivers and wadis: OpenStreetMap waterways from OpenFreeMap's vector tiles (no key) */
+    waterways: 'https://tiles.openfreemap.org/planet'
   };
   var SOURCES_NOTE = '<b>Sources.</b> Scripture: Berean Standard Bible (public domain). Places and identifications: ' +
     '<a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0), with Jordan and Dead Sea ' +
     'outlines from OpenStreetMap; seas from Natural Earth. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap ' +
-    'contributors. Imagery © Esri. Map labels: OpenFreeMap. Map engine: MapLibre GL.';
+    'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Ancient roads: main route corridors after standard reconstructions, approximate between cities. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
   function getJSON(url) {
@@ -317,6 +319,12 @@
         '<li class="dbm-srow" data-dbm-cityrow>' + SYM.uncertain() + '<span>Location uncertain</span></li>' +
         '<li class="dbm-srow" data-dbm-cityrow>' + SYM.mount() + '<span>Mountain or hill</span></li>';
     }
+    keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-roads aria-pressed="true">' +
+        '<svg viewBox="0 0 56 20"><line x1="2" y1="10" x2="54" y2="10" stroke="var(--dbm-road)" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/></svg>' +
+        '<span>Main ancient roads <span class="dbm-vv">approximate · tap to show or hide</span></span></button></li>' +
+      '<li class="dbm-srow"><svg viewBox="0 0 56 20"><line x1="2" y1="7" x2="54" y2="7" stroke="var(--dbm-water-line)" stroke-width="1.8"/>' +
+        '<line x1="2" y1="14" x2="54" y2="14" stroke="var(--dbm-water-line)" stroke-width="1.4" stroke-dasharray="5 3.5"/></svg>' +
+        '<span>Rivers; seasonal brooks (wadis) dashed <span class="dbm-vv">Ancient view</span></span></li>';
     keyHTML += '</ul>';
     root.querySelectorAll('[data-dbm-key]').forEach(function (k) { k.innerHTML = keyHTML; });
     var notes = (spec.notes || []).map(function (n) {
@@ -335,6 +343,11 @@
       if ((b = t.closest('[data-dbm-move]'))) { var n = +b.getAttribute('data-dbm-move'); ctx.shown.has(n) ? ctx.shown.delete(n) : ctx.shown.add(n); applyVisibility(ctx); }
       else if ((b = t.closest('[data-dbm-all]'))) { ctx.shown.clear(); if (b.getAttribute('data-dbm-all') === '1') ctx.spec.moves.forEach(function (m) { ctx.shown.add(m.n); }); applyVisibility(ctx); }
       else if (t.closest('[data-dbm-cities]')) { ctx.citiesOn = !ctx.citiesOn; applyVisibility(ctx); }
+      else if (t.closest('[data-dbm-roads]')) {
+        ctx.roadsOn = ctx.roadsOn === false;
+        ctx.root.querySelectorAll('[data-dbm-roads]').forEach(function (b) { b.setAttribute('aria-pressed', String(ctx.roadsOn)); });
+        setMode(ctx, ctx.mode || 'ancient');
+      }
       else if ((b = t.closest('[data-dbm-mode]'))) setMode(ctx, b.getAttribute('data-dbm-mode'));
       else if ((b = t.closest('[data-dbm-3d]'))) toggle3d(ctx, b);
       else if (t.closest('[data-dbm-big]')) setBig(ctx, !ctx.big);
@@ -351,10 +364,12 @@
   // ── The map itself ─────────────────────────────────────────
   function bootMap(ctx) {
     var msg = ctx.frame.querySelector('.dbm-msg');
-    Promise.all([loadEngine(), getJSON('data/maps/' + ctx.id + '.json'), getJSON('data/maps/base/water.json'), hebrewNames()])
+    Promise.all([loadEngine(), getJSON('data/maps/' + ctx.id + '.json'), getJSON('data/maps/base/water.json'), hebrewNames(),
+                 getJSON('data/maps/base/ancient.json').catch(function () { return null; })])
       .then(function (res) {
         if (state.ctx !== ctx) return;                       // closed while loading
         var spec = res[1], water = res[2], hn = res[3];
+        water.ancient = res[4];
         fillAtlas(ctx, spec, hn);
         var placesP = spec.places ? getJSON('data/maps/places/' + spec.places + '.json').catch(function () { return null; }) : Promise.resolve(null);
         return placesP.then(function (places) {
@@ -398,6 +413,9 @@
           sea: { type: 'geojson', data: water.sea }, galilee: { type: 'geojson', data: water.galilee },
           deadsea: { type: 'geojson', data: water.deadSea }, jordan: { type: 'geojson', data: water.jordan },
           waternames: { type: 'geojson', data: water.names },
+          ofm: { type: 'vector', url: BASEMAPS.waterways },
+          roads: { type: 'geojson', data: (water.ancient && water.ancient.roads) || empty },
+          streamnames: { type: 'geojson', data: (water.ancient && water.ancient.streams) || empty },
           places: { type: 'geojson', data: places || empty },
           moves: { type: 'geojson', data: { type: 'FeatureCollection', features: (spec.moves || []).map(function (m) {
             return { type: 'Feature', properties: { n: m.n }, geometry: { type: 'MultiLineString', coordinates: linesOf(m) } }; }) } }
@@ -412,7 +430,19 @@
           { id: 'sea-edge', type: 'line', source: 'sea', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1 } },
           { id: 'galilee', type: 'fill', source: 'galilee', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'deadsea', type: 'fill', source: 'deadsea', paint: { 'fill-color': css('--dbm-water') } },
-          { id: 'jordan', type: 'line', source: 'jordan', paint: { 'line-color': css('--dbm-water-line'), 'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.2, 13, 3] } }
+          { id: 'wadi', type: 'line', source: 'ofm', 'source-layer': 'waterway', minzoom: 7,
+            filter: ['all', ['in', ['get', 'class'], ['literal', ['river', 'stream']]], ['!=', ['get', 'intermittent'], 1]],
+            layout: { 'line-cap': 'round', 'line-join': 'round' },
+            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.85,
+              'line-width': ['interpolate', ['linear'], ['zoom'], 7, ['match', ['get', 'class'], 'river', 1, 0.5], 12, ['match', ['get', 'class'], 'river', 2.2, 1.2]] } },
+          { id: 'wadi-seasonal', type: 'line', source: 'ofm', 'source-layer': 'waterway', minzoom: 7,
+            filter: ['all', ['in', ['get', 'class'], ['literal', ['river', 'stream']]], ['==', ['get', 'intermittent'], 1]],
+            layout: { 'line-join': 'round' },
+            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.75, 'line-dasharray': [3, 2],
+              'line-width': ['interpolate', ['linear'], ['zoom'], 7, ['match', ['get', 'class'], 'river', 1, 0.5], 12, ['match', ['get', 'class'], 'river', 2, 1.1]] } },
+          { id: 'jordan', type: 'line', source: 'jordan', paint: { 'line-color': css('--dbm-water-line'), 'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.2, 13, 3] } },
+          { id: 'roads', type: 'line', source: 'roads', layout: { 'line-cap': 'round', 'line-join': 'round' },
+            paint: { 'line-color': css('--dbm-road'), 'line-opacity': 0.75, 'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.2, 12, 2.6] } }
         ]
       },
       bounds: spec.bounds,
@@ -451,6 +481,15 @@
 
   function addLayers(ctx, ml, spec) {
     var map = ctx.map;
+    map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
+      layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 12, 12],
+        'text-letter-spacing': 0.04, 'text-optional': true },
+      paint: { 'text-color': css('--dbm-water-line'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
+    map.addLayer({ id: 'roads-label', type: 'symbol', source: 'roads', minzoom: 7,
+      filter: ['!=', ['get', 'label'], ''],
+      layout: { 'text-field': ['get', 'label'], 'text-font': ['literal', ['Noto Sans Italic']], 'symbol-placement': 'line',
+        'text-size': ['interpolate', ['linear'], ['zoom'], 7, 10, 12, 12], 'symbol-spacing': 320, 'text-letter-spacing': 0.06, 'text-offset': [0, -0.7] },
+      paint: { 'text-color': css('--dbm-road'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
     map.addLayer({ id: 'water-label', type: 'symbol', source: 'waternames', maxzoom: 11,
       layout: { 'text-field': ['format', ['get', 'n'], {}, '\n', {}, ['get', 's'], { 'font-scale': 0.8 }],
         'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 7, 11, 10, 14], 'text-letter-spacing': 0.12 },
@@ -583,7 +622,8 @@
     map.setLayoutProperty('street', 'visibility', m === 'modern' ? 'visible' : 'none');
     map.setLayoutProperty('sat', 'visibility', m === 'sat' ? 'visible' : 'none');
     map.setPaintProperty('hillshade', 'hillshade-exaggeration', m === 'ancient' ? 0.55 : m === 'modern' ? 0.2 : 0);
-    ['deadsea', 'sea', 'sea-edge', 'galilee', 'water-label', 'jordan'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' ? 'visible' : 'none'); });
+    ['deadsea', 'sea', 'sea-edge', 'galilee', 'water-label', 'jordan', 'wadi', 'wadi-seasonal', 'stream-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' ? 'visible' : 'none'); });
+    ['roads', 'roads-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' && ctx.roadsOn !== false ? 'visible' : 'none'); });
     map.setPaintProperty('places-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-label'));
     map.setPaintProperty('places-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
   }
@@ -598,6 +638,11 @@
     ['deadsea', 'sea', 'galilee'].forEach(function (id) { map.setPaintProperty(id, 'fill-color', css('--dbm-water')); });
     map.setPaintProperty('sea-edge', 'line-color', css('--dbm-water-line'));
     map.setPaintProperty('jordan', 'line-color', css('--dbm-water-line'));
+    ['wadi', 'wadi-seasonal'].forEach(function (id) { map.setPaintProperty(id, 'line-color', css('--dbm-water-line')); });
+    map.setPaintProperty('roads', 'line-color', css('--dbm-road'));
+    ['roads-label', 'stream-label'].forEach(function (id) { map.setPaintProperty(id, 'text-halo-color', css('--dbm-paper')); });
+    map.setPaintProperty('roads-label', 'text-color', css('--dbm-road'));
+    map.setPaintProperty('stream-label', 'text-color', css('--dbm-water-line'));
     map.setPaintProperty('water-label', 'text-color', css('--dbm-water-line'));
     map.setPaintProperty('water-label', 'text-halo-color', css('--dbm-water'));
     map.setPaintProperty('moves-casing', 'line-color', css('--dbm-paper'));

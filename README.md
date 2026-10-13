@@ -72,6 +72,9 @@ python3 tools/build_map_places.py /tmp/obgeo data/maps/places
 
 - Check every map before publishing: `python3 tools/check_maps.py`
 - Background maps (terrain, street, satellite) are set in one place at the top of `assets/maps.js`.
+- Ancient view extras, shared by every map: rivers and wadis from OpenStreetMap (OpenFreeMap vector tiles,
+  seasonal ones dashed), and `data/maps/base/ancient.json` with the main ancient road corridors (drawn through
+  OpenBible.info sites, approximate between cities) and labels with the biblical names of the main streams.
 
 ## Rebuilding the BSB data
 
