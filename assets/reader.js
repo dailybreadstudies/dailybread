@@ -560,6 +560,7 @@
       header += '<p class="page-parsha">Torah Portion: <em>' + day.parsha.name + '</em>' +
         (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</p>';
     }
+    header += '<p class="page-progress" id="day-progress"></p>';
     header += '<p class="page-refs">' +
       refs.map(function (r, i) { return '<a href="#' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join(' &middot; ') + '</p>';
     document.getElementById('day-header').innerHTML = header;
@@ -590,6 +591,7 @@
           renderNotes(passage.notes, displayRef(r)) + '</div></div>';
       }
       html += renderTextNotes(passage.textNotes);
+      if (n === total) html += doneRow();
       html += '<nav class="nav-bar">' +
         '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
         '<span class="nav-indicator">' + n + ' of ' + total + '<span class="division-name">' + p.label + '</span></span>' +
@@ -605,7 +607,106 @@
     goTo(portionFromHash(), false);
     decorateMaps();
     fillToday(day);
+    drawProgress();
   }
+
+  // ── Reading progress (kept on this device only) ─────────────
+  // dbs-progress = { done: { "2026-10-12": 1, … }, since: "2026-10-20" | null }
+  // "since" is set by "Skip" so older unread days stop counting as catch-up.
+  var PLAN_START = '2026-10-04', PLAN_END = '2027-10-24';   // the 5787 Daily Bread year
+  var JOURNAL_URL = 'https://arielmedia.shop/collections/dailybread';
+  var progress = { done: {}, since: null };
+  try {
+    var savedProg = JSON.parse(localStorage.getItem('dbs-progress') || 'null');
+    if (savedProg && savedProg.done) progress = { done: savedProg.done, since: savedProg.since || null };
+  } catch (e) { /* storage unavailable: progress lasts for this visit only */ }
+  function saveProgress() {
+    try { localStorage.setItem('dbs-progress', JSON.stringify(progress)); } catch (e) { /* ignore */ }
+  }
+  function dayNumber(iso) {
+    return Math.round((Date.parse(iso + 'T12:00:00Z') - Date.parse(PLAN_START + 'T12:00:00Z')) / 864e5) + 1;
+  }
+  function isDone(iso) { return !!progress.done[iso]; }
+  function doneCount() { return Object.keys(progress.done).length; }
+  // Planned days before today that are not marked as read, counted from the first day the reader marked
+  // (so a new visitor is never told they are behind) or from "Skip", whichever is later.
+  function missedDays() {
+    var marked = Object.keys(progress.done).sort();
+    if (!marked.length) return [];
+    var from = marked[0];
+    if (progress.since && progress.since > from) from = progress.since;
+    var today = todayISO();
+    return planDays.filter(function (d) { return d >= from && d < today && !isDone(d); });
+  }
+  function shortDate(iso) {
+    return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  }
+  function doneRow() {
+    return '<div class="done-row">' +
+      '<button type="button" class="done-btn" id="done-btn" aria-pressed="false">' +
+      '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' +
+      '<span class="done-label">Mark as read</span></button>' +
+      '<p class="done-next" id="done-next"></p>' +
+      '<p class="journal-line">Writing as you read? The <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread journal</a> ' +
+      'follows this plan day by day, with a page for each day.</p></div>';
+  }
+  function drawProgress() {
+    if (!current || !current.day) return;
+    var date = current.day.date, n = dayNumber(date), total = dayNumber(PLAN_END);
+    var line = document.getElementById('day-progress');
+    if (line) {
+      var bits = [];
+      if (n >= 1 && n <= total) bits.push('Day ' + n + ' of ' + total);
+      var c = doneCount();
+      if (c) bits.push(c + (c === 1 ? ' day' : ' days') + ' read');
+      var html = bits.join(' &middot; ');
+      var missed = missedDays();
+      if (missed.length && date === todayISO()) {
+        html += '<span class="catch-up">' + missed.length + (missed.length === 1 ? ' reading' : ' readings') + ' to catch up: ' +
+          '<button type="button" class="link-btn" data-day="' + missed[0] + '">start with ' + shortDate(missed[0]) + '</button>' +
+          ' or <button type="button" class="link-btn" id="skip-missed">pick up from today</button></span>';
+      }
+      line.innerHTML = html;
+      line.classList.toggle('is-done', isDone(date));
+    }
+    var btn = document.getElementById('done-btn');
+    if (btn) {
+      var on = isDone(date);
+      btn.setAttribute('aria-pressed', String(on));
+      btn.querySelector('.done-label').textContent = on ? 'Read' : 'Mark as read';
+      btn.title = on ? 'Marked as read. Tap again to undo.' : '';
+    }
+    var next = document.getElementById('done-next');
+    if (next) {
+      var rest = missedDays().filter(function (d) { return d !== date; });
+      var today = todayISO();
+      if (isDone(date) && rest.length) {
+        next.innerHTML = 'Next to catch up: <button type="button" class="link-btn" data-day="' + rest[0] + '">' + shortDate(rest[0]) + ' &rarr;</button>';
+      } else if (isDone(date) && date < today && planDays.indexOf(today) >= 0) {
+        next.innerHTML = 'All caught up. <button type="button" class="link-btn" data-day="' + today + '">Go to today &rarr;</button>';
+      } else {
+        next.innerHTML = '';
+      }
+    }
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#done-btn') && current && current.day) {
+      var d = current.day.date;
+      if (isDone(d)) delete progress.done[d]; else progress.done[d] = 1;
+      saveProgress();
+      drawProgress();
+      if (calMonth && !calPanel.hidden) drawCalendar();
+      return;
+    }
+    if (e.target.closest('#skip-missed')) {
+      progress.since = todayISO();
+      saveProgress();
+      drawProgress();
+      return;
+    }
+    var jump = e.target.closest('.link-btn[data-day]');
+    if (jump) loadDay(jump.getAttribute('data-day'));
+  });
 
   // Map buttons beside verses (assets/maps.js). Optional: without that file nothing happens.
   function decorateMaps() {
@@ -1050,6 +1151,7 @@
     var days = new Date(y, m, 0).getDate();
     var today = todayISO();
     var selected = current && current.day ? current.day.date : '';
+    var missed = missedDays();
     var html = '<div class="cal-head">' +
       '<button type="button" class="cal-nav" data-cal="-1" aria-label="Previous month">&lsaquo;</button>' +
       '<div class="cal-title"><span class="cal-month">' + MONTH_NAMES[m - 1] + ' ' + y + '</span><span class="cal-hmonth" id="cal-hmonth"></span></div>' +
@@ -1064,12 +1166,14 @@
       var iso = isoOf(y, m, d);
       var has = planDays.indexOf(iso) >= 0;
       var cls = 'cal-day' + (has ? ' has-plan' : '') + (iso === today ? ' is-today' : '') + (iso === selected ? ' is-selected' : '') +
+        (has && isDone(iso) ? ' is-read' : '') + (has && missed.indexOf(iso) >= 0 ? ' is-missed' : '') +
         (new Date(y, m - 1, d).getDay() === 6 ? ' cal-sat' : '');
       html += '<button type="button" class="' + cls + '" data-date="' + iso + '"' + (has ? '' : ' disabled') +
-        ' aria-label="' + iso + (has ? '' : ' (no reading yet)') + '"><span class="cal-g">' + d + '</span><span class="cal-h"></span><span class="cal-dot"></span></button>';
+        ' aria-label="' + iso + (has ? (isDone(iso) ? ' (read)' : '') : ' (no reading yet)') + '"><span class="cal-mark" aria-hidden="true"></span><span class="cal-g">' + d + '</span><span class="cal-h"></span><span class="cal-dot"></span></button>';
     }
     html += '</div><div class="cal-foot"><button type="button" class="cal-today" data-date="' + today + '">Today</button>' +
-      '<span class="cal-legend"><span class="cal-dot on"></span> holiday or Rosh Chodesh</span></div>';
+      '<span class="cal-legend"><span class="cal-legend-item"><span class="cal-mark read"></span> read</span>' +
+      '<span class="cal-legend-item"><span class="cal-dot on"></span> holiday or Rosh Chodesh</span></span></div>';
     calPanel.innerHTML = html;
 
     // Hebrew dates and holidays from Hebcal (if reachable)

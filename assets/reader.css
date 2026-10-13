@@ -150,6 +150,29 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .page-refs a { color: inherit; text-decoration: none; white-space: nowrap; }
 .page-refs a:hover { color: var(--accent-deep); text-decoration: underline; text-decoration-color: var(--accent-line); }
 
+/* ── Reading progress ── */
+.page-progress { text-align: center; font: 400 0.74rem/1.6 var(--sans); letter-spacing: 0.02em; color: var(--accent-faint);
+  margin: -0.25rem 0 0.6rem; }
+.page-progress:empty { display: none; }
+.page-progress .catch-up { display: block; color: var(--muted); }
+.link-btn { background: none; border: none; padding: 0; font: inherit; color: var(--accent); cursor: pointer;
+  text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 2px; }
+.link-btn:hover { color: var(--accent-deep); }
+.done-row { margin: 2.6rem 0 0; padding-top: 1.8rem; border-top: 1px solid var(--rule); text-align: center; }
+.done-btn { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 20px 0 16px; border-radius: 21px;
+  border: 1px solid var(--line-strong); background: none; color: var(--accent); font: 500 0.82rem var(--sans);
+  letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.15s, color 0.15s; }
+.done-btn svg { opacity: 0.45; }
+.done-btn:hover { background: var(--tint); border-color: var(--accent-soft); }
+.done-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.done-btn[aria-pressed="true"] svg { opacity: 1; }
+.done-btn:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.done-next { margin: 0.7rem 0 0; font: 400 0.8rem/1.6 var(--sans); color: var(--muted); }
+.done-next:empty { display: none; }
+.journal-line { margin: 1.4rem auto 0; max-width: 30rem; font: 400 0.74rem/1.7 var(--sans); color: var(--faint-text); }
+.journal-line a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 2px; }
+.journal-line a:hover { color: var(--accent); }
+
 /* ── Calendar intro ── */
 .calendar-intro { margin: 0 0 2.5rem; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); }
 .calendar-intro p { margin-bottom: 1rem; }
@@ -427,6 +450,17 @@ html.font-sans .scripture { line-height: 1.8; }
 .cal-today:hover { background: var(--tint); }
 .cal-legend { font-size: 11px; color: var(--muted); display: inline-flex; align-items: center; gap: 5px; }
 .cal-legend .cal-dot { position: static; display: inline-block; }
+.cal-legend { gap: 10px; }
+.cal-legend-item { display: inline-flex; align-items: center; gap: 5px; }
+/* Reading progress in the calendar: a small check on days read, a faint ring on days to catch up */
+.cal-mark { position: absolute; top: 4px; left: 5px; width: 11px; height: 11px; display: none; }
+.cal-day.is-read .cal-mark, .cal-mark.read { display: block; background: currentColor; color: var(--accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4l2.6 2.6L10 3.4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4l2.6 2.6L10 3.4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; }
+.cal-legend .cal-mark.read { position: static; display: inline-block; }
+.cal-day.is-missed .cal-mark { display: block; top: 5px; left: 5px; width: 5px; height: 5px; border-radius: 50%; border: 1px solid var(--accent-faint); }
+.cal-day.is-selected .cal-mark { color: var(--on-accent); }
+.cal-day.is-selected.is-missed .cal-mark { border-color: var(--on-accent); }
 .cal-nav:focus-visible, .cal-day:focus-visible, .cal-today:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 1px; }
 
 /* Original languages */
@@ -603,3 +637,18 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
   .portion:first-of-type { page-break-before: auto; }
   .nav-bar, .fn-pop { display: none !important; }
 }
+
+/* ── About page ── */
+.about-back { margin: 0 0 1.5rem; font: 400 0.82rem var(--sans); }
+.about-back a { color: var(--accent); text-decoration: none; }
+.about-back a:hover { text-decoration: underline; text-decoration-color: var(--accent-line); }
+.about-body { font-size: 1.05rem; line-height: 1.8; color: var(--ink); }
+.about-body h2 { font-family: var(--sans); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin: 2.4rem 0 0.8rem; }
+.about-body h2:first-child { margin-top: 1.5rem; }
+.about-body p { margin: 0 0 1rem; }
+.about-body a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 2px; }
+.about-body a:hover { color: var(--accent-deep); }
+.about-body a.about-cta { font: 500 0.85rem var(--sans); text-decoration: none; }
+.about-body a.about-cta:hover { text-decoration: underline; }
+.about-page .page-title { margin-bottom: 0; }
