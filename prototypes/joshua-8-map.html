@@ -91,6 +91,7 @@ button { font: inherit; color: inherit; }
   scrollbar-width: thin;
 }
 .map-col .atlas { margin: 0; }
+.page.with-map .map-col:has(.atlas.big) { overflow: visible; z-index: 1000; }
 .map-col .frame { width: min(100%, calc(100dvh - 12rem)); }
 .read { min-width: 0; }
 .has-map { position: relative; }
@@ -203,8 +204,8 @@ h1 { font: 700 1.75rem/1.25 var(--display); margin: 0 0 0.35rem; text-wrap: bala
 .key-float .key { margin-top: 0.5rem; }
 
 /* Enlarged state */
-.atlas.big .frame {
-  position: fixed; inset: 0; z-index: 1000; aspect-ratio: auto; border: 0; border-radius: 0;
+.atlas.big .frame, .map-col .atlas.big .frame {
+  position: fixed; inset: 0; z-index: 1000; aspect-ratio: auto; border: 0; border-radius: 0; width: auto; max-width: none; height: auto;
   padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 .atlas.big .key-float { display: block; }
