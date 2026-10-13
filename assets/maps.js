@@ -82,7 +82,7 @@
   };
   var SYM_COLOR = { camp: 'var(--dbm-israel)', ambush: 'var(--dbm-ambush)', fire: 'var(--dbm-fire)', battle: 'var(--dbm-enemy)',
     sun: 'var(--dbm-fire)', moon: 'var(--dbm-label)', hail: 'var(--dbm-water-line)', cave: 'var(--dbm-enemy)', captured: 'var(--dbm-israel)' };
-  var MAP_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 4v13.5M15 6.5V20" stroke="currentColor" stroke-width="1.6"/></svg>';
+  var MAP_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M9 4v13.5M15 6.5V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
   function sideColor(side) { return 'var(--dbm-' + (['israel', 'ambush', 'enemy'].indexOf(side) >= 0 ? side : 'other') + ')'; }
 
   function swatch(m) {
@@ -118,7 +118,7 @@
           var target = hit[2];
           var block = target.closest('.scripture > *') || target.parentNode;
           block.classList.add('dbm-anchor');
-          var pin = el('button', 'dbm-pin', MAP_ICON + '<span>Map</span>');
+          var pin = el('button', 'dbm-pin', MAP_ICON);
           pin.type = 'button';
           pin.setAttribute('data-dbm-open', m.id);
           pin.setAttribute('aria-pressed', state.open === m.id ? 'true' : 'false');
