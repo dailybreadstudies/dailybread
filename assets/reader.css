@@ -245,7 +245,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   margin-right: 0.25em; vertical-align: -0.12em;
 }
 .lord { text-transform: uppercase; }   /* the divine name: full capitals (LORD, ADONAI, HASHEM) */
-html.name-small .lord { text-transform: none; font-variant: small-caps; letter-spacing: 0.03em; }
 .xt { font-style: normal; }
 
 /* ── BSB footnote markers & popover ── */
@@ -376,7 +375,6 @@ html.font-sans .scripture { line-height: 1.8; }
 .sp-seg button:hover:not([aria-pressed="true"]) { background: var(--tint); }
 .sp-seg-name button { padding: 0 9px; font-size: 12.5px; }
 .dn-sample { text-transform: uppercase; letter-spacing: 0.02em; }
-html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .sp-smallcaps { font-variant: small-caps; }
 .sp-serif { font-family: 'Source Serif 4', Georgia, serif; }
 .sp-sans { font-family: var(--sans); }
@@ -451,6 +449,12 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .sp-cant-row[hidden] { display: none; }
 
 /* Greek textual notes */
+.tc-apparatus > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; user-select: none; }
+.tc-apparatus > summary::-webkit-details-marker { display: none; }
+.tc-apparatus > summary::after { content: '▸'; font-size: 0.9em; color: var(--accent-soft); transition: transform 0.2s; }
+.tc-apparatus[open] > summary::after { transform: rotate(90deg); }
+.tc-apparatus:not([open]) > summary { margin-bottom: 0; }
+.ap-count { font-weight: 400; letter-spacing: 0.04em; color: var(--accent-faint); }
 .tcm { font-size: 0.62em; color: var(--accent-soft); vertical-align: 0.45em; margin: 0 0.05em; font-family: var(--sans); }
 .vp-en .tcm { display: none; }
 .tc-note { font-family: var(--greek), var(--serif); font-size: 1.04em; }
@@ -469,6 +473,7 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .quick-go input { width: 118px; border: none; background: transparent; outline: none; color: var(--ink);
   font: 14px var(--sans); padding: 0; }
 .quick-go input::placeholder { color: var(--accent-faint); opacity: 0.85; }
+.quick-go input:not(:focus)::placeholder { color: transparent; }
 .quick-go.qg-miss { border-bottom-color: #b5533c; animation: qgShake 0.35s; }
 @keyframes qgShake { 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
 

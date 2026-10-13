@@ -14,7 +14,7 @@
 
   // ── Settings (remembered per visitor) ────────────────────────
   var SIZES = [100, 112.5, 125, 137.5, 150];          // % of the browser's base size
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', nameCase: 'caps', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -25,7 +25,6 @@
   function applyLook() {
     document.documentElement.style.fontSize = SIZES[settings.size] + '%';
     document.documentElement.classList.toggle('font-sans', settings.font === 'sans');
-    document.documentElement.classList.toggle('name-small', settings.nameCase === 'small');
     if (settings.theme === 'light' || settings.theme === 'dark') document.documentElement.setAttribute('data-theme', settings.theme);
     else document.documentElement.removeAttribute('data-theme');
     applyDivineName(document);
@@ -521,7 +520,7 @@
   function renderTextNotes(list) {
     if (!list || !list.length) return '';
     var last = '';
-    return '<div class="apparatus tc-apparatus"><div class="apparatus-title">Greek Textual Notes</div><p class="tc-run">' +
+    return '<details class="apparatus tc-apparatus"><summary class="apparatus-title">Greek Textual Notes <span class="ap-count">(' + list.length + ')</span></summary><p class="tc-run">' +
       list.map(function (n) {
         var label = n.ref !== last ? '<b class="fn-verse">' + n.ref + '</b>' : '<span class="tc-sep">•</span>';
         last = n.ref;
@@ -529,7 +528,7 @@
       }).join(' ') +
       '</p><p class="tc-key">SBLGNT reading first, then the editions that agree; after ] the other readings. ' +
       'WH Westcott–Hort · Treg Tregelles · NA28 Nestle–Aland 28th ed. · NIV Greek text behind the NIV · RP Robinson–Pierpont (Byzantine) · – omitted · + added. ' +
-      'The marks <span class="tcm-key">⸀ ⸂ ⸃</span> in the Greek show where a note applies.</p></div>';
+      'The marks <span class="tcm-key">⸀ ⸂ ⸃</span> in the Greek show where a note applies.</p></details>';
   }
 
   function renderNotes(notes, refText) {
@@ -745,9 +744,6 @@
     panel.querySelectorAll('[data-name]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-name') === settings.divineName));
     });
-    panel.querySelectorAll('[data-namecase]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-namecase') === settings.nameCase));
-    });
     panel.querySelectorAll('[data-orig]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-orig') === settings.original));
     });
@@ -788,9 +784,6 @@
       settings.divineName = t.getAttribute('data-name');
       applyLook();
       rerender();   // restores "the" when going back to LORD
-    } else if (t.hasAttribute('data-namecase')) {
-      settings.nameCase = t.getAttribute('data-namecase');
-      applyLook();
     } else if (t.hasAttribute('data-orig')) {
       settings.original = t.getAttribute('data-orig');
       rerender();
