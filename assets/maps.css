@@ -180,6 +180,10 @@ body.dbm-locked { overflow: hidden; }
 /* ── Marks drawn on the map ── */
 .dbm-pl { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
 .dbm-pl.left { flex-direction: row-reverse; gap: 5px; }
+.dbm-pl.right { flex-direction: row; gap: 5px; }
+.dbm-pl.above { flex-direction: column-reverse; }
+.dbm-pl.right .lbl, .dbm-pl.left .lbl { margin-top: 0; }
+.dbm-pl.above .lbl { margin: 0 0 3px; }
 .dbm-pl .dot { width: 12px; height: 12px; border-radius: 2px; transform: rotate(45deg); background: var(--paper); border: 2.5px solid var(--ink); box-shadow: 0 1px 4px var(--shadow); }
 .dbm-pl .lbl { margin-top: 3px; white-space: nowrap; font: 700 0.82rem/1.1 var(--display); color: var(--dbm-label); letter-spacing: 0.02em;
   text-shadow: 0 0 3px var(--dbm-paper), 0 0 3px var(--dbm-paper), 0 0 6px var(--dbm-paper); }

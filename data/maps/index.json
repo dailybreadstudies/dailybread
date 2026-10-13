@@ -14,6 +14,79 @@
     "Mount Ebal",
     "Mount Gerizim"
    ]
+  },
+  {
+   "id": "josh-10-gibeon",
+   "title": "The Day the Sun Stood Still",
+   "ref": "Joshua 10:1–15",
+   "book": "JOS",
+   "c": 10,
+   "v": 1,
+   "range": [
+    1,
+    15
+   ],
+   "links": [
+    "Jerusalem",
+    "Gibeon",
+    "Hebron",
+    "Jarmuth",
+    "Lachish",
+    "Eglon",
+    "Gilgal",
+    "Beth-horon",
+    "Azekah",
+    "Makkedah",
+    "Aijalon",
+    "Jericho"
+   ]
+  },
+  {
+   "id": "josh-10-makkedah",
+   "title": "The Victory at Makkedah",
+   "ref": "Joshua 10:16–28",
+   "book": "JOS",
+   "c": 10,
+   "v": 16,
+   "range": [
+    16,
+    28
+   ],
+   "links": [
+    "Makkedah",
+    "Jerusalem",
+    "Hebron",
+    "Jarmuth",
+    "Lachish",
+    "Eglon",
+    "Jericho"
+   ]
+  },
+  {
+   "id": "josh-10-south",
+   "title": "Conquest of the Southern Cities",
+   "ref": "Joshua 10:29–43",
+   "book": "JOS",
+   "c": 10,
+   "v": 29,
+   "range": [
+    29,
+    43
+   ],
+   "links": [
+    "Makkedah",
+    "Libnah",
+    "Lachish",
+    "Gezer",
+    "Eglon",
+    "Hebron",
+    "Debir",
+    "Gaza",
+    "Kadesh-barnea",
+    "Gibeon",
+    "Gilgal",
+    "Jericho"
+   ]
   }
  ]
 }

@@ -69,11 +69,17 @@
     ambush: function (c) { return '<svg width="46" height="26" viewBox="0 0 46 26"><defs><pattern id="dbm-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="' + c + '" stroke-width="1.6"/></pattern></defs><ellipse cx="23" cy="13" rx="21" ry="11" fill="url(#dbm-hatch)" stroke="' + c + '" stroke-width="2"/></svg>'; },
     battle: function (c) { return '<svg width="24" height="24" viewBox="0 0 24 24"><g stroke="' + c + '" stroke-width="2.6" stroke-linecap="round"><path d="M4 4l16 16M20 4 4 20"/></g><g stroke="var(--dbm-paper)" stroke-width="1" stroke-linecap="round"><path d="M4 4l16 16M20 4 4 20"/></g></svg>'; },
     fire: function (c) { return '<svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 1c1 5 7 7 7 13a7 7 0 0 1-14 0c0-3 2-5 3-6 0 2 1 4 3 4-1-4 0-8 1-11Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/></svg>'; },
+    sun: function (c) { return '<svg width="26" height="26" viewBox="0 0 26 26"><g stroke="' + c + '" stroke-width="2" stroke-linecap="round"><path d="M13 1.5v3.5M13 21v3.5M1.5 13H5M21 13h3.5M4.9 4.9l2.5 2.5M18.6 18.6l2.5 2.5M4.9 21.1l2.5-2.5M18.6 7.4l2.5-2.5"/></g><circle cx="13" cy="13" r="5.5" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/></svg>'; },
+    moon: function (c) { return '<svg width="22" height="22" viewBox="0 0 22 22"><path d="M14.5 2.5a9 9 0 1 0 5 15.6A7.2 7.2 0 0 1 14.5 2.5Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/></svg>'; },
+    hail: function (c) { return '<svg width="30" height="22" viewBox="0 0 30 22"><g fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1"><circle cx="5" cy="6" r="3.2"/><circle cx="14" cy="4" r="3.6"/><circle cx="24" cy="7" r="3.2"/><circle cx="9" cy="15" r="3.6"/><circle cx="20" cy="17" r="3.4"/></g></svg>'; },
+    cave: function (c) { return '<svg width="28" height="20" viewBox="0 0 28 20"><path d="M1 19C3 8 8 2 14 2s11 6 13 17Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/><path d="M9 19c0-5 2.2-8 5-8s5 3 5 8Z" fill="var(--dbm-paper)"/></svg>'; },
+    captured: function (c) { return '<svg width="20" height="24" viewBox="0 0 20 24"><path d="M4 23V2" stroke="' + c + '" stroke-width="2.2" stroke-linecap="round"/><path d="M5 2.5h12l-3.2 4.2L17 11H5Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1"/></svg>'; },
     city: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="var(--paper)" stroke="var(--dbm-label)" stroke-width="1.8"/></svg>'; },
     uncertain: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="var(--dbm-label)" stroke-width="1.4" stroke-dasharray="2 1.5"/></svg>'; },
     mount: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="var(--accent-soft)" stroke="var(--dbm-label)" stroke-width="1.2"/></svg>'; }
   };
-  var SYM_COLOR = { camp: 'var(--dbm-israel)', ambush: 'var(--dbm-ambush)', fire: 'var(--dbm-fire)', battle: 'var(--dbm-enemy)' };
+  var SYM_COLOR = { camp: 'var(--dbm-israel)', ambush: 'var(--dbm-ambush)', fire: 'var(--dbm-fire)', battle: 'var(--dbm-enemy)',
+    sun: 'var(--dbm-fire)', moon: 'var(--dbm-label)', hail: 'var(--dbm-water-line)', cave: 'var(--dbm-enemy)', captured: 'var(--dbm-israel)' };
   var MAP_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 4v13.5M15 6.5V20" stroke="currentColor" stroke-width="1.6"/></svg>';
   function sideColor(side) { return 'var(--dbm-' + (['israel', 'ambush', 'enemy'].indexOf(side) >= 0 ? side : 'other') + ')'; }
 
@@ -145,10 +151,12 @@
     var texts = [], node;
     // chapter changes are marked by .chapter-num spans; track them while walking
     var all = document.createTreeWalker(scr, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
-    var inCh = new Set();
+    var inCh = new Set(), v = 0;
+    var lo = m.range ? m.range[0] : 0, hi = m.range ? m.range[1] : 999;
     while ((node = all.nextNode())) {
-      if (node.nodeType === 1 && node.classList.contains('chapter-num')) c = parseInt(node.textContent, 10) || c;
-      else if (node.nodeType === 3 && c === m.c) inCh.add(node);
+      if (node.nodeType === 1 && node.classList.contains('chapter-num')) { c = parseInt(node.textContent, 10) || c; v = 1; }
+      else if (node.nodeType === 1 && node.classList.contains('verse-num')) v = parseInt(node.getAttribute('data-v'), 10) || v;
+      else if (node.nodeType === 3 && c === m.c && v >= lo && v <= hi) inCh.add(node);
     }
     while ((node = walker.nextNode())) if (inCh.has(node)) texts.push(node);
     texts.forEach(function (t) {
@@ -298,7 +306,10 @@
             '<span class="dbm-badge" style="background:' + sideColor(m.side) + '">' + m.n + '</span><span>' + esc(m.text) + ' <span class="dbm-vv">' + esc(m.vv || '') + '</span></span></button></li>';
         }).join('') + '</ol>';
     }
-    keyHTML += '<h4>Symbols</h4><ul>' + (spec.symbols || []).map(function (s) {
+    var symSeen = {};
+    keyHTML += '<h4>Symbols</h4><ul>' + (spec.symbols || []).filter(function (s) {
+      if (symSeen[s.type]) return false; symSeen[s.type] = true; return true;
+    }).map(function (s) {
       return '<li class="dbm-srow" data-dbm-sym="' + esc(s.type) + '">' + SYM[s.type](SYM_COLOR[s.type]) + '<span>' + esc(s.key) + ' <span class="dbm-vv">' + esc(s.vv || '') + '</span></span></li>';
     }).join('');
     if (spec.places) {
@@ -363,6 +374,13 @@
         var p = Object.assign({}, f.properties); p.d = displayName(p.n, hn); return { type: 'Feature', geometry: f.geometry, properties: p };
       }) };
     }
+    if (places && spec.named) {                       // the map's own named places are drawn larger; drop their duplicates
+      places = { type: 'FeatureCollection', features: places.features.filter(function (f) {
+        return !spec.named.some(function (p) {
+          return (p.name === f.properties.n || p.short === f.properties.n) && Math.abs(p.ll[0] - f.geometry.coordinates[0]) < 0.03 && Math.abs(p.ll[1] - f.geometry.coordinates[1]) < 0.03;
+        });
+      }) };
+    }
     ctx.places = places;
     var container = ctx.frame.querySelector('.dbm-map');
     var empty = { type: 'FeatureCollection', features: [] };
@@ -382,7 +400,7 @@
           waternames: { type: 'geojson', data: water.names },
           places: { type: 'geojson', data: places || empty },
           moves: { type: 'geojson', data: { type: 'FeatureCollection', features: (spec.moves || []).map(function (m) {
-            return { type: 'Feature', properties: { n: m.n }, geometry: { type: 'LineString', coordinates: m.coords } }; }) } }
+            return { type: 'Feature', properties: { n: m.n }, geometry: { type: 'MultiLineString', coordinates: linesOf(m) } }; }) } }
         },
         layers: [
           { id: 'bg', type: 'background', paint: { 'background-color': css('--dbm-paper') } },
@@ -478,6 +496,8 @@
       '<a href="https://www.openbible.info/geo/ancient/' + esc(p.u) + '" target="_blank" rel="noopener">OpenBible.info entry ↗</a></div>';
   }
 
+  /* A movement is one line, or several lines (e.g. five armies marching at once) */
+  function linesOf(m) { return Array.isArray(m.coords[0][0]) ? m.coords : [m.coords]; }
   function along(coords, t) {
     var seg = [], total = 0, i;
     for (i = 1; i < coords.length; i++) { var d = Math.hypot(coords[i][0] - coords[i - 1][0], coords[i][1] - coords[i - 1][1]); seg.push(d); total += d; }
@@ -498,27 +518,34 @@
     var map = ctx.map;
     function mk(node, ll, opts) { return new ml.Marker(Object.assign({ element: node }, opts || {})).setLngLat(ll).addTo(map); }
     ctx.mk = mk;
-    ctx.marks = { moves: {}, syms: {} };
-    (spec.symbols || []).forEach(function (s) {
-      var list = ctx.marks.syms[s.type] = ctx.marks.syms[s.type] || [];
+    ctx.marks = { moves: {}, symbol: {} };
+    (spec.symbols || []).forEach(function (s, i) {
+      var list = ctx.marks.symbol[i] = [];
       var color = SYM_COLOR[s.type];
-      if (s.type === 'fire') { list.push(mk(el('div', 'dbm-glow'), s.at)); list.push(mk(el('div', 'dbm-sym', SYM.fire(color)), s.at, { offset: [14, -14] })); }
-      else if (s.type === 'camp') list.push(mk(el('div', 'dbm-sym', (s.label ? '<span>' + esc(s.label) + '</span>' : '') + SYM.camp(color)), s.at, { anchor: 'bottom', offset: [0, 6] }));
-      else list.push(mk(el('div', 'dbm-sym', SYM[s.type](color) + (s.label ? '<span>' + esc(s.label) + '</span>' : '')), s.at, s.type === 'ambush' ? { offset: [0, 8] } : {}));
+      var lbl = s.label ? '<span>' + esc(s.label) + '</span>' : '';
+      var off = s.offset || null;
+      if (s.type === 'fire') { list.push(mk(el('div', 'dbm-glow'), s.at)); list.push(mk(el('div', 'dbm-sym', SYM.fire(color)), s.at, { offset: off || [14, -14] })); }
+      else if (s.type === 'camp' || s.type === 'captured') list.push(mk(el('div', 'dbm-sym', lbl + SYM[s.type](color)), s.at, { anchor: 'bottom', offset: off || [0, 6] }));
+      else list.push(mk(el('div', 'dbm-sym', SYM[s.type](color) + lbl), s.at, { offset: off || (s.type === 'ambush' ? [0, 8] : [0, 0]) }));
     });
     (spec.moves || []).forEach(function (m) {
-      var c = m.coords, a = c[c.length - 2], b = c[c.length - 1];
-      var arrow = el('div', 'dbm-arrow'); arrow.style.borderBottomColor = sideColor(m.side);
-      ctx.marks.moves[m.n] = [
-        mk(arrow, b, { rotation: bearing(a, b), rotationAlignment: 'map', pitchAlignment: 'map' }),
-        mk(el('div', 'dbm-num', '<span class="dbm-badge" style="background:' + sideColor(m.side) + '">' + m.n + '</span>'), along(c, m.at == null ? 0.5 : m.at))
-      ];
+      var lines = linesOf(m), list = ctx.marks.moves[m.n] = [];
+      lines.forEach(function (c, li) {
+        if (m.arrow !== false) {
+          var a = c[c.length - 2], b = c[c.length - 1];
+          var arrow = el('div', 'dbm-arrow'); arrow.style.borderBottomColor = sideColor(m.side);
+          list.push(mk(arrow, b, { rotation: bearing(a, b), rotationAlignment: 'map', pitchAlignment: 'map' }));
+        }
+        var badgeOn = m.badges === 'all' || li === (m.badgeLine || 0);
+        if (badgeOn) list.push(mk(el('div', 'dbm-num', '<span class="dbm-badge" style="background:' + sideColor(m.side) + '">' + m.n + '</span>'), along(c, m.at == null ? 0.5 : m.at)));
+      });
     });
     (spec.named || []).forEach(function (p) {
-      var left = p.label === 'left';
-      var node = el('div', 'dbm-pl' + (left ? ' left' : ''), '<span class="dot"></span><span class="lbl">' + esc(displayName(p.name, hn)) + '</span>');
+      var pos = p.label || 'below';
+      var node = el('div', 'dbm-pl ' + pos, '<span class="dot"></span><span class="lbl">' + esc(p.short ? p.short : displayName(p.name, hn)) + '</span>');
       node.addEventListener('click', function (ev) { ev.stopPropagation(); showNamed(ctx, p.name); });
-      mk(node, p.ll, left ? { anchor: 'right', offset: [7, 0] } : { anchor: 'top', offset: [0, -7] });
+      var A = { left: ['right', [7, 0]], right: ['left', [-7, 0]], above: ['bottom', [0, 7]] }[pos] || ['top', [0, -7]];
+      mk(node, p.ll, { anchor: A[0], offset: A[1] });
     });
     ctx.hn = hn;
   }
@@ -526,10 +553,14 @@
   function applyVisibility(ctx) {
     var spec = ctx.spec, root = ctx.root;
     root.querySelectorAll('[data-dbm-move]').forEach(function (b) { b.setAttribute('aria-pressed', String(ctx.shown.has(+b.getAttribute('data-dbm-move')))); });
-    (spec.symbols || []).forEach(function (s) {
+    var typeOn = {};
+    (spec.symbols || []).forEach(function (s, i) {
       var on = !s.moves || s.moves.some(function (n) { return ctx.shown.has(n); });
-      root.querySelectorAll('[data-dbm-sym="' + s.type + '"]').forEach(function (r) { r.classList.toggle('off', !on); });
-      (ctx.marks.syms[s.type] || []).forEach(function (mm) { mm.getElement().classList.toggle('dbm-off', !on); });
+      typeOn[s.type] = typeOn[s.type] || on;
+      (ctx.marks.symbol[i] || []).forEach(function (mm) { mm.getElement().classList.toggle('dbm-off', !on); });
+    });
+    Object.keys(typeOn).forEach(function (k) {
+      root.querySelectorAll('[data-dbm-sym="' + k + '"]').forEach(function (r) { r.classList.toggle('off', !typeOn[k]); });
     });
     root.querySelectorAll('[data-dbm-cities]').forEach(function (b) { b.setAttribute('aria-pressed', String(ctx.citiesOn)); });
     root.querySelectorAll('[data-dbm-cityrow]').forEach(function (r) { r.classList.toggle('off', !ctx.citiesOn); });

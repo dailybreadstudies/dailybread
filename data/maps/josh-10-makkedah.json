@@ -1,0 +1,379 @@
+{
+ "id": "josh-10-makkedah",
+ "title": "The Victory at Makkedah",
+ "ref": "Joshua 10:16–28",
+ "anchor": {
+  "book": "JOS",
+  "c": 10,
+  "v": 16
+ },
+ "range": [
+  16,
+  28
+ ],
+ "bounds": [
+  [
+   34.8,
+   31.46
+  ],
+  [
+   35.27,
+   31.8
+  ]
+ ],
+ "places": "JOS",
+ "placesLabel": "Cities named in Joshua",
+ "named": [
+  {
+   "name": "Makkedah",
+   "ll": [
+    34.96656,
+    31.53472
+   ],
+   "label": "right",
+   "site": "Khirbet el-Qom (uncertain)",
+   "note": "OpenBible.info lists Khirbet el-Qom as a possible site; Khirbet Beit Maqdum close by is another proposal. The cave where the kings hid has not been identified.",
+   "ob": "abf8e4e/makkedah"
+  },
+  {
+   "name": "Azekah",
+   "ll": [
+    34.9357,
+    31.70023
+   ],
+   "label": "left",
+   "site": "Tel Azekah",
+   "note": "The rout of verse 10 ran as far as Azekah and Makkedah.",
+   "ob": "af2ca0c/azekah"
+  },
+  {
+   "name": "Jerusalem",
+   "ll": [
+    35.23417,
+    31.77667
+   ],
+   "label": "left",
+   "site": "City of David",
+   "note": "Its king, Adoni-zedek, was the first of the five kings brought out of the cave (v. 23).",
+   "ob": "a15257a/jerusalem"
+  },
+  {
+   "name": "Hebron",
+   "ll": [
+    35.10222,
+    31.52509
+   ],
+   "label": "right",
+   "site": "Tel Rumeida",
+   "note": "Hoham, king of Hebron, was one of the five kings (v. 3).",
+   "ob": "a85151a/hebron"
+  },
+  {
+   "name": "Jarmuth",
+   "ll": [
+    34.975,
+    31.7083
+   ],
+   "label": "above",
+   "site": "Tel Yarmut",
+   "note": "Piram, king of Jarmuth, was one of the five kings (v. 3).",
+   "ob": "a539e01/jarmuth-1"
+  },
+  {
+   "name": "Lachish",
+   "ll": [
+    34.84917,
+    31.56528
+   ],
+   "label": "left",
+   "site": "Tel Lachish (Tell ed-Duweir)",
+   "note": "Japhia, king of Lachish, was one of the five kings (v. 3).",
+   "ob": "a3cc590/lachish"
+  },
+  {
+   "name": "Eglon",
+   "ll": [
+    34.92806,
+    31.49181
+   ],
+   "label": "below",
+   "site": "Tell Eton (likely)",
+   "note": "Debir, king of Eglon, was one of the five kings (v. 3). Tel Hesi is the main alternative site.",
+   "ob": "a244d8f/eglon"
+  }
+ ],
+ "links": [
+  "Makkedah",
+  "Jerusalem",
+  "Hebron",
+  "Jarmuth",
+  "Lachish",
+  "Eglon",
+  "Jericho"
+ ],
+ "alternates": {
+  "for": "Makkedah",
+  "bounds": [
+   [
+    34.88,
+    31.42
+   ],
+   [
+    35.02,
+    31.6
+   ]
+  ],
+  "sites": [
+   {
+    "name": "Khirbet Beit Maqdum",
+    "ll": [
+     34.9706,
+     31.5377
+    ]
+   },
+   {
+    "name": "Tell Beit Mirsim",
+    "ll": [
+     34.9098,
+     31.4558
+    ]
+   }
+  ]
+ },
+ "moves": [
+  {
+   "n": 1,
+   "side": "enemy",
+   "w": 3.2,
+   "vv": "v. 16",
+   "at": 0.45,
+   "text": "The five kings flee and hide in the cave at Makkedah",
+   "coords": [
+    [
+     34.94,
+     31.705
+    ],
+    [
+     34.947,
+     31.64
+    ],
+    [
+     34.958,
+     31.56
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "w": 3.4,
+   "vv": "vv. 18–20",
+   "at": 0.55,
+   "badgeLine": 0,
+   "text": "Israel pursues the fleeing army and attacks from behind",
+   "coords": [
+    [
+     [
+      34.955,
+      31.69
+     ],
+     [
+      34.92,
+      31.64
+     ],
+     [
+      34.885,
+      31.6
+     ]
+    ],
+    [
+     [
+      34.965,
+      31.69
+     ],
+     [
+      35.02,
+      31.64
+     ],
+     [
+      35.06,
+      31.6
+     ]
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "enemy",
+   "dash": [
+    2.6,
+    1.4
+   ],
+   "w": 3.0,
+   "vv": "v. 20",
+   "at": 0.5,
+   "badgeLine": 0,
+   "text": "The survivors escape into the fortified cities",
+   "coords": [
+    [
+     [
+      34.885,
+      31.6
+     ],
+     [
+      34.855,
+      31.572
+     ]
+    ],
+    [
+     [
+      34.9,
+      31.585
+     ],
+     [
+      34.925,
+      31.5
+     ]
+    ],
+    [
+     [
+      35.06,
+      31.6
+     ],
+     [
+      35.098,
+      31.535
+     ]
+    ],
+    [
+     [
+      34.97,
+      31.68
+     ],
+     [
+      34.974,
+      31.704
+     ]
+    ],
+    [
+     [
+      35.06,
+      31.62
+     ],
+     [
+      35.15,
+      31.7
+     ],
+     [
+      35.225,
+      31.77
+     ]
+    ]
+   ]
+  },
+  {
+   "n": 4,
+   "side": "israel",
+   "dash": [
+    0.1,
+    1.8
+   ],
+   "w": 3.4,
+   "vv": "v. 21",
+   "at": 0.5,
+   "badgeLine": 0,
+   "text": "The whole army returns to Joshua's camp at Makkedah",
+   "coords": [
+    [
+     [
+      34.885,
+      31.6
+     ],
+     [
+      34.93,
+      31.57
+     ],
+     [
+      34.958,
+      31.545
+     ]
+    ],
+    [
+     [
+      35.06,
+      31.6
+     ],
+     [
+      35.01,
+      31.565
+     ],
+     [
+      34.976,
+      31.542
+     ]
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "cave",
+   "at": [
+    34.958,
+    31.528
+   ],
+   "label": "Cave",
+   "key": "Cave of the five kings",
+   "vv": "vv. 16–18, 22–27",
+   "offset": [
+    -4,
+    12
+   ]
+  },
+  {
+   "type": "camp",
+   "at": [
+    34.975,
+    31.545
+   ],
+   "label": "Camp",
+   "key": "Joshua's camp at Makkedah",
+   "vv": "v. 21",
+   "moves": [
+    4
+   ],
+   "offset": [
+    10,
+    -4
+   ]
+  },
+  {
+   "type": "captured",
+   "at": [
+    34.96656,
+    31.53472
+   ],
+   "key": "City captured",
+   "vv": "v. 28",
+   "offset": [
+    16,
+    -8
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "Where was Makkedah?",
+   "p": [
+    "Makkedah lay in the Shephelah, the low hills between the Judean hill country and the coastal plain, near Azekah and on the way south toward Lachish and Eglon. Its site is not certain. The map follows OpenBible.info's leading suggestion, Khirbet el-Qom, with only modest confidence."
+   ],
+   "alternates": true
+  },
+  {
+   "h": "About the routes",
+   "p": [
+    "The text says only that Israel struck the fleeing army \"from behind\" so that few reached their cities (vv. 19–20), and that the army returned to the camp at Makkedah (v. 21). The arrows toward the five cities show that direction of escape, not recorded roads."
+   ]
+  }
+ ]
+}

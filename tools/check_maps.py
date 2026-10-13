@@ -17,6 +17,7 @@ would show a broken or misleading map:
 Map file format (data/maps/<id>.json):
   id, title, ref               "josh-8-ai", "The Battle of Ai", "Joshua 8:10–23"
   anchor {book, c, v}          where the map button sits (the verse the map begins at)
+  range [first, last]          optional: verses whose place names are tappable (default: whole chapter)
   bounds [[w, s], [e, n]]      the view the map opens at
   places "JOS"                 optional: show the cities of this book (data/maps/places/JOS.json)
   placesLabel                  key text for that layer, e.g. "Cities named in Joshua"
@@ -24,7 +25,8 @@ Map file format (data/maps/<id>.json):
   links [names]                place names that become tappable in the chapter text
   alternates {for, bounds, sites[{name, ll}]} optional: other proposed sites
   moves [{n, side, dash, w, vv, at, text, coords}]   side: israel | ambush | enemy | other
-  symbols [{type, at, label, key, vv, moves}]        type: camp | ambush | fire | battle
+                               coords is one line [[lon, lat], …] or several lines [[[lon, lat], …], …]
+  symbols [{type, at, label, key, vv, moves, offset}] type: camp | ambush | fire | battle | sun | moon | hail | cave | captured
   notes [{h, p[], alternates}] notes shown under the key (p may contain <i>, <b>, <a>)
 Exits with status 1 if any problem is found.
 """
@@ -36,7 +38,8 @@ import sys
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 MAPS = os.path.join(ROOT, 'data', 'maps')
 SIDES = {'israel', 'ambush', 'enemy', 'other'}
-SYMBOLS = {'camp', 'ambush', 'fire', 'battle'}
+SYMBOLS = {'camp', 'ambush', 'fire', 'battle', 'sun', 'moon', 'hail', 'cave', 'captured'}
+LABELS = {'below', 'above', 'left', 'right'}
 problems = []
 
 
@@ -111,9 +114,24 @@ for entry in index.get('maps', []):
     for p in m.get('named', []):
         if not is_ll(p.get('ll')):
             bad(mid, 'named place %r has bad coordinates' % p.get('name'))
+        if p.get('label', 'below') not in LABELS:
+            bad(mid, 'named place %r: label must be one of %s' % (p.get('name'), ', '.join(sorted(LABELS))))
+    rng = m.get('range')
+    if rng is not None:
+        if not (isinstance(rng, list) and len(rng) == 2 and rng[0] <= a.get('v', 0) <= rng[1]):
+            bad(mid, 'range must be [first verse, last verse] and include the anchor verse')
+        elif verses and rng[1] not in verses:
+            bad(mid, 'range ends at verse %s, which does not exist' % rng[1])
+    if entry.get('range') != m.get('range'):
+        bad(mid, 'index.json range differs from the map file')
+    named = {p.get('name') for p in m.get('named', [])}
     for name in m.get('links', []):
         if text and not re.search(r'(?<![A-Za-z])' + re.escape(name) + r'(?![A-Za-z])', text):
             bad(mid, 'link %r does not occur in the chapter text' % name)
+        if name not in named and m.get('places'):
+            layer = os.path.join(MAPS, 'places', m['places'] + '.json')
+            if os.path.exists(layer) and not any(f['properties']['n'] == name for f in json.load(open(layer, encoding='utf-8'))['features']):
+                bad(mid, 'link %r is neither a named place nor in the places layer' % name)
     nums = set()
     for mv in m.get('moves', []):
         n = mv.get('n')
@@ -123,8 +141,10 @@ for entry in index.get('maps', []):
         if mv.get('side') not in SIDES:
             bad(mid, 'movement %r: side must be one of %s' % (n, ', '.join(sorted(SIDES))))
         coords = mv.get('coords', [])
-        if len(coords) < 2 or not all(is_ll(c) for c in coords):
-            bad(mid, 'movement %r needs at least two valid points' % n)
+        lines = coords if coords and isinstance(coords[0], list) and coords[0] and isinstance(coords[0][0], list) else [coords]
+        for line in lines:
+            if len(line) < 2 or not all(is_ll(c) for c in line):
+                bad(mid, 'movement %r: every line needs at least two valid points' % n)
         d = mv.get('dash')
         if d is not None and not (isinstance(d, list) and len(d) % 2 == 0 and all(isinstance(x, (int, float)) and x >= 0 for x in d)):
             bad(mid, 'movement %r: dash must be an even list of numbers' % n)
