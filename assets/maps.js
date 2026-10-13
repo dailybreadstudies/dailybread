@@ -320,7 +320,7 @@
         '<li class="dbm-srow" data-dbm-cityrow>' + SYM.mount() + '<span>Mountain or hill</span></li>';
     }
     keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-roads aria-pressed="true">' +
-        '<svg viewBox="0 0 56 20"><line x1="2" y1="10" x2="54" y2="10" stroke="var(--dbm-road)" stroke-width="2.2" stroke-linecap="round" opacity="0.8"/></svg>' +
+        '<svg viewBox="0 0 56 20"><line x1="3" y1="10" x2="54" y2="10" stroke="var(--dbm-road)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/></svg>' +
         '<span>Main ancient roads <span class="dbm-vv">approximate · tap to show or hide</span></span></button></li>' +
       '<li class="dbm-srow"><svg viewBox="0 0 56 20"><line x1="2" y1="7" x2="54" y2="7" stroke="var(--dbm-water-line)" stroke-width="1.8"/>' +
         '<line x1="2" y1="14" x2="54" y2="14" stroke="var(--dbm-water-line)" stroke-width="1.4" stroke-dasharray="5 3.5"/></svg>' +
@@ -442,7 +442,8 @@
               'line-width': ['interpolate', ['linear'], ['zoom'], 7, ['match', ['get', 'class'], 'river', 1, 0.5], 12, ['match', ['get', 'class'], 'river', 2, 1.1]] } },
           { id: 'jordan', type: 'line', source: 'jordan', paint: { 'line-color': css('--dbm-water-line'), 'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.2, 13, 3] } },
           { id: 'roads', type: 'line', source: 'roads', layout: { 'line-cap': 'round', 'line-join': 'round' },
-            paint: { 'line-color': css('--dbm-road'), 'line-opacity': 0.75, 'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.2, 12, 2.6] } }
+            paint: { 'line-color': css('--dbm-road'), 'line-opacity': 0.8, 'line-dasharray': [0.1, 2.2],
+              'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.6, 12, 2.8] } }
         ]
       },
       bounds: spec.bounds,
@@ -488,7 +489,7 @@
     map.addLayer({ id: 'roads-label', type: 'symbol', source: 'roads', minzoom: 7,
       filter: ['!=', ['get', 'label'], ''],
       layout: { 'text-field': ['get', 'label'], 'text-font': ['literal', ['Noto Sans Italic']], 'symbol-placement': 'line',
-        'text-size': ['interpolate', ['linear'], ['zoom'], 7, 10, 12, 12], 'symbol-spacing': 320, 'text-letter-spacing': 0.06, 'text-offset': [0, -0.7] },
+        'text-size': ['interpolate', ['linear'], ['zoom'], 7, 9.5, 12, 11], 'symbol-spacing': 360, 'text-letter-spacing': 0.06, 'text-offset': [0, -0.7] },
       paint: { 'text-color': css('--dbm-road'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
     map.addLayer({ id: 'water-label', type: 'symbol', source: 'waternames', maxzoom: 11,
       layout: { 'text-field': ['format', ['get', 'n'], {}, '\n', {}, ['get', 's'], { 'font-scale': 0.8 }],
