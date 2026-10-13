@@ -302,7 +302,7 @@
     var keyHTML = '';
     if (moves.length) {
       keyHTML += '<div class="dbm-keytools"><h4>Movements</h4><span><button type="button" data-dbm-all="1">Show all</button><button type="button" data-dbm-all="0">Hide all</button></span></div>' +
-        '<p class="dbm-hint">Tap a line to show or hide it on the map.</p><ol>' +
+        '<p class="dbm-hint">Tap a line, the cities or the roads to show or hide them on the map.</p><ol>' +
         moves.map(function (m) {
           return '<li><button type="button" class="dbm-krow" data-dbm-move="' + m.n + '" aria-pressed="true">' + swatch(m) +
             '<span class="dbm-badge" style="background:' + sideColor(m.side) + '">' + m.n + '</span><span>' + esc(m.text) + ' <span class="dbm-vv">' + esc(m.vv || '') + '</span></span></button></li>';
@@ -315,16 +315,15 @@
       return '<li class="dbm-srow" data-dbm-sym="' + esc(s.type) + '">' + SYM[s.type](SYM_COLOR[s.type]) + '<span>' + esc(s.key) + ' <span class="dbm-vv">' + esc(s.vv || '') + '</span></span></li>';
     }).join('');
     if (spec.places) {
-      keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-cities aria-pressed="true">' + SYM.city() + '<span>' + esc(spec.placesLabel || 'Places') + ' <span class="dbm-vv">tap to show or hide</span></span></button></li>' +
-        '<li class="dbm-srow" data-dbm-cityrow>' + SYM.uncertain() + '<span>Location uncertain</span></li>' +
-        '<li class="dbm-srow" data-dbm-cityrow>' + SYM.mount() + '<span>Mountain or hill</span></li>';
+      keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-cities aria-pressed="true">' + SYM.city() + '<span>' + esc(spec.placesLabel || 'Places') +
+        ' <span class="dbm-mini">' + SYM.uncertain() + 'uncertain</span><span class="dbm-mini">' + SYM.mount() + 'hill</span></span></button></li>';
     }
     keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-roads aria-pressed="true">' +
         '<svg viewBox="0 0 56 20"><line x1="3" y1="10" x2="54" y2="10" stroke="var(--dbm-road)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/></svg>' +
-        '<span>Main ancient roads <span class="dbm-vv">approximate · tap to show or hide</span></span></button></li>' +
+        '<span>Main ancient roads <span class="dbm-vv">approximate</span></span></button></li>' +
       '<li class="dbm-srow"><svg viewBox="0 0 56 20"><line x1="2" y1="7" x2="54" y2="7" stroke="var(--dbm-water-line)" stroke-width="1.8"/>' +
         '<line x1="2" y1="14" x2="54" y2="14" stroke="var(--dbm-water-line)" stroke-width="1.4" stroke-dasharray="5 3.5"/></svg>' +
-        '<span>Rivers; seasonal brooks (wadis) dashed <span class="dbm-vv">Ancient view</span></span></li>';
+        '<span>Rivers; seasonal wadis dashed</span></li>';
     keyHTML += '</ul>';
     root.querySelectorAll('[data-dbm-key]').forEach(function (k) { k.innerHTML = keyHTML; });
     var notes = (spec.notes || []).map(function (n) {
