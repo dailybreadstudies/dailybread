@@ -51,13 +51,13 @@ git clone --depth 1 https://github.com/STEPBible/STEPBible-Data /tmp/step
 python3 tools/build_words.py /tmp/step
 ```
 
-## Bible maps (test stage)
+## Bible maps
 
 A map button appears beside the verse where a map begins. Tapping it opens the map, its key and notes:
 in a column to the left of the text on wide screens, or inside the text column below the verse on phones.
 
-- Maps are shown only on `maps-test.html` for now. To switch them on for everyone, add the two lines
-  `maps-test.html` has to `index.html` (`assets/maps.css` and `assets/maps.js`).
+- Maps are live on `index.html`. `maps-test.html` is the same reader, kept for trying changes.
+- Maps so far: Joshua 8 (Ai), Joshua 10 (Gibeon and Beth-horon; Makkedah; the southern cities).
 - `assets/maps.js` + `assets/maps.css` — the map module. `reader.js` calls `DBMaps.decorate()` after each
   render; without `maps.js` that call does nothing.
 - `assets/vendor/maplibre-gl/` — the map engine (MapLibre GL 4.7.1, BSD licence), loaded only when a map opens.
