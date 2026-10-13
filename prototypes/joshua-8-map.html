@@ -82,7 +82,43 @@ body.locked { overflow: hidden; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
 
-.read { max-width: 36rem; margin: 0 auto; }
+.page { display: grid; grid-template-columns: minmax(0, 36rem); justify-content: center; column-gap: 3rem; }
+.page.with-map { grid-template-columns: minmax(0, 40rem) minmax(0, 36rem); }
+.map-col { display: none; }
+.page.with-map .map-col {
+  display: block; position: sticky; top: env(safe-area-inset-top, 0px); align-self: start;
+  max-height: 100vh; max-height: 100dvh; overflow-y: auto; margin-top: -2.5rem; padding-block: 1.5rem 2rem;
+  scrollbar-width: thin;
+}
+.map-col .atlas { margin: 0; }
+.map-col .frame { width: min(100%, calc((100dvh - 6rem) * 0.8)); }
+.read { min-width: 0; }
+.has-map { position: relative; }
+.map-pin {
+  position: absolute; left: -3.4rem; top: 0.15rem; width: 2.5rem; height: 2.5rem;
+  display: grid; place-items: center; align-content: center; gap: 0.05rem;
+  border: 1px solid var(--accent-line); border-radius: 50%; background: var(--surface); color: var(--accent);
+  box-shadow: 0 2px 8px var(--shadow); cursor: pointer; transition: background-color 0.15s, color 0.15s, transform 0.15s;
+}
+.map-pin svg { width: 1.05rem; height: 1.05rem; }
+.map-pin span { font: 600 0.42rem/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
+.map-pin:hover { transform: scale(1.06); border-color: var(--accent); }
+.map-pin[aria-pressed="true"] { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+@media (max-width: 760px) {
+  .map-pin { position: static; float: left; margin: 0.3rem 0.6rem 0.1rem 0; width: 2.3rem; height: 2.3rem; }
+}
+.close-map {
+  display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid var(--accent-line); background: var(--surface);
+  border-radius: 999px; padding: 0.35rem 0.7rem; cursor: pointer; color: var(--ink-soft);
+  font: 500 0.6rem/1 var(--sans); letter-spacing: 0; text-transform: none;
+}
+.close-map svg { width: 0.6rem; height: 0.6rem; }
+.close-map { white-space: nowrap; flex: none; }
+@media (max-width: 520px) { .plate-label em { display: none; } }
+.close-map:hover { border-color: var(--accent); color: var(--accent); }
+.plate-label em { font-style: normal; color: var(--muted); letter-spacing: 0.04em; text-transform: none; font-weight: 500; margin-left: 0.4rem; }
+.plate-notes .src { font-size: 0.68rem; line-height: 1.6; color: var(--muted); margin-top: 1.2rem; }
+.plate-notes .src b { font-weight: 600; color: var(--ink-soft); }
 .eyebrow {
   font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--accent-faint); margin: 0 0 0.6rem;
@@ -109,11 +145,10 @@ h1 { font: 700 1.75rem/1.25 var(--display); margin: 0 0 0.35rem; text-wrap: bala
 /* ── The map plate ── */
 .atlas { margin: 2rem 0 2.4rem; }
 .plate-label {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
   font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
   margin-bottom: 0.5rem;
 }
-.plate-label span:last-child { color: var(--muted); letter-spacing: 0.06em; text-transform: none; font-weight: 500; }
 .frame {
   position: relative; width: 100%; aspect-ratio: 4 / 5; max-width: 100%;
   border: 1px solid var(--accent-line); border-radius: 4px; overflow: hidden;
@@ -201,7 +236,7 @@ h1 { font: 700 1.75rem/1.25 var(--display); margin: 0 0 0.35rem; text-wrap: bala
   font: 500 0.58rem/1 var(--sans); padding: 0.32rem 0.6rem; color: var(--ink-soft);
 }
 .key-tools button:hover { border-color: var(--accent); color: var(--accent); }
-.scripture .key .key-hint { margin: -0.25rem 0 0; font: italic 400 0.66rem/1.4 var(--serif); color: var(--muted); }
+.key .key-hint, .scripture .key .key-hint { margin: -0.25rem 0 0; font: italic 400 0.66rem/1.4 var(--serif); color: var(--muted); }
 .krow {
   display: grid; grid-template-columns: 3.1rem 1.3rem minmax(0, 1fr); align-items: center; gap: 0.45rem;
   width: 100%; text-align: left; background: none; border: 0; padding: 0.18rem 0.3rem; margin: -0.18rem -0.3rem;
@@ -293,16 +328,20 @@ h1 { font: 700 1.75rem/1.25 var(--display); margin: 0 0 0.35rem; text-wrap: bala
 </style>
 </head>
 <body>
-<main class="read">
-  <p class="eyebrow">Daily Bread Online · Map prototype</p>
-  <h1>Joshua 8: The Conquest of Ai</h1>
-  <p class="dek">The map of the battle sits in the text below. Tap a place name to find it on the map; zoom out to see every city named in the book of Joshua.</p>
-  <div class="scripture" id="scripture"></div>
-</main>
+<div class="page" id="page">
+  <aside class="map-col" id="mapCol" aria-label="Map"></aside>
+  <main class="read">
+    <p class="eyebrow">Daily Bread Online · Map prototype</p>
+    <h1>Joshua 8: The Conquest of Ai</h1>
+    <p class="dek">Where a map is available, a map button appears beside the verse. Open it to follow the battle alongside the text.</p>
+    <div class="scripture" id="scripture"></div>
+  </main>
+</div>
+<div id="atlasHold" hidden></div>
 
 <template id="atlasTpl">
   <figure class="atlas" id="atlas" aria-label="Map: the battle of Ai">
-    <div class="plate-label"><span>Map · The battle of Ai</span><span>Joshua 8:10–23</span></div>
+    <div class="plate-label"><span>Map · The battle of Ai <em>Joshua 8:10–23</em></span><button type="button" class="close-map" id="closeMap"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2 2 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Close map</button></div>
     <div class="frame" id="frame">
       <div id="map"></div>
       <div class="cartouche"><b>The Battle of Ai</b><i>Joshua 8:10–23</i></div>
@@ -338,12 +377,7 @@ h1 { font: 700 1.75rem/1.25 var(--display); margin: 0 0 0.35rem; text-wrap: bala
       <p>Verse 3 sends out 30,000 men and verse 12 speaks of about 5,000 in ambush. Commentators explain the difference in several ways.</p>
       <h3>Cities of Joshua</h3>
       <p>Every city named in the book of Joshua that OpenBible.info can locate is on the map. Zoom out to see them, and tap one for its modern site and first mention. A hollow circle means the location is uncertain. You can hide them from the key.</p>
-      <h3>Sources</h3>
-      <ul>
-        <li>Scripture: Berean Standard Bible (public domain).</li>
-        <li>Places and identifications: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info Bible Geocoding Data</a>, CC BY 4.0. Jordan River and Dead Sea outlines from the same dataset (OpenStreetMap).</li>
-        <li>Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels: OpenFreeMap.</li>
-      </ul>
+      <p class="src"><b>Sources.</b> Scripture: Berean Standard Bible (public domain). Places and identifications: <a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0), with Jordan and Dead Sea outlines from OpenStreetMap; seas from Natural Earth. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels: OpenFreeMap.</p>
     </div>
   </figure>
 </template>
@@ -377,28 +411,28 @@ const DEFAULT_BOUNDS = [[35.233, 31.9], [35.322, 31.933]];
 
 /* ── The eight movements, each with its own line style ── */
 const MOVES = [
-  { n: 1, side: 'israel', dash: null, w: 4.5, vv: 'vv. 10–11', at: 0.9,
+  { n: 1, side: 'israel', dash: null, w: 3.4, vv: 'vv. 10–11', at: 0.9,
     text: "Israel's main army marches up from Gilgal and camps north of Ai",
     coords: [[35.459969,31.881883],[35.438,31.890],[35.41,31.898],[35.38,31.905],[35.35,31.913],[35.32,31.923],[35.30,31.929],[35.285,31.931],[35.272,31.931], P.camp] },
-  { n: 2, side: 'israel', dash: [0.1, 1.8], w: 4, vv: 'v. 13', at: 0.85,
+  { n: 2, side: 'israel', dash: [0.1, 1.8], w: 3.6, vv: 'v. 13', at: 0.85,
     text: 'Joshua goes down into the valley at night',
     coords: [P.camp, [35.2638,31.9265], P.valley] },
-  { n: 3, side: 'enemy', dash: null, w: 4.5, vv: 'v. 14', at: 0.62,
+  { n: 3, side: 'enemy', dash: null, w: 3.4, vv: 'v. 14', at: 0.62,
     text: 'The king of Ai goes out toward the Arabah',
     coords: [AI, [35.272,31.9157], [35.283,31.9138], [35.292,31.9112]] },
-  { n: 4, side: 'israel', dash: [2.6, 1.4], w: 3.5, vv: 'v. 15', at: 0.55,
+  { n: 4, side: 'israel', dash: [2.6, 1.4], w: 3.1, vv: 'v. 15', at: 0.55,
     text: 'Israel feigns defeat and flees toward the wilderness',
     coords: [P.valley, [35.276,31.9215], [35.293,31.9162], [35.308,31.9095], P.wild] },
-  { n: 5, side: 'enemy', dash: [2.6, 1.4], w: 3.5, vv: 'v. 17', at: 0.22,
+  { n: 5, side: 'enemy', dash: [2.6, 1.4], w: 3.1, vv: 'v. 17', at: 0.22,
     text: 'The men of Bethel join the pursuit',
     coords: [BETHEL, [35.249,31.9205], [35.2575,31.9196], [35.267,31.9178], [35.276,31.9160]] },
-  { n: 6, side: 'ambush', dash: null, w: 4.5, vv: 'v. 19', at: 0.62,
+  { n: 6, side: 'ambush', dash: null, w: 3.4, vv: 'v. 19', at: 0.62,
     text: 'The ambush rises, takes Ai and sets it on fire',
     coords: [P.ambush, [35.2555,31.9193], [35.2595,31.9176]] },
-  { n: 7, side: 'israel', dash: [3.2, 1, 0.5, 1], w: 3.5, vv: 'vv. 20–21', at: 0.5,
+  { n: 7, side: 'israel', dash: [3.2, 1, 0.5, 1], w: 3.1, vv: 'vv. 20–21', at: 0.5,
     text: 'Israel turns back on its pursuers',
     coords: [[35.318,31.9025], [35.307,31.9035], [35.296,31.9070]] },
-  { n: 8, side: 'ambush', dash: [2.6, 1.4], w: 3.5, vv: 'v. 22', at: 0.45,
+  { n: 8, side: 'ambush', dash: [2.6, 1.4], w: 3.1, vv: 'v. 22', at: 0.45,
     text: 'The ambush comes out of the city behind them',
     coords: [[35.2625,31.9160], [35.2715,31.9118], [35.2825,31.9090]] }
 ];
@@ -421,6 +455,7 @@ const PLACE_KEY = { 'Mount Ebal': 'Mount Ebal', 'Mount Gerizim': 'Mount Gerizim'
 const linkPlaces = html => html.split(/(<[^>]+>)/).map(part =>
   part.startsWith('<') ? part : part.replace(PLACE_RE, m => `<button type="button" class="place" data-place="${PLACE_KEY[m]}">${m}</button>`)
 ).join('');
+const MAP_AT = 10;   // the map belongs to vv. 10–23
 let html = '', mapPlaced = false;
 for (const b of ch.b) {
   if (b.k === 's1') { html += `<h2>${b.c.join('')}</h2>`; continue; }
@@ -431,11 +466,52 @@ for (const b of ch.b) {
     else if (typeof x === 'string') p += linkPlaces(x);
     else if (x && 'f' in x) p += `<button type="button" class="fn" data-fn="${x.f}" aria-label="Footnote">${String.fromCharCode(97 + x.f)}</button>`;
   }
-  html += `<p>${p}</p>`;
-  if (!mapPlaced && b.c.includes(13)) { html += '<div id="atlasSlot"></div>'; mapPlaced = true; }
+  if (!mapPlaced && b.c.includes(MAP_AT)) {
+    html += `<p class="has-map" id="mapAnchor"><button type="button" class="map-pin" id="mapPin" aria-pressed="false" aria-label="Show map: the battle of Ai" title="Map: the battle of Ai (vv. 10–23)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 4v13.5M15 6.5V20" stroke="currentColor" stroke-width="1.6"/></svg><span>Map</span></button>${p}</p>`;
+    mapPlaced = true;
+  } else html += `<p>${p}</p>`;
 }
 $('scripture').innerHTML = html;
-$('atlasSlot').replaceWith($('atlasTpl').content.cloneNode(true));
+$('atlasHold').appendChild($('atlasTpl').content.cloneNode(true));
+
+/* ── Opening the map: a side column on wide screens, inline on narrow ones ── */
+const WIDE = matchMedia('(min-width: 1180px)');
+let mapOpen = false, booted = false, onOpened = null, pendingPlace = null;
+function placeAtlas() {
+  const atlasEl = $('atlas');
+  if (WIDE.matches) { $('mapCol').appendChild(atlasEl); $('page').classList.add('with-map'); }
+  else { $('page').classList.remove('with-map'); $('mapAnchor').after(atlasEl); }
+}
+function openMap(scroll = true) {
+  if (!mapOpen) {
+    mapOpen = true;
+    placeAtlas();
+    $('mapPin').setAttribute('aria-pressed', 'true');
+    $('mapPin').setAttribute('aria-label', 'Hide map');
+    if (!booted) { booted = true; bootMap(); } else if (onOpened) onOpened();
+  }
+  if (scroll && !WIDE.matches) $('atlas').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+}
+function closeMap() {
+  if (!mapOpen) return;
+  mapOpen = false;
+  if ($('atlas').classList.contains('big') && window.__setBig) window.__setBig(false);
+  $('atlasHold').appendChild($('atlas'));
+  $('page').classList.remove('with-map');
+  $('mapPin').setAttribute('aria-pressed', 'false');
+  $('mapPin').setAttribute('aria-label', 'Show map: the battle of Ai');
+}
+$('mapPin').addEventListener('click', () => mapOpen ? closeMap() : openMap());
+$('closeMap').addEventListener('click', () => { const was = WIDE.matches; closeMap(); if (!was) $('mapAnchor').scrollIntoView({ block: 'center' }); });
+WIDE.addEventListener('change', () => { if (mapOpen) { placeAtlas(); if (onOpened) onOpened(); } });
+$('scripture').addEventListener('click', e => {
+  const b = e.target.closest('.place');
+  if (!b || e.target.closest('.atlas')) return;
+  pendingPlace = b.dataset.place;
+  openMap(false);
+  if (window.__flyPlace && window.__mapReady && window.__mapReady()) { window.__flyPlace(pendingPlace); pendingPlace = null; }
+  if (!WIDE.matches) $('atlas').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+});
 
 /* Footnotes */
 let pop = null;
@@ -480,6 +556,7 @@ const keyHTML = `<div class="key-tools"><h4>Movements</h4><span><button type="bu
   </ul>`;
 document.querySelectorAll('[data-key]').forEach(k => { k.innerHTML = keyHTML; });
 
+function bootMap() {
 if (!window.maplibregl) {
   $('map').innerHTML = '<p style="padding:2rem;font:0.8rem var(--sans);color:var(--muted)">The map library could not load.</p>';
   return;
@@ -588,7 +665,7 @@ function addMoveLayers() {
     type: 'Feature', properties: { n: m.n }, geometry: { type: 'LineString', coordinates: m.coords } })) });
   map.addLayer({ id: 'moves-casing', type: 'line', source: 'moves',
     layout: { 'line-cap': 'round', 'line-join': 'round' },
-    paint: { 'line-color': css('--map-paper'), 'line-width': 8, 'line-opacity': 0.7 } });
+    paint: { 'line-color': css('--map-paper'), 'line-width': 6.5, 'line-opacity': 0.7 } });
   for (const m of MOVES) {
     const paint = { 'line-color': css('--' + m.side), 'line-width': m.w };
     if (m.dash) paint['line-dasharray'] = m.dash;
@@ -691,21 +768,16 @@ function openNamed(name) {
 }
 
 /* Place names in the text fly the map there */
-$('scripture').addEventListener('click', e => {
-  const b = e.target.closest('.place');
-  if (!b || e.target.closest('.atlas')) return;
-  const name = b.dataset.place;
-  const frame = $('frame');
-  const r = frame.getBoundingClientRect();
-  if (!atlas.classList.contains('big') && (r.top < 0 || r.bottom > innerHeight)) {
-    frame.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
-  }
+function flyPlace(name) {
   const ll = openNamed(name);
   if (ll) {
     const near = name === 'Ai' || name === 'Bethel';
     map.flyTo({ center: ll, zoom: near ? 13.6 : 11.5, duration: reduceMotion ? 0 : 1400 });
   }
-});
+}
+window.__flyPlace = flyPlace;
+window.__mapReady = () => ready;
+onOpened = () => requestAnimationFrame(() => { map.resize(); });
 
 /* Map styles. OpenStreetMap needs no key. */
 const atlas = $('atlas');
@@ -749,6 +821,7 @@ function fitDefault(duration = 0) {
   const left = big && !kf.classList.contains('closed') && innerWidth >= 760 ? kf.offsetWidth + 40 : 28;
   map.fitBounds(DEFAULT_BOUNDS, { padding: { top: 80, bottom: 36, left, right: 28 }, duration });
 }
+window.__setBig = setBig;
 btnBig.addEventListener('click', () => setBig(!atlas.classList.contains('big')));
 addEventListener('keydown', e => { if (e.key === 'Escape' && atlas.classList.contains('big')) setBig(false); });
 $('keyToggle').addEventListener('click', () => {
@@ -804,11 +877,13 @@ function start() {
     setMode('ancient');
     fitDefault();
     applyVisibility();
+    if (pendingPlace) { const n = pendingPlace; pendingPlace = null; setTimeout(() => flyPlace(n), 300); }
   } catch (err) { console.error('MAPINIT', err && err.stack || err); }
 }
 map.on('style.load', start);
 map.on('load', start);
 if (map.isStyleLoaded()) start();
+}
 })();
 </script>
 </body>
