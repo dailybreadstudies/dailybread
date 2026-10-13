@@ -450,21 +450,6 @@ html.name-small .dn-sample { text-transform: none; font-variant: small-caps; }
 .qr::before { content: '['; color: var(--muted); } .qr::after { content: ']'; color: var(--muted); }
 .sp-cant-row[hidden] { display: none; }
 
-/* Study notes */
-.sn-apparatus > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; user-select: none; }
-.sn-apparatus > summary::-webkit-details-marker { display: none; }
-.sn-apparatus > summary::after { content: '▸'; font-size: 0.9em; color: var(--accent-soft); transition: transform 0.2s; }
-.sn-apparatus[open] > summary::after { transform: rotate(90deg); }
-.sn-apparatus[open] > summary { margin-bottom: 0.85rem; }
-.sn-apparatus:not([open]) > summary { margin-bottom: 0; }
-.sn-count { font-weight: 400; letter-spacing: 0.04em; color: var(--accent-faint); }
-.sn-item { padding-left: 2.6rem !important; text-indent: -2.6rem !important; }
-.sn-item .fn-verse { display: inline-block; width: 2.6rem; text-indent: 0; margin-right: 0; }
-.sn-quote { font-size: 1.05em; color: var(--accent); margin-inline-end: 0.35em; line-height: 1; }
-.sn-quote.he { font-family: var(--hebrew); font-size: 1.15em; }
-.sn-quote.grc { font-family: var(--greek); }
-.sn-text em { font-style: italic; color: var(--ink); }
-
 /* Greek textual notes */
 .tcm { font-size: 0.62em; color: var(--accent-soft); vertical-align: 0.45em; margin: 0 0.05em; font-family: var(--sans); }
 .vp-en .tcm { display: none; }
