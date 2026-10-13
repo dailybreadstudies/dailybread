@@ -91,7 +91,7 @@ button { font: inherit; color: inherit; }
   scrollbar-width: thin;
 }
 .map-col .atlas { margin: 0; }
-.map-col .frame { width: min(100%, calc((100dvh - 6rem) * 0.8)); }
+.map-col .frame { width: min(100%, calc(100dvh - 12rem)); }
 .read { min-width: 0; }
 .has-map { position: relative; }
 .map-pin {
@@ -150,7 +150,7 @@ h1 { font: 700 1.75rem/1.25 var(--display); margin: 0 0 0.35rem; text-wrap: bala
   margin-bottom: 0.5rem;
 }
 .frame {
-  position: relative; width: 100%; aspect-ratio: 4 / 5; max-width: 100%;
+  position: relative; width: 100%; aspect-ratio: 1 / 1; max-width: 100%;
   border: 1px solid var(--accent-line); border-radius: 4px; overflow: hidden;
   background: var(--map-paper); box-shadow: 0 1px 0 var(--rule), 0 8px 26px var(--shadow);
 }
@@ -401,7 +401,7 @@ const ALT_AI = [
 ];
 /* Positions from the text (approximate) */
 const P = {
-  ambush: [35.2505, 31.9210],   // between Bethel and Ai, west of Ai (vv. 9, 12)
+  ambush: [35.2525, 31.9177],   // between Bethel and Ai, west of Ai (vv. 9, 12), on the rise south of the Bethel road
   camp:   [35.2630, 31.9295],   // north of Ai, valley between (v. 11)
   valley: [35.2640, 31.9235],   // "Joshua went into the valley" (v. 13)
   wild:   [35.3180, 31.9045],   // toward the wilderness (v. 15)
@@ -428,7 +428,7 @@ const MOVES = [
     coords: [BETHEL, [35.249,31.9205], [35.2575,31.9196], [35.267,31.9178], [35.276,31.9160]] },
   { n: 6, side: 'ambush', dash: null, w: 3.4, vv: 'v. 19', at: 0.62,
     text: 'The ambush rises, takes Ai and sets it on fire',
-    coords: [P.ambush, [35.2555,31.9193], [35.2595,31.9176]] },
+    coords: [P.ambush, [35.2563,31.9175], [35.2593,31.9171]] },
   { n: 7, side: 'israel', dash: [3.2, 1, 0.5, 1], w: 3.1, vv: 'vv. 20–21', at: 0.5,
     text: 'Israel turns back on its pursuers',
     coords: [[35.318,31.9025], [35.307,31.9035], [35.296,31.9070]] },
