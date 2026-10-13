@@ -56,10 +56,10 @@ body.dbm-margin .dbm-pin { position: absolute; left: -54px; margin: -1px 0 0; } 
 .dbm-place:hover, .dbm-place:focus-visible { text-decoration-color: var(--accent-soft); outline: none; }
 
 /* ── Side column (wide screens) ── */
-body.dbm-side { padding-left: calc(var(--dbm-panel-w, 640px) + 84px); }
+body.dbm-side { padding-left: calc(var(--dbm-panel-left, 48px) + var(--dbm-panel-w, 580px) + 84px); justify-content: flex-start; }
 .dbm-panel {
-  position: fixed; left: 20px; top: 0; z-index: 150; width: var(--dbm-panel-w, 640px);
-  height: 100vh; height: 100dvh; overflow-y: auto; padding: 22px 4px 28px 0; scrollbar-width: thin;
+  position: fixed; left: var(--dbm-panel-left, 48px); top: 0; z-index: 150; width: var(--dbm-panel-w, 580px);
+  height: 100vh; height: 100dvh; overflow-y: auto; overflow-x: hidden; padding: 22px 10px 28px 0; scrollbar-width: thin;
 }
 .dbm-panel:has(.dbm-big) { overflow: visible; z-index: 1000; }
 
@@ -154,7 +154,7 @@ body.dbm-locked { overflow: hidden; }
 .dbm .dbm-hint { margin: -0.25rem 0 0; font: italic 400 0.66rem/1.4 var(--serif); color: var(--muted); }
 .dbm-krow {
   display: grid; grid-template-columns: 3.1rem 1.3rem minmax(0, 1fr); align-items: center; gap: 0.45rem;
-  width: calc(100% + 0.6rem); text-align: left; background: none; border: 0; padding: 0.18rem 0.3rem; margin: -0.18rem -0.3rem;
+  width: 100%; text-align: left; background: none; border: 0; padding: 0.18rem 0.3rem; margin: -0.18rem 0;
   border-radius: 5px; cursor: pointer; font: 400 0.72rem/1.4 var(--sans); color: var(--ink-soft);
   transition: opacity 0.15s, background-color 0.15s;
 }

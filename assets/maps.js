@@ -186,7 +186,7 @@
   function sideWidth() {
     var r = readerEl();
     if (!r) return 0;
-    var w = Math.min(760, window.innerWidth - r.offsetWidth - 20 - 84 - 28);
+    var w = Math.min(600, window.innerWidth - r.offsetWidth - 48 - 84 - 48);
     return w >= 400 ? w : 0;
   }
   function updateMargin() {
@@ -208,7 +208,11 @@
     if (w) {
       var panel = document.querySelector('.dbm-panel') || document.body.appendChild(el('aside', 'dbm-panel'));
       panel.setAttribute('aria-label', 'Map');
+      // keep map and text together as one centred pair on very wide screens
+      var rw = readerEl().offsetWidth, gap = 84;
+      var left = Math.max(48, Math.round((window.innerWidth - (w + gap + rw)) / 2));
       document.body.style.setProperty('--dbm-panel-w', w + 'px');
+      document.body.style.setProperty('--dbm-panel-left', left + 'px');
       document.body.classList.add('dbm-side');
       if (ctx.root.parentNode !== panel) panel.appendChild(ctx.root);
       state.mode = 'side';
