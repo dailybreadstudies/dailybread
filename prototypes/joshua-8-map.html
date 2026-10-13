@@ -133,9 +133,10 @@ h1 { font: 700 1.75rem/1.25 var(--display); margin: 0 0 0.35rem; text-wrap: bala
 .lord { font-variant: small-caps; }
 .place {
   display: inline; font: inherit; background: none; border: 0; padding: 0; cursor: pointer; color: inherit;
-  text-decoration: underline dotted var(--accent-soft); text-decoration-thickness: 1.5px; text-underline-offset: 0.2em;
+  text-decoration: underline dotted transparent; text-decoration-thickness: 1.5px; text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.15s;
 }
-.place:hover { color: var(--accent); text-decoration-style: solid; }
+.place:hover, .place:focus-visible { text-decoration-color: var(--accent-soft); }
 .fn { font: 600 0.62em/0 var(--sans); vertical-align: super; color: var(--accent-soft); background: none; border: 0; padding: 0 0.1em; cursor: pointer; }
 .fn-pop {
   position: absolute; z-index: 50; max-width: 18rem; background: var(--pop); color: var(--pop-ink);
