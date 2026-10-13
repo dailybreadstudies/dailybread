@@ -51,6 +51,28 @@ git clone --depth 1 https://github.com/STEPBible/STEPBible-Data /tmp/step
 python3 tools/build_words.py /tmp/step
 ```
 
+## Bible maps (test stage)
+
+A map button appears beside the verse where a map begins. Tapping it opens the map, its key and notes:
+in a column to the left of the text on wide screens, or inside the text column below the verse on phones.
+
+- Maps are shown only on `maps-test.html` for now. To switch them on for everyone, add the two lines
+  `maps-test.html` has to `index.html` (`assets/maps.css` and `assets/maps.js`).
+- `assets/maps.js` + `assets/maps.css` — the map module. `reader.js` calls `DBMaps.decorate()` after each
+  render; without `maps.js` that call does nothing.
+- `assets/vendor/maplibre-gl/` — the map engine (MapLibre GL 4.7.1, BSD licence), loaded only when a map opens.
+- `data/maps/index.json` — which maps exist and at which verse. `data/maps/<id>.json` — one file per map
+  (format described at the top of `tools/check_maps.py`).
+- `data/maps/places/<BOOK>.json` — every located city and hill named in each book, from OpenBible.info (CC BY 4.0):
+
+```
+git clone --depth 1 https://github.com/openbibleinfo/Bible-Geocoding-Data /tmp/obgeo
+python3 tools/build_map_places.py /tmp/obgeo data/maps/places
+```
+
+- Check every map before publishing: `python3 tools/check_maps.py`
+- Background maps (terrain, street, satellite) are set in one place at the top of `assets/maps.js`.
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).

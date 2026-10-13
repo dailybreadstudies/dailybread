@@ -1,0 +1,409 @@
+{
+ "id": "josh-8-ai",
+ "title": "The Battle of Ai",
+ "ref": "Joshua 8:10–23",
+ "anchor": {
+  "book": "JOS",
+  "c": 8,
+  "v": 10
+ },
+ "chapter": {
+  "book": "JOS",
+  "c": 8
+ },
+ "bounds": [
+  [
+   35.233,
+   31.9
+  ],
+  [
+   35.322,
+   31.933
+  ]
+ ],
+ "places": "JOS",
+ "placesLabel": "Cities named in Joshua",
+ "named": [
+  {
+   "name": "Ai",
+   "ll": [
+    35.261111,
+    31.916944
+   ],
+   "label": "below",
+   "site": "et-Tell",
+   "ob": "a7e13e1/ai-1",
+   "note": "OpenBible.info rates et-Tell its most likely identification (about 55%). Other proposals include Khirbet el-Maqatir and Khirbet Nisieh."
+  },
+  {
+   "name": "Bethel",
+   "ll": [
+    35.241389,
+    31.922778
+   ],
+   "label": "left",
+   "site": "Beitin",
+   "ob": "a64f355/bethel-1",
+   "note": "About 2 km northwest of Ai. Its men joined the pursuit and left the city open (v. 17)."
+  }
+ ],
+ "links": [
+  "Ai",
+  "Bethel",
+  "Jericho",
+  "Mount Ebal",
+  "Mount Gerizim"
+ ],
+ "alternates": {
+  "for": "Ai",
+  "bounds": [
+   [
+    35.224,
+    31.893
+   ],
+   [
+    35.272,
+    31.93
+   ]
+  ],
+  "sites": [
+   {
+    "name": "Khirbet el-Maqatir",
+    "ll": [
+     35.2496,
+     31.91476
+    ]
+   },
+   {
+    "name": "Khirbet Nisieh",
+    "ll": [
+     35.228619,
+     31.897515
+    ]
+   }
+  ]
+ },
+ "moves": [
+  {
+   "n": 1,
+   "side": "israel",
+   "w": 3.4,
+   "vv": "vv. 10–11",
+   "at": 0.9,
+   "text": "Israel's main army marches up from Gilgal and camps north of Ai",
+   "coords": [
+    [
+     35.459969,
+     31.881883
+    ],
+    [
+     35.438,
+     31.89
+    ],
+    [
+     35.41,
+     31.898
+    ],
+    [
+     35.38,
+     31.905
+    ],
+    [
+     35.35,
+     31.913
+    ],
+    [
+     35.32,
+     31.923
+    ],
+    [
+     35.3,
+     31.929
+    ],
+    [
+     35.285,
+     31.931
+    ],
+    [
+     35.272,
+     31.931
+    ],
+    [
+     35.263,
+     31.9295
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "dash": [
+    0.1,
+    1.8
+   ],
+   "w": 3.6,
+   "vv": "v. 13",
+   "at": 0.85,
+   "text": "Joshua goes down into the valley at night",
+   "coords": [
+    [
+     35.263,
+     31.9295
+    ],
+    [
+     35.2638,
+     31.9265
+    ],
+    [
+     35.264,
+     31.9235
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "enemy",
+   "w": 3.4,
+   "vv": "v. 14",
+   "at": 0.62,
+   "text": "The king of Ai goes out toward the Arabah",
+   "coords": [
+    [
+     35.261111,
+     31.916944
+    ],
+    [
+     35.272,
+     31.9157
+    ],
+    [
+     35.283,
+     31.9138
+    ],
+    [
+     35.292,
+     31.9112
+    ]
+   ]
+  },
+  {
+   "n": 4,
+   "side": "israel",
+   "dash": [
+    2.6,
+    1.4
+   ],
+   "w": 3.1,
+   "vv": "v. 15",
+   "at": 0.55,
+   "text": "Israel feigns defeat and flees toward the wilderness",
+   "coords": [
+    [
+     35.264,
+     31.9235
+    ],
+    [
+     35.276,
+     31.9215
+    ],
+    [
+     35.293,
+     31.9162
+    ],
+    [
+     35.308,
+     31.9095
+    ],
+    [
+     35.318,
+     31.9045
+    ]
+   ]
+  },
+  {
+   "n": 5,
+   "side": "enemy",
+   "dash": [
+    2.6,
+    1.4
+   ],
+   "w": 3.1,
+   "vv": "v. 17",
+   "at": 0.22,
+   "text": "The men of Bethel join the pursuit",
+   "coords": [
+    [
+     35.241389,
+     31.922778
+    ],
+    [
+     35.249,
+     31.9205
+    ],
+    [
+     35.2575,
+     31.9196
+    ],
+    [
+     35.267,
+     31.9178
+    ],
+    [
+     35.276,
+     31.916
+    ]
+   ]
+  },
+  {
+   "n": 6,
+   "side": "ambush",
+   "w": 3.4,
+   "vv": "v. 19",
+   "at": 0.62,
+   "text": "The ambush rises, takes Ai and sets it on fire",
+   "coords": [
+    [
+     35.2525,
+     31.9177
+    ],
+    [
+     35.2563,
+     31.9175
+    ],
+    [
+     35.2593,
+     31.9171
+    ]
+   ]
+  },
+  {
+   "n": 7,
+   "side": "israel",
+   "dash": [
+    3.2,
+    1,
+    0.5,
+    1
+   ],
+   "w": 3.1,
+   "vv": "vv. 20–21",
+   "at": 0.5,
+   "text": "Israel turns back on its pursuers",
+   "coords": [
+    [
+     35.318,
+     31.9025
+    ],
+    [
+     35.307,
+     31.9035
+    ],
+    [
+     35.296,
+     31.907
+    ]
+   ]
+  },
+  {
+   "n": 8,
+   "side": "ambush",
+   "dash": [
+    2.6,
+    1.4
+   ],
+   "w": 3.1,
+   "vv": "v. 22",
+   "at": 0.45,
+   "text": "The ambush comes out of the city behind them",
+   "coords": [
+    [
+     35.2625,
+     31.916
+    ],
+    [
+     35.2715,
+     31.9118
+    ],
+    [
+     35.2825,
+     31.909
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "camp",
+   "at": [
+    35.263,
+    31.9295
+   ],
+   "label": "Camp",
+   "key": "Israel's camp",
+   "vv": "v. 11",
+   "moves": [
+    1
+   ]
+  },
+  {
+   "type": "ambush",
+   "at": [
+    35.2525,
+    31.9177
+   ],
+   "label": "Ambush",
+   "key": "Ambush position",
+   "vv": "vv. 9, 12",
+   "moves": [
+    6
+   ]
+  },
+  {
+   "type": "fire",
+   "at": [
+    35.261111,
+    31.916944
+   ],
+   "key": "City set on fire",
+   "vv": "vv. 19, 28",
+   "moves": [
+    6
+   ]
+  },
+  {
+   "type": "battle",
+   "at": [
+    35.289,
+    31.9082
+   ],
+   "key": "Men of Ai caught between",
+   "vv": "v. 22",
+   "moves": [
+    7,
+    8
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "Where was Ai?",
+   "p": [
+    "The map places Ai at et-Tell, the identification most scholars follow and OpenBible.info's top choice. Its Arabic name means \"the mound\", which echoes Joshua 8:28: Joshua made Ai a <i>tel olam</i>, a heap forever. The excavations at et-Tell found no city there in the period most often given for Joshua, so some scholars, notably Bryant Wood, argue for Khirbet el-Maqatir, about one kilometre to the west."
+   ],
+   "alternates": true
+  },
+  {
+   "h": "About the routes",
+   "p": [
+    "The text gives the positions: the ambush between Bethel and Ai, west of the city (vv. 9, 12); the main camp north of Ai with a valley between (v. 11); the retreat toward the wilderness (v. 15). The lines that connect them are reconstructions drawn for teaching, not paths the text describes.",
+    "Verse 3 sends out 30,000 men and verse 12 speaks of about 5,000 in ambush. Commentators explain the difference in several ways."
+   ]
+  },
+  {
+   "h": "Cities of Joshua",
+   "p": [
+    "Every city named in the book of Joshua that OpenBible.info can locate is on the map. Zoom out to see them, and tap one for its modern site and first mention. A hollow circle means the location is uncertain. You can hide them from the key."
+   ]
+  }
+ ]
+}

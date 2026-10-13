@@ -1,0 +1,19 @@
+{
+ "maps": [
+  {
+   "id": "josh-8-ai",
+   "title": "The Battle of Ai",
+   "ref": "Joshua 8:10–23",
+   "book": "JOS",
+   "c": 8,
+   "v": 10,
+   "links": [
+    "Ai",
+    "Bethel",
+    "Jericho",
+    "Mount Ebal",
+    "Mount Gerizim"
+   ]
+  }
+ ]
+}

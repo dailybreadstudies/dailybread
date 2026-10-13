@@ -572,7 +572,7 @@
       var r = refs[i];
       var passage = renderPassage(books[r.book], r, i + 1);
       var n = i + 1;
-      html += '<section class="portion" id="portion-' + n + '" aria-label="' + escapeAttr(p.label) + '">';
+      html += '<section class="portion" id="portion-' + n + '" data-book="' + r.book + '" data-c="' + r.c1 + '" aria-label="' + escapeAttr(p.label) + '">';
       if (i === 0) {
         html += '<div class="today-box" id="today-box" aria-live="polite"></div>';
         if (day.intro && day.intro.length) {
@@ -603,7 +603,14 @@
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
     goTo(portionFromHash(), false);
+    decorateMaps();
     fillToday(day);
+  }
+
+  // Map buttons beside verses (assets/maps.js). Optional: without that file nothing happens.
+  function decorateMaps() {
+    if (!window.DBMaps) return;
+    try { window.DBMaps.decorate(document.getElementById('portions')); } catch (e) { /* maps are optional */ }
   }
 
   // ── Navigation ───────────────────────────────────────────────
@@ -1285,7 +1292,7 @@
     document.getElementById('day-header').innerHTML =
       '<p class="bible-back"><button type="button" class="back-today">&larr; Back to today’s Daily Bread</button></p>';
     document.title = ref + ' · Daily Bread Online';
-    var html = '<section class="portion active bible-view" aria-label="' + escapeAttr(ref) + '">' +
+    var html = '<section class="portion active bible-view" data-book="' + data.id + '" data-c="' + c + '" aria-label="' + escapeAttr(ref) + '">' +
       '<p class="division-label">' + g[0] + ' <span class="he">' + noNikud(g[1]) + '</span></p>' +
       '<h2 class="chapter-head chapter-nav">' +
         '<button type="button" class="day-step" data-chapter="-1"' + (prev ? '' : ' disabled') + ' aria-label="Previous chapter">&lsaquo;</button>' +
@@ -1303,6 +1310,7 @@
     document.getElementById('portions').innerHTML = html;
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
+    decorateMaps();
     if (v) {
       var mark = document.querySelector('.bible-view .verse-num[data-v="' + v + '"]');
       if (mark) {

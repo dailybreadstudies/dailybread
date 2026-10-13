@@ -1,0 +1,230 @@
+/* Daily Bread Online — Bible maps (loaded with assets/maps.js)
+   Everything here is prefixed dbm- so it cannot collide with the reader's styles.
+   Colours come from the reader's own tokens (--paper, --ink, --accent …) plus the
+   map tokens below. The map engine's own stylesheet is loaded only when a map opens. */
+
+:root {
+  --dbm-paper: #efe6d6;
+  --dbm-shade: #6b5640;
+  --dbm-highlight: #fbf6ec;
+  --dbm-water: #a9c3c9;
+  --dbm-water-line: #6f949c;
+  --dbm-label: #3b3027;
+  --dbm-israel: #24577a;
+  --dbm-ambush: #3f7a2c;
+  --dbm-enemy: #a23a2b;
+  --dbm-other: #6d5a8c;
+  --dbm-fire: #d9741c;
+  --dbm-badge-ink: #ffffff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --dbm-paper: #2a231c; --dbm-shade: #0c0907; --dbm-highlight: #5b4c3d;
+    --dbm-water: #2c4248; --dbm-water-line: #4f7078; --dbm-label: #e3d8ca;
+    --dbm-israel: #7fb3d4; --dbm-ambush: #9cc77c; --dbm-enemy: #e8907c; --dbm-other: #b9a6dc;
+    --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e;
+  }
+}
+:root[data-theme="dark"] {
+  --dbm-paper: #2a231c; --dbm-shade: #0c0907; --dbm-highlight: #5b4c3d;
+  --dbm-water: #2c4248; --dbm-water-line: #4f7078; --dbm-label: #e3d8ca;
+  --dbm-israel: #7fb3d4; --dbm-ambush: #9cc77c; --dbm-enemy: #e8907c; --dbm-other: #b9a6dc;
+  --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e;
+}
+
+/* ── Map button beside the verse ── */
+.dbm-anchor { position: relative; }
+.dbm-pin {
+  display: inline-grid; place-items: center; align-content: center; gap: 1px;
+  width: 2.3rem; height: 2.3rem; margin: 0 0.35rem 0 0; padding: 0; vertical-align: -0.55rem;
+  border: 1px solid var(--accent-line); border-radius: 50%; background: var(--surface); color: var(--accent);
+  box-shadow: 0 2px 8px var(--shadow); cursor: pointer; text-indent: 0; line-height: 1;
+  transition: background-color 0.15s, color 0.15s, transform 0.15s;
+}
+.dbm-pin svg { width: 0.95rem; height: 0.95rem; }
+.dbm-pin span { font: 600 0.4rem/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
+.dbm-pin:hover { transform: scale(1.06); border-color: var(--accent); }
+.dbm-pin[aria-pressed="true"] { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+.dbm-pin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* With room beside the column, the button hangs in the left margin at the verse's line */
+body:not(.dbm-margin) .dbm-pin { width: 1.95rem; height: 1.95rem; vertical-align: -0.4rem; }
+body:not(.dbm-margin) .dbm-pin span { display: none; }
+body.dbm-margin .dbm-pin { position: absolute; left: -3.3rem; margin: -0.55rem 0 0; }
+
+/* Place names in the text: no mark until hovered */
+.dbm-place { cursor: pointer; text-decoration: underline dotted transparent; text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.2em; transition: text-decoration-color 0.15s; }
+.dbm-place:hover, .dbm-place:focus-visible { text-decoration-color: var(--accent-soft); outline: none; }
+
+/* ── Side column (wide screens) ── */
+body.dbm-side { padding-left: calc(var(--dbm-panel-w, 640px) + 84px); }
+.dbm-panel {
+  position: fixed; left: 20px; top: 0; z-index: 150; width: var(--dbm-panel-w, 640px);
+  height: 100vh; height: 100dvh; overflow-y: auto; padding: 22px 4px 28px 0; scrollbar-width: thin;
+}
+.dbm-panel:has(.dbm-big) { overflow: visible; z-index: 1000; }
+
+/* ── The map plate ── */
+.dbm { font-family: var(--sans); color: var(--ink); line-height: 1.5; text-align: left; text-indent: 0; }
+.scripture .dbm { margin: 1.4rem 0 2rem; font-size: 1rem; }
+.dbm-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.5rem;
+  font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+}
+.dbm-head em { font-style: normal; color: var(--muted); letter-spacing: 0.04em; text-transform: none; font-weight: 500; margin-left: 0.4rem; }
+.dbm-close {
+  display: inline-flex; align-items: center; gap: 0.35rem; flex: none; white-space: nowrap;
+  border: 1px solid var(--accent-line); background: var(--surface); border-radius: 999px; padding: 0.35rem 0.7rem;
+  cursor: pointer; color: var(--ink-soft); font: 500 0.6rem/1 var(--sans); letter-spacing: 0; text-transform: none;
+}
+.dbm-close svg { width: 0.6rem; height: 0.6rem; }
+.dbm-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.dbm-frame {
+  position: relative; width: 100%; aspect-ratio: 1 / 1; max-width: 100%;
+  border: 1px solid var(--accent-line); border-radius: 4px; overflow: hidden;
+  background: var(--dbm-paper); box-shadow: 0 1px 0 var(--rule), 0 8px 26px var(--shadow);
+}
+.dbm-panel .dbm-frame { width: min(100%, calc(100dvh - 12rem)); }
+.dbm-frame .dbm-map { position: absolute; inset: 0; background: var(--dbm-paper); }   /* beats the engine's own .maplibregl-map rule */
+.dbm-msg { position: absolute; inset: 0; display: grid; place-items: center; padding: 2rem; text-align: center;
+  font: 400 0.75rem/1.5 var(--sans); color: var(--muted); }
+
+.dbm-cartouche {
+  position: absolute; left: 0.6rem; top: 0.6rem; z-index: 4; pointer-events: none;
+  background: var(--surface-glass); border: 1px solid var(--accent-line); border-radius: 3px;
+  padding: 0.45rem 0.7rem 0.5rem; box-shadow: 0 2px 10px var(--shadow);
+}
+.dbm-cartouche b { display: block; font: 700 0.86rem/1.2 var(--display); color: var(--ink); }
+.dbm-cartouche i { display: block; font: italic 400 0.68rem/1.3 var(--serif); color: var(--muted); margin-top: 0.1rem; }
+
+.dbm-tools { position: absolute; right: 0.6rem; top: 0.6rem; z-index: 5; display: flex; flex-direction: column; align-items: flex-end; gap: 0.4rem; }
+.dbm-seg { display: inline-flex; background: var(--surface-glass); border: 1px solid var(--accent-line); border-radius: 999px; padding: 3px; box-shadow: 0 2px 10px var(--shadow); }
+.dbm-seg button {
+  display: inline-flex; align-items: center; gap: 0.3rem; border: 0; background: none; cursor: pointer; border-radius: 999px;
+  font: 500 0.62rem/1 var(--sans); padding: 0.42rem 0.62rem; color: var(--ink-soft);
+}
+.dbm-seg button[aria-pressed="true"] { background: var(--accent); color: var(--paper); }
+.dbm-seg svg { width: 0.75rem; height: 0.75rem; }
+
+.dbm-offline {
+  position: absolute; right: 0.6rem; top: 5.6rem; width: min(15rem, calc(100% - 1.2rem)); z-index: 5;
+  background: var(--surface-glass); border: 1px solid var(--accent-line); border-radius: 6px;
+  padding: 0.45rem 0.65rem; font: 400 0.6rem/1.45 var(--sans); color: var(--muted);
+}
+
+.dbm-keyfloat {
+  display: none; position: absolute; left: 0.75rem; bottom: 2.4rem; z-index: 6;
+  width: min(23rem, calc(100% - 1.5rem)); max-height: calc(100% - 7rem); overflow: auto;
+  background: var(--surface-glass); border: 1px solid var(--accent-line); border-radius: 6px;
+  padding: 0.7rem 0.85rem; box-shadow: 0 6px 24px var(--shadow);
+}
+.dbm-keyfloat.closed .dbm-key { display: none; }
+.dbm-keyhead { display: flex; justify-content: space-between; align-items: center;
+  font: 600 0.6rem/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.dbm-keyhead button { border: 0; background: none; color: var(--accent); cursor: pointer; font: 600 0.62rem/1 var(--sans); padding: 0.2rem; }
+.dbm-keyfloat .dbm-key { margin-top: 0.5rem; }
+
+/* Enlarged */
+.dbm-big .dbm-frame {
+  position: fixed; inset: 0; z-index: 1000; width: auto; max-width: none; height: auto; aspect-ratio: auto;
+  border: 0; border-radius: 0;
+}
+.dbm-big .dbm-keyfloat { display: block; }
+.dbm-big .dbm-cartouche, .dbm-big .dbm-tools { top: calc(0.6rem + env(safe-area-inset-top, 0px)); }
+body.dbm-locked { overflow: hidden; }
+
+/* ── Key ── */
+.dbm-key { display: grid; gap: 0.55rem; }
+.dbm-key h4 { margin: 0.3rem 0 0; font: 600 0.58rem/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-faint); }
+.dbm-key ol, .dbm-key ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.32rem; }
+.dbm-key li { margin: 0; }
+.dbm-key .dbm-srow { display: grid; grid-template-columns: 3.1rem minmax(0, 1fr); align-items: center; gap: 0.45rem;
+  font: 400 0.72rem/1.4 var(--sans); color: var(--ink-soft); transition: opacity 0.15s; }
+.dbm-key svg { width: 3.1rem; height: 1.1rem; overflow: visible; }
+.dbm-vv { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.dbm-keytools { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
+.dbm-keytools span { display: flex; gap: 0.25rem; }
+.dbm-keytools button {
+  border: 1px solid var(--accent-line); background: var(--surface); border-radius: 999px; cursor: pointer;
+  font: 500 0.58rem/1 var(--sans); padding: 0.32rem 0.6rem; color: var(--ink-soft);
+}
+.dbm-keytools button:hover { border-color: var(--accent); color: var(--accent); }
+.dbm .dbm-hint { margin: -0.25rem 0 0; font: italic 400 0.66rem/1.4 var(--serif); color: var(--muted); }
+.dbm-krow {
+  display: grid; grid-template-columns: 3.1rem 1.3rem minmax(0, 1fr); align-items: center; gap: 0.45rem;
+  width: calc(100% + 0.6rem); text-align: left; background: none; border: 0; padding: 0.18rem 0.3rem; margin: -0.18rem -0.3rem;
+  border-radius: 5px; cursor: pointer; font: 400 0.72rem/1.4 var(--sans); color: var(--ink-soft);
+  transition: opacity 0.15s, background-color 0.15s;
+}
+.dbm-krow:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.dbm-krow.dbm-cities { grid-template-columns: 3.1rem minmax(0, 1fr); }
+.dbm-krow[aria-pressed="false"], .dbm-srow.off { opacity: 0.35; }
+.dbm-krow[aria-pressed="false"] > span:last-child { text-decoration: line-through; text-decoration-color: var(--muted); }
+.dbm-badge {
+  display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem; border-radius: 50%;
+  font: 700 0.62rem/1 var(--sans); color: var(--dbm-badge-ink); border: 1.5px solid var(--dbm-paper);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.dbm-keyunder { margin-top: 1rem; padding: 0.9rem 1rem 1rem; background: var(--tint); border-radius: 4px; }
+
+.dbm-notes { margin-top: 1rem; }
+.dbm-notes h3 { font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-faint); margin: 1.2rem 0 0.4rem; }
+.dbm .dbm-notes p { font: 400 0.78rem/1.65 var(--sans); color: var(--ink-soft); margin: 0 0 0.6rem; text-indent: 0; }
+.dbm .dbm-notes p.dbm-src { font-size: 0.68rem; line-height: 1.6; color: var(--muted); margin-top: 1.2rem; }
+.dbm-src b { font-weight: 600; color: var(--ink-soft); }
+.dbm-notes a { color: var(--accent); }
+.dbm-link { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer;
+  font: 600 0.78rem/1.65 var(--sans); text-decoration: underline; text-underline-offset: 0.18em; }
+
+/* ── Marks drawn on the map ── */
+.dbm-pl { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+.dbm-pl.left { flex-direction: row-reverse; gap: 5px; }
+.dbm-pl .dot { width: 12px; height: 12px; border-radius: 2px; transform: rotate(45deg); background: var(--paper); border: 2.5px solid var(--ink); box-shadow: 0 1px 4px var(--shadow); }
+.dbm-pl .lbl { margin-top: 3px; white-space: nowrap; font: 700 0.82rem/1.1 var(--display); color: var(--dbm-label); letter-spacing: 0.02em;
+  text-shadow: 0 0 3px var(--dbm-paper), 0 0 3px var(--dbm-paper), 0 0 6px var(--dbm-paper); }
+.dbm-pl.left .lbl { margin-top: 0; }
+.dbm-pl.alt { cursor: default; }
+.dbm-pl.alt .dot { border-style: dashed; border-color: var(--muted); background: transparent; transform: none; border-radius: 50%; }
+.dbm-pl.alt .lbl { font: italic 500 0.6rem/1.15 var(--sans); color: var(--ink-soft); text-align: center; }
+.dbm-sat .dbm-pl .lbl, .dbm-sat .dbm-sym span { color: #fff; text-shadow: 0 0 3px #000, 0 0 6px #000; }
+.dbm-num { pointer-events: none; }
+.dbm-arrow { width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-bottom: 13px solid; }
+.dbm-sym { pointer-events: none; display: flex; flex-direction: column; align-items: center; }
+.dbm-sym svg { display: block; overflow: visible; }
+.dbm-sym span { font: 600 0.56rem/1.2 var(--sans); color: var(--dbm-label); white-space: nowrap; margin-top: 2px;
+  text-shadow: 0 0 3px var(--dbm-paper), 0 0 3px var(--dbm-paper); }
+.dbm-glow { width: 34px; height: 34px; border-radius: 50%; position: relative; pointer-events: none; }
+.dbm-glow::before, .dbm-glow::after { content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle, var(--dbm-fire) 0 30%, transparent 70%); animation: dbm-smoke 2.6s ease-out infinite; }
+.dbm-glow::after { animation-delay: 1.3s; }
+@keyframes dbm-smoke { 0% { transform: scale(0.6); opacity: 0.9; } 100% { transform: scale(2.4); opacity: 0; } }
+.maplibregl-marker.dbm-off { display: none !important; }
+
+/* Map engine controls, popups and attribution in the reader's style */
+.dbm .maplibregl-popup-content { background: var(--surface); color: var(--ink); border-radius: 6px; padding: 0.7rem 0.85rem;
+  box-shadow: 0 6px 24px var(--shadow); font-family: var(--sans); max-width: 15rem; }
+.dbm .maplibregl-popup-anchor-bottom .maplibregl-popup-tip { border-top-color: var(--surface); }
+.dbm .maplibregl-popup-anchor-top .maplibregl-popup-tip { border-bottom-color: var(--surface); }
+.dbm .maplibregl-popup-anchor-left .maplibregl-popup-tip { border-right-color: var(--surface); }
+.dbm .maplibregl-popup-anchor-right .maplibregl-popup-tip { border-left-color: var(--surface); }
+.dbm .maplibregl-popup-close-button { color: var(--muted); font-size: 1rem; padding: 0 0.35rem; }
+.dbm-pp h4 { font: 700 0.84rem/1.3 var(--display); margin: 0 0 0.15rem; }
+.dbm-pp p { font: 400 0.66rem/1.5 var(--sans); margin: 0 0 0.4rem; color: var(--ink-soft); }
+.dbm-pp p.site { font-size: 0.64rem; font-weight: 500; color: var(--muted); }
+.dbm-pp a { font: 600 0.64rem/1.4 var(--sans); color: var(--accent); }
+.dbm .maplibregl-ctrl-attrib { font: 400 0.52rem/1.4 var(--sans); background: var(--surface-glass) !important; color: var(--muted); }
+.dbm .maplibregl-ctrl-attrib a { color: var(--muted); }
+.dbm .maplibregl-ctrl-group { background: var(--surface); }
+.dbm .maplibregl-ctrl-scale { background: var(--surface-glass); border-color: var(--ink-soft); color: var(--ink-soft); font: 500 0.55rem/1.4 var(--sans); }
+
+@media (max-width: 520px) {
+  .dbm:not(.dbm-big) .maplibregl-ctrl-group { display: none; }
+  .dbm-cartouche b { font-size: 0.76rem; }
+  .dbm-seg button { padding: 0.4rem 0.5rem; }
+  .dbm-head em { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dbm-glow::before, .dbm-glow::after { animation: none; transform: scale(1.6); opacity: 0.6; }
+}
+@media print { .dbm-pin, .dbm-panel, .scripture .dbm { display: none !important; } }
