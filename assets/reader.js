@@ -594,11 +594,11 @@
     header += '<ol class="day-plan" aria-label="Today’s readings">' +
       refs.map(function (r, i) {
         var p = day.portions[i];
-        return '<li><a class="dp-row" href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' +
-          '<span class="dp-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
-          '<span class="dp-label">' + p.label + '</span>' +
-          '<span class="dp-ref">' + displayRef(r) + '</span>' +
-          (p.he ? '<span class="dp-he he" lang="he">' + noNikud(p.he) + '</span>' : '<span></span>') + '</a></li>';
+        return '<li class="dp-item" data-n="' + (i + 1) + '">' +
+          '<button type="button" class="dp-check" data-read="' + (i + 1) + '" aria-pressed="false" aria-label="Mark ' + p.label + ' complete">' +
+          '<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>' +
+          '<a class="dp-row" href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' +
+          '<span class="dp-label">' + p.label + '</span><span class="dp-ref">' + displayRef(r) + '</span></a></li>';
       }).join('') + '</ol>';
     document.getElementById('day-header').innerHTML = header;
     document.title = 'Daily Bread Online · ' + dateText;
@@ -750,10 +750,13 @@
       line.innerHTML = bits.join(' &middot; ');
     }
     // Header: tick the readings already done
-    document.querySelectorAll('.day-plan a[data-n]').forEach(function (a) {
-      var done = isRead(date, +a.getAttribute('data-n'));
-      a.classList.toggle('is-read', done);
-      a.setAttribute('aria-label', a.querySelector('.dp-label').textContent + ' ' + a.querySelector('.dp-ref').textContent + (done ? ', complete' : ''));
+    document.querySelectorAll('.day-plan .dp-item').forEach(function (li) {
+      var n = +li.getAttribute('data-n'), done = isRead(date, n);
+      li.classList.toggle('is-read', done);
+      var btn = li.querySelector('.dp-check'), label = li.querySelector('.dp-label').textContent;
+      btn.setAttribute('aria-pressed', String(done));
+      btn.setAttribute('aria-label', (done ? 'Unmark ' : 'Mark ') + label + ' complete');
+      btn.title = done ? label + ' complete. Tap to undo.' : 'Mark ' + label + ' complete';
     });
     // Buttons under each reading
     document.querySelectorAll('.done-row').forEach(function (row) {
@@ -925,7 +928,7 @@
     closePop();
     document.querySelectorAll('.portion').forEach(function (p) { p.classList.remove('active'); });
     target.classList.add('active');
-    document.querySelectorAll('.day-plan a[data-n]').forEach(function (a) { a.classList.toggle('is-current', +a.getAttribute('data-n') === n); });
+    document.querySelectorAll('.day-plan .dp-item').forEach(function (li) { li.classList.toggle('is-current', +li.getAttribute('data-n') === n); });
     if (location.hash !== '#' + n) history.replaceState(null, '', location.pathname + location.search + '#' + n);
     if (scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
   }
