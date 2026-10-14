@@ -89,6 +89,8 @@ body.dbm-side { padding-left: calc(var(--dbm-panel-left, 32px) + var(--dbm-panel
 .dbm-msg { position: absolute; inset: 0; display: grid; place-items: center; padding: 2rem; text-align: center;
   font: 400 0.75rem/1.5 var(--sans); color: var(--muted); }
 
+/* The title shows above the map; on the map itself only when enlarged, where that heading is hidden */
+.dbm:not(.dbm-big) .dbm-cartouche { display: none; }
 .dbm-cartouche {
   position: absolute; left: 0.6rem; top: 0.6rem; z-index: 4; pointer-events: none;
   background: var(--surface-glass); border: 1px solid var(--accent-line); border-radius: 3px;

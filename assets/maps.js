@@ -280,7 +280,8 @@
       '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2 2 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Close map</button></div>' +
       '<div class="dbm-frame"><div class="dbm-map"></div><div class="dbm-msg">Loading the map…</div></div>' +
       '<div class="dbm-keyunder"><div class="dbm-key" data-dbm-key></div></div><div class="dbm-notes"></div>';
-    var ctx = { id: id, root: root, frame: root.querySelector('.dbm-frame'), map: null, ready: false, queue: [], shown: null, citiesOn: true, marks: {}, big: false };
+    var ctx = { id: id, root: root, frame: root.querySelector('.dbm-frame'), map: null, ready: false, queue: [], shown: null, marks: {}, big: false,
+      citiesOn: !(window.matchMedia && matchMedia('(max-width: 760px)').matches) };   // phones start without the cities layer
     wireAtlas(ctx);
     return ctx;
   }
