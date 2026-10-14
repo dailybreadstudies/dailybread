@@ -102,7 +102,7 @@ console.log('\n(· = that day is not in the reading plan files yet, so the site 
 const shirah = entries.filter(e => e.anchor.type === 'event' && /shirah/i.test(e.anchor.event));
 if (shirah.length) console.log('Shabbat Shirah is found from the plan’s Torah portion, so it appears once that week of the plan is loaded.');
 const none = entries.filter(e => !count.get(e.id) && !shirah.includes(e));
-if (none.length) console.log('Not in this range: ' + none.map(e => e.id).join(', '));
+if (none.length && !dates.length) console.log('Not in this range: ' + none.map(e => e.id).join(', '));
 
 if (csvOut) {
   const esc = s => /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;

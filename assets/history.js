@@ -76,9 +76,14 @@
     { name: 'Second day of Yom Tov', aliases: ['Yom Tov Sheni'], diasporaOnly: true, test: function (i, o) {
       if (o.israel) return false;
       return isDate(i, 16, 'Tishri') || isDate(i, 23, 'Tishri') || isDate(i, 16, 'Nisan') || isDate(i, 22, 'Nisan') || isDate(i, 7, 'Sivan'); } },
+    { name: 'Chanukah', aliases: ['Hanukkah', 'First day of Chanukah'], hebcal: 'Chanukah', test: function (i) { return isDate(i, 25, 'Kislev'); } },
     { name: 'Fast of Tevet', aliases: ['Asara BTevet', "Asara B'Tevet", 'Tenth of Tevet'], hebcal: 'Asara B', test: function (i) { return isDate(i, 10, 'Tevet'); } },
+    { name: 'Tu BiShvat', aliases: ['Tu Bishvat', "Tu B'Shvat"], hebcal: 'Tu BiShvat', test: function (i) { return isDate(i, 15, 'Shevat'); } },
     { name: 'Shabbat Shirah', hebcal: 'Shabbat Shirah', needsParsha: true, test: function (i, o) {
       return weekday(i) === 6 && !!o.parsha && /^Beshalach/i.test(o.parsha); } },
+    // Only in a leap year (14 Adar I)
+    { name: 'Purim Katan', hebcal: 'Purim Katan', test: function (i) { var h = heb(i); return h.leap && h.m === 'Adar I' && h.d === 14; } },
+    { name: 'Shabbat Shekalim', aliases: ['Shabbat Shkalim'], hebcal: 'Shabbat Shekalim', test: function (i) { return shabbatWithin(i, 1, 'Adar', 0, 6); } },
     { name: 'Shabbat Zachor', hebcal: 'Shabbat Zachor', test: function (i) { return shabbatWithin(i, 14, 'Adar', 1, 7); } },
     { name: 'Fast of Esther', aliases: ['Taanit Esther', "Ta'anit Esther", 'Ta’anit Ester', "Ta'anit Ester"], hebcal: "Ta'anit Esther", test: function (i) { return observed(i, 13, 'Adar', { 6: -2 }); } },
     { name: 'Purim', hebcal: 'Purim', test: function (i) { return isDate(i, 14, 'Adar'); } },
@@ -86,10 +91,14 @@
     { name: 'Shabbat Parah', hebcal: 'Shabbat Parah', test: function (i) { return weekday(i) === 6 && shabbatWithin(addDays(i, 7), 1, 'Nisan', 0, 6); } },
     { name: 'Shabbat HaChodesh', hebcal: 'Shabbat HaChodesh', test: function (i) { return shabbatWithin(i, 1, 'Nisan', 0, 6); } },
     { name: 'Shabbat HaGadol', hebcal: 'Shabbat HaGadol', test: function (i) { return shabbatWithin(i, 15, 'Nisan', 1, 7); } },
+    { name: 'Yom HaAliyah', aliases: ["Yom Ha'Aliyah", 'Aliyah Day'], hebcal: 'Yom HaAliyah', test: function (i) { return isDate(i, 10, 'Nisan'); } },
     { name: 'Fast of the Firstborn', aliases: ['Taanit Bechorot', "Ta'anit Bechorot", 'Ta’anit Bechorot'], hebcal: "Ta'anit Bechorot", test: function (i) { return observed(i, 14, 'Nisan', { 6: -2 }); } },
     { name: 'Yom HaShoah', hebcal: 'Yom HaShoah', test: function (i) { return observed(i, 27, 'Nisan', { 5: -1, 0: 1 }); } },
     { name: 'Yom HaZikaron', hebcal: 'Yom HaZikaron', test: function (i) { return observed(addDays(i, 1), 5, 'Iyar', { 5: -1, 6: -2, 1: 1 }); } },
     { name: 'Yom HaAtzmaut', hebcal: 'Yom HaAtzma', test: function (i) { return observed(i, 5, 'Iyar', { 5: -1, 6: -2, 1: 1 }); } },
+    { name: 'Pesach Sheni', hebcal: 'Pesach Sheni', test: function (i) { return isDate(i, 14, 'Iyar'); } },
+    // Day 17 of the Omer (2 Iyar): 153 fish, John 21 (17 + 16 + … + 1 = 153)
+    { name: 'Dag BaOmer', aliases: ["Dag Ba'Omer"], test: function (i) { return isDate(i, 2, 'Iyar'); } },
     { name: 'Lag BaOmer', aliases: ["Lag Ba'Omer"], hebcal: 'Lag BaOmer', test: function (i) { return isDate(i, 18, 'Iyar'); } },
     { name: 'Yom Yerushalayim', hebcal: 'Yom Yerushalayim', test: function (i) { return isDate(i, 28, 'Iyar'); } },
     { name: 'Fast of Tamuz', aliases: ['Tzom Tammuz', 'Tzom Tamuz', 'Fast of Tammuz'], hebcal: 'Tzom Tammuz', test: function (i) { return observed(i, 17, 'Tamuz', { 6: 1 }); } },
@@ -97,6 +106,7 @@
     { name: 'First Shabbat of the Three Weeks', test: function (i) { return shabbatWithin(addDays(i, 14), 9, 'Av', 0, 6); } },
     { name: 'Shabbat Chazon', hebcal: 'Shabbat Chazon', test: function (i) { return shabbatWithin(i, 9, 'Av', 0, 6); } },
     { name: 'Fast of Av', aliases: ["Tish'a B'Av", 'Tisha BAv', 'Ninth of Av'], hebcal: "Tish'a B'Av", test: function (i) { return observed(i, 9, 'Av', { 6: 1 }); } },
+    { name: "Tu B'Av", aliases: ['Tu BAv', 'Tu Bav'], hebcal: "Tu B'Av", test: function (i) { return isDate(i, 15, 'Av'); } },
     { name: 'Shabbat Nachamu', hebcal: 'Shabbat Nachamu', test: function (i) {
       if (weekday(i) !== 6) return false;
       for (var k = 1; k <= 7; k++) if (isDate(addDays(i, -k), 9, 'Av')) return true;
@@ -104,6 +114,7 @@
     // The Shabbat on the 29th, with Rosh Chodesh next day; in Tamuz, Av and Elul the season's Haftarah is read instead
     { name: 'Shabbat Machar Chodesh', hebcal: 'Shabbat Machar Chodesh', test: function (i) {
       var h = heb(i); return weekday(i) === 6 && h.d === 29 && ['Tamuz', 'Av', 'Elul'].indexOf(h.m) < 0; } },
+    { name: 'Rosh Hashana LaBehemot', aliases: ['Rosh HaShanah LaBehemot', 'New Year for Animals'], hebcal: 'Rosh Hashana LaBehemot', test: function (i) { return isDate(i, 1, 'Elul'); } },
     // Ashkenazi custom: the Saturday night at least four days before Rosh HaShanah (shown on that Shabbat)
     { name: 'Leil Slichot', aliases: ['Leil Selichot', 'Slichot', 'Selichot'], hebcal: 'Leil Selichot', test: function (i) { return shabbatWithin(i, 1, 'Tishri', 4, 10); } }
   ];

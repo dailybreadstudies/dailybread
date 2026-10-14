@@ -63,6 +63,6 @@ in the day's order). Progress page: year bar, totals, by-section bars, catch-up 
 - Sign-in with email link (e.g. Supabase) to sync progress across devices; separate unticked marketing-consent box,
   double opt-in, privacy page; possibly feed consenting emails into Shopify. Optional daily reading email.
 - Four section progress bars across the whole year (needs the full plan loaded).
-- More history entries: John's v1 (Word file) covered 12 Sivan to 23 Tishrei + 15 occasion notes (78 rows); he will add more.
+- History file: 222 rows = John's Word v1 (Sivan–Tishrei) + every Today in History / Calendar Note from the 5787 journal PDF (DB-5787-inside-v6), split into single events. Journal is the reference.
 - Connect dailybread.online (DNS at John's registrar).
 - Highlights/notes may come later.
