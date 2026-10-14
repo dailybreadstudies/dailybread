@@ -131,13 +131,6 @@
     </div>
   </div>
 
-  <div class="sp-row">
-    <span class="sp-label">Justified Text</span>
-    <div class="sp-seg" role="group" aria-label="Justified Bible text">
-      <button type="button" data-justify="off" aria-pressed="true">Off</button>
-      <button type="button" data-justify="on" aria-pressed="false">On</button>
-    </div>
-  </div>
 
   <div class="sp-row">
     <span class="sp-label">Divine Name</span>
@@ -167,6 +160,22 @@
   </div>
 
   <div class="sp-divider"></div>
+
+  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="justify">
+    <span class="sp-switch-text">
+      <span class="sp-switch-title">Justified Text</span>
+      <span class="sp-switch-sub">Bible prose aligned to both margins</span>
+    </span>
+    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+  </button>
+
+  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="verseNumbers">
+    <span class="sp-switch-text">
+      <span class="sp-switch-title">Show Verse Numbers</span>
+      <span class="sp-switch-sub">Chapter numbers always show</span>
+    </span>
+    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+  </button>
 
   <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="messianic">
     <span class="sp-switch-text">

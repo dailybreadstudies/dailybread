@@ -807,3 +807,6 @@ html.justify .scripture .vp-en, html.justify .scripture .vo-para {
   text-align: justify; -webkit-hyphens: auto; hyphens: auto;
 }
 html.justify .scripture .vo-para[lang="he"], html.justify .scripture .vo-para[lang="grc"] { -webkit-hyphens: manual; hyphens: manual; }
+
+/* Show Verse Numbers: off hides the numbers but keeps them in the text, so maps, notes and links still find their verses */
+html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }

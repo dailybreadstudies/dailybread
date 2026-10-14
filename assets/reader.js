@@ -32,7 +32,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -44,6 +44,7 @@
     document.documentElement.style.fontSize = SIZES[settings.size] + '%';
     document.documentElement.classList.toggle('font-sans', settings.font === 'sans');
     document.documentElement.classList.toggle('justify', !!settings.justify);
+    document.documentElement.classList.toggle('no-verses', settings.verseNumbers === false);
     document.documentElement.classList.toggle('orig-off', settings.original === 'off');   // Hebrew blessings only with Original Text on
     if (settings.theme === 'light' || settings.theme === 'dark' || settings.theme === 'sepia') document.documentElement.setAttribute('data-theme', settings.theme);
     else document.documentElement.removeAttribute('data-theme');
@@ -1055,9 +1056,7 @@
     panel.querySelectorAll('[data-font]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-font') === settings.font));
     });
-    panel.querySelectorAll('[data-justify]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String((b.getAttribute('data-justify') === 'on') === !!settings.justify));
-    });
+
     panel.querySelectorAll('[role="switch"]').forEach(function (b) {
       b.setAttribute('aria-checked', String(!!settings[b.getAttribute('data-setting')]));
     });
@@ -1097,13 +1096,12 @@
     } else if (t.hasAttribute('data-font')) {
       settings.font = t.getAttribute('data-font');
       applyLook();
-    } else if (t.hasAttribute('data-justify')) {
-      settings.justify = t.getAttribute('data-justify') === 'on';
-      applyLook();
+
     } else if (t.getAttribute('role') === 'switch') {
       var key = t.getAttribute('data-setting');
       settings[key] = !settings[key];
-      rerender();   // re-render with the new wording
+      if (key === 'justify' || key === 'verseNumbers') applyLook();   // display only
+      else rerender();   // re-render with the new wording
     }
     saveSettings();
     refreshPanel();
