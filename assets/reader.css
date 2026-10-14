@@ -263,7 +263,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .blessing .lead-he { font-size: 1.7rem; color: var(--accent); margin-left: 0.15em; }
 .blessing .scripture-quote { font-style: italic; color: var(--ink-soft); }
 .pray-intro { margin: 0 0 0.5rem; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); text-align: left; }
-.bless-apparatus { margin-top: 1.4rem; padding-bottom: 1.15rem; border-bottom: 1px solid var(--rule); margin-bottom: 2.6rem; }
+.bless-apparatus { border-top: none; padding-top: 0; margin-top: 1.4rem; padding-bottom: 1.15rem; border-bottom: 1px solid var(--rule); margin-bottom: 2.6rem; }
 .bless-apparatus > summary.apparatus-title { margin-bottom: 0; }
 .bless-apparatus[open] > summary.apparatus-title { margin-bottom: 1.3rem; }
 .bless-apparatus .blessings-title, .bless-apparatus .blessings-divider { display: none; }
