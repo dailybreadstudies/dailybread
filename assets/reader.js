@@ -606,11 +606,10 @@
         if (day.intro && day.intro.length) {
           html += '<div class="calendar-intro">' + day.intro.map(function (para) { return '<p>' + linkRefs(para) + '</p>'; }).join('') + '</div>';
         }
-        html += '<div class="pray-intro"><p>Take a moment to pray before reading the Scriptures.</p>' +
-          '<p>(<button type="button" class="link-btn pray-toggle" aria-expanded="' + (settings.blessingsOpen ? 'true' : 'false') +
-          '" aria-controls="blessings-box">Traditional Blessings</button>)</p></div>' +
-          '<div class="blessings-box" id="blessings-box"' + (settings.blessingsOpen ? '' : ' hidden') + '>' +
-          document.getElementById('blessings-template').innerHTML + '</div><hr class="blessings-divider">';
+        html += '<p class="pray-intro">Take a moment to pray before reading the Scriptures.</p>' +
+          '<details class="apparatus tc-apparatus bless-apparatus" id="blessings-box"' + (settings.blessingsOpen ? ' open' : '') + '>' +
+          '<summary class="apparatus-title">Traditional Blessings</summary>' +
+          document.getElementById('blessings-template').innerHTML + '</details>';
       }
       html += '<p class="division-label">' + p.label + (p.he ? ' <span class="he">' + noNikud(p.he) + '</span>' : '') + '</p>';
       html += '<h2 class="chapter-head">' + displayRef(r) + '</h2>';
@@ -868,16 +867,11 @@
   });
 
   // "Traditional Blessings" opens and closes the blessings; the choice is remembered
-  document.addEventListener('click', function (e) {
-    var t = e.target.closest('.pray-toggle');
-    if (!t) return;
-    var box = document.getElementById('blessings-box');
-    if (!box) return;
-    box.hidden = !box.hidden;
-    t.setAttribute('aria-expanded', String(!box.hidden));
-    settings.blessingsOpen = !box.hidden;
+  document.addEventListener('toggle', function (e) {
+    if (e.target.id !== 'blessings-box') return;
+    settings.blessingsOpen = e.target.open;
     saveSettings();
-  });
+  }, true);
 
   // Map buttons beside verses (assets/maps.js). Optional: without that file nothing happens.
   function decorateMaps() {

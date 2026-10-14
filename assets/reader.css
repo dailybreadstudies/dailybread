@@ -108,7 +108,7 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --track: #d9d2ca;         /* switch (off) */
   --shadow: rgba(55, 44, 35, 0.14);
   color-scheme: light;
-  --topbar-h: 66px;
+  --topbar-h: 72px;
   --serif: 'Source Serif 4', 'Merriweather', Georgia, serif;
   --display: 'Merriweather', Georgia, serif;
   --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
@@ -262,13 +262,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 }
 .blessing .lead-he { font-size: 1.7rem; color: var(--accent); margin-left: 0.15em; }
 .blessing .scripture-quote { font-style: italic; color: var(--ink-soft); }
-.pray-intro { text-align: center; font-family: var(--display); font-size: 1.02rem; font-style: italic; color: var(--muted);
-  letter-spacing: 0.01em; line-height: 1.7; }
-.pray-intro p { margin: 0; }
-.pray-intro .link-btn { font-style: italic; }
-.blessings-box { margin-top: 2rem; }
-.blessings-box .blessings-title, .blessings-box .blessings-divider { display: none; }
-.blessings-box .blessings-section { margin-bottom: 0; }
+.pray-intro { margin: 0 0 0.5rem; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); text-align: left; }
+.bless-apparatus { margin-top: 1.4rem; padding-bottom: 1.15rem; border-bottom: 1px solid var(--rule); margin-bottom: 2.6rem; }
+.bless-apparatus > summary.apparatus-title { margin-bottom: 0; }
+.bless-apparatus[open] > summary.apparatus-title { margin-bottom: 1.3rem; }
+.bless-apparatus .blessings-title, .bless-apparatus .blessings-divider { display: none; }
+.bless-apparatus .blessings-section { margin-bottom: 0; }
 .blessings-divider { border: none; border-top: 1px solid var(--rule); margin: 2.5rem auto; max-width: 180px; }
 
 /* ── Portion heading ── */
