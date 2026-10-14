@@ -192,14 +192,18 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   text-align: center; font-family: var(--display); font-size: 0.92rem;
   color: var(--muted); margin-bottom: 0.6rem;
 }
-.day-plan { list-style: none; margin: 1.4rem 0 2.3rem; padding: 0 0 1.4rem; border-bottom: 1px solid var(--rule); }
-.dp-item { display: flex; align-items: center; gap: 12px; padding: 0.22rem 0; }
-.dp-row { display: flex; align-items: baseline; gap: 1em; text-decoration: none; color: inherit; padding: 0.1rem 0; }
+.day-plan { list-style: none; margin: 1.4rem 0 2.3rem; padding: 0 0 1.4rem; border-bottom: 1px solid var(--rule);
+  display: grid; grid-template-columns: auto auto 1fr; align-items: baseline; row-gap: 0.32rem; }
+/* rows share one grid, so every reference starts at the same place (one em after the longest section name) */
+.dp-item, .dp-row { display: contents; }
+.dp-row { text-decoration: none; color: inherit; }
 .dp-row:hover .dp-ref { color: var(--accent-deep); text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
-.dp-row:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; border-radius: 3px; }
+.dp-row:focus-visible .dp-ref { outline: 2px solid var(--accent-soft); outline-offset: 2px; border-radius: 3px; }
+.dp-label { margin-left: 12px; margin-right: 1em; cursor: pointer; }
+.dp-ref { cursor: pointer; }
 .dp-label { font: 600 0.72rem/1.2 var(--sans); letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
 .dp-ref { font-family: var(--serif); font-size: 1.1rem; line-height: 1.35; color: var(--ink); }
-.dp-check { flex: none; width: 20px; height: 20px; padding: 0; border-radius: 50%; border: 1.5px solid var(--line-strong); background: none;
+.dp-check { flex: none; align-self: center; width: 20px; height: 20px; padding: 0; border-radius: 50%; border: 1.5px solid var(--line-strong); background: none;
   display: inline-flex; align-items: center; justify-content: center; color: transparent; cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s; }
 .dp-check:hover { border-color: var(--done); color: var(--done-line); }
