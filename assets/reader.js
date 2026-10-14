@@ -647,8 +647,8 @@
       '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' +
       '<span class="done-label">Mark as read</span></button>' +
       '<p class="done-next" id="done-next"></p>' +
-      '<p class="journal-line">Writing as you read? The <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread journal</a> ' +
-      'follows this plan day by day, with a page for each day.</p></div>';
+      '<p class="journal-line">Studies find we understand more when we read on paper, and remember more when we write by hand. ' +
+      'The printed <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread journal</a> follows this plan day by day.</p></div>';
   }
   function drawProgress() {
     if (!current || !current.day) return;
