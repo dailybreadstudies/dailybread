@@ -593,13 +593,6 @@
       }
       html += renderTextNotes(passage.textNotes);
       html += readRow(n, total, p.label);
-      html += '<nav class="nav-bar">' +
-        '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
-        '<span class="nav-indicator">' + n + ' of ' + total + '<span class="division-name">' + p.label + '</span></span>' +
-        (n < total
-          ? '<button class="nav-btn primary" data-go="' + (n + 1) + '">Next &rarr;</button>'
-          : '<button class="nav-btn primary" data-go="1">Return to Start &#8635;</button>') +
-        '</nav>';
       html += '</section>';
     });
     document.getElementById('portions').innerHTML = html;
@@ -684,8 +677,17 @@
   // At the end of every reading: mark it as read; after the last one, the day's summary and the journal line
   function readRow(n, total, label) {
     return '<div class="done-row" data-n="' + n + '">' +
-      '<button type="button" class="done-btn" data-read="' + n + '" aria-pressed="false">' + CHECK_SVG +
-      '<span class="done-label">Mark ' + label + ' as read</span></button>' +
+      '<nav class="nav-bar">' +
+        '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
+        '<div class="nav-center">' +
+          '<button type="button" class="done-btn" data-read="' + n + '" aria-pressed="false">' + CHECK_SVG +
+          '<span class="done-label">Mark ' + label + ' Complete</span></button>' +
+          '<span class="nav-indicator">' + n + ' of ' + total + '</span>' +
+        '</div>' +
+        (n < total
+          ? '<button class="nav-btn primary" data-go="' + (n + 1) + '">Next &rarr;</button>'
+          : '<button class="nav-btn primary" data-go="1">Return to Start &#8635;</button>') +
+      '</nav>' +
       '<p class="done-next"></p>' +
       (n === total ? '<p class="journal-line">Studies find we understand more when we read on paper, and remember more when we write by hand. ' +
         'The printed <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread journal</a> follows this plan day by day.</p>' : '') +
@@ -723,7 +725,7 @@
       var label = current.day.portions[n - 1].label;
       var btn = row.querySelector('.done-btn');
       btn.setAttribute('aria-pressed', String(on));
-      btn.querySelector('.done-label').textContent = on ? label + ' read' : 'Mark ' + label + ' as read';
+      btn.querySelector('.done-label').textContent = on ? label + ' Complete' : 'Mark ' + label + ' Complete';
       btn.title = on ? 'Marked as read. Tap again to undo.' : '';
       var next = row.querySelector('.done-next'), msg = '';
       if (on) {
