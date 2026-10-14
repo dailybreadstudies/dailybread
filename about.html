@@ -13,14 +13,10 @@
     try { var t = JSON.parse(localStorage.getItem('dbs-settings') || '{}').theme;
           if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
     document.documentElement.classList.add('js');
+    try { localStorage.setItem('dbs-visited', '1'); } catch (e) {}
   </script>
   <style>
-    body.about { display: block; padding: 0; line-height: 1.7; }
-    .ab-top { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center;
-      padding: 22px clamp(20px, 5vw, 56px); font: 500 0.8rem var(--sans); letter-spacing: 0.04em; z-index: 2; }
-    .ab-top a { color: var(--accent); text-decoration: none; }
-    .ab-top a:hover { text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
-    .ab-top .ab-brand { font-family: var(--display); font-weight: 300; font-size: 1rem; letter-spacing: 0; color: var(--heading); }
+    body.about { display: block; padding: var(--topbar-h) 0 0; line-height: 1.7; }
 
     .ab-sec { min-height: 88vh; display: flex; align-items: center; padding: clamp(80px, 12vh, 140px) clamp(20px, 6vw, 80px);
       border-top: 1px solid var(--rule); }
@@ -38,7 +34,7 @@
     .ab-small { font: 400 0.85rem/1.7 var(--sans); color: var(--muted); max-width: 44em; margin: 1.8rem 0 0; }
 
     /* Hero */
-    .ab-hero { min-height: 100vh; border-top: none; text-align: center; }
+    .ab-hero { min-height: calc(100vh - var(--topbar-h)); border-top: none; text-align: center; }
     .ab-hero .ab-in { max-width: 980px; }
     .ab-hero .ab-h { font-size: clamp(2.4rem, 6.4vw, 5.2rem); max-width: none; margin-bottom: 1.8rem; }
     .ab-hero .ab-p { margin: 0 auto; }
@@ -135,10 +131,11 @@
 </head>
 <body class="about">
 
-<nav class="ab-top">
-  <a class="ab-brand" href="./">Daily Bread Online</a>
-  <a href="./">Today’s reading &rarr;</a>
-</nav>
+<header class="topbar" id="topbar">
+  <a class="tb-logo" href="./" aria-label="Daily Bread Online, today’s reading">Daily Bread</a>
+  <nav class="tb-nav" aria-label="Main"><a href="./">Today</a><a href="progress.html">Progress</a><a href="about.html" aria-current="page">About</a></nav>
+  <div class="tb-end"></div>
+</header>
 
 <!-- 1 · Motto -->
 <section class="ab-sec ab-hero">

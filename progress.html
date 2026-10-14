@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Progress · Daily Bread Online</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Your reading progress. Daily Bible readings and studies for the Daily Bread reading plan: Torah, Prophets, Writings and Apostles, in the Berean Standard Bible.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Hebrew:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/reader.css">
+  <link rel="stylesheet" href="assets/maps.css">
+  <script>
+    /* Apply a saved Light/Dark choice before the page paints (avoids a flash) */
+    try { var t = JSON.parse(localStorage.getItem('dbs-settings') || '{}').theme;
+          if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+</head>
+<body data-page="progress">
+
+<header class="topbar" id="topbar">
+  <a class="tb-logo" href="./" aria-label="Daily Bread Online, today’s reading">Daily Bread</a>
+  <nav class="tb-nav" aria-label="Main"><a href="./">Today</a><a href="progress.html" aria-current="page">Progress</a><a href="about.html">About</a></nav>
+  <div class="tb-end"></div>
+</header>
+
+<main class="reader" id="reader">
+  <h1 class="page-title pg-title">Your Progress</h1>
+  <div id="progress-page"><p class="status">Loading…</p></div>
+  <div id="portions" hidden></div>
+  <footer class="reader-footer">
+    <p><a href="about.html">About Daily Bread</a></p>
+    <p>The English biblical text is adapted from the Berean Standard Bible (BSB) with its translation notes.
+      Hebrew: Miqra according to the Masorah, from
+      <a href="https://en.wikisource.org/wiki/User:Dovi/Miqra_according_to_the_Masorah#beginning" rel="noopener">Hebrew Wikisource</a>
+      (as published on Sefaria), <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>.
+      Greek: SBL Greek New Testament, copyright 2010 Society of Biblical Literature and Logos Bible Software,
+      <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>, with its textual apparatus.
+      Word study: <a href="https://www.stepbible.org" rel="noopener">STEPBible.org</a> (Tyndale House, Cambridge), CC BY 4.0.
+      Fonts: SBL Hebrew and SBL Greek, Tiro Typeworks / Society of Biblical Literature.
+      Jewish calendar and Shabbat times: <a href="https://www.hebcal.com/" rel="noopener">Hebcal.com</a>, CC BY 4.0.</p>
+  </footer>
+  <div class="fn-pop" id="fn-pop" role="dialog" hidden></div>
+</main>
+
+<!-- Blessings shown before the first portion each day -->
+<template id="blessings-template">
+  <div class="blessings-section">
+    <p class="blessings-title">Blessings</p>
+
+    <div class="blessing">
+      <span class="lead">Blessed</span> are you, <span class="lord">Lord</span> our God, King of the universe, who has sanctified us with his commandments and has commanded us to engage in study of the words of Torah. Please, <span class="lord">Lord</span> our God, make the words of your Torah sweet in our mouth, and in the mouth of your people, the house of Israel. May we and our descendants, and the descendants of your people, the house of Israel, all know your name and study your Torah for its own sake. Blessed are you, <span class="lord">Lord</span>, who teaches Torah to his people Israel.
+      <span class="hebrew-blessing"><span class="lead-he">בָּרוּךְ</span> אַתָּה יי אֱלֹהֵֽינוּ מֶֽלֶךְ הָעוֹלָם, אֲשֶׁר קִדְּשָֽׁנוּ בְּמִצְוֹתָיו, וְצִוָּֽנוּ לַעֲסֹק בְּדִבְרֵי תוֹרָה. וְהַעֲרֶב נָא יי אֱלֹהֵֽינוּ אֶת דִּבְרֵי תוֹרָתְךָ בְּפִֽינוּ, וּבְפִי עַמְּךָ בֵּית יִשְׂרָאֵל, וְנִהְיֶה אֲנַֽחְנוּ וְצֶאֱצָאֵֽינוּ, וְצֶאֱצָאֵי עַמְּךָ בֵּית יִשְׂרָאֵל, כֻּלָּֽנוּ יוֹדְעֵי שְׁמֶֽךָ, וְלוֹמְדֵי תוֹרָתֶֽךָ לִשְׁמָהּ. בָּרוּךְ אַתָּה יי, הַמְלַמֵּד תּוֹרָה לְעַמּוֹ יִשְׂרָאֵל.</span>
+    </div>
+
+    <div class="blessing">
+      <span class="lead">Blessed</span> are you, <span class="lord">Lord</span> our God, King of the universe, who gives the Torah of truth and the good news of salvation to his people Israel and to all peoples through his Son, Yeshua the Messiah, our Master. Blessed are you, <span class="lord">Lord</span>, giver of the Torah.
+      <span class="hebrew-blessing"><span class="lead-he">בָּרוּךְ</span> אַתָּה יי אֱלֹהֵֽינוּ מֶֽלֶךְ הָעוֹלָם, אֲשֶׁר נוֹתֵן תּוֹרַת אֶמֶת וּבְשׂוֹרַת יְשׁוּעָה לְעַמּוֹ יִשְׂרָאֵל וּלְכָל הָעַמִּים עַל־יְדֵי בְּנוֹ יֵשׁוּעַ הַמָשִׁיחַ אֲדֹנֵינוּ. בָּרוּךְ אַתָּה יי, נוֹתֵן הַתּוֹרָה.</span>
+    </div>
+
+    <div class="blessing">
+      <span class="scripture-quote">Open my eyes, that I may behold wondrous things from your Torah.</span>
+      <span class="hebrew-blessing">גַּל־עֵינַי וְאַבִּיטָה נִפְלָאוֹת מִתּוֹרָתֶךָ׃</span>
+    </div>
+  </div>
+  <hr class="blessings-divider">
+</template>
+
+<!-- Tools: calendar and reading settings [ A / א ] -->
+<div class="tools">
+<form class="quick-go" id="quick-go" role="search" autocomplete="off">
+  <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg>
+  <input type="text" placeholder="Go to … Gen 1" aria-label="Go to a Bible passage, for example Genesis 1 or John 3:16" enterkeyhint="go">
+</form>
+<button type="button" class="tool-btn cal-btn bible-btn" id="bible-btn" aria-haspopup="dialog" aria-expanded="false"
+        aria-controls="bible-panel" title="Bible: open any book and chapter" aria-label="Bible">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 6.5C10.2 5 7.6 4.5 4 4.5v13.5c3.6 0 6.2.5 8 2 1.8-1.5 4.4-2 8-2V4.5c-3.6 0-6.2.5-8 2z"/><path d="M12 6.5V20"/>
+  </svg>
+</button>
+<button type="button" class="tool-btn cal-btn" id="cal-btn" aria-haspopup="dialog" aria-expanded="false"
+        aria-controls="cal-panel" title="Calendar: choose a day" aria-label="Calendar">
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/>
+    <circle cx="8.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/>
+  </svg>
+</button>
+<button type="button" class="tool-btn settings-btn" id="settings-btn" aria-haspopup="dialog" aria-expanded="false"
+        aria-controls="settings-panel" title="Reading settings: text, appearance, divine name and wording">
+  <span class="sb-en">A</span><span class="sb-sep">/</span><span class="sb-he">א</span>
+</button>
+</div>
+<div class="settings-panel bible-panel" id="bible-panel" role="dialog" aria-label="Bible" hidden></div>
+<div class="settings-panel cal-panel" id="cal-panel" role="dialog" aria-label="Calendar" hidden></div>
+<div class="settings-panel" id="settings-panel" role="dialog" aria-label="Reading settings" hidden>
+  <div class="sp-head">
+    <span class="sp-title">Reading settings</span>
+    <button type="button" class="sp-close" data-close aria-label="Close settings">&times;</button>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Text Size</span>
+    <div class="sp-stepper">
+      <button type="button" data-size="-1" aria-label="Smaller text"><span class="sp-a-small">A</span></button>
+      <span class="sp-value" data-size-label>113%</span>
+      <button type="button" data-size="1" aria-label="Larger text"><span class="sp-a-large">A</span></button>
+    </div>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Appearance</span>
+    <div class="sp-seg" role="group" aria-label="Appearance">
+      <button type="button" data-theme-opt="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme-opt="dark" aria-pressed="false">Dark</button>
+      <button type="button" data-theme-opt="system" aria-pressed="true">Auto</button>
+    </div>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Typeface</span>
+    <div class="sp-seg" role="group" aria-label="Typeface">
+      <button type="button" data-font="serif" aria-pressed="true" class="sp-serif">Serif</button>
+      <button type="button" data-font="sans" aria-pressed="false" class="sp-sans">Sans</button>
+    </div>
+  </div>
+
+  <div class="sp-row">
+    <span class="sp-label">Divine Name</span>
+    <div class="sp-seg sp-seg-name" role="group" aria-label="Divine name">
+      <button type="button" data-name="lord" aria-pressed="true"><span class="dn-sample">Lord</span></button>
+      <button type="button" data-name="adonai" aria-pressed="false"><span class="dn-sample">Adonai</span></button>
+      <button type="button" data-name="hashem" aria-pressed="false"><span class="dn-sample">HaShem</span></button>
+    </div>
+  </div>
+
+
+  <div class="sp-row">
+    <span class="sp-label">Original Text</span>
+    <div class="sp-seg sp-seg-name" role="group" aria-label="Original language text">
+      <button type="button" data-orig="off" aria-pressed="true">Off</button>
+      <button type="button" data-orig="under" aria-pressed="false">Under Verses</button>
+      <button type="button" data-orig="only" aria-pressed="false">Only</button>
+    </div>
+  </div>
+
+  <div class="sp-row sp-cant-row" hidden>
+    <span class="sp-label">Hebrew Marks</span>
+    <div class="sp-seg" role="group" aria-label="Hebrew marks">
+      <button type="button" data-cant="off" aria-pressed="true">Vowels</button>
+      <button type="button" data-cant="on" aria-pressed="false">+ Cantillation</button>
+    </div>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="messianic">
+    <span class="sp-switch-text">
+      <span class="sp-switch-title">Messianic Filter</span>
+      <span class="sp-switch-sub">Yeshua, Messiah, Torah, immersion, assembly…</span>
+    </span>
+    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+  </button>
+
+  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="hebrewNames">
+    <span class="sp-switch-text">
+      <span class="sp-switch-title">Hebrew Names</span>
+      <span class="sp-switch-sub">Yerushalayim, Moshe, Yehoshafat, Yoram…</span>
+    </span>
+    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+  </button>
+</div>
+
+<script src="assets/maps.js"></script>
+<script src="assets/reader.js"></script>
+</body>
+</html>

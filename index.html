@@ -15,11 +15,26 @@
     try { var t = JSON.parse(localStorage.getItem('dbs-settings') || '{}').theme;
           if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
   </script>
+  <script>
+    /* First visit to the home page: show About first. Returning visitors (or links to a day/chapter) stay here. */
+    try {
+      var q = location.search;
+      var seen = localStorage.getItem('dbs-visited') || localStorage.getItem('dbs-settings') || localStorage.getItem('dbs-progress');
+      localStorage.setItem('dbs-visited', '1');
+      if (!seen && !/[?&](d|r)=/.test(q)) location.replace('about.html');
+    } catch (e) {}
+  </script>
 </head>
 <body>
 
+<header class="topbar" id="topbar">
+  <a class="tb-logo" href="./" aria-label="Daily Bread Online, today’s reading">Daily Bread</a>
+  <nav class="tb-nav" aria-label="Main"><a href="./" aria-current="page">Today</a><a href="progress.html">Progress</a><a href="about.html">About</a></nav>
+  <div class="tb-end"></div>
+</header>
+
 <main class="reader" id="reader">
-  <h1 class="page-title">Daily Bread Online</h1>
+  <h1 class="page-title visually-hidden">Daily Bread Online</h1>
   <div id="day-header"></div>
   <div id="portions"><p class="status">Loading today’s readings…</p></div>
   <footer class="reader-footer">

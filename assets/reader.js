@@ -14,6 +14,24 @@
 
   // ── Settings (remembered per visitor) ────────────────────────
   var SIZES = [100, 112.5, 125, 137.5, 150];          // % of the browser's base size
+  // The top bar scrolls away; floating tools and the map column start below it and rise as it leaves.
+  (function () {
+    var bar = document.getElementById('topbar');
+    if (!bar) { document.documentElement.style.setProperty('--tb-off', '0px'); return; }
+    var queued = false;
+    function place() {
+      queued = false;
+      var off = Math.max(0, bar.offsetHeight - window.scrollY);
+      document.documentElement.style.setProperty('--tb-off', off + 'px');
+    }
+    window.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(place); } }, { passive: true });
+    window.addEventListener('resize', place);
+    place();
+  })();
+  try { localStorage.setItem('dbs-visited', '1'); } catch (e) { /* ignore */ }
+
+  // Which page this is: 'today' (index.html) or 'progress' (progress.html)
+  var PAGE = document.body.getAttribute('data-page') || 'today';
   var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
@@ -563,7 +581,7 @@
     header += '<p class="page-progress" id="day-progress"></p>';
     header += '<p class="page-refs">' +
       refs.map(function (r, i) { return '<a href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join(' &middot; ') + '</p>' +
-      '<div class="progress-review" id="progress-review" hidden></div>';
+      '';
     document.getElementById('day-header').innerHTML = header;
     document.title = 'Daily Bread Online · ' + dateText;
 
@@ -699,21 +717,15 @@
     var date = current.day.date, total = current.day.portions.length, today = todayISO();
     var missed = missedReadings();
 
-    // Header: day number, readings so far, catch-up
+    // Header: day number; the full picture is on the Progress page
     var line = document.getElementById('day-progress');
     if (line) {
       var dn = dayNumber(date), last = dayNumber(PLAN_END), bits = [];
       if (dn >= 1 && dn <= last) bits.push('Day ' + dn + ' of ' + last);
-      var c = totalRead();
-      if (c) bits.push('<button type="button" class="link-btn quiet" id="review-btn" aria-expanded="false">' + c + (c === 1 ? ' reading' : ' readings') + ' read</button>');
-      var html = bits.join(' &middot; ');
       if (missed.length && date === today) {
-        var m = missed[0];
-        html += '<span class="catch-up">' + missed.length + (missed.length === 1 ? ' reading' : ' readings') + ' to catch up: ' +
-          '<button type="button" class="link-btn" data-day="' + m.date + '" data-n="' + m.n + '">start with ' + refLabel(m.ref) + ' (' + shortDate(m.date) + ')</button>' +
-          ' or <button type="button" class="link-btn" id="skip-missed">pick up from today</button></span>';
+        bits.push('<a class="link-btn quiet" href="progress.html">' + missed.length + (missed.length === 1 ? ' reading' : ' readings') + ' to catch up</a>');
       }
-      line.innerHTML = html;
+      line.innerHTML = bits.join(' &middot; ');
     }
     // Header: tick the readings already done
     document.querySelectorAll('.page-refs a[data-n]').forEach(function (a) {
@@ -747,63 +759,74 @@
       }
       next.innerHTML = msg;
     });
-    var review = document.getElementById('progress-review');
-    if (review && !review.hidden) drawReview();
   }
 
-  // The review: totals by section, what is left to catch up, and day by day
-  function drawReview() {
-    var box = document.getElementById('progress-review');
+  // ── Progress page (progress.html) ──
+  function drawProgressPage() {
+    var box = document.getElementById('progress-page');
     if (!box) return;
     var from = trackFrom(), today = todayISO();
-    if (!from) { box.innerHTML = '<p class="pr-empty">Mark a reading as read to start tracking your year.</p>'; return; }
+    var dn = Math.min(Math.max(dayNumber(today), 0), dayNumber(PLAN_END)), last = dayNumber(PLAN_END);
+    var html = '<p class="pg-year">5787 &middot; Day ' + dn + ' of ' + last + '</p>' +
+      '<div class="pg-yearbar" title="' + Math.round(100 * dn / last) + '% of the year"><span style="width:' + (100 * dn / last).toFixed(1) + '%"></span></div>';
+    if (!from) {
+      box.innerHTML = html + '<div class="pg-empty"><p>Your progress will appear here.</p>' +
+        '<p>At the end of each reading, tap <em>Mark Torah Complete</em>, <em>Mark Prophets Complete</em> and so on. ' +
+        'This page then shows what you have read, section by section, and anything left to catch up.</p>' +
+        '<p><a class="pg-btn" href="./">Go to today’s reading</a></p></div>' + privacyNote();
+      return;
+    }
     var days = planDays.filter(function (d) { return d >= from && d <= today && plan[d]; });
+    var missed = missedReadings();
+    html += '<div class="pg-stats">' +
+      '<div><b>' + totalRead() + '</b><span>readings complete</span></div>' +
+      '<div><b>' + days.filter(dayComplete).length + '</b><span>' + (days.filter(dayComplete).length === 1 ? 'full day' : 'full days') + '</span></div>' +
+      '<div><b>' + missed.length + '</b><span>to catch up</span></div></div>';
+
     var sections = {}, order = ['Torah', 'Prophets', 'Writings', 'Apostles', 'Feast readings'];
     days.forEach(function (d) {
       plan[d].forEach(function (x, i) {
-        var s = sectionOf(x[0]);
-        sections[s] = sections[s] || { due: 0, read: 0 };
-        if (d < today || isRead(d, i + 1)) sections[s].due++;
-        if (isRead(d, i + 1)) sections[s].read++;
+        var sec = sectionOf(x[0]);
+        sections[sec] = sections[sec] || { due: 0, read: 0 };
+        if (d < today || isRead(d, i + 1)) sections[sec].due++;
+        if (isRead(d, i + 1)) sections[sec].read++;
       });
     });
-    var html = '<div class="pr-head"><span>Your readings since ' + shortDate(from) + '</span>' +
-      '<button type="button" class="sp-close" id="review-close" aria-label="Close">&times;</button></div>';
-    html += '<div class="pr-sections">' + order.filter(function (s) { return sections[s] && sections[s].due; }).map(function (s) {
-      var v = sections[s], pct = Math.round(100 * v.read / v.due);
-      return '<div class="pr-sec"><span class="pr-sec-name">' + s + '</span><span class="pr-sec-num">' + v.read + ' / ' + v.due + '</span>' +
-        '<span class="pr-bar"><span style="width:' + pct + '%"></span></span></div>';
-    }).join('') + '</div>';
-    var missed = missedReadings();
+    html += '<h2 class="pg-h">By section <span>since ' + shortDate(from) + '</span></h2><div class="pr-sections">' +
+      order.filter(function (sec) { return sections[sec] && sections[sec].due; }).map(function (sec) {
+        var v = sections[sec], pct = Math.round(100 * v.read / v.due);
+        return '<div class="pr-sec"><span class="pr-sec-name">' + sec + '</span><span class="pr-sec-num">' + v.read + ' / ' + v.due + '</span>' +
+          '<span class="pr-bar"><span style="width:' + pct + '%"></span></span></div>';
+      }).join('') + '</div>';
+
+    html += '<h2 class="pg-h">To catch up</h2>';
     if (missed.length) {
-      html += '<p class="pr-sub">To catch up</p><ul class="pr-missed">' + missed.map(function (m) {
-        return '<li><span class="pr-m-label">' + m.label + '</span><button type="button" class="link-btn" data-day="' + m.date + '" data-n="' + m.n + '">' +
-          refLabel(m.ref) + '</button><span class="pr-m-date">' + weekdayDate(m.date) + '</span></li>';
+      html += '<ul class="pr-missed">' + missed.map(function (m) {
+        return '<li><span class="pr-m-label">' + m.label + '</span><a class="link-btn" href="./?d=' + m.date + '#' + m.n + '">' +
+          refLabel(m.ref) + '</a><span class="pr-m-date">' + weekdayDate(m.date) + '</span></li>';
       }).join('') + '</ul><p class="pr-skip"><button type="button" class="link-btn" id="skip-missed">Pick up from today</button>' +
-        ' <span>(older readings will no longer count as missed)</span></p>';
+        ' <span>Older readings will no longer count as missed.</span></p>';
     } else {
-      html += '<p class="pr-sub">All caught up.</p>';
+      html += '<p class="pg-note">All caught up.</p>';
     }
-    html += '<p class="pr-sub">Day by day</p><ol class="pr-days">' + days.slice().reverse().map(function (d) {
-      return '<li><button type="button" class="pr-day" data-day="' + d + '"><span class="pr-d-date">' + weekdayDate(d) + '</span><span class="pr-dots">' +
+
+    html += '<h2 class="pg-h">Day by day</h2><ol class="pr-days">' + days.slice().reverse().map(function (d) {
+      return '<li><a class="pr-day" href="./?d=' + d + '"><span class="pr-d-date">' + weekdayDate(d) + '</span><span class="pr-dots">' +
         plan[d].map(function (x, i) {
           var cls = isRead(d, i + 1) ? 'on' : (d < today ? 'miss' : '');
           return '<span class="pr-dot ' + cls + '" title="' + escapeAttr(x[0] + ': ' + refLabel(x[1])) + '"></span>';
-        }).join('') + '</span></button></li>';
+        }).join('') + '</span></a></li>';
     }).join('') + '</ol>';
-    box.innerHTML = html;
+    box.innerHTML = html + privacyNote() +
+      '<p class="pg-clear"><button type="button" class="link-btn quiet" id="clear-progress">Clear all progress</button></p>';
   }
-  function toggleReview(open) {
-    var box = document.getElementById('progress-review');
-    if (!box) return;
-    if (open === undefined) open = box.hidden;
-    box.hidden = !open;
-    var btn = document.getElementById('review-btn');
-    if (btn) btn.setAttribute('aria-expanded', String(open));
-    if (open) drawReview();
+  function privacyNote() {
+    return '<p class="pg-note pg-privacy">Your progress is kept in this browser, on this device only. Nothing is sent to us, ' +
+      'and clearing your browser data erases it.</p>';
   }
 
   function openReading(date, n) {
+    if (PAGE !== 'today') { location.href = './?d=' + date + '#' + (n || 1); return; }
     if (current && current.day && current.day.date === date) { goTo(n || 1); return; }
     loadDay(date).then(function () { if (n) goTo(n, false); });
   }
@@ -816,12 +839,16 @@
       if (calMonth && !calPanel.hidden) drawCalendar();
       return;
     }
-    if (e.target.closest('#review-btn')) { toggleReview(); return; }
-    if (e.target.closest('#review-close')) { toggleReview(false); return; }
     if (e.target.closest('#skip-missed')) {
       progress.since = todayISO();
       saveProgress();
-      drawProgress();
+      if (PAGE === 'progress') drawProgressPage(); else drawProgress();
+      return;
+    }
+    if (e.target.closest('#clear-progress')) {
+      if (window.confirm('Clear all your reading progress on this device? This cannot be undone.')) {
+        progress.read = {}; progress.since = null; saveProgress(); drawProgressPage();
+      }
       return;
     }
     var jump = e.target.closest('.link-btn[data-day], .pr-day[data-day]');
@@ -1477,6 +1504,7 @@
   }
 
   function loadChapter(book, c, v, replace) {
+    if (PAGE !== 'today') { location.href = './?r=' + book + '.' + c + (v ? '.' + v : ''); return new Promise(function () {}); }
     return Promise.all([loadBook(book), neededOrig([book])]).then(function (res) {
       var data = res[0];
       var url = location.pathname + '?r=' + book + '.' + c + (v ? '.' + v : '');
@@ -1695,6 +1723,7 @@
   var planDays = [];
 
   function loadDay(date, replace) {
+    if (PAGE !== 'today') { location.href = './?d=' + date; return new Promise(function () {}); }
     return getJSON('data/days/' + date + '.json').then(function (day) {
       var ids = day.portions.map(function (p) { return parseRef(p.ref).book; })
         .filter(function (v, i, a) { return a.indexOf(v) === i; });
@@ -1730,14 +1759,15 @@
       migrateProgress();
       bookIndex = res[1];
       hebrewNames = wordReplacer(res[2]);
+      if (PAGE === 'progress') { drawProgressPage(); return; }
       var r = new URLSearchParams(location.search).get('r');
       var t = r && parseTarget(r);
       if (t) return loadChapter(t.book, t.c, t.v, true);
       return loadDay(pickDate(planDays), true);
     })
     .catch(function (err) {
-      document.getElementById('portions').innerHTML =
-        '<p class="status">Sorry, the readings could not be loaded. (' + err.message + ')</p>';
+      var where = document.getElementById(PAGE === 'progress' ? 'progress-page' : 'portions');
+      where.innerHTML = '<p class="status">Sorry, the readings could not be loaded. (' + err.message + ')</p>';
     });
 
   // Use the visitor's location for Shabbat times if they already allowed it
