@@ -861,9 +861,20 @@
     var mark = e.target.closest('[data-read]');
     if (mark && current && current.day) {
       var d = current.day.date, n = +mark.getAttribute('data-read');
-      setRead(d, n, !isRead(d, n));
+      var nowDone = !isRead(d, n);
+      setRead(d, n, nowDone);
       drawProgress();
       if (calMonth && !calPanel.hidden) drawCalendar();
+      // The Complete button at the end of a reading: show the blue for a moment, then go on like Next
+      if (nowDone && mark.classList.contains('done-btn')) {
+        var total = current.day.portions.length, dayNow = d, next = 0;
+        for (var k = n + 1; k <= total && !next; k++) if (!isRead(d, k)) next = k;
+        for (k = 1; k < n && !next; k++) if (!isRead(d, k)) next = k;
+        if (!next && n < total) next = n + 1;
+        if (next) setTimeout(function () {
+          if (current && current.day && current.day.date === dayNow && isRead(dayNow, n)) goTo(next);
+        }, 900);
+      }
       return;
     }
     if (e.target.closest('#skip-missed')) {
