@@ -262,6 +262,13 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 }
 .blessing .lead-he { font-size: 1.7rem; color: var(--accent); margin-left: 0.15em; }
 .blessing .scripture-quote { font-style: italic; color: var(--ink-soft); }
+.pray-intro { text-align: center; font-family: var(--display); font-size: 1.02rem; font-style: italic; color: var(--muted);
+  letter-spacing: 0.01em; line-height: 1.7; }
+.pray-intro p { margin: 0; }
+.pray-intro .link-btn { font-style: italic; }
+.blessings-box { margin-top: 2rem; }
+.blessings-box .blessings-title, .blessings-box .blessings-divider { display: none; }
+.blessings-box .blessings-section { margin-bottom: 0; }
 .blessings-divider { border: none; border-top: 1px solid var(--rule); margin: 2.5rem auto; max-width: 180px; }
 
 /* ── Portion heading ── */
