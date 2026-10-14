@@ -15,7 +15,7 @@
 
 /* ── Dark mode: follows the device unless the reader picks Light or Dark ── */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme="light"]):not([data-theme="sepia"]) {
   --paper: #17130f;
     --ink: #e8e0d5;
     --ink-soft: #c8bdb0;
@@ -73,6 +73,36 @@
   --track: #4a4037;
   --shadow: rgba(0, 0, 0, 0.45);
   color-scheme: dark;
+}
+
+:root[data-theme="sepia"] {
+  --paper: #f5ecd7;
+  --ink: #3b2f22;
+  --ink-soft: #5a4a38;
+  --muted: #7d6b57;
+  --accent: #7a5634;
+  --accent-deep: #4f3720;
+  --accent-soft: #93724f;
+  --accent-faint: #a98d6d;
+  --accent-line: #d9c7a6;
+  --line-strong: #d2bf9d;
+  --tint: #ede1c6;
+  --rule: #e3d5b8;
+  --pop: #3f3022;
+  --pop-ink: #f7efdf;
+  --pop-edge: #5a4633;
+  --faint-text: #9a8670;
+  --surface: #f8f0dd;
+  --surface-glass: rgba(248, 240, 221, 0.94);
+  --on-accent: #fbf5e8;
+  --done: #4f6f86;
+  --done-bg: #e3e6dc;
+  --done-line: #b9c6c9;
+  --verse: #3b2f22;
+  --heading: #2e2419;
+  --track: #d6c6a8;
+  --shadow: rgba(80, 58, 30, 0.16);
+  color-scheme: light;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -475,6 +505,7 @@ html.font-sans .scripture { line-height: 1.8; }
 .sp-seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
 .sp-seg button:hover:not([aria-pressed="true"]) { background: var(--tint); }
 .sp-seg-name button { padding: 0 9px; font-size: 12.5px; }
+.sp-seg-theme button { padding: 0 10px; font-size: 13.5px; }
 .dn-sample { text-transform: uppercase; letter-spacing: 0.02em; }
 .sp-smallcaps { font-variant: small-caps; }
 .sp-serif { font-family: 'Source Serif 4', Georgia, serif; }
@@ -769,3 +800,10 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 .pg-btn { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: 22px; background: var(--accent);
   color: var(--on-accent); font: 600 0.78rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
 .pg-btn:hover { background: var(--accent-deep); }
+
+/* Justified Bible text (setting): prose paragraphs only; poetry, lists and centred lines keep their shape */
+html.justify .scripture p.p, html.justify .scripture p.m, html.justify .scripture p.pmo, html.justify .scripture p.pi1,
+html.justify .scripture .vp-en, html.justify .scripture .vo-para {
+  text-align: justify; -webkit-hyphens: auto; hyphens: auto;
+}
+html.justify .scripture .vo-para[lang="he"], html.justify .scripture .vo-para[lang="grc"] { -webkit-hyphens: manual; hyphens: manual; }

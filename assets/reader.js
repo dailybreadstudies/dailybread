@@ -43,8 +43,9 @@
   function applyLook() {
     document.documentElement.style.fontSize = SIZES[settings.size] + '%';
     document.documentElement.classList.toggle('font-sans', settings.font === 'sans');
+    document.documentElement.classList.toggle('justify', !!settings.justify);
     document.documentElement.classList.toggle('orig-off', settings.original === 'off');   // Hebrew blessings only with Original Text on
-    if (settings.theme === 'light' || settings.theme === 'dark') document.documentElement.setAttribute('data-theme', settings.theme);
+    if (settings.theme === 'light' || settings.theme === 'dark' || settings.theme === 'sepia') document.documentElement.setAttribute('data-theme', settings.theme);
     else document.documentElement.removeAttribute('data-theme');
     applyDivineName(document);
   }
@@ -1054,6 +1055,9 @@
     panel.querySelectorAll('[data-font]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-font') === settings.font));
     });
+    panel.querySelectorAll('[data-justify]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String((b.getAttribute('data-justify') === 'on') === !!settings.justify));
+    });
     panel.querySelectorAll('[role="switch"]').forEach(function (b) {
       b.setAttribute('aria-checked', String(!!settings[b.getAttribute('data-setting')]));
     });
@@ -1092,6 +1096,9 @@
       applyLook();
     } else if (t.hasAttribute('data-font')) {
       settings.font = t.getAttribute('data-font');
+      applyLook();
+    } else if (t.hasAttribute('data-justify')) {
+      settings.justify = t.getAttribute('data-justify') === 'on';
       applyLook();
     } else if (t.getAttribute('role') === 'switch') {
       var key = t.getAttribute('data-setting');

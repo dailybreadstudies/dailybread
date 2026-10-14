@@ -14,7 +14,7 @@
   <script>
     /* Apply a saved Light/Dark choice before the page paints (avoids a flash) */
     try { var t = JSON.parse(localStorage.getItem('dbs-settings') || '{}').theme;
-          if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+          if (t === 'light' || t === 'dark' || t === 'sepia') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
   </script>
 </head>
 <body>
@@ -115,8 +115,9 @@
 
   <div class="sp-row">
     <span class="sp-label">Appearance</span>
-    <div class="sp-seg" role="group" aria-label="Appearance">
+    <div class="sp-seg sp-seg-theme" role="group" aria-label="Appearance">
       <button type="button" data-theme-opt="light" aria-pressed="false">Light</button>
+      <button type="button" data-theme-opt="sepia" aria-pressed="false">Sepia</button>
       <button type="button" data-theme-opt="dark" aria-pressed="false">Dark</button>
       <button type="button" data-theme-opt="system" aria-pressed="true">Auto</button>
     </div>
@@ -131,6 +132,14 @@
   </div>
 
   <div class="sp-row">
+    <span class="sp-label">Justified Text</span>
+    <div class="sp-seg" role="group" aria-label="Justified Bible text">
+      <button type="button" data-justify="off" aria-pressed="true">Off</button>
+      <button type="button" data-justify="on" aria-pressed="false">On</button>
+    </div>
+  </div>
+
+  <div class="sp-row">
     <span class="sp-label">Divine Name</span>
     <div class="sp-seg sp-seg-name" role="group" aria-label="Divine name">
       <button type="button" data-name="lord" aria-pressed="true"><span class="dn-sample">Lord</span></button>
@@ -141,7 +150,7 @@
 
 
   <div class="sp-row">
-    <span class="sp-label">Original Text</span>
+    <span class="sp-label">Original Languages</span>
     <div class="sp-seg sp-seg-name" role="group" aria-label="Original language text">
       <button type="button" data-orig="off" aria-pressed="true">Off</button>
       <button type="button" data-orig="under" aria-pressed="false">Under Verses</button>
