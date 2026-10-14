@@ -590,9 +590,16 @@
       header += '<p class="page-parsha">Torah Portion: <em>' + day.parsha.name + '</em>' +
         (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</p>';
     }
-    header += '<p class="page-refs">' +
-      refs.map(function (r, i) { return '<a href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join(' &middot; ') + '</p>' +
-      '';
+    // The day's readings: section, reference and a check once marked complete
+    header += '<ol class="day-plan" aria-label="Today’s readings">' +
+      refs.map(function (r, i) {
+        var p = day.portions[i];
+        return '<li><a class="dp-row" href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' +
+          '<span class="dp-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>' +
+          '<span class="dp-label">' + p.label + '</span>' +
+          '<span class="dp-ref">' + displayRef(r) + '</span>' +
+          (p.he ? '<span class="dp-he he" lang="he">' + noNikud(p.he) + '</span>' : '<span></span>') + '</a></li>';
+      }).join('') + '</ol>';
     document.getElementById('day-header').innerHTML = header;
     document.title = 'Daily Bread Online · ' + dateText;
 
@@ -743,8 +750,10 @@
       line.innerHTML = bits.join(' &middot; ');
     }
     // Header: tick the readings already done
-    document.querySelectorAll('.page-refs a[data-n]').forEach(function (a) {
-      a.classList.toggle('is-read', isRead(date, +a.getAttribute('data-n')));
+    document.querySelectorAll('.day-plan a[data-n]').forEach(function (a) {
+      var done = isRead(date, +a.getAttribute('data-n'));
+      a.classList.toggle('is-read', done);
+      a.setAttribute('aria-label', a.querySelector('.dp-label').textContent + ' ' + a.querySelector('.dp-ref').textContent + (done ? ', complete' : ''));
     });
     // Buttons under each reading
     document.querySelectorAll('.done-row').forEach(function (row) {
@@ -916,6 +925,7 @@
     closePop();
     document.querySelectorAll('.portion').forEach(function (p) { p.classList.remove('active'); });
     target.classList.add('active');
+    document.querySelectorAll('.day-plan a[data-n]').forEach(function (a) { a.classList.toggle('is-current', +a.getAttribute('data-n') === n); });
     if (location.hash !== '#' + n) history.replaceState(null, '', location.pathname + location.search + '#' + n);
     if (scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -925,7 +935,7 @@
     if (step && step.getAttribute('data-day')) { loadDay(step.getAttribute('data-day')); return; }
     var go = e.target.closest('[data-go]');
     if (go) { goTo(+go.getAttribute('data-go')); return; }
-    var link = e.target.closest('.page-refs a');
+    var link = e.target.closest('.day-plan a');
     if (link) { e.preventDefault(); goTo(+link.getAttribute('href').slice(1)); return; }
     var back = e.target.closest('.fn-label');
     if (back) {
