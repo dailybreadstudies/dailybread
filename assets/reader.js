@@ -1359,7 +1359,7 @@
       var label = day.date === todayISO() ? 'Today' : 'This day';
       var html = items.map(function (it, i) {
         var lead = i === 0 ? '<span class="lead">' + label + '</span> ' : '';
-        if (it.own) return '<p class="own-note">' + lead + richText(it.own) + '</p>';
+        if (it.own) return '<p class="own-note">' + lead + richText(i === 0 ? afterLead(it.own) : it.own) + '</p>';
         return '<p>' + lead +
           '<span class="today-title">' + escapeAttr(it.title) + '</span>' +
           (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') +
@@ -1386,32 +1386,29 @@
   function richText(s) {
     return escapeAttr(String(s).trim()).replace(/\bLORD\b/g, '<span class="lord">Lord</span>');
   }
+  // After a lead the text reads on as one sentence: "Today the Fast of Tamuz is …",
+  // "Today in History was the death of …", "Today in History Moses ascends Sinai …"
+  var NOUN_START = /^(Birth and death of|Birth of|Death of|Possible beginning of|Possible date of|Confession of|The martyrdom of|The circumcision of|The fast of the|The official (?:start|end) of)\b/;
+  var PLAIN_START = /^(The|During|In|At|After|Under|To|Two|Waters?|New|Barley|It|Possible|A|An)\b/;
+  function afterLead(text, history) {
+    text = String(text).trim();
+    if (history) {
+      if (NOUN_START.test(text)) return 'was ' + (/^The /.test(text) ? 't' : 'the ' + text.charAt(0).toLowerCase()) + text.slice(1);
+      if (/^(Kristallnacht|Yom HaMeyuchas)\b/.test(text)) return 'was ' + text;
+    }
+    return PLAIN_START.test(text) ? text.charAt(0).toLowerCase() + text.slice(1) : text;
+  }
   function fillHistory(day, list) {
     var box = document.getElementById('history-box');
     if (!box) return;
     if (!list.length) { box.hidden = true; box.innerHTML = ''; return; }
     var label = (day.date === todayISO() ? 'Today' : 'This day') + ' in History';
     box.innerHTML = list.map(function (e, i) {
-        return '<div class="hist-item"><p class="hist-text">' + (i === 0 ? '<span class="lead">' + label + '</span> ' : '') + richText(e.text) + '</p>' +
-          '<button type="button" class="hist-more" aria-expanded="false" hidden>more</button></div>';
-      }).join('');
+      return '<p class="hist-text">' + (i === 0 ? '<span class="lead">' + label + '</span> ' + richText(afterLead(e.text, true)) : richText(e.text)) + '</p>';
+    }).join('');
     applyDivineName(box);
     box.hidden = false;
-    // Long entries open with "more"
-    box.querySelectorAll('.hist-item').forEach(function (item) {
-      var p = item.querySelector('.hist-text');
-      if (p.scrollHeight > p.clientHeight + 2) item.querySelector('.hist-more').hidden = false;
-      else p.classList.add('is-short');
-    });
   }
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest('.hist-more');
-    if (!b) return;
-    var open = b.getAttribute('aria-expanded') !== 'true';
-    b.setAttribute('aria-expanded', String(open));
-    b.closest('.hist-item').classList.toggle('is-open', open);
-    b.textContent = open ? 'less' : 'more';
-  });
 
   function locPicker() {
     return '<button type="button" class="loc-btn" aria-expanded="false" aria-controls="loc-picker">change</button>' +
@@ -1438,13 +1435,15 @@
     shabbatTimes(iso, loc).then(function (t) {
       if (!document.body.contains(line) || !t) return;
       var parts = [];
-      if (t.candles[iso]) parts.push('Candle lighting for <span class="cl-for">' +
-        (new Date(iso + 'T12:00:00').getDay() === 5 ? 'Shabbat' : 'Yom Tov') + '</span> <strong>' + t.candles[iso] + '</strong>');
-      if (t.havdalah[iso]) parts.push('Havdalah <strong>' + t.havdalah[iso] + '</strong>');
+      // "Today the candle lighting time for Shabbat is 17:21 in Jerusalem"
+      if (t.havdalah[iso]) parts.push('havdalah is at <strong>' + t.havdalah[iso] + '</strong>');
+      if (t.candles[iso]) parts.push('the candle lighting time for <span class="cl-for">' +
+        (new Date(iso + 'T12:00:00').getDay() === 5 ? 'Shabbat' : 'Yom Tov') + '</span> is <strong>' + t.candles[iso] + '</strong>');
       if (!parts.length) return;
       var first = box.hidden;
-      line.innerHTML = (first ? '<span class="lead">' + (iso === todayISO() ? 'Today' : 'This day') + '</span> ' : '') +
-        parts.join(' &middot; ') + ' in ' + escapeAttr(loc.name) + ' ' + locPicker();
+      var said = parts.join(' and ') + ' in ' + escapeAttr(loc.name);
+      line.innerHTML = (first ? '<span class="lead">' + (iso === todayISO() ? 'Today' : 'This day') + '</span> ' + said
+        : said.charAt(0).toUpperCase() + said.slice(1)) + ' ' + locPicker();
       line.hidden = false;
       box.hidden = false;
       // On the eve of a festival, name it: "Candle lighting for Sukkot I"
