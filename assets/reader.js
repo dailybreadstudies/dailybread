@@ -580,7 +580,8 @@
       '<span class="page-date-text">' + titleDate + '</span>' +
       '<button type="button" class="day-step" data-day="' + (nextDay || '') + '"' + (nextDay ? '' : ' disabled') + ' aria-label="Next day">&rsaquo;</button>' +
       '</h2>' +
-      '<p class="page-parsha page-weekday" id="page-weekday">' + (isSat ? 'Shabbat' : dObj.toLocaleDateString('en-GB', { weekday: 'long' })) +
+      '<p class="page-parsha page-weekday' + (isSat ? ' is-holy' : '') + '" id="page-weekday"><span class="wd-name">' +
+      (isSat ? 'Shabbat' : dObj.toLocaleDateString('en-GB', { weekday: 'long' })) + '</span>' +
       '<span id="day-events">' + dayEventsHtml(planEvents(day)) + '</span></p>';
     if (day.parsha) {
       header += '<p class="page-parsha">Torah Portion: <em>' + day.parsha.name + '</em>' +
@@ -1263,7 +1264,9 @@
           var t = niceTitle(ev.title);
           if (plan0 && /\bDay \d\b/.test(plan0.title) && t.toLowerCase().indexOf(plan0.title.split(' Day')[0].toLowerCase()) === 0) t = plan0.title;
           special.push({ title: t, he: ev.hebrew || '', memo: ev.memo || '', link: ev.link || '' });
-          if (ev.yomtov) { var pd = document.getElementById('page-date'); if (pd) pd.classList.add('is-holy'); }
+          if (ev.yomtov) {
+            ['page-date', 'page-weekday'].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.add('is-holy'); });
+          }
         });
         if (plan0 && !special.some(function (x) { return x.title.toLowerCase().indexOf(plan0.title.toLowerCase().split(' ').slice(0, 2).join(' ')) === 0; })) special.unshift(plan0);
         var holder = document.getElementById('day-events');

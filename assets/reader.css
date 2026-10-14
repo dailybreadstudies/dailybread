@@ -151,6 +151,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 }
 .page-parsha.page-weekday { margin-bottom: 0.15rem; }
 .page-date.is-holy { font-weight: 700; letter-spacing: -0.01em; }
+.page-weekday.is-holy .wd-name { font-weight: 700; color: var(--accent); }
 .day-event { background: none; border: none; padding: 0; font: inherit; color: var(--accent); cursor: pointer;
   text-decoration: underline dotted; text-decoration-color: var(--accent-soft); text-underline-offset: 3px; }
 .day-event:hover { color: var(--accent-deep); }
