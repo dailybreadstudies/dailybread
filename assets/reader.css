@@ -149,10 +149,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   text-align: center; font-family: var(--display); font-size: 1.9rem; font-weight: 300; line-height: 1.25;
   color: var(--heading); letter-spacing: -0.015em; margin-bottom: 0.45rem;
 }
-.page-parsha.page-weekday { margin-bottom: 0.15rem; }
+.page-parsha.page-weekday { margin-bottom: 0.3rem; font: 600 0.76rem/1.6 var(--sans); text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent); }
 .page-date.is-holy { font-weight: 700; letter-spacing: -0.01em; color: var(--accent); }
 .page-weekday.is-holy, .page-weekday.is-holy .day-event { font-weight: 700; color: var(--accent); }
-.day-event { background: none; border: none; padding: 0; font: inherit; color: var(--accent); cursor: pointer;
+.day-event { background: none; border: none; padding: 0; font: inherit; text-transform: inherit; letter-spacing: inherit; color: var(--accent); cursor: pointer;
   text-decoration: underline dotted; text-decoration-color: var(--accent-soft); text-underline-offset: 3px; }
 .day-event:hover { color: var(--accent-deep); }
 .day-event:disabled { cursor: default; text-decoration: none; color: var(--accent); opacity: 1; }
@@ -272,11 +273,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 
 /* ── Portion heading ── */
 .division-label {
-  text-align: center; font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
-  letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent-faint); margin-bottom: 1.1rem;
+  text-align: center; font-family: var(--sans); font-size: 0.86rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.1rem;
 }
 .division-label .he {
-  font-size: 1.02rem; font-weight: 400; letter-spacing: 0; color: var(--accent-line);
+  font-size: 1.25rem; font-weight: 400; letter-spacing: 0; color: var(--accent-soft);
   margin-left: 0.4em; text-transform: none;
 }
 .chapter-head { font-size: 1.5rem; text-align: center; margin-bottom: 0.3rem; color: var(--heading); }
