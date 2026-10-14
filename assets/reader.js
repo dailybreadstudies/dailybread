@@ -613,6 +613,7 @@
       html += '<section class="portion" id="portion-' + n + '" data-book="' + r.book + '" data-c="' + r.c1 + '" aria-label="' + escapeAttr(p.label) + '">';
       if (i === 0) {
         html += '<div class="today-box" id="today-box" aria-live="polite"></div>';
+        html += '<div class="history-box" id="history-box" hidden></div>';
         if (day.intro && day.intro.length) {
           html += '<div class="calendar-intro">' + day.intro.map(function (para) { return '<p>' + linkRefs(para) + '</p>'; }).join('') + '</div>';
         }
@@ -1304,8 +1305,17 @@
     box.hidden = true;
     var isShabbat = new Date(day.date + 'T12:00:00').getDay() === 6;
     var occasion = day.occasion && day.occasion !== 'Shabbat' ? day.occasion : '';
-    hebcalDay(day.date).then(function (events) {
+    Promise.all([hebcalDay(day.date), historyFor(day)]).then(function (res) {
+      var events = res[0], mine = res[1];
       if (!document.body.contains(box)) return;
+      fillHistory(day, mine.history);
+      // John's own note for a day Hebcal names replaces Hebcal's description
+      var notes = mine.notes.map(function (n) { return { text: n.text, hebcal: DBHistory.hebcalTitle(n).toLowerCase(), used: false }; });
+      function noteFor(title) {
+        var t = String(title || '').toLowerCase();
+        for (var k = 0; k < notes.length; k++) if (notes[k].hebcal && t.indexOf(notes[k].hebcal) === 0) return notes[k];
+        return null;
+      }
       var items = [];
       (events || []).forEach(function (ev) {
         if (CATEGORY_SKIP[ev.category] && !(isShabbat && ev.category === 'parashat')) return;
@@ -1326,28 +1336,82 @@
           if (ev.category !== 'holiday' && ev.category !== 'roshchodesh') return;
           var t = niceTitle(ev.title);
           if (plan0 && /\bDay \d\b/.test(plan0.title) && t.toLowerCase().indexOf(plan0.title.split(' Day')[0].toLowerCase()) === 0) t = plan0.title;
-          special.push({ title: t, he: ev.hebrew || '', memo: ev.memo || '', link: ev.link || '' });
+          var own = noteFor(t);
+          special.push({ title: t, he: ev.hebrew || '', memo: own ? own.text : (ev.memo || ''), link: own ? '' : (ev.link || '') });
           if (ev.yomtov) {
             ['page-date', 'page-weekday'].forEach(function (id) { var el = document.getElementById(id); if (el) el.classList.add('is-holy'); });
           }
         });
-        if (plan0 && !special.some(function (x) { return x.title.toLowerCase().indexOf(plan0.title.toLowerCase().split(' ').slice(0, 2).join(' ')) === 0; })) special.unshift(plan0);
+        if (plan0 && !special.some(function (x) { return x.title.toLowerCase().indexOf(plan0.title.toLowerCase().split(' ').slice(0, 2).join(' ')) === 0; })) {
+          var own0 = noteFor(plan0.title);
+          if (own0) plan0 = { title: plan0.title, he: plan0.he, memo: own0.text };
+          special.unshift(plan0);
+        }
         var holder = document.getElementById('day-events');
         if (holder) holder.innerHTML = dayEventsHtml(special);
       }
+      // The note's own wording names the day ("Shabbat Zachor (Sabbath of Remembrance) is …"), so it stands alone
+      items.forEach(function (it) {
+        var own = noteFor(it.title);
+        if (own) { it.own = own.text; own.used = true; }
+      });
+      notes.forEach(function (n) { if (!n.used) items.push({ own: n.text }); });
       var label = day.date === todayISO() ? 'Today' : 'This day';
       var html = items.map(function (it, i) {
-        return '<p>' + (i === 0 ? '<span class="lead">' + label + '</span> ' : '') +
+        var lead = i === 0 ? '<span class="lead">' + label + '</span> ' : '';
+        if (it.own) return '<p class="own-note">' + lead + richText(it.own) + '</p>';
+        return '<p>' + lead +
           '<span class="today-title">' + escapeAttr(it.title) + '</span>' +
           (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') +
-          (it.memo ? ' — ' + escapeAttr(it.memo.replace(/\s+$/, '')) + (/[.!?]$/.test(it.memo.trim()) ? '' : '.') : '') + '</p>';
+          (it.memo ? ' — ' + escapeAttr(it.memo.replace(/\s+$/, '')) + (/[.!?][\s"”’')\]]*$/.test(it.memo.trim()) ? '' : '.') : '') + '</p>';
       }).join('');
       html += '<p class="shabbat-line" id="shabbat-line" hidden></p>';
       box.innerHTML = html;
+      applyDivineName(box);
       box.hidden = !items.length;
       drawShabbat(day.date);
     });
   }
+
+  // ── "This day" notes and "Today in History" (data/history.json, built from data/history.csv) ──
+  var historyData = null;
+  function historyFor(day) {
+    if (!window.DBHistory) return Promise.resolve({ notes: [], history: [] });
+    if (!historyData) historyData = getJSON('data/history.json').catch(function () { historyData = null; return { entries: [] }; });
+    return historyData.then(function (data) {
+      return DBHistory.forDay(data, day.date, { israel: HEBCAL_ISRAEL, parsha: day.parsha && day.parsha.name });
+    });
+  }
+  // Text as written; LORD follows the Divine Name setting
+  function richText(s) {
+    return escapeAttr(String(s).trim()).replace(/\bLORD\b/g, '<span class="lord">Lord</span>');
+  }
+  function fillHistory(day, list) {
+    var box = document.getElementById('history-box');
+    if (!box) return;
+    if (!list.length) { box.hidden = true; box.innerHTML = ''; return; }
+    var label = (day.date === todayISO() ? 'Today' : 'This day') + ' in History';
+    box.innerHTML = list.map(function (e, i) {
+        return '<div class="hist-item"><p class="hist-text">' + (i === 0 ? '<span class="lead">' + label + '</span> ' : '') + richText(e.text) + '</p>' +
+          '<button type="button" class="hist-more" aria-expanded="false" hidden>more</button></div>';
+      }).join('');
+    applyDivineName(box);
+    box.hidden = false;
+    // Long entries open with "more"
+    box.querySelectorAll('.hist-item').forEach(function (item) {
+      var p = item.querySelector('.hist-text');
+      if (p.scrollHeight > p.clientHeight + 2) item.querySelector('.hist-more').hidden = false;
+      else p.classList.add('is-short');
+    });
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.hist-more');
+    if (!b) return;
+    var open = b.getAttribute('aria-expanded') !== 'true';
+    b.setAttribute('aria-expanded', String(open));
+    b.closest('.hist-item').classList.toggle('is-open', open);
+    b.textContent = open ? 'less' : 'more';
+  });
 
   function locPicker() {
     return '<button type="button" class="loc-btn" aria-expanded="false" aria-controls="loc-picker">change</button>' +

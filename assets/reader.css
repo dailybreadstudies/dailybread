@@ -840,3 +840,16 @@ html.justify .scripture .vo-para[lang="he"], html.justify .scripture .vo-para[la
 
 /* Show Verse Numbers: off hides the numbers but keeps them in the text, so maps, notes and links still find their verses */
 html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
+
+/* "This day" notes and "Today in History" (data/history.csv) */
+.today-box .own-note { color: var(--ink-soft); }
+.history-box { margin: -1rem 0 2rem; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); }
+.today-box[hidden] + .history-box { margin-top: 0; }
+.hist-item { margin-bottom: 0.5rem; }
+.hist-item:last-child { margin-bottom: 0; }
+.hist-text { margin: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.hist-text.is-short, .hist-item.is-open .hist-text { display: block; -webkit-line-clamp: unset; line-clamp: none; overflow: visible; }
+.hist-more { background: none; border: none; padding: 0; color: var(--accent); cursor: pointer; font: 0.8rem var(--sans);
+  letter-spacing: 0.04em; text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 2px; }
+.hist-more:hover { color: var(--accent-deep); }
+.hist-more[hidden] { display: none; }

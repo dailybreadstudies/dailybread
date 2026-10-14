@@ -18,6 +18,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - Shared top bar on all pages: "DAILY BREAD" logo + TODAY · PROGRESS · ABOUT (right end reserved for future sign-in).
 
 ## Code
+- `assets/history.js` — when each history entry / calendar note falls (shared with `tools/build_history.mjs`).
 - `assets/reader.js` — everything on Today/Progress (one IIFE). `assets/reader.css` — all styles and colour tokens
   (Light, **Sepia**, Dark, Auto via `data-theme`). `assets/maps.js/.css` — Bible maps (separate work stream).
 - Data: `data/bsb/` (BSB text + notes), `data/days/<date>.json` + `data/days/index.json` (days **and** each day's
@@ -33,7 +34,10 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
    tapping a special day shows Hebcal's explanation in a bubble.
 3. "Torah Portion: Noach (Noah)".
 4. Readings list: circle (tap = mark/unmark complete) · SECTION · reference (tap = open reading); references aligned.
-5. "This day" box (Hebcal, Shabbat/candle lighting "for Shabbat" or for the festival).
+5. "This day" box (Hebcal, Shabbat/candle lighting "for Shabbat" or for the festival) + John's own calendar notes
+   (they replace Hebcal's description for the same day), then **"Today in History"** entries (long ones clamp to
+   3 lines with "more"). Source: `data/history.csv` -> `node tools/build_history.mjs` -> `data/history.json`;
+   date logic in `assets/history.js` (see README).
 6. "Take a moment to pray before reading the Scriptures." ⓘ + collapsible **Traditional Blessings** (remembered);
    last blessing indented "Jewish disciples pray:" ⓘ. Hebrew blessing lines show only when Original Languages is on.
 7. Each reading ends with Previous · **Mark <Section> Complete** · Next (soft blue when complete; then auto-advances
@@ -59,5 +63,6 @@ in the day's order). Progress page: year bar, totals, by-section bars, catch-up 
 - Sign-in with email link (e.g. Supabase) to sync progress across devices; separate unticked marketing-consent box,
   double opt-in, privacy page; possibly feed consenting emails into Shopify. Optional daily reading email.
 - Four section progress bars across the whole year (needs the full plan loaded).
-- "This Day in History" database (~100 events) from John. Connect dailybread.online (DNS at John's registrar).
+- More history entries: John's v1 (Word file) covered 12 Sivan to 23 Tishrei + 15 occasion notes (78 rows); he will add more.
+- Connect dailybread.online (DNS at John's registrar).
 - Highlights/notes may come later.

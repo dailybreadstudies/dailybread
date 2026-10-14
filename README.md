@@ -30,6 +30,26 @@ Hebcal.com API (Diaspora schedule; set `HEBCAL_ISRAEL = true` in `assets/reader.
 to switch). Shabbat times use the visitor's location if they allow it, otherwise
 Jerusalem, and can be changed to a city. Hebcal data is CC BY 4.0.
 
+## This Day notes and Today in History
+
+`data/history.csv` is the editable source (open it in Excel or Google Sheets): one row per entry with
+`id`, `kind` (`history` = "Today in History", `note` = a "This day" calendar note), `date`, `adar`, `if_missing`,
+`text` (shown exactly as written; LORD follows the Divine Name setting) and `comment` (never shown).
+`date` is a Hebrew date ("17 Tamuz", "13 Adar", "Adar I 14"), a calendar occasion that moves with the calendar
+("Fast of Esther", "Shabbat Zachor", "Yom HaZikaron"; the full list is `EVENTS` in `assets/history.js`) or a
+Gregorian date ("29 November"). In a leap year a plain "Adar" entry falls in Adar II unless `adar` is `I`;
+`if_missing` handles 30 Cheshvan / 30 Kislev / 30 Adar I in years without them (`next`, `29` or `skip`).
+A note for a day Hebcal names (e.g. a fast) replaces Hebcal's description, also in the tap-for-explanation bubble.
+After editing:
+
+```
+node tools/build_history.mjs            # checks the file, writes data/history.json, lists every date in the plan year
+node tools/build_history.mjs 2027-03-01 2027-04-30 --csv dates.csv   # another range, and a spreadsheet of it
+```
+
+Dates are worked out in the browser (`assets/history.js`, using the browser's own Hebrew calendar), so the same
+file keeps working in later years.
+
 ## Original languages
 
 `data/orig/<BOOK>.json` holds the Hebrew (Miqra according to the Masorah, CC BY-SA 4.0) and Greek
