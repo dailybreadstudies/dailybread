@@ -4,85 +4,284 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>About Daily Bread · Daily Bread Online</title>
-  <meta name="description" content="Become a disciplined student of the whole Bible. Daily Bread is a Messianic one-year Bible reading plan that follows the weekly Torah portion and the biblical Hebrew calendar.">
+  <meta name="description" content="Helping disciples of Messiah become disciplined students of the whole Bible. Daily Bread is a Messianic one-year Bible reading plan that follows the weekly Torah portion and the biblical Hebrew calendar.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Hebrew:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/reader.css">
   <script>
     try { var t = JSON.parse(localStorage.getItem('dbs-settings') || '{}').theme;
           if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+    document.documentElement.classList.add('js');
   </script>
+  <style>
+    body.about { display: block; padding: 0; line-height: 1.7; }
+    .ab-top { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center;
+      padding: 22px clamp(20px, 5vw, 56px); font: 500 0.8rem var(--sans); letter-spacing: 0.04em; z-index: 2; }
+    .ab-top a { color: var(--accent); text-decoration: none; }
+    .ab-top a:hover { text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+    .ab-top .ab-brand { font-family: var(--display); font-weight: 300; font-size: 1rem; letter-spacing: 0; color: var(--heading); }
+
+    .ab-sec { min-height: 88vh; display: flex; align-items: center; padding: clamp(80px, 12vh, 140px) clamp(20px, 6vw, 80px);
+      border-top: 1px solid var(--rule); }
+    .ab-sec.tint { background: var(--tint); }
+    .ab-in { width: 100%; max-width: 1080px; margin: 0 auto; }
+    .ab-eyebrow { font: 600 0.74rem var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft);
+      margin: 0 0 1.4rem; }
+    .ab-h { font-family: var(--display); font-weight: 300; color: var(--heading); letter-spacing: -0.02em;
+      font-size: clamp(2.1rem, 5.2vw, 4.2rem); line-height: 1.12; margin: 0 0 1.6rem; max-width: 16em; text-wrap: balance; }
+    .ab-h em { font-style: italic; color: var(--accent); }
+    .ab-p { font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.75; color: var(--ink-soft); max-width: 36em; margin: 0 0 1.1rem; }
+    .ab-p:last-child { margin-bottom: 0; }
+    .ab-p a, .ab-small a, .ab-stat a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+    .ab-p a:hover { color: var(--accent-deep); }
+    .ab-small { font: 400 0.85rem/1.7 var(--sans); color: var(--muted); max-width: 44em; margin: 1.8rem 0 0; }
+
+    /* Hero */
+    .ab-hero { min-height: 100vh; border-top: none; text-align: center; }
+    .ab-hero .ab-in { max-width: 980px; }
+    .ab-hero .ab-h { font-size: clamp(2.4rem, 6.4vw, 5.2rem); max-width: none; margin-bottom: 1.8rem; }
+    .ab-hero .ab-p { margin: 0 auto; }
+    .ab-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 2.6rem; }
+    .ab-btn { display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 26px; border-radius: 25px;
+      font: 600 0.82rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--line-strong); color: var(--accent); transition: background 0.15s, border-color 0.15s, color 0.15s; }
+    .ab-btn:hover { background: var(--paper); border-color: var(--accent-soft); }
+    .ab-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .ab-btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+    .ab-scroll { display: block; margin: 4.5rem auto 0; width: 1px; height: 56px; background: linear-gradient(var(--accent-soft), transparent); }
+
+    /* Quote */
+    .ab-quote { font-family: var(--display); font-weight: 300; font-style: italic; color: var(--heading);
+      font-size: clamp(1.6rem, 3.4vw, 2.7rem); line-height: 1.35; max-width: 22em; margin: 0 0 1.4rem; text-wrap: balance; }
+    .ab-cite { font: 500 0.82rem var(--sans); letter-spacing: 0.06em; color: var(--accent-soft); margin: 0 0 2.6rem; }
+    .ab-cite a { color: inherit; text-decoration: none; }
+    .ab-cite a:hover { text-decoration: underline; }
+
+    /* The four sections */
+    .ab-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+      margin: 2.6rem 0 0; }
+    .ab-four > div { background: var(--paper); padding: 28px 22px 26px; }
+    .ab-sec.tint .ab-four > div { background: var(--tint); }
+    .ab-four .he { display: block; text-align: left; font-family: var(--hebrew); font-size: 2rem; line-height: 1.2; color: var(--accent); margin-bottom: 0.7rem; }
+    .ab-four b { display: block; font: 600 0.78rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--heading); margin-bottom: 0.35rem; }
+    .ab-four span:last-child { font-size: 0.95rem; line-height: 1.55; color: var(--muted); }
+
+    /* Feasts strip */
+    .ab-feasts { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; grid-template-columns: repeat(7, 1fr);
+      border-top: 1px solid var(--line-strong); }
+    .ab-feasts li { padding: 18px 10px 0 0; font: 500 0.74rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); position: relative; }
+    .ab-feasts li::before { content: ''; position: absolute; top: -4px; left: 0; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent-soft); }
+    .ab-feasts .he { display: block; text-align: left; font-family: var(--hebrew); font-size: 1.5rem; line-height: 1.3;
+      letter-spacing: 0; text-transform: none; color: var(--accent); margin-bottom: 0.3rem; }
+
+    /* Feature list */
+    .ab-feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 40px; margin: 2.8rem 0 0; padding: 0; list-style: none; }
+    .ab-feats li { border-top: 1px solid var(--line-strong); padding-top: 14px; }
+    .ab-feats b { display: block; font: 600 0.8rem var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .ab-feats span { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); }
+
+    /* Two columns */
+    .ab-two { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 6vw, 90px); align-items: center; }
+    .ab-stat { border-left: 2px solid var(--accent-line); padding: 4px 0 4px 26px; margin: 0 0 30px; }
+    .ab-stat:last-child { margin-bottom: 0; }
+    .ab-stat b { display: block; font-family: var(--display); font-weight: 300; font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.3; color: var(--heading); margin-bottom: 0.4rem; }
+    .ab-stat span { font: 400 0.9rem/1.6 var(--sans); color: var(--muted); }
+
+    /* Closing */
+    .ab-end { min-height: 70vh; text-align: center; }
+    .ab-end .ab-h, .ab-end .ab-p { margin-left: auto; margin-right: auto; }
+    .ab-foot { padding: 28px clamp(20px, 6vw, 80px) 40px; border-top: 1px solid var(--rule); font: 400 0.74rem/1.9 var(--sans); color: var(--faint-text); }
+    .ab-foot .ab-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; }
+    .ab-foot a { color: inherit; text-underline-offset: 2px; text-decoration-color: var(--rule); }
+
+    /* Reveal on scroll */
+    .js .rv { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2,.7,.2,1); }
+    .js .rv.d1 { transition-delay: 0.12s; } .js .rv.d2 { transition-delay: 0.24s; } .js .rv.d3 { transition-delay: 0.36s; }
+    .js .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 860px) {
+      .ab-four { grid-template-columns: repeat(2, 1fr); }
+      .ab-feats { grid-template-columns: repeat(2, 1fr); }
+      .ab-two { grid-template-columns: 1fr; }
+      .ab-feasts { grid-template-columns: repeat(4, 1fr); row-gap: 28px; }
+    }
+    @media (max-width: 520px) {
+      .ab-sec { min-height: 0; padding: 88px 20px; }
+      .ab-hero { min-height: 100vh; }
+      .ab-four, .ab-feats { grid-template-columns: 1fr; }
+      .ab-feasts { grid-template-columns: repeat(2, 1fr); }
+      .ab-btn { width: 100%; justify-content: center; }
+    }
+  </style>
 </head>
-<body>
+<body class="about">
 
-<main class="reader about-page">
-  <p class="about-back"><a href="./">&larr; Today’s reading</a></p>
-  <h1 class="page-title">About Daily Bread</h1>
-  <p class="about-motto">Become a disciplined student of the whole Bible.</p>
+<nav class="ab-top">
+  <a class="ab-brand" href="./">Daily Bread Online</a>
+  <a href="./">Today’s reading &rarr;</a>
+</nav>
 
-  <div class="about-body">
-    <h2>One of a kind</h2>
-    <p>Daily Bread is a Messianic one-year Bible reading plan, the only one of its kind. It gives you a daily, balanced
-      diet from the Word of God and takes you through the entire Bible in a year. As the Master said,
-      “It is written: ‘Man shall not live on bread alone, but on every word that proceeds out of the mouth of God’”
-      (<a href="./?r=MAT.4.4">Matthew 4:4</a>; <a href="./?r=DEU.8.3">Deuteronomy 8:3</a>).</p>
-    <p>The Bible has come to us from the Jewish people, and Daily Bread reads it the way Israel does:</p>
-    <ul class="about-list">
-      <li>It follows the same Jewish division of the Scriptures that the Messiah and the Apostles knew:
-        the Torah, the Prophets and the Writings (<a href="./?r=LUK.24.44">Luke 24:44</a>), together with the Apostles.</li>
-      <li>It takes you through a portion from each of these sections every day.</li>
-      <li>It follows the same Torah portions that all of Israel studies each week, and completes them with the rest of the biblical text.</li>
-      <li>It walks through the year by the Hebrew calendar, with its Sabbaths, Feasts and new moons, and what has happened
-        in the history of Israel on different days.</li>
-    </ul>
-
-    <h2>How the readings work</h2>
-    <p>Every day except Sabbaths and holidays has four readings: one from the <em>Torah</em> (the Five Books of Moses),
-      one from the <em>Prophets</em>, one from the <em>Writings</em> and one from the <em>Apostles</em>.</p>
-    <p>The weekly Torah portion, the <em>Parashah</em>, is read in every synagogue around the world each Sabbath, and the
-      Apostles encouraged disciples who were not Jewish to follow the synagogue’s Scripture readings
-      (<a href="./?r=ACT.15.21">Acts 15:21</a>). Each portion is divided into seven shorter readings, the <em>aliyot</em>,
-      which make up the daily Torah reading. On the Sabbath the seventh <em>aliyah</em> is read together with the
-      accompanying portion from the Prophets, the <em>Haftarah</em> (<a href="./?r=LUK.4.16">Luke 4:16</a>), and
-      Daily Bread adds a Messianic reading from the Apostles on Sabbaths and holidays.</p>
-    <p>We recommend reading all the day’s portions early in the morning. If time does not allow, read the rest in the
-      evening, or read two portions in the morning and two in the evening. If you fall behind, you can catch up on the
-      Sabbath, but a disciplined daily reading of the Word is best.</p>
-    <p>The reading plan was prepared by Lars Enarson and is published by
-      <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a>, the publishing ministry of The Watchman International.
-      The present year, 5787, runs from 4 October 2026 to 24 October 2027.</p>
-
-    <h2>Reading here</h2>
-    <p>Daily Bread Online is free. Each day’s readings are given in the Berean Standard Bible, with the Hebrew and Greek
-      text, word study for every Hebrew and Greek word, maps for key passages, the Jewish calendar and Shabbat times.</p>
-    <p>At the end of each day’s reading you can mark it as read. The calendar then shows the days you have read, and
-      if you miss a few days the site offers to help you catch up, or simply to pick up again from today.
-      Your progress is kept in this browser on this device only. Nothing is sent to us, and clearing your
-      browser data erases it.</p>
-
-    <h2>Paper and pen</h2>
-    <p>A screen is a good place to look things up. For reading to understand, paper still does better: studies comparing
-      the two have found that people understand longer texts better when they read them in print than on a screen.
-      Writing helps too. Putting what you read into your own words, by hand, engages the mind more deeply than typing
-      and helps you remember it.</p>
-    <p>That is what the printed Daily Bread journal is for. It follows the same plan, with a page for each day: the
-      Gregorian and Hebrew dates, the day’s readings, notes on the Hebrew calendar and on what happened in the Bible or in
-      history on that day, and empty lines to record what speaks to you from the Scriptures, prayer subjects and answers
-      to prayer. It is a hardcover book, in Classic and Women’s editions, with Daily Bread for Kids for younger readers.</p>
-    <p><a class="about-cta" href="https://arielmedia.shop/collections/dailybread" rel="noopener">See the Daily Bread journals &rarr;</a></p>
-
-    <h2>Privacy</h2>
-    <p>This site has no accounts, no advertising and no tracking. Fonts are loaded from Google Fonts. If you choose a
-      location for Shabbat times, it is used only to ask <a href="https://www.hebcal.com/" rel="noopener">Hebcal.com</a>
-      for those times.</p>
+<!-- 1 · Motto -->
+<section class="ab-sec ab-hero">
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">Daily Bread · A Messianic One-Year Bible Reading Plan</p>
+    <h1 class="ab-h rv d1">Helping disciples of Messiah become <em>disciplined students of the whole Bible.</em></h1>
+    <p class="ab-p rv d2">The only one-year Bible reading plan of its kind: the whole Bible in a year, read the way Israel reads it.</p>
+    <div class="ab-btns rv d3">
+      <a class="ab-btn primary" href="./">Start today’s reading</a>
+      <a class="ab-btn" href="#journal">The printed journal</a>
+    </div>
+    <span class="ab-scroll rv d3" aria-hidden="true"></span>
   </div>
+</section>
 
-  <footer class="reader-footer">
-    <p><a href="./">Daily Bread Online</a> · Published by <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a>,
-      a ministry of The Watchman International.</p>
-  </footer>
-</main>
+<!-- 2 · Bread -->
+<section class="ab-sec tint">
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">Our daily bread</p>
+    <p class="ab-quote rv d1">“Man shall not live on bread alone, but on every word that proceeds out of the mouth of God.”</p>
+    <p class="ab-cite rv d1"><a href="./?r=MAT.4.4">Matthew 4:4</a> · <a href="./?r=DEU.8.3">Deuteronomy 8:3</a></p>
+    <h2 class="ab-h rv d2">A balanced meal from the Word, every day.</h2>
+    <p class="ab-p rv d2">Daily Bread takes you through the entire Bible in one year, a little from every part of Scripture
+      each day, so nothing is left out and nothing is left for later.</p>
+  </div>
+</section>
 
+<!-- 3 · The four sections -->
+<section class="ab-sec">
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">Four readings a day</p>
+    <h2 class="ab-h rv d1">Read the Scriptures as Messiah and the Apostles knew them.</h2>
+    <p class="ab-p rv d2">The Bible has come to us from the Jewish people. Daily Bread follows the Jewish division of the
+      Scriptures, the Torah, the Prophets and the Writings (<a href="./?r=LUK.24.44">Luke 24:44</a>), and adds the Apostles.
+      Every day except Sabbaths and holidays you read a portion from each.</p>
+    <div class="ab-four rv d3">
+      <div><span class="he">תורה</span><b>Torah</b><span>The Five Books of Moses</span></div>
+      <div><span class="he">נביאים</span><b>Prophets</b><span>Joshua to Kings, Isaiah, Jeremiah, Ezekiel and the Twelve</span></div>
+      <div><span class="he">כתובים</span><b>Writings</b><span>Psalms, Proverbs, Job, the five Scrolls, Daniel to Chronicles</span></div>
+      <div><span class="he">שליחים</span><b>Apostles</b><span>The Gospels, Acts and the Letters to Revelation</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · With all Israel -->
+<section class="ab-sec tint">
+  <div class="ab-in ab-two">
+    <div>
+      <p class="ab-eyebrow rv">The weekly Torah portion</p>
+      <h2 class="ab-h rv d1">In step with all Israel.</h2>
+      <p class="ab-p rv d2">Each Sabbath the same Torah portion, the <em>Parashah</em>, is read in every synagogue in the world.
+        The Apostles encouraged disciples who were not Jewish to follow these readings
+        (<a href="./?r=ACT.15.21">Acts 15:21</a>). Daily Bread reads them with you, and fills in the rest of the Bible around them.</p>
+    </div>
+    <div>
+      <p class="ab-stat rv d2"><b>Sunday to Friday</b><span>One of the portion’s seven <em>aliyot</em> each day.</span></p>
+      <p class="ab-stat rv d3"><b>Sabbath</b><span>The seventh <em>aliyah</em>, the <em>Haftarah</em> from the Prophets
+        (<a href="./?r=LUK.4.16">Luke 4:16</a>) and a Messianic reading from the Apostles. Holidays have their own readings.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · Calendar -->
+<section class="ab-sec">
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">The biblical calendar</p>
+    <h2 class="ab-h rv d1">Keep time with God’s calendar.</h2>
+    <p class="ab-p rv d2">The year follows the Hebrew calendar, with its Sabbaths, Feasts and new moons, and remembers
+      what happened in the Bible and in the history of Israel on the day you are reading.</p>
+    <ol class="ab-feasts rv d3" aria-label="The appointed times through the year">
+      <li><span class="he">ראש השנה</span>Rosh Hashanah</li>
+      <li><span class="he">יום כפור</span>Yom Kippur</li>
+      <li><span class="he">סוכות</span>Sukkot</li>
+      <li><span class="he">חנוכה</span>Chanukah</li>
+      <li><span class="he">פורים</span>Purim</li>
+      <li><span class="he">פסח</span>Pesach</li>
+      <li><span class="he">שבועות</span>Shavuot</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 6 · Discipline -->
+<section class="ab-sec tint">
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">A daily discipline</p>
+    <h2 class="ab-h rv d1">Begin the day in the Word.</h2>
+    <p class="ab-p rv d2">Read the day’s portions early in the morning. If time does not allow, read two in the morning and
+      two in the evening. Fall behind, and you can catch up on the Sabbath, but a disciplined daily reading is best.</p>
+    <p class="ab-p rv d2">Here you can mark each day as read. The calendar shows the days you have read and helps you catch up,
+      or pick up again from today.</p>
+  </div>
+</section>
+
+<!-- 7 · The site -->
+<section class="ab-sec">
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">Daily Bread Online</p>
+    <h2 class="ab-h rv d1">Go deeper. <em>Free.</em></h2>
+    <ul class="ab-feats">
+      <li class="rv d1"><b>Every day’s readings</b><span>In the Berean Standard Bible, with its translation notes.</span></li>
+      <li class="rv d1"><b>Hebrew and Greek</b><span>The original text under each verse, or on its own.</span></li>
+      <li class="rv d2"><b>Word study</b><span>Tap any Hebrew or Greek word for its meaning and form.</span></li>
+      <li class="rv d2"><b>Maps</b><span>Interactive maps for key passages.</span></li>
+      <li class="rv d3"><b>Jewish calendar</b><span>Today’s Hebrew date, Feasts and Shabbat times where you are.</span></li>
+      <li class="rv d3"><b>Your progress</b><span>Kept in your browser on this device only. Nothing is sent to us.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8 · Paper and pen -->
+<section class="ab-sec tint" id="journal">
+  <div class="ab-in ab-two">
+    <div>
+      <p class="ab-eyebrow rv">The printed journal</p>
+      <h2 class="ab-h rv d1">Read on paper. <em>Write it by hand.</em></h2>
+      <p class="ab-p rv d2">Studies comparing paper and screens find that we understand longer texts better in print.
+        Putting what we read into our own words by hand engages the mind more deeply than typing, and helps us remember.</p>
+      <div class="ab-btns rv d3" style="justify-content:flex-start">
+        <a class="ab-btn primary" href="https://arielmedia.shop/collections/dailybread" rel="noopener">See the journals</a>
+      </div>
+    </div>
+    <div>
+      <p class="ab-stat rv d2"><b>A page for every day</b><span>Gregorian and Hebrew dates, the day’s readings, the calendar
+        and what happened on that day, with lines to record what speaks to you, prayer requests and answers to prayer.</span></p>
+      <p class="ab-stat rv d3"><b>Made to last the year</b><span>Hardcover, Smyth-sewn, with a ribbon marker.
+        Classic and Women’s editions, and Daily Bread for Kids.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · Close -->
+<section class="ab-sec ab-end">
+  <div class="ab-in">
+    <h2 class="ab-h rv">Your daily bread is ready.</h2>
+    <p class="ab-p rv d1">The reading plan was prepared by Lars Enarson and is published by
+      <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a>, the publishing ministry of The Watchman International.
+      The year 5787 runs from 4 October 2026 to 24 October 2027.</p>
+    <div class="ab-btns rv d2"><a class="ab-btn primary" href="./">Start today’s reading</a></div>
+  </div>
+</section>
+
+<footer class="ab-foot">
+  <div class="ab-in">
+    <span>Daily Bread Online · Published by <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a></span>
+    <span>No accounts, no advertising, no tracking. Fonts load from Google Fonts; a location you choose for Shabbat times
+      is used only to ask <a href="https://www.hebcal.com/" rel="noopener">Hebcal.com</a>.</span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.rv');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
 </body>
 </html>

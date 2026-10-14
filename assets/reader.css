@@ -638,22 +638,3 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
   .nav-bar, .fn-pop { display: none !important; }
 }
 
-/* ── About page ── */
-.about-back { margin: 0 0 1.5rem; font: 400 0.82rem var(--sans); }
-.about-back a { color: var(--accent); text-decoration: none; }
-.about-back a:hover { text-decoration: underline; text-decoration-color: var(--accent-line); }
-.about-body { font-size: 1.05rem; line-height: 1.8; color: var(--ink); }
-.about-body h2 { font-family: var(--sans); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--accent); margin: 2.4rem 0 0.8rem; }
-.about-body h2:first-child { margin-top: 1.5rem; }
-.about-body p { margin: 0 0 1rem; }
-.about-body a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 2px; }
-.about-body a:hover { color: var(--accent-deep); }
-.about-body a.about-cta { font: 500 0.85rem var(--sans); text-decoration: none; }
-.about-body a.about-cta:hover { text-decoration: underline; }
-.about-page .page-title { margin-bottom: 0; }
-.about-motto { text-align: center; font-family: var(--display); font-style: italic; font-size: 1.1rem; color: var(--accent);
-  margin: 0.4rem 0 0; }
-.about-list { margin: 0 0 1rem; padding-left: 1.3rem; }
-.about-list li { margin: 0 0 0.45rem; padding-left: 0.2rem; }
-.about-list li::marker { color: var(--accent-faint); }
