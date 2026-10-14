@@ -698,11 +698,11 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 .topbar { position: absolute; top: 0; left: 0; right: 0; height: var(--topbar-h); z-index: 210;
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 clamp(16px, 3.2vw, 40px);
   border-bottom: 1px solid var(--rule); background: var(--paper); }
-.tb-logo { justify-self: start; font-family: var(--display); font-weight: 400; font-size: 1.02rem; letter-spacing: 0.2em;
+.tb-logo { justify-self: start; font-family: var(--display); font-weight: 400; font-size: 18px; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--heading); text-decoration: none; white-space: nowrap; }
 .tb-logo:hover { color: var(--accent-deep); }
 .tb-nav { display: flex; gap: clamp(18px, 3vw, 36px); }
-.tb-nav a { font: 600 0.72rem/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-soft);
+.tb-nav a { font: 600 13px/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-soft);
   text-decoration: none; padding: 8px 0 6px; border-bottom: 1px solid transparent; transition: color 0.15s, border-color 0.15s; }
 .tb-nav a:hover { color: var(--accent-deep); }
 .tb-nav a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent-soft); }
@@ -713,8 +713,8 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 @media (max-width: 700px) {
   .topbar { grid-template-columns: auto 1fr; }
   .tb-nav { justify-self: end; gap: 18px; }
-  .tb-nav a { font-size: 0.66rem; letter-spacing: 0.12em; }
-  .tb-logo { font-size: 0.92rem; letter-spacing: 0.16em; }
+  .tb-nav a { font-size: 12px; letter-spacing: 0.12em; }
+  .tb-logo { font-size: 16.5px; letter-spacing: 0.16em; }
   .tb-end { display: none; }
 }
 @media print { .topbar { display: none; } }
