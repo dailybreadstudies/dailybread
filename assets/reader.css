@@ -173,6 +173,42 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .journal-line a { color: inherit; text-decoration-color: var(--rule); text-underline-offset: 2px; }
 .journal-line a:hover { color: var(--accent); }
 
+/* Readings already marked, ticked in the header */
+.page-refs a.is-read { color: var(--accent); }
+.page-refs a.is-read::before { content: '✓\00a0'; font-family: var(--sans); font-style: normal; font-size: 0.8em; }
+.link-btn.quiet { color: inherit; text-decoration-color: var(--rule); }
+.link-btn.quiet:hover, .link-btn.quiet[aria-expanded="true"] { color: var(--accent); }
+
+/* Progress review (opens from "… readings read") */
+.progress-review { margin: -1rem 0 2.25rem; padding: 18px 20px 20px; border: 1px solid var(--rule); border-radius: 10px;
+  font-family: var(--sans); font-size: 0.82rem; line-height: 1.5; color: var(--ink-soft); }
+.progress-review[hidden] { display: none; }
+.pr-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+  font-weight: 600; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.pr-sections { display: grid; gap: 9px; margin-bottom: 4px; }
+.pr-sec { display: grid; grid-template-columns: 8.5em 4.5em 1fr; align-items: center; gap: 10px; }
+.pr-sec-name { color: var(--ink); }
+.pr-sec-num { color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; }
+.pr-bar { height: 4px; border-radius: 2px; background: var(--rule); overflow: hidden; }
+.pr-bar span { display: block; height: 100%; background: var(--accent-soft); border-radius: 2px; }
+.pr-sub { margin: 18px 0 8px; font-weight: 600; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-faint); }
+.pr-missed, .pr-days { list-style: none; margin: 0; padding: 0; }
+.pr-missed li { display: grid; grid-template-columns: 7em 1fr auto; align-items: baseline; gap: 10px; padding: 5px 0; border-bottom: 1px solid var(--rule); }
+.pr-missed .link-btn { text-align: left; justify-self: start; }
+.pr-missed li:last-child { border-bottom: none; }
+.pr-m-label { color: var(--muted); }
+.pr-m-date { color: var(--muted); white-space: nowrap; }
+.pr-skip { margin: 8px 0 0; color: var(--muted); font-size: 0.78rem; }
+.pr-empty { margin: 0; color: var(--muted); }
+.pr-days { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 2px 14px; max-height: 260px; overflow-y: auto; }
+.pr-day { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 4px 6px; border: none; border-radius: 6px;
+  background: none; font: inherit; color: var(--ink-soft); cursor: pointer; text-align: left; }
+.pr-day:hover { background: var(--tint); }
+.pr-dots { display: inline-flex; gap: 4px; }
+.pr-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--line-strong); }
+.pr-dot.on { background: var(--accent); border-color: var(--accent); }
+.pr-dot.miss { border-color: var(--accent-faint); border-style: dashed; }
+
 /* ── Calendar intro ── */
 .calendar-intro { margin: 0 0 2.5rem; font-size: 1rem; line-height: 1.8; color: var(--ink-soft); }
 .calendar-intro p { margin-bottom: 1rem; }
@@ -459,6 +495,9 @@ html.font-sans .scripture { line-height: 1.8; }
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4l2.6 2.6L10 3.4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; }
 .cal-legend .cal-mark.read { position: static; display: inline-block; }
 .cal-day.is-missed .cal-mark { display: block; top: 5px; left: 5px; width: 5px; height: 5px; border-radius: 50%; border: 1px solid var(--accent-faint); }
+.cal-day.is-partial .cal-mark { display: block; background: currentColor; color: var(--accent-faint); opacity: 0.7;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4l2.6 2.6L10 3.4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.4l2.6 2.6L10 3.4' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; }
 .cal-day.is-selected .cal-mark { color: var(--on-accent); }
 .cal-day.is-selected.is-missed .cal-mark { border-color: var(--on-accent); }
 .cal-nav:focus-visible, .cal-day:focus-visible, .cal-today:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 1px; }

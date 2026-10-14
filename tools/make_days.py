@@ -155,8 +155,16 @@ def main():
             fh.write(json.dumps(out, ensure_ascii=False, indent=2) + '\n')
 
     all_days = sorted(f[:-5] for f in os.listdir(DAYS) if re.match(r'\d{4}-\d\d-\d\d\.json$', f))
+    # The index also lists every day's readings (label and reference), so the reader can track and review
+    # progress reading by reading without opening each day's file.
+    plan = {}
+    for iso in all_days:
+        d = json.load(open(os.path.join(DAYS, iso + '.json'), encoding='utf-8'))
+        plan[iso] = [[p['label'], p['ref']] for p in d['portions']]
     with open(os.path.join(DAYS, 'index.json'), 'w', encoding='utf-8') as fh:
-        json.dump({'days': all_days}, fh, indent=1)
+        fh.write('{"days": ' + json.dumps(all_days) + ',\n "plan": {\n' +
+                 ',\n'.join('  ' + json.dumps(k) + ': ' + json.dumps(v, ensure_ascii=False) for k, v in plan.items()) +
+                 '\n }}\n')
     print(f'{len(days)} days written; {len(all_days)} days in the index')
 
 

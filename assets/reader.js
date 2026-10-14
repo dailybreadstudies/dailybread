@@ -562,7 +562,8 @@
     }
     header += '<p class="page-progress" id="day-progress"></p>';
     header += '<p class="page-refs">' +
-      refs.map(function (r, i) { return '<a href="#' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join(' &middot; ') + '</p>';
+      refs.map(function (r, i) { return '<a href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join(' &middot; ') + '</p>' +
+      '<div class="progress-review" id="progress-review" hidden></div>';
     document.getElementById('day-header').innerHTML = header;
     document.title = 'Daily Bread Online · ' + dateText;
 
@@ -591,7 +592,7 @@
           renderNotes(passage.notes, displayRef(r)) + '</div></div>';
       }
       html += renderTextNotes(passage.textNotes);
-      if (n === total) html += doneRow();
+      html += readRow(n, total, p.label);
       html += '<nav class="nav-bar">' +
         '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
         '<span class="nav-indicator">' + n + ' of ' + total + '<span class="division-name">' + p.label + '</span></span>' +
@@ -611,101 +612,218 @@
   }
 
   // ── Reading progress (kept on this device only) ─────────────
-  // dbs-progress = { done: { "2026-10-12": 1, … }, since: "2026-10-20" | null }
-  // "since" is set by "Skip" so older unread days stop counting as catch-up.
+  // dbs-progress = { read: { "2026-10-12": [1, 2, 4], … }, since: "2026-10-20" | null }
+  // Numbers are the day's readings in order (1 = Torah …). "since" is set by "pick up from today", so older
+  // unread readings stop counting as catch-up. Older saves ({ done: { date: 1 } }) meant the whole day.
   var PLAN_START = '2026-10-04', PLAN_END = '2027-10-24';   // the 5787 Daily Bread year
   var JOURNAL_URL = 'https://arielmedia.shop/collections/dailybread';
-  var progress = { done: {}, since: null };
+  var plan = {};                                            // date -> [[label, ref], …] from data/days/index.json
+  var progress = { read: {}, since: null, done: null };
   try {
     var savedProg = JSON.parse(localStorage.getItem('dbs-progress') || 'null');
-    if (savedProg && savedProg.done) progress = { done: savedProg.done, since: savedProg.since || null };
+    if (savedProg) progress = { read: savedProg.read || {}, since: savedProg.since || null, done: savedProg.done || null };
   } catch (e) { /* storage unavailable: progress lasts for this visit only */ }
   function saveProgress() {
-    try { localStorage.setItem('dbs-progress', JSON.stringify(progress)); } catch (e) { /* ignore */ }
+    try { localStorage.setItem('dbs-progress', JSON.stringify({ read: progress.read, since: progress.since })); } catch (e) { /* ignore */ }
+  }
+  function migrateProgress() {               // once the plan is known: whole days marked earlier → all their readings
+    if (!progress.done) return;
+    Object.keys(progress.done).forEach(function (d) {
+      if (plan[d] && !progress.read[d]) progress.read[d] = plan[d].map(function (x, i) { return i + 1; });
+    });
+    progress.done = null;
+    saveProgress();
   }
   function dayNumber(iso) {
     return Math.round((Date.parse(iso + 'T12:00:00Z') - Date.parse(PLAN_START + 'T12:00:00Z')) / 864e5) + 1;
   }
-  function isDone(iso) { return !!progress.done[iso]; }
-  function doneCount() { return Object.keys(progress.done).length; }
-  // Planned days before today that are not marked as read, counted from the first day the reader marked
-  // (so a new visitor is never told they are behind) or from "Skip", whichever is later.
-  function missedDays() {
-    var marked = Object.keys(progress.done).sort();
-    if (!marked.length) return [];
-    var from = marked[0];
-    if (progress.since && progress.since > from) from = progress.since;
-    var today = todayISO();
-    return planDays.filter(function (d) { return d >= from && d < today && !isDone(d); });
+  function isRead(iso, n) { return (progress.read[iso] || []).indexOf(n) >= 0; }
+  function readCount(iso) { return (progress.read[iso] || []).length; }
+  function dayTotal(iso) { return plan[iso] ? plan[iso].length : 0; }
+  function dayComplete(iso) { var t = dayTotal(iso); return t > 0 && readCount(iso) >= t; }
+  function setRead(iso, n, on) {
+    var list = (progress.read[iso] || []).filter(function (x) { return x !== n; });
+    if (on) list.push(n);
+    list.sort(function (x, y) { return x - y; });
+    if (list.length) progress.read[iso] = list; else delete progress.read[iso];
+    saveProgress();
+  }
+  function totalRead() {
+    return Object.keys(progress.read).reduce(function (sum, d) { return sum + progress.read[d].length; }, 0);
+  }
+  // Tracking starts on the first day with a reading marked (so a new visitor is never told they are behind),
+  // or at "pick up from today", whichever is later.
+  function trackFrom() {
+    var marked = Object.keys(progress.read).sort();
+    if (!marked.length) return null;
+    return progress.since && progress.since > marked[0] ? progress.since : marked[0];
+  }
+  // Readings not yet marked on planned days from trackFrom() up to yesterday, oldest first.
+  function missedReadings() {
+    var from = trackFrom(), today = todayISO(), out = [];
+    if (!from) return out;
+    planDays.forEach(function (d) {
+      if (d < from || d >= today || !plan[d]) return;
+      plan[d].forEach(function (x, i) { if (!isRead(d, i + 1)) out.push({ date: d, n: i + 1, label: x[0], ref: x[1] }); });
+    });
+    return out;
+  }
+  function sectionOf(label) {
+    if (label === 'Haftarah') return 'Prophets';
+    return ['Torah', 'Prophets', 'Writings', 'Apostles'].indexOf(label) >= 0 ? label : 'Feast readings';
   }
   function shortDate(iso) {
     return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
   }
-  function doneRow() {
-    return '<div class="done-row">' +
-      '<button type="button" class="done-btn" id="done-btn" aria-pressed="false">' +
-      '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' +
-      '<span class="done-label">Mark as read</span></button>' +
-      '<p class="done-next" id="done-next"></p>' +
-      '<p class="journal-line">Studies find we understand more when we read on paper, and remember more when we write by hand. ' +
-      'The printed <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread journal</a> follows this plan day by day.</p></div>';
+  function weekdayDate(iso) {
+    return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).replace(/,/g, '');
   }
+  function refLabel(ref) { var r = parseRef(ref); return r ? displayRef(r) : ref; }
+  var CHECK_SVG = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+  // At the end of every reading: mark it as read; after the last one, the day's summary and the journal line
+  function readRow(n, total, label) {
+    return '<div class="done-row" data-n="' + n + '">' +
+      '<button type="button" class="done-btn" data-read="' + n + '" aria-pressed="false">' + CHECK_SVG +
+      '<span class="done-label">Mark ' + label + ' as read</span></button>' +
+      '<p class="done-next"></p>' +
+      (n === total ? '<p class="journal-line">Studies find we understand more when we read on paper, and remember more when we write by hand. ' +
+        'The printed <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread journal</a> follows this plan day by day.</p>' : '') +
+      '</div>';
+  }
+
   function drawProgress() {
     if (!current || !current.day) return;
-    var date = current.day.date, n = dayNumber(date), total = dayNumber(PLAN_END);
+    var date = current.day.date, total = current.day.portions.length, today = todayISO();
+    var missed = missedReadings();
+
+    // Header: day number, readings so far, catch-up
     var line = document.getElementById('day-progress');
     if (line) {
-      var bits = [];
-      if (n >= 1 && n <= total) bits.push('Day ' + n + ' of ' + total);
-      var c = doneCount();
-      if (c) bits.push(c + (c === 1 ? ' day' : ' days') + ' read');
+      var dn = dayNumber(date), last = dayNumber(PLAN_END), bits = [];
+      if (dn >= 1 && dn <= last) bits.push('Day ' + dn + ' of ' + last);
+      var c = totalRead();
+      if (c) bits.push('<button type="button" class="link-btn quiet" id="review-btn" aria-expanded="false">' + c + (c === 1 ? ' reading' : ' readings') + ' read</button>');
       var html = bits.join(' &middot; ');
-      var missed = missedDays();
-      if (missed.length && date === todayISO()) {
+      if (missed.length && date === today) {
+        var m = missed[0];
         html += '<span class="catch-up">' + missed.length + (missed.length === 1 ? ' reading' : ' readings') + ' to catch up: ' +
-          '<button type="button" class="link-btn" data-day="' + missed[0] + '">start with ' + shortDate(missed[0]) + '</button>' +
+          '<button type="button" class="link-btn" data-day="' + m.date + '" data-n="' + m.n + '">start with ' + refLabel(m.ref) + ' (' + shortDate(m.date) + ')</button>' +
           ' or <button type="button" class="link-btn" id="skip-missed">pick up from today</button></span>';
       }
       line.innerHTML = html;
-      line.classList.toggle('is-done', isDone(date));
     }
-    var btn = document.getElementById('done-btn');
-    if (btn) {
-      var on = isDone(date);
+    // Header: tick the readings already done
+    document.querySelectorAll('.page-refs a[data-n]').forEach(function (a) {
+      a.classList.toggle('is-read', isRead(date, +a.getAttribute('data-n')));
+    });
+    // Buttons under each reading
+    document.querySelectorAll('.done-row').forEach(function (row) {
+      var n = +row.getAttribute('data-n'), on = isRead(date, n);
+      var label = current.day.portions[n - 1].label;
+      var btn = row.querySelector('.done-btn');
       btn.setAttribute('aria-pressed', String(on));
-      btn.querySelector('.done-label').textContent = on ? 'Read' : 'Mark as read';
+      btn.querySelector('.done-label').textContent = on ? label + ' read' : 'Mark ' + label + ' as read';
       btn.title = on ? 'Marked as read. Tap again to undo.' : '';
-    }
-    var next = document.getElementById('done-next');
-    if (next) {
-      var rest = missedDays().filter(function (d) { return d !== date; });
-      var today = todayISO();
-      if (isDone(date) && rest.length) {
-        next.innerHTML = 'Next to catch up: <button type="button" class="link-btn" data-day="' + rest[0] + '">' + shortDate(rest[0]) + ' &rarr;</button>';
-      } else if (isDone(date) && date < today && planDays.indexOf(today) >= 0) {
-        next.innerHTML = 'All caught up. <button type="button" class="link-btn" data-day="' + today + '">Go to today &rarr;</button>';
-      } else {
-        next.innerHTML = '';
+      var next = row.querySelector('.done-next'), msg = '';
+      if (on) {
+        var unread = [];
+        for (var i = 1; i <= total; i++) if (!isRead(date, i)) unread.push(i);
+        var rest = missed.filter(function (x) { return !(x.date === date); });
+        if (unread.length) {
+          var k = unread.filter(function (x) { return x > n; })[0] || unread[0];
+          msg = readCount(date) + ' of ' + total + ' read ' + (date === today ? 'today' : 'for ' + shortDate(date)) + '. <button type="button" class="link-btn" data-go="' + k + '">Next: ' +
+            current.day.portions[k - 1].label + ' &rarr;</button>';
+        } else if (rest.length) {
+          msg = 'All ' + total + ' read for ' + shortDate(date) + '. Next to catch up: <button type="button" class="link-btn" data-day="' +
+            rest[0].date + '" data-n="' + rest[0].n + '">' + refLabel(rest[0].ref) + ' (' + shortDate(rest[0].date) + ') &rarr;</button>';
+        } else if (date < today && planDays.indexOf(today) >= 0) {
+          msg = 'All caught up. <button type="button" class="link-btn" data-day="' + today + '">Go to today &rarr;</button>';
+        } else {
+          msg = 'All ' + total + ' readings done for today.';
+        }
       }
+      next.innerHTML = msg;
+    });
+    var review = document.getElementById('progress-review');
+    if (review && !review.hidden) drawReview();
+  }
+
+  // The review: totals by section, what is left to catch up, and day by day
+  function drawReview() {
+    var box = document.getElementById('progress-review');
+    if (!box) return;
+    var from = trackFrom(), today = todayISO();
+    if (!from) { box.innerHTML = '<p class="pr-empty">Mark a reading as read to start tracking your year.</p>'; return; }
+    var days = planDays.filter(function (d) { return d >= from && d <= today && plan[d]; });
+    var sections = {}, order = ['Torah', 'Prophets', 'Writings', 'Apostles', 'Feast readings'];
+    days.forEach(function (d) {
+      plan[d].forEach(function (x, i) {
+        var s = sectionOf(x[0]);
+        sections[s] = sections[s] || { due: 0, read: 0 };
+        if (d < today || isRead(d, i + 1)) sections[s].due++;
+        if (isRead(d, i + 1)) sections[s].read++;
+      });
+    });
+    var html = '<div class="pr-head"><span>Your readings since ' + shortDate(from) + '</span>' +
+      '<button type="button" class="sp-close" id="review-close" aria-label="Close">&times;</button></div>';
+    html += '<div class="pr-sections">' + order.filter(function (s) { return sections[s] && sections[s].due; }).map(function (s) {
+      var v = sections[s], pct = Math.round(100 * v.read / v.due);
+      return '<div class="pr-sec"><span class="pr-sec-name">' + s + '</span><span class="pr-sec-num">' + v.read + ' / ' + v.due + '</span>' +
+        '<span class="pr-bar"><span style="width:' + pct + '%"></span></span></div>';
+    }).join('') + '</div>';
+    var missed = missedReadings();
+    if (missed.length) {
+      html += '<p class="pr-sub">To catch up</p><ul class="pr-missed">' + missed.map(function (m) {
+        return '<li><span class="pr-m-label">' + m.label + '</span><button type="button" class="link-btn" data-day="' + m.date + '" data-n="' + m.n + '">' +
+          refLabel(m.ref) + '</button><span class="pr-m-date">' + weekdayDate(m.date) + '</span></li>';
+      }).join('') + '</ul><p class="pr-skip"><button type="button" class="link-btn" id="skip-missed">Pick up from today</button>' +
+        ' <span>(older readings will no longer count as missed)</span></p>';
+    } else {
+      html += '<p class="pr-sub">All caught up.</p>';
     }
+    html += '<p class="pr-sub">Day by day</p><ol class="pr-days">' + days.slice().reverse().map(function (d) {
+      return '<li><button type="button" class="pr-day" data-day="' + d + '"><span class="pr-d-date">' + weekdayDate(d) + '</span><span class="pr-dots">' +
+        plan[d].map(function (x, i) {
+          var cls = isRead(d, i + 1) ? 'on' : (d < today ? 'miss' : '');
+          return '<span class="pr-dot ' + cls + '" title="' + escapeAttr(x[0] + ': ' + refLabel(x[1])) + '"></span>';
+        }).join('') + '</span></button></li>';
+    }).join('') + '</ol>';
+    box.innerHTML = html;
+  }
+  function toggleReview(open) {
+    var box = document.getElementById('progress-review');
+    if (!box) return;
+    if (open === undefined) open = box.hidden;
+    box.hidden = !open;
+    var btn = document.getElementById('review-btn');
+    if (btn) btn.setAttribute('aria-expanded', String(open));
+    if (open) drawReview();
+  }
+
+  function openReading(date, n) {
+    if (current && current.day && current.day.date === date) { goTo(n || 1); return; }
+    loadDay(date).then(function () { if (n) goTo(n, false); });
   }
   document.addEventListener('click', function (e) {
-    if (e.target.closest('#done-btn') && current && current.day) {
-      var d = current.day.date;
-      if (isDone(d)) delete progress.done[d]; else progress.done[d] = 1;
-      saveProgress();
+    var mark = e.target.closest('[data-read]');
+    if (mark && current && current.day) {
+      var d = current.day.date, n = +mark.getAttribute('data-read');
+      setRead(d, n, !isRead(d, n));
       drawProgress();
       if (calMonth && !calPanel.hidden) drawCalendar();
       return;
     }
+    if (e.target.closest('#review-btn')) { toggleReview(); return; }
+    if (e.target.closest('#review-close')) { toggleReview(false); return; }
     if (e.target.closest('#skip-missed')) {
       progress.since = todayISO();
       saveProgress();
       drawProgress();
       return;
     }
-    var jump = e.target.closest('.link-btn[data-day]');
-    if (jump) loadDay(jump.getAttribute('data-day'));
+    var jump = e.target.closest('.link-btn[data-day], .pr-day[data-day]');
+    if (jump) openReading(jump.getAttribute('data-day'), +jump.getAttribute('data-n') || 0);
   });
 
   // Map buttons beside verses (assets/maps.js). Optional: without that file nothing happens.
@@ -1151,7 +1269,7 @@
     var days = new Date(y, m, 0).getDate();
     var today = todayISO();
     var selected = current && current.day ? current.day.date : '';
-    var missed = missedDays();
+    var missedDates = missedReadings().map(function (m) { return m.date; });
     var html = '<div class="cal-head">' +
       '<button type="button" class="cal-nav" data-cal="-1" aria-label="Previous month">&lsaquo;</button>' +
       '<div class="cal-title"><span class="cal-month">' + MONTH_NAMES[m - 1] + ' ' + y + '</span><span class="cal-hmonth" id="cal-hmonth"></span></div>' +
@@ -1166,10 +1284,11 @@
       var iso = isoOf(y, m, d);
       var has = planDays.indexOf(iso) >= 0;
       var cls = 'cal-day' + (has ? ' has-plan' : '') + (iso === today ? ' is-today' : '') + (iso === selected ? ' is-selected' : '') +
-        (has && isDone(iso) ? ' is-read' : '') + (has && missed.indexOf(iso) >= 0 ? ' is-missed' : '') +
+        (has && dayComplete(iso) ? ' is-read' : (has && readCount(iso) ? ' is-partial' : '')) +
+        (has && missedDates.indexOf(iso) >= 0 && !readCount(iso) ? ' is-missed' : '') +
         (new Date(y, m - 1, d).getDay() === 6 ? ' cal-sat' : '');
       html += '<button type="button" class="' + cls + '" data-date="' + iso + '"' + (has ? '' : ' disabled') +
-        ' aria-label="' + iso + (has ? (isDone(iso) ? ' (read)' : '') : ' (no reading yet)') + '"><span class="cal-mark" aria-hidden="true"></span><span class="cal-g">' + d + '</span><span class="cal-h"></span><span class="cal-dot"></span></button>';
+        ' aria-label="' + iso + (has ? (dayComplete(iso) ? ' (read)' : readCount(iso) ? ' (' + readCount(iso) + ' of ' + dayTotal(iso) + ' read)' : '') : ' (no reading yet)') + '"><span class="cal-mark" aria-hidden="true"></span><span class="cal-g">' + d + '</span><span class="cal-h"></span><span class="cal-dot"></span></button>';
     }
     html += '</div><div class="cal-foot"><button type="button" class="cal-today" data-date="' + today + '">Today</button>' +
       '<span class="cal-legend"><span class="cal-legend-item"><span class="cal-mark read"></span> read</span>' +
@@ -1605,6 +1724,8 @@
                getJSON('data/hebrew-names.json').catch(function () { return {}; })])
     .then(function (res) {
       planDays = res[0].days.slice().sort();
+      plan = res[0].plan || {};
+      migrateProgress();
       bookIndex = res[1];
       hebrewNames = wordReplacer(res[2]);
       var r = new URLSearchParams(location.search).get('r');
