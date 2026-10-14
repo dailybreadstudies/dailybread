@@ -569,11 +569,17 @@
     var idx = planDays.indexOf(day.date);
     var prevDay = idx > 0 ? planDays[idx - 1] : null;
     var nextDay = idx >= 0 && idx < planDays.length - 1 ? planDays[idx + 1] : null;
-    var header = '<p class="page-date">' +
+    // Title: "14 Oct. / 3 Cheshvan", then the weekday, then the Torah portion
+    var dObj = new Date(day.date + 'T12:00:00');
+    var MON = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
+    var titleDate = dObj.getDate() + ' ' + MON[dObj.getMonth()] +
+      (day.hebrewDate ? ' / ' + day.hebrewDate.replace(/\s+\d{4}$/, '') : '');
+    var header = '<h2 class="page-date">' +
       '<button type="button" class="day-step" data-day="' + (prevDay || '') + '"' + (prevDay ? '' : ' disabled') + ' aria-label="Previous day">&lsaquo;</button>' +
-      '<span class="page-date-text">' + (day.hebrewDate ? day.hebrewDate.replace(/\s+\d{4}$/, '') + ' / ' : '') + headDate + '</span>' +
+      '<span class="page-date-text">' + titleDate + '</span>' +
       '<button type="button" class="day-step" data-day="' + (nextDay || '') + '"' + (nextDay ? '' : ' disabled') + ' aria-label="Next day">&rsaquo;</button>' +
-      '</p>';
+      '</h2>' +
+      '<p class="page-parsha page-weekday">' + dObj.toLocaleDateString('en-GB', { weekday: 'long' }) + '</p>';
     if (day.parsha) {
       header += '<p class="page-parsha">Torah Portion: <em>' + day.parsha.name + '</em>' +
         (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</p>';

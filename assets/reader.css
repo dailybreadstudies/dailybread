@@ -146,9 +146,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   margin-bottom: 0.5rem; color: var(--heading); letter-spacing: -0.015em;
 }
 .page-date {
-  text-align: center; font-family: var(--display); font-size: 1rem; color: var(--accent);
-  margin-bottom: 0.25rem;
+  text-align: center; font-family: var(--display); font-size: 1.9rem; font-weight: 300; line-height: 1.25;
+  color: var(--heading); letter-spacing: -0.015em; margin-bottom: 0.45rem;
 }
+.page-parsha.page-weekday { margin-bottom: 0.15rem; }
 .page-parsha {
   text-align: center; font-family: var(--display); font-size: 0.92rem;
   color: var(--muted); margin-bottom: 0.6rem;
@@ -671,7 +672,7 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 @media (max-width: 700px) {
   body { padding: calc(var(--topbar-h) + 1.25rem) 16px 5.5rem; }
   .reader { padding: 0.5rem 0 2.5rem; }
-  .page-title { font-size: 1.5rem; }
+  .page-title, .page-date { font-size: 1.5rem; }
   .chapter-head { font-size: 1.25rem; }
   .scripture { font-size: 1.04rem; }
   .lead { font-size: 0.92rem; }
