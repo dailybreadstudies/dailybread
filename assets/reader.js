@@ -1374,7 +1374,8 @@
     shabbatTimes(iso, loc).then(function (t) {
       if (!document.body.contains(line) || !t) return;
       var parts = [];
-      if (t.candles[iso]) parts.push('Candle lighting <strong>' + t.candles[iso] + '</strong>');
+      if (t.candles[iso]) parts.push('Candle lighting for <span class="cl-for">' +
+        (new Date(iso + 'T12:00:00').getDay() === 5 ? 'Shabbat' : 'Yom Tov') + '</span> <strong>' + t.candles[iso] + '</strong>');
       if (t.havdalah[iso]) parts.push('Havdalah <strong>' + t.havdalah[iso] + '</strong>');
       if (!parts.length) return;
       var first = box.hidden;
@@ -1382,6 +1383,15 @@
         parts.join(' &middot; ') + ' in ' + escapeAttr(loc.name) + ' ' + locPicker();
       line.hidden = false;
       box.hidden = false;
+      // On the eve of a festival, name it: "Candle lighting for Sukkot I"
+      if (t.candles[iso] && new Date(iso + 'T12:00:00').getDay() !== 5) {
+        var nx = new Date(iso + 'T12:00:00'); nx.setDate(nx.getDate() + 1);
+        hebcalDay(isoOf(nx.getFullYear(), nx.getMonth() + 1, nx.getDate())).then(function (evs) {
+          var yt = (evs || []).filter(function (ev) { return ev.yomtov; })[0];
+          var span = line.querySelector('.cl-for');
+          if (yt && span) span.textContent = niceTitle(yt.title).replace(/\s+\d{4}$/, '');
+        });
+      }
     });
   }
 
