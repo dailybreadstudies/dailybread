@@ -90,6 +90,22 @@
     .ab-stat b { display: block; font-family: var(--display); font-weight: 300; font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.3; color: var(--heading); margin-bottom: 0.4rem; }
     .ab-stat span { font: 400 0.9rem/1.6 var(--sans); color: var(--muted); }
 
+    /* Photo section: the journal, darkened, moving slowly behind the text */
+    .ab-photo { position: relative; overflow: hidden; background: #111111; border-top: none; color: #fff; }
+    .ab-photo-bg { position: absolute; left: 0; right: 0; top: -15%; height: 130%; z-index: 0;
+      background: url('assets/img/journal.jpg') center / cover no-repeat; will-change: transform; }
+    .ab-photo-bg::after { content: ''; position: absolute; inset: 0; background: rgba(17, 17, 17, 0.6); }
+    .ab-photo .ab-in { position: relative; z-index: 1; }
+    .ab-photo .ab-eyebrow { color: #e9d9c6; }
+    .ab-photo .ab-h, .ab-photo .ab-stat b { color: #ffffff; }
+    .ab-photo .ab-h em { color: #f0dcc4; }
+    .ab-photo .ab-p, .ab-photo .ab-stat span { color: rgba(255, 255, 255, 0.92); }
+    .ab-photo .ab-h, .ab-photo .ab-p, .ab-photo .ab-stat, .ab-photo .ab-eyebrow { text-shadow: 0 1px 18px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.35); }
+    .ab-photo .ab-stat { border-left-color: rgba(255, 255, 255, 0.45); }
+    .ab-photo .ab-btn.primary { background: #ffffff; border-color: #ffffff; color: #3b2c20; }
+    .ab-photo .ab-btn.primary:hover { background: #f0e6da; border-color: #f0e6da; }
+    @media (max-width: 860px) { .ab-photo-bg { background-image: url('assets/img/journal-sm.jpg'); } .ab-photo-bg::after { background: rgba(17, 17, 17, 0.68); } }
+
     /* Closing */
     .ab-end { min-height: 70vh; text-align: center; }
     .ab-end .ab-h, .ab-end .ab-p { margin-left: auto; margin-right: auto; }
@@ -233,7 +249,8 @@
 </section>
 
 <!-- 8 · Paper and pen -->
-<section class="ab-sec tint" id="journal">
+<section class="ab-sec ab-photo" id="journal">
+  <div class="ab-photo-bg" aria-hidden="true"></div>
   <div class="ab-in ab-two">
     <div>
       <p class="ab-eyebrow rv">The printed journal</p>
@@ -280,6 +297,22 @@
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
     }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
     els.forEach(function (e) { io.observe(e); });
+  })();
+  // Gentle parallax for the journal photo
+  (function () {
+    var bg = document.querySelector('.ab-photo-bg');
+    if (!bg || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    var sec = bg.parentNode, ticking = false;
+    function move() {
+      ticking = false;
+      var r = sec.getBoundingClientRect(), vh = window.innerHeight;
+      if (r.bottom < 0 || r.top > vh) return;
+      var t = (r.top + r.height / 2 - vh / 2) / (vh + r.height);   // -0.5 … 0.5 while on screen
+      bg.style.transform = 'translate3d(0,' + (t * 0.2 * r.height).toFixed(1) + 'px,0)';
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(move); } }, { passive: true });
+    window.addEventListener('resize', move);
+    move();
   })();
 </script>
 </body>
