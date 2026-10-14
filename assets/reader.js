@@ -606,7 +606,8 @@
         if (day.intro && day.intro.length) {
           html += '<div class="calendar-intro">' + day.intro.map(function (para) { return '<p>' + linkRefs(para) + '</p>'; }).join('') + '</div>';
         }
-        html += '<p class="pray-intro">Take a moment to pray before reading the Scriptures.</p>' +
+        html += '<p class="pray-intro">Take a moment to pray before reading the Scriptures. ' +
+          '<button type="button" class="info-btn" data-info="pray" aria-label="Why pray first?" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="0.6" fill="currentColor"/></svg></button></p>' +
           '<details class="apparatus tc-apparatus bless-apparatus" id="blessings-box"' + (settings.blessingsOpen ? ' open' : '') + '>' +
           '<summary class="apparatus-title">Traditional Blessings</summary>' +
           document.getElementById('blessings-template').innerHTML + '</details>';
@@ -866,6 +867,27 @@
     if (jump) openReading(jump.getAttribute('data-day'), +jump.getAttribute('data-n') || 0);
   });
 
+  // Information bubbles (ⓘ) beside the prayer line and the Jewish blessing
+  var INFO_TEXT = {
+    pray: 'Torah studies (all Scripture included) is of even higher importance than prayer and should be done daily. ' +
+      'Since it is a commandment (see Dt. 6:6–7) and a spiritual undertaking, it is customary in Israel to first pray and ' +
+      'bless God before reading. These blessings are considered to cover all Scripture reading and studies for the rest of the day.',
+    jewish: 'The Apostle Shaul (Paul) writes, “Then what advantage has the Jew? Or what is the benefit of circumcision? ' +
+      'Great in every respect. First of all, that they were entrusted with the oracles of God” (Rom. 3:1–2).'
+  };
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.info-btn');
+    if (!b) return;
+    e.preventDefault();
+    if (popFor === b && !pop.hidden) { closePop(); return; }
+    if (popFor && popFor !== b) popFor.setAttribute('aria-expanded', 'false');
+    popFor = b; pinned = true;
+    b.setAttribute('aria-expanded', 'true');
+    pop.classList.remove('wd-pop');
+    pop.innerHTML = '<span class="info-text">' + escapeAttr(INFO_TEXT[b.getAttribute('data-info')] || '') + '</span>';
+    placePop(b);
+  });
+
   // "Traditional Blessings" opens and closes the blessings; the choice is remembered
   document.addEventListener('toggle', function (e) {
     if (e.target.id !== 'blessings-box') return;
@@ -911,7 +933,7 @@
     }
     var fn = e.target.closest('.fn-ref');
     if (fn) { togglePop(fn, true); return; }
-    if (!e.target.closest('#fn-pop, a.sref, .w[data-w], .day-event')) closePop();
+    if (!e.target.closest('#fn-pop, a.sref, .w[data-w], .day-event, .info-btn')) closePop();
   });
 
   window.addEventListener('hashchange', function () { goTo(portionFromHash(), false); });

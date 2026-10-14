@@ -269,6 +269,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .bless-apparatus[open] > summary.apparatus-title { margin-bottom: 1.3rem; }
 .bless-apparatus .blessings-title, .bless-apparatus .blessings-divider { display: none; }
 .bless-apparatus .blessings-section { margin-bottom: 0; }
+.info-btn { display: inline-flex; vertical-align: -2px; padding: 2px; margin-left: 2px; border: none; background: none;
+  color: var(--accent-soft); cursor: pointer; border-radius: 50%; }
+.info-btn:hover, .info-btn[aria-expanded="true"] { color: var(--accent); }
+.info-btn:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 1px; }
+.fn-pop .info-text { display: block; font: 400 0.86rem/1.6 var(--sans); color: var(--pop-ink); }
+.blessing-jewish { margin-left: 1.6rem; padding-left: 1rem; border-left: 2px solid var(--rule); }
+.blessing-who { margin: 0 0 0.4rem; font: 600 0.72rem/1.4 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-soft); }
+.blessing-who .info-btn { vertical-align: -3px; }
 .blessings-divider { border: none; border-top: 1px solid var(--rule); margin: 2.5rem auto; max-width: 180px; }
 
 /* ── Portion heading ── */
