@@ -199,7 +199,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .dp-row { text-decoration: none; color: inherit; }
 .dp-row:hover .dp-ref { color: var(--accent-deep); text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
 .dp-row:focus-visible .dp-ref { outline: 2px solid var(--accent-soft); outline-offset: 2px; border-radius: 3px; }
-.dp-label { margin-left: 12px; margin-right: 1em; cursor: pointer; }
+.dp-label { margin-left: 12px; margin-right: 1.6em; cursor: pointer; }
 .dp-ref { cursor: pointer; }
 .dp-label { font: 600 0.72rem/1.2 var(--sans); letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
 .dp-ref { font-family: var(--serif); font-size: 1.1rem; line-height: 1.35; color: var(--ink); }
