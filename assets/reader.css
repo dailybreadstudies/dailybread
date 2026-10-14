@@ -192,7 +192,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   text-align: center; font-family: var(--display); font-size: 0.92rem;
   color: var(--muted); margin-bottom: 0.6rem;
 }
-.day-plan { list-style: none; margin: 1.4rem 0 2.3rem; padding: 0 0 1.4rem; border-bottom: 1px solid var(--rule);
+.day-plan { list-style: none; margin: 2.1rem 0 2.3rem; padding: 0 0 1.4rem; border-bottom: 1px solid var(--rule);
   display: grid; grid-template-columns: auto auto 1fr; align-items: baseline; row-gap: 0.32rem; }
 /* rows share one grid, so every reference starts at the same place (one em after the longest section name) */
 .dp-item, .dp-row { display: contents; }
