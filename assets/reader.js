@@ -43,6 +43,7 @@
   function applyLook() {
     document.documentElement.style.fontSize = SIZES[settings.size] + '%';
     document.documentElement.classList.toggle('font-sans', settings.font === 'sans');
+    document.documentElement.classList.toggle('orig-off', settings.original === 'off');   // Hebrew blessings only with Original Text on
     if (settings.theme === 'light' || settings.theme === 'dark') document.documentElement.setAttribute('data-theme', settings.theme);
     else document.documentElement.removeAttribute('data-theme');
     applyDivineName(document);
@@ -873,7 +874,7 @@
       'Since it is a commandment (see Dt. 6:6–7) and a spiritual undertaking, it is customary in Israel to first pray and ' +
       'bless God before reading. These blessings are considered to cover all Scripture reading and studies for the rest of the day.',
     jewish: 'The Apostle Shaul (Paul) writes, “Then what advantage has the Jew? Or what is the benefit of circumcision? ' +
-      'Great in every respect. First of all, that they were entrusted with the oracles of God” (Rom. 3:1–2).'
+      'Great in every respect. First of all, that they were entrusted with the oracles of God” (Rom. 3:1–2). Jews therefore pray this blessing.'
   };
   document.addEventListener('click', function (e) {
     var b = e.target.closest('.info-btn');
@@ -1081,6 +1082,7 @@
       rerender();   // restores "the" when going back to LORD
     } else if (t.hasAttribute('data-orig')) {
       settings.original = t.getAttribute('data-orig');
+      applyLook();
       rerender();
     } else if (t.hasAttribute('data-cant')) {
       settings.cantillation = t.getAttribute('data-cant') === 'on';
