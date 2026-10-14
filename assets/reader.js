@@ -574,17 +574,18 @@
     var MON = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
     var titleDate = dObj.getDate() + ' ' + MON[dObj.getMonth()] +
       (day.hebrewDate ? ' / ' + day.hebrewDate.replace(/\s+\d{4}$/, '') : '');
-    var header = '<h2 class="page-date">' +
+    var isSat = dObj.getDay() === 6;
+    var header = '<h2 class="page-date' + (isSat ? ' is-holy' : '') + '" id="page-date">' +
       '<button type="button" class="day-step" data-day="' + (prevDay || '') + '"' + (prevDay ? '' : ' disabled') + ' aria-label="Previous day">&lsaquo;</button>' +
       '<span class="page-date-text">' + titleDate + '</span>' +
       '<button type="button" class="day-step" data-day="' + (nextDay || '') + '"' + (nextDay ? '' : ' disabled') + ' aria-label="Next day">&rsaquo;</button>' +
       '</h2>' +
-      '<p class="page-parsha page-weekday">' + dObj.toLocaleDateString('en-GB', { weekday: 'long' }) + '</p>';
+      '<p class="page-parsha page-weekday" id="page-weekday">' + (isSat ? 'Shabbat' : dObj.toLocaleDateString('en-GB', { weekday: 'long' })) +
+      '<span id="day-events">' + dayEventsHtml(planEvents(day)) + '</span></p>';
     if (day.parsha) {
       header += '<p class="page-parsha">Torah Portion: <em>' + day.parsha.name + '</em>' +
         (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</p>';
     }
-    header += '<p class="page-progress" id="day-progress"></p>';
     header += '<p class="page-refs">' +
       refs.map(function (r, i) { return '<a href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' + displayRef(r) + '</a>'; }).join(' &middot; ') + '</p>' +
       '';
@@ -899,7 +900,7 @@
     }
     var fn = e.target.closest('.fn-ref');
     if (fn) { togglePop(fn, true); return; }
-    if (!e.target.closest('#fn-pop, a.sref, .w[data-w]')) closePop();
+    if (!e.target.closest('#fn-pop, a.sref, .w[data-w], .day-event')) closePop();
   });
 
   window.addEventListener('hashchange', function () { goTo(portionFromHash(), false); });
@@ -1193,6 +1194,44 @@
 
   var CATEGORY_SKIP = { hebdate: 1, parashat: 1 };
 
+  // ── Special days beside the weekday: "Monday, Rosh Chodesh Day 2" (tap for Hebcal's explanation) ──
+  var dayEvents = [];
+  function shortEvent(title) {   // on Shabbat, "Shabbat Machar Chodesh" reads "Shabbat, Machar Chodesh"
+    return title.replace(/^Shabbat\s+/, '');
+  }
+  function planEvents(day) {     // from the reading plan, before Hebcal answers (or if it cannot be reached)
+    var o = day.occasion;
+    if (!o || o === 'Shabbat' || /^Shabbat,/.test(o)) return [];
+    return [{ title: o, he: '', memo: PLAN_MEMOS[o] || '' }];
+  }
+  // Occasions in the plan that Hebcal does not describe
+  var PLAN_MEMOS = {
+    'Shabbat Machar Chodesh': 'The Sabbath that falls on the day before Rosh Chodesh. Its special Haftarah, 1 Samuel 20:18–42, ' +
+      'begins: “Tomorrow is the New Moon.”'
+  };
+  function dayEventsHtml(list) {
+    dayEvents = list;
+    return list.map(function (ev, i) {
+      return ', <button type="button" class="day-event" data-ev="' + i + '"' + (ev.memo ? '' : ' disabled') + '>' +
+        escapeAttr(shortEvent(ev.title)) + '</button>';
+    }).join('');
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.day-event');
+    if (!b) return;
+    var ev = dayEvents[+b.getAttribute('data-ev')];
+    if (!ev || !ev.memo) return;
+    if (popFor === b && !pop.hidden) { closePop(); return; }
+    if (popFor && popFor !== b) popFor.setAttribute('aria-expanded', 'false');
+    popFor = b; pinned = true;
+    b.setAttribute('aria-expanded', 'true');
+    pop.classList.remove('wd-pop');
+    pop.innerHTML = '<span class="pv-ref">' + escapeAttr(ev.title) + (ev.he ? ' <span class="he">' + escapeAttr(ev.he) + '</span>' : '') + '</span>' +
+      '<span class="pv-text ev-text">' + escapeAttr(ev.memo.trim()) + '</span>' +
+      (ev.link ? '<a class="pv-open" href="' + escapeAttr(ev.link) + '" target="_blank" rel="noopener">Hebcal.com &rarr;</a>' : '');
+    placePop(b);
+  });
+
   // "Today" information: shown only when there is something to say
   // (a holiday, Rosh Chodesh, a special Shabbat, candle lighting or havdalah).
   function fillToday(day) {
@@ -1216,6 +1255,19 @@
         var dayNo = occasion.match(/\bDay \d\b/);
         if (match && dayNo) match.title += ' · ' + dayNo[0];
         if (!match || !events) items.unshift({ title: occasion, he: '', memo: '' });
+      }
+      if (events) {
+        var special = [], plan0 = planEvents(day)[0];
+        events.forEach(function (ev) {
+          if (ev.category !== 'holiday' && ev.category !== 'roshchodesh') return;
+          var t = niceTitle(ev.title);
+          if (plan0 && /\bDay \d\b/.test(plan0.title) && t.toLowerCase().indexOf(plan0.title.split(' Day')[0].toLowerCase()) === 0) t = plan0.title;
+          special.push({ title: t, he: ev.hebrew || '', memo: ev.memo || '', link: ev.link || '' });
+          if (ev.yomtov) { var pd = document.getElementById('page-date'); if (pd) pd.classList.add('is-holy'); }
+        });
+        if (plan0 && !special.some(function (x) { return x.title.toLowerCase().indexOf(plan0.title.toLowerCase().split(' ').slice(0, 2).join(' ')) === 0; })) special.unshift(plan0);
+        var holder = document.getElementById('day-events');
+        if (holder) holder.innerHTML = dayEventsHtml(special);
       }
       var label = day.date === todayISO() ? 'Today' : 'This day';
       var html = items.map(function (it, i) {

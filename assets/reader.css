@@ -108,7 +108,7 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --track: #d9d2ca;         /* switch (off) */
   --shadow: rgba(55, 44, 35, 0.14);
   color-scheme: light;
-  --topbar-h: 58px;
+  --topbar-h: 66px;
   --serif: 'Source Serif 4', 'Merriweather', Georgia, serif;
   --display: 'Merriweather', Georgia, serif;
   --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
@@ -150,6 +150,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   color: var(--heading); letter-spacing: -0.015em; margin-bottom: 0.45rem;
 }
 .page-parsha.page-weekday { margin-bottom: 0.15rem; }
+.page-date.is-holy { font-weight: 700; letter-spacing: -0.01em; }
+.day-event { background: none; border: none; padding: 0; font: inherit; color: var(--accent); cursor: pointer;
+  text-decoration: underline dotted; text-decoration-color: var(--accent-soft); text-underline-offset: 3px; }
+.day-event:hover { color: var(--accent-deep); }
+.day-event:disabled { cursor: default; text-decoration: none; color: var(--accent); opacity: 1; }
+.ev-text { font-family: var(--serif); }
 .page-parsha {
   text-align: center; font-family: var(--display); font-size: 0.92rem;
   color: var(--muted); margin-bottom: 0.6rem;
