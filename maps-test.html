@@ -104,6 +104,7 @@
     <button type="button" class="sp-close" data-close aria-label="Close settings">&times;</button>
   </div>
 
+  <p class="sp-group">Page</p>
   <div class="sp-row">
     <span class="sp-label">Text Size</span>
     <div class="sp-stepper">
@@ -112,7 +113,6 @@
       <button type="button" data-size="1" aria-label="Larger text"><span class="sp-a-large">A</span></button>
     </div>
   </div>
-
   <div class="sp-row">
     <span class="sp-label">Appearance</span>
     <div class="sp-seg sp-seg-theme" role="group" aria-label="Appearance">
@@ -122,7 +122,6 @@
       <button type="button" data-theme-opt="system" aria-pressed="true">Auto</button>
     </div>
   </div>
-
   <div class="sp-row">
     <span class="sp-label">Typeface</span>
     <div class="sp-seg" role="group" aria-label="Typeface">
@@ -130,8 +129,16 @@
       <button type="button" data-font="sans" aria-pressed="false" class="sp-sans">Sans</button>
     </div>
   </div>
+  <button type="button" class="sp-switch sp-switch-row" role="switch" aria-checked="false" data-setting="justify">
+    <span class="sp-label">Justified Text</span>
+    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+  </button>
 
-
+  <p class="sp-group">Bible Text</p>
+  <button type="button" class="sp-switch sp-switch-row" role="switch" aria-checked="false" data-setting="verseNumbers">
+    <span class="sp-label">Verse Numbers</span>
+    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+  </button>
   <div class="sp-row">
     <span class="sp-label">Divine Name</span>
     <div class="sp-seg sp-seg-name" role="group" aria-label="Divine name">
@@ -140,8 +147,6 @@
       <button type="button" data-name="hashem" aria-pressed="false"><span class="dn-sample">HaShem</span></button>
     </div>
   </div>
-
-
   <div class="sp-row">
     <span class="sp-label">Original Languages</span>
     <div class="sp-seg sp-seg-name" role="group" aria-label="Original language text">
@@ -150,7 +155,6 @@
       <button type="button" data-orig="only" aria-pressed="false">Only</button>
     </div>
   </div>
-
   <div class="sp-row sp-cant-row" hidden>
     <span class="sp-label">Hebrew Marks</span>
     <div class="sp-seg" role="group" aria-label="Hebrew marks">
@@ -159,24 +163,7 @@
     </div>
   </div>
 
-  <div class="sp-divider"></div>
-
-  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="justify">
-    <span class="sp-switch-text">
-      <span class="sp-switch-title">Justified Text</span>
-      <span class="sp-switch-sub">Bible prose aligned to both margins</span>
-    </span>
-    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
-  </button>
-
-  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="verseNumbers">
-    <span class="sp-switch-text">
-      <span class="sp-switch-title">Show Verse Numbers</span>
-      <span class="sp-switch-sub">Chapter numbers always show</span>
-    </span>
-    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
-  </button>
-
+  <p class="sp-group">Names &amp; Terms</p>
   <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="messianic">
     <span class="sp-switch-text">
       <span class="sp-switch-title">Messianic Filter</span>
@@ -184,7 +171,6 @@
     </span>
     <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
   </button>
-
   <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="hebrewNames">
     <span class="sp-switch-text">
       <span class="sp-switch-title">Hebrew Names</span>
