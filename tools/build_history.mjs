@@ -99,7 +99,7 @@ for (let iso = from; iso <= to; iso = H.addDays(iso, 1)) {
 }
 out.forEach(d => console.log(`${d.iso}  ${d.heb.padEnd(17)} ${d.loaded ? '   ' : ' · '} ${d.all.map(e => (e.kind === 'note' ? '[note] ' : '') + e.id).join(', ')}`));
 console.log('\n(· = that day is not in the reading plan files yet, so the site does not show it yet)');
-const shirah = entries.filter(e => e.anchor.type === 'event' && /shirah/i.test(e.anchor.event));
+const shirah = [];
 if (shirah.length) console.log('Shabbat Shirah is found from the plan’s Torah portion, so it appears once that week of the plan is loaded.');
 const none = entries.filter(e => !count.get(e.id) && !shirah.includes(e));
 if (none.length && !dates.length) console.log('Not in this range: ' + none.map(e => e.id).join(', '));
