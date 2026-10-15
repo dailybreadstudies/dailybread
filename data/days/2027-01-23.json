@@ -1,0 +1,26 @@
+{
+  "date": "2027-01-23",
+  "hebrewDate": "15 Shvat 5787",
+  "parsha": {
+    "name": "Beshalach",
+    "meaning": "When He Sent"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 17"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JDG 4:4-5:31"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 19:11-21"
+    }
+  ]
+}

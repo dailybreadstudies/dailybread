@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-11",
+  "hebrewDate": "1 Kislev 5787",
+  "parsha": {
+    "name": "Toldot",
+    "meaning": "Generations"
+  },
+  "occasion": "Rosh Chodesh Day 2",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 26:23-29"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JDG 12-13"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 35"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 26:31-56"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 11:17-36",
+      "optional": true
+    }
+  ]
+}

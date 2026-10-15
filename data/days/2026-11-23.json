@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-23",
+  "hebrewDate": "13 Kislev 5787",
+  "parsha": {
+    "name": "Vayishlach",
+    "meaning": "He Sent"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 32:13-29"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1SA 3"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 45"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 4:21-41"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 5",
+      "optional": true
+    }
+  ]
+}

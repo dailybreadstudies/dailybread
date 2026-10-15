@@ -1,0 +1,31 @@
+{
+  "date": "2027-04-03",
+  "hebrewDate": "25 Adar II 5787",
+  "parsha": {
+    "name": "Shmini",
+    "meaning": "Eighth"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 11:33-47"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "EXO 12:1-20"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "EZK 45:16-46:18"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 21:12-17"
+    }
+  ]
+}

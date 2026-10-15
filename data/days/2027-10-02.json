@@ -1,0 +1,31 @@
+{
+  "date": "2027-10-02",
+  "hebrewDate": "1 Tishrei 5788",
+  "parsha": {
+    "name": "Rosh HaShanah",
+    "meaning": "Feast of Trumpets"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 21:28-34"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "NUM 29:1-6"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1SA 1:1-2:10"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1TH 4:13-18"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-13",
+  "hebrewDate": "3 Kislev 5787",
+  "parsha": {
+    "name": "Toldot",
+    "meaning": "Generations"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 27:28-28:4"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JDG 16"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 37"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 27:1-31"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 13",
+      "optional": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "date": "2027-01-09",
+  "hebrewDate": "1 Shvat 5787",
+  "parsha": {
+    "name": "Va’era",
+    "meaning": "I Appeared"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 9:17-35"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 66"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 21:1-8"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "date": "2027-04-01",
+  "hebrewDate": "23 Adar II 5787",
+  "parsha": {
+    "name": "Shmini",
+    "meaning": "Eighth"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 10:16-20"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ISA 23"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PRO 7"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 24"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 18",
+      "optional": true
+    }
+  ]
+}

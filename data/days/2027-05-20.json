@@ -1,0 +1,36 @@
+{
+  "date": "2027-05-20",
+  "hebrewDate": "13 Iyar 5787",
+  "parsha": {
+    "name": "Behar",
+    "meaning": "On the Mountain"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 25:29-38"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 3"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "JOB 13"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 11:1-16"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 26:1-30",
+      "optional": true
+    }
+  ]
+}

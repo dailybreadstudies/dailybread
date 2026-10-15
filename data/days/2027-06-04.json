@@ -1,0 +1,36 @@
+{
+  "date": "2027-06-04",
+  "hebrewDate": "28 Iyar 5787",
+  "parsha": {
+    "name": "Bamidbar",
+    "meaning": "In the Wilderness"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 3:40-51"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 16"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "JOB 27"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 7:1-24"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 5:21-43",
+      "optional": true
+    }
+  ]
+}

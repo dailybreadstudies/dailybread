@@ -1,0 +1,36 @@
+{
+  "date": "2027-02-10",
+  "hebrewDate": "3 Adar I 5787",
+  "parsha": {
+    "name": "Trumah",
+    "meaning": "Heave Offering"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 26:15-30"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1KI 22"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 113"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 7:25-53"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2TI 3",
+      "optional": true
+    }
+  ]
+}

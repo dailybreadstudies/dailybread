@@ -1,0 +1,36 @@
+{
+  "date": "2027-03-14",
+  "hebrewDate": "5 Adar II 5787",
+  "parsha": {
+    "name": "Vayikra",
+    "meaning": "He Called"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 1:1-13"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ISA 2"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 142"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 9"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 3",
+      "optional": true
+    }
+  ]
+}

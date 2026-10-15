@@ -1,0 +1,41 @@
+{
+  "date": "2026-12-08",
+  "hebrewDate": "28 Kislev 5787",
+  "parsha": {
+    "name": "Miketz",
+    "meaning": "At the End"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 41:39-52"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "NUM 7:30-41"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1SA 18"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 58"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 12:28-44"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 15:29-58",
+      "optional": true
+    }
+  ]
+}

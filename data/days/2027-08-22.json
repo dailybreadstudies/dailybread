@@ -1,0 +1,36 @@
+{
+  "date": "2027-08-22",
+  "hebrewDate": "19 Av 5787",
+  "parsha": {
+    "name": "Re’eh",
+    "meaning": "See"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 11:26-12:10"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "EZK 42"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "1CH 16"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2TI 2:1-13"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 7:1-24",
+      "optional": true
+    }
+  ]
+}

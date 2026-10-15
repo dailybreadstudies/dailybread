@@ -1,0 +1,36 @@
+{
+  "date": "2027-09-01",
+  "hebrewDate": "29 Av 5787",
+  "parsha": {
+    "name": "Shoftim",
+    "meaning": "Judges"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 18:6-13"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "HOS 5-6"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "1CH 25"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 2"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 12:26-50",
+      "optional": true
+    }
+  ]
+}

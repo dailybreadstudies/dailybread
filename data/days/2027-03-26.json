@@ -1,0 +1,36 @@
+{
+  "date": "2027-03-26",
+  "hebrewDate": "17 Adar II 5787",
+  "parsha": {
+    "name": "Tsav",
+    "meaning": "Command"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 8:14-21"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ISA 15-16"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PRO 2"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 19"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 13",
+      "optional": true
+    }
+  ]
+}

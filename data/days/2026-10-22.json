@@ -25,6 +25,12 @@
       "label": "Apostles",
       "he": "שְׁלִיחִים",
       "ref": "MAT 14"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1JN 4",
+      "optional": true
     }
   ]
 }

@@ -3,7 +3,7 @@
   "hebrewDate": "16 Cheshvan 5787",
   "parsha": {
     "name": "Vayera",
-    "meaning": "And He Appeared"
+    "meaning": "He Appeared"
   },
   "portions": [
     {
@@ -25,6 +25,12 @@
       "label": "Apostles",
       "he": "שְׁלִיחִים",
       "ref": "MAT 18"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JUD 1",
+      "optional": true
     }
   ]
 }

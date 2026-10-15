@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-08",
+  "hebrewDate": "28 Cheshvan 5787",
+  "parsha": {
+    "name": "Toldot",
+    "meaning": "Generations"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 25:19-26:5"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JDG 9"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 32"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 25:1-23"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 9",
+      "optional": true
+    }
+  ]
+}

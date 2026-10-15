@@ -1,0 +1,36 @@
+{
+  "date": "2026-12-27",
+  "hebrewDate": "17 Tevet 5787",
+  "parsha": {
+    "name": "Shmot",
+    "meaning": "Names"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 1:1-17"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "2SA 6"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 74"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 5"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "GAL 2",
+      "optional": true
+    }
+  ]
+}

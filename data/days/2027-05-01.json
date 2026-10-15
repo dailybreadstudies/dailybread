@@ -1,0 +1,26 @@
+{
+  "date": "2027-05-01",
+  "hebrewDate": "24 Nisan 5787",
+  "parsha": {
+    "name": "Acharei Mot",
+    "meaning": "After the Death"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 16:18-18:30"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "AMO 9:7-15"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 15:12-21"
+    }
+  ]
+}

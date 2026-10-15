@@ -1,0 +1,36 @@
+{
+  "date": "2027-05-14",
+  "hebrewDate": "7 Iyar 5787",
+  "parsha": {
+    "name": "Emor",
+    "meaning": "Speak"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 23:33-44"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ISA 63-64"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "JOB 8"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 7"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 23",
+      "optional": true
+    }
+  ]
+}

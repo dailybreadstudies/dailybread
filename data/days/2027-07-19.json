@@ -1,0 +1,36 @@
+{
+  "date": "2027-07-19",
+  "hebrewDate": "14 Tamuz 5787",
+  "parsha": {
+    "name": "Pinchas",
+    "meaning": "Phinehas"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 26:5-51"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "EZK 13"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "NEH 1"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "EPH 5:18-33"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 11:1-28",
+      "optional": true
+    }
+  ]
+}

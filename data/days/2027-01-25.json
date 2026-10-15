@@ -1,0 +1,36 @@
+{
+  "date": "2027-01-25",
+  "hebrewDate": "17 Shvat 5787",
+  "parsha": {
+    "name": "Yitro",
+    "meaning": "Jethro"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 18:13-23"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1KI 8"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 99"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 23:1-25"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1TH 4",
+      "optional": true
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "date": "2027-04-27",
+  "hebrewDate": "20 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 9:1-14"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "NUM 28:19-25"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ISA 46-47"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PRO 26"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1JN 2"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 13:1-30",
+      "optional": true
+    }
+  ]
+}

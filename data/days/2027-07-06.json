@@ -1,0 +1,42 @@
+{
+  "date": "2027-07-06",
+  "hebrewDate": "1 Tamuz 5787",
+  "parsha": {
+    "name": "Korach",
+    "meaning": "Korah"
+  },
+  "occasion": "Rosh Chodesh Day 2",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 16:20-43"
+    },
+    {
+      "label": "Rosh Chodesh",
+      "he": "רֹאשׁ חֹדֶשׁ",
+      "ref": "NUM 28:11-15"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 50"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "DAN 12"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "GAL 1"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 4:22-44",
+      "optional": true
+    }
+  ]
+}

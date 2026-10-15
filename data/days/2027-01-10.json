@@ -1,0 +1,36 @@
+{
+  "date": "2027-01-10",
+  "hebrewDate": "2 Shvat 5787",
+  "parsha": {
+    "name": "Bo",
+    "meaning": "Come"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 10:1-11"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "2SA 19"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 86"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 12:1-34"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "PHP 1",
+      "optional": true
+    }
+  ]
+}

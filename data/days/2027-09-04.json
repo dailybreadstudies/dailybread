@@ -1,0 +1,26 @@
+{
+  "date": "2027-09-04",
+  "hebrewDate": "2 Elul 5787",
+  "parsha": {
+    "name": "Shoftim",
+    "meaning": "Judges"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 20:10-21:9"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 51:12-52:12"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1PE 1:3-13"
+    }
+  ]
+}

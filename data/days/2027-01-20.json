@@ -1,0 +1,36 @@
+{
+  "date": "2027-01-20",
+  "hebrewDate": "12 Shvat 5787",
+  "parsha": {
+    "name": "Beshalach",
+    "meaning": "When He Sent"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 14:26-15:26"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1KI 4"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 95"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 20"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "COL 4",
+      "optional": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "date": "2027-04-30",
+  "hebrewDate": "23 Nisan 5787",
+  "parsha": {
+    "name": "Acharei Mot",
+    "meaning": "After the Death"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 16:1-17"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ISA 48"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PRO 27"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1JN 3"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 13:31-58",
+      "optional": true
+    }
+  ]
+}

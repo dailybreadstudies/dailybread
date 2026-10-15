@@ -1,0 +1,36 @@
+{
+  "date": "2027-03-11",
+  "hebrewDate": "2 Adar II 5787",
+  "parsha": {
+    "name": "Pekudei",
+    "meaning": "Countings"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 40:1-16"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "2KI 25"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 140"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 7:30-60"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 2:1-11",
+      "optional": true
+    }
+  ]
+}

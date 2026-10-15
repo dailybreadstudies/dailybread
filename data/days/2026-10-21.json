@@ -25,6 +25,12 @@
       "label": "Apostles",
       "he": "שְׁלִיחִים",
       "ref": "MAT 13:31-58"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1JN 3",
+      "optional": true
     }
   ]
 }

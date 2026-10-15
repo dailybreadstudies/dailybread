@@ -25,6 +25,12 @@
       "label": "Apostles",
       "he": "שְׁלִיחִים",
       "ref": "MAT 12:1-21"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2PE 3",
+      "optional": true
     }
   ]
 }

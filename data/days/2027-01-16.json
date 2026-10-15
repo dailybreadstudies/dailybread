@@ -1,0 +1,26 @@
+{
+  "date": "2027-01-16",
+  "hebrewDate": "8 Shvat 5787",
+  "parsha": {
+    "name": "Bo",
+    "meaning": "Come"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 13:1-16"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JER 46:13-28"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 26:17-29"
+    }
+  ]
+}

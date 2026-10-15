@@ -1,0 +1,36 @@
+{
+  "date": "2027-05-02",
+  "hebrewDate": "25 Nisan 5787",
+  "parsha": {
+    "name": "Kedoshim",
+    "meaning": "Holy"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 19:1-14"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ISA 49"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PRO 28"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1JN 4"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 14",
+      "optional": true
+    }
+  ]
+}

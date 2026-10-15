@@ -1,0 +1,36 @@
+{
+  "date": "2027-08-06",
+  "hebrewDate": "3 Av 5787",
+  "parsha": {
+    "name": "Dvarim",
+    "meaning": "Words"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 2:31-3:14"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "EZK 30"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "1CH 4"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1TH 5"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 23:26-56",
+      "optional": true
+    }
+  ]
+}

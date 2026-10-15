@@ -1,0 +1,45 @@
+{
+  "date": "2027-08-12",
+  "hebrewDate": "9 Av 5787",
+  "parsha": {
+    "name": "Va’etchanan",
+    "meaning": "I Pleaded"
+  },
+  "portions": [
+    {
+      "label": "Evening",
+      "he": "עַרְבִית",
+      "ref": "LAM 1-5"
+    },
+    {
+      "label": "Morning",
+      "he": "שַׁחֲרִית",
+      "ref": "DEU 4:25-40"
+    },
+    {
+      "label": "Morning",
+      "he": "שַׁחֲרִית",
+      "ref": "JER 8:13-9:23"
+    },
+    {
+      "label": "Morning",
+      "he": "שַׁחֲרִית",
+      "ref": "1CO 3:1-20"
+    },
+    {
+      "label": "Afternoon",
+      "he": "מִנְחָה",
+      "ref": "EXO 32:11-14; 34:4-10"
+    },
+    {
+      "label": "Afternoon",
+      "he": "מִנְחָה",
+      "ref": "ISA 55:6-56:8"
+    },
+    {
+      "label": "Afternoon",
+      "he": "מִנְחָה",
+      "ref": "MAT 5:1-12"
+    }
+  ]
+}

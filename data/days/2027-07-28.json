@@ -1,0 +1,36 @@
+{
+  "date": "2027-07-28",
+  "hebrewDate": "23 Tamuz 5787",
+  "parsha": {
+    "name": "Mattot–Massei",
+    "meaning": "Tribes–Journeys"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 32:20-33:49"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "EZK 22"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "NEH 9"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "COL 1:15-29"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 17",
+      "optional": true
+    }
+  ]
+}

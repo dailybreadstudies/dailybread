@@ -1,0 +1,36 @@
+{
+  "date": "2027-02-28",
+  "hebrewDate": "21 Adar I 5787",
+  "parsha": {
+    "name": "Vayak’hel",
+    "meaning": "He Assembled"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 35:1-20"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "2KI 15"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 126-127"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 19"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 9:1-14",
+      "optional": true
+    }
+  ]
+}

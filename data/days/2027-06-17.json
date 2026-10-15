@@ -1,0 +1,36 @@
+{
+  "date": "2027-06-17",
+  "hebrewDate": "12 Sivan 5787",
+  "parsha": {
+    "name": "Nasso",
+    "meaning": "Take Up"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 7:1-41"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 29"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "JOB 37"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 15:1-28"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 12:1-27",
+      "optional": true
+    }
+  ]
+}

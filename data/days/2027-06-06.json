@@ -1,0 +1,42 @@
+{
+  "date": "2027-06-06",
+  "hebrewDate": "1 Sivan 5787",
+  "parsha": {
+    "name": "Shavuot",
+    "meaning": "Feast of Weeks"
+  },
+  "occasion": "Rosh Chodesh",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 14:22-29"
+    },
+    {
+      "label": "Rosh Chodesh",
+      "he": "רֹאשׁ חֹדֶשׁ",
+      "ref": "NUM 28:11-15"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 17"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "JOB 28"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 7:25-40"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 6:1-29",
+      "optional": true
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "date": "2027-07-12",
+  "hebrewDate": "7 Tamuz 5787",
+  "parsha": {
+    "name": "Chukat–Balak",
+    "meaning": "Statute–Balak"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 20:7-21"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "EZK 4-5"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "EZR 5"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "GAL 6"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 7:24-50",
+      "optional": true
+    }
+  ]
+}

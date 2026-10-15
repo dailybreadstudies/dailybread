@@ -1,0 +1,36 @@
+{
+  "date": "2027-06-08",
+  "hebrewDate": "3 Sivan 5787",
+  "parsha": {
+    "name": "Shavuot",
+    "meaning": "Feast of Weeks"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 15:19-23"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 20-21"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "JOB 30"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 9"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 7",
+      "optional": true
+    }
+  ]
+}

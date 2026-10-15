@@ -1,0 +1,26 @@
+{
+  "date": "2027-09-18",
+  "hebrewDate": "16 Elul 5787",
+  "parsha": {
+    "name": "Ki Tavo",
+    "meaning": "When You Come In"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 29:2-9"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 60"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 8:31-39"
+    }
+  ]
+}

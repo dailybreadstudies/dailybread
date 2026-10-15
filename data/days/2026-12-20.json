@@ -1,0 +1,46 @@
+{
+  "date": "2026-12-20",
+  "hebrewDate": "10 Tevet 5787",
+  "parsha": {
+    "name": "Vayechi",
+    "meaning": "He Lived"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 47:28-48:9"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1SA 30"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 68"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 1:57-80"
+    },
+    {
+      "label": "Synagogue",
+      "he": "בֵּית הַכְּנֶסֶת",
+      "ref": "EXO 32:11-14; 34:1-10"
+    },
+    {
+      "label": "Synagogue",
+      "he": "בֵּית הַכְּנֶסֶת",
+      "ref": "ISA 55:6-56:8"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2CO 9",
+      "optional": true
+    }
+  ]
+}

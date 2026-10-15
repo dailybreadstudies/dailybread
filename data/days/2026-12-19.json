@@ -1,0 +1,26 @@
+{
+  "date": "2026-12-19",
+  "hebrewDate": "9 Tevet 5787",
+  "parsha": {
+    "name": "Vayigash",
+    "meaning": "He Drew Near"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 47:11-27"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "EZK 37:15-28"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 3:13-26"
+    }
+  ]
+}

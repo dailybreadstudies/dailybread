@@ -23,8 +23,8 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
   (Light, **Sepia**, Dark, Auto via `data-theme`). `assets/maps.js/.css` — Bible maps (separate work stream).
 - Data: `data/bsb/` (BSB text + notes), `data/days/<date>.json` + `data/days/index.json` (days **and** each day's
   readings as `plan`), `data/orig/` (Hebrew MAM + Greek SBLGNT with textual notes), `data/words/` (STEPBible word study),
-  `data/maps/`. Rebuild commands are in `README.md`; new plan days: `python3 tools/make_days.py tools/plan-5787.txt 2026`
-  (only 5–31 Oct 2026 are loaded so far — John will supply more).
+  `data/maps/`. Rebuild commands are in `README.md`; the whole 5787 plan (4 Oct 2026 – 24 Oct 2027, 386 days) is loaded from
+  the journal PDF: `tools/journal_to_plan.py` → `tools/plan-5787.json` → `tools/make_days.py` (see README).
 - Hebcal (Today info, special days, Shabbat/candle times) is fetched live in the browser; it cannot be reached from the
   build workspace, so tests mock it with Playwright routes.
 
@@ -44,7 +44,11 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 7. Each reading ends with Previous · **Mark <Section> Complete** · Next (soft blue when complete; then auto-advances
    to the next unfinished reading after ~1 s), plus the journal line after the last reading.
 
-## Settings menu (A/א) — three groups
+## Settings menu (A/א) — four groups
+Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;
+the two are then labelled Gospels (Matthew–Acts) / Epistles (Romans–Revelation). The optional reading is always last in
+a day (index entry `[label, ref, 1]`, day file `"optional": true`), so progress numbering never shifts. It counts for
+catch-up / full days only from `settings.apostlesSince` (the day it was turned on).
 Page: Text Size, Appearance (Light/Sepia/Dark/Auto), Typeface, Justified Text (switch).
 Bible Text: Verse Numbers (switch, on by default — hidden numbers stay in the DOM for maps/notes), Divine Name
 (LORD/ADONAI/HASHEM), Original Languages (Off/Under Verses/Only) + Hebrew Marks.

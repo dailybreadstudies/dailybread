@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-05",
+  "hebrewDate": "25 Cheshvan 5787",
+  "parsha": {
+    "name": "Chayei Sarah",
+    "meaning": "Sara’s Life"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 24:53-67"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JDG 7"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 30"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 24:1-28"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 8:1-17",
+      "optional": true
+    }
+  ]
+}

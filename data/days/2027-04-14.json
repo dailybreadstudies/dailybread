@@ -1,0 +1,36 @@
+{
+  "date": "2027-04-14",
+  "hebrewDate": "7 Nisan 5787",
+  "parsha": {
+    "name": "Metzora",
+    "meaning": "Leper"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 14:33-53"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ISA 37"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PRO 18"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1PE 2"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 6",
+      "optional": true
+    }
+  ]
+}

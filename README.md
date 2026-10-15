@@ -12,16 +12,19 @@ Live site: https://dailybreadstudies.github.io/dailybread/
 - `data/bsb/<BOOK>.json` — the whole Berean Standard Bible with its section headings, poetry layout
   and translation footnotes, stored in this repository so the site never depends on an outside API.
 
-## Adding readings from the Daily Bread plan
+## The Daily Bread plan
 
-Paste the plan into `tools/plan-5787.txt` (two lines per day, as printed), then:
+The whole year comes from the journal PDF:
 
 ```
-python3 tools/make_days.py tools/plan-5787.txt 2026
+python3 tools/journal_to_plan.py DB-5787-inside.pdf tools/plan-5787.json   # read every day from the PDF
+python3 tools/make_days.py tools/plan-5787.json                           # check every reference, write the days
 ```
 
-This writes one file per day in `data/days/`, checks every reference against the BSB,
-and keeps any intro text already written for a day.
+`tools/plan-5787.json` (one line per day: date, Hebrew date, Torah portion, occasion, readings, and `extra`, the
+optional second Apostolic reading in parentheses) can be corrected by hand and rebuilt with `make_days.py`.
+A reading can have several parts in one book ("Joshua 3:5–7; 5:2–6:1, 27"). Three misprints in the 5787 journal
+are corrected in `journal_to_plan.py` (`CORRECT`). Day files keep any intro text already written.
 
 ## Jewish calendar and Shabbat times
 

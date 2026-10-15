@@ -1,0 +1,36 @@
+{
+  "date": "2027-01-06",
+  "hebrewDate": "27 Tevet 5787",
+  "parsha": {
+    "name": "Va’era",
+    "meaning": "I Appeared"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 7:8-8:10"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "2SA 16"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 83"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 10"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "EPH 5:1-17",
+      "optional": true
+    }
+  ]
+}

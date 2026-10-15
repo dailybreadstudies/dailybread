@@ -1,0 +1,26 @@
+{
+  "date": "2027-02-13",
+  "hebrewDate": "6 Adar I 5787",
+  "parsha": {
+    "name": "Trumah",
+    "meaning": "Heave Offering"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 27:9-19"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1KI 5:12-6:13"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 8:1-6"
+    }
+  ]
+}

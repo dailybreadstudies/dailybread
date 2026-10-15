@@ -1,0 +1,36 @@
+{
+  "date": "2027-02-21",
+  "hebrewDate": "14 Adar I 5787",
+  "parsha": {
+    "name": "Ki Tisa",
+    "meaning": "When You Count"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 30:11-31:17"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "2KI 9"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 119:97-120"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 13"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 4",
+      "optional": true
+    }
+  ]
+}

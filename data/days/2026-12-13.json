@@ -1,0 +1,36 @@
+{
+  "date": "2026-12-13",
+  "hebrewDate": "3 Tevet 5787",
+  "parsha": {
+    "name": "Vayigash",
+    "meaning": "He Drew Near"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 44:18-30"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1SA 22"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 62"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 14:53-72"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2CO 3",
+      "optional": true
+    }
+  ]
+}

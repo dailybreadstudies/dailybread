@@ -1,0 +1,36 @@
+{
+  "date": "2027-07-02",
+  "hebrewDate": "27 Sivan 5787",
+  "parsha": {
+    "name": "Shlach",
+    "meaning": "Send"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 15:17-26"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 46-47"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "DAN 9"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2CO 11"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 2:22-52",
+      "optional": true
+    }
+  ]
+}

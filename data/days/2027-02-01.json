@@ -1,0 +1,36 @@
+{
+  "date": "2027-02-01",
+  "hebrewDate": "24 Shvat 5787",
+  "parsha": {
+    "name": "Mishpatim",
+    "meaning": "Judgments"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 21:20-22:4"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1KI 14"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 105"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 2"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1TI 2",
+      "optional": true
+    }
+  ]
+}

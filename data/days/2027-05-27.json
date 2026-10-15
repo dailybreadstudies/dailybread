@@ -1,0 +1,36 @@
+{
+  "date": "2027-05-27",
+  "hebrewDate": "20 Iyar 5787",
+  "parsha": {
+    "name": "Bechukotai",
+    "meaning": "In My Statutes"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 27:16-21"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 9"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "JOB 19"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 16"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 1:1-20",
+      "optional": true
+    }
+  ]
+}

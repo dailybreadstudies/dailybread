@@ -1,0 +1,36 @@
+{
+  "date": "2027-10-10",
+  "hebrewDate": "9 Tishrei 5788",
+  "parsha": {
+    "name": "Yom Kippur",
+    "meaning": "Day of Atonement"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 22:26-33"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ZEC 9"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "2CH 29"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 15"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 21:1-16",
+      "optional": true
+    }
+  ]
+}

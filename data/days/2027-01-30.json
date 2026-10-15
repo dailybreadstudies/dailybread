@@ -1,0 +1,26 @@
+{
+  "date": "2027-01-30",
+  "hebrewDate": "22 Shvat 5787",
+  "parsha": {
+    "name": "Yitro",
+    "meaning": "Jethro"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 20:18-26"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 6:1-7:6; 9:6-7"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 5:13-20"
+    }
+  ]
+}

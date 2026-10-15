@@ -1,0 +1,42 @@
+{
+  "date": "2026-12-10",
+  "hebrewDate": "30 Kislev 5787",
+  "parsha": {
+    "name": "Miketz",
+    "meaning": "At the End"
+  },
+  "occasion": "Rosh Chodesh Day 1",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 42:19-43:15"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "NUM 7:42-47"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1SA 20"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 60"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 14:1-26"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2CO 1",
+      "optional": true
+    }
+  ]
+}

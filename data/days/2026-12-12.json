@@ -1,0 +1,31 @@
+{
+  "date": "2026-12-12",
+  "hebrewDate": "2 Tevet 5787",
+  "parsha": {
+    "name": "Miketz",
+    "meaning": "At the End"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 43:30-44:17"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "NUM 7:54-8:4"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ZEC 2:10-4:7"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 10:22-38"
+    }
+  ]
+}

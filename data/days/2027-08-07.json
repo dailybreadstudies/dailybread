@@ -1,0 +1,26 @@
+{
+  "date": "2027-08-07",
+  "hebrewDate": "4 Av 5787",
+  "parsha": {
+    "name": "Dvarim",
+    "meaning": "Words"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 3:15-22"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 1:1-27"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 3:1-12"
+    }
+  ]
+}

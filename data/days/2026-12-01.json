@@ -1,0 +1,36 @@
+{
+  "date": "2026-12-01",
+  "hebrewDate": "21 Kislev 5787",
+  "parsha": {
+    "name": "Vayeshev",
+    "meaning": "He Settled"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 37:23-36"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1SA 12"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 52"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 9:1-29"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 11",
+      "optional": true
+    }
+  ]
+}

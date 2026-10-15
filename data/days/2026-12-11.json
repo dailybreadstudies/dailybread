@@ -1,0 +1,42 @@
+{
+  "date": "2026-12-11",
+  "hebrewDate": "1 Tevet 5787",
+  "parsha": {
+    "name": "Miketz",
+    "meaning": "At the End"
+  },
+  "occasion": "Rosh Chodesh Day 2",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 43:16-29"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "NUM 7:48-53; 28:11-15"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1SA 21"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 61"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 14:27-52"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2CO 2",
+      "optional": true
+    }
+  ]
+}

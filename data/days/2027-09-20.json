@@ -1,0 +1,36 @@
+{
+  "date": "2027-09-20",
+  "hebrewDate": "18 Elul 5787",
+  "parsha": {
+    "name": "Nitzavim–Vayelech",
+    "meaning": "Standing–He Went"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 30:1-6"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "MIC 5"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "2CH 13"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 13"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 7",
+      "optional": true
+    }
+  ]
+}

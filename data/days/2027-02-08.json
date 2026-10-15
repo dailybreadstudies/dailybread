@@ -1,0 +1,42 @@
+{
+  "date": "2027-02-08",
+  "hebrewDate": "1 Adar I 5787",
+  "parsha": {
+    "name": "Trumah",
+    "meaning": "Heave Offering"
+  },
+  "occasion": "Rosh Chodesh Day 2",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 25:17-30"
+    },
+    {
+      "label": "Rosh Chodesh",
+      "he": "רֹאשׁ חֹדֶשׁ",
+      "ref": "NUM 28:11-15"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "1KI 20"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 111"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 6:37-71"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2TI 2:1-13",
+      "optional": true
+    }
+  ]
+}

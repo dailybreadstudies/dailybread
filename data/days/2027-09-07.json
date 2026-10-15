@@ -1,0 +1,36 @@
+{
+  "date": "2027-09-07",
+  "hebrewDate": "5 Elul 5787",
+  "parsha": {
+    "name": "Ki Tetze",
+    "meaning": "When You Go Out"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 22:8-23:6"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JOL 1"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "2CH 1"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 7:1-14"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 17",
+      "optional": true
+    }
+  ]
+}

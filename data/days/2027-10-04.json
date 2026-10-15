@@ -1,0 +1,46 @@
+{
+  "date": "2027-10-04",
+  "hebrewDate": "3 Tishrei 5788",
+  "parsha": {
+    "name": "Ha’azinu",
+    "meaning": "Listen"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 32:1-6"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "HAG 1-2"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "2CH 24"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 10"
+    },
+    {
+      "label": "Synagogue",
+      "he": "בֵּית הַכְּנֶסֶת",
+      "ref": "EXO 32:11-14; 34:1-10"
+    },
+    {
+      "label": "Synagogue",
+      "he": "בֵּית הַכְּנֶסֶת",
+      "ref": "ISA 55:6-56:8"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 17:19-34",
+      "optional": true
+    }
+  ]
+}

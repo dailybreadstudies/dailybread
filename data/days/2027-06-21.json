@@ -1,0 +1,36 @@
+{
+  "date": "2027-06-21",
+  "hebrewDate": "16 Sivan 5787",
+  "parsha": {
+    "name": "Beha’alotcha",
+    "meaning": "When You Set Up"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 8:15-26"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JER 32"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "JOB 40"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2CO 1"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 14:1-26",
+      "optional": true
+    }
+  ]
+}

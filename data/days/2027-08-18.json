@@ -1,0 +1,36 @@
+{
+  "date": "2027-08-18",
+  "hebrewDate": "15 Av 5787",
+  "parsha": {
+    "name": "Ekev",
+    "meaning": "Consequence"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 10:1-11"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "EZK 39"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "1CH 13"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1TI 5:11-25"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 5",
+      "optional": true
+    }
+  ]
+}

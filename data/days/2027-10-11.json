@@ -1,0 +1,50 @@
+{
+  "date": "2027-10-11",
+  "hebrewDate": "10 Tishrei 5788",
+  "parsha": {
+    "name": "Yom Kippur",
+    "meaning": "Day of Atonement"
+  },
+  "portions": [
+    {
+      "label": "Morning",
+      "he": "שַׁחֲרִית",
+      "ref": "LEV 16"
+    },
+    {
+      "label": "Morning",
+      "he": "שַׁחֲרִית",
+      "ref": "NUM 29:7-11"
+    },
+    {
+      "label": "Morning",
+      "he": "שַׁחֲרִית",
+      "ref": "ISA 57:14-58:14"
+    },
+    {
+      "label": "Morning",
+      "he": "שַׁחֲרִית",
+      "ref": "JAS 4:1-12"
+    },
+    {
+      "label": "Afternoon",
+      "he": "מִנְחָה",
+      "ref": "LEV 18"
+    },
+    {
+      "label": "Afternoon",
+      "he": "מִנְחָה",
+      "ref": "JON 1-4"
+    },
+    {
+      "label": "Afternoon",
+      "he": "מִנְחָה",
+      "ref": "MIC 7:18-20"
+    },
+    {
+      "label": "Afternoon",
+      "he": "מִנְחָה",
+      "ref": "2PE 3:9-14"
+    }
+  ]
+}

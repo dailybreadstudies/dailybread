@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-18",
+  "hebrewDate": "8 Kislev 5787",
+  "parsha": {
+    "name": "Vayetze",
+    "meaning": "He Went Out"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 30:14-27"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "JDG 20"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 41"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 1:21-45"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 1",
+      "optional": true
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "date": "2027-05-29",
+  "hebrewDate": "22 Iyar 5787",
+  "parsha": {
+    "name": "Bechukotai",
+    "meaning": "In My Statutes"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 27:29-34"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JER 16:19-17:14"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 14:15-27"
+    }
+  ]
+}

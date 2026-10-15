@@ -1,0 +1,20 @@
+{
+  "date": "2027-03-23",
+  "hebrewDate": "14 Adar II 5787",
+  "parsha": {
+    "name": "Tsav",
+    "meaning": "Command"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 17:8-16"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 19:1-5"
+    }
+  ]
+}

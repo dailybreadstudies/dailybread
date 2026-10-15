@@ -1,0 +1,36 @@
+{
+  "date": "2027-10-01",
+  "hebrewDate": "29 Elul 5787",
+  "parsha": {
+    "name": "Rosh HaShanah",
+    "meaning": "Feast of Trumpets"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 21:22-27"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "ZEP 3"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "2CH 23"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 9"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 17:1-18",
+      "optional": true
+    }
+  ]
+}

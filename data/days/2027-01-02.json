@@ -1,0 +1,26 @@
+{
+  "date": "2027-01-02",
+  "hebrewDate": "23 Tevet 5787",
+  "parsha": {
+    "name": "Shmot",
+    "meaning": "Names"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 5:1-6:1"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 27:6-28:13; 29:22-23"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 7:17-37"
+    }
+  ]
+}

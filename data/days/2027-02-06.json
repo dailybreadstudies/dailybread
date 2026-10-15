@@ -1,0 +1,26 @@
+{
+  "date": "2027-02-06",
+  "hebrewDate": "29 Shvat 5787",
+  "parsha": {
+    "name": "Mishpatim",
+    "meaning": "Judgments"
+  },
+  "occasion": "Shabbat Machar Chodesh",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 23:26-24:18"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1SA 20:18-42"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 1:26-33"
+    }
+  ]
+}

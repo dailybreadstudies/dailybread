@@ -1,0 +1,26 @@
+{
+  "date": "2027-09-11",
+  "hebrewDate": "9 Elul 5787",
+  "parsha": {
+    "name": "Ki Tetze",
+    "meaning": "When You Go Out"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 24:14-25:19"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 54:1-10"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ROM 8:18-30"
+    }
+  ]
+}

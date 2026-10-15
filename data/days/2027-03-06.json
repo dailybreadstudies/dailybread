@@ -1,0 +1,31 @@
+{
+  "date": "2027-03-06",
+  "hebrewDate": "27 Adar I 5787",
+  "parsha": {
+    "name": "Vayak’hel",
+    "meaning": "He Assembled"
+  },
+  "occasion": "Shabbat",
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 38:1-20"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "EXO 30:11-16"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "2KI 12:1-16"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 17:24-27"
+    }
+  ]
+}

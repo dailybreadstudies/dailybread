@@ -1,0 +1,36 @@
+{
+  "date": "2027-09-17",
+  "hebrewDate": "15 Elul 5787",
+  "parsha": {
+    "name": "Ki Tavo",
+    "meaning": "When You Come In"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 28:7-29:1"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "MIC 1-2"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "2CH 11"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 12:1-14"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 5",
+      "optional": true
+    }
+  ]
+}

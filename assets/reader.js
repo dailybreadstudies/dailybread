@@ -32,7 +32,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true, apostlesTwice: false, apostlesSince: null };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -162,7 +162,17 @@
   }
 
   // ── References: "GEN 6:9-22", "PSA 8", "JOS 8", "GEN 6:9-7:5" ──
+  // A reading in several parts of one book: "JOS 3:5-7; 5:2-6:1; 6:27" → the first part, with .parts listing all
   function parseRef(ref) {
+    var bits = String(ref).split(';');
+    if (bits.length > 1) {
+      var first = parseOne(bits[0]);
+      first.parts = bits.map(function (b, i) { return i ? parseOne(first.book + ' ' + b.trim()) : parseOne(bits[0]); });
+      return first;
+    }
+    return parseOne(ref);
+  }
+  function parseOne(ref) {
     var m = ref.trim().match(/^(\w{3})\s+(\d+)(?::(\d+))?(?:\s*[-–]\s*(?:(\d+):)?(\d+))?$/);
     if (!m) throw new Error('Cannot read reference: ' + ref);
     var c1 = +m[2], v1 = m[3] ? +m[3] : 1;
@@ -183,7 +193,15 @@
   }
 
   function displayRef(r) {
+    if (r.parts) {
+      var head = displayRef(r.parts[0]), name0 = head.replace(/\s\d.*$/, '');
+      return head + r.parts.slice(1).map(function (p) { return '; ' + displayRef(p).replace(name0 + ' ', ''); }).join('');
+    }
     var name = bookName(r.book);
+    var one = (bookIndex || []).filter(function (b) { return b.id === r.book; })[0];
+    if (one && one.chapters === 1 && r.c1 === 1 && r.c2 === 1 && !(r.v1 === 1 && r.v2 === null)) {   // Jude 5–25
+      return name + ' ' + r.v1 + (r.v2 === null ? '–end' : r.v2 !== r.v1 ? '–' + r.v2 : '');
+    }
     if (/^Psalms?$/.test(name)) name = r.c1 === r.c2 ? 'Psalm' : 'Psalms';   // Psalm 8, but Psalms 3–4
     var s = name + ' ' + r.c1;
     var wholeStart = r.v1 === 1;
@@ -319,6 +337,22 @@
       html = renderOriginal(units, orig, multiChapter, tnotes);
     }
     return { html: html, notes: notes, titles: titles, originalOnly: !!orig && settings.original === 'only', textNotes: tnotes };
+  }
+
+  // A reading in several parts: each part in turn, with its reference between them
+  function renderParts(book, r, pIndex) {
+    if (!r.parts) return renderPassage(book, r, pIndex);
+    var out = { html: '', notes: [], titles: [], originalOnly: false, textNotes: [] };
+    r.parts.forEach(function (part, k) {
+      var one = renderPassage(book, part, pIndex + '-' + k);
+      if (k) out.html += '<p class="part-ref">' + escapeAttr(displayRef(part)) + '</p>';
+      out.html += one.html;
+      out.notes = out.notes.concat(one.notes);
+      one.titles.forEach(function (t) { if (out.titles.indexOf(t) < 0) out.titles.push(t); });
+      out.textNotes = out.textNotes.concat(one.textNotes);
+      out.originalOnly = one.originalOnly;
+    });
+    return out;
   }
 
   // ── Word study (STEPBible, CC BY 4.0): tap a Hebrew or Greek word ──
@@ -613,7 +647,7 @@
     var html = '';
     day.portions.forEach(function (p, i) {
       var r = refs[i];
-      var passage = renderPassage(books[r.book], r, i + 1);
+      var passage = renderParts(books[r.book], r, i + 1);
       var n = i + 1;
       html += '<section class="portion" id="portion-' + n + '" data-book="' + r.book + '" data-c="' + r.c1 + '" aria-label="' + escapeAttr(p.label) + '">';
       if (i === 0) {
@@ -660,7 +694,38 @@
   // unread readings stop counting as catch-up. Older saves ({ done: { date: 1 } }) meant the whole day.
   var PLAN_START = '2026-10-04', PLAN_END = '2027-10-24', PLAN_YEAR = 5787;   // the 5787 Daily Bread year
   var JOURNAL_URL = 'https://arielmedia.shop/collections/dailybread';
-  var plan = {};                                            // date -> [[label, ref], …] from data/days/index.json
+  var plan = {};                                            // date -> [[label, ref], …] as shown (see trackPlan)
+  var fullPlan = {};                                        // date -> [[label, ref, optional?], …] from data/days/index.json
+
+  // ── Optional track: the Apostolic Scriptures twice a year ──
+  // The journal prints a second Apostolic reading in parentheses. With "Apostolic Scriptures Twice a Year" on, it is a
+  // fifth reading, and the day's two Apostolic readings are named Gospels (Matthew–Acts) and Epistles (Romans–Revelation).
+  // The optional reading is always last in a day, so turning the track on or off never renumbers the other readings.
+  var GOSPEL_BOOKS = { MAT: 1, MRK: 1, LUK: 1, JHN: 1, ACT: 1 };
+  var TRACK_HE = { Gospels: 'בְּשׂוֹרוֹת', Epistles: 'אִגְּרוֹת' };
+  function trackLabel(ref) { return GOSPEL_BOOKS[String(ref).slice(0, 3)] ? 'Gospels' : 'Epistles'; }
+  function trackEntries(list) {          // [[label, ref, opt]] → as shown with the current setting
+    var hasExtra = list.some(function (x) { return x[2]; });
+    return list.filter(function (x) { return !x[2] || settings.apostlesTwice; }).map(function (x) {
+      if (settings.apostlesTwice && hasExtra && x[0] === 'Apostles') return [trackLabel(x[1]), x[1], x[2] || 0];
+      return x;
+    });
+  }
+  function trackPlan() {
+    plan = {};
+    Object.keys(fullPlan).forEach(function (d) { plan[d] = trackEntries(fullPlan[d]); });
+  }
+  function trackDay(day) {               // the same for a day file's portions
+    var list = day.portions.map(function (p) { return [p.label, p.ref, p.optional ? 1 : 0]; });
+    var shown = trackEntries(list);
+    day.portions = day.portions.filter(function (p) { return !p.optional || settings.apostlesTwice; }).map(function (p, i) {
+      var lab = shown[i][0];
+      return lab === p.label ? p : Object.assign({}, p, { label: lab, he: TRACK_HE[lab] || p.he });
+    });
+    return day;
+  }
+  // An optional reading counts (for catch-up and full days) only from the day the track was turned on
+  function counts(iso, x) { return !x[2] || (settings.apostlesSince && iso >= settings.apostlesSince); }
   var progress = { read: {}, since: null, done: null, chapters: {}, archive: {} };
   try {
     var savedProg = JSON.parse(localStorage.getItem('dbs-progress') || 'null');
@@ -689,7 +754,7 @@
     Object.keys(progress.read).forEach(function (d) {
       var y = cycleOf(d);
       if (y >= now) return;
-      bucket(y).read[d] = progress.read[d].map(function (n) { return plan[d] && plan[d][n - 1] ? plan[d][n - 1] : ['', '']; });
+      bucket(y).read[d] = progress.read[d].map(function (n) { return fullPlan[d] && fullPlan[d][n - 1] ? fullPlan[d][n - 1].slice(0, 2) : ['', '']; });
       delete progress.read[d]; changed = true;
     });
     Object.keys(progress.chapters).forEach(function (k) {
@@ -718,8 +783,10 @@
   }
   function isRead(iso, n) { return (progress.read[iso] || []).indexOf(n) >= 0; }
   function readCount(iso) { return (progress.read[iso] || []).length; }
-  function dayTotal(iso) { return plan[iso] ? plan[iso].length : 0; }
-  function dayComplete(iso) { var t = dayTotal(iso); return t > 0 && readCount(iso) >= t; }
+  function dayTotal(iso) { return plan[iso] ? plan[iso].filter(function (x) { return counts(iso, x); }).length : 0; }
+  function dayComplete(iso) {
+    return !!plan[iso] && plan[iso].length > 0 && plan[iso].every(function (x, i) { return !counts(iso, x) || isRead(iso, i + 1); });
+  }
   function setRead(iso, n, on) {
     var list = (progress.read[iso] || []).filter(function (x) { return x !== n; });
     if (on) list.push(n);
@@ -743,12 +810,13 @@
     if (!from) return out;
     planDays.forEach(function (d) {
       if (d < from || d >= today || !plan[d]) return;
-      plan[d].forEach(function (x, i) { if (!isRead(d, i + 1)) out.push({ date: d, n: i + 1, label: x[0], ref: x[1] }); });
+      plan[d].forEach(function (x, i) { if (counts(d, x) && !isRead(d, i + 1)) out.push({ date: d, n: i + 1, label: x[0], ref: x[1] }); });
     });
     return out;
   }
   function sectionOf(label) {
     if (label === 'Haftarah') return 'Prophets';
+    if (label === 'Gospels' || label === 'Epistles') return 'Apostles';
     return ['Torah', 'Prophets', 'Writings', 'Apostles'].indexOf(label) >= 0 ? label : 'Feast readings';
   }
   function shortDate(iso) {
@@ -877,6 +945,7 @@
     html += '<h2 class="pg-h">Day by day</h2><ol class="pr-days">' + days.slice().reverse().map(function (d) {
       return '<li><a class="pr-day" href="./?d=' + d + '"><span class="pr-d-date">' + weekdayDate(d) + '</span><span class="pr-dots">' +
         plan[d].map(function (x, i) {
+          if (!counts(d, x) && !isRead(d, i + 1)) return '';   // optional reading before the track was turned on
           var cls = isRead(d, i + 1) ? 'on' : (d < today ? 'miss' : '');
           return '<span class="pr-dot ' + cls + '" title="' + escapeAttr(x[0] + ': ' + refLabel(x[1])) + '"></span>';
         }).join('') + '</span></a></li>';
@@ -895,7 +964,7 @@
     var out = [];
     if (y === undefined || y === currentCycle()) {
       Object.keys(progress.read).forEach(function (d) {
-        (progress.read[d] || []).forEach(function (n) { var x = plan[d] && plan[d][n - 1]; if (x) out.push(x[1]); });
+        (progress.read[d] || []).forEach(function (n) { var x = fullPlan[d] && fullPlan[d][n - 1]; if (x) out.push(x[1]); });
       });
       Object.keys(progress.chapters).forEach(function (k) { out.push(k.replace('.', ' ')); });
     } else {
@@ -908,16 +977,18 @@
   function readVerses(refs, lastVerse) {   // → { GEN: { 1: { 1: true, … } } }; lastVerse(book, c) gives a chapter's verse count
     var out = {};
     refs.forEach(function (ref) {
-      var r;
-      try { r = parseRef(ref); } catch (e) { return; }
-      for (var c = r.c1; c <= r.c2; c++) {
-        var last = lastVerse(r.book, c);
-        if (!last) continue;
-        var from = c === r.c1 ? r.v1 : 1;
-        var to = c === r.c2 && r.v2 ? Math.min(r.v2, last) : last;
-        var ch = ((out[r.book] = out[r.book] || {})[c] = out[r.book][c] || {});
-        for (var v = from; v <= to; v++) ch[v] = true;
-      }
+      var whole;
+      try { whole = parseRef(ref); } catch (e) { return; }
+      (whole.parts || [whole]).forEach(function (r) {
+        for (var c = r.c1; c <= r.c2; c++) {
+          var last = lastVerse(r.book, c);
+          if (!last) continue;
+          var from = c === r.c1 ? r.v1 : 1;
+          var to = c === r.c2 && r.v2 ? Math.min(r.v2, last) : last;
+          var ch = ((out[r.book] = out[r.book] || {})[c] = out[r.book][c] || {});
+          for (var v = from; v <= to; v++) ch[v] = true;
+        }
+      });
     });
     return out;
   }
@@ -1347,6 +1418,14 @@
     } else if (t.getAttribute('role') === 'switch') {
       var key = t.getAttribute('data-setting');
       settings[key] = !settings[key];
+      if (key === 'apostlesTwice') {
+        if (settings.apostlesTwice) settings.apostlesSince = todayISO();
+        trackPlan();
+        saveSettings(); refreshPanel();
+        if (PAGE === 'progress') drawProgressPage();
+        else if (current && current.day) loadDay(current.day.date, true);
+        return;
+      }
       if (key === 'justify' || key === 'verseNumbers') applyLook();   // display only
       else rerender();   // re-render with the new wording
     }
@@ -1965,7 +2044,7 @@
     if (!last) return false;
     var refs = [];
     Object.keys(progress.read).forEach(function (d) {
-      (progress.read[d] || []).forEach(function (n) { var x = plan[d] && plan[d][n - 1]; if (x) refs.push(x[1]); });
+      (progress.read[d] || []).forEach(function (n) { var x = fullPlan[d] && fullPlan[d][n - 1]; if (x) refs.push(x[1]); });
     });
     var got = (readVerses(refs, function (b, ch) { return b === book && ch === c ? last : 0; })[book] || {})[c] || {};
     for (var v = 1; v <= last; v++) if (!got[v]) return false;
@@ -2185,6 +2264,7 @@
   function loadDay(date, replace) {
     if (PAGE !== 'today') { location.href = './?d=' + date; return new Promise(function () {}); }
     return getJSON('data/days/' + date + '.json').then(function (day) {
+      day = trackDay(day);
       var ids = day.portions.map(function (p) { return parseRef(p.ref).book; })
         .filter(function (v, i, a) { return a.indexOf(v) === i; });
       return Promise.all(ids.map(loadBook).concat([neededOrig(ids)])).then(function (list) {
@@ -2215,7 +2295,8 @@
                getJSON('data/hebrew-names.json').catch(function () { return {}; })])
     .then(function (res) {
       planDays = res[0].days.slice().sort();
-      plan = res[0].plan || {};
+      fullPlan = res[0].plan || {};
+      trackPlan();
       migrateProgress();
       archiveOldYears();
       bookIndex = res[1];

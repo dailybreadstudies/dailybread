@@ -1,0 +1,36 @@
+{
+  "date": "2027-02-16",
+  "hebrewDate": "9 Adar I 5787",
+  "parsha": {
+    "name": "Tetzaveh",
+    "meaning": "You Shall Command"
+  },
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 28:31-43"
+    },
+    {
+      "label": "Prophets",
+      "he": "נְבִיאִים",
+      "ref": "2KI 5"
+    },
+    {
+      "label": "Writings",
+      "he": "כְּתוּבִים",
+      "ref": "PSA 119:1-24"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 11:1-27"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "PHM 1",
+      "optional": true
+    }
+  ]
+}
