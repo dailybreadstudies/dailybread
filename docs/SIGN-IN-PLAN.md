@@ -43,11 +43,10 @@ Agreed with John on 15 Oct 2026. **Not built yet** — start once dailybread.onl
 
 ### Consent box wording (chosen by John, 15 Oct 2026)
 > ☐ **Join the Daily Bread family**
-> Everything here is given freely. Friends of the ministry get occasional news and new resources from Israel.
+> Everything here is given freely. Friends of Ariel Media get occasional news and new resources from Israel.
 > It costs nothing and helps more than you'd think. Unsubscribe anytime.
 
-"The ministry" means Ariel Media. Because consent must say who will send the emails, the box (or a small line
-directly under it) also names the sender, e.g. *"Emails come from Ariel Media. Privacy"* with a link to the privacy page.
+The wording names the sender (Ariel Media), as consent requires. Link "Privacy" next to it (to the privacy page).
 
 ## What John needs to provide
 1. Domain **dailybread.online** connected (GitHub Pages + email DNS records).
