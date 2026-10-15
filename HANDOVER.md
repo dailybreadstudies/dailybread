@@ -78,8 +78,7 @@ in the day's order). Progress page: year bar, totals, by-section bars, catch-up 
 - Removed on purpose: unfoldingWord study notes, "Name style" option, "Day N of 386" line on Today, Hebrew in the readings list.
 
 ## Ideas discussed, not built yet
-- Sign-in with email link (e.g. Supabase) to sync progress across devices; separate unticked marketing-consent box,
-  double opt-in, privacy page; possibly feed consenting emails into Shopify. Optional daily reading email.
+- **Sign-in, progress sync and the Ariel Media email list: full plan agreed in `docs/SIGN-IN-PLAN.md`** (start once dailybread.online is connected).
 - Four section progress bars across the whole year (needs the full plan loaded).
 - History file: 222 rows = John's Word v1 (Sivan–Tishrei) + every Today in History / Calendar Note from the 5787 journal PDF (DB-5787-inside-v6), split into single events. Journal is the reference.
 - Connect dailybread.online (DNS at John's registrar).
