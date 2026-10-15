@@ -1215,8 +1215,9 @@
 
   // Map buttons beside verses (assets/maps.js). Optional: without that file nothing happens.
   function decorateMaps() {
-    if (!window.DBMaps) return;
-    try { window.DBMaps.decorate(document.getElementById('portions')); } catch (e) { /* maps are optional */ }
+    var root = document.getElementById('portions');
+    if (window.DBMaps) { try { window.DBMaps.decorate(root); } catch (e) { /* maps are optional */ } }
+    if (window.DBFinds) { try { window.DBFinds.decorate(root); } catch (e) { /* finds are optional */ } }
   }
 
   // ── Navigation ───────────────────────────────────────────────

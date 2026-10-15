@@ -99,6 +99,18 @@ python3 tools/build_map_places.py /tmp/obgeo data/maps/places
   seasonal ones dashed), and `data/maps/base/ancient.json` (built by `python3 tools/build_ancient_roads.py`) with the main ancient road corridors (drawn through
   OpenBible.info sites, approximate between cities) and labels with the biblical names of the main streams.
 
+## Archaeology finds (test stage)
+
+A small button beside a verse opens a card about an archaeological find: a picture or two, key facts and a
+short note. On wide screens it opens in the free space left of the text (the text does not move); on phones,
+below the verse. Shown only on `maps-test.html` for now; to switch on for everyone, add `assets/finds.css` and
+`assets/finds.js` to `index.html` as `maps-test.html` does.
+
+- `data/finds/index.json` lists each find and the verses it belongs to; `data/finds/<id>.json` holds the card.
+- Pictures are shown from Wikimedia Commons by file name, with a link to each file page (author and licence).
+  Check each file's licence on Commons before going live: public domain, CC BY or CC BY-SA, credited.
+- Card text is our own wording, with a link to the Wikipedia article for more.
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).

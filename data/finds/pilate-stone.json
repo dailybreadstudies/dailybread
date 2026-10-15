@@ -1,0 +1,63 @@
+{
+ "id": "pilate-stone",
+ "title": "The Pilate Stone",
+ "kind": "Inscription",
+ "anchors": [
+  {
+   "book": "LUK",
+   "c": 3,
+   "v": 1
+  },
+  {
+   "book": "MAT",
+   "c": 27,
+   "v": 2
+  },
+  {
+   "book": "MRK",
+   "c": 15,
+   "v": 1
+  },
+  {
+   "book": "JHN",
+   "c": 18,
+   "v": 29
+  }
+ ],
+ "images": [
+  {
+   "file": "Pilate_Inscription.JPG",
+   "caption": "The limestone block with Pilate’s name in Latin.",
+   "page": "https://commons.wikimedia.org/wiki/File:Pilate_Inscription.JPG"
+  }
+ ],
+ "facts": [
+  [
+   "Found",
+   "1961, in the Roman theatre at Caesarea Maritima, reused as a step"
+  ],
+  [
+   "Excavators",
+   "Italian team led by Antonio Frova"
+  ],
+  [
+   "Date",
+   "AD 26–36, Pilate’s term as governor"
+  ],
+  [
+   "Now",
+   "The Israel Museum, Jerusalem; a replica stands at Caesarea"
+  ]
+ ],
+ "p": [
+  "A limestone block from a building Pontius Pilate dedicated to the emperor Tiberius. The damaged Latin text reads, in part, <i>[…]S TIBERIEUM / [PON]TIUS PILATUS / [PRAEF]ECTUS IUDA[EA]E</i>: “Pontius Pilate, prefect of Judea.”",
+  "It is the only inscription from his lifetime that names Pilate, and it gives his title as <i>prefect</i>, the rank Roman governors of Judea held before AD 41. Caesarea was the governor’s seat; he came up to Jerusalem at the festivals, as the Gospels show him doing at Passover."
+ ],
+ "verse": "Luke 3:1; Matthew 27:2",
+ "links": [
+  [
+   "Pilate stone on Wikipedia",
+   "https://en.wikipedia.org/wiki/Pilate_stone"
+  ]
+ ]
+}

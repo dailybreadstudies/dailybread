@@ -1,0 +1,57 @@
+{
+ "finds": [
+  {
+   "id": "ketef-hinnom",
+   "title": "The Ketef Hinnom silver scrolls",
+   "anchors": [
+    {
+     "book": "NUM",
+     "c": 6,
+     "v": 24
+    }
+   ]
+  },
+  {
+   "id": "siloam",
+   "title": "Hezekiah’s Tunnel and the Siloam Inscription",
+   "anchors": [
+    {
+     "book": "2KI",
+     "c": 20,
+     "v": 20
+    },
+    {
+     "book": "2CH",
+     "c": 32,
+     "v": 30
+    }
+   ]
+  },
+  {
+   "id": "pilate-stone",
+   "title": "The Pilate Stone",
+   "anchors": [
+    {
+     "book": "LUK",
+     "c": 3,
+     "v": 1
+    },
+    {
+     "book": "MAT",
+     "c": 27,
+     "v": 2
+    },
+    {
+     "book": "MRK",
+     "c": 15,
+     "v": 1
+    },
+    {
+     "book": "JHN",
+     "c": 18,
+     "v": 29
+    }
+   ]
+  }
+ ]
+}

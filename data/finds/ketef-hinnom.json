@@ -1,0 +1,52 @@
+{
+ "id": "ketef-hinnom",
+ "title": "The Ketef Hinnom silver scrolls",
+ "kind": "Inscription",
+ "anchors": [
+  {
+   "book": "NUM",
+   "c": 6,
+   "v": 24
+  }
+ ],
+ "images": [
+  {
+   "file": "Ketef_hinom_scrolls.JPG",
+   "caption": "The two silver scrolls (KH1 and KH2) after unrolling.",
+   "page": "https://commons.wikimedia.org/wiki/File:Ketef_hinom_scrolls.JPG"
+  }
+ ],
+ "facts": [
+  [
+   "Found",
+   "1979, in a burial cave at Ketef Hinnom, Jerusalem"
+  ],
+  [
+   "Excavator",
+   "Gabriel Barkay"
+  ],
+  [
+   "Date",
+   "Around 600 BC, shortly before the Babylonian destruction of Jerusalem"
+  ],
+  [
+   "Size",
+   "KH1 about 27 × 97 mm; KH2 about 11 × 39 mm"
+  ],
+  [
+   "Now",
+   "The Israel Museum, Jerusalem"
+  ]
+ ],
+ "p": [
+  "Two tiny rolled sheets of silver, worn as amulets, were found among the burial goods of a family tomb across the Hinnom Valley from Mount Zion. When they were finally unrolled, both turned out to carry, in old Hebrew script, a form of the priestly blessing of Numbers 6:24–26: “The <span class=\"lord\">Lord</span> bless you and keep you; the <span class=\"lord\">Lord</span> make His face shine upon you…”",
+  "They are the oldest known copies of words from the Hebrew Bible, several centuries older than the Dead Sea Scrolls. The divine name YHWH is written out in them."
+ ],
+ "verse": "Numbers 6:24–26",
+ "links": [
+  [
+   "Ketef Hinnom scrolls on Wikipedia",
+   "https://en.wikipedia.org/wiki/Ketef_Hinnom_scrolls"
+  ]
+ ]
+}

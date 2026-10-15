@@ -1,0 +1,68 @@
+/* Daily Bread Online — archaeology finds (assets/finds.js). Prefixed dbf-; uses the reader's colour tokens. */
+
+/* Button beside the verse: same look as the map button */
+.dbf-pin {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; margin: 0 0.35rem 0 0; padding: 0; vertical-align: -12px;
+  border: 1px solid var(--line-strong); border-radius: 19px; background: var(--surface-glass); color: var(--accent);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  cursor: pointer; text-indent: 0; line-height: 1; transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.dbf-pin svg { width: 18px; height: 18px; }
+.dbf-pin:hover, .dbf-pin[aria-pressed="true"] { border-color: var(--accent-soft); background: var(--tint); color: var(--accent-deep); }
+.dbf-pin:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+body:not(.dbm-margin) .dbf-pin { width: 32px; height: 32px; vertical-align: -9px; }
+body.dbm-margin .dbf-pin { position: absolute; left: -54px; margin: -1px 0 0; }
+body.dbm-margin .dbf-pin.dbf-second { left: -98px; }
+
+/* Side panel: the free space left of the text; the text column does not move */
+.dbf-panel {
+  position: fixed; left: 32px; top: 0; z-index: 150;
+  height: 100vh; height: 100dvh; overflow-y: auto; overflow-x: hidden; padding: 22px 8px 28px 0; scrollbar-width: thin;
+}
+
+/* The card */
+.dbf { font-family: var(--sans); color: var(--ink); line-height: 1.5; text-align: left; text-indent: 0; }
+.scripture .dbf { margin: 1.2rem 0 1.8rem; font-size: 1rem; }
+.dbf-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.6rem;
+  font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+}
+.dbf-close {
+  display: inline-flex; align-items: center; gap: 0.35rem; flex: none; white-space: nowrap;
+  border: 1px solid var(--accent-line); background: var(--surface); border-radius: 999px; padding: 0.35rem 0.7rem;
+  cursor: pointer; color: var(--ink-soft); font: 500 0.6rem/1 var(--sans); letter-spacing: 0; text-transform: none;
+}
+.dbf-close svg { width: 0.6rem; height: 0.6rem; }
+.dbf-close:hover { border-color: var(--accent); color: var(--accent); }
+.dbf-msg { font-size: 0.75rem; color: var(--muted); }
+
+.dbf-fig { margin: 0; }
+.dbf-frame {
+  width: 100%; max-width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 4px;
+  background: var(--tint); border: 1px solid var(--accent-line);
+}
+.dbf-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.dbf-frame.dbf-noimg img { display: none; }
+.dbf-frame.dbf-noimg::after { content: "The picture could not load."; display: grid; place-items: center; height: 100%; font-size: 0.72rem; color: var(--muted); }
+.dbf figcaption { margin-top: 0.45rem; font: 400 0.68rem/1.5 var(--sans); color: var(--muted); }
+.dbf figcaption a { color: var(--muted); text-underline-offset: 2px; }
+.dbf-thumbs { display: flex; gap: 0.45rem; margin-top: 0.55rem; }
+.dbf-thumbs button {
+  width: 3.4rem; height: 3.4rem; padding: 0; border: 1px solid var(--accent-line); border-radius: 4px; overflow: hidden;
+  background: var(--tint); cursor: pointer; opacity: 0.65; transition: opacity 0.15s, border-color 0.15s;
+}
+.dbf-thumbs button[aria-pressed="true"], .dbf-thumbs button:hover { opacity: 1; border-color: var(--accent); }
+.dbf-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.dbf-title { font: 700 1.05rem/1.3 var(--display); color: var(--ink); margin: 1rem 0 0.15rem; text-wrap: balance; }
+.dbf-verse { font: italic 400 0.8rem/1.4 var(--serif); color: var(--accent); margin: 0 0 0.8rem; }
+.dbf-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 0.55rem 1rem; margin: 0 0 1rem; font-size: 0.74rem; line-height: 1.45; }
+.dbf-facts > div { min-width: 0; }
+.dbf-facts dt { font-weight: 600; color: var(--accent-faint); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.58rem; }
+.dbf-facts dd { margin: 0.1rem 0 0; color: var(--ink-soft); }
+.dbf .dbf-p { font: 400 0.8rem/1.65 var(--sans); color: var(--ink-soft); margin: 0 0 0.65rem; text-indent: 0; }
+.dbf-links { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; margin: 0.9rem 0 0; font: 600 0.72rem/1.4 var(--sans); }
+.dbf-links a { color: var(--accent); }
+
+@media print { .dbf-pin, .dbf-panel, .scripture .dbf { display: none !important; } }
