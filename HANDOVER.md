@@ -15,7 +15,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - `progress.html` — **Progress** (same reader script, `data-page="progress"`).
 - `about.html` — **About**: full-width scrolling page with its own `<style>`; journal photo `assets/img/journal*.jpg` with parallax.
 - `maps-test.html` — copy of index for trying map changes (keep its settings panel and blessings in step with index).
-- Shared top bar on all pages: John's SVG wordmark (assets/img/logo-dark.svg, inlined in each page, fill = theme heading colour, 15px tall / 13.5px on phones) + TODAY · PROGRESS · ABOUT (right end reserved for future sign-in).
+- Shared top bar on all pages: John's SVG wordmark (assets/img/logo-dark.svg, inlined in each page, fill = theme heading colour, 15px tall; on phones the logo is centred with the menu on a second row, top bar 96px) + TODAY · PROGRESS · ABOUT (right end reserved for future sign-in).
 
 ## Code
 - `assets/history.js` — when each history entry / calendar note falls (shared with `tools/build_history.mjs`).

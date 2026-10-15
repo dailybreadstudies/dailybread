@@ -800,11 +800,12 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 .tb-end { justify-self: end; }   /* sign-in will go here one day */
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-@media (max-width: 700px) {
-  .topbar { grid-template-columns: auto 1fr; }
-  .tb-nav { justify-self: end; gap: 18px; }
-  .tb-nav a { font-size: 12px; letter-spacing: 0.12em; }
-  .tb-logo-img { height: 13.5px; }
+@media (max-width: 700px) {   /* phones: logo centred, the menu centred on the row below */
+  :root { --topbar-h: 96px; }
+  .topbar { grid-template-columns: 1fr; justify-items: center; align-content: center; row-gap: 12px; }
+  .tb-logo, .tb-nav { justify-self: center; }
+  .tb-nav { gap: 26px; }
+  .tb-nav a { font-size: 12px; letter-spacing: 0.14em; padding: 4px 0 5px; }
   .tb-end { display: none; }
 }
 @media print { .topbar { display: none; } }
