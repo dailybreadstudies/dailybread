@@ -1657,7 +1657,7 @@
         if (own) { it.own = own.text; own.used = true; }
       });
       notes.forEach(function (n) { if (!n.used) items.push({ own: n.text }); });
-      var label = day.date === todayISO() ? 'Today' : 'This day';
+      var label = 'Today';
       var html = items.map(function (it, i) {
         var lead = i === 0 ? '<span class="lead">' + label + '</span> ' : '';
         if (it.own) return '<p class="own-note">' + lead + richText(i === 0 ? afterLead(it.own) : it.own) + '</p>';
@@ -1703,7 +1703,7 @@
     var box = document.getElementById('history-box');
     if (!box) return;
     if (!list.length) { box.hidden = true; box.innerHTML = ''; return; }
-    var label = (day.date === todayISO() ? 'Today' : 'This day') + ' in History';
+    var label = 'Today in History';
     box.innerHTML = list.map(function (e, i) {
       return '<p class="hist-text">' + (i === 0 ? '<span class="lead">' + label + '</span> ' + richText(afterLead(e.text, true)) : richText(e.text)) + '</p>';
     }).join('');
@@ -1743,7 +1743,7 @@
       if (!parts.length) return;
       var first = box.hidden;
       var said = parts.join(' and ') + ' in ' + escapeAttr(loc.name);
-      line.innerHTML = (first ? '<span class="lead">' + (iso === todayISO() ? 'Today' : 'This day') + '</span> ' + said
+      line.innerHTML = (first ? '<span class="lead">Today</span> ' + said
         : said.charAt(0).toUpperCase() + said.slice(1)) + ' ' + locPicker();
       line.hidden = false;
       box.hidden = false;

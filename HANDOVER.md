@@ -15,7 +15,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - `progress.html` — **Progress** (same reader script, `data-page="progress"`).
 - `about.html` — **About**: full-width scrolling page with its own `<style>`; journal photo `assets/img/journal*.jpg` with parallax.
 - `maps-test.html` — copy of index for trying map changes (keep its settings panel and blessings in step with index).
-- Shared top bar on all pages: John's SVG wordmark (assets/img/logo-dark.svg, inlined in each page, fill = theme heading colour, 15px tall; on phones the logo is centred with the menu on a second row, top bar 96px) + TODAY · PROGRESS · ABOUT (right end reserved for future sign-in).
+- Shared top bar on all pages: John's SVG wordmark (assets/img/logo-dark.svg, inlined in each page, fill = theme heading colour, 15px tall; on phones the logo is centred with the menu on a second row, top bar 96px) + TODAY · PROGRESS · ABOUT (right end reserved for future sign-in). Passage search ("Go to … Gen 1", `#quick-go`) sits at the right end of the top bar on desktop only (scrolls away with it; hidden on phones). The Bible / calendar / A/א buttons stay pinned.
 
 ## Code
 - `assets/history.js` — when each history entry / calendar note falls (shared with `tools/build_history.mjs`).
@@ -35,7 +35,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
    tapping a special day shows Hebcal's explanation in a bubble.
 3. "Torah Portion: Noach (Noah)".
 4. Readings list: circle (tap = mark/unmark complete) · SECTION · reference (tap = open reading); references aligned.
-5. "This day" box (Hebcal, Shabbat/candle lighting "for Shabbat" or for the festival) + John's own calendar notes
+5. "Today" box (always labelled Today / Today in History, whatever date is shown; Hebcal, Shabbat/candle lighting "for Shabbat" or for the festival) + John's own calendar notes
    (they replace Hebcal's description for the same day), then **"Today in History"** entries (long ones clamp to
    3 lines with "more"). Source: `data/history.csv` -> `node tools/build_history.mjs` -> `data/history.json`;
    date logic in `assets/history.js` (see README).

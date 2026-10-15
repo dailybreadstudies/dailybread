@@ -748,9 +748,6 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 /* Phones: button bottom-right within thumb reach; panel becomes a bottom sheet */
 @media (max-width: 700px) {
   .tools { top: auto; bottom: 18px; right: 16px; gap: 10px; align-items: center; }
-  .quick-go { height: 44px; padding: 0 12px; border: 1px solid var(--line-strong); border-radius: 22px; background: var(--surface-glass);
-    box-shadow: 0 4px 14px var(--shadow); margin-right: 0; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-  .quick-go input { width: 84px; font-size: 16px; }
   .tool-btn { height: 44px; padding: 0 1rem; border-radius: 22px; box-shadow: 0 4px 14px var(--shadow); }
   .cal-btn { width: 44px; padding: 0; }
   .settings-panel { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none;
@@ -804,7 +801,8 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 .tb-nav a:hover { color: var(--accent-deep); }
 .tb-nav a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent-soft); }
 .tb-nav a:focus-visible, .tb-logo:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; border-radius: 2px; }
-.tb-end { justify-self: end; }   /* sign-in will go here one day */
+.tb-end { justify-self: end; display: flex; align-items: center; }   /* passage search (desktop); sign-in may join it one day */
+.tb-end .quick-go { margin-right: 0; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 @media (max-width: 700px) {   /* phones: logo centred, the menu centred on the row below */
