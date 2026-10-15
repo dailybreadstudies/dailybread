@@ -705,7 +705,9 @@ html.font-sans .scripture { line-height: 1.8; }
   color: var(--accent); font: 500 0.82rem var(--sans); cursor: pointer; }
 .back-today:hover { background: var(--tint); }
 .chapter-nav { display: flex; align-items: center; justify-content: center; gap: 0.6rem; }
-.verse-target { background: var(--tint); box-shadow: 0 0 0 3px var(--tint); border-radius: 3px; color: var(--accent); }
+/* The verse a link points to: its number white on black (inverted in Dark mode), shown even when verse numbers are off */
+.scripture .verse-num.verse-target, html.no-verses .scripture .verse-num.verse-target { background: var(--heading); color: var(--paper); font-size: 0.7em;
+  font-weight: 600; padding: 0.12em 0.42em; margin-right: 0.35em; border-radius: 3px; }
 
 /* Scripture references and their preview */
 a.sref { color: inherit; text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 2px; }
