@@ -651,19 +651,59 @@
   }
 
   // ── Reading progress (kept on this device only) ─────────────
-  // dbs-progress = { read: { "2026-10-12": [1, 2, 4], … }, since: "2026-10-20" | null }
+  // dbs-progress = { read: { "2026-10-12": [1, 2, 4], … }, since: "2026-10-20" | null,
+  //                  chapters: { "GEN.1": "2026-10-15", … }   (chapters marked read in the Bible reader, with the date),
+  //                  archive: { "5786": { read: { date: [[label, ref], …] }, chapters: {…} } } }
+  // Each Daily Bread year runs Simchat Torah to Simchat Torah. When a new year begins, the old year's marks move to
+  // the archive (shown under "Past years") and the counts start again.
   // Numbers are the day's readings in order (1 = Torah …). "since" is set by "pick up from today", so older
   // unread readings stop counting as catch-up. Older saves ({ done: { date: 1 } }) meant the whole day.
-  var PLAN_START = '2026-10-04', PLAN_END = '2027-10-24';   // the 5787 Daily Bread year
+  var PLAN_START = '2026-10-04', PLAN_END = '2027-10-24', PLAN_YEAR = 5787;   // the 5787 Daily Bread year
   var JOURNAL_URL = 'https://arielmedia.shop/collections/dailybread';
   var plan = {};                                            // date -> [[label, ref], …] from data/days/index.json
-  var progress = { read: {}, since: null, done: null };
+  var progress = { read: {}, since: null, done: null, chapters: {}, archive: {} };
   try {
     var savedProg = JSON.parse(localStorage.getItem('dbs-progress') || 'null');
-    if (savedProg) progress = { read: savedProg.read || {}, since: savedProg.since || null, done: savedProg.done || null };
+    if (savedProg) progress = { read: savedProg.read || {}, since: savedProg.since || null, done: savedProg.done || null,
+      chapters: savedProg.chapters || {}, archive: savedProg.archive || {} };
   } catch (e) { /* storage unavailable: progress lasts for this visit only */ }
   function saveProgress() {
-    try { localStorage.setItem('dbs-progress', JSON.stringify({ read: progress.read, since: progress.since })); } catch (e) { /* ignore */ }
+    try {
+      localStorage.setItem('dbs-progress', JSON.stringify({ read: progress.read, since: progress.since,
+        chapters: progress.chapters, archive: progress.archive }));
+    } catch (e) { /* ignore */ }
+  }
+  // Which Daily Bread year a date belongs to: the loaded plan's dates are its year; otherwise a year runs
+  // from 23 Tishrei (Simchat Torah outside Israel, when Beresheet begins) to the day before the next.
+  function cycleOf(iso) {
+    if (iso >= PLAN_START && iso <= PLAN_END) return PLAN_YEAR;
+    if (!window.DBHistory) return iso < PLAN_START ? PLAN_YEAR - 1 : PLAN_YEAR + 1;
+    var h = DBHistory.hebrewDate(iso);
+    return h.m === 'Tishri' && h.d < 23 ? h.y - 1 : h.y;
+  }
+  function currentCycle() { return cycleOf(todayISO()); }
+  // Marks from an earlier year go to the archive (with their passages, so they still count after the plan changes)
+  function archiveOldYears() {
+    var now = currentCycle(), changed = false;
+    function bucket(y) { return (progress.archive[y] = progress.archive[y] || { read: {}, chapters: {} }); }
+    Object.keys(progress.read).forEach(function (d) {
+      var y = cycleOf(d);
+      if (y >= now) return;
+      bucket(y).read[d] = progress.read[d].map(function (n) { return plan[d] && plan[d][n - 1] ? plan[d][n - 1] : ['', '']; });
+      delete progress.read[d]; changed = true;
+    });
+    Object.keys(progress.chapters).forEach(function (k) {
+      var y = cycleOf(progress.chapters[k]);
+      if (y >= now) return;
+      bucket(y).chapters[k] = progress.chapters[k];
+      delete progress.chapters[k]; changed = true;
+    });
+    if (changed) { if (progress.since && cycleOf(progress.since) < now) progress.since = null; saveProgress(); }
+  }
+  function isChapterMarked(book, c) { return !!progress.chapters[book + '.' + c]; }
+  function setChapterMarked(book, c, on) {
+    if (on) progress.chapters[book + '.' + c] = todayISO(); else delete progress.chapters[book + '.' + c];
+    saveProgress();
   }
   function migrateProgress() {               // once the plan is known: whole days marked earlier → all their readings
     if (!progress.done) return;
@@ -800,13 +840,19 @@
     if (!box) return;
     var from = trackFrom(), today = todayISO();
     var dn = Math.min(Math.max(dayNumber(today), 0), dayNumber(PLAN_END)), last = dayNumber(PLAN_END);
-    var html = '<p class="pg-year">5787 &middot; Day ' + dn + ' of ' + last + '</p>' +
+    var html = '<p class="pg-year">' + PLAN_YEAR + ' &middot; Day ' + dn + ' of ' + last + '</p>' +
       '<div class="pg-yearbar" title="' + Math.round(100 * dn / last) + '% of the year"><span style="width:' + (100 * dn / last).toFixed(1) + '%"></span></div>';
+    if (!bibleSize) {     // book sizes not loaded yet: draw again when they are
+      getJSON('data/bible-size.json').then(function (d) { bibleSize = d; drawProgressPage(); }).catch(function () { bibleSize = {}; drawProgressPage(); });
+      box.innerHTML = html + '<p class="status">Loading…</p>';
+      return;
+    }
     if (!from) {
+      var other = Object.keys(progress.chapters).length || Object.keys(progress.archive).length;
       box.innerHTML = html + '<div class="pg-empty"><p>Your progress will appear here.</p>' +
         '<p>At the end of each reading, tap <em>Mark Torah Complete</em>, <em>Mark Prophets Complete</em> and so on. ' +
         'This page then shows what you have read, section by section, and anything left to catch up.</p>' +
-        '<p><a class="pg-btn" href="./">Go to today’s reading</a></p></div>' + privacyNote();
+        '<p><a class="pg-btn" href="./">Go to today’s reading</a></p></div>' + (other ? bibleProgressHtml() : '') + privacyNote();
       return;
     }
     var days = planDays.filter(function (d) { return d >= from && d <= today && plan[d]; });
@@ -816,12 +862,6 @@
       '<div><b>' + days.filter(dayComplete).length + '</b><span>' + (days.filter(dayComplete).length === 1 ? 'full day' : 'full days') + '</span></div>' +
       '<div><b>' + missed.length + '</b><span>to catch up</span></div></div>';
 
-    if (!bibleSize) {     // book sizes not loaded yet: draw again when they are
-      getJSON('data/bible-size.json').then(function (d) { bibleSize = d; drawProgressPage(); }).catch(function () { bibleSize = {}; drawProgressPage(); });
-      box.innerHTML = html + '<p class="status">Loading…</p>';
-      return;
-    }
-    html += bibleProgressHtml();
 
     html += '<h2 class="pg-h">To catch up</h2>';
     if (missed.length) {
@@ -841,37 +881,49 @@
           return '<span class="pr-dot ' + cls + '" title="' + escapeAttr(x[0] + ': ' + refLabel(x[1])) + '"></span>';
         }).join('') + '</span></a></li>';
     }).join('') + '</ol>';
+    html += bibleProgressHtml();
     box.innerHTML = html + privacyNote() +
-      '<p class="pg-clear"><button type="button" class="link-btn quiet" id="clear-progress">Clear all progress</button></p>';
+      '<p class="pg-clear"><button type="button" class="link-btn quiet" id="clear-progress">Clear this year’s progress</button></p>';
   }
   // ── How much of the Bible has been read ─────────────────────
   // Every reading marked complete counts its verses (each passage once, however often it is read).
   // Sizes come from data/bible-size.json: [verses, words] per chapter, so books and sections are
   // weighed by the real length of their text.
   var bibleSize = null;
-  function readVerses() {             // → { GEN: { 1: { 1: true, … } } }
-    var out = {};
-    Object.keys(progress.read).forEach(function (d) {
-      (progress.read[d] || []).forEach(function (n) {
-        var x = plan[d] && plan[d][n - 1];
-        if (!x) return;
-        var r;
-        try { r = parseRef(x[1]); } catch (e) { return; }
-        var size = bibleSize[r.book];
-        if (!size) return;
-        for (var c = r.c1; c <= r.c2 && c <= size.length; c++) {
-          var last = size[c - 1][0];
-          var from = c === r.c1 ? r.v1 : 1;
-          var to = c === r.c2 && r.v2 ? Math.min(r.v2, last) : last;
-          var ch = ((out[r.book] = out[r.book] || {})[c] = out[r.book][c] || {});
-          for (var v = from; v <= to; v++) ch[v] = true;
-        }
+  // The passages a year's marks cover: [[label, ref], …] from completed readings plus whole chapters from the reader
+  function yearRefs(y) {
+    var out = [];
+    if (y === undefined || y === currentCycle()) {
+      Object.keys(progress.read).forEach(function (d) {
+        (progress.read[d] || []).forEach(function (n) { var x = plan[d] && plan[d][n - 1]; if (x) out.push(x[1]); });
       });
+      Object.keys(progress.chapters).forEach(function (k) { out.push(k.replace('.', ' ')); });
+    } else {
+      var a = progress.archive[y] || { read: {}, chapters: {} };
+      Object.keys(a.read).forEach(function (d) { a.read[d].forEach(function (x) { if (x[1]) out.push(x[1]); }); });
+      Object.keys(a.chapters).forEach(function (k) { out.push(k.replace('.', ' ')); });
+    }
+    return out;
+  }
+  function readVerses(refs, lastVerse) {   // → { GEN: { 1: { 1: true, … } } }; lastVerse(book, c) gives a chapter's verse count
+    var out = {};
+    refs.forEach(function (ref) {
+      var r;
+      try { r = parseRef(ref); } catch (e) { return; }
+      for (var c = r.c1; c <= r.c2; c++) {
+        var last = lastVerse(r.book, c);
+        if (!last) continue;
+        var from = c === r.c1 ? r.v1 : 1;
+        var to = c === r.c2 && r.v2 ? Math.min(r.v2, last) : last;
+        var ch = ((out[r.book] = out[r.book] || {})[c] = out[r.book][c] || {});
+        for (var v = from; v <= to; v++) ch[v] = true;
+      }
     });
     return out;
   }
-  function bibleTally() {
-    var read = readVerses(), maxWords = 0;
+  function sizeLast(book, c) { var s = bibleSize[book]; return s && s[c - 1] ? s[c - 1][0] : 0; }
+  function bibleTally(y) {
+    var read = readVerses(yearRefs(y), sizeLast), maxWords = 0;
     var sections = GROUPS.map(function (g, gi) {
       var sec = { name: g[0], he: g[1].replace(/[֑-ׇ]/g, ''), n: gi, words: 0, wordsRead: 0, verses: 0, versesRead: 0, books: [] };
       g[2].forEach(function (id) {
@@ -942,7 +994,10 @@
   }
   function bibleProgressHtml() {
     var t = bibleTally(), max = t.maxWords;
-    var html = '<h2 class="pg-h">Your Bible <span>by length of text</span></h2>' +
+    var html = '<h2 class="pg-h">Your Bible <span>' + PLAN_YEAR + ' &middot; by length of text</span></h2>' +
+      '<p class="pg-blurb">Every reading you mark complete, and every chapter you mark read in the Bible reader, fills in its verses here. ' +
+      'The circle is the whole Bible, each part drawn to the length of its text, so you can watch the Scriptures fill in as the year goes by. ' +
+      'Touch a part of the circle to see that book.</p>' +
       '<div class="bb-wrap">' + bibleRingSvg(t) + '<div class="bb-secs">' +
       t.sections.map(function (sec) {
         return '<div class="bb-sec bb-s' + sec.n + '"><span class="bb-key"></span><span class="bb-name">' + sec.name + '</span>' +
@@ -950,21 +1005,43 @@
           '<span class="bb-bar"><span style="width:' + (100 * sec.wordsRead / sec.words).toFixed(2) + '%"></span></span>' +
           '<span class="bb-sub">' + num(sec.versesRead) + ' of ' + num(sec.verses) + ' verses &middot; ' + sec.books.length + ' books</span></div>';
       }).join('') + '</div></div>';
-    // Each book as a bar as long as the book itself (the longest book fills the line)
-    html += '<h2 class="pg-h">By book <span>bars drawn to the length of each book</span></h2><div class="bb-books">' +
+    // Each book as a bar as long as the book itself (the longest book fills the line); folded away until opened
+    var started = 0;
+    t.sections.forEach(function (sec) { sec.books.forEach(function (b) { if (b.versesRead) started++; }); });
+    html += '<h2 class="pg-h">By book</h2>' +
+      '<p class="pg-blurb">From Obadiah’s single chapter to the hundred and fifty Psalms, each bar is drawn to the length of its book ' +
+      'and fills in as you read.</p>' +
+      '<details class="bb-all"' + (bbOpen ? ' open' : '') + '><summary><span class="bb-all-open">Show all 66 books</span>' +
+      '<span class="bb-all-close">Hide the books</span><span class="bb-all-n">' + started + ' started</span></summary><div class="bb-books">' +
       t.sections.map(function (sec) {
-        return '<details class="bb-group bb-s' + sec.n + '"' + (sec.versesRead ? ' open' : '') + '><summary><span class="bb-name">' + sec.name +
-          ' <span class="he">' + sec.he + '</span></span><span class="bb-pct">' + pctText(sec.wordsRead, sec.words) + '</span></summary>' +
+        return '<div class="bb-group bb-s' + sec.n + '"><p class="bb-ghead"><span class="bb-name">' + sec.name +
+          ' <span class="he">' + sec.he + '</span></span><span class="bb-pct">' + pctText(sec.wordsRead, sec.words) + '</span></p>' +
           sec.books.map(function (b) {
             var len = 100 * b.words / max, done = b.words ? 100 * b.wordsRead / b.words : 0;
             return '<div class="bb-book" title="' + escapeAttr(bookLabel(b.id) + ': ' + b.chapters + ' chapters, ' + num(b.verses) + ' verses') + '">' +
               '<span class="bb-bname">' + escapeAttr(bookLabel(b.id)) + '</span>' +
               '<span class="bb-lane"><span class="bb-bbar" style="width:' + len.toFixed(2) + '%"><span style="width:' + done.toFixed(2) + '%"></span></span></span>' +
               '<span class="bb-bpct' + (b.wordsRead ? '' : ' is-zero') + '">' + pctText(b.wordsRead, b.words) + '</span></div>';
-          }).join('') + '</details>';
-      }).join('') + '</div>';
+          }).join('') + '</div>';
+      }).join('') + '</div></details>';
+    // Earlier Daily Bread years, kept when a new year begins
+    var past = Object.keys(progress.archive).sort().reverse();
+    if (past.length) {
+      html += '<h2 class="pg-h">Past years</h2><ul class="bb-past">' + past.map(function (y) {
+        var a = progress.archive[y], pt = bibleTally(+y);
+        var n = Object.keys(a.read).reduce(function (sum, d) { return sum + a.read[d].length; }, 0);
+        return '<li><span class="bb-past-y">' + y + '</span><span>' + pctText(pt.all.wordsRead, pt.all.words) + ' of the Bible</span>' +
+          '<span class="bb-past-n">' + [n ? num(n) + (n === 1 ? ' reading' : ' readings') : '',
+            Object.keys(a.chapters).length ? num(Object.keys(a.chapters).length) + (Object.keys(a.chapters).length === 1 ? ' chapter' : ' chapters') : '']
+            .filter(Boolean).join(' &middot; ') + '</span></li>';
+      }).join('') + '</ul>';
+    }
     return html;
   }
+  var bbOpen = false;
+  document.addEventListener('toggle', function (e) {
+    if (e.target.classList && e.target.classList.contains('bb-all')) bbOpen = e.target.open;
+  }, true);
   // Hover or tap a book on the circle: its name and share read appear in the middle
   function ringShow(hit) {
     var ring = hit && hit.closest('.bb-ring');
@@ -1028,8 +1105,8 @@
       return;
     }
     if (e.target.closest('#clear-progress')) {
-      if (window.confirm('Clear all your reading progress on this device? This cannot be undone.')) {
-        progress.read = {}; progress.since = null; saveProgress(); drawProgressPage();
+      if (window.confirm('Clear your reading progress for ' + PLAN_YEAR + ' on this device? Past years are kept. This cannot be undone.')) {
+        progress.read = {}; progress.since = null; progress.chapters = {}; saveProgress(); drawProgressPage();
       }
       return;
     }
@@ -1876,6 +1953,44 @@
   }
   function chapterLabel(n) { return n ? labelRef(n.book, n.c) : ''; }
 
+  // "Mark Genesis 1 Read" under a chapter in the Bible reader: counts towards "Your Bible" on the Progress page.
+  // A chapter already covered by this year's completed daily readings shows as read without a mark of its own.
+  function chapterVerseCount() {
+    var last = 0;
+    document.querySelectorAll('.bible-view .verse-num[data-v]').forEach(function (el) { last = Math.max(last, +el.getAttribute('data-v') || 0); });
+    return last;
+  }
+  function chapterInDailyReadings(book, c) {
+    var last = chapterVerseCount();
+    if (!last) return false;
+    var refs = [];
+    Object.keys(progress.read).forEach(function (d) {
+      (progress.read[d] || []).forEach(function (n) { var x = plan[d] && plan[d][n - 1]; if (x) refs.push(x[1]); });
+    });
+    var got = (readVerses(refs, function (b, ch) { return b === book && ch === c ? last : 0; })[book] || {})[c] || {};
+    for (var v = 1; v <= last; v++) if (!got[v]) return false;
+    return true;
+  }
+  function drawChapterDone() {
+    var btn = document.querySelector('[data-chapter-read]');
+    if (!btn || !current || !current.bible) return;
+    var ref = labelRef(current.book, current.c), marked = isChapterMarked(current.book, current.c);
+    var daily = !marked && chapterInDailyReadings(current.book, current.c);
+    btn.setAttribute('aria-pressed', String(marked || daily));
+    btn.disabled = daily;
+    btn.querySelector('.done-label').textContent = marked || daily ? ref + ' Read' : 'Mark ' + ref + ' Read';
+    btn.title = marked ? 'Tap to undo' : '';
+    var note = btn.parentNode.querySelector('.chapter-done-note');
+    note.innerHTML = daily ? 'Read in your daily readings this year.'
+      : marked ? 'Counted in <a href="progress.html">Your Bible</a> for ' + PLAN_YEAR + '.' : '';
+  }
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-chapter-read]');
+    if (!btn || btn.disabled || !current || !current.bible) return;
+    setChapterMarked(current.book, current.c, !isChapterMarked(current.book, current.c));
+    drawChapterDone();
+  });
+
   function renderChapter(data, c, v) {
     current = { bible: true, book: data.id, c: c, bookData: data };
     closePop();
@@ -1897,6 +2012,8 @@
     html += '<div class="scripture">' + passage.html + '</div>' +
       (passage.originalOnly ? '' : '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
       renderNotes(passage.notes, ref) + '</div></div>') + renderTextNotes(passage.textNotes) +
+      '<div class="chapter-done"><button type="button" class="done-btn" data-chapter-read aria-pressed="false">' + CHECK_SVG +
+      '<span class="done-label">Mark ' + escapeAttr(ref) + ' Read</span></button><p class="chapter-done-note"></p></div>' +
       '<nav class="nav-bar">' +
         '<button class="nav-btn" data-chapter="-1"' + (prev ? '' : ' disabled') + '>&larr; ' + (prev ? chapterLabel(prev) : 'Previous') + '</button>' +
         '<span class="nav-indicator">Bible<span class="division-name">' + escapeAttr(bookLabel(data.id)) + '</span></span>' +
@@ -1906,6 +2023,7 @@
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
     decorateMaps();
+    drawChapterDone();
     if (v) {
       var mark = document.querySelector('.bible-view .verse-num[data-v="' + v + '"]');
       if (mark) {
@@ -2099,6 +2217,7 @@
       planDays = res[0].days.slice().sort();
       plan = res[0].plan || {};
       migrateProgress();
+      archiveOldYears();
       bookIndex = res[1];
       hebrewNames = wordReplacer(res[2]);
       if (PAGE === 'progress') { drawProgressPage(); return; }

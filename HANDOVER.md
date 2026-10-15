@@ -56,6 +56,14 @@ Names & Terms: Messianic Filter, Hebrew Names.
   Circle = whole Bible, 4 section arcs sized by text length, pale = unread, full colour = read (positioned by verse);
   hover/tap a book on the circle shows it in the middle. Then section bars, then "By book" bars drawn to each book's length.
   Section colours (validated for colour-blindness): Torah rust, Prophets teal, Writings gold, Apostles indigo (`--bb0..3`).
+- Bible reader: "Mark <Book> <c> Read" under each chapter → `progress.chapters['GEN.1'] = date`; shown as read (disabled)
+  when this year's completed daily readings already cover the whole chapter.
+- Years: `PLAN_YEAR` (5787). A date's year = the loaded plan's year if inside PLAN_START..PLAN_END, else Hebrew year with
+  1–22 Tishrei counting to the year before. On load, marks from earlier years move to `progress.archive[year]`
+  (readings stored with their passages) and show under "Past years". When the 5788 plan is loaded, update
+  PLAN_START/PLAN_END/PLAN_YEAR in reader.js.
+- Page order: stats → To catch up → Day by day → Your Bible (blurb, circle, sections) → By book (blurb, all 66 books
+  folded behind "Show all 66 books") → Past years → privacy note + "Clear this year's progress".
 Stored only in the browser: `localStorage['dbs-progress'] = { read: { 'YYYY-MM-DD': [1,2,4] }, since }` (reading numbers
 in the day's order). Progress page: year bar, totals, by-section bars, catch-up list (links open the exact reading),
 "pick up from today", day-by-day dots, clear all. Calendar shows ✓ / faint ✓ / ring.
