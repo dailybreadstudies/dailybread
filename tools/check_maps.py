@@ -28,6 +28,9 @@ Map file format (data/maps/<id>.json):
                                coords is one line [[lon, lat], …] or several lines [[[lon, lat], …], …]
   symbols [{type, at, label, key, vv, moves, offset}] type: camp | ambush | fire | battle | sun | moon | hail | cave | captured
   notes [{h, p[], alternates}] notes shown under the key (p may contain <i>, <b>, <a>)
+  groups [{id, name, color, vv, places[{n, ll, c, m, f, u}], area, labelAt, hidden}]
+                               coloured sets of places (tribal allotments, clans, kings); area is an
+                               approximate closed ring drawn around them (tools/build_joshua_maps.py)
 Exits with status 1 if any problem is found.
 """
 import json
@@ -38,7 +41,7 @@ import sys
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 MAPS = os.path.join(ROOT, 'data', 'maps')
 SIDES = {'israel', 'ambush', 'enemy', 'other'}
-SYMBOLS = {'camp', 'ambush', 'fire', 'battle', 'sun', 'moon', 'hail', 'cave', 'captured'}
+SYMBOLS = {'camp', 'ambush', 'fire', 'battle', 'sun', 'moon', 'hail', 'cave', 'captured', 'altar', 'stones', 'tabernacle', 'tomb', 'circuit'}
 LABELS = {'below', 'above', 'left', 'right'}
 problems = []
 
@@ -161,6 +164,18 @@ for entry in index.get('maps', []):
         for n in s.get('moves', []):
             if n not in nums:
                 bad(mid, 'symbol %r links to movement %r, which does not exist' % (s.get('type'), n))
+    gids = set()
+    for g in m.get('groups', []):
+        if g.get('id') in gids:
+            bad(mid, 'group id %r used twice' % g.get('id'))
+        gids.add(g.get('id'))
+        if not g.get('name') or not g.get('color'):
+            bad(mid, 'group %r needs a name and a colour' % g.get('id'))
+        for p in g.get('places', []):
+            if not is_ll(p.get('ll')):
+                bad(mid, 'group %r: place %r has bad coordinates' % (g.get('id'), p.get('n')))
+        if g.get('area') and not (len(g['area']) >= 4 and all(is_ll(x) for x in g['area']) and g['area'][0] == g['area'][-1]):
+            bad(mid, 'group %r: area must be a closed ring of valid points' % g.get('id'))
     alt = m.get('alternates')
     if alt:
         if not all(is_ll(x.get('ll')) for x in alt.get('sites', [])):

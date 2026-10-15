@@ -1,6 +1,73 @@
 {
  "maps": [
   {
+   "id": "josh-2-spies",
+   "title": "The Spies at Jericho",
+   "ref": "Joshua 2",
+   "book": "JOS",
+   "c": 2,
+   "v": 1,
+   "links": [
+    "Shittim",
+    "Jericho"
+   ],
+   "range": [
+    1,
+    24
+   ]
+  },
+  {
+   "id": "josh-3-jordan",
+   "title": "Crossing the Jordan",
+   "ref": "Joshua 3–4",
+   "book": "JOS",
+   "c": 3,
+   "v": 1,
+   "links": [
+    "Shittim",
+    "Adam",
+    "Zarethan",
+    "Jericho"
+   ],
+   "range": [
+    1,
+    17
+   ]
+  },
+  {
+   "id": "josh-6-jericho",
+   "title": "The Fall of Jericho",
+   "ref": "Joshua 6",
+   "book": "JOS",
+   "c": 6,
+   "v": 1,
+   "links": [
+    "Jericho"
+   ],
+   "range": [
+    1,
+    27
+   ]
+  },
+  {
+   "id": "josh-7-achor",
+   "title": "Defeat at Ai and the Valley of Achor",
+   "ref": "Joshua 7",
+   "book": "JOS",
+   "c": 7,
+   "v": 2,
+   "links": [
+    "Ai",
+    "Bethel",
+    "Jericho",
+    "Valley of Achor"
+   ],
+   "range": [
+    2,
+    26
+   ]
+  },
+  {
    "id": "josh-8-ai",
    "title": "The Battle of Ai",
    "ref": "Joshua 8:10–23",
@@ -13,6 +80,25 @@
     "Jericho",
     "Mount Ebal",
     "Mount Gerizim"
+   ]
+  },
+  {
+   "id": "josh-9-gibeonites",
+   "title": "The Gibeonite Deception",
+   "ref": "Joshua 9",
+   "book": "JOS",
+   "c": 9,
+   "v": 3,
+   "links": [
+    "Gibeon",
+    "Gilgal",
+    "Chephirah",
+    "Beeroth",
+    "Kiriath-jearim"
+   ],
+   "range": [
+    1,
+    27
    ]
   },
   {
@@ -86,6 +172,168 @@
     "Gibeon",
     "Gilgal",
     "Jericho"
+   ]
+  },
+  {
+   "id": "josh-11-north",
+   "title": "The Northern Campaign",
+   "ref": "Joshua 11:1–15",
+   "book": "JOS",
+   "c": 11,
+   "v": 1,
+   "links": [
+    "Hazor",
+    "Madon",
+    "Shimron",
+    "Achshaph",
+    "Merom",
+    "Sidon",
+    "Misrephoth-maim"
+   ],
+   "range": [
+    1,
+    23
+   ]
+  },
+  {
+   "id": "josh-12-kings",
+   "title": "The Defeated Kings",
+   "ref": "Joshua 12",
+   "book": "JOS",
+   "c": 12,
+   "v": 1,
+   "links": [],
+   "range": [
+    1,
+    24
+   ]
+  },
+  {
+   "id": "josh-13-east",
+   "title": "Allotments East of the Jordan",
+   "ref": "Joshua 13:8–33",
+   "book": "JOS",
+   "c": 13,
+   "v": 8,
+   "links": [],
+   "range": [
+    8,
+    33
+   ]
+  },
+  {
+   "id": "josh-15-judah",
+   "title": "The Allotment of Judah",
+   "ref": "Joshua 15",
+   "book": "JOS",
+   "c": 15,
+   "v": 1,
+   "links": [],
+   "range": [
+    1,
+    63
+   ]
+  },
+  {
+   "id": "josh-16-joseph",
+   "title": "The Allotment of Joseph",
+   "ref": "Joshua 16–17",
+   "book": "JOS",
+   "c": 16,
+   "v": 1,
+   "links": [],
+   "range": [
+    1,
+    10
+   ]
+  },
+  {
+   "id": "josh-18-benjamin",
+   "title": "Shiloh and the Allotment of Benjamin",
+   "ref": "Joshua 18",
+   "book": "JOS",
+   "c": 18,
+   "v": 1,
+   "links": [
+    "Shiloh"
+   ],
+   "range": [
+    1,
+    28
+   ]
+  },
+  {
+   "id": "josh-19-tribes",
+   "title": "The Tribal Allotments",
+   "ref": "Joshua 13–19",
+   "book": "JOS",
+   "c": 19,
+   "v": 1,
+   "links": [
+    "Timnath-serah",
+    "Leshem"
+   ],
+   "range": [
+    1,
+    51
+   ]
+  },
+  {
+   "id": "josh-20-refuge",
+   "title": "The Cities of Refuge",
+   "ref": "Joshua 20",
+   "book": "JOS",
+   "c": 20,
+   "v": 1,
+   "links": [],
+   "range": [
+    1,
+    9
+   ]
+  },
+  {
+   "id": "josh-21-levites",
+   "title": "The Levitical Cities",
+   "ref": "Joshua 21",
+   "book": "JOS",
+   "c": 21,
+   "v": 1,
+   "links": [],
+   "range": [
+    1,
+    45
+   ]
+  },
+  {
+   "id": "josh-22-altar",
+   "title": "The Altar by the Jordan",
+   "ref": "Joshua 22",
+   "book": "JOS",
+   "c": 22,
+   "v": 1,
+   "links": [
+    "Shiloh",
+    "Geliloth"
+   ],
+   "range": [
+    1,
+    34
+   ]
+  },
+  {
+   "id": "josh-24-shechem",
+   "title": "Covenant at Shechem",
+   "ref": "Joshua 24",
+   "book": "JOS",
+   "c": 24,
+   "v": 1,
+   "links": [
+    "Shechem",
+    "Timnath-serah"
+   ],
+   "range": [
+    1,
+    33
    ]
   }
  ]

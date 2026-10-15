@@ -76,12 +76,18 @@
     hail: function (c) { return '<svg width="30" height="22" viewBox="0 0 30 22"><g fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1"><circle cx="5" cy="6" r="3.2"/><circle cx="14" cy="4" r="3.6"/><circle cx="24" cy="7" r="3.2"/><circle cx="9" cy="15" r="3.6"/><circle cx="20" cy="17" r="3.4"/></g></svg>'; },
     cave: function (c) { return '<svg width="28" height="20" viewBox="0 0 28 20"><path d="M1 19C3 8 8 2 14 2s11 6 13 17Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/><path d="M9 19c0-5 2.2-8 5-8s5 3 5 8Z" fill="var(--dbm-paper)"/></svg>'; },
     captured: function (c) { return '<svg width="20" height="24" viewBox="0 0 20 24"><path d="M4 23V2" stroke="' + c + '" stroke-width="2.2" stroke-linecap="round"/><path d="M5 2.5h12l-3.2 4.2L17 11H5Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1"/></svg>'; },
+    altar: function (c) { return '<svg width="22" height="22" viewBox="0 0 22 22"><path d="M3 20h16l-1.5-9h-13Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/><path d="M6 11V8.5M16 11V8.5M8 7c0-2 3-2 3-5 0 3 3 3 3 5" fill="none" stroke="' + c + '" stroke-width="1.6" stroke-linecap="round"/></svg>'; },
+    stones: function (c) { return '<svg width="24" height="20" viewBox="0 0 24 20"><g fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1"><ellipse cx="7" cy="15" rx="5.5" ry="4"/><ellipse cx="17" cy="15" rx="5.5" ry="4"/><ellipse cx="12" cy="7.5" rx="5.5" ry="4"/></g></svg>'; },
+    tabernacle: function (c) { return '<svg width="26" height="20" viewBox="0 0 26 20"><path d="M2 18V9l11-6 11 6v9Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.3"/><path d="M10 18v-6h6v6" fill="var(--dbm-paper)"/></svg>'; },
+    tomb: function (c) { return '<svg width="20" height="22" viewBox="0 0 20 22"><path d="M3 21V9a7 7 0 0 1 14 0v12Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/><path d="M10 9v7M7 12h6" stroke="var(--dbm-paper)" stroke-width="1.5" stroke-linecap="round"/></svg>'; },
+    circuit: function (c) { return '<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="' + c + '" stroke-width="2" stroke-dasharray="4 2.5"/><path d="M18.5 4.5l1.5 4-4.2.6" fill="none" stroke="' + c + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; },
     city: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="var(--paper)" stroke="var(--dbm-label)" stroke-width="1.8"/></svg>'; },
     uncertain: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="var(--dbm-label)" stroke-width="1.4" stroke-dasharray="2 1.5"/></svg>'; },
     mount: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="var(--accent-soft)" stroke="var(--dbm-label)" stroke-width="1.2"/></svg>'; }
   };
   var SYM_COLOR = { camp: 'var(--dbm-israel)', ambush: 'var(--dbm-ambush)', fire: 'var(--dbm-fire)', battle: 'var(--dbm-enemy)',
-    sun: 'var(--dbm-fire)', moon: 'var(--dbm-label)', hail: 'var(--dbm-water-line)', cave: 'var(--dbm-enemy)', captured: 'var(--dbm-israel)' };
+    sun: 'var(--dbm-fire)', moon: 'var(--dbm-label)', hail: 'var(--dbm-water-line)', cave: 'var(--dbm-enemy)', captured: 'var(--dbm-israel)',
+    altar: 'var(--dbm-fire)', stones: 'var(--dbm-label)', tabernacle: 'var(--dbm-israel)', tomb: 'var(--dbm-label)', circuit: 'var(--dbm-israel)' };
   var MAP_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M9 4v13.5M15 6.5V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
   function sideColor(side) { return 'var(--dbm-' + (['israel', 'ambush', 'enemy'].indexOf(side) >= 0 ? side : 'other') + ')'; }
 
@@ -312,8 +318,20 @@
             '<span class="dbm-badge" style="background:' + sideColor(m.side) + '">' + m.n + '</span><span>' + esc(m.text) + ' <span class="dbm-vv">' + esc(m.vv || '') + '</span></span></button></li>';
         }).join('') + '</ol>';
     }
+    var groups = spec.groups || [];
+    ctx.gshown = new Set(groups.filter(function (g) { return !g.hidden; }).map(function (g) { return g.id; }));
+    if (groups.length) {
+      keyHTML += '<div class="dbm-keytools"><h4>' + esc(spec.groupsLabel || 'Areas') + '</h4><span><button type="button" data-dbm-gall="1">Show all</button><button type="button" data-dbm-gall="0">Hide all</button></span></div>' +
+        (moves.length ? '' : '<p class="dbm-hint">Tap a name to show or hide it on the map.</p>') + '<ul class="dbm-groups">' +
+        groups.map(function (g) {
+          var sw = g.area ? '<svg viewBox="0 0 56 20"><rect x="3" y="3" width="50" height="14" rx="2" fill="' + g.color + '" fill-opacity="0.22" stroke="' + g.color + '" stroke-width="1.6" stroke-dasharray="4 2.5"/><circle cx="28" cy="10" r="3.4" fill="' + g.color + '" stroke="var(--dbm-paper)" stroke-width="1.2"/></svg>'
+                          : '<svg viewBox="0 0 56 20"><circle cx="28" cy="10" r="4.6" fill="' + g.color + '" stroke="var(--dbm-paper)" stroke-width="1.4"/></svg>';
+          return '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-group="' + esc(g.id) + '" aria-pressed="' + (ctx.gshown.has(g.id)) + '">' + sw +
+            '<span>' + esc(g.name) + ' <span class="dbm-vv">' + esc(g.vv || '') + (g.places ? ' · ' + g.places.length + (g.places.length === 1 ? ' place' : ' places') : '') + '</span></span></button></li>';
+        }).join('') + '</ul>';
+    }
     var symSeen = {};
-    keyHTML += '<h4>Symbols</h4><ul>' + (spec.symbols || []).filter(function (s) {
+    keyHTML += (spec.symbols && spec.symbols.length ? '<h4>Symbols</h4>' : '<h4>Map</h4>') + '<ul>' + (spec.symbols || []).filter(function (s) {
       if (symSeen[s.type]) return false; symSeen[s.type] = true; return true;
     }).map(function (s) {
       return '<li class="dbm-srow" data-dbm-sym="' + esc(s.type) + '">' + SYM[s.type](SYM_COLOR[s.type]) + '<span>' + esc(s.key) + ' <span class="dbm-vv">' + esc(s.vv || '') + '</span></span></li>';
@@ -345,6 +363,8 @@
       var b;
       if ((b = t.closest('[data-dbm-move]'))) { var n = +b.getAttribute('data-dbm-move'); ctx.shown.has(n) ? ctx.shown.delete(n) : ctx.shown.add(n); applyVisibility(ctx); }
       else if ((b = t.closest('[data-dbm-all]'))) { ctx.shown.clear(); if (b.getAttribute('data-dbm-all') === '1') ctx.spec.moves.forEach(function (m) { ctx.shown.add(m.n); }); applyVisibility(ctx); }
+      else if ((b = t.closest('[data-dbm-group]'))) { var g = b.getAttribute('data-dbm-group'); ctx.gshown.has(g) ? ctx.gshown.delete(g) : ctx.gshown.add(g); applyVisibility(ctx); }
+      else if ((b = t.closest('[data-dbm-gall]'))) { ctx.gshown.clear(); if (b.getAttribute('data-dbm-gall') === '1') ctx.spec.groups.forEach(function (g) { ctx.gshown.add(g.id); }); applyVisibility(ctx); }
       else if (t.closest('[data-dbm-cities]')) { ctx.citiesOn = !ctx.citiesOn; applyVisibility(ctx); }
       else if (t.closest('[data-dbm-roads]')) {
         ctx.roadsOn = ctx.roadsOn === false;
@@ -420,6 +440,8 @@
           roads: { type: 'geojson', data: (water.ancient && water.ancient.roads) || empty },
           streamnames: { type: 'geojson', data: (water.ancient && water.ancient.streams) || empty },
           places: { type: 'geojson', data: places || empty },
+          gareas: { type: 'geojson', data: groupAreas(spec) },
+          gpoints: { type: 'geojson', data: groupPoints(spec, hn) },
           moves: { type: 'geojson', data: { type: 'FeatureCollection', features: (spec.moves || []).map(function (m) {
             return { type: 'Feature', properties: { n: m.n }, geometry: { type: 'MultiLineString', coordinates: linesOf(m) } }; }) } }
         },
@@ -521,6 +543,28 @@
     });
     map.on('mouseenter', 'places-dot', function () { map.getCanvas().style.cursor = 'pointer'; });
     map.on('mouseleave', 'places-dot', function () { map.getCanvas().style.cursor = ''; });
+    map.addLayer({ id: 'garea-fill', type: 'fill', source: 'gareas', filter: ['==', ['get', 'kind'], 'area'],
+      paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.13 } });
+    map.addLayer({ id: 'garea-line', type: 'line', source: 'gareas', filter: ['==', ['get', 'kind'], 'area'],
+      layout: { 'line-join': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': 1.6, 'line-opacity': 0.75, 'line-dasharray': [3, 2] } });
+    map.addLayer({ id: 'gpoint', type: 'circle', source: 'gpoints',
+      paint: { 'circle-color': ['get', 'color'], 'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 2.6, 10, 4.2, 14, 6],
+        'circle-stroke-color': css('--dbm-paper'), 'circle-stroke-width': 1.2, 'circle-opacity': ['case', ['==', ['get', 'c'], 0], 0.55, 1] } });
+    map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gpoints', minzoom: 8.3,
+      layout: { 'text-field': ['get', 'd'], 'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Regular']]],
+        'text-size': ['interpolate', ['linear'], ['zoom'], 8.3, 10, 13, 12.5], 'text-variable-anchor': ['top', 'right', 'left', 'bottom'],
+        'text-radial-offset': 0.6, 'text-justify': 'auto', 'text-optional': true },
+      paint: { 'text-color': css('--dbm-label'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
+    map.addLayer({ id: 'garea-label', type: 'symbol', source: 'gareas', filter: ['==', ['get', 'kind'], 'label'],
+      layout: { 'text-field': ['get', 'name'], 'text-font': ['literal', ['Noto Sans Bold']], 'text-transform': 'uppercase', 'text-letter-spacing': 0.18,
+        'text-size': ['interpolate', ['linear'], ['zoom'], 6, 10, 10, 15], 'text-allow-overlap': false, 'text-padding': 4 },
+      paint: { 'text-color': ['get', 'color'], 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.6 } });
+    map.on('click', 'gpoint', function (e) {
+      var f = e.features[0];
+      showPopup(ctx, f.geometry.coordinates, placePopup(f.properties, spec, f.properties.gname));
+    });
+    map.on('mouseenter', 'gpoint', function () { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'gpoint', function () { map.getCanvas().style.cursor = ''; });
     map.addLayer({ id: 'moves-casing', type: 'line', source: 'moves', layout: { 'line-cap': 'round', 'line-join': 'round' },
       paint: { 'line-color': css('--dbm-paper'), 'line-width': 6.5, 'line-opacity': 0.7 } });
     (spec.moves || []).forEach(function (m) {
@@ -531,12 +575,33 @@
     });
   }
   function placeFill() { return ['case', ['==', ['get', 'k'], 'mount'], css('--accent-soft'), ['==', ['get', 'c'], 0], 'rgba(0,0,0,0)', css('--paper')]; }
-  function placePopup(p, spec) {
+  function placePopup(p, spec, gname) {
     var conf = ['Location uncertain', 'Possible location', 'Likely location'][p.c] || '';
-    var bookName = spec.placesName || (spec.places === 'JOS' ? 'Joshua' : spec.places);
+    var bookName = spec.placesName || (spec.places === 'JOS' || /^josh-/.test(spec.id) ? 'Joshua' : spec.places);
     return '<div class="dbm-pp"><h4>' + esc(p.d || p.n) + '</h4><p class="site">' + (p.m ? 'Modern site: ' + esc(p.m) + ' · ' : '') + conf + '</p>' +
-      '<p>First named in ' + esc(bookName) + ' at ' + esc(p.f) + '.</p>' +
+      (gname ? '<p>' + esc(gname) + (p.f ? ', ' + esc(bookName) + ' ' + esc(p.f) : '') + '.</p>' : '<p>First named in ' + esc(bookName) + ' at ' + esc(p.f) + '.</p>') +
       '<a href="https://www.openbible.info/geo/ancient/' + esc(p.u) + '" target="_blank" rel="noopener">OpenBible.info entry ↗</a></div>';
+  }
+
+  /* Groups: places in an allotment, a clan's towns, a list of kings. Each group may carry an
+     approximate area drawn around its towns (made by tools/build_joshua_maps.py). */
+  function groupAreas(spec) {
+    var feats = [];
+    (spec.groups || []).forEach(function (g) {
+      if (g.area) feats.push({ type: 'Feature', properties: { g: g.id, color: g.color, kind: 'area' }, geometry: { type: 'Polygon', coordinates: [g.area] } });
+      if (g.labelAt) feats.push({ type: 'Feature', properties: { g: g.id, color: g.color, kind: 'label', name: g.short || g.name }, geometry: { type: 'Point', coordinates: g.labelAt } });
+    });
+    return { type: 'FeatureCollection', features: feats };
+  }
+  function groupPoints(spec, hn) {
+    var feats = [];
+    (spec.groups || []).forEach(function (g) {
+      (g.places || []).forEach(function (p) {
+        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, color: g.color, n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '' },
+          geometry: { type: 'Point', coordinates: p.ll } });
+      });
+    });
+    return { type: 'FeatureCollection', features: feats };
   }
 
   /* A movement is one line, or several lines (e.g. five armies marching at once) */
@@ -568,7 +633,7 @@
       var lbl = s.label ? '<span>' + esc(s.label) + '</span>' : '';
       var off = s.offset || null;
       if (s.type === 'fire') { list.push(mk(el('div', 'dbm-glow'), s.at)); list.push(mk(el('div', 'dbm-sym', SYM.fire(color)), s.at, { offset: off || [14, -14] })); }
-      else if (s.type === 'camp' || s.type === 'captured') list.push(mk(el('div', 'dbm-sym', lbl + SYM[s.type](color)), s.at, { anchor: 'bottom', offset: off || [0, 6] }));
+      else if (['camp', 'captured', 'tabernacle', 'altar', 'tomb', 'stones'].indexOf(s.type) >= 0) list.push(mk(el('div', 'dbm-sym', lbl + SYM[s.type](color)), s.at, { anchor: 'bottom', offset: off || [0, 6] }));
       else list.push(mk(el('div', 'dbm-sym', SYM[s.type](color) + lbl), s.at, { offset: off || (s.type === 'ambush' ? [0, 8] : [0, 0]) }));
     });
     (spec.moves || []).forEach(function (m) {
@@ -605,7 +670,8 @@
     Object.keys(typeOn).forEach(function (k) {
       root.querySelectorAll('[data-dbm-sym="' + k + '"]').forEach(function (r) { r.classList.toggle('off', !typeOn[k]); });
     });
-    root.querySelectorAll('[data-dbm-cities]').forEach(function (b) { b.setAttribute('aria-pressed', String(ctx.citiesOn)); });
+    root.querySelectorAll('[data-dbm-cities]:not([data-dbm-group]):not([data-dbm-roads])').forEach(function (b) { b.setAttribute('aria-pressed', String(ctx.citiesOn)); });
+    root.querySelectorAll('[data-dbm-group]').forEach(function (b) { b.setAttribute('aria-pressed', String(ctx.gshown.has(b.getAttribute('data-dbm-group')))); });
     root.querySelectorAll('[data-dbm-cityrow]').forEach(function (r) { r.classList.toggle('off', !ctx.citiesOn); });
     if (!ctx.ready) return;
     (spec.moves || []).forEach(function (m) {
@@ -615,6 +681,12 @@
     });
     ctx.map.setFilter('moves-casing', ['in', ['get', 'n'], ['literal', Array.from(ctx.shown)]]);
     ['places-dot', 'places-label'].forEach(function (id) { ctx.map.setLayoutProperty(id, 'visibility', ctx.citiesOn ? 'visible' : 'none'); });
+    var gl = ['literal', Array.from(ctx.gshown || [])];
+    ['garea-fill', 'garea-line', 'garea-label', 'gpoint', 'gpoint-label'].forEach(function (id) {
+      var base = id.indexOf('garea') === 0 ? ['==', ['get', 'kind'], id === 'garea-label' ? 'label' : 'area'] : null;
+      var f = ['in', ['get', 'g'], gl];
+      ctx.map.setFilter(id, base ? ['all', base, f] : f);
+    });
   }
 
   function setMode(ctx, m) {
@@ -629,6 +701,9 @@
     ['deadsea', 'sea', 'sea-edge', 'galilee', 'water-label', 'jordan', 'wadi', 'wadi-seasonal', 'stream-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' ? 'visible' : 'none'); });
     ['roads', 'roads-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' && ctx.roadsOn !== false ? 'visible' : 'none'); });
     map.setPaintProperty('places-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-label'));
+    map.setPaintProperty('gpoint-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-label'));
+    map.setPaintProperty('gpoint-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
+    map.setPaintProperty('garea-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
     map.setPaintProperty('places-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
   }
   function repaint() {
@@ -652,6 +727,9 @@
     map.setPaintProperty('moves-casing', 'line-color', css('--dbm-paper'));
     (ctx.spec.moves || []).forEach(function (m) { map.setPaintProperty('move-' + m.n, 'line-color', css(sideColor(m.side).slice(4, -1))); });
     map.setPaintProperty('places-dot', 'circle-stroke-color', css('--dbm-label'));
+    map.setPaintProperty('gpoint', 'circle-stroke-color', css('--dbm-paper'));
+    map.setPaintProperty('gpoint-label', 'text-halo-color', css('--dbm-paper'));
+    map.setPaintProperty('garea-label', 'text-halo-color', css('--dbm-paper'));
     map.setPaintProperty('places-dot', 'circle-color', placeFill());
     setMode(ctx, ctx.mode || 'ancient');
   }

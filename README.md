@@ -80,7 +80,11 @@ A map button appears beside the verse where a map begins. Tapping it opens the m
 in a column to the left of the text on wide screens, or inside the text column below the verse on phones.
 
 - Maps are live on `index.html`. `maps-test.html` is the same reader, kept for trying changes.
-- Maps so far: Joshua 8 (Ai), Joshua 10 (Gibeon and Beth-horon; Makkedah; the southern cities).
+- Maps so far: every major section of Joshua. Joshua 8 and 10 are drawn by hand (`data/maps/josh-8-ai.json`,
+  `josh-10-*.json`); the others are built by `python3 tools/build_joshua_maps.py /tmp/obgeo` (edit the map
+  definitions in that script and run it again). Tribal areas are drawn around the towns OpenBible.info ties to
+  each allotment's verses, not along the boundary descriptions.
+- A map can carry `groups`: coloured sets of places (tribes, clans, kings) that the key shows and hides.
 - `assets/maps.js` + `assets/maps.css` — the map module. `reader.js` calls `DBMaps.decorate()` after each
   render; without `maps.js` that call does nothing.
 - `assets/vendor/maplibre-gl/` — the map engine (MapLibre GL 4.7.1, BSD licence), loaded only when a map opens.
