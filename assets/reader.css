@@ -855,3 +855,52 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
 .today-box[hidden] + .history-box { margin-top: 0; }
 .hist-text { margin: 0 0 0.5rem; }
 .hist-text:last-child { margin-bottom: 0; }
+
+/* ── Progress: the whole Bible (circle, sections, books) ──
+   Section colours checked for colour-blind separation (Light/Sepia and Dark sets); every colour also has its name beside it. */
+:root { --bb0: #a8452e; --bb1: #0f8670; --bb2: #b48a12; --bb3: #5d5fb3; }
+:root[data-theme="dark"] { --bb0: #c74b52; --bb1: #169b81; --bb2: #b58f1f; --bb3: #7a7ed8; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="sepia"]) { --bb0: #c74b52; --bb1: #169b81; --bb2: #b58f1f; --bb3: #7a7ed8; }
+}
+.bb-s0 { --bb: var(--bb0); } .bb-s1 { --bb: var(--bb1); } .bb-s2 { --bb: var(--bb2); } .bb-s3 { --bb: var(--bb3); }
+.bb-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 28px; align-items: center; }
+.bb-ring { width: 100%; max-width: 240px; height: auto; display: block; margin: 0 auto; overflow: visible; }
+.bb-track { stroke: color-mix(in srgb, var(--bb) 20%, var(--paper)); }
+.bb-read { stroke: var(--bb); }
+.bb-hit { stroke: transparent; cursor: pointer; pointer-events: stroke; }
+.bb-hit.is-on { stroke: color-mix(in srgb, var(--heading) 9%, transparent); }
+.bb-c-pct { font-family: var(--display); font-weight: 300; font-size: 34px; fill: var(--heading); }
+.bb-c-lbl { font: 600 9.5px var(--sans); letter-spacing: 0.12em; text-transform: uppercase; fill: var(--accent); }
+.bb-c-sub { font: 400 10px var(--sans); fill: var(--muted); }
+.bb-secs { display: grid; gap: 14px; font-family: var(--sans); }
+.bb-sec { display: grid; grid-template-columns: 12px 1fr auto; column-gap: 10px; row-gap: 5px; align-items: center; }
+.bb-key { width: 10px; height: 10px; border-radius: 3px; background: var(--bb); }
+.bb-name { color: var(--ink); font-size: 0.92rem; }
+.bb-pct { color: var(--heading); font-size: 0.92rem; font-variant-numeric: tabular-nums; }
+.bb-bar { grid-column: 2 / 4; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--bb) 20%, var(--paper)); overflow: hidden; }
+.bb-bar span { display: block; height: 100%; background: var(--bb); border-radius: 3px; }
+.bb-sub { grid-column: 2 / 4; font-size: 0.74rem; color: var(--muted); }
+.bb-books { font-family: var(--sans); font-size: 0.84rem; }
+.bb-group { border-top: 1px solid var(--rule); }
+.bb-group:last-child { border-bottom: 1px solid var(--rule); }
+.bb-group summary { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 2px; cursor: pointer; list-style: none; }
+.bb-group summary::-webkit-details-marker { display: none; }
+.bb-group summary::before { content: ''; width: 10px; height: 10px; border-radius: 3px; background: var(--bb); flex: none; }
+.bb-group summary .bb-name { flex: 1; }
+.bb-group summary .he { color: var(--accent-soft); font-size: 0.95em; margin-left: 0.35em; }
+.bb-group summary::after { content: '›'; color: var(--accent-soft); font-size: 1.1rem; transition: transform 0.15s; }
+.bb-group[open] summary::after { transform: rotate(90deg); }
+.bb-group[open] { padding-bottom: 10px; }
+.bb-book { display: grid; grid-template-columns: 8.2em 1fr 3em; gap: 10px; align-items: center; padding: 2px 2px 2px 20px; }
+.bb-bname { color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bb-lane { display: block; }
+.bb-bbar { display: block; height: 6px; min-width: 3px; border-radius: 3px; background: color-mix(in srgb, var(--bb) 20%, var(--paper)); overflow: hidden; }
+.bb-bbar span { display: block; height: 100%; background: var(--bb); }
+.bb-bpct { text-align: right; color: var(--ink-soft); font-variant-numeric: tabular-nums; font-size: 0.8rem; }
+.bb-bpct.is-zero { color: var(--muted); opacity: 0.7; }
+@media (max-width: 700px) {
+  .bb-wrap { grid-template-columns: 1fr; gap: 22px; }
+  .bb-ring { max-width: 230px; }
+  .bb-book { grid-template-columns: 7.2em 1fr 2.8em; padding-left: 20px; }
+}

@@ -51,6 +51,11 @@ Bible Text: Verse Numbers (switch, on by default — hidden numbers stay in the 
 Names & Terms: Messianic Filter, Hebrew Names.
 
 ## Progress
+- **Your Bible** (new): every reading marked complete counts its verses (union, so re-reading doesn't double count),
+  weighted by words using `data/bible-size.json` ([verses, words] per chapter, built by `python3 tools/build_sizes.py`).
+  Circle = whole Bible, 4 section arcs sized by text length, pale = unread, full colour = read (positioned by verse);
+  hover/tap a book on the circle shows it in the middle. Then section bars, then "By book" bars drawn to each book's length.
+  Section colours (validated for colour-blindness): Torah rust, Prophets teal, Writings gold, Apostles indigo (`--bb0..3`).
 Stored only in the browser: `localStorage['dbs-progress'] = { read: { 'YYYY-MM-DD': [1,2,4] }, since }` (reading numbers
 in the day's order). Progress page: year bar, totals, by-section bars, catch-up list (links open the exact reading),
 "pick up from today", day-by-day dots, clear all. Calendar shows ✓ / faint ✓ / ring.

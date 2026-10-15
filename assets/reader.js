@@ -816,21 +816,12 @@
       '<div><b>' + days.filter(dayComplete).length + '</b><span>' + (days.filter(dayComplete).length === 1 ? 'full day' : 'full days') + '</span></div>' +
       '<div><b>' + missed.length + '</b><span>to catch up</span></div></div>';
 
-    var sections = {}, order = ['Torah', 'Prophets', 'Writings', 'Apostles', 'Feast readings'];
-    days.forEach(function (d) {
-      plan[d].forEach(function (x, i) {
-        var sec = sectionOf(x[0]);
-        sections[sec] = sections[sec] || { due: 0, read: 0 };
-        if (d < today || isRead(d, i + 1)) sections[sec].due++;
-        if (isRead(d, i + 1)) sections[sec].read++;
-      });
-    });
-    html += '<h2 class="pg-h">By section <span>since ' + shortDate(from) + '</span></h2><div class="pr-sections">' +
-      order.filter(function (sec) { return sections[sec] && sections[sec].due; }).map(function (sec) {
-        var v = sections[sec], pct = Math.round(100 * v.read / v.due);
-        return '<div class="pr-sec"><span class="pr-sec-name">' + sec + '</span><span class="pr-sec-num">' + v.read + ' / ' + v.due + '</span>' +
-          '<span class="pr-bar"><span style="width:' + pct + '%"></span></span></div>';
-      }).join('') + '</div>';
+    if (!bibleSize) {     // book sizes not loaded yet: draw again when they are
+      getJSON('data/bible-size.json').then(function (d) { bibleSize = d; drawProgressPage(); }).catch(function () { bibleSize = {}; drawProgressPage(); });
+      box.innerHTML = html + '<p class="status">Loading…</p>';
+      return;
+    }
+    html += bibleProgressHtml();
 
     html += '<h2 class="pg-h">To catch up</h2>';
     if (missed.length) {
@@ -853,6 +844,153 @@
     box.innerHTML = html + privacyNote() +
       '<p class="pg-clear"><button type="button" class="link-btn quiet" id="clear-progress">Clear all progress</button></p>';
   }
+  // ── How much of the Bible has been read ─────────────────────
+  // Every reading marked complete counts its verses (each passage once, however often it is read).
+  // Sizes come from data/bible-size.json: [verses, words] per chapter, so books and sections are
+  // weighed by the real length of their text.
+  var bibleSize = null;
+  function readVerses() {             // → { GEN: { 1: { 1: true, … } } }
+    var out = {};
+    Object.keys(progress.read).forEach(function (d) {
+      (progress.read[d] || []).forEach(function (n) {
+        var x = plan[d] && plan[d][n - 1];
+        if (!x) return;
+        var r;
+        try { r = parseRef(x[1]); } catch (e) { return; }
+        var size = bibleSize[r.book];
+        if (!size) return;
+        for (var c = r.c1; c <= r.c2 && c <= size.length; c++) {
+          var last = size[c - 1][0];
+          var from = c === r.c1 ? r.v1 : 1;
+          var to = c === r.c2 && r.v2 ? Math.min(r.v2, last) : last;
+          var ch = ((out[r.book] = out[r.book] || {})[c] = out[r.book][c] || {});
+          for (var v = from; v <= to; v++) ch[v] = true;
+        }
+      });
+    });
+    return out;
+  }
+  function bibleTally() {
+    var read = readVerses(), maxWords = 0;
+    var sections = GROUPS.map(function (g, gi) {
+      var sec = { name: g[0], he: g[1].replace(/[֑-ׇ]/g, ''), n: gi, words: 0, wordsRead: 0, verses: 0, versesRead: 0, books: [] };
+      g[2].forEach(function (id) {
+        var size = bibleSize[id] || [];
+        var book = { id: id, words: 0, wordsRead: 0, verses: 0, versesRead: 0, chapters: size.length, runs: [] };
+        size.forEach(function (cs, ci) {
+          var got = (read[id] || {})[ci + 1] || {}, per = cs[1] / Math.max(cs[0], 1);
+          for (var v = 1; v <= cs[0]; v++) {
+            if (got[v]) {
+              book.versesRead++; book.wordsRead += per;
+              // runs of read text, in words from the start of the book (for the circle)
+              var at = book.words + per * (v - 1), run = book.runs[book.runs.length - 1];
+              if (run && Math.abs(run[1] - at) < 0.01) run[1] = at + per; else book.runs.push([at, at + per]);
+            }
+          }
+          book.words += cs[1]; book.verses += cs[0];
+        });
+        maxWords = Math.max(maxWords, book.words);
+        sec.books.push(book);
+        ['words', 'wordsRead', 'verses', 'versesRead'].forEach(function (k) { sec[k] += book[k]; });
+      });
+      return sec;
+    });
+    var all = { words: 0, wordsRead: 0, verses: 0, versesRead: 0 };
+    sections.forEach(function (sec) { ['words', 'wordsRead', 'verses', 'versesRead'].forEach(function (k) { all[k] += sec[k]; }); });
+    return { sections: sections, all: all, maxWords: maxWords };
+  }
+  function pctText(part, whole) {
+    if (!whole || !part) return '0%';
+    var p = 100 * part / whole;
+    return p < 1 ? '&lt;1%' : p > 99 && p < 100 ? '99%' : Math.round(p) + '%';
+  }
+  function num(n) { return Math.round(n).toLocaleString('en-US'); }
+
+  // The whole Bible as a circle: four arcs (Torah, Prophets, Writings, Apostles) sized by the length
+  // of their text, pale where unread and full colour where read.
+  function bibleRingSvg(t) {
+    var R = 96, W = 20, GAP = 2.4, C = 120, total = 360 - GAP * t.sections.length;
+    function pt(a, r) { a = (a - 90) * Math.PI / 180; return (C + r * Math.cos(a)).toFixed(2) + ' ' + (C + r * Math.sin(a)).toFixed(2); }
+    function arc(a0, a1, r) {
+      if (a1 - a0 < 0.05) a1 = a0 + 0.05;
+      return 'M' + pt(a0, r) + ' A' + r + ' ' + r + ' 0 ' + (a1 - a0 > 180 ? 1 : 0) + ' 1 ' + pt(a1, r);
+    }
+    var svg = '', hits = '', a = GAP / 2;
+    t.sections.forEach(function (sec) {
+      var span = total * sec.words / t.all.words, a0 = a;
+      svg += '<path class="bb-track bb-s' + sec.n + '" d="' + arc(a0, a0 + span, R) + '"/>';
+      var at = a0;
+      sec.books.forEach(function (b) {
+        var bspan = span * b.words / sec.words;
+        b.runs.forEach(function (run) {
+          svg += '<path class="bb-read bb-s' + sec.n + '" d="' + arc(at + bspan * run[0] / b.words, at + bspan * run[1] / b.words, R) + '"/>';
+        });
+        hits += '<path class="bb-hit" data-label="' + escapeAttr(bookLabel(b.id)) + '" data-pct="' + pctText(b.wordsRead, b.words) +
+          '" data-sub="' + num(b.versesRead) + ' of ' + num(b.verses) + ' verses" d="' + arc(at, at + bspan, R) + '"><title>' +
+          escapeAttr(bookLabel(b.id)) + ' · ' + pctText(b.wordsRead, b.words).replace('&lt;', '<') + '</title></path>';
+        at += bspan;
+      });
+      a += span + GAP;
+    });
+    var mid = '<text class="bb-c-pct" x="120" y="118" text-anchor="middle">' + pctText(t.all.wordsRead, t.all.words) + '</text>' +
+      '<text class="bb-c-lbl" x="120" y="140" text-anchor="middle">of the Bible</text>' +
+      '<text class="bb-c-sub" x="120" y="158" text-anchor="middle">' + num(t.all.versesRead) + ' of ' + num(t.all.verses) + ' verses</text>';
+    return '<svg class="bb-ring" viewBox="0 0 240 240" role="img" aria-label="' +
+      escapeAttr(pctText(t.all.wordsRead, t.all.words).replace('&lt;', 'under ') + ' of the Bible read') + '">' +
+      '<g fill="none" stroke-width="' + W + '">' + svg + '</g><g class="bb-hits" fill="none" stroke-width="' + (W + 14) + '">' + hits + '</g>' +
+      '<g class="bb-centre" data-pct="' + pctText(t.all.wordsRead, t.all.words) + '" data-sub="' + num(t.all.versesRead) + ' of ' + num(t.all.verses) + ' verses">' + mid + '</g></svg>';
+  }
+  function bibleProgressHtml() {
+    var t = bibleTally(), max = t.maxWords;
+    var html = '<h2 class="pg-h">Your Bible <span>by length of text</span></h2>' +
+      '<div class="bb-wrap">' + bibleRingSvg(t) + '<div class="bb-secs">' +
+      t.sections.map(function (sec) {
+        return '<div class="bb-sec bb-s' + sec.n + '"><span class="bb-key"></span><span class="bb-name">' + sec.name + '</span>' +
+          '<span class="bb-pct">' + pctText(sec.wordsRead, sec.words) + '</span>' +
+          '<span class="bb-bar"><span style="width:' + (100 * sec.wordsRead / sec.words).toFixed(2) + '%"></span></span>' +
+          '<span class="bb-sub">' + num(sec.versesRead) + ' of ' + num(sec.verses) + ' verses &middot; ' + sec.books.length + ' books</span></div>';
+      }).join('') + '</div></div>';
+    // Each book as a bar as long as the book itself (the longest book fills the line)
+    html += '<h2 class="pg-h">By book <span>bars drawn to the length of each book</span></h2><div class="bb-books">' +
+      t.sections.map(function (sec) {
+        return '<details class="bb-group bb-s' + sec.n + '"' + (sec.versesRead ? ' open' : '') + '><summary><span class="bb-name">' + sec.name +
+          ' <span class="he">' + sec.he + '</span></span><span class="bb-pct">' + pctText(sec.wordsRead, sec.words) + '</span></summary>' +
+          sec.books.map(function (b) {
+            var len = 100 * b.words / max, done = b.words ? 100 * b.wordsRead / b.words : 0;
+            return '<div class="bb-book" title="' + escapeAttr(bookLabel(b.id) + ': ' + b.chapters + ' chapters, ' + num(b.verses) + ' verses') + '">' +
+              '<span class="bb-bname">' + escapeAttr(bookLabel(b.id)) + '</span>' +
+              '<span class="bb-lane"><span class="bb-bbar" style="width:' + len.toFixed(2) + '%"><span style="width:' + done.toFixed(2) + '%"></span></span></span>' +
+              '<span class="bb-bpct' + (b.wordsRead ? '' : ' is-zero') + '">' + pctText(b.wordsRead, b.words) + '</span></div>';
+          }).join('') + '</details>';
+      }).join('') + '</div>';
+    return html;
+  }
+  // Hover or tap a book on the circle: its name and share read appear in the middle
+  function ringShow(hit) {
+    var ring = hit && hit.closest('.bb-ring');
+    if (!ring) return;
+    var c = ring.querySelector('.bb-centre'), tx = c.querySelectorAll('text');
+    ring.querySelectorAll('.bb-hit.is-on').forEach(function (h) { h.classList.remove('is-on'); });
+    if (hit.classList.contains('bb-hit')) {
+      hit.classList.add('is-on');
+      tx[0].innerHTML = hit.getAttribute('data-pct'); tx[1].textContent = hit.getAttribute('data-label'); tx[2].textContent = hit.getAttribute('data-sub');
+    } else {
+      tx[0].innerHTML = c.getAttribute('data-pct'); tx[1].textContent = 'of the Bible'; tx[2].textContent = c.getAttribute('data-sub');
+    }
+  }
+  document.addEventListener('mouseover', function (e) {
+    var hit = e.target.closest && e.target.closest('.bb-hit');
+    if (hit) ringShow(hit);
+  });
+  document.addEventListener('mouseout', function (e) {
+    var hit = e.target.closest && e.target.closest('.bb-hit');
+    if (hit && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('.bb-hit'))) ringShow(hit.closest('.bb-ring').querySelector('.bb-centre'));
+  });
+  document.addEventListener('click', function (e) {
+    var hit = e.target.closest && e.target.closest('.bb-hit');
+    if (hit) ringShow(hit);
+  });
+
   function privacyNote() {
     return '<p class="pg-note pg-privacy">Your progress is kept in this browser, on this device only. Nothing is sent to us, ' +
       'and clearing your browser data erases it.</p>';
