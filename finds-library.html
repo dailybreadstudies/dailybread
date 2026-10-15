@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Archaeology Library · Daily Bread Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/reader.css">
+  <style>
+    /* Working overview of the archaeology entries: what each card says, its verses,
+       its photos and where it stands (draft, for review, ready; photo licence checked). */
+    body { display: block; padding: 2.5rem 1rem 5rem; }
+    .lib { max-width: 72rem; margin: 0 auto; font-family: var(--sans); color: var(--ink); }
+    .lib h1 { font: 700 1.6rem/1.25 var(--display); margin: 0 0 0.4rem; }
+    .lib .intro { font-size: 0.82rem; line-height: 1.6; color: var(--ink-soft); max-width: 46rem; margin: 0 0 1.6rem; }
+    .lib .intro b { color: var(--ink); }
+    .counts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.6rem; }
+    .filter {
+      border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink-soft); border-radius: 999px;
+      font: 500 0.72rem/1 var(--sans); padding: 0.5rem 0.85rem; cursor: pointer;
+    }
+    .filter[aria-pressed="true"] { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: 1.4rem; }
+    .entry { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--surface); display: flex; flex-direction: column; min-width: 0; }
+    .entry .pics { display: grid; grid-template-columns: repeat(var(--n, 1), 1fr); gap: 2px; background: var(--rule); aspect-ratio: 16 / 10; }
+    .entry .pics a { display: block; background: var(--tint); overflow: hidden; }
+    .entry .pics img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .entry .body { padding: 0.9rem 1rem 1rem; display: flex; flex-direction: column; gap: 0.55rem; flex: 1; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .badge { font: 600 0.58rem/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; padding: 0.32rem 0.5rem; border-radius: 3px; border: 1px solid currentColor; }
+    .st-draft { color: var(--muted); }
+    .st-review { color: #b07a12; }
+    .st-ready { color: #3f7a2c; }
+    .ph-no { color: #a23a2b; }
+    .ph-yes { color: #3f7a2c; }
+    .entry h2 { font: 700 1rem/1.3 var(--display); margin: 0; }
+    .entry .id { font: 400 0.66rem/1 var(--sans); color: var(--muted); }
+    .verses { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; font-size: 0.74rem; }
+    .verses a { color: var(--accent); }
+    .entry p { font-size: 0.76rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+    .files { font-size: 0.66rem; line-height: 1.5; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.55rem; margin-top: auto; word-break: break-word; }
+    .files a { color: var(--muted); }
+    .ideas { margin-top: 3rem; }
+    .ideas h2 { font: 600 0.66rem/1.2 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.8rem; }
+    .ideas ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: 0.6rem 1.4rem; }
+    .ideas li { font-size: 0.78rem; line-height: 1.5; color: var(--ink-soft); }
+    .ideas b { color: var(--ink); font-weight: 600; }
+    .ideas .v { color: var(--accent); }
+    .back { font-size: 0.75rem; color: var(--accent); }
+  </style>
+</head>
+<body>
+<main class="lib">
+  <p><a class="back" href="./">← Daily Bread Online</a></p>
+  <h1>Archaeology library</h1>
+  <p class="intro">Every archaeology card for the reader, with its verses and photos. A card appears on the public site only when it is <b>ready</b> and its <b>photo licence is checked</b>; until then it shows on the <a href="maps-test.html">test page</a> only. Tap a verse to see the card in place. To approve, change wording, or swap a photo, tell Claude which card and what to change (for a new photo, paste its Wikimedia Commons link).</p>
+  <div class="counts" id="counts"></div>
+  <div class="grid" id="grid"><p class="intro">Loading…</p></div>
+  <section class="ideas" id="ideas"></section>
+</main>
+<script>
+(function () {
+  'use strict';
+  var COMMONS = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
+  var STATUS = { draft: 'Draft', review: 'For review', ready: 'Ready' };
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+  function get(u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
+  var filter = 'all', entries = [], books = {};
+
+  Promise.all([get('data/finds/index.json'), get('data/bsb/index.json'), get('data/finds/ideas.json').catch(function () { return { ideas: [] }; })])
+    .then(function (res) {
+      res[1].forEach(function (b) { books[b.id] = b.name; });
+      var ideas = res[2].ideas || [];
+      if (ideas.length) document.getElementById('ideas').innerHTML = '<h2>Suggested next</h2><ul>' + ideas.map(function (i) {
+        return '<li><b>' + esc(i.title) + '</b> · <span class="v">' + esc(i.verses) + '</span><br>' + esc(i.note) + '</li>';
+      }).join('') + '</ul>';
+      return Promise.all(res[0].finds.map(function (f) { return get('data/finds/' + f.id + '.json'); }));
+    })
+    .then(function (list) { entries = list; draw(); })
+    .catch(function (e) { document.getElementById('grid').innerHTML = '<p class="intro">The library could not load. (' + esc(e.message) + ')</p>'; });
+
+  function draw() {
+    var n = { all: entries.length, draft: 0, review: 0, ready: 0, photo: 0 };
+    entries.forEach(function (f) { n[f.status] = (n[f.status] || 0) + 1; if (!f.photoChecked) n.photo++; });
+    document.getElementById('counts').innerHTML = [['all', 'All ' + n.all], ['draft', 'Draft ' + n.draft], ['review', 'For review ' + n.review], ['ready', 'Ready ' + n.ready], ['photo', 'Photo to check ' + n.photo]]
+      .map(function (x) { return '<button type="button" class="filter" data-f="' + x[0] + '" aria-pressed="' + (filter === x[0]) + '">' + x[1] + '</button>'; }).join('');
+    document.getElementById('grid').innerHTML = entries.filter(function (f) {
+      return filter === 'all' || (filter === 'photo' ? !f.photoChecked : f.status === filter);
+    }).map(card).join('') || '<p class="intro">None.</p>';
+  }
+  function card(f) {
+    var imgs = (f.images || []).slice(0, 2);
+    var verses = (f.anchors || []).map(function (a) {
+      return '<a href="maps-test.html?r=' + a.book + '.' + a.c + '.' + a.v + '">' + esc((books[a.book] || a.book) + ' ' + a.c + ':' + a.v) + '</a>';
+    }).join('');
+    return '<article class="entry">' +
+      (imgs.length ? '<div class="pics" style="--n:' + imgs.length + '">' + imgs.map(function (im) {
+        return '<a href="' + esc(im.page) + '" target="_blank" rel="noopener" title="' + esc(im.file) + '"><img loading="lazy" alt="" src="' + esc(COMMONS + encodeURIComponent(im.file) + '?width=500') + '"></a>';
+      }).join('') + '</div>' : '') +
+      '<div class="body"><div class="badges"><span class="badge st-' + f.status + '">' + (STATUS[f.status] || f.status) + '</span>' +
+      '<span class="badge ' + (f.photoChecked ? 'ph-yes">Photo licence checked' : 'ph-no">Photo licence to check') + '</span></div>' +
+      '<h2>' + esc(f.title) + '</h2><span class="id">' + esc(f.id) + ' · ' + esc(f.kind || '') + '</span>' +
+      '<div class="verses">' + verses + '</div>' +
+      '<p>' + (f.p && f.p[0] || '') + '</p>' +
+      '<div class="files">' + imgs.map(function (im) { return '<a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + esc(im.file) + '</a>'; }).join('<br>') + '</div>' +
+      '</div></article>';
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-f]');
+    if (b) { filter = b.getAttribute('data-f'); draw(); }
+  });
+})();
+</script>
+</body>
+</html>

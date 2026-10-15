@@ -1,0 +1,59 @@
+{
+ "id": "tel-dan",
+ "title": "The Tel Dan Stele",
+ "kind": "Inscription",
+ "anchors": [
+  {
+   "book": "2KI",
+   "c": 8,
+   "v": 28
+  },
+  {
+   "book": "2SA",
+   "c": 7,
+   "v": 16
+  }
+ ],
+ "images": [
+  {
+   "file": "JRSLM_300116_Tel_Dan_Stele_01.jpg",
+   "caption": "The Tel Dan Stele in the Israel Museum.",
+   "page": "https://commons.wikimedia.org/wiki/File:JRSLM_300116_Tel_Dan_Stele_01.jpg"
+  }
+ ],
+ "p": [
+  "Pieces of a basalt victory monument, written in Aramaic, most likely set up by Hazael king of Aram-Damascus after he fought the kings of Israel and Judah. The king boasts of killing “[Jo]ram son of [Ahab], king of Israel” and “[Ahaz]iah son of [Joram], king of the House of David”.",
+  "The words <i>bytdwd</i>, “House of David”, are the earliest known mention of David outside the Bible, written little more than a century after his reign. The reading is now widely accepted. The stele’s account of who killed Joram and Ahaziah differs from 2 Kings 9, where Jehu kills them."
+ ],
+ "facts": [
+  [
+   "Found",
+   "1993 and 1994, at Tel Dan in northern Israel"
+  ],
+  [
+   "Excavator",
+   "Avraham Biran’s team"
+  ],
+  [
+   "Date",
+   "9th century BC, probably about 840 BC"
+  ],
+  [
+   "Language",
+   "Aramaic"
+  ],
+  [
+   "Now",
+   "The Israel Museum, Jerusalem"
+  ]
+ ],
+ "verse": "2 Kings 8:28–29; 2 Samuel 7:16",
+ "links": [
+  [
+   "Tel Dan stele on Wikipedia",
+   "https://en.wikipedia.org/wiki/Tel_Dan_stele"
+  ]
+ ],
+ "status": "draft",
+ "photoChecked": false
+}

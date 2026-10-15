@@ -1,0 +1,50 @@
+{
+ "id": "pool-of-siloam",
+ "title": "The Pool of Siloam",
+ "kind": "Site",
+ "anchors": [
+  {
+   "book": "JHN",
+   "c": 9,
+   "v": 7
+  }
+ ],
+ "images": [
+  {
+   "file": "City_of_David_-_Pool_of_Siloam_IMG_5919.JPG",
+   "caption": "The excavated steps of the Second Temple period pool.",
+   "page": "https://commons.wikimedia.org/wiki/File:City_of_David_-_Pool_of_Siloam_IMG_5919.JPG"
+  }
+ ],
+ "p": [
+  "Jesus sent the man born blind to “wash in the Pool of Siloam” (John 9:7). The pool shown to visitors for centuries was a small Byzantine one; in 2004 workers repairing a sewer pipe uncovered the steps of a much larger pool just below it.",
+  "The excavation showed broad stone steps on several sides, built in the late Second Temple period and fed by the water of Hezekiah’s Tunnel. It was likely used for ritual washing by pilgrims, and a stepped street led up from it toward the Temple Mount. Most of the pool still lies unexcavated."
+ ],
+ "facts": [
+  [
+   "Found",
+   "2004, at the south end of the City of David, Jerusalem"
+  ],
+  [
+   "Excavators",
+   "Ronny Reich and Eli Shukron"
+  ],
+  [
+   "Date",
+   "1st century BC to AD 70"
+  ],
+  [
+   "Now",
+   "Open to visitors in the City of David"
+  ]
+ ],
+ "verse": "John 9:7",
+ "links": [
+  [
+   "Pool of Siloam on Wikipedia",
+   "https://en.wikipedia.org/wiki/Pool_of_Siloam"
+  ]
+ ],
+ "status": "draft",
+ "photoChecked": false
+}

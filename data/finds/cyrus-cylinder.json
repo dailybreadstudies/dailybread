@@ -1,0 +1,59 @@
+{
+ "id": "cyrus-cylinder",
+ "title": "The Cyrus Cylinder",
+ "kind": "Inscription",
+ "anchors": [
+  {
+   "book": "EZR",
+   "c": 1,
+   "v": 1
+  },
+  {
+   "book": "2CH",
+   "c": 36,
+   "v": 22
+  }
+ ],
+ "images": [
+  {
+   "file": "Cyrus_Cylinder.jpg",
+   "caption": "The Cyrus Cylinder in the British Museum.",
+   "page": "https://commons.wikimedia.org/wiki/File:Cyrus_Cylinder.jpg"
+  }
+ ],
+ "p": [
+  "A clay barrel inscribed in Babylonian cuneiform after Cyrus the Great took Babylon in 539 BC. Cyrus says he returned the gods of many cities to their sanctuaries and “gathered all their people and returned them to their dwellings”.",
+  "It does not mention Judah or Jerusalem, but it shows the same policy behind the decree of Ezra 1:1–4 and 2 Chronicles 36:22–23, which let the exiles go home and rebuild the Temple."
+ ],
+ "facts": [
+  [
+   "Found",
+   "1879, in the foundations of the Esagila temple, Babylon"
+  ],
+  [
+   "Excavator",
+   "Hormuzd Rassam"
+  ],
+  [
+   "Date",
+   "Shortly after 539 BC"
+  ],
+  [
+   "Language",
+   "Akkadian (Babylonian cuneiform)"
+  ],
+  [
+   "Now",
+   "The British Museum, London"
+  ]
+ ],
+ "verse": "Ezra 1:1–4; 2 Chronicles 36:22–23",
+ "links": [
+  [
+   "Cyrus Cylinder on Wikipedia",
+   "https://en.wikipedia.org/wiki/Cyrus_Cylinder"
+  ]
+ ],
+ "status": "draft",
+ "photoChecked": false
+}

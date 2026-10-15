@@ -25,7 +25,13 @@
   function imgURL(file, w) { return COMMONS + encodeURIComponent(file) + '?width=' + w; }
 
   var indexP = null;
-  function index() { return indexP || (indexP = getJSON('data/finds/index.json').then(function (j) { return j.finds || []; }).catch(function () { return []; })); }
+  /* The public site shows only finds marked ready with their photos checked; the test page shows all */
+  var SHOW_ALL = /maps-test/.test(location.pathname);
+  function index() {
+    return indexP || (indexP = getJSON('data/finds/index.json').then(function (j) {
+      return (j.finds || []).filter(function (f) { return SHOW_ALL || (f.status === 'ready' && f.photoChecked); });
+    }).catch(function () { return []; }));
+  }
 
   var state = { open: null, root: null, mode: null };
 
@@ -136,8 +142,8 @@
     }
     html += '<h3 class="dbf-title">' + esc(f.title) + '</h3>';
     if (f.verse) html += '<p class="dbf-verse">' + esc(f.verse) + '</p>';
-    html += '<dl class="dbf-facts">' + (f.facts || []).map(function (x) { return '<div><dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>'; }).join('') + '</dl>';
     html += (f.p || []).map(function (p) { return '<p class="dbf-p">' + p + '</p>'; }).join('');
+    html += '<dl class="dbf-facts">' + (f.facts || []).map(function (x) { return '<div><dt>' + esc(x[0]) + '</dt><dd>' + esc(x[1]) + '</dd></div>'; }).join('') + '</dl>';
     if (f.links && f.links.length) html += '<p class="dbf-links">' + f.links.map(function (l) { return '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + esc(l[0]) + ' ↗</a>'; }).join('') + '</p>';
     root.innerHTML = html;
     root._images = imgs;

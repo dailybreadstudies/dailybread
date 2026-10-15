@@ -110,6 +110,10 @@ below the verse. Shown only on `maps-test.html` for now; to switch on for everyo
 - Pictures are shown from Wikimedia Commons by file name, with a link to each file page (author and licence).
   Check each file's licence on Commons before going live: public domain, CC BY or CC BY-SA, credited.
 - Card text is our own wording, with a link to the Wikipedia article for more.
+- `finds-library.html` is the working overview of every entry: photos, verses, status and photo-licence check.
+  Each entry has `status` (`draft`, `review`, `ready`) and `photoChecked`; `index.json` repeats both.
+  The public site shows a find only when it is `ready` and `photoChecked` is true; the test page shows all.
+- `data/finds/ideas.json` lists finds suggested for later.
 
 ## Rebuilding the BSB data
 

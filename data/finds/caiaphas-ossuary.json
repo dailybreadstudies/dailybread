@@ -1,0 +1,55 @@
+{
+ "id": "caiaphas-ossuary",
+ "title": "The Caiaphas Ossuary",
+ "kind": "Burial box",
+ "anchors": [
+  {
+   "book": "MAT",
+   "c": 26,
+   "v": 57
+  },
+  {
+   "book": "JHN",
+   "c": 18,
+   "v": 13
+  }
+ ],
+ "images": [
+  {
+   "file": "Ossuary_of_the_high_priest_Joseph_Caiaphas_P1180839.JPG",
+   "caption": "The ornate ossuary inscribed “Joseph son of Caiaphas”.",
+   "page": "https://commons.wikimedia.org/wiki/File:Ossuary_of_the_high_priest_Joseph_Caiaphas_P1180839.JPG"
+  }
+ ],
+ "p": [
+  "A richly carved limestone bone box from a family tomb in Jerusalem. One of its inscriptions reads <i>Yehosef bar Qayafa</i>, “Joseph son of Caiaphas”, the full name Josephus gives for the high priest who presided at the trial of Jesus.",
+  "Most scholars accept that it belonged to the high priest’s family, and perhaps held his own bones, though some question the reading or the link. Bones of several people were found inside, among them a man of about sixty."
+ ],
+ "facts": [
+  [
+   "Found",
+   "1990, in a tomb in the Peace Forest, south Jerusalem, during road works"
+  ],
+  [
+   "Excavator",
+   "Zvi Greenhut"
+  ],
+  [
+   "Date",
+   "1st century AD"
+  ],
+  [
+   "Now",
+   "The Israel Museum, Jerusalem"
+  ]
+ ],
+ "verse": "Matthew 26:57; John 18:13",
+ "links": [
+  [
+   "Caiaphas ossuary on Wikipedia",
+   "https://en.wikipedia.org/wiki/Caiaphas_ossuary"
+  ]
+ ],
+ "status": "draft",
+ "photoChecked": false
+}

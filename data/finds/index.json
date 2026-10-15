@@ -3,6 +3,8 @@
   {
    "id": "ketef-hinnom",
    "title": "The Ketef Hinnom silver scrolls",
+   "status": "review",
+   "photoChecked": false,
    "anchors": [
     {
      "book": "NUM",
@@ -12,8 +14,54 @@
    ]
   },
   {
+   "id": "merneptah",
+   "title": "The Merneptah Stele",
+   "status": "draft",
+   "photoChecked": false,
+   "anchors": [
+    {
+     "book": "JDG",
+     "c": 1,
+     "v": 1
+    }
+   ]
+  },
+  {
+   "id": "mesha",
+   "title": "The Mesha Stele (Moabite Stone)",
+   "status": "draft",
+   "photoChecked": false,
+   "anchors": [
+    {
+     "book": "2KI",
+     "c": 3,
+     "v": 4
+    }
+   ]
+  },
+  {
+   "id": "tel-dan",
+   "title": "The Tel Dan Stele",
+   "status": "draft",
+   "photoChecked": false,
+   "anchors": [
+    {
+     "book": "2KI",
+     "c": 8,
+     "v": 28
+    },
+    {
+     "book": "2SA",
+     "c": 7,
+     "v": 16
+    }
+   ]
+  },
+  {
    "id": "siloam",
    "title": "Hezekiah’s Tunnel and the Siloam Inscription",
+   "status": "review",
+   "photoChecked": false,
    "anchors": [
     {
      "book": "2KI",
@@ -28,8 +76,46 @@
    ]
   },
   {
+   "id": "isaiah-scroll",
+   "title": "The Great Isaiah Scroll",
+   "status": "draft",
+   "photoChecked": false,
+   "anchors": [
+    {
+     "book": "ISA",
+     "c": 1,
+     "v": 1
+    },
+    {
+     "book": "ISA",
+     "c": 53,
+     "v": 5
+    }
+   ]
+  },
+  {
+   "id": "cyrus-cylinder",
+   "title": "The Cyrus Cylinder",
+   "status": "draft",
+   "photoChecked": false,
+   "anchors": [
+    {
+     "book": "EZR",
+     "c": 1,
+     "v": 1
+    },
+    {
+     "book": "2CH",
+     "c": 36,
+     "v": 22
+    }
+   ]
+  },
+  {
    "id": "pilate-stone",
    "title": "The Pilate Stone",
+   "status": "review",
+   "photoChecked": false,
    "anchors": [
     {
      "book": "LUK",
@@ -50,6 +136,37 @@
      "book": "JHN",
      "c": 18,
      "v": 29
+    }
+   ]
+  },
+  {
+   "id": "caiaphas-ossuary",
+   "title": "The Caiaphas Ossuary",
+   "status": "draft",
+   "photoChecked": false,
+   "anchors": [
+    {
+     "book": "MAT",
+     "c": 26,
+     "v": 57
+    },
+    {
+     "book": "JHN",
+     "c": 18,
+     "v": 13
+    }
+   ]
+  },
+  {
+   "id": "pool-of-siloam",
+   "title": "The Pool of Siloam",
+   "status": "draft",
+   "photoChecked": false,
+   "anchors": [
+    {
+     "book": "JHN",
+     "c": 9,
+     "v": 7
     }
    ]
   }

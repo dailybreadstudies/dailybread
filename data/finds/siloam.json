@@ -26,6 +26,10 @@
    "page": "https://commons.wikimedia.org/wiki/File:Hezekiahs_Tunnel.jpg"
   }
  ],
+ "p": [
+  "The Gihon Spring, Jerusalem’s main water source, lay outside the city wall. Second Kings 20:20 and 2 Chronicles 32:30 say Hezekiah made a pool and a conduit and brought the waters of the Gihon down to the west side of the City of David, readying the city for the Assyrian siege.",
+  "The tunnel winds through the rock for about half a kilometre. Six lines of old Hebrew script near its exit describe the moment two teams, cutting from opposite ends, heard each other through the rock and broke through, “axe against axe”, so that water flowed 1,200 cubits to the pool."
+ ],
  "facts": [
   [
    "Where",
@@ -48,10 +52,6 @@
    "Inscription: Istanbul Archaeology Museums; a replica is in the Israel Museum"
   ]
  ],
- "p": [
-  "The Gihon Spring, Jerusalem’s main water source, lay outside the city wall. Second Kings 20:20 and 2 Chronicles 32:30 say Hezekiah made a pool and a conduit and brought the waters of the Gihon down to the west side of the City of David, readying the city for the Assyrian siege.",
-  "The tunnel winds through the rock for about half a kilometre. Six lines of old Hebrew script near its exit describe the moment two teams, cutting from opposite ends, heard each other through the rock and broke through, “axe against axe”, so that water flowed 1,200 cubits to the pool."
- ],
  "verse": "2 Kings 20:20; 2 Chronicles 32:30",
  "links": [
   [
@@ -62,5 +62,7 @@
    "Siloam inscription on Wikipedia",
    "https://en.wikipedia.org/wiki/Siloam_inscription"
   ]
- ]
+ ],
+ "status": "review",
+ "photoChecked": false
 }

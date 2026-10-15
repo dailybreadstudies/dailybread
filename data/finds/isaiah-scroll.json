@@ -1,0 +1,68 @@
+{
+ "id": "isaiah-scroll",
+ "title": "The Great Isaiah Scroll",
+ "kind": "Manuscript",
+ "anchors": [
+  {
+   "book": "ISA",
+   "c": 1,
+   "v": 1
+  },
+  {
+   "book": "ISA",
+   "c": 53,
+   "v": 5
+  }
+ ],
+ "images": [
+  {
+   "file": "The_Great_Isaiah_Scroll_MS_A_(1QIsa)_-_Google_Art_Project.jpg",
+   "caption": "The Great Isaiah Scroll (1QIsaᵃ).",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Great_Isaiah_Scroll_MS_A_(1QIsa)_-_Google_Art_Project.jpg"
+  },
+  {
+   "file": "Great_Isaiah_Scroll_Ch53.jpg",
+   "caption": "The columns containing Isaiah 53.",
+   "page": "https://commons.wikimedia.org/wiki/File:Great_Isaiah_Scroll_Ch53.jpg"
+  }
+ ],
+ "p": [
+  "The best preserved of the Dead Sea Scrolls, found in 1947 by Bedouin shepherds in a cave near Qumran. It contains all 66 chapters of Isaiah, written about a thousand years before the oldest Hebrew manuscripts known until then.",
+  "Its text agrees closely with the later Masoretic text, apart from spelling and many small differences, which shows how carefully Isaiah was copied over the centuries. The Dead Sea Scrolls include parts of every book of the Hebrew Bible except Esther."
+ ],
+ "facts": [
+  [
+   "Found",
+   "1947, Qumran Cave 1, near the Dead Sea"
+  ],
+  [
+   "Date",
+   "About 125 BC"
+  ],
+  [
+   "Size",
+   "About 7.3 m long, 54 columns"
+  ],
+  [
+   "Language",
+   "Hebrew"
+  ],
+  [
+   "Now",
+   "The Shrine of the Book, Israel Museum, Jerusalem"
+  ]
+ ],
+ "verse": "Isaiah 1–66",
+ "links": [
+  [
+   "Isaiah Scroll on Wikipedia",
+   "https://en.wikipedia.org/wiki/Isaiah_Scroll"
+  ],
+  [
+   "Dead Sea Scrolls on Wikipedia",
+   "https://en.wikipedia.org/wiki/Dead_Sea_Scrolls"
+  ]
+ ],
+ "status": "draft",
+ "photoChecked": false
+}

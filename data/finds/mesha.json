@@ -1,0 +1,59 @@
+{
+ "id": "mesha",
+ "title": "The Mesha Stele (Moabite Stone)",
+ "kind": "Inscription",
+ "anchors": [
+  {
+   "book": "2KI",
+   "c": 3,
+   "v": 4
+  }
+ ],
+ "images": [
+  {
+   "file": "Mesha_stele_(Louvre,_AO_5066).jpg",
+   "caption": "The Mesha Stele in the Louvre, pieced together after it was broken in 1869.",
+   "page": "https://commons.wikimedia.org/wiki/File:Mesha_stele_(Louvre,_AO_5066).jpg"
+  },
+  {
+   "file": "YHWH_on_Mesha_Stele.jpg",
+   "caption": "Detail: the divine name YHWH in line 18.",
+   "page": "https://commons.wikimedia.org/wiki/File:YHWH_on_Mesha_Stele.jpg"
+  }
+ ],
+ "p": [
+  "A black basalt monument set up by Mesha king of Moab, the same king who 2 Kings 3:4–5 says paid tribute to Israel and rebelled after Ahab’s death. Mesha tells how “Omri was king of Israel and oppressed Moab many days” until Chemosh, Moab’s god, gave him victory.",
+  "It names Omri and Israel, and it mentions taking the “vessels of YHWH” from Nebo, one of the earliest mentions of the divine name outside the Bible. The account is told from Moab’s side, and it differs from 2 Kings 3 in its outcome."
+ ],
+ "facts": [
+  [
+   "Found",
+   "1868, at Dhiban (biblical Dibon), Jordan"
+  ],
+  [
+   "Recovered",
+   "Broken up in 1869; pieced together from fragments and an earlier paper squeeze"
+  ],
+  [
+   "Date",
+   "About 840 BC"
+  ],
+  [
+   "Language",
+   "Moabite"
+  ],
+  [
+   "Now",
+   "The Louvre, Paris"
+  ]
+ ],
+ "verse": "2 Kings 3:4–5",
+ "links": [
+  [
+   "Mesha Stele on Wikipedia",
+   "https://en.wikipedia.org/wiki/Mesha_Stele"
+  ]
+ ],
+ "status": "draft",
+ "photoChecked": false
+}
