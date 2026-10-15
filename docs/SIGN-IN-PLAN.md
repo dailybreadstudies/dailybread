@@ -41,27 +41,20 @@ Agreed with John on 15 Oct 2026. **Not built yet** — start once dailybread.onl
 7. Subscribers are sent to **Shopify** customers with marketing consent (so Shopify Email can reach them together
    with journal customers) — or to a separate list (Mailchimp/Brevo). John to decide. List = **Ariel Media**, broadly.
 
-### Consent box wording (draft, for John to choose or edit)
-**A — Partnership**
-> ☐ **Yes, keep me in touch with Ariel Media**
-> Daily Bread Online is free, and we would love to keep it that way. Joining our email list is a simple way to
-> stand with this ministry: you'll hear about new journals, books and resources from Israel. Unsubscribe anytime.
+### Consent box wording (chosen by John, 15 Oct 2026)
+> ☐ **Join the Daily Bread family**
+> Everything here is given freely. Friends of the ministry get occasional news and new resources from Israel.
+> It costs nothing and helps more than you'd think. Unsubscribe anytime.
 
-**B — Friendship**
-> ☐ **Count me in as a friend of Ariel Media**
-> Everything here is given freely. Friends of the ministry get occasional news, new resources and the next
-> Daily Bread journal first. It costs nothing and helps more than you'd think. Unsubscribe anytime.
-
-**C — Short**
-> ☐ **Join the Ariel Media family**
-> Occasional news and new resources from Israel — a free way to support this work. Unsubscribe anytime.
+"The ministry" means Ariel Media. Because consent must say who will send the emails, the box (or a small line
+directly under it) also names the sender, e.g. *"Emails come from Ariel Media. Privacy"* with a link to the privacy page.
 
 ## What John needs to provide
 1. Domain **dailybread.online** connected (GitHub Pages + email DNS records).
 2. A Supabase account (invite Claude or share the project keys).
 3. A Google Cloud project for "Continue with Google" (Claude will give click-by-click steps).
 4. An email sender account (Resend or Postmark) on the domain.
-5. Decisions: final consent wording; Shopify or a separate list.
+5. Decision: Shopify or a separate list. (Consent wording: chosen.)
 
 ## Build steps (when ready)
 1. Supabase project (EU), tables: `progress` (user id, data, updated) and `consent` (user id, opted in, text, time, method),
