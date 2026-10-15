@@ -1439,6 +1439,16 @@
     if (e.key === 'Escape' && !panel.hidden) { openPanel(false); toggleBtn.focus(); }
   });
 
+  // Footer credits: open and close the full paragraph
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.credits-more');
+    if (!b) return;
+    var f = b.closest('.reader-footer'), open = !f.classList.contains('is-open');
+    f.classList.toggle('is-open', open);
+    b.setAttribute('aria-expanded', String(open));
+    b.textContent = open ? 'less' : 'more';
+  });
+
   // ── Hebcal: Jewish calendar information (Diaspora schedule) ──
   // Data from Hebcal.com, CC BY 4.0. One request per month, cached for the visit.
   // If Hebcal cannot be reached, the page still shows everything from the reading plan.
