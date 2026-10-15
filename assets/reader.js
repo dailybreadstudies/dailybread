@@ -578,7 +578,12 @@
     var titleDate = dObj.getDate() + ' ' + MON[dObj.getMonth()] +
       (day.hebrewDate ? ' / ' + day.hebrewDate.replace(/\s+\d{4}$/, '') : '');
     var isSat = dObj.getDay() === 6;
-    var header = '<h2 class="page-date' + (isSat ? ' is-holy' : '') + '" id="page-date">' +
+    // Ariel Media mark above the date, shown with the first reading (Torah) only
+    var header = '<div class="day-mark" id="day-mark" role="img" aria-label="Ariel Media">' +
+      '<svg viewBox="0 0 44.29 44.29" aria-hidden="true" focusable="false">' +
+      '<circle cx="22.14" cy="22.14" r="21.54" fill="none" stroke="currentColor" stroke-width="1.2"/>' +
+      '<path fill="currentColor" d="M29.85,20.13c-1.08-1.78-4.31-5.04-4.31-4.92,0,.26-1.08,2.5-1.08,3.39,0,1.53,1.87,2.46,3,3.6,1.45,1.52,3.89,3.65,3.89,5.68,0,1.61-1.31,6.78-1.59,7.41,0-.21.05-.38.05-.59,0-1.86-.98-3.35-2.25-4.91-.8-.97-10.59-10.55-11.06-10.64-.28.38-.89,1.95-1.03,3.18,0,2.5.98,4.62,4.78,4.62.14,0,.23,0,.28-.04-.05.38-1.31,5.47-1.73,5.76-1.59.3-7.45.93-8.39,2.8.09-.72,1.31-6.1,2.11-7.29.14,0,.28.04.42.04.42,0,.8-.08,1.03-.34.37-3.09,1.22-5.89,1.22-7.97,0-1.27-.65-2.84-1.5-3.14-.05,0-.09-.08-.14-.17-.28.13-.47.63-.75,1.02.28-2.03,3.09-10.17,3.28-10.51-.05.89-.37,1.78-.37,2.63,0,.68.19,1.19.8,1.78,1.13,1.1,6.42,6.27,7.5,7.16.33-.29,3.66-11.57,3.66-11.57.05.3.05.51.05.72,0,.38-.05.64-.05,1.02,0,2.03,2.81,3.35,3.94,5.47-.09,1.06-1.31,5.34-1.73,5.8Z"/></svg></div>' +
+      '<h2 class="page-date' + (isSat ? ' is-holy' : '') + '" id="page-date">' +
       '<button type="button" class="day-step" data-day="' + (prevDay || '') + '"' + (prevDay ? '' : ' disabled') + ' aria-label="Previous day">&lsaquo;</button>' +
       '<span class="page-date-text">' + titleDate + '</span>' +
       '<button type="button" class="day-step" data-day="' + (nextDay || '') + '"' + (nextDay ? '' : ' disabled') + ' aria-label="Next day">&rsaquo;</button>' +
@@ -941,6 +946,8 @@
     document.querySelectorAll('.portion').forEach(function (p) { p.classList.remove('active'); });
     target.classList.add('active');
     document.querySelectorAll('.day-plan .dp-item').forEach(function (li) { li.classList.toggle('is-current', +li.getAttribute('data-n') === n); });
+    var mark = document.getElementById('day-mark');
+    if (mark) mark.hidden = n !== 1;
     if (location.hash !== '#' + n) history.replaceState(null, '', location.pathname + location.search + '#' + n);
     if (scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
   }

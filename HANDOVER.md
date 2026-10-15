@@ -29,6 +29,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
   build workspace, so tests mock it with Playwright routes.
 
 ## Today page, top to bottom (current design)
+0. Ariel Media mark (assets/img/ariel-media-mark.svg, inlined in reader.js, theme heading colour), equal space to top bar and date (40px; 30px on phones); shown only while the first reading (Torah) is open.
 1. Date title "14 Oct. / 3 Cheshvan" (‹ › for previous/next day); bold + accent on Shabbat/Yom Tov.
 2. Weekday line in small sans caps ("SHABBAT" on Saturdays) + special days after a comma ("MONDAY, ROSH CHODESH DAY 2");
    tapping a special day shows Hebcal's explanation in a bubble.

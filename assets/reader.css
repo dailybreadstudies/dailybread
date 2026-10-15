@@ -171,6 +171,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .he { font-family: var(--hebrew); direction: rtl; unicode-bidi: embed; font-style: normal; }
 
 /* ── Page header ── */
+/* Ariel Media mark: equal space above (to the top bar) and below (to the date); first reading only */
+.day-mark { width: 46px; height: 46px; margin: calc(40px - 4rem) auto 40px; color: var(--heading); }
+.day-mark svg { display: block; width: 100%; height: 100%; }
+.day-mark[hidden] { display: none; }
 .page-title {
   font-size: 1.9rem; font-weight: 300; text-align: center;
   margin-bottom: 0.5rem; color: var(--heading); letter-spacing: -0.015em;
@@ -760,6 +764,7 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 @media (max-width: 700px) {
   body { padding: calc(var(--topbar-h) + 1.25rem) 16px 5.5rem; }
   .reader { padding: 0.5rem 0 2.5rem; }
+  .day-mark { width: 42px; height: 42px; margin: calc(30px - 1.75rem) auto 30px; }
   .page-title, .page-date { font-size: 1.5rem; }
   .chapter-head { font-size: 1.25rem; }
   .scripture { font-size: 1.04rem; }
