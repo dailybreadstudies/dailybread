@@ -158,7 +158,8 @@
     img.alt = im.caption || '';
     img.onerror = function () { img.closest('.dbf-frame').classList.add('dbf-noimg'); };
     root.querySelector('figcaption').innerHTML = esc(im.caption || '') +
-      ' <a href="' + esc(im.page) + '" target="_blank" rel="noopener">Photo: Wikimedia Commons · author and licence</a>';
+      ' <a href="' + esc(im.page) + '" target="_blank" rel="noopener">' +
+      (im.credit ? 'Photo: ' + esc(im.credit) + ', via Wikimedia Commons' + (im.licence ? ' (' + esc(im.licence) + ')' : '') : 'Photo: Wikimedia Commons · author and licence') + '</a>';
     root.querySelectorAll('[data-dbf-img]').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.getAttribute('data-dbf-img') === i)); });
   }
 

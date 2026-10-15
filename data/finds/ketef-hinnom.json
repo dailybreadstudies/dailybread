@@ -11,9 +11,11 @@
  ],
  "images": [
   {
-   "file": "Ketef_hinom_scrolls.JPG",
-   "caption": "The two silver scrolls (KH1 and KH2) after unrolling.",
-   "page": "https://commons.wikimedia.org/wiki/File:Ketef_hinom_scrolls.JPG"
+   "file": "Birkat_kohanim_22.jpg",
+   "caption": "Silver scroll KH2: photo, drawing and transcription.",
+   "page": "https://commons.wikimedia.org/wiki/File:Birkat_kohanim_22.jpg",
+   "credit": "Tamar Hayardeni",
+   "licence": "Attribution"
   }
  ],
  "p": [
@@ -49,6 +51,6 @@
    "https://en.wikipedia.org/wiki/Ketef_Hinnom_scrolls"
   ]
  ],
- "status": "review",
- "photoChecked": false
+ "status": "ready",
+ "photoChecked": true
 }

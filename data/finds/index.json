@@ -3,8 +3,8 @@
   {
    "id": "ketef-hinnom",
    "title": "The Ketef Hinnom silver scrolls",
-   "status": "review",
-   "photoChecked": false,
+   "status": "ready",
+   "photoChecked": true,
    "anchors": [
     {
      "book": "NUM",
