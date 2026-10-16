@@ -83,7 +83,7 @@
     circuit: function (c) { return '<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="' + c + '" stroke-width="2" stroke-dasharray="4 2.5"/><path d="M18.5 4.5l1.5 4-4.2.6" fill="none" stroke="' + c + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; },
     city: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="var(--paper)" stroke="var(--dbm-label)" stroke-width="1.8"/></svg>'; },
     uncertain: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="var(--dbm-label)" stroke-width="1.4" stroke-dasharray="2 1.5"/></svg>'; },
-    mount: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="var(--accent-soft)" stroke="var(--dbm-label)" stroke-width="1.2"/></svg>'; }
+    mount: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2.2 L12.2 11.4 L1.8 11.4 Z" fill="var(--accent-soft)" stroke="var(--dbm-label)" stroke-width="1.2" stroke-linejoin="round"/></svg>'; }
   };
   var SYM_COLOR = { camp: 'var(--dbm-israel)', ambush: 'var(--dbm-ambush)', fire: 'var(--dbm-fire)', battle: 'var(--dbm-enemy)',
     sun: 'var(--dbm-fire)', moon: 'var(--dbm-label)', hail: 'var(--dbm-water-line)', cave: 'var(--dbm-enemy)', captured: 'var(--dbm-israel)',
@@ -519,7 +519,8 @@
       layout: { 'text-field': ['format', ['get', 'n'], {}, '\n', {}, ['get', 's'], { 'font-scale': 0.8 }],
         'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 7, 11, 10, 14], 'text-letter-spacing': 0.12 },
       paint: { 'text-color': css('--dbm-water-line'), 'text-halo-color': css('--dbm-water'), 'text-halo-width': 1 } });
-    map.addLayer({ id: 'places-dot', type: 'circle', source: 'places',
+    hillImage(map);
+    map.addLayer({ id: 'places-dot', type: 'circle', source: 'places', filter: ['!=', ['get', 'k'], 'mount'],
       paint: {
         'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 2.2, 11, 4, 14, 5.5],
         'circle-color': placeFill(),
@@ -527,6 +528,9 @@
         'circle-stroke-width': ['case', ['==', ['get', 'c'], 0], 1.1, 1.6],
         'circle-stroke-opacity': ['case', ['==', ['get', 'c'], 0], 0.7, 1]
       } });
+    map.addLayer({ id: 'places-mount', type: 'symbol', source: 'places', filter: ['==', ['get', 'k'], 'mount'],
+      layout: { 'icon-image': 'dbm-hill', 'icon-allow-overlap': true, 'icon-ignore-placement': true,
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 7, 0.5, 11, 0.8, 14, 1] } });
     map.addLayer({ id: 'places-label', type: 'symbol', source: 'places', minzoom: 7.5,
       layout: {
         'text-field': ['coalesce', ['get', 'd'], ['get', 'n']],
@@ -536,12 +540,14 @@
         'symbol-sort-key': ['-', 2, ['get', 'c']]
       },
       paint: { 'text-color': css('--dbm-label'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
-    map.on('click', 'places-dot', function (e) {
-      var f = e.features[0];
-      showPopup(ctx, f.geometry.coordinates, placePopup(f.properties, spec));
+    ['places-dot', 'places-mount'].forEach(function (id) {
+      map.on('click', id, function (e) {
+        var f = e.features[0];
+        showPopup(ctx, f.geometry.coordinates, placePopup(f.properties, spec));
+      });
+      map.on('mouseenter', id, function () { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', id, function () { map.getCanvas().style.cursor = ''; });
     });
-    map.on('mouseenter', 'places-dot', function () { map.getCanvas().style.cursor = 'pointer'; });
-    map.on('mouseleave', 'places-dot', function () { map.getCanvas().style.cursor = ''; });
     map.addLayer({ id: 'garea-fill', type: 'fill', source: 'gareas', filter: ['==', ['get', 'kind'], 'area'],
       paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.13 } });
     map.addLayer({ id: 'garea-line', type: 'line', source: 'gareas', filter: ['==', ['get', 'kind'], 'area'],
@@ -572,6 +578,19 @@
       map.addLayer({ id: 'move-' + m.n, type: 'line', source: 'moves', filter: ['==', ['get', 'n'], m.n],
         layout: { 'line-cap': m.dash && m.dash[0] < 0.5 ? 'round' : 'butt', 'line-join': 'round' }, paint: paint });
     });
+  }
+  // Hills and mountains: an upward triangle, drawn in the current theme colours.
+  function hillImage(map) {
+    var r = 2, w = 18 * r, h = 16 * r, c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    var g = c.getContext('2d');
+    g.beginPath(); g.moveTo(w / 2, 1.5 * r); g.lineTo(w - 1.5 * r, h - 1.5 * r); g.lineTo(1.5 * r, h - 1.5 * r); g.closePath();
+    g.lineJoin = 'round'; g.lineWidth = 1.6 * r;
+    g.fillStyle = css('--accent-soft') || '#e8dcc8'; g.fill();
+    g.strokeStyle = css('--dbm-label') || '#333'; g.stroke();
+    var img = g.getImageData(0, 0, w, h);
+    if (map.hasImage('dbm-hill')) map.updateImage('dbm-hill', img);
+    else map.addImage('dbm-hill', img, { pixelRatio: r });
   }
   function placeFill() { return ['case', ['==', ['get', 'k'], 'mount'], css('--accent-soft'), ['==', ['get', 'c'], 0], 'rgba(0,0,0,0)', css('--paper')]; }
   function placePopup(p, spec, gname) {
@@ -679,7 +698,7 @@
       (ctx.marks.moves[m.n] || []).forEach(function (mm) { mm.getElement().classList.toggle('dbm-off', !on); });
     });
     ctx.map.setFilter('moves-casing', ['in', ['get', 'n'], ['literal', Array.from(ctx.shown)]]);
-    ['places-dot', 'places-label'].forEach(function (id) { ctx.map.setLayoutProperty(id, 'visibility', ctx.citiesOn ? 'visible' : 'none'); });
+    ['places-dot', 'places-mount', 'places-label'].forEach(function (id) { ctx.map.setLayoutProperty(id, 'visibility', ctx.citiesOn ? 'visible' : 'none'); });
     var gl = ['literal', Array.from(ctx.gshown || [])];
     ['garea-fill', 'garea-line', 'garea-label', 'gpoint', 'gpoint-label'].forEach(function (id) {
       var base = id.indexOf('garea') === 0 ? ['==', ['get', 'kind'], id === 'garea-label' ? 'label' : 'area'] : null;
@@ -731,6 +750,7 @@
     map.setPaintProperty('gpoint-label', 'text-halo-color', css('--dbm-paper'));
     map.setPaintProperty('garea-label', 'text-halo-color', css('--dbm-paper'));
     map.setPaintProperty('places-dot', 'circle-color', placeFill());
+    hillImage(map);
     setMode(ctx, ctx.mode || 'ancient');
   }
 
