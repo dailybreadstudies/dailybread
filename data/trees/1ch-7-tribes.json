@@ -1,0 +1,1466 @@
+{
+ "id": "1ch-7-tribes",
+ "title": "The Northern Tribes",
+ "ref": "1 Chronicles 7",
+ "branches": [
+  {
+   "id": "issachar",
+   "name": "Issachar",
+   "col": "ochre"
+  },
+  {
+   "id": "benjamin",
+   "name": "Benjamin",
+   "col": "plum"
+  },
+  {
+   "id": "naphtali",
+   "name": "Naphtali",
+   "col": "teal"
+  },
+  {
+   "id": "joseph",
+   "name": "Manasseh and Ephraim",
+   "col": "shem"
+  },
+  {
+   "id": "asher",
+   "name": "Asher",
+   "col": "japheth"
+  }
+ ],
+ "intro": [
+  "Issachar, Benjamin, Naphtali, Manasseh, Ephraim and Asher, much of it in the form of military census lists (\"mighty men of valor\"). Dan and Zebulun are not listed at all, a gap that has never been fully explained.",
+  "Ephraim's line runs ten generations to Joshua son of Nun, and Manasseh's includes Zelophehad, whose daughters won the right to inherit (Numbers 27)."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Babylonian Talmud, Sanhedrin 92b; Targum on Chronicles; Mekhilta, Beshallach. Scholarly summary after the standard commentaries.",
+ "anchor": {
+  "book": "1CH",
+  "c": 7,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "israel",
+   "n": "Israel",
+   "p": null,
+   "v": [
+    "7:29"
+   ],
+   "he": "יִשְׂרָאֵל",
+   "tr": "Israel"
+  },
+  {
+   "id": "issachar",
+   "n": "Issachar",
+   "p": "israel",
+   "v": [
+    "7:1",
+    "7:5"
+   ],
+   "branch": "issachar",
+   "he": "יִשָּׂשכָר",
+   "tr": "Yissachar"
+  },
+  {
+   "id": "tola",
+   "n": "Tola",
+   "p": "issachar",
+   "v": [
+    "7:1",
+    "7:2"
+   ],
+   "g": "22,600 in David's day",
+   "note": "A later Tola son of Puah, of Issachar, judged Israel (Judges 10:1).",
+   "he": "תּוֹלָע",
+   "tr": "Tola"
+  },
+  {
+   "id": "uzzi",
+   "n": "Uzzi",
+   "p": "tola",
+   "v": [
+    "7:2",
+    "7:3"
+   ],
+   "he": "עֻזִּי",
+   "tr": "Uzzi"
+  },
+  {
+   "id": "izrahiah",
+   "n": "Izrahiah",
+   "p": "uzzi",
+   "v": [
+    "7:3"
+   ],
+   "he": "יִזְרַחְיָה",
+   "tr": "Yizrachyah"
+  },
+  {
+   "id": "michael",
+   "n": "Michael",
+   "p": "izrahiah",
+   "v": [
+    "7:3"
+   ],
+   "he": "מִיכָאֵל",
+   "tr": "Michael"
+  },
+  {
+   "id": "obadiah",
+   "n": "Obadiah",
+   "p": "izrahiah",
+   "v": [
+    "7:3"
+   ],
+   "he": "עֹבַדְיָהוּ",
+   "tr": "Ovadyah"
+  },
+  {
+   "id": "joel",
+   "n": "Joel",
+   "p": "izrahiah",
+   "v": [
+    "7:3"
+   ],
+   "he": "יוֹאֵל",
+   "tr": "Yoel"
+  },
+  {
+   "id": "isshiah",
+   "n": "Isshiah",
+   "p": "izrahiah",
+   "v": [
+    "7:3"
+   ],
+   "he": "יִשִּׁיָּה",
+   "tr": "Yishshiyyah"
+  },
+  {
+   "id": "rephaiah",
+   "n": "Rephaiah",
+   "p": "tola",
+   "v": [
+    "7:2"
+   ],
+   "he": "רְפָיָה",
+   "tr": "Refayah"
+  },
+  {
+   "id": "jeriel",
+   "n": "Jeriel",
+   "p": "tola",
+   "v": [
+    "7:2"
+   ],
+   "he": "יְרִיאֵל",
+   "tr": "Yeriel"
+  },
+  {
+   "id": "jahmai",
+   "n": "Jahmai",
+   "p": "tola",
+   "v": [
+    "7:2"
+   ],
+   "he": "יַחְמַי",
+   "tr": "Yachmay"
+  },
+  {
+   "id": "ibsam",
+   "n": "Ibsam",
+   "p": "tola",
+   "v": [
+    "7:2"
+   ],
+   "he": "יִבְשָׂם",
+   "tr": "Yivsam"
+  },
+  {
+   "id": "shemuel",
+   "n": "Shemuel",
+   "p": "tola",
+   "v": [
+    "7:2"
+   ],
+   "he": "שְׁמוּאֵל",
+   "tr": "Shemuel"
+  },
+  {
+   "id": "puah",
+   "n": "Puah",
+   "p": "issachar",
+   "v": [
+    "7:1"
+   ],
+   "he": "פּוּאָה",
+   "tr": "Puah"
+  },
+  {
+   "id": "jashub",
+   "n": "Jashub",
+   "p": "issachar",
+   "v": [
+    "7:1"
+   ],
+   "he": "יָשׁוּב",
+   "tr": "Yashuv"
+  },
+  {
+   "id": "shimron",
+   "n": "Shimron",
+   "p": "issachar",
+   "v": [
+    "7:1"
+   ],
+   "he": "שִׁמְרוֹן",
+   "tr": "Shimron"
+  },
+  {
+   "id": "benjamin",
+   "n": "Benjamin",
+   "p": "israel",
+   "v": [
+    "7:6"
+   ],
+   "branch": "benjamin",
+   "note": "Benjamin's fuller genealogy follows in chapter 8.",
+   "he": "בִּנְיָמִן",
+   "tr": "Binyamin"
+  },
+  {
+   "id": "bela",
+   "n": "Bela",
+   "p": "benjamin",
+   "v": [
+    "7:6",
+    "7:7"
+   ],
+   "he": "בֶּלַע",
+   "tr": "Bela"
+  },
+  {
+   "id": "ezbon",
+   "n": "Ezbon",
+   "p": "bela",
+   "v": [
+    "7:7"
+   ],
+   "he": "אֶצְבּוֹן",
+   "tr": "Etzbon"
+  },
+  {
+   "id": "uzzi-b",
+   "n": "Uzzi",
+   "p": "bela",
+   "v": [
+    "7:7"
+   ],
+   "he": "עֻזִּי",
+   "tr": "Uzzi"
+  },
+  {
+   "id": "uzziel",
+   "n": "Uzziel",
+   "p": "bela",
+   "v": [
+    "7:7"
+   ],
+   "he": "עֻזִּיאֵל",
+   "tr": "Uzziel"
+  },
+  {
+   "id": "jerimoth",
+   "n": "Jerimoth",
+   "p": "bela",
+   "v": [
+    "7:7"
+   ],
+   "he": "ירִימוֹת",
+   "tr": ""
+  },
+  {
+   "id": "iri",
+   "n": "Iri",
+   "p": "bela",
+   "v": [
+    "7:7",
+    "7:12"
+   ],
+   "forms": [
+    "Ir"
+   ],
+   "note": "\"Ir\" of 7:12: the Shuppites and Huppites descended from him.",
+   "he": "עִירִי",
+   "tr": "Iri"
+  },
+  {
+   "id": "becher",
+   "n": "Becher",
+   "p": "benjamin",
+   "v": [
+    "7:6",
+    "7:8"
+   ],
+   "he": "בֶּכֶר",
+   "tr": "Becher"
+  },
+  {
+   "id": "zemirah",
+   "n": "Zemirah",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "זְמִירָה",
+   "tr": "Zemirah"
+  },
+  {
+   "id": "joash",
+   "n": "Joash",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "יוֹעָשׁ",
+   "tr": "Yoash"
+  },
+  {
+   "id": "eliezer",
+   "n": "Eliezer",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "אֱלִיעֶזֶר",
+   "tr": "Eliezer"
+  },
+  {
+   "id": "elioenai",
+   "n": "Elioenai",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "אֶלְיוֹעֵינַי",
+   "tr": ""
+  },
+  {
+   "id": "omri",
+   "n": "Omri",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "עׇמְרִי",
+   "tr": "Omri"
+  },
+  {
+   "id": "jeremoth",
+   "n": "Jeremoth",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "יְרֵמוֹת",
+   "tr": "Yeremot"
+  },
+  {
+   "id": "abijah",
+   "n": "Abijah",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "אֲבִיָּה",
+   "tr": "Aviyah"
+  },
+  {
+   "id": "anathoth",
+   "n": "Anathoth",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "עֲנָתוֹת",
+   "tr": "Anatot"
+  },
+  {
+   "id": "alemeth",
+   "n": "Alemeth",
+   "p": "becher",
+   "v": [
+    "7:8"
+   ],
+   "he": "עָלֶמֶת",
+   "tr": "Alemet"
+  },
+  {
+   "id": "jediael",
+   "n": "Jediael",
+   "p": "benjamin",
+   "v": [
+    "7:6",
+    "7:10",
+    "7:11"
+   ],
+   "he": "יְדִיעֲאֵל",
+   "tr": "Yediael"
+  },
+  {
+   "id": "bilhan",
+   "n": "Bilhan",
+   "p": "jediael",
+   "v": [
+    "7:10"
+   ],
+   "he": "בִּלְהָן",
+   "tr": "Bilhan"
+  },
+  {
+   "id": "jeush",
+   "n": "Jeush",
+   "p": "bilhan",
+   "v": [
+    "7:10"
+   ],
+   "he": "יְעוּשׁ",
+   "tr": "Yeush"
+  },
+  {
+   "id": "benjamin-2",
+   "n": "Benjamin",
+   "p": "bilhan",
+   "v": [
+    "7:10"
+   ],
+   "he": "בִּנְיָמִן",
+   "tr": "Binyamin"
+  },
+  {
+   "id": "ehud",
+   "n": "Ehud",
+   "p": "bilhan",
+   "v": [
+    "7:10"
+   ],
+   "he": "אֵהוּד",
+   "tr": "Ehud"
+  },
+  {
+   "id": "chenaanah",
+   "n": "Chenaanah",
+   "p": "bilhan",
+   "v": [
+    "7:10"
+   ],
+   "he": "כְּנַעֲנָה",
+   "tr": "Kenaanah"
+  },
+  {
+   "id": "zethan",
+   "n": "Zethan",
+   "p": "bilhan",
+   "v": [
+    "7:10"
+   ],
+   "he": "זֵיתָן",
+   "tr": "Zetan"
+  },
+  {
+   "id": "tarshish",
+   "n": "Tarshish",
+   "p": "bilhan",
+   "v": [
+    "7:10"
+   ],
+   "he": "תַּרְשִׁישׁ",
+   "tr": "Tarshish"
+  },
+  {
+   "id": "ahishahar",
+   "n": "Ahishahar",
+   "p": "bilhan",
+   "v": [
+    "7:10"
+   ],
+   "he": "אֲחִישָׁחַר",
+   "tr": "Achishachar"
+  },
+  {
+   "id": "aher",
+   "n": "Aher",
+   "p": "benjamin",
+   "v": [
+    "7:12"
+   ],
+   "g": "the Hushites",
+   "rel": "from",
+   "he": "אַחֵר",
+   "tr": "Acher"
+  },
+  {
+   "id": "naphtali",
+   "n": "Naphtali",
+   "p": "israel",
+   "v": [
+    "7:13"
+   ],
+   "branch": "naphtali",
+   "he": "נַפְתָּלִי",
+   "tr": "Naftali"
+  },
+  {
+   "id": "jahziel",
+   "n": "Jahziel",
+   "p": "naphtali",
+   "v": [
+    "7:13"
+   ],
+   "he": "יַחְצִיאֵל",
+   "tr": "Yachtziel"
+  },
+  {
+   "id": "guni",
+   "n": "Guni",
+   "p": "naphtali",
+   "v": [
+    "7:13"
+   ],
+   "he": "גּוּנִי",
+   "tr": "Guni"
+  },
+  {
+   "id": "jezer",
+   "n": "Jezer",
+   "p": "naphtali",
+   "v": [
+    "7:13"
+   ],
+   "he": "יֵצֶר",
+   "tr": "Yetzer"
+  },
+  {
+   "id": "shallum",
+   "n": "Shallum",
+   "p": "naphtali",
+   "v": [
+    "7:13"
+   ],
+   "g": "Shillem in Gen 46:24",
+   "he": "שַׁלּוּם",
+   "tr": "Shalum"
+  },
+  {
+   "id": "joseph",
+   "n": "Joseph",
+   "p": "israel",
+   "v": [
+    "7:29"
+   ],
+   "branch": "joseph",
+   "he": "יוֹסֵף",
+   "tr": "Yosef"
+  },
+  {
+   "id": "manasseh",
+   "n": "Manasseh",
+   "p": "joseph",
+   "v": [
+    "7:14",
+    "7:17"
+   ],
+   "he": "מְנַשֶּׁה",
+   "tr": "Menasheh"
+  },
+  {
+   "id": "aramean",
+   "n": "his Aramean concubine",
+   "p": "manasseh",
+   "v": [
+    "7:14"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "",
+   "tr": "",
+   "concubine": true
+  },
+  {
+   "id": "asriel",
+   "n": "Asriel",
+   "p": "aramean",
+   "v": [
+    "7:14"
+   ],
+   "he": "אַשְׂרִיאֵל",
+   "tr": "Asriel"
+  },
+  {
+   "id": "machir",
+   "n": "Machir",
+   "p": "aramean",
+   "v": [
+    "7:14",
+    "7:15",
+    "7:16",
+    "7:17"
+   ],
+   "g": "father of Gilead",
+   "he": "מָכִיר",
+   "tr": "Machir"
+  },
+  {
+   "id": "maacah",
+   "n": "Maacah",
+   "p": "machir",
+   "v": [
+    "7:15",
+    "7:16"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "note": "Called both Machir's sister (7:15) and his wife (7:16); the text is hard here.",
+   "he": "מַעֲכָה",
+   "tr": "Maachah"
+  },
+  {
+   "id": "peresh",
+   "n": "Peresh",
+   "p": "maacah",
+   "v": [
+    "7:16"
+   ],
+   "he": "פֶּרֶשׁ",
+   "tr": "Peresh"
+  },
+  {
+   "id": "sheresh",
+   "n": "Sheresh",
+   "p": "maacah",
+   "v": [
+    "7:16"
+   ],
+   "he": "שָׁרֶשׁ",
+   "tr": "Sheresh"
+  },
+  {
+   "id": "ulam",
+   "n": "Ulam",
+   "p": "sheresh",
+   "v": [
+    "7:16",
+    "7:17"
+   ],
+   "he": "אוּלָם",
+   "tr": "Ulam"
+  },
+  {
+   "id": "bedan",
+   "n": "Bedan",
+   "p": "ulam",
+   "v": [
+    "7:17"
+   ],
+   "he": "בְּדָן",
+   "tr": "Bedan"
+  },
+  {
+   "id": "rekem",
+   "n": "Rekem",
+   "p": "sheresh",
+   "v": [
+    "7:16"
+   ],
+   "he": "רֶקֶם",
+   "tr": "Rekem"
+  },
+  {
+   "id": "gilead",
+   "n": "Gilead",
+   "p": "machir",
+   "v": [
+    "7:17"
+   ],
+   "g": "the region east of the Jordan",
+   "he": "גִּלְעָד",
+   "tr": "Gilad"
+  },
+  {
+   "id": "hammolecheth",
+   "n": "Hammolecheth",
+   "p": "machir",
+   "v": [
+    "7:18"
+   ],
+   "g": "Gilead's sister",
+   "sex": "f",
+   "note": "Her name means \"the queen.\"",
+   "he": "הַמֹּלֶכֶת",
+   "tr": "Molechet"
+  },
+  {
+   "id": "ishhod",
+   "n": "Ishhod",
+   "p": "hammolecheth",
+   "v": [
+    "7:18"
+   ],
+   "he": "אִישְׁהוֹד",
+   "tr": "Ishhod"
+  },
+  {
+   "id": "abiezer",
+   "n": "Abiezer",
+   "p": "hammolecheth",
+   "v": [
+    "7:18"
+   ],
+   "note": "The clan of Gideon (Judges 6:11).",
+   "he": "אֲבִיעֶזֶר",
+   "tr": "Aviezer"
+  },
+  {
+   "id": "mahlah",
+   "n": "Mahlah",
+   "p": "hammolecheth",
+   "v": [
+    "7:18"
+   ],
+   "he": "מַחְלָה",
+   "tr": "Machlah"
+  },
+  {
+   "id": "zelophehad",
+   "n": "Zelophehad",
+   "p": "manasseh",
+   "v": [
+    "7:15"
+   ],
+   "g": "had only daughters",
+   "rel": "from",
+   "note": "His five daughters, Mahlah, Noah, Hoglah, Milcah and Tirzah, asked Moses for their father's inheritance, and God said, \"they are right\" (Numbers 27:1–7).",
+   "he": "צְלׇפְחָד",
+   "tr": "Tzelofchad"
+  },
+  {
+   "id": "shemida",
+   "n": "Shemida",
+   "p": "manasseh",
+   "v": [
+    "7:19"
+   ],
+   "rel": "from",
+   "he": "שְׁמִידָע",
+   "tr": "Shemida"
+  },
+  {
+   "id": "ahian",
+   "n": "Ahian",
+   "p": "shemida",
+   "v": [
+    "7:19"
+   ],
+   "he": "אַחְיָן",
+   "tr": "Achyan"
+  },
+  {
+   "id": "shechem",
+   "n": "Shechem",
+   "p": "shemida",
+   "v": [
+    "7:19"
+   ],
+   "he": "שֶׁכֶם",
+   "tr": "Shechem"
+  },
+  {
+   "id": "likhi",
+   "n": "Likhi",
+   "p": "shemida",
+   "v": [
+    "7:19"
+   ],
+   "he": "לִקְחִי",
+   "tr": "Likchi"
+  },
+  {
+   "id": "aniam",
+   "n": "Aniam",
+   "p": "shemida",
+   "v": [
+    "7:19"
+   ],
+   "he": "אֲנִיעָם",
+   "tr": "Aniam"
+  },
+  {
+   "id": "ephraim",
+   "n": "Ephraim",
+   "p": "joseph",
+   "v": [
+    "7:20",
+    "7:22"
+   ],
+   "g": "mourned his sons",
+   "he": "אֶפְרַיִם",
+   "tr": "Efrayim"
+  },
+  {
+   "id": "shuthelah",
+   "n": "Shuthelah",
+   "p": "ephraim",
+   "v": [
+    "7:20"
+   ],
+   "he": "שׁוּתֶלַח",
+   "tr": "Shutelach"
+  },
+  {
+   "id": "bered",
+   "n": "Bered",
+   "p": "shuthelah",
+   "v": [
+    "7:20"
+   ],
+   "he": "בֶּרֶד",
+   "tr": "Bered"
+  },
+  {
+   "id": "tahath",
+   "n": "Tahath",
+   "p": "bered",
+   "v": [
+    "7:20"
+   ],
+   "he": "תַּחַת",
+   "tr": "Tachat"
+  },
+  {
+   "id": "eleadah",
+   "n": "Eleadah",
+   "p": "tahath",
+   "v": [
+    "7:20"
+   ],
+   "he": "אֶלְעָדָה",
+   "tr": "Eladah"
+  },
+  {
+   "id": "tahath-2",
+   "n": "Tahath",
+   "p": "eleadah",
+   "v": [
+    "7:20"
+   ],
+   "he": "תַּחַת",
+   "tr": "Tachat"
+  },
+  {
+   "id": "zabad",
+   "n": "Zabad",
+   "p": "tahath-2",
+   "v": [
+    "7:21"
+   ],
+   "he": "זָבָד",
+   "tr": "Zavad"
+  },
+  {
+   "id": "shuthelah-2",
+   "n": "Shuthelah",
+   "p": "zabad",
+   "v": [
+    "7:21"
+   ],
+   "he": "שׁוּתֶלַח",
+   "tr": "Shutelach"
+  },
+  {
+   "id": "ezer",
+   "n": "Ezer",
+   "p": "ephraim",
+   "v": [
+    "7:21"
+   ],
+   "g": "killed by the men of Gath",
+   "he": "עֵזֶר",
+   "tr": "Ezer"
+  },
+  {
+   "id": "elead",
+   "n": "Elead",
+   "p": "ephraim",
+   "v": [
+    "7:21"
+   ],
+   "g": "killed by the men of Gath",
+   "trad": "The Mekhilta and Sanhedrin 92b tell that the Ephraimites left Egypt thirty years too early and were killed by the men of Gath; their dry bones are those Ezekiel saw revived (Ezekiel 37).",
+   "he": "אֶלְעָד",
+   "tr": "Elad"
+  },
+  {
+   "id": "beriah",
+   "n": "Beriah",
+   "p": "ephraim",
+   "v": [
+    "7:23"
+   ],
+   "g": "\"in tragedy\"",
+   "note": "\"Because tragedy (<i>bera'ah</i>) had come upon his house.\"",
+   "he": "בְּרִיעָה",
+   "tr": "Beriyah"
+  },
+  {
+   "id": "sheerah",
+   "n": "Sheerah",
+   "p": "ephraim",
+   "v": [
+    "7:24"
+   ],
+   "g": "built the two Beth-horons",
+   "sex": "f",
+   "note": "She built Lower and Upper Beth-horon and Uzzen-sheerah: the only woman in the Bible credited with building towns.",
+   "he": "שֶׁאֱרָה",
+   "tr": "Sheerah"
+  },
+  {
+   "id": "rephah",
+   "n": "Rephah",
+   "p": "ephraim",
+   "v": [
+    "7:25"
+   ],
+   "he": "רֶפַח",
+   "tr": "Refach"
+  },
+  {
+   "id": "resheph",
+   "n": "Resheph",
+   "p": "rephah",
+   "v": [
+    "7:25"
+   ],
+   "he": "רֶשֶׁף",
+   "tr": "Reshef"
+  },
+  {
+   "id": "telah",
+   "n": "Telah",
+   "p": "resheph",
+   "v": [
+    "7:25"
+   ],
+   "he": "תֶּלַח",
+   "tr": "Telach"
+  },
+  {
+   "id": "tahan",
+   "n": "Tahan",
+   "p": "telah",
+   "v": [
+    "7:25"
+   ],
+   "he": "תַּחַן",
+   "tr": "Tachan"
+  },
+  {
+   "id": "ladan",
+   "n": "Ladan",
+   "p": "tahan",
+   "v": [
+    "7:26"
+   ],
+   "he": "לַעְדָּן",
+   "tr": "Ladan"
+  },
+  {
+   "id": "ammihud",
+   "n": "Ammihud",
+   "p": "ladan",
+   "v": [
+    "7:26"
+   ],
+   "he": "עַמִּיהוּד",
+   "tr": "Ammihud"
+  },
+  {
+   "id": "elishama",
+   "n": "Elishama",
+   "p": "ammihud",
+   "v": [
+    "7:26"
+   ],
+   "g": "leader of Ephraim",
+   "he": "אֱלִישָׁמָע",
+   "tr": "Elishama"
+  },
+  {
+   "id": "nun",
+   "n": "Nun",
+   "p": "elishama",
+   "v": [
+    "7:27"
+   ],
+   "he": "נוּן",
+   "tr": "Nun"
+  },
+  {
+   "id": "joshua",
+   "n": "Joshua",
+   "p": "nun",
+   "v": [
+    "7:27"
+   ],
+   "g": "son of Nun",
+   "note": "Moses' successor, who led Israel into the land; his line from Ephraim is given only here.",
+   "he": "יְהוֹשֻׁעַ",
+   "tr": "Yehoshua"
+  },
+  {
+   "id": "asher",
+   "n": "Asher",
+   "p": "israel",
+   "v": [
+    "7:30",
+    "7:40"
+   ],
+   "branch": "asher",
+   "he": "אָשֵׁר",
+   "tr": "Asher"
+  },
+  {
+   "id": "imnah",
+   "n": "Imnah",
+   "p": "asher",
+   "v": [
+    "7:30"
+   ],
+   "he": "יִמְנָה",
+   "tr": "Yimnah"
+  },
+  {
+   "id": "ishvah",
+   "n": "Ishvah",
+   "p": "asher",
+   "v": [
+    "7:30"
+   ],
+   "he": "יִשְׁוָה",
+   "tr": "Yishvah"
+  },
+  {
+   "id": "ishvi",
+   "n": "Ishvi",
+   "p": "asher",
+   "v": [
+    "7:30"
+   ],
+   "he": "יִשְׁוִי",
+   "tr": "Yishvi"
+  },
+  {
+   "id": "beriah-a",
+   "n": "Beriah",
+   "p": "asher",
+   "v": [
+    "7:30",
+    "7:31"
+   ],
+   "he": "בְּרִיעָה",
+   "tr": "Beriyah"
+  },
+  {
+   "id": "heber",
+   "n": "Heber",
+   "p": "beriah-a",
+   "v": [
+    "7:31",
+    "7:32"
+   ],
+   "he": "חֶבֶר",
+   "tr": "Chever"
+  },
+  {
+   "id": "japhlet",
+   "n": "Japhlet",
+   "p": "heber",
+   "v": [
+    "7:32",
+    "7:33"
+   ],
+   "he": "יַפְלֵט",
+   "tr": "Yaflet"
+  },
+  {
+   "id": "pasach",
+   "n": "Pasach",
+   "p": "japhlet",
+   "v": [
+    "7:33"
+   ],
+   "he": "פָּסַךְ",
+   "tr": "Pasach"
+  },
+  {
+   "id": "bimhal",
+   "n": "Bimhal",
+   "p": "japhlet",
+   "v": [
+    "7:33"
+   ],
+   "he": "בִּמְהָל",
+   "tr": "Bimhal"
+  },
+  {
+   "id": "ashvath",
+   "n": "Ashvath",
+   "p": "japhlet",
+   "v": [
+    "7:33"
+   ],
+   "he": "עַשְׁוָת",
+   "tr": "Ashvat"
+  },
+  {
+   "id": "shomer",
+   "n": "Shomer",
+   "p": "heber",
+   "v": [
+    "7:32",
+    "7:34"
+   ],
+   "g": "Shemer",
+   "forms": [
+    "Shemer"
+   ],
+   "he": "שֹׁמֵר",
+   "tr": "Shomer"
+  },
+  {
+   "id": "ahi",
+   "n": "Ahi",
+   "p": "shomer",
+   "v": [
+    "7:34"
+   ],
+   "he": "אֲחִי",
+   "tr": "Achi"
+  },
+  {
+   "id": "rohgah",
+   "n": "Rohgah",
+   "p": "shomer",
+   "v": [
+    "7:34"
+   ],
+   "he": "רָהְגָּה",
+   "tr": "Rohagah"
+  },
+  {
+   "id": "hubbah",
+   "n": "Hubbah",
+   "p": "shomer",
+   "v": [
+    "7:34"
+   ],
+   "he": "חֻבָּה",
+   "tr": "Yechubbah"
+  },
+  {
+   "id": "aram",
+   "n": "Aram",
+   "p": "shomer",
+   "v": [
+    "7:34"
+   ],
+   "he": "אֲרָם",
+   "tr": "Aram"
+  },
+  {
+   "id": "hotham",
+   "n": "Hotham",
+   "p": "heber",
+   "v": [
+    "7:32",
+    "7:35"
+   ],
+   "g": "Helem?",
+   "forms": [
+    "Helem"
+   ],
+   "note": "Probably the \"Helem\" of 7:35.",
+   "he": "חוֹתָם",
+   "tr": "Chotam"
+  },
+  {
+   "id": "zophah",
+   "n": "Zophah",
+   "p": "hotham",
+   "v": [
+    "7:35",
+    "7:36"
+   ],
+   "he": "צוֹפַח",
+   "tr": "Tzofach"
+  },
+  {
+   "id": "suah",
+   "n": "Suah",
+   "p": "zophah",
+   "v": [
+    "7:36"
+   ],
+   "he": "סוּחַ",
+   "tr": "Suach"
+  },
+  {
+   "id": "harnepher",
+   "n": "Harnepher",
+   "p": "zophah",
+   "v": [
+    "7:36"
+   ],
+   "he": "חַרְנֶפֶר",
+   "tr": "Charnefer"
+  },
+  {
+   "id": "shual",
+   "n": "Shual",
+   "p": "zophah",
+   "v": [
+    "7:36"
+   ],
+   "he": "שׁוּעָל",
+   "tr": "Shual"
+  },
+  {
+   "id": "beri",
+   "n": "Beri",
+   "p": "zophah",
+   "v": [
+    "7:36"
+   ],
+   "he": "בֵּרִי",
+   "tr": "Beri"
+  },
+  {
+   "id": "imrah",
+   "n": "Imrah",
+   "p": "zophah",
+   "v": [
+    "7:36"
+   ],
+   "he": "יִמְרָה",
+   "tr": "Yimrah"
+  },
+  {
+   "id": "bezer",
+   "n": "Bezer",
+   "p": "zophah",
+   "v": [
+    "7:37"
+   ],
+   "he": "בֶּצֶר",
+   "tr": "Betzer"
+  },
+  {
+   "id": "hod",
+   "n": "Hod",
+   "p": "zophah",
+   "v": [
+    "7:37"
+   ],
+   "he": "הוֹד",
+   "tr": "Hod"
+  },
+  {
+   "id": "shamma",
+   "n": "Shamma",
+   "p": "zophah",
+   "v": [
+    "7:37"
+   ],
+   "he": "שַׁמָּא",
+   "tr": "Shamma"
+  },
+  {
+   "id": "shilshah",
+   "n": "Shilshah",
+   "p": "zophah",
+   "v": [
+    "7:37"
+   ],
+   "he": "שִׁלְשָׁה",
+   "tr": "Shilshah"
+  },
+  {
+   "id": "ithran",
+   "n": "Ithran",
+   "p": "zophah",
+   "v": [
+    "7:37"
+   ],
+   "he": "יִתְרָן",
+   "tr": "Yitran"
+  },
+  {
+   "id": "beera",
+   "n": "Beera",
+   "p": "zophah",
+   "v": [
+    "7:37"
+   ],
+   "he": "בְּאֵרָא",
+   "tr": "Beera"
+  },
+  {
+   "id": "imna",
+   "n": "Imna",
+   "p": "hotham",
+   "v": [
+    "7:35"
+   ],
+   "he": "יִמְנָע",
+   "tr": "Yimna"
+  },
+  {
+   "id": "shelesh",
+   "n": "Shelesh",
+   "p": "hotham",
+   "v": [
+    "7:35"
+   ],
+   "he": "שֶׁלֶשׁ",
+   "tr": "Shelesh"
+  },
+  {
+   "id": "amal",
+   "n": "Amal",
+   "p": "hotham",
+   "v": [
+    "7:35"
+   ],
+   "he": "עָמָל",
+   "tr": "Amal"
+  },
+  {
+   "id": "shua",
+   "n": "Shua",
+   "p": "heber",
+   "v": [
+    "7:32"
+   ],
+   "g": "their sister",
+   "sex": "f",
+   "he": "שׁוּעָא",
+   "tr": "Shua"
+  },
+  {
+   "id": "malchiel",
+   "n": "Malchiel",
+   "p": "beriah-a",
+   "v": [
+    "7:31"
+   ],
+   "g": "father of Birzaith",
+   "he": "מַלְכִּיאֵל",
+   "tr": "Malkiel"
+  },
+  {
+   "id": "serah",
+   "n": "Serah",
+   "p": "asher",
+   "v": [
+    "7:30"
+   ],
+   "g": "their sister",
+   "sex": "f",
+   "he": "שֶׂרַח",
+   "tr": "Serach"
+  },
+  {
+   "id": "jether",
+   "n": "Jether",
+   "p": "asher",
+   "v": [
+    "7:38"
+   ],
+   "g": "Ithran?",
+   "rel": "from",
+   "he": "יֶתֶר",
+   "tr": "Yeter"
+  },
+  {
+   "id": "jephunneh",
+   "n": "Jephunneh",
+   "p": "jether",
+   "v": [
+    "7:38"
+   ],
+   "he": "יְפֻנֶּה",
+   "tr": "Yefuneh"
+  },
+  {
+   "id": "pispa",
+   "n": "Pispa",
+   "p": "jether",
+   "v": [
+    "7:38"
+   ],
+   "he": "פִּסְפָּה",
+   "tr": "Pispah"
+  },
+  {
+   "id": "ara",
+   "n": "Ara",
+   "p": "jether",
+   "v": [
+    "7:38"
+   ],
+   "he": "אֲרָא",
+   "tr": "Ara"
+  },
+  {
+   "id": "ulla",
+   "n": "Ulla",
+   "p": "asher",
+   "v": [
+    "7:39"
+   ],
+   "rel": "from",
+   "he": "עֻלָּא",
+   "tr": "Ulla"
+  },
+  {
+   "id": "arah",
+   "n": "Arah",
+   "p": "ulla",
+   "v": [
+    "7:39"
+   ],
+   "he": "אָרַח",
+   "tr": "Arach"
+  },
+  {
+   "id": "hanniel",
+   "n": "Hanniel",
+   "p": "ulla",
+   "v": [
+    "7:39"
+   ],
+   "he": "חַנִּיאֵל",
+   "tr": "Channiel"
+  },
+  {
+   "id": "rizia",
+   "n": "Rizia",
+   "p": "ulla",
+   "v": [
+    "7:39"
+   ],
+   "he": "רִצְיָא",
+   "tr": "Ritzya"
+  }
+ ]
+}

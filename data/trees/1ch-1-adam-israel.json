@@ -1,0 +1,2153 @@
+{
+ "id": "1ch-1-adam-israel",
+ "title": "From Adam to Israel",
+ "ref": "1 Chronicles 1",
+ "compact": true,
+ "branches": [
+  {
+   "id": "japheth",
+   "name": "Japheth",
+   "col": "japheth"
+  },
+  {
+   "id": "ham",
+   "name": "Ham",
+   "col": "ham"
+  },
+  {
+   "id": "shem",
+   "name": "Shem",
+   "col": "shem"
+  },
+  {
+   "id": "abraham",
+   "name": "Abraham",
+   "col": "plum"
+  },
+  {
+   "id": "seir",
+   "name": "Seir",
+   "col": "ochre"
+  }
+ ],
+ "intro": [
+  "The Chronicler opens Israel's story with Adam. In a few lines he retraces Genesis: the ten generations to Noah, the nations (Genesis 10), the line from Shem to Abraham, Abraham's sons by Hagar, Sarah and Keturah, Esau's family and the Horites of Seir. At each step the side branches come first and the chosen line last, so that everything narrows to Israel (2:1).",
+  "The chapter ends with the kings and chiefs of Edom (1:43–54), a succession of rulers rather than a family, not drawn here."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Notes shared with the Genesis trees. Parallels: Genesis 5; 10; 11:10–26; 25:1–4, 12–16; 36:10–28.",
+ "anchor": {
+  "book": "1CH",
+  "c": 1,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "adam",
+   "n": "Adam",
+   "p": null,
+   "v": [
+    "1:1"
+   ],
+   "he": "אָדָם",
+   "tr": "Adam"
+  },
+  {
+   "id": "seth",
+   "n": "Seth",
+   "p": "adam",
+   "v": [
+    "1:1"
+   ],
+   "he": "שֵׁת",
+   "tr": "Shet"
+  },
+  {
+   "id": "enosh",
+   "n": "Enosh",
+   "p": "seth",
+   "v": [
+    "1:1"
+   ],
+   "he": "אֱנוֹשׁ",
+   "tr": "Enosh"
+  },
+  {
+   "id": "kenan",
+   "n": "Kenan",
+   "p": "enosh",
+   "v": [
+    "1:2"
+   ],
+   "he": "קֵינָן",
+   "tr": "Kenan"
+  },
+  {
+   "id": "mahalalel",
+   "n": "Mahalalel",
+   "p": "kenan",
+   "v": [
+    "1:2"
+   ],
+   "he": "מַהֲלַלְאֵל",
+   "tr": "Mahalalel"
+  },
+  {
+   "id": "jared",
+   "n": "Jared",
+   "p": "mahalalel",
+   "v": [
+    "1:2"
+   ],
+   "he": "יֶרֶד",
+   "tr": "Yered"
+  },
+  {
+   "id": "enoch",
+   "n": "Enoch",
+   "p": "jared",
+   "v": [
+    "1:3"
+   ],
+   "he": "חֲנוֹךְ",
+   "tr": "Chanoch"
+  },
+  {
+   "id": "methuselah",
+   "n": "Methuselah",
+   "p": "enoch",
+   "v": [
+    "1:3"
+   ],
+   "he": "מְתוּשֶׁלַח",
+   "tr": "Metushelach"
+  },
+  {
+   "id": "lamech",
+   "n": "Lamech",
+   "p": "methuselah",
+   "v": [
+    "1:3"
+   ],
+   "he": "לֶמֶךְ",
+   "tr": "Lemech"
+  },
+  {
+   "id": "noah",
+   "n": "Noah",
+   "p": "lamech",
+   "v": [
+    "1:3",
+    "1:4"
+   ],
+   "g": "",
+   "cert": "",
+   "trad": "The rabbis teach that the seven commandments given to Noah and his sons (the Noahide laws) bind all the nations listed here (Sanhedrin 56a).",
+   "sch": "The chapter is a <i>toledot</i> (\"these are the generations\"), one of the headings that structure Genesis.",
+   "note": "Seventy names descend from his three sons. Jewish tradition reads them as the seventy nations of the world.",
+   "he": "נֹחַ",
+   "tr": "Noach"
+  },
+  {
+   "id": "japheth",
+   "n": "Japheth",
+   "p": "noah",
+   "v": [
+    "1:4",
+    "1:5"
+   ],
+   "branch": "japheth",
+   "g": "peoples of the north and the coastlands",
+   "cert": "",
+   "trad": "Noah's blessing, \"May God enlarge Japheth, and may he dwell in the tents of Shem\" (9:27), was read by the sages to mean that the beauty of Japheth, the Greek language, may dwell in the tents of Shem; so the Torah may be written in Greek (Megillah 9b).",
+   "sch": "His line covers Anatolia, the Aegean, the Caucasus and Iran: the northern and western edge of the world known to Israel.",
+   "note": "His line is given first and most briefly; the chapter moves from the far peoples to the near ones, ending with Shem.",
+   "he": "יֶפֶת",
+   "tr": "Yefet"
+  },
+  {
+   "id": "gomer",
+   "n": "Gomer",
+   "p": "japheth",
+   "v": [
+    "1:5",
+    "1:6"
+   ],
+   "g": "Cimmerians",
+   "cert": "probable",
+   "trad": "Josephus: the Galatians, once called Gomerites (Ant. 1.123). Talmud: \"Germamya\" (Yoma 10a).",
+   "sch": "The Cimmerians (Akkadian <i>Gimirrai</i>), horse-riding people from north of the Black Sea who swept into Anatolia in the 8th–7th centuries BC. Ezekiel 38:6 places Gomer among the northern allies of Gog.",
+   "he": "גֹּמֶר",
+   "tr": "Gomer"
+  },
+  {
+   "id": "ashkenaz",
+   "n": "Ashkenaz",
+   "p": "gomer",
+   "v": [
+    "1:6"
+   ],
+   "g": "Scythians",
+   "cert": "probable",
+   "trad": "In medieval Hebrew Ashkenaz became the name for the Germanic lands (hence \"Ashkenazi\" Jews). Josephus: the Rheginians (Ant. 1.126).",
+   "sch": "Most likely the Scythians (Assyrian <i>Ashkuza</i>). Jeremiah 51:27 calls the kingdoms \"Ararat, Minni and Ashkenaz\" to war against Babylon, which fits the region of Lake Urmia.",
+   "he": "אַשְׁכְּנַז",
+   "tr": "Ashkenaz"
+  },
+  {
+   "id": "riphath",
+   "n": "Riphath",
+   "p": "gomer",
+   "v": [
+    "1:6"
+   ],
+   "note": "The Hebrew here reads Diphath (a d/r confusion); the BSB follows Genesis 10:3.",
+   "he": "דִיפַת",
+   "tr": "Difat",
+   "g": "Anatolia (unknown)",
+   "cert": "uncertain",
+   "trad": "Josephus: the Paphlagonians, on the south coast of the Black Sea (Ant. 1.126).",
+   "sch": "Not identified. 1 Chronicles 1:6 reads Diphath, a common d/r confusion in Hebrew script."
+  },
+  {
+   "id": "togarmah",
+   "n": "Togarmah",
+   "p": "gomer",
+   "v": [
+    "1:6"
+   ],
+   "g": "eastern Anatolia",
+   "cert": "probable",
+   "trad": "Josephus: the Phrygians (Ant. 1.126). In the tenth-century Khazar correspondence the Khazar king traces his people to Togarmah, and medieval Jewish writers used the name for the Turkic peoples. Armenian tradition also claims him as ancestor.",
+   "sch": "Hittite and Assyrian <i>Tegarama</i>, a city and district of eastern Anatolia near the upper Euphrates (around modern Gürün). Ezekiel 27:14 has Beth-togarmah trading horses and mules with Tyre.",
+   "he": "תּוֹגַרְמָה",
+   "tr": ""
+  },
+  {
+   "id": "magog",
+   "n": "Magog",
+   "p": "japheth",
+   "v": [
+    "1:5"
+   ],
+   "g": "Scythians?",
+   "cert": "uncertain",
+   "trad": "Josephus: the Scythians (Ant. 1.123). Talmud: \"Kandiya\" (Yoma 10a). Through Ezekiel 38–39, \"Gog of the land of Magog\" became in Jewish and Christian tradition the name for the final enemy of God's people.",
+   "sch": "Not securely identified. Often linked with the Scythians or with Lydia (Gyges, Assyrian <i>Gugu</i>); \"Magog\" may mean \"land of Gog.\"",
+   "he": "מָגוֹג",
+   "tr": "Magog"
+  },
+  {
+   "id": "madai",
+   "n": "Madai",
+   "p": "japheth",
+   "v": [
+    "1:5"
+   ],
+   "g": "Medes",
+   "cert": "established",
+   "trad": "Josephus: the Medes (Ant. 1.124). Talmud: Macedonia (Yoma 10a).",
+   "sch": "The Medes of north-western Iran; <i>Madai</i> is the ordinary Hebrew name for Media (2 Kgs 17:6; Esther 1:3; Daniel 5:28).",
+   "he": "מָדַי",
+   "tr": "Maday"
+  },
+  {
+   "id": "javan",
+   "n": "Javan",
+   "p": "japheth",
+   "v": [
+    "1:5",
+    "1:7"
+   ],
+   "g": "Greeks (Ionians)",
+   "cert": "established",
+   "trad": "Josephus: Ionia and all the Greeks (Ant. 1.124). Talmud: \"in its plain sense,\" Greece (Yoma 10a). <i>Yavan</i> remains the Hebrew name for Greece; in Daniel 8:21 and the Hanukkah story Yavan is the Hellenistic kingdom.",
+   "sch": "The Ionians, the Greeks of the west coast of Anatolia and the islands (Assyrian <i>Yamnaya</i>); the name later stood for all Greeks.",
+   "he": "יָוָן",
+   "tr": "Yavan"
+  },
+  {
+   "id": "elishah",
+   "n": "Elishah",
+   "p": "javan",
+   "v": [
+    "1:7"
+   ],
+   "g": "Cyprus (Alashiya)?",
+   "cert": "probable",
+   "trad": "Josephus: the Aeolians (Ant. 1.127).",
+   "sch": "Probably Alashiya, the Bronze Age name for Cyprus or part of it, known from the Amarna letters and Ugarit. Ezekiel 27:7 speaks of purple dye \"from the coasts of Elishah.\"",
+   "he": "אֱלִישָׁה",
+   "tr": "Elishah"
+  },
+  {
+   "id": "tarshish",
+   "n": "Tarshish",
+   "p": "javan",
+   "v": [
+    "1:7"
+   ],
+   "g": "far west by sea",
+   "cert": "uncertain",
+   "trad": "Josephus: Tarsus in Cilicia (Ant. 1.127). The Targum of the prophets often renders Tarshish as \"the sea\" or Africa.",
+   "sch": "A distant western port reached by \"ships of Tarshish\" (Jonah 1:3; 1 Kgs 10:22). Proposals: Tartessos in southern Spain, Sardinia (the Nora stone names <i>trshsh</i>), or Tarsus. The phrase \"ships of Tarshish\" came to mean large ocean-going ships.",
+   "he": "תַּרְשִׁישׁ",
+   "tr": "Tarshish"
+  },
+  {
+   "id": "kittim",
+   "n": "Kittim",
+   "p": "javan",
+   "v": [
+    "1:7"
+   ],
+   "forms": [
+    "Kittites"
+   ],
+   "g": "Cyprus (Kition)",
+   "cert": "established",
+   "trad": "Josephus: Cyprus, named from the city of Kition (Ant. 1.128). Later Jewish usage widened Kittim to Greeks (1 Maccabees 1:1, of Alexander) and Romans (Daniel 11:30; the Dead Sea Scrolls).",
+   "sch": "Kition (modern Larnaca) on Cyprus, a Phoenician port; by extension the people of Cyprus and the eastern Mediterranean islands.",
+   "he": "כִּתִּי",
+   "tr": "Kitti"
+  },
+  {
+   "id": "dodanim",
+   "n": "Rodanim",
+   "p": "javan",
+   "v": [
+    "1:7"
+   ],
+   "forms": [
+    "Rodanites"
+   ],
+   "g": "Rhodes?",
+   "cert": "probable",
+   "trad": "The traditional Hebrew text reads Dodanim; 1 Chronicles 1:7, the Samaritan Pentateuch and the Septuagint read Rodanim.",
+   "sch": "With the reading Rodanim, most scholars identify the people of Rhodes. With Dodanim, some suggest the Dardanians of north-west Anatolia.",
+   "note": "The BSB follows the Rodanim reading (\"Rodanites\"); see its footnote at 10:4.",
+   "he": "רוֹדָנִים",
+   "tr": "Dodanim"
+  },
+  {
+   "id": "tubal",
+   "n": "Tubal",
+   "p": "japheth",
+   "v": [
+    "1:5"
+   ],
+   "g": "Tabal (central Anatolia)",
+   "cert": "probable",
+   "trad": "Josephus: the Iberians of the Caucasus (Ant. 1.124). Talmud: \"Beit Unaiki,\" probably Bithynia (Yoma 10a).",
+   "sch": "Tabal, a kingdom in central and south-eastern Anatolia in Assyrian records. Almost always paired with Meshech (Ezekiel 27:13; 38:2).",
+   "he": "תֻּבָל",
+   "tr": "Tuval"
+  },
+  {
+   "id": "meshech",
+   "n": "Meshech",
+   "p": "japheth",
+   "v": [
+    "1:5"
+   ],
+   "g": "Mushki (Phrygia)",
+   "cert": "probable",
+   "trad": "Josephus: the Cappadocians, whose city was Mazaca (Ant. 1.125). Talmud: Mysia (Yoma 10a).",
+   "sch": "The Mushki of Assyrian texts, a people of central Anatolia linked with the Phrygians (King Mita of Mushki, the Midas of Greek legend).",
+   "he": "מֶשֶׁךְ",
+   "tr": "Meshech"
+  },
+  {
+   "id": "tiras",
+   "n": "Tiras",
+   "p": "japheth",
+   "v": [
+    "1:5"
+   ],
+   "g": "Thracians? Sea Peoples?",
+   "cert": "uncertain",
+   "trad": "Josephus: the Thracians (Ant. 1.125). Talmud: Rav Yosef taught that Tiras is Persia; another view, \"Beit Teraiki,\" Thrace (Yoma 10a).",
+   "sch": "Often linked with the Tursha, one of the Sea Peoples in Egyptian texts, and so perhaps with the Tyrsenians (Etruscans) of Greek writers.",
+   "he": "תִּירָס",
+   "tr": "Tiras"
+  },
+  {
+   "id": "ham",
+   "n": "Ham",
+   "p": "noah",
+   "v": [
+    "1:4",
+    "1:8"
+   ],
+   "branch": "ham",
+   "g": "peoples of the south",
+   "cert": "",
+   "trad": "Jewish tradition connects Ham with the incident of 9:20–27, where the curse falls on his son Canaan rather than on Ham himself (Rashi on 9:25).",
+   "sch": "His line covers Africa (Cush, Egypt, Libya), southern Arabia and the land of Canaan: peoples tied to Egypt by geography and politics rather than by language (Canaanite is a Semitic tongue).",
+   "note": "\"Land of Ham\" is a poetic name for Egypt (Psalm 105:23).",
+   "he": "חָם",
+   "tr": "Cham"
+  },
+  {
+   "id": "cush",
+   "n": "Cush",
+   "p": "ham",
+   "v": [
+    "1:8",
+    "1:9",
+    "1:10"
+   ],
+   "g": "Nubia (Sudan)",
+   "cert": "established",
+   "trad": "Josephus: the Ethiopians, still called Cushites (Ant. 1.131).",
+   "sch": "Kush, the kingdom south of Egypt on the Nile, in today's Sudan (Egyptian <i>Kash</i>). Cush's sons point to the Red Sea coasts of Africa and Arabia.",
+   "note": "The Cush who fathers Nimrod (10:8) may be a different, Mesopotamian Cush, perhaps the Kassites.",
+   "he": "כּוּשׁ",
+   "tr": "Kush"
+  },
+  {
+   "id": "seba",
+   "n": "Seba",
+   "p": "cush",
+   "v": [
+    "1:9"
+   ],
+   "g": "East Africa",
+   "cert": "uncertain",
+   "trad": "Josephus: the Sabaeans (Ant. 1.134).",
+   "sch": "An African people named with Egypt and Cush (Isaiah 43:3; 45:14), perhaps on the African Red Sea coast; distinct in Hebrew spelling from Sheba.",
+   "he": "סְבָא",
+   "tr": "Seva"
+  },
+  {
+   "id": "havilah-c",
+   "n": "Havilah",
+   "p": "cush",
+   "v": [
+    "1:9"
+   ],
+   "g": "Arabia",
+   "cert": "uncertain",
+   "trad": "Josephus: the Getuli of north-west Africa (Ant. 1.134).",
+   "sch": "A region of Arabia; Genesis 25:18 sets the Ishmaelites \"from Havilah to Shur.\" Havilah appears again among Joktan's sons (10:29): a people of the Red Sea trade with both African and Arabian ties.",
+   "he": "חֲוִילָה",
+   "tr": "Chavilah"
+  },
+  {
+   "id": "sabtah",
+   "n": "Sabta",
+   "p": "cush",
+   "v": [
+    "1:9"
+   ],
+   "he": "סַבְתָּא",
+   "g": "southern Arabia?",
+   "cert": "possible",
+   "trad": "Josephus: the Astaborans (Ant. 1.134). Talmud: \"inner Sakistan\" (Yoma 10a).",
+   "sch": "Perhaps Shabwa, the ancient capital of Hadramawt in southern Arabia.",
+   "tr": ""
+  },
+  {
+   "id": "raamah",
+   "n": "Raamah",
+   "p": "cush",
+   "v": [
+    "1:9"
+   ],
+   "he": "רַעְמָא",
+   "g": "south-west Arabia",
+   "cert": "possible",
+   "trad": "Josephus: the Ragmeans (Ant. 1.135).",
+   "sch": "Traders with Tyre together with Sheba (Ezekiel 27:22); perhaps <i>Rgmt</i> of the Sabaean inscriptions, near Najran.",
+   "tr": ""
+  },
+  {
+   "id": "sheba-c",
+   "n": "Sheba",
+   "p": "raamah",
+   "v": [
+    "1:9"
+   ],
+   "g": "Saba (Yemen)",
+   "cert": "probable",
+   "trad": "The Queen of Sheba's visit to Solomon (1 Kgs 10) made Sheba proverbial for wealth and wisdom.",
+   "sch": "Saba, the incense kingdom of Yemen (capital Marib). Sheba appears three times in Genesis: here, among Joktan's sons (10:28), and with Dedan among Abraham's descendants by Keturah (25:3).",
+   "note": "Such repetitions show that the chapter maps peoples by their connections (trade, region, alliance) as much as by descent.",
+   "he": "סְבָא",
+   "tr": "Sheva"
+  },
+  {
+   "id": "dedan",
+   "n": "Dedan",
+   "p": "raamah",
+   "v": [
+    "1:9"
+   ],
+   "he": "דְּדָן",
+   "tr": "Dedan",
+   "g": "al-'Ula (NW Arabia)",
+   "cert": "established",
+   "trad": "Josephus, reading a different text, names the Judadeans of western Ethiopia (Ant. 1.135).",
+   "sch": "The oasis of Dedan, modern al-'Ula in north-west Saudi Arabia, a caravan city known from its own inscriptions (Ezekiel 27:20; Jeremiah 25:23)."
+  },
+  {
+   "id": "sabteca",
+   "n": "Sabteca",
+   "p": "cush",
+   "v": [
+    "1:9"
+   ],
+   "g": "unknown",
+   "cert": "uncertain",
+   "trad": "Josephus: the Sabactens (Ant. 1.135). Talmud: \"outer Sakistan\" (Yoma 10a).",
+   "sch": "Not identified.",
+   "he": "סַבְתְּכָא",
+   "tr": "Savtecha"
+  },
+  {
+   "id": "nimrod",
+   "n": "Nimrod",
+   "p": "cush",
+   "v": [
+    "1:10"
+   ],
+   "g": "founder of Babylon and Nineveh",
+   "cert": "",
+   "trad": "The sages read his name from <i>marad</i>, \"to rebel.\" Rashi: \"He ensnared the minds of people by his words, misleading them to rebel against the Omnipresent\" (on 10:9, from Genesis Rabbah 37:2). Josephus makes him the instigator of the Tower of Babel (Ant. 1.113–114), and the midrash sets him against Abraham (Genesis Rabbah 38:13).",
+   "sch": "No certain identification. Proposals include Ninurta, the Mesopotamian god of war and hunting, and kings such as Sargon of Akkad or Tukulti-Ninurta I. Micah 5:6 calls Assyria \"the land of Nimrod.\"",
+   "note": "His cities (10:10–12): Babylon; Erech (Uruk); Accad (Agade); Calneh (unknown); Nineveh; Rehoboth-Ir; Calah (Nimrud); Resen. An individual rather than a people, so he is usually left out of the seventy.",
+   "he": "נִמְרוֹד",
+   "tr": "Nimrod"
+  },
+  {
+   "id": "mizraim",
+   "n": "Mizraim",
+   "p": "ham",
+   "v": [
+    "1:8",
+    "1:11"
+   ],
+   "g": "Egypt",
+   "cert": "established",
+   "trad": "Josephus: the Egyptians, who call their land Mestre (Ant. 1.132). The dual ending is traditionally explained as the \"two Egypts,\" Upper and Lower.",
+   "sch": "The ordinary Hebrew name of Egypt. His \"sons\" are peoples within and around Egypt, all given in plural form.",
+   "he": "מִצְרַיִם",
+   "tr": "Mitzrayim"
+  },
+  {
+   "id": "ludim",
+   "n": "Ludim",
+   "p": "mizraim",
+   "v": [
+    "1:11"
+   ],
+   "forms": [
+    "Ludites"
+   ],
+   "g": "unknown (Libyans?)",
+   "cert": "uncertain",
+   "trad": "Josephus lists the name without identifying it (Ant. 1.137).",
+   "sch": "Unclear. Some read Lubim (Libyans); others think of Lydian mercenaries serving in Egypt (Jeremiah 46:9 has Lud with Cush and Put). Distinct from Shem's son Lud (10:22).",
+   "he": "לוּדִי",
+   "tr": "Ludi"
+  },
+  {
+   "id": "anamim",
+   "n": "Anamim",
+   "p": "mizraim",
+   "v": [
+    "1:11"
+   ],
+   "forms": [
+    "Anamites"
+   ],
+   "g": "unknown",
+   "cert": "uncertain",
+   "trad": "Josephus lists the name without identifying it (Ant. 1.137).",
+   "sch": "Not identified; perhaps the people of the Kharga oasis in Egypt's western desert.",
+   "he": "עֲנָמִים",
+   "tr": "Anamim"
+  },
+  {
+   "id": "lehabim",
+   "n": "Lehabim",
+   "p": "mizraim",
+   "v": [
+    "1:11"
+   ],
+   "forms": [
+    "Lehabites"
+   ],
+   "g": "Libyans",
+   "cert": "probable",
+   "trad": "Josephus: they settled Libya (Ant. 1.137).",
+   "sch": "Usually taken as the Lubim, the Libyans west of Egypt (2 Chronicles 12:3; Nahum 3:9).",
+   "he": "לְהָבִים",
+   "tr": "Lehavim"
+  },
+  {
+   "id": "naphtuhim",
+   "n": "Naphtuhim",
+   "p": "mizraim",
+   "v": [
+    "1:11"
+   ],
+   "forms": [
+    "Naphtuhites"
+   ],
+   "g": "Lower Egypt?",
+   "cert": "possible",
+   "trad": "Josephus lists the name without identifying it (Ant. 1.137).",
+   "sch": "Perhaps from Egyptian <i>p3-t3-mḥw</i>, \"the northland,\" the Nile Delta.",
+   "he": "נַפְתֻּחִים",
+   "tr": "Naftuchim"
+  },
+  {
+   "id": "pathrusim",
+   "n": "Pathrusim",
+   "p": "mizraim",
+   "v": [
+    "1:12"
+   ],
+   "forms": [
+    "Pathrusites"
+   ],
+   "g": "Upper Egypt",
+   "cert": "established",
+   "trad": "Josephus lists the name without identifying it (Ant. 1.137).",
+   "sch": "People of Pathros, Egyptian <i>p3-t3-rsy</i>, \"the southland\": Upper Egypt (Isaiah 11:11; Jeremiah 44:1).",
+   "he": "פַּתְרֻסִים",
+   "tr": "Patrusi"
+  },
+  {
+   "id": "casluhim",
+   "n": "Casluhim",
+   "p": "mizraim",
+   "v": [
+    "1:12"
+   ],
+   "forms": [
+    "Casluhites"
+   ],
+   "g": "unknown",
+   "cert": "uncertain",
+   "trad": "Josephus lists the name without identifying it (Ant. 1.137).",
+   "sch": "Not identified.",
+   "he": "כַּסְלֻחִים",
+   "tr": "Kasluchim"
+  },
+  {
+   "id": "philistines",
+   "n": "Philistines",
+   "p": "casluhim",
+   "v": [
+    "1:12"
+   ],
+   "rel": "from",
+   "g": "the southern coast",
+   "cert": "established",
+   "trad": "Josephus: the Philistines, after whom the Greeks call part of the land Palestine (Ant. 1.136).",
+   "sch": "One of the Sea Peoples (Egyptian <i>Peleset</i>) who settled the southern coast around 1175 BC; their pottery and customs are Aegean. Amos 9:7 and Jeremiah 47:4 bring them from Caphtor, so some scholars think the clause \"from whom the Philistines came\" belongs after the Caphtorim.",
+   "note": "Introduced as \"came from,\" not as a son, so they are sometimes left out of the seventy and sometimes counted in Nimrod's place.",
+   "he": "פְּלִשְׁתִּי",
+   "tr": ""
+  },
+  {
+   "id": "caphtorim",
+   "n": "Caphtorim",
+   "p": "mizraim",
+   "v": [
+    "1:12"
+   ],
+   "forms": [
+    "Caphtorites"
+   ],
+   "g": "Crete",
+   "cert": "probable",
+   "trad": "Targum Pseudo-Jonathan renders the name \"Kappadokians.\"",
+   "sch": "Caphtor is Crete (Egyptian <i>Keftiu</i>, Akkadian <i>Kaptara</i>) and the Aegean world (Deuteronomy 2:23; Amos 9:7).",
+   "he": "כַּפְתֹּרִי",
+   "tr": "Kaftori"
+  },
+  {
+   "id": "put",
+   "n": "Put",
+   "p": "ham",
+   "v": [
+    "1:8"
+   ],
+   "g": "Libya",
+   "cert": "probable",
+   "trad": "Josephus: the Libyans, called Phutites, after a river in Mauretania (Ant. 1.132–133).",
+   "sch": "Libya (Old Persian <i>Putaya</i>); some suggest Punt on the Red Sea. Put supplies soldiers to Egypt and Tyre (Jeremiah 46:9; Ezekiel 27:10).",
+   "he": "פּוּט",
+   "tr": "Put"
+  },
+  {
+   "id": "canaan",
+   "n": "Canaan",
+   "p": "ham",
+   "v": [
+    "1:8",
+    "1:13"
+   ],
+   "g": "the land of Canaan",
+   "cert": "established",
+   "trad": "Josephus: the land later called Judea (Ant. 1.134). The sages read Canaan's listing among Ham's sons together with the curse of 9:25.",
+   "sch": "The peoples of the coast and hills between Gaza and Phoenicia. Linguistically Canaanite is Semitic, close to Hebrew; Canaan is placed with Egypt because the land was long under Egyptian rule.",
+   "note": "His eleven \"sons\" include a city (Sidon) and ten peoples in the singular gentilic form (\"the Jebusite\").",
+   "he": "כְּנַעַן",
+   "tr": "Kenaan"
+  },
+  {
+   "id": "sidon",
+   "n": "Sidon",
+   "p": "canaan",
+   "v": [
+    "1:13"
+   ],
+   "g": "Phoenician city",
+   "cert": "established",
+   "trad": "Josephus: the city of Sidon, called by the Greeks Sidon too (Ant. 1.138).",
+   "sch": "Sidon (Saida, Lebanon), one of the oldest Phoenician cities; \"firstborn\" reflects its seniority. \"Sidonians\" can stand for all Phoenicians (1 Kgs 16:31).",
+   "he": "צִידוֹן",
+   "tr": "Tzidon"
+  },
+  {
+   "id": "heth",
+   "n": "Heth (Hittites)",
+   "p": "canaan",
+   "v": [
+    "1:13"
+   ],
+   "forms": [
+    "Hittites"
+   ],
+   "g": "Hittites",
+   "cert": "uncertain",
+   "trad": "Abraham buys the cave of Machpelah from \"the sons of Heth\" at Hebron (Genesis 23).",
+   "sch": "The biblical Hittites of the hill country may be a local people with no direct link to the Hittite empire of Anatolia; others connect them with the Neo-Hittite kingdoms of Syria. Debated.",
+   "note": "The Hebrew text has \"Heth\"; the BSB renders it \"the Hittites.\"",
+   "he": "חֵת",
+   "tr": "Chet"
+  },
+  {
+   "id": "jebusite",
+   "n": "Jebusite",
+   "p": "canaan",
+   "v": [
+    "1:14"
+   ],
+   "forms": [
+    "Jebusites"
+   ],
+   "g": "Jerusalem",
+   "cert": "established",
+   "trad": "The Jebusites held Jerusalem until David took it (2 Samuel 5:6–9); David bought the threshing floor of Araunah the Jebusite, the site of the Temple (2 Samuel 24:18–25).",
+   "sch": "The people of Jebus, the name the Bible gives Jerusalem before David (Judges 19:10).",
+   "he": "יְבוּסִי",
+   "tr": "Yevusi"
+  },
+  {
+   "id": "amorite",
+   "n": "Amorite",
+   "p": "canaan",
+   "v": [
+    "1:14"
+   ],
+   "forms": [
+    "Amorites"
+   ],
+   "g": "Amurru",
+   "cert": "established",
+   "trad": "\"The iniquity of the Amorites is not yet complete\" (Genesis 15:16) became a rabbinic byword for God's patience with the nations.",
+   "sch": "The Amurru, \"westerners,\" a West-Semitic people well known in Mesopotamian sources (Hammurabi's dynasty was Amorite). In the Bible often the hill-country population of Canaan and Transjordan.",
+   "he": "אֱמֹרִי",
+   "tr": "Emori"
+  },
+  {
+   "id": "girgashite",
+   "n": "Girgashite",
+   "p": "canaan",
+   "v": [
+    "1:14"
+   ],
+   "forms": [
+    "Girgashites"
+   ],
+   "g": "unknown",
+   "cert": "uncertain",
+   "trad": "The Jerusalem Talmud teaches that the Girgashites left the land before Israel entered and were given a land in Africa (Shevi'it 6:1).",
+   "sch": "Not identified. <i>grgš</i> occurs as a name at Ugarit; some link the Karkisha of Hittite and Egyptian texts.",
+   "he": "גִּרְגָּשִׁי",
+   "tr": "Girgashi"
+  },
+  {
+   "id": "hivite",
+   "n": "Hivite",
+   "p": "canaan",
+   "v": [
+    "1:15"
+   ],
+   "forms": [
+    "Hivites"
+   ],
+   "g": "Shechem, Gibeon, Lebanon",
+   "cert": "possible",
+   "trad": "The Gibeonites who deceived Joshua were Hivites (Joshua 9:7), as were the people of Shechem (Genesis 34:2).",
+   "sch": "Found at Shechem, Gibeon and below Mount Hermon (Joshua 11:3). Some scholars identify them with the Hurrians.",
+   "he": "חִוִּי",
+   "tr": "Chivvi"
+  },
+  {
+   "id": "arkite",
+   "n": "Arkite",
+   "p": "canaan",
+   "v": [
+    "1:15"
+   ],
+   "forms": [
+    "Arkites"
+   ],
+   "g": "Arqa (Lebanon)",
+   "cert": "established",
+   "trad": "Josephus: Arce in Lebanon (Ant. 1.138).",
+   "sch": "Arqa (Tell Arqa), north-east of Tripoli in Lebanon, a city known from the Amarna letters.",
+   "he": "עַרְקִי",
+   "tr": "Arki"
+  },
+  {
+   "id": "sinite",
+   "n": "Sinite",
+   "p": "canaan",
+   "v": [
+    "1:15"
+   ],
+   "forms": [
+    "Sinites"
+   ],
+   "g": "northern Phoenicia",
+   "cert": "possible",
+   "trad": "Josephus lists them among the peoples whose cities were destroyed (Ant. 1.139).",
+   "sch": "Perhaps Siyannu near Ugarit, or a town near Arqa; named with other cities of the northern coast.",
+   "he": "סִינִי",
+   "tr": "Sini"
+  },
+  {
+   "id": "arvadite",
+   "n": "Arvadite",
+   "p": "canaan",
+   "v": [
+    "1:16"
+   ],
+   "forms": [
+    "Arvadites"
+   ],
+   "g": "Arwad (Syria)",
+   "cert": "established",
+   "trad": "Josephus: the island of Aradus (Ant. 1.138).",
+   "sch": "Arwad, the island city off the Syrian coast; its sailors served Tyre (Ezekiel 27:8, 11).",
+   "he": "אַרְוָדִי",
+   "tr": "Arvadi"
+  },
+  {
+   "id": "zemarite",
+   "n": "Zemarite",
+   "p": "canaan",
+   "v": [
+    "1:16"
+   ],
+   "forms": [
+    "Zemarites"
+   ],
+   "g": "Sumur (Syria)",
+   "cert": "probable",
+   "trad": "Josephus lists them among the peoples whose cities were destroyed (Ant. 1.139).",
+   "sch": "Sumur, probably Tell Kazel near the Syrian coast, prominent in the Amarna letters.",
+   "he": "צְמָרִי",
+   "tr": "Tzemari"
+  },
+  {
+   "id": "hamathite",
+   "n": "Hamathite",
+   "p": "canaan",
+   "v": [
+    "1:16"
+   ],
+   "forms": [
+    "Hamathites"
+   ],
+   "g": "Hama (Syria)",
+   "cert": "established",
+   "trad": "Josephus: Amathe, renamed Epiphania by the Macedonians (Ant. 1.138).",
+   "sch": "Hamath (Hama) on the Orontes in Syria; \"Lebo-hamath\" marks Israel's ideal northern border (Numbers 34:8).",
+   "he": "חֲמָתִי",
+   "tr": "Chamati"
+  },
+  {
+   "id": "shem",
+   "n": "Shem",
+   "p": "noah",
+   "v": [
+    "1:4",
+    "1:17",
+    "1:24"
+   ],
+   "branch": "shem",
+   "g": "peoples of the east",
+   "cert": "",
+   "trad": "The sages identify Shem with Melchizedek, king of Salem (Nedarim 32b; Targum Pseudo-Jonathan on 14:18). Tradition tells of the study house of Shem and Eber, where Rebekah went to inquire of the LORD and Jacob studied (Rashi on 25:22; Megillah 17a).",
+   "sch": "His line covers Mesopotamia, Syria and Arabia. \"Semitic,\" a modern term for the language family, is taken from his name, though the lists do not follow language strictly (Elam was not Semitic-speaking).",
+   "note": "His line comes last because it leads on to Abraham (11:10–26). \"Father of all the children of Eber\" (10:21) points ahead to the Hebrews.",
+   "he": "שֵׁם",
+   "tr": "Shem"
+  },
+  {
+   "id": "elam",
+   "n": "Elam",
+   "p": "shem",
+   "v": [
+    "1:17"
+   ],
+   "g": "Elam (SW Iran)",
+   "cert": "established",
+   "trad": "Josephus: the Elamites, ancestors of the Persians (Ant. 1.143).",
+   "sch": "Elam, the kingdom of south-western Iran with its capital at Susa (Daniel 8:2). Its language is not Semitic; it is placed here by geography.",
+   "he": "עֵילָם",
+   "tr": "Eilam"
+  },
+  {
+   "id": "asshur",
+   "n": "Asshur",
+   "p": "shem",
+   "v": [
+    "1:17"
+   ],
+   "g": "Assyria",
+   "cert": "established",
+   "trad": "Rashi on 10:11: \"As soon as Asshur saw that his sons listened to Nimrod, rebelling against the Omnipresent by building the Tower, he went forth out of their midst\" (from Genesis Rabbah 37:4). Josephus: the Assyrians, whose city was Nineveh (Ant. 1.143).",
+   "sch": "Assyria and its first capital Ashur on the Tigris.",
+   "he": "אַשּׁוּר",
+   "tr": "Ashur"
+  },
+  {
+   "id": "arphaxad",
+   "n": "Arphaxad",
+   "p": "shem",
+   "v": [
+    "1:17",
+    "1:18",
+    "1:24"
+   ],
+   "g": "Chaldeans?",
+   "cert": "uncertain",
+   "trad": "Josephus: the Chaldeans (Ant. 1.143–144).",
+   "sch": "Unexplained. The ending <i>-kshad</i> may contain <i>Kasdim</i>, the Chaldeans; some suggest Arrapha (near Kirkuk).",
+   "note": "The Septuagint adds Cainan as his son (followed in Luke 3:36).",
+   "he": "אַרְפַּכְשַׁד",
+   "tr": "Arpachshad"
+  },
+  {
+   "id": "shelah",
+   "n": "Shelah",
+   "p": "arphaxad",
+   "v": [
+    "1:18",
+    "1:24"
+   ],
+   "g": "",
+   "cert": "uncertain",
+   "trad": "Listed in the line from Shem to Abraham (11:12–15).",
+   "sch": "No people of this name is known; he is a link in the chosen line.",
+   "note": "The Septuagint and Luke 3:35–36 put Cainan between Arphaxad and Shelah (BSB footnote at 10:24).",
+   "he": "שֶׁלַח",
+   "tr": "Shelach"
+  },
+  {
+   "id": "eber",
+   "n": "Eber",
+   "p": "shelah",
+   "v": [
+    "1:18",
+    "1:19",
+    "1:25"
+   ],
+   "g": "the Hebrews",
+   "cert": "probable",
+   "trad": "The midrash plays on <i>ever</i>, \"the other side\": \"the whole world stood on one side and Abraham on the other\" (Genesis Rabbah 42:8, on \"Abram the Hebrew,\" 14:13). Rashi on 10:25: Eber was a prophet, for he named his son after the division that was coming.",
+   "sch": "The eponym of the Hebrews (<i>ivri</i>). Shem is called \"father of all the children of Eber\" (10:21), a wider group than Israel alone.",
+   "he": "עֵבֶר",
+   "tr": "Ever"
+  },
+  {
+   "id": "peleg",
+   "n": "Peleg",
+   "p": "eber",
+   "v": [
+    "1:19",
+    "1:25"
+   ],
+   "g": "",
+   "cert": "possible",
+   "trad": "Rashi: the earth was \"divided\" when \"the languages became confounded and they were scattered abroad from the plain of Shinar\" (on 10:25), the dispersion of Babel (11:1–9).",
+   "sch": "The name means \"division\"; Akkadian <i>palgu</i> is an irrigation canal, so some see a memory of the dividing of the land by canals.",
+   "note": "His line continues in 11:18–26 to Terah and Abram.",
+   "he": "פֶּלֶג",
+   "tr": "Peleg"
+  },
+  {
+   "id": "reu",
+   "n": "Reu",
+   "p": "peleg",
+   "v": [
+    "1:25"
+   ],
+   "he": "רְעוּ",
+   "tr": "Reu"
+  },
+  {
+   "id": "serug",
+   "n": "Serug",
+   "p": "reu",
+   "v": [
+    "1:26"
+   ],
+   "he": "שְׂרוּג",
+   "tr": "Serug"
+  },
+  {
+   "id": "nahor",
+   "n": "Nahor",
+   "p": "serug",
+   "v": [
+    "1:26"
+   ],
+   "he": "נָחוֹר",
+   "tr": "Nachor"
+  },
+  {
+   "id": "terah",
+   "n": "Terah",
+   "p": "nahor",
+   "v": [
+    "1:26"
+   ],
+   "he": "תֶּרַח",
+   "tr": "Terach"
+  },
+  {
+   "id": "abraham",
+   "n": "Abraham",
+   "p": "terah",
+   "v": [
+    "1:27",
+    "1:28",
+    "1:34"
+   ],
+   "g": "Abram",
+   "forms": [
+    "Abram"
+   ],
+   "branch": "abraham",
+   "note": "Lived 175 years and was buried with Sarah in the cave of Machpelah (25:7–10).",
+   "he": "אַבְרָם",
+   "tr": "Avraham"
+  },
+  {
+   "id": "isaac",
+   "n": "Isaac",
+   "p": "abraham",
+   "v": [
+    "1:28",
+    "1:34"
+   ],
+   "g": "\"he laughs\"",
+   "note": "Married Rebekah at forty; the twins were born when he was sixty (25:20, 26).",
+   "he": "יִצְחָק",
+   "tr": "Yitzchak"
+  },
+  {
+   "id": "esau",
+   "n": "Esau",
+   "p": "isaac",
+   "v": [
+    "1:34",
+    "1:35"
+   ],
+   "g": "the firstborn twin; Edom",
+   "note": "\"Red… hairy\" (25:25): <i>admoni</i> and <i>se'ar</i> point to Edom and Seir.",
+   "he": "עֵשָׂו",
+   "tr": "Esav"
+  },
+  {
+   "id": "eliphaz",
+   "n": "Eliphaz",
+   "p": "esau",
+   "v": [
+    "1:35",
+    "1:36"
+   ],
+   "g": "Esau's firstborn",
+   "note": "Job's friend Eliphaz is \"the Temanite\" (Job 2:11).",
+   "he": "אֱלִיפַז",
+   "tr": "Elifaz"
+  },
+  {
+   "id": "teman",
+   "n": "Teman",
+   "p": "eliphaz",
+   "v": [
+    "1:36"
+   ],
+   "g": "region of Edom",
+   "sch": "A region (or town) of Edom, famed for wisdom (Jeremiah 49:7; Obadiah 9).",
+   "he": "תֵּימָן",
+   "tr": "Teiman"
+  },
+  {
+   "id": "omar",
+   "n": "Omar",
+   "p": "eliphaz",
+   "v": [
+    "1:36"
+   ],
+   "he": "אוֹמָר",
+   "tr": "Omar"
+  },
+  {
+   "id": "zepho",
+   "n": "Zepho",
+   "p": "eliphaz",
+   "v": [
+    "1:36"
+   ],
+   "he": "צְפִי",
+   "tr": "Tzefi",
+   "note": "The Hebrew here reads Zephi."
+  },
+  {
+   "id": "gatam",
+   "n": "Gatam",
+   "p": "eliphaz",
+   "v": [
+    "1:36"
+   ],
+   "he": "גַּעְתָּם",
+   "tr": "Gatam"
+  },
+  {
+   "id": "kenaz",
+   "n": "Kenaz",
+   "p": "eliphaz",
+   "v": [
+    "1:36"
+   ],
+   "g": "the Kenizzites",
+   "note": "Caleb is called \"the Kenizzite\" (Numbers 32:12), and Othniel is \"son of Kenaz\" (Judges 1:13).",
+   "he": "קְנַז",
+   "tr": "Kenaz"
+  },
+  {
+   "id": "timna",
+   "n": "Timna",
+   "p": "eliphaz",
+   "v": [
+    "1:36"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "concubine": true,
+   "g": "sister of the Horite Lotan",
+   "trad": "The Talmud says Timna, a princess, wished to join Abraham's family and was turned away, so she became a concubine to Eliphaz; from her came Amalek (Sanhedrin 99b).",
+   "he": "תִּמְנָע",
+   "tr": "Timna"
+  },
+  {
+   "id": "amalek",
+   "n": "Amalek",
+   "p": "timna",
+   "v": [
+    "1:36"
+   ],
+   "g": "the Amalekites",
+   "note": "Ancestor of Israel's first enemy after the Exodus (Exodus 17:8–16; Deuteronomy 25:17–19).",
+   "he": "עֲמָלֵק",
+   "tr": "Amalek"
+  },
+  {
+   "id": "reuel",
+   "n": "Reuel",
+   "p": "esau",
+   "v": [
+    "1:35",
+    "1:37"
+   ],
+   "he": "רְעוּאֵל",
+   "tr": "Reuel"
+  },
+  {
+   "id": "nahath",
+   "n": "Nahath",
+   "p": "reuel",
+   "v": [
+    "1:37"
+   ],
+   "he": "נַחַת",
+   "tr": "Nachat"
+  },
+  {
+   "id": "zerah",
+   "n": "Zerah",
+   "p": "reuel",
+   "v": [
+    "1:37"
+   ],
+   "he": "זֶרַח",
+   "tr": "Zerach"
+  },
+  {
+   "id": "shammah",
+   "n": "Shammah",
+   "p": "reuel",
+   "v": [
+    "1:37"
+   ],
+   "he": "שַׁמָּה",
+   "tr": "Shammah"
+  },
+  {
+   "id": "mizzah",
+   "n": "Mizzah",
+   "p": "reuel",
+   "v": [
+    "1:37"
+   ],
+   "he": "מִזָּה",
+   "tr": "Mizzah"
+  },
+  {
+   "id": "jeush",
+   "n": "Jeush",
+   "p": "esau",
+   "v": [
+    "1:35"
+   ],
+   "he": "יְעוּשׁ",
+   "tr": "Yeush"
+  },
+  {
+   "id": "jalam",
+   "n": "Jalam",
+   "p": "esau",
+   "v": [
+    "1:35"
+   ],
+   "he": "יַעְלָם",
+   "tr": "Yalam"
+  },
+  {
+   "id": "korah",
+   "n": "Korah",
+   "p": "esau",
+   "v": [
+    "1:35"
+   ],
+   "note": "Not the Levite Korah of Numbers 16.",
+   "he": "קֹרַח",
+   "tr": "Korach"
+  },
+  {
+   "id": "israel",
+   "n": "Israel",
+   "p": "isaac",
+   "v": [
+    "1:34"
+   ],
+   "g": "Jacob",
+   "he": "יִשְׂרָאֵל",
+   "tr": "Israel"
+  },
+  {
+   "id": "ishmael",
+   "n": "Ishmael",
+   "p": "abraham",
+   "v": [
+    "1:28",
+    "1:29",
+    "1:31"
+   ],
+   "g": "\"God hears\"; 137 years",
+   "trad": "Rashi on 25:9 notes that Ishmael lets Isaac go first at their father's burial, a sign that he repented.",
+   "sch": "The Ishmaelites are the tribes of the north Arabian desert; several sons' names are known from Assyrian and Arabian sources.",
+   "note": "\"These were… twelve princes of their tribes\" (25:16), as promised in 17:20.",
+   "he": "יִשְׁמָעֵאל",
+   "tr": "Yishmael"
+  },
+  {
+   "id": "nebaioth",
+   "n": "Nebaioth",
+   "p": "ishmael",
+   "v": [
+    "1:29"
+   ],
+   "g": "the firstborn",
+   "sch": "Perhaps the Nabayati of Assyrian records (often linked, uncertainly, with the later Nabataeans).",
+   "he": "נְבָיוֹת",
+   "tr": "Nevavot"
+  },
+  {
+   "id": "kedar",
+   "n": "Kedar",
+   "p": "ishmael",
+   "v": [
+    "1:29"
+   ],
+   "g": "Qedar (N Arabia)",
+   "sch": "Qedar, the strongest Arab tribal confederation of the 8th–5th centuries BC; \"the tents of Kedar\" (Song 1:5; Isaiah 42:11).",
+   "he": "קֵדָר",
+   "tr": "Kedar"
+  },
+  {
+   "id": "adbeel",
+   "n": "Adbeel",
+   "p": "ishmael",
+   "v": [
+    "1:29"
+   ],
+   "sch": "Perhaps Idiba'ilu, an Arab people near Egypt's border in Tiglath-pileser III's records.",
+   "he": "אַדְבְּאֵל",
+   "tr": "Adbeel"
+  },
+  {
+   "id": "mibsam",
+   "n": "Mibsam",
+   "p": "ishmael",
+   "v": [
+    "1:29"
+   ],
+   "he": "מִבְשָׂם",
+   "tr": "Mivsam"
+  },
+  {
+   "id": "mishma",
+   "n": "Mishma",
+   "p": "ishmael",
+   "v": [
+    "1:30"
+   ],
+   "he": "מִשְׁמָע",
+   "tr": "Mishma"
+  },
+  {
+   "id": "dumah",
+   "n": "Dumah",
+   "p": "ishmael",
+   "v": [
+    "1:30"
+   ],
+   "g": "Dumat al-Jandal",
+   "sch": "The oasis of Dumat al-Jandal in northern Arabia (Isaiah 21:11).",
+   "he": "דּוּמָה",
+   "tr": "Dumah"
+  },
+  {
+   "id": "massa",
+   "n": "Massa",
+   "p": "ishmael",
+   "v": [
+    "1:30"
+   ],
+   "sch": "An Arab people; Agur and King Lemuel are \"of Massa\" (Proverbs 30:1; 31:1).",
+   "he": "מַשָּׂא",
+   "tr": "Massa"
+  },
+  {
+   "id": "hadad",
+   "n": "Hadad",
+   "p": "ishmael",
+   "v": [
+    "1:30"
+   ],
+   "he": "חֲדַד",
+   "tr": "Chadad"
+  },
+  {
+   "id": "tema",
+   "n": "Tema",
+   "p": "ishmael",
+   "v": [
+    "1:30"
+   ],
+   "g": "Tayma oasis",
+   "sch": "The oasis of Tayma in north-west Arabia, where the Babylonian king Nabonidus later lived for ten years.",
+   "he": "תֵּימָא",
+   "tr": "Tema"
+  },
+  {
+   "id": "jetur",
+   "n": "Jetur",
+   "p": "ishmael",
+   "v": [
+    "1:31"
+   ],
+   "g": "Ituraeans?",
+   "sch": "Probably the Ituraeans of the Lebanon and the Hauran (Luke 3:1).",
+   "he": "יְטוּר",
+   "tr": "Yetur"
+  },
+  {
+   "id": "naphish",
+   "n": "Naphish",
+   "p": "ishmael",
+   "v": [
+    "1:31"
+   ],
+   "he": "נָפִישׁ",
+   "tr": "Nafish"
+  },
+  {
+   "id": "kedemah",
+   "n": "Kedemah",
+   "p": "ishmael",
+   "v": [
+    "1:31"
+   ],
+   "g": "the last of twelve",
+   "he": "קֵדְמָה",
+   "tr": "Kedemah"
+  },
+  {
+   "id": "keturah",
+   "n": "Keturah",
+   "p": "abraham",
+   "v": [
+    "1:32",
+    "1:33"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "concubine": true,
+   "note": "Called Abraham's concubine here; his \"wife\" in Genesis 25:1.",
+   "trad": "Rashi and Genesis Rabbah 61:4 identify Keturah with Hagar, taken back after Sarah's death.",
+   "he": "קְטוּרָה",
+   "tr": "Keturah"
+  },
+  {
+   "id": "zimran",
+   "n": "Zimran",
+   "p": "keturah",
+   "v": [
+    "1:32"
+   ],
+   "he": "זִמְרָן",
+   "tr": "Zimran"
+  },
+  {
+   "id": "jokshan",
+   "n": "Jokshan",
+   "p": "keturah",
+   "v": [
+    "1:32"
+   ],
+   "he": "יׇקְשָׁן",
+   "tr": "Yokshan"
+  },
+  {
+   "id": "sheba",
+   "n": "Sheba",
+   "p": "jokshan",
+   "v": [
+    "1:32"
+   ],
+   "g": "Saba (Arabia)",
+   "sch": "The incense people of Saba; Sheba and Dedan also appear among Cush's descendants in Genesis 10:7.",
+   "he": "שְׁבָא",
+   "tr": "Sheva"
+  },
+  {
+   "id": "dedan-k",
+   "n": "Dedan",
+   "p": "jokshan",
+   "v": [
+    "1:32"
+   ],
+   "he": "דְּדָן",
+   "tr": "Dedan"
+  },
+  {
+   "id": "medan",
+   "n": "Medan",
+   "p": "keturah",
+   "v": [
+    "1:32"
+   ],
+   "he": "מְדָן",
+   "tr": "Medan"
+  },
+  {
+   "id": "midian",
+   "n": "Midian",
+   "p": "keturah",
+   "v": [
+    "1:32",
+    "1:33"
+   ],
+   "g": "the Midianites",
+   "sch": "Tribes of north-west Arabia east of the Gulf of Aqaba.",
+   "note": "Moses' father-in-law Jethro was a priest of Midian (Exodus 3:1).",
+   "he": "מִדְיָן",
+   "tr": "Midyan"
+  },
+  {
+   "id": "ephah",
+   "n": "Ephah",
+   "p": "midian",
+   "v": [
+    "1:33"
+   ],
+   "sch": "\"The young camels of Midian and Ephah\" (Isaiah 60:6); Assyrian Haiapa.",
+   "he": "עֵיפָה",
+   "tr": "Efah"
+  },
+  {
+   "id": "epher",
+   "n": "Epher",
+   "p": "midian",
+   "v": [
+    "1:33"
+   ],
+   "he": "עֵפֶר",
+   "tr": "Efer"
+  },
+  {
+   "id": "hanoch",
+   "n": "Hanoch",
+   "p": "midian",
+   "v": [
+    "1:33"
+   ],
+   "he": "חֲנוֹךְ",
+   "tr": "Chanoch"
+  },
+  {
+   "id": "abida",
+   "n": "Abida",
+   "p": "midian",
+   "v": [
+    "1:33"
+   ],
+   "he": "אֲבִידָע",
+   "tr": "Avida"
+  },
+  {
+   "id": "eldaah",
+   "n": "Eldaah",
+   "p": "midian",
+   "v": [
+    "1:33"
+   ],
+   "he": "אֶלְדָּעָה",
+   "tr": "Eldaah"
+  },
+  {
+   "id": "ishbak",
+   "n": "Ishbak",
+   "p": "keturah",
+   "v": [
+    "1:32"
+   ],
+   "he": "יִשְׁבָּק",
+   "tr": "Yishbak"
+  },
+  {
+   "id": "shuah",
+   "n": "Shuah",
+   "p": "keturah",
+   "v": [
+    "1:32"
+   ],
+   "note": "Job's friend Bildad is a Shuhite (Job 2:11).",
+   "he": "שׁוּחַ",
+   "tr": "Shuach"
+  },
+  {
+   "id": "joktan",
+   "n": "Joktan",
+   "p": "eber",
+   "v": [
+    "1:19",
+    "1:20",
+    "1:23"
+   ],
+   "g": "tribes of South Arabia",
+   "cert": "probable",
+   "trad": "Rashi: \"He was so called ('the little one') because he was so humble and thought little of himself,\" and so merited to found all these families (on 10:25). Arab genealogy traces the southern Arabs to Qahtan, usually equated with Joktan.",
+   "sch": "Father of thirteen peoples of southern Arabia; several of their names are known places in Yemen and Hadramawt.",
+   "he": "יׇקְטָן",
+   "tr": "Yoktan"
+  },
+  {
+   "id": "almodad",
+   "n": "Almodad",
+   "p": "joktan",
+   "v": [
+    "1:20"
+   ],
+   "g": "South Arabia (unknown)",
+   "cert": "uncertain",
+   "trad": "Targum Pseudo-Jonathan: \"who measured the earth with lines.\"",
+   "sch": "Not identified; perhaps \"God is friend\" or \"the beloved.\"",
+   "he": "אַלְמוֹדָד",
+   "tr": "Almodad"
+  },
+  {
+   "id": "sheleph",
+   "n": "Sheleph",
+   "p": "joktan",
+   "v": [
+    "1:20"
+   ],
+   "g": "Yemen",
+   "cert": "possible",
+   "trad": "Targum Pseudo-Jonathan: \"who drew out the waters of rivers.\"",
+   "sch": "Perhaps the Yemeni tribe or district of Salif.",
+   "he": "שֶׁלֶף",
+   "tr": "Shelef"
+  },
+  {
+   "id": "hazarmaveth",
+   "n": "Hazarmaveth",
+   "p": "joktan",
+   "v": [
+    "1:20"
+   ],
+   "g": "Hadramawt",
+   "cert": "established",
+   "trad": "The name reads in Hebrew as \"court of death.\"",
+   "sch": "Hadramawt, the incense region of southern Yemen; the name is the same word.",
+   "he": "חֲצַרְמָוֶת",
+   "tr": "Chatzarmavet"
+  },
+  {
+   "id": "jerah",
+   "n": "Jerah",
+   "p": "joktan",
+   "v": [
+    "1:20"
+   ],
+   "g": "South Arabia (unknown)",
+   "cert": "uncertain",
+   "trad": "The name means \"moon.\"",
+   "sch": "Not identified.",
+   "he": "יֶרַח",
+   "tr": "Yerach"
+  },
+  {
+   "id": "hadoram",
+   "n": "Hadoram",
+   "p": "joktan",
+   "v": [
+    "1:21"
+   ],
+   "g": "South Arabia (unknown)",
+   "cert": "uncertain",
+   "trad": "Listed without comment in the rabbinic sources.",
+   "sch": "Not identified.",
+   "he": "הֲדוֹרָם",
+   "tr": "Hadoram"
+  },
+  {
+   "id": "uzal",
+   "n": "Uzal",
+   "p": "joktan",
+   "v": [
+    "1:21"
+   ],
+   "g": "Sanaa?",
+   "cert": "possible",
+   "trad": "Arab and Jewish tradition give Azal as the old name of Sanaa, the capital of Yemen.",
+   "sch": "Possibly Sanaa; Ezekiel 27:19 may name Uzal among the traders of Tyre.",
+   "he": "אוּזָל",
+   "tr": "Uzal"
+  },
+  {
+   "id": "diklah",
+   "n": "Diklah",
+   "p": "joktan",
+   "v": [
+    "1:21"
+   ],
+   "g": "a palm oasis",
+   "cert": "uncertain",
+   "trad": "The name means \"date palm.\"",
+   "sch": "Not identified; probably an oasis.",
+   "he": "דִּקְלָה",
+   "tr": "Diklah"
+  },
+  {
+   "id": "obal",
+   "n": "Obal",
+   "p": "joktan",
+   "v": [
+    "1:22"
+   ],
+   "note": "The Hebrew here reads Ebal.",
+   "he": "עֵיבָל",
+   "tr": "Eival",
+   "g": "South Arabia (unknown)",
+   "cert": "uncertain",
+   "trad": "1 Chronicles 1:22 reads Ebal.",
+   "sch": "Not identified."
+  },
+  {
+   "id": "abimael",
+   "n": "Abimael",
+   "p": "joktan",
+   "v": [
+    "1:22"
+   ],
+   "g": "South Arabia (unknown)",
+   "cert": "uncertain",
+   "trad": "The name means \"my father is God\" or similar.",
+   "sch": "Not identified; the name has a South Arabian form.",
+   "he": "אֲבִימָאֵל",
+   "tr": "Avimael"
+  },
+  {
+   "id": "sheba-j",
+   "n": "Sheba",
+   "p": "joktan",
+   "v": [
+    "1:22"
+   ],
+   "g": "Saba (Yemen)",
+   "cert": "probable",
+   "trad": "See Sheba son of Raamah (10:7).",
+   "sch": "Saba in Yemen. The same people is listed under both Cush and Joktan, reflecting its African and Arabian ties.",
+   "he": "שְׁבָא",
+   "tr": "Sheva"
+  },
+  {
+   "id": "ophir",
+   "n": "Ophir",
+   "p": "joktan",
+   "v": [
+    "1:23"
+   ],
+   "g": "land of gold",
+   "cert": "uncertain",
+   "trad": "\"Gold of Ophir\" became proverbial (Psalm 45:9; Job 28:16).",
+   "sch": "Solomon's ships brought gold from Ophir (1 Kgs 9:28). Location debated: southern Arabia, the Horn of Africa, or India. An ostracon from Tell Qasile (8th century BC) reads \"gold of Ophir to Beth-horon.\"",
+   "he": "אוֹפִיר",
+   "tr": "Ofir"
+  },
+  {
+   "id": "havilah-j",
+   "n": "Havilah",
+   "p": "joktan",
+   "v": [
+    "1:23"
+   ],
+   "g": "Arabia",
+   "cert": "uncertain",
+   "trad": "See Havilah son of Cush (10:7).",
+   "sch": "A region of Arabia, listed under both Cush and Joktan.",
+   "he": "חֲוִילָה",
+   "tr": "Chavilah"
+  },
+  {
+   "id": "jobab",
+   "n": "Jobab",
+   "p": "joktan",
+   "v": [
+    "1:23"
+   ],
+   "g": "South Arabia (unknown)",
+   "cert": "uncertain",
+   "trad": "Listed without comment in the rabbinic sources.",
+   "sch": "Not identified; distinct from Jobab king of Edom (Genesis 36:33).",
+   "he": "יוֹבָב",
+   "tr": "Yovav"
+  },
+  {
+   "id": "lud",
+   "n": "Lud",
+   "p": "shem",
+   "v": [
+    "1:17"
+   ],
+   "g": "Lydia?",
+   "cert": "possible",
+   "trad": "Josephus: the Lydians of western Anatolia (Ant. 1.144).",
+   "sch": "Usually Lydia (Assyrian <i>Luddu</i>), though Lydia lies far from the other sons of Shem; perhaps placed here for political reasons. Distinct from the Ludim of Egypt (10:13).",
+   "he": "לוּד",
+   "tr": "Lud"
+  },
+  {
+   "id": "aram",
+   "n": "Aram",
+   "p": "shem",
+   "v": [
+    "1:17"
+   ],
+   "g": "Arameans (Syria)",
+   "cert": "established",
+   "trad": "Josephus: the Arameans, whom the Greeks call Syrians (Ant. 1.144). Israel's ancestors are remembered as Arameans: \"A wandering Aramean was my father\" (Deuteronomy 26:5), recited at the Passover Seder.",
+   "sch": "The Arameans of Syria and upper Mesopotamia, whose language, Aramaic, became the common tongue of the Near East and of parts of Daniel, Ezra and the Talmud.",
+   "he": "אֲרָם",
+   "tr": "Aram"
+  },
+  {
+   "id": "uz",
+   "n": "Uz",
+   "p": "aram",
+   "v": [
+    "1:17"
+   ],
+   "g": "land of Job",
+   "cert": "uncertain",
+   "trad": "Josephus: founder of Trachonitis and Damascus (Ant. 1.145). Job lived \"in the land of Uz\" (Job 1:1).",
+   "sch": "Location debated: the Hauran south of Damascus, or the borders of Edom (Lamentations 4:21).",
+   "he": "עוּץ",
+   "tr": "Utz"
+  },
+  {
+   "id": "hul",
+   "n": "Hul",
+   "p": "aram",
+   "v": [
+    "1:17"
+   ],
+   "g": "unknown",
+   "cert": "uncertain",
+   "trad": "Josephus: Armenia (Ant. 1.145).",
+   "sch": "Not identified.",
+   "he": "חוּל",
+   "tr": "Chul"
+  },
+  {
+   "id": "gether",
+   "n": "Gether",
+   "p": "aram",
+   "v": [
+    "1:17"
+   ],
+   "g": "unknown",
+   "cert": "uncertain",
+   "trad": "Josephus: the Bactrians (Ant. 1.145).",
+   "sch": "Not identified.",
+   "he": "גֶּתֶר",
+   "tr": "Geter"
+  },
+  {
+   "id": "mash",
+   "n": "Meshech",
+   "p": "aram",
+   "v": [
+    "1:17"
+   ],
+   "note": "Mash in Genesis 10:23.",
+   "g": "unknown",
+   "cert": "uncertain",
+   "trad": "Josephus: the Mesaneans at Charax Spasinu (Ant. 1.145). 1 Chronicles 1:17 reads Meshech.",
+   "sch": "Perhaps Mount Masius (Tur Abdin) in northern Mesopotamia; not certain.",
+   "he": "מֶשֶׁךְ",
+   "tr": "Meshech"
+  },
+  {
+   "id": "seir",
+   "n": "Seir",
+   "p": null,
+   "v": [
+    "1:38"
+   ],
+   "g": "the Horite",
+   "branch": "seir",
+   "he": "שֵׂעִיר",
+   "tr": "Seir"
+  },
+  {
+   "id": "lotan",
+   "n": "Lotan",
+   "p": "seir",
+   "v": [
+    "1:38",
+    "1:39"
+   ],
+   "he": "לוֹטָן",
+   "tr": "Lotan"
+  },
+  {
+   "id": "hori",
+   "n": "Hori",
+   "p": "lotan",
+   "v": [
+    "1:39"
+   ],
+   "he": "חֹרִי",
+   "tr": "Chori"
+  },
+  {
+   "id": "homam",
+   "n": "Homam",
+   "p": "lotan",
+   "v": [
+    "1:39"
+   ],
+   "g": "Hemam in Gen 36:22",
+   "he": "הוֹמָם",
+   "tr": "Homam"
+  },
+  {
+   "id": "shobal",
+   "n": "Shobal",
+   "p": "seir",
+   "v": [
+    "1:38",
+    "1:40"
+   ],
+   "he": "שׁוֹבָל",
+   "tr": "Shoval"
+  },
+  {
+   "id": "alvan",
+   "n": "Alvan",
+   "p": "shobal",
+   "v": [
+    "1:40"
+   ],
+   "he": "עַלְיָן",
+   "tr": "Alyan",
+   "note": "The Hebrew here reads Alian."
+  },
+  {
+   "id": "manahath",
+   "n": "Manahath",
+   "p": "shobal",
+   "v": [
+    "1:40"
+   ],
+   "he": "מָנַחַת",
+   "tr": "Manachat"
+  },
+  {
+   "id": "ebal",
+   "n": "Ebal",
+   "p": "shobal",
+   "v": [
+    "1:40"
+   ],
+   "he": "עֵיבָל",
+   "tr": "Eival"
+  },
+  {
+   "id": "shepho",
+   "n": "Shepho",
+   "p": "shobal",
+   "v": [
+    "1:40"
+   ],
+   "he": "שְׁפִי",
+   "tr": "Shefi",
+   "note": "The Hebrew here reads Shephi."
+  },
+  {
+   "id": "onam",
+   "n": "Onam",
+   "p": "shobal",
+   "v": [
+    "1:40"
+   ],
+   "he": "אוֹנָם",
+   "tr": "Onam"
+  },
+  {
+   "id": "zibeon",
+   "n": "Zibeon",
+   "p": "seir",
+   "v": [
+    "1:38",
+    "1:40"
+   ],
+   "he": "צִבְעוֹן",
+   "tr": "Tzivon"
+  },
+  {
+   "id": "aiah",
+   "n": "Aiah",
+   "p": "zibeon",
+   "v": [
+    "1:40"
+   ],
+   "he": "אַיָּה",
+   "tr": "Ayyah"
+  },
+  {
+   "id": "anah-z",
+   "n": "Anah",
+   "p": "zibeon",
+   "v": [
+    "1:40"
+   ],
+   "he": "עֲנָה",
+   "tr": "Anah"
+  },
+  {
+   "id": "anah",
+   "n": "Anah",
+   "p": "seir",
+   "v": [
+    "1:38",
+    "1:41"
+   ],
+   "he": "עֲנָה",
+   "tr": "Anah"
+  },
+  {
+   "id": "dishon-a",
+   "n": "Dishon",
+   "p": "anah",
+   "v": [
+    "1:41"
+   ],
+   "note": "Genesis 36:26 gives these four sons to Dishon son of Seir.",
+   "he": "דִּישׁוֹן",
+   "tr": "Dishon"
+  },
+  {
+   "id": "hemdan",
+   "n": "Hemdan",
+   "p": "dishon-a",
+   "v": [
+    "1:41"
+   ],
+   "he": "חַמְרָן",
+   "tr": "Chamran",
+   "note": "The Hebrew here reads Hamran."
+  },
+  {
+   "id": "eshban",
+   "n": "Eshban",
+   "p": "dishon-a",
+   "v": [
+    "1:41"
+   ],
+   "he": "אֶשְׁבָּן",
+   "tr": "Eshban"
+  },
+  {
+   "id": "ithran",
+   "n": "Ithran",
+   "p": "dishon-a",
+   "v": [
+    "1:41"
+   ],
+   "he": "יִתְרָן",
+   "tr": "Yitran"
+  },
+  {
+   "id": "cheran",
+   "n": "Cheran",
+   "p": "dishon-a",
+   "v": [
+    "1:41"
+   ],
+   "he": "כְּרָן",
+   "tr": "Keran"
+  },
+  {
+   "id": "dishon",
+   "n": "Dishon",
+   "p": "seir",
+   "v": [
+    "1:38"
+   ],
+   "he": "דִּישֹׁן",
+   "tr": "Dishon"
+  },
+  {
+   "id": "ezer",
+   "n": "Ezer",
+   "p": "seir",
+   "v": [
+    "1:38",
+    "1:42"
+   ],
+   "he": "אֵצֶר",
+   "tr": "Etzer"
+  },
+  {
+   "id": "bilhan",
+   "n": "Bilhan",
+   "p": "ezer",
+   "v": [
+    "1:42"
+   ],
+   "he": "בִּלְהָן",
+   "tr": "Bilhan"
+  },
+  {
+   "id": "zaavan",
+   "n": "Zaavan",
+   "p": "ezer",
+   "v": [
+    "1:42"
+   ],
+   "he": "זַעֲוָן",
+   "tr": "Zaavan"
+  },
+  {
+   "id": "akan",
+   "n": "Akan",
+   "p": "ezer",
+   "v": [
+    "1:42"
+   ],
+   "he": "יַעֲקָן",
+   "tr": "Yaakan",
+   "note": "The Hebrew here reads Jaakan."
+  },
+  {
+   "id": "dishan",
+   "n": "Dishan",
+   "p": "seir",
+   "v": [
+    "1:38",
+    "1:42"
+   ],
+   "he": "דִּישָׁן",
+   "tr": "Dishan"
+  },
+  {
+   "id": "uz-s",
+   "n": "Uz",
+   "p": "dishan",
+   "v": [
+    "1:42"
+   ],
+   "he": "עוּץ",
+   "tr": "Utz"
+  },
+  {
+   "id": "aran",
+   "n": "Aran",
+   "p": "dishan",
+   "v": [
+    "1:42"
+   ],
+   "he": "אֲרָן",
+   "tr": "Aran"
+  },
+  {
+   "id": "timna-s",
+   "n": "Timna",
+   "p": "seir",
+   "v": [
+    "1:39"
+   ],
+   "g": "Lotan's sister",
+   "sex": "f",
+   "he": "תִּמְנָע",
+   "tr": "Timna"
+  }
+ ]
+}

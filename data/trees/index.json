@@ -273,6 +273,177 @@
      ]
     }
    ]
+  },
+  {
+   "id": "1ch-1-adam-israel",
+   "title": "From Adam to Israel",
+   "ref": "1 Chronicles 1",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 1,
+     "v": 1,
+     "range": [
+      1,
+      42
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-2-judah",
+   "title": "The Family of Judah",
+   "ref": "1 Chronicles 2",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 2,
+     "v": 1,
+     "range": [
+      1,
+      55
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-4-judah-simeon",
+   "title": "Judah and Simeon",
+   "ref": "1 Chronicles 4",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 4,
+     "v": 1,
+     "range": [
+      1,
+      43
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-5-transjordan",
+   "title": "Reuben, Gad and East Manasseh",
+   "ref": "1 Chronicles 5:1–24",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 5,
+     "v": 1,
+     "range": [
+      1,
+      24
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-6-levites",
+   "title": "The Levites and the Singers",
+   "ref": "1 Chronicles 6:16–53",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 6,
+     "v": 16,
+     "range": [
+      16,
+      53
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-7-tribes",
+   "title": "The Northern Tribes",
+   "ref": "1 Chronicles 7",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 7,
+     "v": 1,
+     "range": [
+      1,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-8-benjamin",
+   "title": "The Family of Benjamin",
+   "ref": "1 Chronicles 8:1–28",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 8,
+     "v": 1,
+     "range": [
+      1,
+      28
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-9-jerusalem",
+   "title": "Those Who Settled in Jerusalem",
+   "ref": "1 Chronicles 9:1–34",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 9,
+     "v": 1,
+     "range": [
+      1,
+      34
+     ]
+    }
+   ]
+  },
+  {
+   "id": "saul-family",
+   "title": "The Family of Saul",
+   "ref": "1 Samuel 14:49–51; 1 Chronicles 8:29–40; 9:35–44",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 8,
+     "v": 29,
+     "range": [
+      29,
+      40
+     ]
+    },
+    {
+     "book": "1CH",
+     "c": 9,
+     "v": 35,
+     "range": [
+      35,
+      44
+     ]
+    },
+    {
+     "book": "1SA",
+     "c": 14,
+     "v": 49,
+     "range": [
+      49,
+      51
+     ]
+    }
+   ]
   }
  ]
 }

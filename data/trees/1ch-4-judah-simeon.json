@@ -1,0 +1,1153 @@
+{
+ "id": "1ch-4-judah-simeon",
+ "title": "Judah and Simeon",
+ "ref": "1 Chronicles 4",
+ "branches": [
+  {
+   "id": "judah",
+   "name": "Judah",
+   "col": "ham"
+  },
+  {
+   "id": "simeon",
+   "name": "Simeon",
+   "col": "teal"
+  }
+ ],
+ "intro": [
+  "More families of Judah, gathered from old records (\"these names are from ancient records,\" 4:22), then Simeon, whose towns lay inside Judah's territory and who were absorbed into it (Joshua 19:1). Many short lists here are not tied to the main line; a dashed line marks a family whose link is not given.",
+  "The best-known name is Jabez, whose prayer (4:9–10) is the only story in the chapter."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Babylonian Talmud, Temurah 16a and Megillah 13a; Targum on Chronicles. Scholarly summary after the standard commentaries (Japhet; Williamson; Knoppers).",
+ "anchor": {
+  "book": "1CH",
+  "c": 4,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "judah",
+   "n": "Judah",
+   "p": null,
+   "v": [
+    "4:1",
+    "4:21"
+   ],
+   "branch": "judah",
+   "he": "יְהוּדָה",
+   "tr": "Yehudah"
+  },
+  {
+   "id": "perez",
+   "n": "Perez",
+   "p": "judah",
+   "v": [
+    "4:1"
+   ],
+   "he": "פֶּרֶץ",
+   "tr": "Peretz"
+  },
+  {
+   "id": "hezron",
+   "n": "Hezron",
+   "p": "perez",
+   "v": [
+    "4:1"
+   ],
+   "he": "חֶצְרוֹן",
+   "tr": "Chetzron"
+  },
+  {
+   "id": "carmi",
+   "n": "Carmi",
+   "p": "hezron",
+   "v": [
+    "4:1"
+   ],
+   "g": "Caleb?",
+   "note": "Probably Caleb (Chelubai) son of Hezron (2:9), read as Carmi.",
+   "he": "כַּרְמִי",
+   "tr": "Karmi"
+  },
+  {
+   "id": "hur",
+   "n": "Hur",
+   "p": "carmi",
+   "v": [
+    "4:1",
+    "4:4"
+   ],
+   "g": "father of Bethlehem",
+   "he": "חוּר",
+   "tr": "Chur"
+  },
+  {
+   "id": "shobal",
+   "n": "Shobal",
+   "p": "hur",
+   "v": [
+    "4:1",
+    "4:2"
+   ],
+   "he": "שׁוֹבָל",
+   "tr": "Shoval"
+  },
+  {
+   "id": "reaiah",
+   "n": "Reaiah",
+   "p": "shobal",
+   "v": [
+    "4:2"
+   ],
+   "he": "רְאָיָה",
+   "tr": "Reayah"
+  },
+  {
+   "id": "jahath",
+   "n": "Jahath",
+   "p": "reaiah",
+   "v": [
+    "4:2"
+   ],
+   "he": "יַחַת",
+   "tr": "Yachat"
+  },
+  {
+   "id": "ahumai",
+   "n": "Ahumai",
+   "p": "jahath",
+   "v": [
+    "4:2"
+   ],
+   "g": "clan of the Zorathites",
+   "he": "אֲחוּמַי",
+   "tr": "Achumay"
+  },
+  {
+   "id": "lahad",
+   "n": "Lahad",
+   "p": "jahath",
+   "v": [
+    "4:2"
+   ],
+   "he": "לָהַד",
+   "tr": "Lahad"
+  },
+  {
+   "id": "etam",
+   "n": "Etam",
+   "p": "hur",
+   "v": [
+    "4:3"
+   ],
+   "rel": "from",
+   "note": "A town near Bethlehem; \"the sons of Etam\" are its clans.",
+   "he": "עֵיטָם",
+   "tr": "Etam"
+  },
+  {
+   "id": "jezreel",
+   "n": "Jezreel",
+   "p": "etam",
+   "v": [
+    "4:3"
+   ],
+   "he": "יִזְרְעֶאל",
+   "tr": "Yizreel"
+  },
+  {
+   "id": "ishma",
+   "n": "Ishma",
+   "p": "etam",
+   "v": [
+    "4:3"
+   ],
+   "he": "יִשְׁמָא",
+   "tr": "Yishma"
+  },
+  {
+   "id": "idbash",
+   "n": "Idbash",
+   "p": "etam",
+   "v": [
+    "4:3"
+   ],
+   "he": "יִדְבָּשׁ",
+   "tr": "Yidbash"
+  },
+  {
+   "id": "hazzelelponi",
+   "n": "Hazzelelponi",
+   "p": "etam",
+   "v": [
+    "4:3"
+   ],
+   "g": "their sister",
+   "sex": "f",
+   "trad": "The midrash makes her the mother of Samson (Numbers Rabbah 10:5).",
+   "he": "הַצְּלֶלְפּוֹנִי",
+   "tr": "Tzelelponi"
+  },
+  {
+   "id": "penuel",
+   "n": "Penuel",
+   "p": "hur",
+   "v": [
+    "4:4"
+   ],
+   "g": "father of Gedor",
+   "he": "פְּנוּאֵל",
+   "tr": "Penuel"
+  },
+  {
+   "id": "ezer",
+   "n": "Ezer",
+   "p": "hur",
+   "v": [
+    "4:4"
+   ],
+   "g": "father of Hushah",
+   "he": "עֵזֶר",
+   "tr": "Ezer"
+  },
+  {
+   "id": "ashhur",
+   "n": "Ashhur",
+   "p": "hezron",
+   "v": [
+    "4:5"
+   ],
+   "g": "father of Tekoa",
+   "note": "Son of Hezron by Abijah (2:24).",
+   "he": "אַשְׁחוּר",
+   "tr": "Ashchur"
+  },
+  {
+   "id": "helah",
+   "n": "Helah",
+   "p": "ashhur",
+   "v": [
+    "4:5",
+    "4:7"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "חֶלְאָה",
+   "tr": "Chelah"
+  },
+  {
+   "id": "zereth",
+   "n": "Zereth",
+   "p": "helah",
+   "v": [
+    "4:7"
+   ],
+   "he": "צֶרֶת",
+   "tr": "Tzeret"
+  },
+  {
+   "id": "zohar",
+   "n": "Zohar",
+   "p": "helah",
+   "v": [
+    "4:7"
+   ],
+   "he": "צֹחַר",
+   "tr": "Tzochar"
+  },
+  {
+   "id": "ethnan",
+   "n": "Ethnan",
+   "p": "helah",
+   "v": [
+    "4:7"
+   ],
+   "he": "אֶתְנַן",
+   "tr": "Etnan"
+  },
+  {
+   "id": "koz",
+   "n": "Koz",
+   "p": "helah",
+   "v": [
+    "4:8"
+   ],
+   "g": "father of Anub and Zobebah",
+   "he": "קוֹץ",
+   "tr": ""
+  },
+  {
+   "id": "naarah",
+   "n": "Naarah",
+   "p": "ashhur",
+   "v": [
+    "4:5",
+    "4:6"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "נַעֲרָה",
+   "tr": "Naarah"
+  },
+  {
+   "id": "ahuzzam",
+   "n": "Ahuzzam",
+   "p": "naarah",
+   "v": [
+    "4:6"
+   ],
+   "he": "אֲחֻזָּם",
+   "tr": "Achuzzam"
+  },
+  {
+   "id": "hepher",
+   "n": "Hepher",
+   "p": "naarah",
+   "v": [
+    "4:6"
+   ],
+   "he": "חֵפֶר",
+   "tr": ""
+  },
+  {
+   "id": "temeni",
+   "n": "Temeni",
+   "p": "naarah",
+   "v": [
+    "4:6"
+   ],
+   "he": "תֵּימְנִי",
+   "tr": "Temeni"
+  },
+  {
+   "id": "haahashtari",
+   "n": "Haahashtari",
+   "p": "naarah",
+   "v": [
+    "4:6"
+   ],
+   "he": "אֲחַשְׁתָּרִי",
+   "tr": "Achashtari"
+  },
+  {
+   "id": "jabez",
+   "n": "Jabez",
+   "p": "judah",
+   "v": [
+    "4:9",
+    "4:10"
+   ],
+   "g": "\"more honourable than his brothers\"",
+   "rel": "from",
+   "note": "His mother named him <i>Ya'betz</i>: \"I bore him in pain (<i>otzev</i>).\" He prayed, \"Bless me and enlarge my territory… keep me from harm, so that I will be free from pain,\" \"and God granted the request\" (4:9–10).",
+   "trad": "The Talmud identifies Jabez with Othniel son of Kenaz, who taught Torah: \"enlarge my territory\" with disciples (Temurah 16a). 2:55 mentions \"the scribes who lived at Jabez.\"",
+   "he": "יַעְבֵּץ",
+   "tr": "Yaavetz"
+  },
+  {
+   "id": "chelub",
+   "n": "Chelub",
+   "p": "judah",
+   "v": [
+    "4:11"
+   ],
+   "g": "brother of Shuhah",
+   "rel": "from",
+   "he": "כְּלוּב",
+   "tr": "Keluv"
+  },
+  {
+   "id": "mehir",
+   "n": "Mehir",
+   "p": "chelub",
+   "v": [
+    "4:11"
+   ],
+   "he": "מְחִיר",
+   "tr": "Mechir"
+  },
+  {
+   "id": "eshton",
+   "n": "Eshton",
+   "p": "mehir",
+   "v": [
+    "4:11",
+    "4:12"
+   ],
+   "note": "Father of Beth-rapha, Paseah and Tehinnah: \"the men of Recah.\"",
+   "he": "אֶשְׁתּוֹן",
+   "tr": "Eshton"
+  },
+  {
+   "id": "kenaz",
+   "n": "Kenaz",
+   "p": "judah",
+   "v": [
+    "4:13"
+   ],
+   "g": "the Kenizzites",
+   "rel": "from",
+   "he": "קְנַז",
+   "tr": "Kenaz"
+  },
+  {
+   "id": "othniel",
+   "n": "Othniel",
+   "p": "kenaz",
+   "v": [
+    "4:13"
+   ],
+   "g": "the first judge",
+   "note": "He captured Debir and married Caleb's daughter Acsah; the first of the judges (Judges 1:13; 3:9–11).",
+   "he": "עׇתְנִיאֵל",
+   "tr": "Otniel"
+  },
+  {
+   "id": "hathath",
+   "n": "Hathath",
+   "p": "othniel",
+   "v": [
+    "4:13"
+   ],
+   "he": "חֲתַת",
+   "tr": "Chatat"
+  },
+  {
+   "id": "meonothai",
+   "n": "Meonothai",
+   "p": "othniel",
+   "v": [
+    "4:13",
+    "4:14"
+   ],
+   "g": "father of Ophrah",
+   "he": "מְעוֹנֹתַי",
+   "tr": "Meonotay"
+  },
+  {
+   "id": "seraiah",
+   "n": "Seraiah",
+   "p": "kenaz",
+   "v": [
+    "4:13",
+    "4:14"
+   ],
+   "he": "שְׂרָיָהוּ",
+   "tr": "Serayah"
+  },
+  {
+   "id": "joab",
+   "n": "Joab",
+   "p": "seraiah",
+   "v": [
+    "4:14"
+   ],
+   "g": "father of Ge-harashim",
+   "note": "\"The valley of craftsmen.\"",
+   "he": "יוֹאָב",
+   "tr": "Yoav"
+  },
+  {
+   "id": "caleb",
+   "n": "Caleb",
+   "p": "judah",
+   "v": [
+    "4:15"
+   ],
+   "g": "son of Jephunneh",
+   "rel": "from",
+   "note": "One of the two faithful spies (Numbers 13–14), \"the Kenizzite\" (Numbers 32:12).",
+   "he": "כָּלֵב",
+   "tr": "Kalev"
+  },
+  {
+   "id": "iru",
+   "n": "Iru",
+   "p": "caleb",
+   "v": [
+    "4:15"
+   ],
+   "he": "עִירוּ",
+   "tr": "Iru"
+  },
+  {
+   "id": "elah",
+   "n": "Elah",
+   "p": "caleb",
+   "v": [
+    "4:15"
+   ],
+   "he": "אֵלָה",
+   "tr": ""
+  },
+  {
+   "id": "kenaz-e",
+   "n": "Kenaz",
+   "p": "elah",
+   "v": [
+    "4:15"
+   ],
+   "he": "קְנַז",
+   "tr": "Kenaz"
+  },
+  {
+   "id": "naam",
+   "n": "Naam",
+   "p": "caleb",
+   "v": [
+    "4:15"
+   ],
+   "he": "נָעַם",
+   "tr": "Naam"
+  },
+  {
+   "id": "jehallelel",
+   "n": "Jehallelel",
+   "p": "judah",
+   "v": [
+    "4:16"
+   ],
+   "rel": "from",
+   "he": "יְהַלֶּלְאֵל",
+   "tr": "Yehallelel"
+  },
+  {
+   "id": "ziph",
+   "n": "Ziph",
+   "p": "jehallelel",
+   "v": [
+    "4:16"
+   ],
+   "he": "זִיף",
+   "tr": "Zif"
+  },
+  {
+   "id": "ziphah",
+   "n": "Ziphah",
+   "p": "jehallelel",
+   "v": [
+    "4:16"
+   ],
+   "he": "זִיפָה",
+   "tr": "Zifah"
+  },
+  {
+   "id": "tiria",
+   "n": "Tiria",
+   "p": "jehallelel",
+   "v": [
+    "4:16"
+   ],
+   "he": "תִּירְיָא",
+   "tr": "Tirya"
+  },
+  {
+   "id": "asarel",
+   "n": "Asarel",
+   "p": "jehallelel",
+   "v": [
+    "4:16"
+   ],
+   "he": "אֲשַׂרְאֵל",
+   "tr": "Asarel"
+  },
+  {
+   "id": "ezrah",
+   "n": "Ezrah",
+   "p": "judah",
+   "v": [
+    "4:17"
+   ],
+   "rel": "from",
+   "he": "עֶזְרָה",
+   "tr": "Ezrah"
+  },
+  {
+   "id": "jether",
+   "n": "Jether",
+   "p": "ezrah",
+   "v": [
+    "4:17"
+   ],
+   "he": "יֶתֶר",
+   "tr": "Yeter"
+  },
+  {
+   "id": "mered",
+   "n": "Mered",
+   "p": "ezrah",
+   "v": [
+    "4:17",
+    "4:18"
+   ],
+   "g": "married Pharaoh's daughter",
+   "he": "מֶרֶד",
+   "tr": "Mered"
+  },
+  {
+   "id": "bithiah",
+   "n": "Bithiah",
+   "p": "mered",
+   "v": [
+    "4:17",
+    "4:18"
+   ],
+   "g": "Pharaoh's daughter",
+   "rel": "wife",
+   "sex": "f",
+   "trad": "The rabbis identify Bithiah, \"daughter of Yah,\" with the Pharaoh's daughter who drew Moses from the Nile: \"You called Moses your son though he was not; I call you My daughter\" (Leviticus Rabbah 1:3; Megillah 13a). They read Mered as Caleb, \"who rebelled\" (<i>marad</i>) against the spies' counsel.",
+   "he": "בִּתְיָה",
+   "tr": "Bityah"
+  },
+  {
+   "id": "miriam",
+   "n": "Miriam",
+   "p": "bithiah",
+   "v": [
+    "4:17"
+   ],
+   "note": "Here a son (or daughter) of Mered, not Moses' sister.",
+   "he": "מִרְיָם",
+   "tr": "Miriam"
+  },
+  {
+   "id": "shammai",
+   "n": "Shammai",
+   "p": "bithiah",
+   "v": [
+    "4:17"
+   ],
+   "he": "שַׁמַּי",
+   "tr": "Shammai"
+  },
+  {
+   "id": "ishbah",
+   "n": "Ishbah",
+   "p": "bithiah",
+   "v": [
+    "4:17"
+   ],
+   "g": "father of Eshtemoa",
+   "he": "יִשְׁבַּח",
+   "tr": "Yishbach"
+  },
+  {
+   "id": "judean-w",
+   "n": "his Judean wife",
+   "p": "mered",
+   "v": [
+    "4:18"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "",
+   "tr": ""
+  },
+  {
+   "id": "jered",
+   "n": "Jered",
+   "p": "judean-w",
+   "v": [
+    "4:18"
+   ],
+   "g": "father of Gedor",
+   "he": "יֶרֶד",
+   "tr": "Yered"
+  },
+  {
+   "id": "heber",
+   "n": "Heber",
+   "p": "judean-w",
+   "v": [
+    "4:18"
+   ],
+   "g": "father of Soco",
+   "he": "חֶבֶר",
+   "tr": "Chever"
+  },
+  {
+   "id": "jekuthiel",
+   "n": "Jekuthiel",
+   "p": "judean-w",
+   "v": [
+    "4:18"
+   ],
+   "g": "father of Zanoah",
+   "he": "יְקוּתִיאֵל",
+   "tr": "Yekutiel"
+  },
+  {
+   "id": "epher",
+   "n": "Epher",
+   "p": "ezrah",
+   "v": [
+    "4:17"
+   ],
+   "he": "עֵפֶר",
+   "tr": "Efer"
+  },
+  {
+   "id": "jalon",
+   "n": "Jalon",
+   "p": "ezrah",
+   "v": [
+    "4:17"
+   ],
+   "he": "יָלוֹן",
+   "tr": "Yalon"
+  },
+  {
+   "id": "shimon",
+   "n": "Shimon",
+   "p": "judah",
+   "v": [
+    "4:20"
+   ],
+   "rel": "from",
+   "he": "שִׁימוֹן",
+   "tr": "Shimon"
+  },
+  {
+   "id": "amnon",
+   "n": "Amnon",
+   "p": "shimon",
+   "v": [
+    "4:20"
+   ],
+   "he": "אַמְנוֹן",
+   "tr": "Amnon"
+  },
+  {
+   "id": "rinnah",
+   "n": "Rinnah",
+   "p": "shimon",
+   "v": [
+    "4:20"
+   ],
+   "he": "רִנָּה",
+   "tr": "Rinnah"
+  },
+  {
+   "id": "ben-hanan",
+   "n": "Ben-hanan",
+   "p": "shimon",
+   "v": [
+    "4:20"
+   ],
+   "he": "בֶּן־חָנָן",
+   "tr": "Ben-Chanan"
+  },
+  {
+   "id": "tilon",
+   "n": "Tilon",
+   "p": "shimon",
+   "v": [
+    "4:20"
+   ],
+   "he": "תִּילוֹן",
+   "tr": "Tulon"
+  },
+  {
+   "id": "ishi",
+   "n": "Ishi",
+   "p": "judah",
+   "v": [
+    "4:20"
+   ],
+   "rel": "from",
+   "he": "יִשְׁעִי",
+   "tr": "Yishi"
+  },
+  {
+   "id": "zoheth",
+   "n": "Zoheth",
+   "p": "ishi",
+   "v": [
+    "4:20"
+   ],
+   "he": "זוֹחֵת",
+   "tr": "Zochet"
+  },
+  {
+   "id": "ben-zoheth",
+   "n": "Ben-zoheth",
+   "p": "ishi",
+   "v": [
+    "4:20"
+   ],
+   "he": "בֶן־זוֹחֵת",
+   "tr": "Ben-Zochet"
+  },
+  {
+   "id": "shelah",
+   "n": "Shelah",
+   "p": "judah",
+   "v": [
+    "4:21"
+   ],
+   "g": "son of Judah",
+   "he": "שֵׁלָה",
+   "tr": "Shelah"
+  },
+  {
+   "id": "er",
+   "n": "Er",
+   "p": "shelah",
+   "v": [
+    "4:21"
+   ],
+   "g": "father of Lecah",
+   "he": "עֵר",
+   "tr": "Er"
+  },
+  {
+   "id": "laadah",
+   "n": "Laadah",
+   "p": "shelah",
+   "v": [
+    "4:21"
+   ],
+   "g": "father of Mareshah",
+   "note": "And of the clans of linen workers at Beth-ashbea.",
+   "he": "לַעְדָּה",
+   "tr": "Ladah"
+  },
+  {
+   "id": "jokim",
+   "n": "Jokim",
+   "p": "shelah",
+   "v": [
+    "4:22"
+   ],
+   "he": "יוֹקִים",
+   "tr": "Yokim"
+  },
+  {
+   "id": "joash",
+   "n": "Joash",
+   "p": "shelah",
+   "v": [
+    "4:22"
+   ],
+   "g": "ruled in Moab",
+   "he": "יוֹאָשׁ",
+   "tr": "Yoash"
+  },
+  {
+   "id": "saraph",
+   "n": "Saraph",
+   "p": "shelah",
+   "v": [
+    "4:22"
+   ],
+   "g": "ruled in Moab",
+   "trad": "The Talmud reads Joash and Saraph as Mahlon and Chilion, who married in Moab (Bava Batra 91b).",
+   "he": "שָׂרָף",
+   "tr": "Saraf"
+  },
+  {
+   "id": "simeon",
+   "n": "Simeon",
+   "p": null,
+   "v": [
+    "4:24"
+   ],
+   "branch": "simeon",
+   "he": "שִׁמְעוֹן",
+   "tr": "Shimon"
+  },
+  {
+   "id": "nemuel",
+   "n": "Nemuel",
+   "p": "simeon",
+   "v": [
+    "4:24"
+   ],
+   "he": "נְמוּאֵל",
+   "tr": "Nemuel"
+  },
+  {
+   "id": "jamin",
+   "n": "Jamin",
+   "p": "simeon",
+   "v": [
+    "4:24"
+   ],
+   "he": "יָמִין",
+   "tr": "Yamin"
+  },
+  {
+   "id": "jarib",
+   "n": "Jarib",
+   "p": "simeon",
+   "v": [
+    "4:24"
+   ],
+   "he": "יָרִיב",
+   "tr": "Yariv"
+  },
+  {
+   "id": "zerah",
+   "n": "Zerah",
+   "p": "simeon",
+   "v": [
+    "4:24"
+   ],
+   "he": "זֶרַח",
+   "tr": "Zerach"
+  },
+  {
+   "id": "shaul",
+   "n": "Shaul",
+   "p": "simeon",
+   "v": [
+    "4:24",
+    "4:25"
+   ],
+   "he": "שָׁאוּל",
+   "tr": "Shaul"
+  },
+  {
+   "id": "shallum",
+   "n": "Shallum",
+   "p": "shaul",
+   "v": [
+    "4:25"
+   ],
+   "he": "שַׁלֻּם",
+   "tr": "Shalum"
+  },
+  {
+   "id": "mibsam",
+   "n": "Mibsam",
+   "p": "shaul",
+   "v": [
+    "4:25"
+   ],
+   "he": "מִבְשָׂם",
+   "tr": "Mivsam"
+  },
+  {
+   "id": "mishma",
+   "n": "Mishma",
+   "p": "shaul",
+   "v": [
+    "4:25",
+    "4:26"
+   ],
+   "he": "מִשְׁמָע",
+   "tr": "Mishma"
+  },
+  {
+   "id": "hammuel",
+   "n": "Hammuel",
+   "p": "mishma",
+   "v": [
+    "4:26"
+   ],
+   "he": "חַמּוּאֵל",
+   "tr": "Chammuel"
+  },
+  {
+   "id": "zaccur",
+   "n": "Zaccur",
+   "p": "mishma",
+   "v": [
+    "4:26"
+   ],
+   "he": "זַכּוּר",
+   "tr": "Zakur"
+  },
+  {
+   "id": "shimei",
+   "n": "Shimei",
+   "p": "mishma",
+   "v": [
+    "4:26",
+    "4:27"
+   ],
+   "g": "sixteen sons and six daughters",
+   "he": "שִׁמְעִי",
+   "tr": "Shimi"
+  },
+  {
+   "id": "amaziah",
+   "n": "Amaziah",
+   "p": "simeon",
+   "v": [
+    "4:34"
+   ],
+   "rel": "from",
+   "note": "One of the Simeonite leaders who settled at Gedor in Hezekiah's day (4:34–41), with Meshobab, Jamlech, Joel, Elioenai, Jaakobah, Jeshohaiah, Asaiah, Adiel, Jesimiel and Benaiah.",
+   "he": "אֲמַצְיָה",
+   "tr": "Amatzyahu"
+  },
+  {
+   "id": "joshah",
+   "n": "Joshah",
+   "p": "amaziah",
+   "v": [
+    "4:34"
+   ],
+   "g": "a Simeonite leader",
+   "he": "יוֹשָׁה",
+   "tr": "Yoshah"
+  },
+  {
+   "id": "asiel",
+   "n": "Asiel",
+   "p": "simeon",
+   "v": [
+    "4:35"
+   ],
+   "rel": "from",
+   "he": "עֲשִׂיאֵל",
+   "tr": "Asiel"
+  },
+  {
+   "id": "seraiah-s",
+   "n": "Seraiah",
+   "p": "asiel",
+   "v": [
+    "4:35"
+   ],
+   "he": "שְׂרָיָה",
+   "tr": "Serayah"
+  },
+  {
+   "id": "joshibiah",
+   "n": "Joshibiah",
+   "p": "seraiah-s",
+   "v": [
+    "4:35"
+   ],
+   "he": "יוֹשִׁבְיָה",
+   "tr": "Yoshivyah"
+  },
+  {
+   "id": "jehu",
+   "n": "Jehu",
+   "p": "joshibiah",
+   "v": [
+    "4:35"
+   ],
+   "g": "a Simeonite leader",
+   "he": "יֵהוּא",
+   "tr": "Yehu"
+  },
+  {
+   "id": "shemaiah",
+   "n": "Shemaiah",
+   "p": "simeon",
+   "v": [
+    "4:37"
+   ],
+   "rel": "from",
+   "he": "שְׁמַעְיָה",
+   "tr": "Shemayah"
+  },
+  {
+   "id": "shimri",
+   "n": "Shimri",
+   "p": "shemaiah",
+   "v": [
+    "4:37"
+   ],
+   "he": "שִׁמְרִי",
+   "tr": "Shimri"
+  },
+  {
+   "id": "jedaiah",
+   "n": "Jedaiah",
+   "p": "shimri",
+   "v": [
+    "4:37"
+   ],
+   "he": "יְדָיָה",
+   "tr": "Yedayah"
+  },
+  {
+   "id": "allon",
+   "n": "Allon",
+   "p": "jedaiah",
+   "v": [
+    "4:37"
+   ],
+   "he": "אַלּוֹן",
+   "tr": "Allon"
+  },
+  {
+   "id": "shiphi",
+   "n": "Shiphi",
+   "p": "allon",
+   "v": [
+    "4:37"
+   ],
+   "he": "שִׁפְעִי",
+   "tr": "Shifi"
+  },
+  {
+   "id": "ziza",
+   "n": "Ziza",
+   "p": "shiphi",
+   "v": [
+    "4:37"
+   ],
+   "g": "a Simeonite leader",
+   "he": "זִיזָא",
+   "tr": "Ziza"
+  },
+  {
+   "id": "ishi-s",
+   "n": "Ishi",
+   "p": "simeon",
+   "v": [
+    "4:42"
+   ],
+   "rel": "from",
+   "note": "His sons led five hundred Simeonites to Mount Seir against the last of the Amalekites (4:42–43).",
+   "he": "יִשְׁעִי",
+   "tr": "Yishi"
+  },
+  {
+   "id": "pelatiah",
+   "n": "Pelatiah",
+   "p": "ishi-s",
+   "v": [
+    "4:42"
+   ],
+   "he": "פְּלַטְיָהוּ",
+   "tr": "Pelatyah"
+  },
+  {
+   "id": "neariah",
+   "n": "Neariah",
+   "p": "ishi-s",
+   "v": [
+    "4:42"
+   ],
+   "he": "נְעַרְיָה",
+   "tr": "Nearyah"
+  },
+  {
+   "id": "rephaiah",
+   "n": "Rephaiah",
+   "p": "ishi-s",
+   "v": [
+    "4:42"
+   ],
+   "he": "רְפָיָה",
+   "tr": "Refayah"
+  },
+  {
+   "id": "uzziel",
+   "n": "Uzziel",
+   "p": "ishi-s",
+   "v": [
+    "4:42"
+   ],
+   "he": "עֻזִּיאֵל",
+   "tr": "Uzziel"
+  }
+ ]
+}

@@ -79,7 +79,8 @@ def lookup(book, refs, names, nt):
     want = [n.lower() for n in names]
     loose = [fz(n) for n in names]
     for ref in refs:
-        for w in words(book).get(ref) or []:
+        rb, rcv = ref.split(' ')
+        for w in words(rb).get(rcv) or []:
             if not w or len(w) < 2 or not w[1]:
                 continue
             s, gloss = w[0], w[1]
@@ -127,9 +128,14 @@ def resolve(tree, p):
     elif 'tr' not in p:
         p['tr'] = HN.get(p['n'].split(' (')[0], '')
     # the Hebrew must occur in one of the person's verses
+    # a bare (unpointed) Hebrew override is filled in with the pointing of the verse itself
+    if p.get('he') and not re.search('[\u05b0-\u05c7]', p['he']):
+        vf = verse_form(book, refs, p['he'])
+        if vf:
+            p['he'] = vf
+            return
     if p.get('he') and not p.get('heOk'):
-        heb = orig(book)
-        if not any(consonants(p['he']) in consonants(heb.get(r, '')) for r in refs):
+        if not any(consonants(p['he']) in consonants(orig(r.split(' ')[0]).get(r.split(' ')[1], '')) for r in refs):
             vf = verse_form(book, refs, p['he'])
             if vf:
                 p['he'] = vf
@@ -146,7 +152,7 @@ def verse_form(book, refs, he):
     key = lambda c: c[:1] + MATRES.sub('', c[1:])      # vowel letters ignored, except a first letter
     want = key(consonants(he))
     for r in refs:
-        text = re.sub(r'<[^>]+>', ' ', orig(book).get(r, ''))
+        text = re.sub(r'<[^>]+>', ' ', orig(r.split(' ')[0]).get(r.split(' ')[1], ''))
         for tok in re.split(r'[\s\u05be\u05c0\u05c3]+', ACCENTS.sub('', text)):
             c = consonants(tok)
             for pre in ('', 'ו', 'ה', 'ל', 'ב', 'מ', 'כ', 'ול', 'וה', 'וב', 'ומ'):
@@ -849,19 +855,741 @@ TREES.append(dict(
     people=_luke))
 
 
+# ───────────────────────────────── 1 Chronicles 1 ─────────────────────────────────
+def reuse(src, people, keys=('g', 'cert', 'trad', 'sch', 'note')):
+    """Copy notes from another tree for people with the same id (1 Chronicles 1 repeats Genesis)."""
+    other = {q['id']: q for q in json.load(open(D('trees', src + '.json'), encoding='utf-8'))['people']}
+    for p in people:
+        q = other.get(p['id'])
+        if q:
+            for k in keys:
+                if k in q and k not in p:
+                    p[k] = q[k]
+    return people
+
+
+CH1 = [
+    P('adam', 'Adam', None, ['1:1']), P('seth', 'Seth', 'adam', ['1:1']), P('enosh', 'Enosh', 'seth', ['1:1']),
+    P('kenan', 'Kenan', 'enosh', ['1:2']), P('mahalalel', 'Mahalalel', 'kenan', ['1:2']), P('jared', 'Jared', 'mahalalel', ['1:2']),
+    P('enoch', 'Enoch', 'jared', ['1:3']), P('methuselah', 'Methuselah', 'enoch', ['1:3']), P('lamech', 'Lamech', 'methuselah', ['1:3']),
+    P('noah', 'Noah', 'lamech', ['1:3', '1:4']),
+    P('japheth', 'Japheth', 'noah', ['1:4', '1:5'], branch='japheth'),
+    P('gomer', 'Gomer', 'japheth', ['1:5', '1:6']),
+    P('ashkenaz', 'Ashkenaz', 'gomer', ['1:6']), P('riphath', 'Riphath', 'gomer', ['1:6'], note='The Hebrew here reads Diphath (a d/r confusion); the BSB follows Genesis 10:3.', heOk=True, he='דִיפַת', tr='Difat'),
+    P('togarmah', 'Togarmah', 'gomer', ['1:6']),
+    P('magog', 'Magog', 'japheth', ['1:5']), P('madai', 'Madai', 'japheth', ['1:5']),
+    P('javan', 'Javan', 'japheth', ['1:5', '1:7']),
+    P('elishah', 'Elishah', 'javan', ['1:7']), P('tarshish', 'Tarshish', 'javan', ['1:7']),
+    P('kittim', 'Kittim', 'javan', ['1:7'], forms=['Kittites']), P('dodanim', 'Rodanim', 'javan', ['1:7'], forms=['Rodanites']),
+    P('tubal', 'Tubal', 'japheth', ['1:5']), P('meshech', 'Meshech', 'japheth', ['1:5']), P('tiras', 'Tiras', 'japheth', ['1:5']),
+    P('ham', 'Ham', 'noah', ['1:4', '1:8'], branch='ham'),
+    P('cush', 'Cush', 'ham', ['1:8', '1:9', '1:10']),
+    P('seba', 'Seba', 'cush', ['1:9']), P('havilah-c', 'Havilah', 'cush', ['1:9']), P('sabtah', 'Sabta', 'cush', ['1:9'], he='סבתא'),
+    P('raamah', 'Raamah', 'cush', ['1:9'], he='רעמא'), P('sheba-c', 'Sheba', 'raamah', ['1:9']), P('dedan', 'Dedan', 'raamah', ['1:9'], he='דדן', tr='Dedan'),
+    P('sabteca', 'Sabteca', 'cush', ['1:9']), P('nimrod', 'Nimrod', 'cush', ['1:10']),
+    P('mizraim', 'Mizraim', 'ham', ['1:8', '1:11']),
+    P('ludim', 'Ludim', 'mizraim', ['1:11'], forms=['Ludites']), P('anamim', 'Anamim', 'mizraim', ['1:11'], forms=['Anamites']),
+    P('lehabim', 'Lehabim', 'mizraim', ['1:11'], forms=['Lehabites']), P('naphtuhim', 'Naphtuhim', 'mizraim', ['1:11'], forms=['Naphtuhites']),
+    P('pathrusim', 'Pathrusim', 'mizraim', ['1:12'], forms=['Pathrusites']), P('casluhim', 'Casluhim', 'mizraim', ['1:12'], forms=['Casluhites']),
+    P('philistines', 'Philistines', 'casluhim', ['1:12'], rel='from'), P('caphtorim', 'Caphtorim', 'mizraim', ['1:12'], forms=['Caphtorites']),
+    P('put', 'Put', 'ham', ['1:8']),
+    P('canaan', 'Canaan', 'ham', ['1:8', '1:13']),
+    P('sidon', 'Sidon', 'canaan', ['1:13']), P('heth', 'Heth (Hittites)', 'canaan', ['1:13'], forms=['Hittites']),
+    P('jebusite', 'Jebusite', 'canaan', ['1:14'], forms=['Jebusites']), P('amorite', 'Amorite', 'canaan', ['1:14'], forms=['Amorites']),
+    P('girgashite', 'Girgashite', 'canaan', ['1:14'], forms=['Girgashites']), P('hivite', 'Hivite', 'canaan', ['1:15'], forms=['Hivites']),
+    P('arkite', 'Arkite', 'canaan', ['1:15'], forms=['Arkites']), P('sinite', 'Sinite', 'canaan', ['1:15'], forms=['Sinites']),
+    P('arvadite', 'Arvadite', 'canaan', ['1:16'], forms=['Arvadites']), P('zemarite', 'Zemarite', 'canaan', ['1:16'], forms=['Zemarites']),
+    P('hamathite', 'Hamathite', 'canaan', ['1:16'], forms=['Hamathites']),
+    P('shem', 'Shem', 'noah', ['1:4', '1:17', '1:24'], branch='shem'),
+    P('elam', 'Elam', 'shem', ['1:17']), P('asshur', 'Asshur', 'shem', ['1:17']),
+    P('arphaxad', 'Arphaxad', 'shem', ['1:17', '1:18', '1:24']),
+    P('shelah', 'Shelah', 'arphaxad', ['1:18', '1:24']), P('eber', 'Eber', 'shelah', ['1:18', '1:19', '1:25']),
+    P('peleg', 'Peleg', 'eber', ['1:19', '1:25']), P('reu', 'Reu', 'peleg', ['1:25']), P('serug', 'Serug', 'reu', ['1:26']),
+    P('nahor', 'Nahor', 'serug', ['1:26']), P('terah', 'Terah', 'nahor', ['1:26']),
+    P('abraham', 'Abraham', 'terah', ['1:27', '1:28', '1:34'], 'Abram', forms=['Abram'], branch='abraham'),
+    P('isaac', 'Isaac', 'abraham', ['1:28', '1:34']),
+    P('esau', 'Esau', 'isaac', ['1:34', '1:35']),
+    P('eliphaz', 'Eliphaz', 'esau', ['1:35', '1:36']),
+    P('teman', 'Teman', 'eliphaz', ['1:36']), P('omar', 'Omar', 'eliphaz', ['1:36']), P('zepho', 'Zepho', 'eliphaz', ['1:36'], he='צפי', tr='Tzefi', note='The Hebrew here reads Zephi.'),
+    P('gatam', 'Gatam', 'eliphaz', ['1:36']), P('kenaz', 'Kenaz', 'eliphaz', ['1:36']),
+    W('timna', 'Timna', 'eliphaz', ['1:36'], concubine=True), P('amalek', 'Amalek', 'timna', ['1:36']),
+    P('reuel', 'Reuel', 'esau', ['1:35', '1:37']),
+    P('nahath', 'Nahath', 'reuel', ['1:37']), P('zerah', 'Zerah', 'reuel', ['1:37']), P('shammah', 'Shammah', 'reuel', ['1:37']),
+    P('mizzah', 'Mizzah', 'reuel', ['1:37']),
+    P('jeush', 'Jeush', 'esau', ['1:35']), P('jalam', 'Jalam', 'esau', ['1:35']), P('korah', 'Korah', 'esau', ['1:35']),
+    P('israel', 'Israel', 'isaac', ['1:34'], 'Jacob'),
+    P('ishmael', 'Ishmael', 'abraham', ['1:28', '1:29', '1:31']),
+    P('nebaioth', 'Nebaioth', 'ishmael', ['1:29']), P('kedar', 'Kedar', 'ishmael', ['1:29']), P('adbeel', 'Adbeel', 'ishmael', ['1:29']),
+    P('mibsam', 'Mibsam', 'ishmael', ['1:29']), P('mishma', 'Mishma', 'ishmael', ['1:30']), P('dumah', 'Dumah', 'ishmael', ['1:30']),
+    P('massa', 'Massa', 'ishmael', ['1:30']), P('hadad', 'Hadad', 'ishmael', ['1:30']), P('tema', 'Tema', 'ishmael', ['1:30']),
+    P('jetur', 'Jetur', 'ishmael', ['1:31']), P('naphish', 'Naphish', 'ishmael', ['1:31']), P('kedemah', 'Kedemah', 'ishmael', ['1:31']),
+    W('keturah', 'Keturah', 'abraham', ['1:32', '1:33'], concubine=True, note='Called Abraham\'s concubine here; his "wife" in Genesis 25:1.'),
+    P('zimran', 'Zimran', 'keturah', ['1:32']), P('jokshan', 'Jokshan', 'keturah', ['1:32']),
+    P('sheba', 'Sheba', 'jokshan', ['1:32']), P('dedan-k', 'Dedan', 'jokshan', ['1:32'], he='דדן', tr='Dedan'),
+    P('medan', 'Medan', 'keturah', ['1:32']), P('midian', 'Midian', 'keturah', ['1:32', '1:33']),
+    P('ephah', 'Ephah', 'midian', ['1:33']), P('epher', 'Epher', 'midian', ['1:33']), P('hanoch', 'Hanoch', 'midian', ['1:33']),
+    P('abida', 'Abida', 'midian', ['1:33']), P('eldaah', 'Eldaah', 'midian', ['1:33']),
+    P('ishbak', 'Ishbak', 'keturah', ['1:32']), P('shuah', 'Shuah', 'keturah', ['1:32']),
+    P('joktan', 'Joktan', 'eber', ['1:19', '1:20', '1:23']),
+    P('almodad', 'Almodad', 'joktan', ['1:20']), P('sheleph', 'Sheleph', 'joktan', ['1:20']), P('hazarmaveth', 'Hazarmaveth', 'joktan', ['1:20']),
+    P('jerah', 'Jerah', 'joktan', ['1:20']), P('hadoram', 'Hadoram', 'joktan', ['1:21']), P('uzal', 'Uzal', 'joktan', ['1:21']),
+    P('diklah', 'Diklah', 'joktan', ['1:21']), P('obal', 'Obal', 'joktan', ['1:22'], note='The Hebrew here reads Ebal.', heOk=True, he='עֵיבָל', tr='Eival'),
+    P('abimael', 'Abimael', 'joktan', ['1:22']), P('sheba-j', 'Sheba', 'joktan', ['1:22']), P('ophir', 'Ophir', 'joktan', ['1:23']),
+    P('havilah-j', 'Havilah', 'joktan', ['1:23']), P('jobab', 'Jobab', 'joktan', ['1:23']),
+    P('lud', 'Lud', 'shem', ['1:17']), P('aram', 'Aram', 'shem', ['1:17']),
+    P('uz', 'Uz', 'aram', ['1:17']), P('hul', 'Hul', 'aram', ['1:17']), P('gether', 'Gether', 'aram', ['1:17']),
+    P('mash', 'Meshech', 'aram', ['1:17'], note='Mash in Genesis 10:23.'),
+    P('seir', 'Seir', None, ['1:38'], 'the Horite', branch='seir'),
+    P('lotan', 'Lotan', 'seir', ['1:38', '1:39']), P('hori', 'Hori', 'lotan', ['1:39']), P('homam', 'Homam', 'lotan', ['1:39'], 'Hemam in Gen 36:22'),
+    P('shobal', 'Shobal', 'seir', ['1:38', '1:40']),
+    P('alvan', 'Alvan', 'shobal', ['1:40'], he='עלין', tr='Alyan', note='The Hebrew here reads Alian.'), P('manahath', 'Manahath', 'shobal', ['1:40']), P('ebal', 'Ebal', 'shobal', ['1:40']),
+    P('shepho', 'Shepho', 'shobal', ['1:40'], he='שפי', tr='Shefi', note='The Hebrew here reads Shephi.'), P('onam', 'Onam', 'shobal', ['1:40']),
+    P('zibeon', 'Zibeon', 'seir', ['1:38', '1:40']), P('aiah', 'Aiah', 'zibeon', ['1:40']), P('anah-z', 'Anah', 'zibeon', ['1:40']),
+    P('anah', 'Anah', 'seir', ['1:38', '1:41']),
+    P('dishon-a', 'Dishon', 'anah', ['1:41'], note='Genesis 36:26 gives these four sons to Dishon son of Seir.'),
+    P('hemdan', 'Hemdan', 'dishon-a', ['1:41'], he='חמרן', tr='Chamran', note='The Hebrew here reads Hamran.'), P('eshban', 'Eshban', 'dishon-a', ['1:41']), P('ithran', 'Ithran', 'dishon-a', ['1:41']),
+    P('cheran', 'Cheran', 'dishon-a', ['1:41']),
+    P('dishon', 'Dishon', 'seir', ['1:38']),
+    P('ezer', 'Ezer', 'seir', ['1:38', '1:42']), P('bilhan', 'Bilhan', 'ezer', ['1:42']), P('zaavan', 'Zaavan', 'ezer', ['1:42']),
+    P('akan', 'Akan', 'ezer', ['1:42'], he='יעקן', tr='Yaakan', note='The Hebrew here reads Jaakan.'),
+    P('dishan', 'Dishan', 'seir', ['1:38', '1:42']), P('uz-s', 'Uz', 'dishan', ['1:42']), P('aran', 'Aran', 'dishan', ['1:42']),
+    P('timna-s', 'Timna', 'seir', ['1:39'], "Lotan's sister", sex='f'),
+]
+reuse('gen-10-nations', CH1)
+reuse('gen-25-abraham', CH1)
+reuse('gen-36-esau', CH1)
+TREES.append(dict(
+    id='1ch-1-adam-israel', title='From Adam to Israel', ref='1 Chronicles 1', book='1CH',
+    anchors=[(1, 1, 1, 42)], compact=True,
+    branches=[{'id': 'japheth', 'name': 'Japheth', 'col': 'japheth'}, {'id': 'ham', 'name': 'Ham', 'col': 'ham'},
+              {'id': 'shem', 'name': 'Shem', 'col': 'shem'}, {'id': 'abraham', 'name': 'Abraham', 'col': 'plum'}, {'id': 'seir', 'name': 'Seir', 'col': 'ochre'}],
+    intro=['The Chronicler opens Israel\'s story with Adam. In a few lines he retraces Genesis: the ten generations to Noah, the nations (Genesis 10), '
+           'the line from Shem to Abraham, Abraham\'s sons by Hagar, Sarah and Keturah, Esau\'s family and the Horites of Seir. '
+           'At each step the side branches come first and the chosen line last, so that everything narrows to Israel (2:1).',
+           'The chapter ends with the kings and chiefs of Edom (1:43–54), a succession of rulers rather than a family, not drawn here.'],
+    sources='Hebrew names: Miqra according to the Masorah. Notes shared with the Genesis trees. Parallels: Genesis 5; 10; 11:10–26; 25:1–4, 12–16; 36:10–28.',
+    people=CH1))
+
+# ───────────────────────────────── 1 Chronicles 2 ─────────────────────────────────
+TREES.append(dict(
+    id='1ch-2-judah', title='The Family of Judah', ref='1 Chronicles 2', book='1CH',
+    anchors=[(2, 1, 1, 55)], compact=True,
+    branches=[{'id': 'jerahmeel', 'name': 'Jerahmeel', 'col': 'teal'}, {'id': 'ram', 'name': 'Ram, to David', 'col': 'ham'},
+              {'id': 'caleb', 'name': 'Caleb', 'col': 'ochre'}],
+    intro=['After the twelve sons of Israel (2:1–2), the Chronicler turns first to Judah, the royal tribe. Through Perez and Hezron the line divides '
+           'into three clans: Jerahmeel, Ram (the line of David) and Caleb (here Chelubai, 2:9). Many "sons" are towns and districts of Judah: '
+           '"father of" often means founder or leader of a place (Mesha "the father of Ziph," Salma "the father of Bethlehem").',
+           'Dashed lines mark links that the text implies but does not state.'],
+    sources='Hebrew names: Miqra according to the Masorah. Rashi and the Targum on 1 Chronicles 2; Babylonian Talmud, Sotah 11b. Scholarly summary after the standard commentaries (Japhet; Williamson; Knoppers).',
+    people=[
+        P('israel', 'Israel', None, ['2:1']),
+        P('reuben', 'Reuben', 'israel', ['2:1']), P('simeon', 'Simeon', 'israel', ['2:1']), P('levi', 'Levi', 'israel', ['2:1']),
+        P('judah', 'Judah', 'israel', ['2:1', '2:3', '2:4'], 'the royal tribe'),
+        W('bathshua', 'Bath-shua', 'judah', ['2:3'], 'the Canaanite', he='בַּת־שׁוּעַ', tr='Bat-Shua', heOk=True, note='"Daughter of Shua" (Genesis 38:2).'),
+        P('er', 'Er', 'bathshua', ['2:3'], 'put to death by the LORD'),
+        P('onan', 'Onan', 'bathshua', ['2:3']),
+        P('shelah', 'Shelah', 'bathshua', ['2:3'], note='His descendants are listed in 4:21–23.'),
+        W('tamar', 'Tamar', 'judah', ['2:4'], "Judah's daughter-in-law", note='Genesis 38.'),
+        P('perez', 'Perez', 'tamar', ['2:4', '2:5']),
+        P('hezron', 'Hezron', 'perez', ['2:5', '2:9', '2:18', '2:21', '2:24'], 'father of three clans'),
+        P('jerahmeel', 'Jerahmeel', 'hezron', ['2:9', '2:25', '2:26', '2:33'], 'the firstborn', branch='jerahmeel',
+          sch='The Jerahmeelites lived in the Negev south of Judah (1 Samuel 27:10; 30:29).'),
+        P('ram-j', 'Ram', 'jerahmeel', ['2:25', '2:27'], 'the firstborn'),
+        P('maaz', 'Maaz', 'ram-j', ['2:27']), P('jamin', 'Jamin', 'ram-j', ['2:27']), P('eker', 'Eker', 'ram-j', ['2:27']),
+        P('bunah', 'Bunah', 'jerahmeel', ['2:25']), P('oren', 'Oren', 'jerahmeel', ['2:25']), P('ozem-j', 'Ozem', 'jerahmeel', ['2:25']),
+        P('ahijah', 'Ahijah', 'jerahmeel', ['2:25']),
+        W('atarah', 'Atarah', 'jerahmeel', ['2:26']),
+        P('onam', 'Onam', 'atarah', ['2:26', '2:28']),
+        P('shammai', 'Shammai', 'onam', ['2:28', '2:32']),
+        P('nadab', 'Nadab', 'shammai', ['2:28', '2:30']),
+        P('seled', 'Seled', 'nadab', ['2:30'], 'died without children'),
+        P('appaim', 'Appaim', 'nadab', ['2:30', '2:31']),
+        P('ishi', 'Ishi', 'appaim', ['2:31']),
+        P('sheshan', 'Sheshan', 'ishi', ['2:31', '2:34', '2:35'], 'had only daughters'),
+        P('ahlai', 'Ahlai', 'sheshan', ['2:31'], note='Called Sheshan\'s son, though 2:34 says he had no sons; perhaps Ahlai was the daughter who married Jarha.'),
+        P('sheshan-d', "Sheshan's daughter", 'sheshan', ['2:35'], 'married the Egyptian Jarha', sex='f', he='', tr='',
+          note='Sheshan gave her to his Egyptian servant Jarha (2:34–35). Her line runs thirteen generations to Elishama.'),
+        P('attai', 'Attai', 'sheshan-d', ['2:35', '2:36'], kin='son of Jarha the Egyptian and Sheshan\'s daughter'),
+        P('nathan', 'Nathan', 'attai', ['2:36']), P('zabad', 'Zabad', 'nathan', ['2:36', '2:37']),
+        P('ephlal', 'Ephlal', 'zabad', ['2:37']), P('obed-j', 'Obed', 'ephlal', ['2:37', '2:38']),
+        P('jehu', 'Jehu', 'obed-j', ['2:38']), P('azariah-j', 'Azariah', 'jehu', ['2:38', '2:39']),
+        P('helez', 'Helez', 'azariah-j', ['2:39']), P('elasah', 'Elasah', 'helez', ['2:39', '2:40'], he='אלעשה', tr='Elasah'),
+        P('sismai', 'Sismai', 'elasah', ['2:40']), P('shallum', 'Shallum', 'sismai', ['2:40', '2:41']),
+        P('jekamiah', 'Jekamiah', 'shallum', ['2:41']), P('elishama', 'Elishama', 'jekamiah', ['2:41']),
+        P('abishur', 'Abishur', 'shammai', ['2:28', '2:29']),
+        W('abihail', 'Abihail', 'abishur', ['2:29'], he='אביהיל', tr='Avihayil'),
+        P('ahban', 'Ahban', 'abihail', ['2:29']), P('molid', 'Molid', 'abihail', ['2:29']),
+        P('jada', 'Jada', 'onam', ['2:28', '2:32'], 'brother of Shammai'),
+        P('jether-j', 'Jether', 'jada', ['2:32'], 'died without children'),
+        P('jonathan', 'Jonathan', 'jada', ['2:32', '2:33']),
+        P('peleth', 'Peleth', 'jonathan', ['2:33']), P('zaza', 'Zaza', 'jonathan', ['2:33']),
+        P('ram', 'Ram', 'hezron', ['2:9', '2:10'], 'line of David', branch='ram'),
+        P('amminadab', 'Amminadab', 'ram', ['2:10']),
+        P('nahshon', 'Nahshon', 'amminadab', ['2:10', '2:11'], 'leader of Judah'),
+        P('salmon', 'Salmon', 'nahshon', ['2:11'], he='שלמא', tr='Salma', note='The Hebrew here reads Salma.'), P('boaz', 'Boaz', 'salmon', ['2:11', '2:12']),
+        P('obed', 'Obed', 'boaz', ['2:12']),
+        P('jesse', 'Jesse', 'obed', ['2:12', '2:13'], 'seven sons and two daughters'),
+        P('eliab', 'Eliab', 'jesse', ['2:13'], 'the firstborn'),
+        P('abinadab', 'Abinadab', 'jesse', ['2:13']), P('shimea', 'Shimea', 'jesse', ['2:13']),
+        P('nethanel', 'Nethanel', 'jesse', ['2:14']), P('raddai', 'Raddai', 'jesse', ['2:14']), P('ozem', 'Ozem', 'jesse', ['2:15']),
+        P('david', 'David', 'jesse', ['2:15'], 'the seventh son', note='1 Samuel 16:10–11 counts eight sons of Jesse, David the youngest; here David is the seventh, a number of honour.'),
+        P('zeruiah', 'Zeruiah', 'jesse', ['2:16'], 'mother of Joab', sex='f'),
+        P('abishai', 'Abishai', 'zeruiah', ['2:16'], he='אבשי', tr='Avshai'),
+        P('joab', 'Joab', 'zeruiah', ['2:16'], "commander of David's army"),
+        P('asahel', 'Asahel', 'zeruiah', ['2:16'], 'swift as a gazelle', he='עשהאל', tr='Asahel', note='Killed by Abner (2 Samuel 2:18–23).'),
+        P('abigail', 'Abigail', 'jesse', ['2:16', '2:17'], sex='f'),
+        P('amasa', 'Amasa', 'abigail', ['2:17'], kin='son of Abigail and Jether the Ishmaelite', note='Absalom\'s commander, later killed by Joab (2 Samuel 20:9–10).'),
+        P('caleb', 'Caleb', 'hezron', ['2:9', '2:18', '2:42', '2:46', '2:48', '2:49'], 'Chelubai', branch='caleb', forms=['Chelubai'],
+          note='Not the Caleb son of Jephunneh of the spies (4:15), though the clans are linked.'),
+        W('azubah', 'Azubah', 'caleb', ['2:18', '2:19']),
+        P('jesher', 'Jesher', 'azubah', ['2:18']), P('shobab', 'Shobab', 'azubah', ['2:18']), P('ardon', 'Ardon', 'azubah', ['2:18']),
+        W('jerioth', 'Jerioth', 'caleb', ['2:18'], note='The Hebrew is unclear: Jerioth may be a second wife or Azubah\'s daughter.'),
+        W('ephrath', 'Ephrath', 'caleb', ['2:19'], 'Ephrathah', he='אפרת', tr='Efrat', forms=['Ephrathah'], note='The name of the Bethlehem district (Micah 5:2).'),
+        P('hur', 'Hur', 'ephrath', ['2:19', '2:20', '2:50'], 'firstborn of Ephrathah',
+          note='Hur held up Moses\' hands with Aaron (Exodus 17:12).', trad='Tradition makes Hur the son of Miriam (Sotah 11b).'),
+        P('uri', 'Uri', 'hur', ['2:20']),
+        P('bezalel', 'Bezalel', 'uri', ['2:20'], 'builder of the tabernacle', note='Filled "with the Spirit of God" to make the tabernacle (Exodus 31:2–5).'),
+        P('shobal', 'Shobal', 'hur', ['2:50', '2:52'], 'father of Kiriath-jearim'),
+        P('haroeh', 'Haroeh', 'shobal', ['2:52'], note='With half the Manahathites and the clans of Kiriath-jearim (2:52–53).'),
+        P('salma', 'Salma', 'hur', ['2:51', '2:54'], 'father of Bethlehem', note='His descendants include Bethlehem, the Netophathites and the Kenites of the house of Rechab (2:54–55).'),
+        P('hareph', 'Hareph', 'hur', ['2:51'], 'father of Beth-gader'),
+        P('mesha', 'Mesha', 'caleb', ['2:42'], 'father of Ziph; the firstborn'),
+        P('mareshah', 'Mareshah', 'caleb', ['2:42'], 'father of Hebron'),
+        P('hebron', 'Hebron', 'mareshah', ['2:42', '2:43']),
+        P('korah', 'Korah', 'hebron', ['2:43']), P('tappuah', 'Tappuah', 'hebron', ['2:43']),
+        P('rekem', 'Rekem', 'hebron', ['2:43', '2:44']),
+        P('shammai-r', 'Shammai', 'rekem', ['2:44', '2:45']),
+        P('maon', 'Maon', 'shammai-r', ['2:45'], 'father of Beth-zur'),
+        P('shema', 'Shema', 'hebron', ['2:43', '2:44']),
+        P('raham', 'Raham', 'shema', ['2:44'], 'father of Jorkeam'),
+        W('ephah', 'Ephah', 'caleb', ['2:46'], concubine=True),
+        P('haran', 'Haran', 'ephah', ['2:46']), P('gazez-h', 'Gazez', 'haran', ['2:46']),
+        P('moza', 'Moza', 'ephah', ['2:46']), P('gazez', 'Gazez', 'ephah', ['2:46']),
+        W('maacah', 'Maacah', 'caleb', ['2:48'], concubine=True),
+        P('sheber', 'Sheber', 'maacah', ['2:48']), P('tirhanah', 'Tirhanah', 'maacah', ['2:48']),
+        P('shaaph', 'Shaaph', 'maacah', ['2:49'], 'father of Madmannah'),
+        P('sheva', 'Sheva', 'maacah', ['2:49'], 'father of Machbenah and Gibea'),
+        P('acsah', 'Acsah', 'caleb', ['2:49'], "Caleb's daughter", sex='f', note='Acsah is also the daughter of Caleb son of Jephunneh, given to Othniel (Joshua 15:16–17).'),
+        P('jahdai', 'Jahdai', 'caleb', ['2:47'], rel='from', note='His link to Caleb is not stated.'),
+        P('regem', 'Regem', 'jahdai', ['2:47']), P('jotham', 'Jotham', 'jahdai', ['2:47']), P('geshan', 'Geshan', 'jahdai', ['2:47']),
+        P('pelet', 'Pelet', 'jahdai', ['2:47']), P('ephah-m', 'Ephah', 'jahdai', ['2:47']), P('shaaph-j', 'Shaaph', 'jahdai', ['2:47']),
+        W('machir-d', "Machir's daughter", 'hezron', ['2:21'], 'married at sixty', he='', tr='', note='Daughter of Machir "the father of Gilead," of Manasseh.'),
+        P('segub', 'Segub', 'machir-d', ['2:21', '2:22']),
+        P('jair', 'Jair', 'segub', ['2:22'], 'twenty-three cities in Gilead', note='Havvoth-jair, "the villages of Jair" (Numbers 32:41).'),
+        W('abijah', 'Abijah', 'hezron', ['2:24'], 'widow of Hezron'),
+        P('ashhur', 'Ashhur', 'abijah', ['2:24'], 'father of Tekoa', note='His family continues in 4:5–8.'),
+        P('hamul', 'Hamul', 'perez', ['2:5']),
+        P('zerah', 'Zerah', 'tamar', ['2:4', '2:6']),
+        P('zimri', 'Zimri', 'zerah', ['2:6'], note='Zabdi in Joshua 7:1.'),
+        P('carmi', 'Carmi', 'zimri', ['2:7'], rel='from', note='Joshua 7:1 makes Carmi son of Zabdi (Zimri).'),
+        P('achar', 'Achar', 'carmi', ['2:7'], '"trouble"', forms=['Achan'], note='Achan of Joshua 7: he took from the devoted things at Jericho. The Chronicler spells him Achar, "trouble," after the Valley of Achor.'),
+        P('ethan', 'Ethan', 'zerah', ['2:6', '2:8'], 'the Ezrahite?', note='Probably the wise men of 1 Kings 4:31: "Ethan the Ezrahite, Heman, Calcol and Darda."'),
+        P('azariah', 'Azariah', 'ethan', ['2:8']),
+        P('heman', 'Heman', 'zerah', ['2:6']), P('calcol', 'Calcol', 'zerah', ['2:6']), P('dara', 'Dara', 'zerah', ['2:6'], 'Darda in 1 Kgs 4:31'),
+        P('issachar', 'Issachar', 'israel', ['2:1']), P('zebulun', 'Zebulun', 'israel', ['2:1']),
+        P('dan', 'Dan', 'israel', ['2:2']), P('joseph', 'Joseph', 'israel', ['2:2']), P('benjamin', 'Benjamin', 'israel', ['2:2']),
+        P('naphtali', 'Naphtali', 'israel', ['2:2']), P('gad', 'Gad', 'israel', ['2:2']), P('asher', 'Asher', 'israel', ['2:2']),
+    ]))
+
+# ───────────────────────────────── 1 Chronicles 4 ─────────────────────────────────
+F = dict(rel='from')   # the link to the parent is implied, not stated
+TREES.append(dict(
+    id='1ch-4-judah-simeon', title='Judah and Simeon', ref='1 Chronicles 4', book='1CH',
+    anchors=[(4, 1, 1, 43)],
+    branches=[{'id': 'judah', 'name': 'Judah', 'col': 'ham'}, {'id': 'simeon', 'name': 'Simeon', 'col': 'teal'}],
+    intro=['More families of Judah, gathered from old records ("these names are from ancient records," 4:22), then Simeon, whose towns lay inside Judah\'s territory '
+           'and who were absorbed into it (Joshua 19:1). Many short lists here are not tied to the main line; a dashed line marks a family whose link is not given.',
+           'The best-known name is Jabez, whose prayer (4:9–10) is the only story in the chapter.'],
+    sources='Hebrew names: Miqra according to the Masorah. Babylonian Talmud, Temurah 16a and Megillah 13a; Targum on Chronicles. Scholarly summary after the standard commentaries (Japhet; Williamson; Knoppers).',
+    people=[
+        P('judah', 'Judah', None, ['4:1', '4:21'], branch='judah'),
+        P('perez', 'Perez', 'judah', ['4:1']),
+        P('hezron', 'Hezron', 'perez', ['4:1']),
+        P('carmi', 'Carmi', 'hezron', ['4:1'], 'Caleb?', note='Probably Caleb (Chelubai) son of Hezron (2:9), read as Carmi.'),
+        P('hur', 'Hur', 'carmi', ['4:1', '4:4'], 'father of Bethlehem'),
+        P('shobal', 'Shobal', 'hur', ['4:1', '4:2']),
+        P('reaiah', 'Reaiah', 'shobal', ['4:2']),
+        P('jahath', 'Jahath', 'reaiah', ['4:2']),
+        P('ahumai', 'Ahumai', 'jahath', ['4:2'], 'clan of the Zorathites'), P('lahad', 'Lahad', 'jahath', ['4:2']),
+        P('etam', 'Etam', 'hur', ['4:3'], rel='from', note='A town near Bethlehem; "the sons of Etam" are its clans.'),
+        P('jezreel', 'Jezreel', 'etam', ['4:3']), P('ishma', 'Ishma', 'etam', ['4:3']), P('idbash', 'Idbash', 'etam', ['4:3']),
+        P('hazzelelponi', 'Hazzelelponi', 'etam', ['4:3'], 'their sister', sex='f', trad='The midrash makes her the mother of Samson (Numbers Rabbah 10:5).'),
+        P('penuel', 'Penuel', 'hur', ['4:4'], 'father of Gedor'),
+        P('ezer', 'Ezer', 'hur', ['4:4'], 'father of Hushah'),
+        P('ashhur', 'Ashhur', 'hezron', ['4:5'], 'father of Tekoa', note='Son of Hezron by Abijah (2:24).'),
+        W('helah', 'Helah', 'ashhur', ['4:5', '4:7']),
+        P('zereth', 'Zereth', 'helah', ['4:7']), P('zohar', 'Zohar', 'helah', ['4:7']), P('ethnan', 'Ethnan', 'helah', ['4:7']),
+        P('koz', 'Koz', 'helah', ['4:8'], 'father of Anub and Zobebah'),
+        W('naarah', 'Naarah', 'ashhur', ['4:5', '4:6']),
+        P('ahuzzam', 'Ahuzzam', 'naarah', ['4:6']), P('hepher', 'Hepher', 'naarah', ['4:6']), P('temeni', 'Temeni', 'naarah', ['4:6']),
+        P('haahashtari', 'Haahashtari', 'naarah', ['4:6']),
+        P('jabez', 'Jabez', 'judah', ['4:9', '4:10'], '"more honourable than his brothers"', rel='from',
+          note='His mother named him <i>Ya\'betz</i>: "I bore him in pain (<i>otzev</i>)." He prayed, "Bless me and enlarge my territory… keep me from harm, so that I will be free from pain," "and God granted the request" (4:9–10).',
+          trad='The Talmud identifies Jabez with Othniel son of Kenaz, who taught Torah: "enlarge my territory" with disciples (Temurah 16a). 2:55 mentions "the scribes who lived at Jabez."'),
+        P('chelub', 'Chelub', 'judah', ['4:11'], 'brother of Shuhah', rel='from'),
+        P('mehir', 'Mehir', 'chelub', ['4:11']), P('eshton', 'Eshton', 'mehir', ['4:11', '4:12'], note='Father of Beth-rapha, Paseah and Tehinnah: "the men of Recah."'),
+        P('kenaz', 'Kenaz', 'judah', ['4:13'], 'the Kenizzites', rel='from'),
+        P('othniel', 'Othniel', 'kenaz', ['4:13'], 'the first judge', note='He captured Debir and married Caleb\'s daughter Acsah; the first of the judges (Judges 1:13; 3:9–11).'),
+        P('hathath', 'Hathath', 'othniel', ['4:13']),
+        P('meonothai', 'Meonothai', 'othniel', ['4:13', '4:14'], 'father of Ophrah'),
+        P('seraiah', 'Seraiah', 'kenaz', ['4:13', '4:14']),
+        P('joab', 'Joab', 'seraiah', ['4:14'], 'father of Ge-harashim', note='"The valley of craftsmen."'),
+        P('caleb', 'Caleb', 'judah', ['4:15'], 'son of Jephunneh', rel='from', note='One of the two faithful spies (Numbers 13–14), "the Kenizzite" (Numbers 32:12).'),
+        P('iru', 'Iru', 'caleb', ['4:15']), P('elah', 'Elah', 'caleb', ['4:15']), P('kenaz-e', 'Kenaz', 'elah', ['4:15']),
+        P('naam', 'Naam', 'caleb', ['4:15']),
+        P('jehallelel', 'Jehallelel', 'judah', ['4:16'], rel='from'),
+        P('ziph', 'Ziph', 'jehallelel', ['4:16']), P('ziphah', 'Ziphah', 'jehallelel', ['4:16']), P('tiria', 'Tiria', 'jehallelel', ['4:16']),
+        P('asarel', 'Asarel', 'jehallelel', ['4:16']),
+        P('ezrah', 'Ezrah', 'judah', ['4:17'], rel='from'),
+        P('jether', 'Jether', 'ezrah', ['4:17']),
+        P('mered', 'Mered', 'ezrah', ['4:17', '4:18'], "married Pharaoh's daughter"),
+        W('bithiah', 'Bithiah', 'mered', ['4:17', '4:18'], "Pharaoh's daughter",
+          trad='The rabbis identify Bithiah, "daughter of Yah," with the Pharaoh\'s daughter who drew Moses from the Nile: "You called Moses your son though he was not; I call you My daughter" (Leviticus Rabbah 1:3; Megillah 13a). They read Mered as Caleb, "who rebelled" (<i>marad</i>) against the spies\' counsel.'),
+        P('miriam', 'Miriam', 'bithiah', ['4:17'], note='Here a son (or daughter) of Mered, not Moses\' sister.'),
+        P('shammai', 'Shammai', 'bithiah', ['4:17']), P('ishbah', 'Ishbah', 'bithiah', ['4:17'], 'father of Eshtemoa'),
+        W('judean-w', 'his Judean wife', 'mered', ['4:18'], he='', tr=''),
+        P('jered', 'Jered', 'judean-w', ['4:18'], 'father of Gedor', he='ירד', tr='Yered'), P('heber', 'Heber', 'judean-w', ['4:18'], 'father of Soco'),
+        P('jekuthiel', 'Jekuthiel', 'judean-w', ['4:18'], 'father of Zanoah'),
+        P('epher', 'Epher', 'ezrah', ['4:17']), P('jalon', 'Jalon', 'ezrah', ['4:17']),
+        P('shimon', 'Shimon', 'judah', ['4:20'], rel='from'),
+        P('amnon', 'Amnon', 'shimon', ['4:20']), P('rinnah', 'Rinnah', 'shimon', ['4:20']), P('ben-hanan', 'Ben-hanan', 'shimon', ['4:20'], he='בֶּן־חָנָן', tr='Ben-Chanan', heOk=True),
+        P('tilon', 'Tilon', 'shimon', ['4:20']),
+        P('ishi', 'Ishi', 'judah', ['4:20'], rel='from'),
+        P('zoheth', 'Zoheth', 'ishi', ['4:20']), P('ben-zoheth', 'Ben-zoheth', 'ishi', ['4:20'], he='בֶן־זוֹחֵת', tr='Ben-Zochet', heOk=True),
+        P('shelah', 'Shelah', 'judah', ['4:21'], 'son of Judah'),
+        P('er', 'Er', 'shelah', ['4:21'], 'father of Lecah'),
+        P('laadah', 'Laadah', 'shelah', ['4:21'], 'father of Mareshah', note='And of the clans of linen workers at Beth-ashbea.'),
+        P('jokim', 'Jokim', 'shelah', ['4:22']),
+        P('joash', 'Joash', 'shelah', ['4:22'], 'ruled in Moab'), P('saraph', 'Saraph', 'shelah', ['4:22'], 'ruled in Moab',
+          trad='The Talmud reads Joash and Saraph as Mahlon and Chilion, who married in Moab (Bava Batra 91b).'),
+        P('simeon', 'Simeon', None, ['4:24'], branch='simeon'),
+        P('nemuel', 'Nemuel', 'simeon', ['4:24']), P('jamin', 'Jamin', 'simeon', ['4:24']), P('jarib', 'Jarib', 'simeon', ['4:24']),
+        P('zerah', 'Zerah', 'simeon', ['4:24']),
+        P('shaul', 'Shaul', 'simeon', ['4:24', '4:25']),
+        P('shallum', 'Shallum', 'shaul', ['4:25']), P('mibsam', 'Mibsam', 'shaul', ['4:25']),
+        P('mishma', 'Mishma', 'shaul', ['4:25', '4:26']),
+        P('hammuel', 'Hammuel', 'mishma', ['4:26']), P('zaccur', 'Zaccur', 'mishma', ['4:26']),
+        P('shimei', 'Shimei', 'mishma', ['4:26', '4:27'], 'sixteen sons and six daughters'),
+        P('amaziah', 'Amaziah', 'simeon', ['4:34'], rel='from', note='One of the Simeonite leaders who settled at Gedor in Hezekiah\'s day (4:34–41), with Meshobab, Jamlech, Joel, Elioenai, Jaakobah, Jeshohaiah, Asaiah, Adiel, Jesimiel and Benaiah.'),
+        P('joshah', 'Joshah', 'amaziah', ['4:34'], 'a Simeonite leader'),
+        P('asiel', 'Asiel', 'simeon', ['4:35'], rel='from'), P('seraiah-s', 'Seraiah', 'asiel', ['4:35']),
+        P('joshibiah', 'Joshibiah', 'seraiah-s', ['4:35']), P('jehu', 'Jehu', 'joshibiah', ['4:35'], 'a Simeonite leader'),
+        P('shemaiah', 'Shemaiah', 'simeon', ['4:37'], rel='from'), P('shimri', 'Shimri', 'shemaiah', ['4:37']),
+        P('jedaiah', 'Jedaiah', 'shimri', ['4:37']), P('allon', 'Allon', 'jedaiah', ['4:37']), P('shiphi', 'Shiphi', 'allon', ['4:37'], he='שפעי', tr='Shifi'),
+        P('ziza', 'Ziza', 'shiphi', ['4:37'], 'a Simeonite leader'),
+        P('ishi-s', 'Ishi', 'simeon', ['4:42'], rel='from', note='His sons led five hundred Simeonites to Mount Seir against the last of the Amalekites (4:42–43).'),
+        P('pelatiah', 'Pelatiah', 'ishi-s', ['4:42']), P('neariah', 'Neariah', 'ishi-s', ['4:42']),
+        P('rephaiah', 'Rephaiah', 'ishi-s', ['4:42']), P('uzziel', 'Uzziel', 'ishi-s', ['4:42']),
+    ]))
+
+# ───────────────────────────────── 1 Chronicles 5 ─────────────────────────────────
+TREES.append(dict(
+    id='1ch-5-transjordan', title='Reuben, Gad and East Manasseh', ref='1 Chronicles 5:1–24', book='1CH',
+    anchors=[(5, 1, 1, 24)], compact=True,
+    branches=[{'id': 'reuben', 'name': 'Reuben', 'col': 'japheth'}, {'id': 'gad', 'name': 'Gad', 'col': 'ochre'}, {'id': 'manasseh', 'name': 'Half-Manasseh', 'col': 'teal'}],
+    intro=['The two and a half tribes that settled east of the Jordan. Reuben was the firstborn, "but his birthright was given to the sons of Joseph," '
+           'while "Judah prevailed over his brothers and a ruler came from him" (5:1–2). These tribes were the first to go into exile, '
+           'carried off by Tiglath-pileser III of Assyria around 733 BC (5:6, 26).',
+           'Most names are clan leaders recorded in the reigns of Jotham and Jeroboam II (5:17). Dashed lines mark families whose link is not given.'],
+    sources='Hebrew names: Miqra according to the Masorah. Scholarly summary after the standard commentaries (Japhet; Williamson; Knoppers).',
+    people=[
+        P('israel', 'Israel', None, ['5:1']),
+        P('reuben', 'Reuben', 'israel', ['5:1', '5:3'], 'the firstborn', branch='reuben', note='He "defiled his father\'s bed" (Genesis 35:22; 49:4).'),
+        P('hanoch', 'Hanoch', 'reuben', ['5:3']), P('pallu', 'Pallu', 'reuben', ['5:3']), P('hezron', 'Hezron', 'reuben', ['5:3']),
+        P('carmi', 'Carmi', 'reuben', ['5:3']),
+        P('joel', 'Joel', 'reuben', ['5:4', '5:8'], rel='from'),
+        P('shemaiah', 'Shemaiah', 'joel', ['5:4']), P('gog', 'Gog', 'shemaiah', ['5:4']), P('shimei', 'Shimei', 'gog', ['5:4']),
+        P('micah', 'Micah', 'shimei', ['5:5']), P('reaiah', 'Reaiah', 'micah', ['5:5']), P('baal', 'Baal', 'reaiah', ['5:5']),
+        P('beerah', 'Beerah', 'baal', ['5:6'], 'exiled by Tiglath-pileser', note='A leader of the Reubenites, carried into exile by Tiglath-pileser III of Assyria.'),
+        P('shema', 'Shema', 'joel', ['5:8'], rel='from'), P('azaz', 'Azaz', 'shema', ['5:8']),
+        P('bela', 'Bela', 'azaz', ['5:8'], 'settled at Aroer', note='With Jeiel the chief and Zechariah, his relatives.'),
+        P('gad', 'Gad', 'israel', ['5:11'], branch='gad'),
+        P('joel-g', 'Joel', 'gad', ['5:12'], 'the chief', rel='from'), P('shapham', 'Shapham', 'gad', ['5:12'], 'the second', rel='from'),
+        P('jaanai', 'Jaanai', 'gad', ['5:12'], rel='from'), P('shaphat', 'Shaphat', 'gad', ['5:12'], rel='from'),
+        P('buz', 'Buz', 'gad', ['5:14'], rel='from'), P('jahdo', 'Jahdo', 'buz', ['5:14']), P('jeshishai', 'Jeshishai', 'jahdo', ['5:14']),
+        P('michael-g', 'Michael', 'jeshishai', ['5:14']), P('gilead', 'Gilead', 'michael-g', ['5:14']), P('jaroah', 'Jaroah', 'gilead', ['5:14']),
+        P('huri', 'Huri', 'jaroah', ['5:14']), P('abihail', 'Abihail', 'huri', ['5:14']),
+        P('michael', 'Michael', 'abihail', ['5:13']), P('meshullam', 'Meshullam', 'abihail', ['5:13']), P('sheba', 'Sheba', 'abihail', ['5:13']),
+        P('jorai', 'Jorai', 'abihail', ['5:13']), P('jacan', 'Jacan', 'abihail', ['5:13']), P('zia', 'Zia', 'abihail', ['5:13']),
+        P('eber', 'Eber', 'abihail', ['5:13']),
+        P('guni', 'Guni', 'gad', ['5:15'], rel='from'), P('abdiel', 'Abdiel', 'guni', ['5:15']),
+        P('ahi', 'Ahi', 'abdiel', ['5:15'], 'head of their family'),
+        P('joseph', 'Joseph', 'israel', ['5:1', '5:2'], 'received the birthright'),
+        P('manasseh', 'Manasseh', 'joseph', ['5:23'], 'the half-tribe east of the Jordan', branch='manasseh', he='מנשה', tr='Menasheh'),
+        P('epher', 'Epher', 'manasseh', ['5:24'], rel='from'), P('ishi', 'Ishi', 'manasseh', ['5:24'], rel='from'),
+        P('eliel', 'Eliel', 'manasseh', ['5:24'], rel='from'), P('azriel', 'Azriel', 'manasseh', ['5:24'], rel='from'),
+        P('jeremiah', 'Jeremiah', 'manasseh', ['5:24'], rel='from'), P('hodaviah', 'Hodaviah', 'manasseh', ['5:24'], rel='from'),
+        P('jahdiel', 'Jahdiel', 'manasseh', ['5:24'], rel='from'),
+    ]))
+
+# ───────────────────────────────── 1 Chronicles 6:16–53 ─────────────────────────────────
+def chain(ids_names, parent, **kw):
+    """A run of single descent: [(id, name, verses, g?), …] each the son of the one before."""
+    out = []
+    for item in ids_names:
+        i, n, v = item[:3]
+        g = item[3] if len(item) > 3 else ''
+        out.append(P(i, n, parent, v, g, **(item[4] if len(item) > 4 else {})))
+        parent = i
+    if kw and out:
+        out[0].update(kw)
+    return out
+
+
+TREES.append(dict(
+    id='1ch-6-levites', title='The Levites and the Singers', ref='1 Chronicles 6:16–53', book='1CH',
+    anchors=[(6, 16, 16, 53)], compact=True,
+    branches=[{'id': 'gershom', 'name': 'Gershom', 'col': 'ochre'}, {'id': 'kohath', 'name': 'Kohath', 'col': 'japheth'},
+              {'id': 'merari', 'name': 'Merari', 'col': 'teal'}],
+    intro=['The three Levite clans, Gershom, Kohath and Merari, first as descending lists (6:16–30), then as the ancestry of the three chief singers David appointed: '
+           'Heman of Kohath in the centre, Asaph of Gershom at his right hand, Ethan of Merari on the left (6:31–47). '
+           'The singers\' lines are traced all the way back to Levi; the section ends with the priests from Aaron to Ahimaaz (6:49–53).',
+           'The two kinds of list do not always agree in their names (Zophai and Zuph, Nahath and Toah, Eliab and Eliel), and some lists here are shown twice.'],
+    sources='Hebrew names: Miqra according to the Masorah (Hebrew 6:1–38). Babylonian Talmud, Arakhin 11b and Taanit 5b; Rashi on 1 Chronicles 6. Psalms of Asaph (50; 73–83), Heman (88) and Ethan (89).',
+    people=[
+        P('levi', 'Levi', None, ['6:16', '6:38', '6:43', '6:47']),
+        P('gershom', 'Gershom', 'levi', ['6:16', '6:17', '6:20', '6:43'], branch='gershom'),
+    ] + chain([('libni', 'Libni', ['6:17', '6:20']), ('jahath', 'Jahath', ['6:20']), ('zimmah', 'Zimmah', ['6:20']), ('joah', 'Joah', ['6:21']),
+               ('iddo', 'Iddo', ['6:21']), ('zerah', 'Zerah', ['6:21']), ('jeatherai', 'Jeatherai', ['6:21'])], 'gershom') + [
+        P('shimei', 'Shimei', 'gershom', ['6:17']),
+    ] + chain([('jahath-a', 'Jahath', ['6:43']), ('shimei-a', 'Shimei', ['6:42']), ('zimmah-a', 'Zimmah', ['6:42']), ('ethan-a', 'Ethan', ['6:42']),
+               ('adaiah', 'Adaiah', ['6:41']), ('zerah-a', 'Zerah', ['6:41']), ('ethni', 'Ethni', ['6:41']), ('malchijah', 'Malchijah', ['6:40']),
+               ('baaseiah', 'Baaseiah', ['6:40']), ('michael', 'Michael', ['6:40']), ('shimea-a', 'Shimea', ['6:39']), ('berechiah', 'Berechiah', ['6:39']),
+               ('asaph', 'Asaph', ['6:39'], "at Heman's right hand")], 'gershom') + [
+        P('kohath', 'Kohath', 'levi', ['6:16', '6:18', '6:22', '6:38'], branch='kohath'),
+        P('amram', 'Amram', 'kohath', ['6:18']),
+    ] + chain([('aaron', 'Aaron', ['6:49', '6:50'], 'the priests'), ('eleazar', 'Eleazar', ['6:50']), ('phinehas', 'Phinehas', ['6:50']),
+               ('abishua', 'Abishua', ['6:50']), ('bukki', 'Bukki', ['6:51']), ('uzzi', 'Uzzi', ['6:51']), ('zerahiah', 'Zerahiah', ['6:51']),
+               ('meraioth', 'Meraioth', ['6:52']), ('amariah', 'Amariah', ['6:52']), ('ahitub', 'Ahitub', ['6:52']), ('zadok', 'Zadok', ['6:53']),
+               ('ahimaaz', 'Ahimaaz', ['6:53'])], 'amram') + [
+        P('izhar', 'Izhar', 'kohath', ['6:18', '6:38']),
+    ] + chain([('korah-h', 'Korah', ['6:37']), ('ebiasaph-h', 'Ebiasaph', ['6:37']), ('assir-h', 'Assir', ['6:37']), ('tahath-h', 'Tahath', ['6:37']),
+               ('zephaniah', 'Zephaniah', ['6:36']), ('azariah', 'Azariah', ['6:36']), ('joel-h', 'Joel', ['6:36']), ('elkanah-h1', 'Elkanah', ['6:36']),
+               ('amasai-h', 'Amasai', ['6:35']), ('mahath', 'Mahath', ['6:35']), ('elkanah-h2', 'Elkanah', ['6:35']), ('zuph', 'Zuph', ['6:35']),
+               ('toah', 'Toah', ['6:34']), ('eliel', 'Eliel', ['6:34']), ('jeroham-h', 'Jeroham', ['6:34']), ('elkanah-h3', 'Elkanah', ['6:34'], 'father of Samuel'),
+               ('samuel-h', 'Samuel', ['6:33'], 'the prophet'), ('joel-h2', 'Joel', ['6:33']), ('heman', 'Heman', ['6:33'], 'the singer')], 'izhar') + [
+        P('hebron', 'Hebron', 'kohath', ['6:18']), P('uzziel', 'Uzziel', 'kohath', ['6:18']),
+        P('amminadab', 'Amminadab', 'kohath', ['6:22'], 'Izhar?', rel='from', note='Probably another name for Izhar (6:18, 38).'),
+    ] + chain([('korah', 'Korah', ['6:22']), ('assir', 'Assir', ['6:22']), ('elkanah', 'Elkanah', ['6:23', '6:25']), ('ebiasaph', 'Ebiasaph', ['6:23']),
+               ('assir-2', 'Assir', ['6:23']), ('tahath', 'Tahath', ['6:24']), ('uriel', 'Uriel', ['6:24']), ('uzziah', 'Uzziah', ['6:24']),
+               ('shaul', 'Shaul', ['6:24'])], 'amminadab') + [
+        P('amasai', 'Amasai', 'elkanah', ['6:25']),
+    ] + chain([('ahimoth', 'Ahimoth', ['6:25']), ('elkanah-2', 'Elkanah', ['6:26']), ('zophai', 'Zophai', ['6:26'], '', dict(he='צופי', tr='Tzofai')), ('nahath', 'Nahath', ['6:26']),
+               ('eliab', 'Eliab', ['6:27']), ('jeroham', 'Jeroham', ['6:27']), ('elkanah-3', 'Elkanah', ['6:27']),
+               ('samuel', 'Samuel', ['6:28'], 'the prophet')], 'elkanah') + [
+        P('joel', 'Joel', 'samuel', ['6:28'], 'the firstborn', he='יוֹאֵל', tr='Yoel', heOk=True,
+          note='The Hebrew reads "the firstborn, Vashni" ("and the second"); the BSB supplies Joel from 1 Samuel 8:2.'), P('abijah', 'Abijah', 'samuel', ['6:28']),
+        P('merari', 'Merari', 'levi', ['6:16', '6:19', '6:29', '6:47'], branch='merari'),
+        P('mahli', 'Mahli', 'merari', ['6:19', '6:29']),
+    ] + chain([('libni-m', 'Libni', ['6:29']), ('shimei-m', 'Shimei', ['6:29']), ('uzzah', 'Uzzah', ['6:29']), ('shimea-m', 'Shimea', ['6:30']),
+               ('haggiah', 'Haggiah', ['6:30']), ('asaiah', 'Asaiah', ['6:30'])], 'mahli') + [
+        P('mushi', 'Mushi', 'merari', ['6:19', '6:47']),
+    ] + chain([('mahli-e', 'Mahli', ['6:47']), ('shemer', 'Shemer', ['6:46']), ('bani', 'Bani', ['6:46']), ('amzi', 'Amzi', ['6:46']),
+               ('hilkiah', 'Hilkiah', ['6:45']), ('amaziah', 'Amaziah', ['6:45']), ('hashabiah', 'Hashabiah', ['6:45']), ('malluch', 'Malluch', ['6:44']),
+               ('abdi', 'Abdi', ['6:44']), ('kishi', 'Kishi', ['6:44']), ('ethan', 'Ethan', ['6:44'], 'on the left')], 'mushi')))
+
+_lv = {p['id']: p for p in TREES[-1]['people']}
+_lv['heman'].update(note='"Heman the singer," head of the musicians from the Kohathites; grandson of the prophet Samuel. Psalm 88 bears his name.',
+                    trad='The sages count Heman, Asaph and Ethan among the ten authors of the Psalms (Bava Batra 14b).')
+_lv['asaph'].update(note='Twelve psalms bear his name (Psalm 50; 73–83). His descendants were still the Temple singers after the exile (Ezra 2:41).')
+_lv['ethan'].update(note='Psalm 89 is "a maskil of Ethan the Ezrahite." Called Jeduthun elsewhere (1 Chronicles 16:41; 25:1).')
+_lv['samuel'].update(note='Samuel the prophet appears here as a Levite of Kohath. 1 Samuel 1:1 calls his father Elkanah "an Ephraimite," that is, a Levite living in Ephraim.')
+_lv['samuel-h'].update(note='The same Samuel, in Heman\'s ancestry (6:33).')
+_lv['korah'].update(note='The rebel of Numbers 16; "the sons of Korah did not die" (Numbers 26:11) and became singers and gatekeepers.')
+
+# ───────────────────────────────── 1 Chronicles 7 ─────────────────────────────────
+TREES.append(dict(
+    id='1ch-7-tribes', title='The Northern Tribes', ref='1 Chronicles 7', book='1CH',
+    anchors=[(7, 1, 1, 40)],
+    branches=[{'id': 'issachar', 'name': 'Issachar', 'col': 'ochre'}, {'id': 'benjamin', 'name': 'Benjamin', 'col': 'plum'},
+              {'id': 'naphtali', 'name': 'Naphtali', 'col': 'teal'}, {'id': 'joseph', 'name': 'Manasseh and Ephraim', 'col': 'shem'},
+              {'id': 'asher', 'name': 'Asher', 'col': 'japheth'}],
+    intro=['Issachar, Benjamin, Naphtali, Manasseh, Ephraim and Asher, much of it in the form of military census lists ("mighty men of valor"). '
+           'Dan and Zebulun are not listed at all, a gap that has never been fully explained.',
+           'Ephraim\'s line runs ten generations to Joshua son of Nun, and Manasseh\'s includes Zelophehad, whose daughters won the right to inherit (Numbers 27).'],
+    sources='Hebrew names: Miqra according to the Masorah. Babylonian Talmud, Sanhedrin 92b; Targum on Chronicles; Mekhilta, Beshallach. Scholarly summary after the standard commentaries.',
+    people=[
+        P('israel', 'Israel', None, ['7:29']),
+        P('issachar', 'Issachar', 'israel', ['7:1', '7:5'], branch='issachar'),
+        P('tola', 'Tola', 'issachar', ['7:1', '7:2'], '22,600 in David\'s day'),
+        P('uzzi', 'Uzzi', 'tola', ['7:2', '7:3']), P('izrahiah', 'Izrahiah', 'uzzi', ['7:3']),
+        P('michael', 'Michael', 'izrahiah', ['7:3']), P('obadiah', 'Obadiah', 'izrahiah', ['7:3']), P('joel', 'Joel', 'izrahiah', ['7:3']),
+        P('isshiah', 'Isshiah', 'izrahiah', ['7:3']),
+        P('rephaiah', 'Rephaiah', 'tola', ['7:2']), P('jeriel', 'Jeriel', 'tola', ['7:2']), P('jahmai', 'Jahmai', 'tola', ['7:2']),
+        P('ibsam', 'Ibsam', 'tola', ['7:2'], he='יבשם', tr='Yivsam'), P('shemuel', 'Shemuel', 'tola', ['7:2'], he='שמואל', tr='Shemuel'),
+        P('puah', 'Puah', 'issachar', ['7:1']), P('jashub', 'Jashub', 'issachar', ['7:1']), P('shimron', 'Shimron', 'issachar', ['7:1']),
+        P('benjamin', 'Benjamin', 'israel', ['7:6'], branch='benjamin', note='Benjamin\'s fuller genealogy follows in chapter 8.'),
+        P('bela', 'Bela', 'benjamin', ['7:6', '7:7']),
+        P('ezbon', 'Ezbon', 'bela', ['7:7']), P('uzzi-b', 'Uzzi', 'bela', ['7:7']), P('uzziel', 'Uzziel', 'bela', ['7:7']),
+        P('jerimoth', 'Jerimoth', 'bela', ['7:7']), P('iri', 'Iri', 'bela', ['7:7', '7:12'], forms=['Ir'], note='"Ir" of 7:12: the Shuppites and Huppites descended from him.'),
+        P('becher', 'Becher', 'benjamin', ['7:6', '7:8']),
+        P('zemirah', 'Zemirah', 'becher', ['7:8']), P('joash', 'Joash', 'becher', ['7:8']), P('eliezer', 'Eliezer', 'becher', ['7:8']),
+        P('elioenai', 'Elioenai', 'becher', ['7:8']), P('omri', 'Omri', 'becher', ['7:8']), P('jeremoth', 'Jeremoth', 'becher', ['7:8']),
+        P('abijah', 'Abijah', 'becher', ['7:8']), P('anathoth', 'Anathoth', 'becher', ['7:8']), P('alemeth', 'Alemeth', 'becher', ['7:8']),
+        P('jediael', 'Jediael', 'benjamin', ['7:6', '7:10', '7:11']),
+        P('bilhan', 'Bilhan', 'jediael', ['7:10']),
+        P('jeush', 'Jeush', 'bilhan', ['7:10']), P('benjamin-2', 'Benjamin', 'bilhan', ['7:10']), P('ehud', 'Ehud', 'bilhan', ['7:10']),
+        P('chenaanah', 'Chenaanah', 'bilhan', ['7:10']), P('zethan', 'Zethan', 'bilhan', ['7:10']), P('tarshish', 'Tarshish', 'bilhan', ['7:10']),
+        P('ahishahar', 'Ahishahar', 'bilhan', ['7:10']),
+        P('aher', 'Aher', 'benjamin', ['7:12'], 'the Hushites', rel='from'),
+        P('naphtali', 'Naphtali', 'israel', ['7:13'], branch='naphtali'),
+        P('jahziel', 'Jahziel', 'naphtali', ['7:13']), P('guni', 'Guni', 'naphtali', ['7:13']), P('jezer', 'Jezer', 'naphtali', ['7:13']),
+        P('shallum', 'Shallum', 'naphtali', ['7:13'], 'Shillem in Gen 46:24'),
+        P('joseph', 'Joseph', 'israel', ['7:29'], branch='joseph'),
+        P('manasseh', 'Manasseh', 'joseph', ['7:14', '7:17']),
+        W('aramean', 'his Aramean concubine', 'manasseh', ['7:14'], he='', tr='', concubine=True),
+        P('asriel', 'Asriel', 'aramean', ['7:14']),
+        P('machir', 'Machir', 'aramean', ['7:14', '7:15', '7:16', '7:17'], 'father of Gilead'),
+        W('maacah', 'Maacah', 'machir', ['7:15', '7:16'], note='Called both Machir\'s sister (7:15) and his wife (7:16); the text is hard here.'),
+        P('peresh', 'Peresh', 'maacah', ['7:16']),
+        P('sheresh', 'Sheresh', 'maacah', ['7:16']),
+        P('ulam', 'Ulam', 'sheresh', ['7:16', '7:17']), P('bedan', 'Bedan', 'ulam', ['7:17']),
+        P('rekem', 'Rekem', 'sheresh', ['7:16']),
+        P('gilead', 'Gilead', 'machir', ['7:17'], 'the region east of the Jordan'),
+        P('hammolecheth', 'Hammolecheth', 'machir', ['7:18'], "Gilead's sister", sex='f', note='Her name means "the queen."'),
+        P('ishhod', 'Ishhod', 'hammolecheth', ['7:18']), P('abiezer', 'Abiezer', 'hammolecheth', ['7:18'], note='The clan of Gideon (Judges 6:11).'),
+        P('mahlah', 'Mahlah', 'hammolecheth', ['7:18']),
+        P('zelophehad', 'Zelophehad', 'manasseh', ['7:15'], 'had only daughters', rel='from',
+          note='His five daughters, Mahlah, Noah, Hoglah, Milcah and Tirzah, asked Moses for their father\'s inheritance, and God said, "they are right" (Numbers 27:1–7).'),
+        P('shemida', 'Shemida', 'manasseh', ['7:19'], rel='from'),
+        P('ahian', 'Ahian', 'shemida', ['7:19']), P('shechem', 'Shechem', 'shemida', ['7:19']), P('likhi', 'Likhi', 'shemida', ['7:19']),
+        P('aniam', 'Aniam', 'shemida', ['7:19']),
+        P('ephraim', 'Ephraim', 'joseph', ['7:20', '7:22'], 'mourned his sons'),
+    ] + chain([('shuthelah', 'Shuthelah', ['7:20']), ('bered', 'Bered', ['7:20']), ('tahath', 'Tahath', ['7:20']), ('eleadah', 'Eleadah', ['7:20']),
+               ('tahath-2', 'Tahath', ['7:20']), ('zabad', 'Zabad', ['7:21']), ('shuthelah-2', 'Shuthelah', ['7:21'])], 'ephraim') + [
+        P('ezer', 'Ezer', 'ephraim', ['7:21'], 'killed by the men of Gath'),
+        P('elead', 'Elead', 'ephraim', ['7:21'], 'killed by the men of Gath',
+          trad='The Mekhilta and Sanhedrin 92b tell that the Ephraimites left Egypt thirty years too early and were killed by the men of Gath; their dry bones are those Ezekiel saw revived (Ezekiel 37).'),
+        P('beriah', 'Beriah', 'ephraim', ['7:23'], '"in tragedy"', note='"Because tragedy (<i>bera\'ah</i>) had come upon his house."'),
+        P('sheerah', 'Sheerah', 'ephraim', ['7:24'], 'built the two Beth-horons', sex='f',
+          note='She built Lower and Upper Beth-horon and Uzzen-sheerah: the only woman in the Bible credited with building towns.'),
+    ] + chain([('rephah', 'Rephah', ['7:25']), ('resheph', 'Resheph', ['7:25']), ('telah', 'Telah', ['7:25']), ('tahan', 'Tahan', ['7:25']),
+               ('ladan', 'Ladan', ['7:26']), ('ammihud', 'Ammihud', ['7:26']), ('elishama', 'Elishama', ['7:26'], 'leader of Ephraim'),
+               ('nun', 'Nun', ['7:27']), ('joshua', 'Joshua', ['7:27'], 'son of Nun')], 'ephraim') + [
+        P('asher', 'Asher', 'israel', ['7:30', '7:40'], branch='asher'),
+        P('imnah', 'Imnah', 'asher', ['7:30']), P('ishvah', 'Ishvah', 'asher', ['7:30']), P('ishvi', 'Ishvi', 'asher', ['7:30']),
+        P('beriah-a', 'Beriah', 'asher', ['7:30', '7:31']),
+        P('heber', 'Heber', 'beriah-a', ['7:31', '7:32']),
+        P('japhlet', 'Japhlet', 'heber', ['7:32', '7:33']),
+        P('pasach', 'Pasach', 'japhlet', ['7:33']), P('bimhal', 'Bimhal', 'japhlet', ['7:33']), P('ashvath', 'Ashvath', 'japhlet', ['7:33']),
+        P('shomer', 'Shomer', 'heber', ['7:32', '7:34'], 'Shemer', forms=['Shemer']),
+        P('ahi', 'Ahi', 'shomer', ['7:34']), P('rohgah', 'Rohgah', 'shomer', ['7:34']), P('hubbah', 'Hubbah', 'shomer', ['7:34']),
+        P('aram', 'Aram', 'shomer', ['7:34']),
+        P('hotham', 'Hotham', 'heber', ['7:32', '7:35'], 'Helem?', forms=['Helem'], note='Probably the "Helem" of 7:35.'),
+        P('zophah', 'Zophah', 'hotham', ['7:35', '7:36']),
+        P('suah', 'Suah', 'zophah', ['7:36']), P('harnepher', 'Harnepher', 'zophah', ['7:36']), P('shual', 'Shual', 'zophah', ['7:36']),
+        P('beri', 'Beri', 'zophah', ['7:36']), P('imrah', 'Imrah', 'zophah', ['7:36']), P('bezer', 'Bezer', 'zophah', ['7:37']),
+        P('hod', 'Hod', 'zophah', ['7:37']), P('shamma', 'Shamma', 'zophah', ['7:37']), P('shilshah', 'Shilshah', 'zophah', ['7:37']),
+        P('ithran', 'Ithran', 'zophah', ['7:37']), P('beera', 'Beera', 'zophah', ['7:37']),
+        P('imna', 'Imna', 'hotham', ['7:35']), P('shelesh', 'Shelesh', 'hotham', ['7:35']), P('amal', 'Amal', 'hotham', ['7:35']),
+        P('shua', 'Shua', 'heber', ['7:32'], 'their sister', sex='f'),
+        P('malchiel', 'Malchiel', 'beriah-a', ['7:31'], 'father of Birzaith'),
+        P('serah', 'Serah', 'asher', ['7:30'], 'their sister', sex='f'),
+        P('jether', 'Jether', 'asher', ['7:38'], 'Ithran?', rel='from'),
+        P('jephunneh', 'Jephunneh', 'jether', ['7:38']), P('pispa', 'Pispa', 'jether', ['7:38']), P('ara', 'Ara', 'jether', ['7:38']),
+        P('ulla', 'Ulla', 'asher', ['7:39'], rel='from'),
+        P('arah', 'Arah', 'ulla', ['7:39']), P('hanniel', 'Hanniel', 'ulla', ['7:39']), P('rizia', 'Rizia', 'ulla', ['7:39']),
+    ]))
+_t7 = {p['id']: p for p in TREES[-1]['people']}
+_t7['joshua'].update(note='Moses\' successor, who led Israel into the land; his line from Ephraim is given only here.')
+_t7['tola'].update(note='A later Tola son of Puah, of Issachar, judged Israel (Judges 10:1).')
+
+# ───────────────────────────────── 1 Chronicles 8 ─────────────────────────────────
+TREES.append(dict(
+    id='1ch-8-benjamin', title='The Family of Benjamin', ref='1 Chronicles 8:1–28', book='1CH',
+    anchors=[(8, 1, 1, 28)],
+    intro=['A second, longer genealogy of Benjamin, the tribe of Saul and, with Judah, the heart of the post-exilic community. '
+           'It names the families of Geba, of Ono and Lod, of Aijalon, and those who "lived in Jerusalem" (8:28). '
+           'Saul\'s family, which follows (8:29–40), has its own tree.',
+           'Several links between these families are not stated; a dashed line marks them.'],
+    col='plum',
+    sources='Hebrew names: Miqra according to the Masorah. Scholarly summary after the standard commentaries (Japhet; Williamson; Knoppers).',
+    people=[
+        P('benjamin', 'Benjamin', None, ['8:1', '8:40']),
+        P('bela', 'Bela', 'benjamin', ['8:1', '8:3'], 'the firstborn'),
+        P('addar', 'Addar', 'bela', ['8:3']), P('gera', 'Gera', 'bela', ['8:3']), P('abihud', 'Abihud', 'bela', ['8:3']),
+        P('abishua', 'Abishua', 'bela', ['8:4']), P('naaman', 'Naaman', 'bela', ['8:4']), P('ahoah', 'Ahoah', 'bela', ['8:4']),
+        P('gera-2', 'Gera', 'bela', ['8:5']), P('shephuphan', 'Shephuphan', 'bela', ['8:5']), P('huram', 'Huram', 'bela', ['8:5']),
+        P('ashbel', 'Ashbel', 'benjamin', ['8:1']), P('aharah', 'Aharah', 'benjamin', ['8:1']), P('nohah', 'Nohah', 'benjamin', ['8:2']),
+        P('rapha', 'Rapha', 'benjamin', ['8:2']),
+        P('ehud', 'Ehud', 'benjamin', ['8:6'], 'families of Geba', rel='from', note='Perhaps Ehud the left-handed judge (Judges 3:15).'),
+        P('naaman-e', 'Naaman', 'ehud', ['8:7']), P('ahijah', 'Ahijah', 'ehud', ['8:7']),
+        P('gera-e', 'Gera', 'ehud', ['8:7'], 'led them into exile'),
+        P('uzza', 'Uzza', 'gera-e', ['8:7']), P('ahihud', 'Ahihud', 'gera-e', ['8:7']),
+        P('shaharaim', 'Shaharaim', 'benjamin', ['8:8'], 'had sons in Moab', rel='from'),
+        W('hushim', 'Hushim', 'shaharaim', ['8:8', '8:11'], 'divorced'),
+        P('abitub', 'Abitub', 'hushim', ['8:11']),
+        P('elpaal', 'Elpaal', 'hushim', ['8:11', '8:12', '8:18']),
+        P('eber', 'Eber', 'elpaal', ['8:12']), P('misham', 'Misham', 'elpaal', ['8:12']),
+        P('shemed', 'Shemed', 'elpaal', ['8:12'], 'built Ono and Lod'),
+        P('beriah', 'Beriah', 'elpaal', ['8:13', '8:16'], 'drove out the people of Gath'),
+        P('ahio', 'Ahio', 'beriah', ['8:14']),
+        P('shashak', 'Shashak', 'beriah', ['8:14', '8:25']),
+        P('ishpan', 'Ishpan', 'shashak', ['8:22']), P('eber-s', 'Eber', 'shashak', ['8:22']), P('eliel-s', 'Eliel', 'shashak', ['8:22']),
+        P('abdon', 'Abdon', 'shashak', ['8:23']), P('zichri-s', 'Zichri', 'shashak', ['8:23']), P('hanan', 'Hanan', 'shashak', ['8:23']),
+        P('hananiah', 'Hananiah', 'shashak', ['8:24']), P('elam', 'Elam', 'shashak', ['8:24']), P('anthothijah', 'Anthothijah', 'shashak', ['8:24']),
+        P('iphdeiah', 'Iphdeiah', 'shashak', ['8:25']), P('penuel', 'Penuel', 'shashak', ['8:25']),
+        P('jeremoth', 'Jeremoth', 'beriah', ['8:14']),
+        P('jeroham', 'Jeroham', 'jeremoth', ['8:27'], 'Jeremoth?', rel='from', note='Probably the Jeremoth of 8:14.'),
+        P('shamsherai', 'Shamsherai', 'jeroham', ['8:26']), P('shehariah', 'Shehariah', 'jeroham', ['8:26'], he='שחריה', tr='Shecharyah'), P('athaliah', 'Athaliah', 'jeroham', ['8:26']),
+        P('jaareshiah', 'Jaareshiah', 'jeroham', ['8:27']), P('elijah', 'Elijah', 'jeroham', ['8:27']), P('zichri-j', 'Zichri', 'jeroham', ['8:27']),
+        P('zebadiah', 'Zebadiah', 'beriah', ['8:15']), P('arad', 'Arad', 'beriah', ['8:15']), P('eder', 'Eder', 'beriah', ['8:15']),
+        P('michael', 'Michael', 'beriah', ['8:16']), P('ishpah', 'Ishpah', 'beriah', ['8:16']), P('joha', 'Joha', 'beriah', ['8:16']),
+        P('shema', 'Shema', 'elpaal', ['8:13'], 'families of Aijalon'),
+        P('shimei', 'Shimei', 'shema', ['8:21'], 'Shema?', rel='from', note='Probably the Shema of 8:13.'),
+        P('jakim', 'Jakim', 'shimei', ['8:19']), P('zichri', 'Zichri', 'shimei', ['8:19']), P('zabdi', 'Zabdi', 'shimei', ['8:19']),
+        P('elienai', 'Elienai', 'shimei', ['8:20']), P('zillethai', 'Zillethai', 'shimei', ['8:20']), P('eliel', 'Eliel', 'shimei', ['8:20']),
+        P('adaiah', 'Adaiah', 'shimei', ['8:21']), P('beraiah', 'Beraiah', 'shimei', ['8:21']), P('shimrath', 'Shimrath', 'shimei', ['8:21']),
+        P('zebadiah-e', 'Zebadiah', 'elpaal', ['8:17']), P('meshullam', 'Meshullam', 'elpaal', ['8:17']), P('hizki', 'Hizki', 'elpaal', ['8:17']),
+        P('heber', 'Heber', 'elpaal', ['8:17']), P('ishmerai', 'Ishmerai', 'elpaal', ['8:18']), P('izliah', 'Izliah', 'elpaal', ['8:18']),
+        P('jobab-e', 'Jobab', 'elpaal', ['8:18']),
+        W('baara', 'Baara', 'shaharaim', ['8:8'], 'divorced'),
+        W('hodesh', 'Hodesh', 'shaharaim', ['8:9']),
+        P('jobab', 'Jobab', 'hodesh', ['8:9']), P('zibia', 'Zibia', 'hodesh', ['8:9']), P('mesha', 'Mesha', 'hodesh', ['8:9']),
+        P('malcam', 'Malcam', 'hodesh', ['8:9']), P('jeuz', 'Jeuz', 'hodesh', ['8:10']), P('sachia', 'Sachia', 'hodesh', ['8:10']),
+        P('mirmah', 'Mirmah', 'hodesh', ['8:10']),
+    ]))
+
+# ───────────────────────────────── 1 Chronicles 9 ─────────────────────────────────
+TREES.append(dict(
+    id='1ch-9-jerusalem', title='Those Who Settled in Jerusalem', ref='1 Chronicles 9:1–34', book='1CH',
+    anchors=[(9, 1, 1, 34)], compact=True,
+    branches=[{'id': 'judah', 'name': 'Judah', 'col': 'ham'}, {'id': 'benjamin', 'name': 'Benjamin', 'col': 'plum'},
+              {'id': 'priests', 'name': 'Priests', 'col': 'japheth'}, {'id': 'levites', 'name': 'Levites', 'col': 'teal'}],
+    intro=['"The first to resettle their own property" after the exile (9:2): heads of families from Judah and Benjamin, priests, Levites and gatekeepers. '
+           'Each is introduced by his ancestry ("Uthai son of Ammihud, son of Omri…"), shown here from the earliest named ancestor down. '
+           'A close parallel list is Nehemiah 11.',
+           'How each family joins its tribe is not stated; a dashed line marks it.'],
+    sources='Hebrew names: Miqra according to the Masorah. Parallel: Nehemiah 11:3–19. Scholarly summary after the standard commentaries.',
+    people=[
+        P('judah', 'Judah', None, ['9:3', '9:4'], branch='judah'),
+        P('perez', 'Perez', 'judah', ['9:4']),
+    ] + chain([('bani', 'Bani', ['9:4'], '', dict(he='בני', tr='Bani')), ('imri', 'Imri', ['9:4']), ('omri', 'Omri', ['9:4']), ('ammihud', 'Ammihud', ['9:4']),
+               ('uthai', 'Uthai', ['9:4'], 'of Perez')], 'perez', rel='from') + [
+        P('asaiah', 'Asaiah', 'judah', ['9:5'], 'of the Shilonites', rel='from', note='The Shilonites are probably the clan of Shelah son of Judah.'),
+        P('zerah', 'Zerah', 'judah', ['9:6']),
+        P('jeuel', 'Jeuel', 'zerah', ['9:6'], 'with 690 relatives', rel='from'),
+        P('benjamin', 'Benjamin', None, ['9:3', '9:7'], branch='benjamin'),
+    ] + chain([('hassenuah', 'Hassenuah', ['9:7'], '', dict(he='הסנאה', tr='Hasenuah')), ('hodaviah', 'Hodaviah', ['9:7']), ('meshullam', 'Meshullam', ['9:7']), ('sallu', 'Sallu', ['9:7'])],
+              'benjamin', rel='from') + [
+        P('jeroham', 'Jeroham', 'benjamin', ['9:8'], rel='from'), P('ibneiah', 'Ibneiah', 'jeroham', ['9:8']),
+    ] + chain([('michri', 'Michri', ['9:8']), ('uzzi', 'Uzzi', ['9:8']), ('elah', 'Elah', ['9:8'])], 'benjamin', rel='from') + \
+        chain([('ibnijah', 'Ibnijah', ['9:8']), ('reuel', 'Reuel', ['9:8']), ('shephatiah', 'Shephatiah', ['9:8']), ('meshullam-2', 'Meshullam', ['9:8'])],
+              'benjamin', rel='from') + [
+        P('priests', 'The priests', None, ['9:10'], branch='priests', he='הַכֹּהֲנִים', tr='ha-Kohanim', heOk=True),
+        P('jedaiah', 'Jedaiah', 'priests', ['9:10'], 'a priestly course', rel='from', note='Jedaiah, Jehoiarib and Jachin are names of priestly divisions (24:7, 17).'),
+        P('jehoiarib', 'Jehoiarib', 'priests', ['9:10'], 'a priestly course', rel='from', sch='The Hasmoneans (Maccabees) belonged to the course of Joarib (1 Maccabees 2:1).'),
+        P('jachin', 'Jachin', 'priests', ['9:10'], 'a priestly course', rel='from'),
+    ] + chain([('ahitub', 'Ahitub', ['9:11']), ('meraioth', 'Meraioth', ['9:11']), ('zadok', 'Zadok', ['9:11']), ('meshullam-p', 'Meshullam', ['9:11']),
+               ('hilkiah', 'Hilkiah', ['9:11']), ('azariah', 'Azariah', ['9:11'], "chief official of God's temple")], 'priests', rel='from') + \
+        chain([('malchijah', 'Malchijah', ['9:12']), ('pashhur', 'Pashhur', ['9:12']), ('jeroham-p', 'Jeroham', ['9:12']), ('adaiah', 'Adaiah', ['9:12'])],
+              'priests', rel='from') + \
+        chain([('immer', 'Immer', ['9:12']), ('meshillemith', 'Meshillemith', ['9:12']), ('meshullam-i', 'Meshullam', ['9:12']), ('jahzerah', 'Jahzerah', ['9:12']),
+               ('adiel', 'Adiel', ['9:12']), ('maasai', 'Maasai', ['9:12'])], 'priests', rel='from') + [
+        P('eleazar', 'Eleazar', 'priests', ['9:20'], rel='from'),
+        P('phinehas', 'Phinehas', 'eleazar', ['9:20'], 'once over the gatekeepers'),
+        P('levites', 'The Levites', None, ['9:14'], branch='levites', he='הַלְוִיִּם', tr='ha-Leviyim', heOk=True),
+        P('merari', 'Merari', 'levites', ['9:14'], rel='from'),
+    ] + chain([('hashabiah', 'Hashabiah', ['9:14']), ('azrikam', 'Azrikam', ['9:14']), ('hasshub', 'Hasshub', ['9:14']), ('shemaiah', 'Shemaiah', ['9:14'])],
+              'merari', rel='from') + [
+        P('bakbakkar', 'Bakbakkar', 'levites', ['9:15'], rel='from'), P('heresh', 'Heresh', 'levites', ['9:15'], rel='from'),
+        P('galal', 'Galal', 'levites', ['9:15'], rel='from'),
+    ] + chain([('asaph', 'Asaph', ['9:15'], 'the singer'), ('zichri', 'Zichri', ['9:15']), ('mica', 'Mica', ['9:15']), ('mattaniah', 'Mattaniah', ['9:15'])],
+              'levites', rel='from') + \
+        chain([('jeduthun', 'Jeduthun', ['9:16'], 'the singer'), ('galal-2', 'Galal', ['9:16']), ('shemaiah-2', 'Shemaiah', ['9:16']), ('obadiah', 'Obadiah', ['9:16'])],
+              'levites', rel='from') + \
+        chain([('elkanah', 'Elkanah', ['9:16']), ('asa', 'Asa', ['9:16']), ('berechiah', 'Berechiah', ['9:16'], 'of the Netophathite villages')],
+              'levites', rel='from') + \
+        chain([('korah', 'Korah', ['9:19']), ('ebiasaph', 'Ebiasaph', ['9:19']), ('kore', 'Kore', ['9:19']),
+               ('shallum', 'Shallum', ['9:17', '9:19'], 'chief of the gatekeepers'), ('mattithiah', 'Mattithiah', ['9:31'], 'baked the bread')],
+              'levites', rel='from') + [
+        P('akkub', 'Akkub', 'levites', ['9:17'], 'gatekeeper', rel='from'), P('talmon', 'Talmon', 'levites', ['9:17'], 'gatekeeper', rel='from'),
+        P('ahiman', 'Ahiman', 'levites', ['9:17'], 'gatekeeper', rel='from'),
+        P('meshelemiah', 'Meshelemiah', 'levites', ['9:21'], rel='from'),
+        P('zechariah', 'Zechariah', 'meshelemiah', ['9:21'], 'gatekeeper of the Tent of Meeting'),
+    ]))
+
+# ───────────────────────────────── Saul ─────────────────────────────────
+TREES.append(dict(
+    id='saul-family', title='The Family of Saul', ref='1 Samuel 14:49–51; 1 Chronicles 8:29–40; 9:35–44', book='1CH',
+    anchors=[(8, 29, 29, 40), (9, 35, 35, 44), ('1SA', 14, 49, 49, 51)], compact=True, col='plum',
+    intro=['Israel\'s first king came from Gibeon\'s leading family of Benjamin. 1 Samuel names Saul\'s household; Chronicles gives the line twice, '
+           'before and after the list of Jerusalem\'s settlers, and carries it about twelve generations past Jonathan, '
+           'through Mephibosheth (Merib-baal), to the time of the exile.',
+           'Chronicles keeps the older names with "Baal" (Esh-baal, Merib-baal), which 2 Samuel changes to <i>-bosheth</i>, "shame."'],
+    sources='Hebrew names: Miqra according to the Masorah. Babylonian Talmud, Yoma 22b and Sanhedrin 21a; Rashi on 1 Samuel 14 and 2 Samuel 21. Scholarly summary after the standard commentaries.',
+    people=[
+        P('jeiel', 'Jeiel', None, ['8:29', '9:35'], 'father of Gibeon', he='יְעִיאֵל', tr='Yeiel', heOk=True, note='The Hebrew of 8:29 does not name him; 9:35 does.'),
+        W('maacah', 'Maacah', 'jeiel', ['8:29', '9:35']),
+        P('abdon', 'Abdon', 'maacah', ['8:30', '9:36'], 'the firstborn'),
+        P('zur', 'Zur', 'maacah', ['8:30', '9:36']),
+        P('kish-1', 'Kish', 'maacah', ['8:30', '9:36']),
+        P('baal', 'Baal', 'maacah', ['8:30', '9:36']),
+        P('ner', 'Ner', 'maacah', ['9:36', '9:39', '8:33', '1SA 14:50', '1SA 14:51'], "Saul's grandfather",
+          note='Chronicles makes Ner the father of Kish (8:33; 9:39); 1 Samuel 14:51 makes Kish and Ner brothers, sons of Abiel. Perhaps there were two men named Kish.'),
+        P('kish', 'Kish', 'ner', ['8:33', '9:39', '1SA 14:51'], "Saul's father"),
+        P('saul', 'Saul', 'kish', ['8:33', '9:39', '1SA 14:49', '1SA 14:50'], 'the first king', note='Anointed by Samuel; reigned over Israel until he fell on Mount Gilboa (1 Samuel 31).',
+          trad='"Saul was one year old when he began to reign" (1 Samuel 13:1): the sages read it as "innocent as a one-year-old" (Yoma 22b).'),
+        W('ahinoam', 'Ahinoam', 'saul', ['1SA 14:50'], 'daughter of Ahimaaz'),
+        P('jonathan', 'Jonathan', 'ahinoam', ['8:33', '8:34', '9:39', '9:40', '1SA 14:49'], "David's friend",
+          note='"The soul of Jonathan was knit to the soul of David" (1 Samuel 18:1). He fell with his father on Mount Gilboa.',
+          trad='"Love that does not depend on anything never ends: the love of David and Jonathan" (Mishnah Avot 5:16).'),
+        P('merib-baal', 'Merib-baal', 'jonathan', ['8:34', '9:40'], 'Mephibosheth', forms=['Mephibosheth'], he='מְרִיב בַּעַל', tr='Meriv-Baal', heOk=True,
+          note='Lame in both feet; David showed him kindness for Jonathan\'s sake (2 Samuel 9).'),
+        P('micah', 'Micah', 'merib-baal', ['8:34', '8:35', '9:40', '9:41'], 'Mica in 2 Sam 9:12'),
+        P('pithon', 'Pithon', 'micah', ['8:35', '9:41']), P('melech', 'Melech', 'micah', ['8:35', '9:41']),
+        P('tarea', 'Tarea', 'micah', ['8:35', '9:41'], forms=['Tahrea']),
+        P('ahaz', 'Ahaz', 'micah', ['8:35', '8:36', '9:41', '9:42']),
+        P('jehoaddah', 'Jehoaddah', 'ahaz', ['8:36', '9:42'], 'Jarah in 9:42', forms=['Jarah']),
+        P('alemeth', 'Alemeth', 'jehoaddah', ['8:36', '9:42']), P('azmaveth', 'Azmaveth', 'jehoaddah', ['8:36', '9:42']),
+        P('zimri', 'Zimri', 'jehoaddah', ['8:36', '9:42']),
+        P('moza', 'Moza', 'zimri', ['8:36', '8:37', '9:42', '9:43']),
+        P('binea', 'Binea', 'moza', ['8:37', '9:43']),
+        P('raphah', 'Raphah', 'binea', ['8:37', '9:43'], 'Rephaiah in 9:43', forms=['Rephaiah'], he='רפה', tr='Rafah'),
+        P('eleasah', 'Eleasah', 'raphah', ['8:37', '9:43'], forms=['Elasah']),
+        P('azel', 'Azel', 'eleasah', ['8:37', '8:38', '9:43', '9:44'], 'six sons'),
+        P('azrikam', 'Azrikam', 'azel', ['8:38', '9:44']), P('bocheru', 'Bocheru', 'azel', ['8:38', '9:44']),
+        P('ishmael', 'Ishmael', 'azel', ['8:38', '9:44']), P('sheariah', 'Sheariah', 'azel', ['8:38', '9:44']),
+        P('obadiah', 'Obadiah', 'azel', ['8:38', '9:44']), P('hanan', 'Hanan', 'azel', ['8:38', '9:44']),
+        P('eshek', 'Eshek', 'eleasah', ['8:39'], 'brother of Azel'),
+        P('ulam', 'Ulam', 'eshek', ['8:39', '8:40'], 'his sons were archers', note='"Mighty men of valor, archers… 150 in all" (8:40).'),
+        P('jeush', 'Jeush', 'eshek', ['8:39']), P('eliphelet', 'Eliphelet', 'eshek', ['8:39']),
+        P('ishvi', 'Ishvi', 'ahinoam', ['1SA 14:49'], note='Not in Chronicles; perhaps another name for Esh-baal (Ish-bosheth).'),
+        P('malchishua', 'Malchishua', 'ahinoam', ['8:33', '9:39', '1SA 14:49'], 'fell at Gilboa', he='מלכישוע', tr='Malki-Shua'),
+        P('abinadab', 'Abinadab', 'ahinoam', ['8:33', '9:39'], 'fell at Gilboa'),
+        P('esh-baal', 'Esh-baal', 'ahinoam', ['8:33', '9:39'], 'Ish-bosheth', forms=['Ish-bosheth'],
+          note='Reigned two years over Israel after Saul\'s death, with Abner as his commander (2 Samuel 2:8–10; 4).'),
+        P('merab', 'Merab', 'ahinoam', ['1SA 14:49'], 'the firstborn daughter', sex='f', note='Promised to David, but given to Adriel (1 Samuel 18:17–19).'),
+        P('michal', 'Michal', 'ahinoam', ['1SA 14:49'], "David's wife", sex='f', note='She loved David and saved his life (1 Samuel 18:20; 19:11–17).'),
+        P('abner', 'Abner', 'ner', ['1SA 14:50'], 'commander of the army', note='1 Samuel calls him "son of Saul\'s uncle Ner." Killed by Joab at Hebron (2 Samuel 3:27).'),
+        P('gedor', 'Gedor', 'maacah', ['8:31', '9:37']), P('ahio', 'Ahio', 'maacah', ['8:31', '9:37']),
+        P('zecher', 'Zecher', 'maacah', ['8:31', '9:37'], 'Zechariah in 9:37', forms=['Zechariah']),
+        P('nadab', 'Nadab', 'maacah', ['8:30', '9:36']),
+        P('mikloth', 'Mikloth', 'maacah', ['8:32', '9:37', '9:38']),
+        P('shimeah', 'Shimeah', 'mikloth', ['8:32', '9:38'], forms=['Shimeam']),
+    ]))
+
 # ───────────────────────────────── build ─────────────────────────────────
 OT_HEB, OT_TR = {}, {}   # English name -> Hebrew and transliteration, collected from the Old Testament trees for the New Testament ones
 
 
+def anchor(tree, a):
+    """(c, v, lo, hi) in the tree's book, or (book, c, v, lo, hi)"""
+    book, (c, v, lo, hi) = (tree['book'], a) if len(a) == 4 else (a[0], a[1:])
+    return {'book': book, 'c': c, 'v': v, 'range': [lo, hi]}
+
+
 def build(tree):
     t = {k: v for k, v in tree.items() if k not in ('anchors', 'book', 'people', 'nt')}
-    c0 = tree['anchors'][0][0]
-    t['anchor'] = {'book': tree['book'], 'c': c0, 'v': tree['anchors'][0][1]}
+    a0 = anchor(tree, tree['anchors'][0])
+    c0 = a0['c']
+    t['anchor'] = {'book': a0['book'], 'c': c0, 'v': a0['v']}
     people = []
     for p in tree['people']:
         p = dict(p)
-        p['vv'] = [v if isinstance(v, str) else '%d:%d' % (c0, v) for v in p['v']]
-        p['v'] = p['vv']
+        vv = [v if isinstance(v, str) else '%d:%d' % (c0, v) for v in p['v']]
+        p['vv'] = [v if ' ' in v else tree['book'] + ' ' + v for v in vv]
+        p['v'] = [v.split(' ')[1] if v.split(' ')[0] == tree['book'] else v for v in p['vv']]
         if tree.get('nt') and 'he' not in p and p['n'] in OT_HEB:
             p['he'] = OT_HEB[p['n']]
             p.setdefault('tr', OT_TR.get(p['n'], ''))
@@ -888,7 +1616,7 @@ def main():
     for tree in TREES:
         old = next((e for e in idx['trees'] if e['id'] == tree['id']), {})
         keep.append({'id': tree['id'], 'title': tree['title'], 'ref': tree['ref'], 'status': old.get('status', 'ready'),
-                     'anchors': [{'book': tree['book'], 'c': c, 'v': v, 'range': [lo, hi]} for c, v, lo, hi in tree['anchors']]})
+                     'anchors': [anchor(tree, a) for a in tree['anchors']]})
     idx['trees'] = keep
     json.dump(idx, open(idx_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     if problems:

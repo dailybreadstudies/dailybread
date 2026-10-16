@@ -1,0 +1,1075 @@
+{
+ "id": "1ch-6-levites",
+ "title": "The Levites and the Singers",
+ "ref": "1 Chronicles 6:16–53",
+ "compact": true,
+ "branches": [
+  {
+   "id": "gershom",
+   "name": "Gershom",
+   "col": "ochre"
+  },
+  {
+   "id": "kohath",
+   "name": "Kohath",
+   "col": "japheth"
+  },
+  {
+   "id": "merari",
+   "name": "Merari",
+   "col": "teal"
+  }
+ ],
+ "intro": [
+  "The three Levite clans, Gershom, Kohath and Merari, first as descending lists (6:16–30), then as the ancestry of the three chief singers David appointed: Heman of Kohath in the centre, Asaph of Gershom at his right hand, Ethan of Merari on the left (6:31–47). The singers' lines are traced all the way back to Levi; the section ends with the priests from Aaron to Ahimaaz (6:49–53).",
+  "The two kinds of list do not always agree in their names (Zophai and Zuph, Nahath and Toah, Eliab and Eliel), and some lists here are shown twice."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah (Hebrew 6:1–38). Babylonian Talmud, Arakhin 11b and Taanit 5b; Rashi on 1 Chronicles 6. Psalms of Asaph (50; 73–83), Heman (88) and Ethan (89).",
+ "anchor": {
+  "book": "1CH",
+  "c": 6,
+  "v": 16
+ },
+ "people": [
+  {
+   "id": "levi",
+   "n": "Levi",
+   "p": null,
+   "v": [
+    "6:16",
+    "6:38",
+    "6:43",
+    "6:47"
+   ],
+   "he": "לֵוִי",
+   "tr": "Levi"
+  },
+  {
+   "id": "gershom",
+   "n": "Gershom",
+   "p": "levi",
+   "v": [
+    "6:16",
+    "6:17",
+    "6:20",
+    "6:43"
+   ],
+   "branch": "gershom",
+   "he": "גֵּרְשֹׁם",
+   "tr": "Gershom"
+  },
+  {
+   "id": "libni",
+   "n": "Libni",
+   "p": "gershom",
+   "v": [
+    "6:17",
+    "6:20"
+   ],
+   "he": "לִבְנִי",
+   "tr": "Livni"
+  },
+  {
+   "id": "jahath",
+   "n": "Jahath",
+   "p": "libni",
+   "v": [
+    "6:20"
+   ],
+   "he": "יַחַת",
+   "tr": "Yachat"
+  },
+  {
+   "id": "zimmah",
+   "n": "Zimmah",
+   "p": "jahath",
+   "v": [
+    "6:20"
+   ],
+   "he": "זִמָּה",
+   "tr": "Zimmah"
+  },
+  {
+   "id": "joah",
+   "n": "Joah",
+   "p": "zimmah",
+   "v": [
+    "6:21"
+   ],
+   "he": "יוֹאָח",
+   "tr": "Yoach"
+  },
+  {
+   "id": "iddo",
+   "n": "Iddo",
+   "p": "joah",
+   "v": [
+    "6:21"
+   ],
+   "he": "עִדּוֹ",
+   "tr": ""
+  },
+  {
+   "id": "zerah",
+   "n": "Zerah",
+   "p": "iddo",
+   "v": [
+    "6:21"
+   ],
+   "he": "זֶרַח",
+   "tr": "Zerach"
+  },
+  {
+   "id": "jeatherai",
+   "n": "Jeatherai",
+   "p": "zerah",
+   "v": [
+    "6:21"
+   ],
+   "he": "יְאָתְרַי",
+   "tr": "Yeateray"
+  },
+  {
+   "id": "shimei",
+   "n": "Shimei",
+   "p": "gershom",
+   "v": [
+    "6:17"
+   ],
+   "he": "שִׁמְעִי",
+   "tr": "Shimi"
+  },
+  {
+   "id": "jahath-a",
+   "n": "Jahath",
+   "p": "gershom",
+   "v": [
+    "6:43"
+   ],
+   "he": "יַחַת",
+   "tr": "Yachat"
+  },
+  {
+   "id": "shimei-a",
+   "n": "Shimei",
+   "p": "jahath-a",
+   "v": [
+    "6:42"
+   ],
+   "he": "שִׁמְעִי",
+   "tr": "Shimi"
+  },
+  {
+   "id": "zimmah-a",
+   "n": "Zimmah",
+   "p": "shimei-a",
+   "v": [
+    "6:42"
+   ],
+   "he": "זִמָּה",
+   "tr": "Zimmah"
+  },
+  {
+   "id": "ethan-a",
+   "n": "Ethan",
+   "p": "zimmah-a",
+   "v": [
+    "6:42"
+   ],
+   "he": "אֵיתָן",
+   "tr": "Etan"
+  },
+  {
+   "id": "adaiah",
+   "n": "Adaiah",
+   "p": "ethan-a",
+   "v": [
+    "6:41"
+   ],
+   "he": "עֲדָיָה",
+   "tr": "Adayah"
+  },
+  {
+   "id": "zerah-a",
+   "n": "Zerah",
+   "p": "adaiah",
+   "v": [
+    "6:41"
+   ],
+   "he": "זֶרַח",
+   "tr": "Zerach"
+  },
+  {
+   "id": "ethni",
+   "n": "Ethni",
+   "p": "zerah-a",
+   "v": [
+    "6:41"
+   ],
+   "he": "אֶתְנִי",
+   "tr": "Etni"
+  },
+  {
+   "id": "malchijah",
+   "n": "Malchijah",
+   "p": "ethni",
+   "v": [
+    "6:40"
+   ],
+   "he": "מַלְכִּיָּה",
+   "tr": "Malkiyyah"
+  },
+  {
+   "id": "baaseiah",
+   "n": "Baaseiah",
+   "p": "malchijah",
+   "v": [
+    "6:40"
+   ],
+   "he": "בַּעֲשֵׂיָה",
+   "tr": "Baaseyah"
+  },
+  {
+   "id": "michael",
+   "n": "Michael",
+   "p": "baaseiah",
+   "v": [
+    "6:40"
+   ],
+   "he": "מִיכָאֵל",
+   "tr": "Michael"
+  },
+  {
+   "id": "shimea-a",
+   "n": "Shimea",
+   "p": "michael",
+   "v": [
+    "6:39"
+   ],
+   "he": "שִׁמְעָא",
+   "tr": ""
+  },
+  {
+   "id": "berechiah",
+   "n": "Berechiah",
+   "p": "shimea-a",
+   "v": [
+    "6:39"
+   ],
+   "he": "בֶּרֶכְיָה",
+   "tr": "Berechyah"
+  },
+  {
+   "id": "asaph",
+   "n": "Asaph",
+   "p": "berechiah",
+   "v": [
+    "6:39"
+   ],
+   "g": "at Heman's right hand",
+   "note": "Twelve psalms bear his name (Psalm 50; 73–83). His descendants were still the Temple singers after the exile (Ezra 2:41).",
+   "he": "אָסָף",
+   "tr": "Asaf"
+  },
+  {
+   "id": "kohath",
+   "n": "Kohath",
+   "p": "levi",
+   "v": [
+    "6:16",
+    "6:18",
+    "6:22",
+    "6:38"
+   ],
+   "branch": "kohath",
+   "he": "קְהָת",
+   "tr": "Kehat"
+  },
+  {
+   "id": "amram",
+   "n": "Amram",
+   "p": "kohath",
+   "v": [
+    "6:18"
+   ],
+   "he": "עַמְרָם",
+   "tr": "Amram"
+  },
+  {
+   "id": "aaron",
+   "n": "Aaron",
+   "p": "amram",
+   "v": [
+    "6:49",
+    "6:50"
+   ],
+   "g": "the priests",
+   "he": "אַהֲרֹן",
+   "tr": "Aharon"
+  },
+  {
+   "id": "eleazar",
+   "n": "Eleazar",
+   "p": "aaron",
+   "v": [
+    "6:50"
+   ],
+   "he": "אֶלְעָזָר",
+   "tr": "Elazar"
+  },
+  {
+   "id": "phinehas",
+   "n": "Phinehas",
+   "p": "eleazar",
+   "v": [
+    "6:50"
+   ],
+   "he": "פִּינְחָס",
+   "tr": "Pinchas"
+  },
+  {
+   "id": "abishua",
+   "n": "Abishua",
+   "p": "phinehas",
+   "v": [
+    "6:50"
+   ],
+   "he": "אֲבִישׁוּעַ",
+   "tr": "Avishua"
+  },
+  {
+   "id": "bukki",
+   "n": "Bukki",
+   "p": "abishua",
+   "v": [
+    "6:51"
+   ],
+   "he": "בֻּקִּי",
+   "tr": "Bukki"
+  },
+  {
+   "id": "uzzi",
+   "n": "Uzzi",
+   "p": "bukki",
+   "v": [
+    "6:51"
+   ],
+   "he": "עֻזִּי",
+   "tr": "Uzzi"
+  },
+  {
+   "id": "zerahiah",
+   "n": "Zerahiah",
+   "p": "uzzi",
+   "v": [
+    "6:51"
+   ],
+   "he": "זְרַחְיָה",
+   "tr": "Zerachyah"
+  },
+  {
+   "id": "meraioth",
+   "n": "Meraioth",
+   "p": "zerahiah",
+   "v": [
+    "6:52"
+   ],
+   "he": "מְרָיוֹת",
+   "tr": "Meravot"
+  },
+  {
+   "id": "amariah",
+   "n": "Amariah",
+   "p": "meraioth",
+   "v": [
+    "6:52"
+   ],
+   "he": "אֲמַרְיָה",
+   "tr": "Amaryah"
+  },
+  {
+   "id": "ahitub",
+   "n": "Ahitub",
+   "p": "amariah",
+   "v": [
+    "6:52"
+   ],
+   "he": "אֲחִיטוּב",
+   "tr": "Achituv"
+  },
+  {
+   "id": "zadok",
+   "n": "Zadok",
+   "p": "ahitub",
+   "v": [
+    "6:53"
+   ],
+   "he": "צָדוֹק",
+   "tr": "Tzadok"
+  },
+  {
+   "id": "ahimaaz",
+   "n": "Ahimaaz",
+   "p": "zadok",
+   "v": [
+    "6:53"
+   ],
+   "he": "אֲחִימַעַץ",
+   "tr": "Achimaatz"
+  },
+  {
+   "id": "izhar",
+   "n": "Izhar",
+   "p": "kohath",
+   "v": [
+    "6:18",
+    "6:38"
+   ],
+   "he": "יִצְהָר",
+   "tr": "Yitzhar"
+  },
+  {
+   "id": "korah-h",
+   "n": "Korah",
+   "p": "izhar",
+   "v": [
+    "6:37"
+   ],
+   "he": "קֹרַח",
+   "tr": "Korach"
+  },
+  {
+   "id": "ebiasaph-h",
+   "n": "Ebiasaph",
+   "p": "korah-h",
+   "v": [
+    "6:37"
+   ],
+   "he": "אֶבְיָסָף",
+   "tr": "Evyasaf"
+  },
+  {
+   "id": "assir-h",
+   "n": "Assir",
+   "p": "ebiasaph-h",
+   "v": [
+    "6:37"
+   ],
+   "he": "אַסִּיר",
+   "tr": "Assir"
+  },
+  {
+   "id": "tahath-h",
+   "n": "Tahath",
+   "p": "assir-h",
+   "v": [
+    "6:37"
+   ],
+   "he": "תַּחַת",
+   "tr": "Tachat"
+  },
+  {
+   "id": "zephaniah",
+   "n": "Zephaniah",
+   "p": "tahath-h",
+   "v": [
+    "6:36"
+   ],
+   "he": "צְפַנְיָה",
+   "tr": "Tzefanyah"
+  },
+  {
+   "id": "azariah",
+   "n": "Azariah",
+   "p": "zephaniah",
+   "v": [
+    "6:36"
+   ],
+   "he": "עֲזַרְיָה",
+   "tr": "Azaryah"
+  },
+  {
+   "id": "joel-h",
+   "n": "Joel",
+   "p": "azariah",
+   "v": [
+    "6:36"
+   ],
+   "he": "יוֹאֵל",
+   "tr": "Yoel"
+  },
+  {
+   "id": "elkanah-h1",
+   "n": "Elkanah",
+   "p": "joel-h",
+   "v": [
+    "6:36"
+   ],
+   "he": "אֶלְקָנָה",
+   "tr": "Elkanah"
+  },
+  {
+   "id": "amasai-h",
+   "n": "Amasai",
+   "p": "elkanah-h1",
+   "v": [
+    "6:35"
+   ],
+   "he": "עֲמָשַׂי",
+   "tr": "Amasay"
+  },
+  {
+   "id": "mahath",
+   "n": "Mahath",
+   "p": "amasai-h",
+   "v": [
+    "6:35"
+   ],
+   "he": "מַחַת",
+   "tr": "Machat"
+  },
+  {
+   "id": "elkanah-h2",
+   "n": "Elkanah",
+   "p": "mahath",
+   "v": [
+    "6:35"
+   ],
+   "he": "אֶלְקָנָה",
+   "tr": "Elkanah"
+  },
+  {
+   "id": "zuph",
+   "n": "Zuph",
+   "p": "elkanah-h2",
+   "v": [
+    "6:35"
+   ],
+   "he": "צוּף",
+   "tr": "Tzuf"
+  },
+  {
+   "id": "toah",
+   "n": "Toah",
+   "p": "zuph",
+   "v": [
+    "6:34"
+   ],
+   "he": "תּוֹחַ",
+   "tr": "Toach"
+  },
+  {
+   "id": "eliel",
+   "n": "Eliel",
+   "p": "toah",
+   "v": [
+    "6:34"
+   ],
+   "he": "אֱלִיאֵל",
+   "tr": "Eliel"
+  },
+  {
+   "id": "jeroham-h",
+   "n": "Jeroham",
+   "p": "eliel",
+   "v": [
+    "6:34"
+   ],
+   "he": "יְרֹחָם",
+   "tr": "Yerocham"
+  },
+  {
+   "id": "elkanah-h3",
+   "n": "Elkanah",
+   "p": "jeroham-h",
+   "v": [
+    "6:34"
+   ],
+   "g": "father of Samuel",
+   "he": "אֶלְקָנָה",
+   "tr": "Elkanah"
+  },
+  {
+   "id": "samuel-h",
+   "n": "Samuel",
+   "p": "elkanah-h3",
+   "v": [
+    "6:33"
+   ],
+   "g": "the prophet",
+   "note": "The same Samuel, in Heman's ancestry (6:33).",
+   "he": "שְׁמוּאֵל",
+   "tr": "Shmuel"
+  },
+  {
+   "id": "joel-h2",
+   "n": "Joel",
+   "p": "samuel-h",
+   "v": [
+    "6:33"
+   ],
+   "he": "יוֹאֵל",
+   "tr": "Yoel"
+  },
+  {
+   "id": "heman",
+   "n": "Heman",
+   "p": "joel-h2",
+   "v": [
+    "6:33"
+   ],
+   "g": "the singer",
+   "note": "\"Heman the singer,\" head of the musicians from the Kohathites; grandson of the prophet Samuel. Psalm 88 bears his name.",
+   "trad": "The sages count Heman, Asaph and Ethan among the ten authors of the Psalms (Bava Batra 14b).",
+   "he": "הֵימָן",
+   "tr": "Heman"
+  },
+  {
+   "id": "hebron",
+   "n": "Hebron",
+   "p": "kohath",
+   "v": [
+    "6:18"
+   ],
+   "he": "חֶבְרוֹן",
+   "tr": "Chevron"
+  },
+  {
+   "id": "uzziel",
+   "n": "Uzziel",
+   "p": "kohath",
+   "v": [
+    "6:18"
+   ],
+   "he": "עֻזִּיאֵל",
+   "tr": "Uzziel"
+  },
+  {
+   "id": "amminadab",
+   "n": "Amminadab",
+   "p": "kohath",
+   "v": [
+    "6:22"
+   ],
+   "g": "Izhar?",
+   "rel": "from",
+   "note": "Probably another name for Izhar (6:18, 38).",
+   "he": "עַמִּינָדָב",
+   "tr": "Amminadav"
+  },
+  {
+   "id": "korah",
+   "n": "Korah",
+   "p": "amminadab",
+   "v": [
+    "6:22"
+   ],
+   "note": "The rebel of Numbers 16; \"the sons of Korah did not die\" (Numbers 26:11) and became singers and gatekeepers.",
+   "he": "קֹרַח",
+   "tr": "Korach"
+  },
+  {
+   "id": "assir",
+   "n": "Assir",
+   "p": "korah",
+   "v": [
+    "6:22"
+   ],
+   "he": "אַסִּיר",
+   "tr": "Assir"
+  },
+  {
+   "id": "elkanah",
+   "n": "Elkanah",
+   "p": "assir",
+   "v": [
+    "6:23",
+    "6:25"
+   ],
+   "he": "אֶלְקָנָה",
+   "tr": "Elkanah"
+  },
+  {
+   "id": "ebiasaph",
+   "n": "Ebiasaph",
+   "p": "elkanah",
+   "v": [
+    "6:23"
+   ],
+   "he": "אֶבְיָסָף",
+   "tr": "Evyasaf"
+  },
+  {
+   "id": "assir-2",
+   "n": "Assir",
+   "p": "ebiasaph",
+   "v": [
+    "6:23"
+   ],
+   "he": "אַסִּיר",
+   "tr": "Assir"
+  },
+  {
+   "id": "tahath",
+   "n": "Tahath",
+   "p": "assir-2",
+   "v": [
+    "6:24"
+   ],
+   "he": "תַּחַת",
+   "tr": "Tachat"
+  },
+  {
+   "id": "uriel",
+   "n": "Uriel",
+   "p": "tahath",
+   "v": [
+    "6:24"
+   ],
+   "he": "אוּרִיאֵל",
+   "tr": "Uriel"
+  },
+  {
+   "id": "uzziah",
+   "n": "Uzziah",
+   "p": "uriel",
+   "v": [
+    "6:24"
+   ],
+   "he": "עֻזִּיָּה",
+   "tr": "Uzziyahu"
+  },
+  {
+   "id": "shaul",
+   "n": "Shaul",
+   "p": "uzziah",
+   "v": [
+    "6:24"
+   ],
+   "he": "שָׁאוּל",
+   "tr": "Shaul"
+  },
+  {
+   "id": "amasai",
+   "n": "Amasai",
+   "p": "elkanah",
+   "v": [
+    "6:25"
+   ],
+   "he": "עֲמָשַׂי",
+   "tr": "Amasay"
+  },
+  {
+   "id": "ahimoth",
+   "n": "Ahimoth",
+   "p": "elkanah",
+   "v": [
+    "6:25"
+   ],
+   "he": "אֲחִימוֹת",
+   "tr": "Achimot"
+  },
+  {
+   "id": "elkanah-2",
+   "n": "Elkanah",
+   "p": "ahimoth",
+   "v": [
+    "6:26"
+   ],
+   "he": "אֶלְקָנָה",
+   "tr": "Elkanah"
+  },
+  {
+   "id": "zophai",
+   "n": "Zophai",
+   "p": "elkanah-2",
+   "v": [
+    "6:26"
+   ],
+   "he": "צוֹפַי",
+   "tr": "Tzofai"
+  },
+  {
+   "id": "nahath",
+   "n": "Nahath",
+   "p": "zophai",
+   "v": [
+    "6:26"
+   ],
+   "he": "נַחַת",
+   "tr": "Nachat"
+  },
+  {
+   "id": "eliab",
+   "n": "Eliab",
+   "p": "nahath",
+   "v": [
+    "6:27"
+   ],
+   "he": "אֱלִיאָב",
+   "tr": "Eliav"
+  },
+  {
+   "id": "jeroham",
+   "n": "Jeroham",
+   "p": "eliab",
+   "v": [
+    "6:27"
+   ],
+   "he": "יְרֹחָם",
+   "tr": "Yerocham"
+  },
+  {
+   "id": "elkanah-3",
+   "n": "Elkanah",
+   "p": "jeroham",
+   "v": [
+    "6:27"
+   ],
+   "he": "אֶלְקָנָה",
+   "tr": "Elkanah"
+  },
+  {
+   "id": "samuel",
+   "n": "Samuel",
+   "p": "elkanah-3",
+   "v": [
+    "6:28"
+   ],
+   "g": "the prophet",
+   "note": "Samuel the prophet appears here as a Levite of Kohath. 1 Samuel 1:1 calls his father Elkanah \"an Ephraimite,\" that is, a Levite living in Ephraim.",
+   "he": "שְׁמוּאֵל",
+   "tr": "Shmuel"
+  },
+  {
+   "id": "joel",
+   "n": "Joel",
+   "p": "samuel",
+   "v": [
+    "6:28"
+   ],
+   "g": "the firstborn",
+   "he": "יוֹאֵל",
+   "tr": "Yoel",
+   "note": "The Hebrew reads \"the firstborn, Vashni\" (\"and the second\"); the BSB supplies Joel from 1 Samuel 8:2."
+  },
+  {
+   "id": "abijah",
+   "n": "Abijah",
+   "p": "samuel",
+   "v": [
+    "6:28"
+   ],
+   "he": "אֲבִיָּה",
+   "tr": "Aviyah"
+  },
+  {
+   "id": "merari",
+   "n": "Merari",
+   "p": "levi",
+   "v": [
+    "6:16",
+    "6:19",
+    "6:29",
+    "6:47"
+   ],
+   "branch": "merari",
+   "he": "מְרָרִי",
+   "tr": "Merari"
+  },
+  {
+   "id": "mahli",
+   "n": "Mahli",
+   "p": "merari",
+   "v": [
+    "6:19",
+    "6:29"
+   ],
+   "he": "מַחְלִי",
+   "tr": "Machli"
+  },
+  {
+   "id": "libni-m",
+   "n": "Libni",
+   "p": "mahli",
+   "v": [
+    "6:29"
+   ],
+   "he": "לִבְנִי",
+   "tr": "Livni"
+  },
+  {
+   "id": "shimei-m",
+   "n": "Shimei",
+   "p": "libni-m",
+   "v": [
+    "6:29"
+   ],
+   "he": "שִׁמְעִי",
+   "tr": "Shimi"
+  },
+  {
+   "id": "uzzah",
+   "n": "Uzzah",
+   "p": "shimei-m",
+   "v": [
+    "6:29"
+   ],
+   "he": "עֻזָּה",
+   "tr": "Uzza"
+  },
+  {
+   "id": "shimea-m",
+   "n": "Shimea",
+   "p": "uzzah",
+   "v": [
+    "6:30"
+   ],
+   "he": "שִׁמְעָא",
+   "tr": ""
+  },
+  {
+   "id": "haggiah",
+   "n": "Haggiah",
+   "p": "shimea-m",
+   "v": [
+    "6:30"
+   ],
+   "he": "חַגִּיָּה",
+   "tr": "Chaggiyyah"
+  },
+  {
+   "id": "asaiah",
+   "n": "Asaiah",
+   "p": "haggiah",
+   "v": [
+    "6:30"
+   ],
+   "he": "עֲשָׂיָה",
+   "tr": "Asayah"
+  },
+  {
+   "id": "mushi",
+   "n": "Mushi",
+   "p": "merari",
+   "v": [
+    "6:19",
+    "6:47"
+   ],
+   "he": "מוּשִׁי",
+   "tr": "Mushi"
+  },
+  {
+   "id": "mahli-e",
+   "n": "Mahli",
+   "p": "mushi",
+   "v": [
+    "6:47"
+   ],
+   "he": "מַחְלִי",
+   "tr": "Machli"
+  },
+  {
+   "id": "shemer",
+   "n": "Shemer",
+   "p": "mahli-e",
+   "v": [
+    "6:46"
+   ],
+   "he": "שֶׁמֶר",
+   "tr": ""
+  },
+  {
+   "id": "bani",
+   "n": "Bani",
+   "p": "shemer",
+   "v": [
+    "6:46"
+   ],
+   "he": "בָּנִי",
+   "tr": "Bani"
+  },
+  {
+   "id": "amzi",
+   "n": "Amzi",
+   "p": "bani",
+   "v": [
+    "6:46"
+   ],
+   "he": "אַמְצִי",
+   "tr": "Amtzi"
+  },
+  {
+   "id": "hilkiah",
+   "n": "Hilkiah",
+   "p": "amzi",
+   "v": [
+    "6:45"
+   ],
+   "he": "חִלְקִיָּה",
+   "tr": "Chilkiyahu"
+  },
+  {
+   "id": "amaziah",
+   "n": "Amaziah",
+   "p": "hilkiah",
+   "v": [
+    "6:45"
+   ],
+   "he": "אֲמַצְיָה",
+   "tr": "Amatzyahu"
+  },
+  {
+   "id": "hashabiah",
+   "n": "Hashabiah",
+   "p": "amaziah",
+   "v": [
+    "6:45"
+   ],
+   "he": "חֲשַׁבְיָה",
+   "tr": "Chashavyah"
+  },
+  {
+   "id": "malluch",
+   "n": "Malluch",
+   "p": "hashabiah",
+   "v": [
+    "6:44"
+   ],
+   "he": "מַלּוּךְ",
+   "tr": "Malluch"
+  },
+  {
+   "id": "abdi",
+   "n": "Abdi",
+   "p": "malluch",
+   "v": [
+    "6:44"
+   ],
+   "he": "עַבְדִּי",
+   "tr": "Avdi"
+  },
+  {
+   "id": "kishi",
+   "n": "Kishi",
+   "p": "abdi",
+   "v": [
+    "6:44"
+   ],
+   "he": "קִישִׁי",
+   "tr": "Kishi"
+  },
+  {
+   "id": "ethan",
+   "n": "Ethan",
+   "p": "kishi",
+   "v": [
+    "6:44"
+   ],
+   "g": "on the left",
+   "note": "Psalm 89 is \"a maskil of Ethan the Ezrahite.\" Called Jeduthun elsewhere (1 Chronicles 16:41; 25:1).",
+   "he": "אֵיתָן",
+   "tr": "Etan"
+  }
+ ]
+}

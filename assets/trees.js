@@ -49,17 +49,24 @@
       var q = p, br = p.branch || null;
       while (q.p) { q = by[q.p]; if (!br && q.branch) br = q.branch; }
       p.br = br; p.col = (br && cols[br]) || t.col || 'root'; p.kids = kids[p.id];
-      p.vv = (p.v || []).map(function (v) { return typeof v === 'number' ? t.anchor.c + ':' + v : String(v); });
+      // verses as "BOOK c:v" (a tree can draw on more than one book)
+      p.vv = (p.v || []).map(function (v) {
+        v = typeof v === 'number' ? t.anchor.c + ':' + v : String(v);
+        return / /.test(v) ? v : t.anchor.book + ' ' + v;
+      });
     });
     // indent: one step per generation; in a compact tree an only child stays in its parent's column
-    (function walk(p, d) {
+    // a tree may have several first ancestors (unconnected families listed together)
+    t.roots = t.people.filter(function (p) { return !p.p; });
+    function walk(p, d) {
       p.depth = d;
-      // (a wife's only child still steps in when she is one of several wives, so the families stay apart)
-      var keep = t.compact && p.kids.length === 1 && !(p.rel === 'wife' && p.p && by[p.p].kids.length > 1);
+      // (a run of only children steps in once where it leaves a family of brothers, so it is not read as more brothers)
+      var keep = t.compact && p.kids.length === 1 && (!p.p || by[p.p].kids.length === 1);
       p.kids.forEach(function (k) { walk(k, d + (keep ? 0 : 1)); });
-    })(t.people.filter(function (p) { return !p.p; })[0], 0);
+    }
+    t.roots.forEach(function (r) { walk(r, 0); });
     t.by = by;
-    t.root = t.people.filter(function (p) { return !p.p; })[0];
+    t.root = t.roots[0];
     return t;
   }
 
@@ -147,7 +154,7 @@
         return NodeFilter.FILTER_ACCEPT;
       }
     });
-    while ((node = walker.nextNode())) if (c === a.c && v >= lo && v <= hi) texts.push([node, c + ':' + v]);
+    while ((node = walker.nextNode())) if (c === a.c && v >= lo && v <= hi) texts.push([node, a.book + ' ' + c + ':' + v]);
     texts.forEach(function (tv) {
       var tn = tv[0], s = tn.nodeValue;
       re.lastIndex = 0;
@@ -248,12 +255,12 @@
       (t.count.legend[1] ? '<span><i class="dbt-dot dbt-some"></i>' + esc(t.count.legend[1]) + '</span>' : '') +
       '<span><i class="dbt-dot dbt-out"></i>' + esc(t.count.legend[2]) + '</span></p>';
     html += '<div class="dbt-tree" role="tree"><svg class="dbt-lines" aria-hidden="true"></svg>';
-    (function walk(p) {
+    t.roots.forEach(function walk(p) {
       html += '<div class="dbt-row dbt-c-' + esc(p.col) + (p.rel === 'wife' ? ' dbt-wife' : '') + (!p.p || p.branch ? ' dbt-headrow' : '') + '" role="treeitem" data-dbt-row="' + esc(p.id) + '" style="padding-left:' + (p.depth * IND) + 'px">' +
         '<button type="button" class="dbt-node" data-dbt-pick="' + esc(p.id) + '" aria-expanded="false"><i class="' + dotClass(t, p) + '"></i>' +
         '<span class="dbt-nm">' + esc(nm(p.n)) + '</span>' + (p.g ? '<span class="dbt-gl">' + esc(p.g) + '</span>' : '') + '</button></div>';
-      p.kids.forEach(walk);
-    })(t.root);
+      p.kids.forEach(function (k) { walk(k); });
+    });
     html += '</div>';
     if (t.countNote) html += '<p class="dbt-note">' + nm(t.countNote) + '</p>';
     if (t.sources) html += '<p class="dbt-sources"><b>Sources.</b> ' + t.sources + '</p>';
@@ -360,7 +367,7 @@
     return word + nm(par.n);
   }
   function cardHTML(t, p) {
-    var vv = (p.vv || []).map(function (v) { return '<button type="button" class="dbt-vv" data-dbt-goto="' + v + '">' + v + '</button>'; }).join('');
+    var vv = (p.vv || []).map(function (v) { return '<button type="button" class="dbt-vv" data-dbt-goto="' + v + '">' + vlabel(t, v) + '</button>'; }).join('');
     var html = '<div class="dbt-hebrow">' + (p.he ? '<span class="dbt-he" lang="he" dir="rtl">' + esc(p.he) + '</span>' : '') +
       (p.gr ? '<span class="dbt-gr" lang="grc">' + esc(p.gr) + '</span>' : '') + (p.tr ? '<span class="dbt-tr">' + esc(p.tr) + '</span>' : '') + '</div>';
     var meta = [KIND[p.kind] || '', kin(t, p)];
@@ -398,9 +405,14 @@
   }
 
   /* Scroll the text to a verse of the tree's chapter and flash the person's name there */
-  function gotoVerse(cv, id) {
+  var BOOKS = { GEN: 'Gen', EXO: 'Exod', NUM: 'Num', RUT: 'Ruth', '1SA': '1 Sam', '2SA': '2 Sam', '1CH': '1 Chr', MAT: 'Matt', LUK: 'Luke' };
+  function vlabel(t, s) {
+    var b = s.split(' ')[0], cv = s.split(' ')[1];
+    return b === t.anchor.book ? cv : (BOOKS[b] || b) + ' ' + cv;
+  }
+  function gotoVerse(bcv, id) {
     var t = state.tree; if (!t) return;
-    var a = { book: t.anchor.book, c: parseInt(cv, 10) }, v = parseInt(String(cv).split(':')[1], 10), target = null;
+    var cv = bcv.split(' ')[1], a = { book: bcv.split(' ')[0], c: parseInt(cv, 10) }, v = parseInt(cv.split(':')[1], 10), target = null;
     document.querySelectorAll('section.portion[data-book="' + a.book + '"] .scripture').forEach(function (scr) {
       var c = parseInt(scr.closest('section').getAttribute('data-c') || '1', 10);
       scr.querySelectorAll('.verse-num, .chapter-num').forEach(function (e) {

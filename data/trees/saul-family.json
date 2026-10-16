@@ -1,0 +1,633 @@
+{
+ "id": "saul-family",
+ "title": "The Family of Saul",
+ "ref": "1 Samuel 14:49–51; 1 Chronicles 8:29–40; 9:35–44",
+ "compact": true,
+ "col": "plum",
+ "intro": [
+  "Israel's first king came from Gibeon's leading family of Benjamin. 1 Samuel names Saul's household; Chronicles gives the line twice, before and after the list of Jerusalem's settlers, and carries it about twelve generations past Jonathan, through Mephibosheth (Merib-baal), to the time of the exile.",
+  "Chronicles keeps the older names with \"Baal\" (Esh-baal, Merib-baal), which 2 Samuel changes to <i>-bosheth</i>, \"shame.\""
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Babylonian Talmud, Yoma 22b and Sanhedrin 21a; Rashi on 1 Samuel 14 and 2 Samuel 21. Scholarly summary after the standard commentaries.",
+ "anchor": {
+  "book": "1CH",
+  "c": 8,
+  "v": 29
+ },
+ "people": [
+  {
+   "id": "jeiel",
+   "n": "Jeiel",
+   "p": null,
+   "v": [
+    "8:29",
+    "9:35"
+   ],
+   "g": "father of Gibeon",
+   "he": "יְעִיאֵל",
+   "tr": "Yeiel",
+   "note": "The Hebrew of 8:29 does not name him; 9:35 does."
+  },
+  {
+   "id": "maacah",
+   "n": "Maacah",
+   "p": "jeiel",
+   "v": [
+    "8:29",
+    "9:35"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "מַעֲכָה",
+   "tr": "Maachah"
+  },
+  {
+   "id": "abdon",
+   "n": "Abdon",
+   "p": "maacah",
+   "v": [
+    "8:30",
+    "9:36"
+   ],
+   "g": "the firstborn",
+   "he": "עַבְדּוֹן",
+   "tr": "Avdon"
+  },
+  {
+   "id": "zur",
+   "n": "Zur",
+   "p": "maacah",
+   "v": [
+    "8:30",
+    "9:36"
+   ],
+   "he": "צוּר",
+   "tr": "Tzur"
+  },
+  {
+   "id": "kish-1",
+   "n": "Kish",
+   "p": "maacah",
+   "v": [
+    "8:30",
+    "9:36"
+   ],
+   "he": "קִישׁ",
+   "tr": "Kish"
+  },
+  {
+   "id": "baal",
+   "n": "Baal",
+   "p": "maacah",
+   "v": [
+    "8:30",
+    "9:36"
+   ],
+   "he": "בַּעַל",
+   "tr": "Baal"
+  },
+  {
+   "id": "ner",
+   "n": "Ner",
+   "p": "maacah",
+   "v": [
+    "9:36",
+    "9:39",
+    "8:33",
+    "1SA 14:50",
+    "1SA 14:51"
+   ],
+   "g": "Saul's grandfather",
+   "note": "Chronicles makes Ner the father of Kish (8:33; 9:39); 1 Samuel 14:51 makes Kish and Ner brothers, sons of Abiel. Perhaps there were two men named Kish.",
+   "he": "נֵר",
+   "tr": "Ner"
+  },
+  {
+   "id": "kish",
+   "n": "Kish",
+   "p": "ner",
+   "v": [
+    "8:33",
+    "9:39",
+    "1SA 14:51"
+   ],
+   "g": "Saul's father",
+   "he": "קִישׁ",
+   "tr": "Kish"
+  },
+  {
+   "id": "saul",
+   "n": "Saul",
+   "p": "kish",
+   "v": [
+    "8:33",
+    "9:39",
+    "1SA 14:49",
+    "1SA 14:50"
+   ],
+   "g": "the first king",
+   "note": "Anointed by Samuel; reigned over Israel until he fell on Mount Gilboa (1 Samuel 31).",
+   "trad": "\"Saul was one year old when he began to reign\" (1 Samuel 13:1): the sages read it as \"innocent as a one-year-old\" (Yoma 22b).",
+   "he": "שָׁאוּל",
+   "tr": "Shaul"
+  },
+  {
+   "id": "ahinoam",
+   "n": "Ahinoam",
+   "p": "saul",
+   "v": [
+    "1SA 14:50"
+   ],
+   "g": "daughter of Ahimaaz",
+   "rel": "wife",
+   "sex": "f",
+   "he": "אֲחִינֹעַם",
+   "tr": "Achinoam"
+  },
+  {
+   "id": "jonathan",
+   "n": "Jonathan",
+   "p": "ahinoam",
+   "v": [
+    "8:33",
+    "8:34",
+    "9:39",
+    "9:40",
+    "1SA 14:49"
+   ],
+   "g": "David's friend",
+   "note": "\"The soul of Jonathan was knit to the soul of David\" (1 Samuel 18:1). He fell with his father on Mount Gilboa.",
+   "trad": "\"Love that does not depend on anything never ends: the love of David and Jonathan\" (Mishnah Avot 5:16).",
+   "he": "יְהוֹנָתָן",
+   "tr": "Yonatan"
+  },
+  {
+   "id": "merib-baal",
+   "n": "Merib-baal",
+   "p": "jonathan",
+   "v": [
+    "8:34",
+    "9:40"
+   ],
+   "g": "Mephibosheth",
+   "forms": [
+    "Mephibosheth"
+   ],
+   "he": "מְרִיב בַּעַל",
+   "tr": "Meriv-Baal",
+   "note": "Lame in both feet; David showed him kindness for Jonathan's sake (2 Samuel 9)."
+  },
+  {
+   "id": "micah",
+   "n": "Micah",
+   "p": "merib-baal",
+   "v": [
+    "8:34",
+    "8:35",
+    "9:40",
+    "9:41"
+   ],
+   "g": "Mica in 2 Sam 9:12",
+   "he": "מִיכָה",
+   "tr": "Michah"
+  },
+  {
+   "id": "pithon",
+   "n": "Pithon",
+   "p": "micah",
+   "v": [
+    "8:35",
+    "9:41"
+   ],
+   "he": "פִּיתוֹן",
+   "tr": "Piton"
+  },
+  {
+   "id": "melech",
+   "n": "Melech",
+   "p": "micah",
+   "v": [
+    "8:35",
+    "9:41"
+   ],
+   "he": "מֶלֶךְ",
+   "tr": "Melech"
+  },
+  {
+   "id": "tarea",
+   "n": "Tarea",
+   "p": "micah",
+   "v": [
+    "8:35",
+    "9:41"
+   ],
+   "forms": [
+    "Tahrea"
+   ],
+   "he": "תַּאֲרֵעַ",
+   "tr": "Taarea"
+  },
+  {
+   "id": "ahaz",
+   "n": "Ahaz",
+   "p": "micah",
+   "v": [
+    "8:35",
+    "8:36",
+    "9:41",
+    "9:42"
+   ],
+   "he": "אָחָז",
+   "tr": "Achaz"
+  },
+  {
+   "id": "jehoaddah",
+   "n": "Jehoaddah",
+   "p": "ahaz",
+   "v": [
+    "8:36",
+    "9:42"
+   ],
+   "g": "Jarah in 9:42",
+   "forms": [
+    "Jarah"
+   ],
+   "he": "יְהוֹעַדָּה",
+   "tr": "Yehoaddah"
+  },
+  {
+   "id": "alemeth",
+   "n": "Alemeth",
+   "p": "jehoaddah",
+   "v": [
+    "8:36",
+    "9:42"
+   ],
+   "he": "עָלֶמֶת",
+   "tr": "Alemet"
+  },
+  {
+   "id": "azmaveth",
+   "n": "Azmaveth",
+   "p": "jehoaddah",
+   "v": [
+    "8:36",
+    "9:42"
+   ],
+   "he": "עַזְמָוֶת",
+   "tr": "Azmavet"
+  },
+  {
+   "id": "zimri",
+   "n": "Zimri",
+   "p": "jehoaddah",
+   "v": [
+    "8:36",
+    "9:42"
+   ],
+   "he": "זִמְרִי",
+   "tr": "Zimri"
+  },
+  {
+   "id": "moza",
+   "n": "Moza",
+   "p": "zimri",
+   "v": [
+    "8:36",
+    "8:37",
+    "9:42",
+    "9:43"
+   ],
+   "he": "מוֹצָא",
+   "tr": "Motza"
+  },
+  {
+   "id": "binea",
+   "n": "Binea",
+   "p": "moza",
+   "v": [
+    "8:37",
+    "9:43"
+   ],
+   "he": "בִּנְעָא",
+   "tr": "Bina"
+  },
+  {
+   "id": "raphah",
+   "n": "Raphah",
+   "p": "binea",
+   "v": [
+    "8:37",
+    "9:43"
+   ],
+   "g": "Rephaiah in 9:43",
+   "forms": [
+    "Rephaiah"
+   ],
+   "he": "רָפָה",
+   "tr": "Rafah"
+  },
+  {
+   "id": "eleasah",
+   "n": "Eleasah",
+   "p": "raphah",
+   "v": [
+    "8:37",
+    "9:43"
+   ],
+   "forms": [
+    "Elasah"
+   ],
+   "he": "אֶלְעָשָׂה",
+   "tr": "Elasah"
+  },
+  {
+   "id": "azel",
+   "n": "Azel",
+   "p": "eleasah",
+   "v": [
+    "8:37",
+    "8:38",
+    "9:43",
+    "9:44"
+   ],
+   "g": "six sons",
+   "he": "אָצֵל",
+   "tr": "Atzel"
+  },
+  {
+   "id": "azrikam",
+   "n": "Azrikam",
+   "p": "azel",
+   "v": [
+    "8:38",
+    "9:44"
+   ],
+   "he": "עַזְרִיקָם",
+   "tr": "Azrikam"
+  },
+  {
+   "id": "bocheru",
+   "n": "Bocheru",
+   "p": "azel",
+   "v": [
+    "8:38",
+    "9:44"
+   ],
+   "he": "בֹּכְרוּ",
+   "tr": "Bocheru"
+  },
+  {
+   "id": "ishmael",
+   "n": "Ishmael",
+   "p": "azel",
+   "v": [
+    "8:38",
+    "9:44"
+   ],
+   "he": "יִשְׁמָעֵאל",
+   "tr": "Yishmael"
+  },
+  {
+   "id": "sheariah",
+   "n": "Sheariah",
+   "p": "azel",
+   "v": [
+    "8:38",
+    "9:44"
+   ],
+   "he": "שְׁעַרְיָה",
+   "tr": "Shearyah"
+  },
+  {
+   "id": "obadiah",
+   "n": "Obadiah",
+   "p": "azel",
+   "v": [
+    "8:38",
+    "9:44"
+   ],
+   "he": "עֹבַדְיָהוּ",
+   "tr": "Ovadyah"
+  },
+  {
+   "id": "hanan",
+   "n": "Hanan",
+   "p": "azel",
+   "v": [
+    "8:38",
+    "9:44"
+   ],
+   "he": "חָנָן",
+   "tr": "Chanan"
+  },
+  {
+   "id": "eshek",
+   "n": "Eshek",
+   "p": "eleasah",
+   "v": [
+    "8:39"
+   ],
+   "g": "brother of Azel",
+   "he": "עֵשֶׁק",
+   "tr": "Eshek"
+  },
+  {
+   "id": "ulam",
+   "n": "Ulam",
+   "p": "eshek",
+   "v": [
+    "8:39",
+    "8:40"
+   ],
+   "g": "his sons were archers",
+   "note": "\"Mighty men of valor, archers… 150 in all\" (8:40).",
+   "he": "אוּלָם",
+   "tr": "Ulam"
+  },
+  {
+   "id": "jeush",
+   "n": "Jeush",
+   "p": "eshek",
+   "v": [
+    "8:39"
+   ],
+   "he": "יְעוּשׁ",
+   "tr": "Yeush"
+  },
+  {
+   "id": "eliphelet",
+   "n": "Eliphelet",
+   "p": "eshek",
+   "v": [
+    "8:39"
+   ],
+   "he": "אֲלִיפֶלֶט",
+   "tr": "Elifelet"
+  },
+  {
+   "id": "ishvi",
+   "n": "Ishvi",
+   "p": "ahinoam",
+   "v": [
+    "1SA 14:49"
+   ],
+   "note": "Not in Chronicles; perhaps another name for Esh-baal (Ish-bosheth).",
+   "he": "יִשְׁוִי",
+   "tr": "Yishvi"
+  },
+  {
+   "id": "malchishua",
+   "n": "Malchishua",
+   "p": "ahinoam",
+   "v": [
+    "8:33",
+    "9:39",
+    "1SA 14:49"
+   ],
+   "g": "fell at Gilboa",
+   "he": "מַלְכִּישׁוּעַ",
+   "tr": "Malki-Shua"
+  },
+  {
+   "id": "abinadab",
+   "n": "Abinadab",
+   "p": "ahinoam",
+   "v": [
+    "8:33",
+    "9:39"
+   ],
+   "g": "fell at Gilboa",
+   "he": "אֲבִינָדָב",
+   "tr": "Avinadav"
+  },
+  {
+   "id": "esh-baal",
+   "n": "Esh-baal",
+   "p": "ahinoam",
+   "v": [
+    "8:33",
+    "9:39"
+   ],
+   "g": "Ish-bosheth",
+   "forms": [
+    "Ish-bosheth"
+   ],
+   "note": "Reigned two years over Israel after Saul's death, with Abner as his commander (2 Samuel 2:8–10; 4).",
+   "he": "אֶשְׁבַּעַל",
+   "tr": "Eshbaal"
+  },
+  {
+   "id": "merab",
+   "n": "Merab",
+   "p": "ahinoam",
+   "v": [
+    "1SA 14:49"
+   ],
+   "g": "the firstborn daughter",
+   "sex": "f",
+   "note": "Promised to David, but given to Adriel (1 Samuel 18:17–19).",
+   "he": "מֵרָב",
+   "tr": "Merav"
+  },
+  {
+   "id": "michal",
+   "n": "Michal",
+   "p": "ahinoam",
+   "v": [
+    "1SA 14:49"
+   ],
+   "g": "David's wife",
+   "sex": "f",
+   "note": "She loved David and saved his life (1 Samuel 18:20; 19:11–17).",
+   "he": "מִיכַל",
+   "tr": "Michal"
+  },
+  {
+   "id": "abner",
+   "n": "Abner",
+   "p": "ner",
+   "v": [
+    "1SA 14:50"
+   ],
+   "g": "commander of the army",
+   "note": "1 Samuel calls him \"son of Saul's uncle Ner.\" Killed by Joab at Hebron (2 Samuel 3:27).",
+   "he": "אֲבִינֵר",
+   "tr": "Avner"
+  },
+  {
+   "id": "gedor",
+   "n": "Gedor",
+   "p": "maacah",
+   "v": [
+    "8:31",
+    "9:37"
+   ],
+   "he": "גְּדוֹר",
+   "tr": "Gedor"
+  },
+  {
+   "id": "ahio",
+   "n": "Ahio",
+   "p": "maacah",
+   "v": [
+    "8:31",
+    "9:37"
+   ],
+   "he": "אַחְיוֹ",
+   "tr": "Achyo"
+  },
+  {
+   "id": "zecher",
+   "n": "Zecher",
+   "p": "maacah",
+   "v": [
+    "8:31",
+    "9:37"
+   ],
+   "g": "Zechariah in 9:37",
+   "forms": [
+    "Zechariah"
+   ],
+   "he": "זֶכֶר",
+   "tr": "Zecher"
+  },
+  {
+   "id": "nadab",
+   "n": "Nadab",
+   "p": "maacah",
+   "v": [
+    "8:30",
+    "9:36"
+   ],
+   "he": "נָדָב",
+   "tr": "Nadav"
+  },
+  {
+   "id": "mikloth",
+   "n": "Mikloth",
+   "p": "maacah",
+   "v": [
+    "8:32",
+    "9:37",
+    "9:38"
+   ],
+   "he": "מִקְלוֹת",
+   "tr": "Miklot"
+  },
+  {
+   "id": "shimeah",
+   "n": "Shimeah",
+   "p": "mikloth",
+   "v": [
+    "8:32",
+    "9:38"
+   ],
+   "forms": [
+    "Shimeam"
+   ],
+   "he": "שִׁמְאָה",
+   "tr": "Shimah"
+  }
+ ]
+}

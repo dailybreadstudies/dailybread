@@ -1,0 +1,1575 @@
+{
+ "id": "1ch-2-judah",
+ "title": "The Family of Judah",
+ "ref": "1 Chronicles 2",
+ "compact": true,
+ "branches": [
+  {
+   "id": "jerahmeel",
+   "name": "Jerahmeel",
+   "col": "teal"
+  },
+  {
+   "id": "ram",
+   "name": "Ram, to David",
+   "col": "ham"
+  },
+  {
+   "id": "caleb",
+   "name": "Caleb",
+   "col": "ochre"
+  }
+ ],
+ "intro": [
+  "After the twelve sons of Israel (2:1–2), the Chronicler turns first to Judah, the royal tribe. Through Perez and Hezron the line divides into three clans: Jerahmeel, Ram (the line of David) and Caleb (here Chelubai, 2:9). Many \"sons\" are towns and districts of Judah: \"father of\" often means founder or leader of a place (Mesha \"the father of Ziph,\" Salma \"the father of Bethlehem\").",
+  "Dashed lines mark links that the text implies but does not state."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi and the Targum on 1 Chronicles 2; Babylonian Talmud, Sotah 11b. Scholarly summary after the standard commentaries (Japhet; Williamson; Knoppers).",
+ "anchor": {
+  "book": "1CH",
+  "c": 2,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "israel",
+   "n": "Israel",
+   "p": null,
+   "v": [
+    "2:1"
+   ],
+   "he": "יִשְׂרָאֵל",
+   "tr": "Israel"
+  },
+  {
+   "id": "reuben",
+   "n": "Reuben",
+   "p": "israel",
+   "v": [
+    "2:1"
+   ],
+   "he": "רְאוּבֵן",
+   "tr": "Reuven"
+  },
+  {
+   "id": "simeon",
+   "n": "Simeon",
+   "p": "israel",
+   "v": [
+    "2:1"
+   ],
+   "he": "שִׁמְעוֹן",
+   "tr": "Shimon"
+  },
+  {
+   "id": "levi",
+   "n": "Levi",
+   "p": "israel",
+   "v": [
+    "2:1"
+   ],
+   "he": "לֵוִי",
+   "tr": "Levi"
+  },
+  {
+   "id": "judah",
+   "n": "Judah",
+   "p": "israel",
+   "v": [
+    "2:1",
+    "2:3",
+    "2:4"
+   ],
+   "g": "the royal tribe",
+   "he": "יְהוּדָה",
+   "tr": "Yehudah"
+  },
+  {
+   "id": "bathshua",
+   "n": "Bath-shua",
+   "p": "judah",
+   "v": [
+    "2:3"
+   ],
+   "g": "the Canaanite",
+   "rel": "wife",
+   "sex": "f",
+   "he": "בַּת־שׁוּעַ",
+   "tr": "Bat-Shua",
+   "note": "\"Daughter of Shua\" (Genesis 38:2)."
+  },
+  {
+   "id": "er",
+   "n": "Er",
+   "p": "bathshua",
+   "v": [
+    "2:3"
+   ],
+   "g": "put to death by the LORD",
+   "he": "עֵר",
+   "tr": "Er"
+  },
+  {
+   "id": "onan",
+   "n": "Onan",
+   "p": "bathshua",
+   "v": [
+    "2:3"
+   ],
+   "he": "אוֹנָן",
+   "tr": "Onan"
+  },
+  {
+   "id": "shelah",
+   "n": "Shelah",
+   "p": "bathshua",
+   "v": [
+    "2:3"
+   ],
+   "note": "His descendants are listed in 4:21–23.",
+   "he": "שֵׁלָה",
+   "tr": "Shelah"
+  },
+  {
+   "id": "tamar",
+   "n": "Tamar",
+   "p": "judah",
+   "v": [
+    "2:4"
+   ],
+   "g": "Judah's daughter-in-law",
+   "rel": "wife",
+   "sex": "f",
+   "note": "Genesis 38.",
+   "he": "תָּמָר",
+   "tr": "Tamar"
+  },
+  {
+   "id": "perez",
+   "n": "Perez",
+   "p": "tamar",
+   "v": [
+    "2:4",
+    "2:5"
+   ],
+   "he": "פֶּרֶץ",
+   "tr": "Peretz"
+  },
+  {
+   "id": "hezron",
+   "n": "Hezron",
+   "p": "perez",
+   "v": [
+    "2:5",
+    "2:9",
+    "2:18",
+    "2:21",
+    "2:24"
+   ],
+   "g": "father of three clans",
+   "he": "חֶצְרוֹן",
+   "tr": "Chetzron"
+  },
+  {
+   "id": "jerahmeel",
+   "n": "Jerahmeel",
+   "p": "hezron",
+   "v": [
+    "2:9",
+    "2:25",
+    "2:26",
+    "2:33"
+   ],
+   "g": "the firstborn",
+   "branch": "jerahmeel",
+   "sch": "The Jerahmeelites lived in the Negev south of Judah (1 Samuel 27:10; 30:29).",
+   "he": "יְרַחְמְאֵל",
+   "tr": "Yerachmeel"
+  },
+  {
+   "id": "ram-j",
+   "n": "Ram",
+   "p": "jerahmeel",
+   "v": [
+    "2:25",
+    "2:27"
+   ],
+   "g": "the firstborn",
+   "he": "רָם",
+   "tr": "Ram"
+  },
+  {
+   "id": "maaz",
+   "n": "Maaz",
+   "p": "ram-j",
+   "v": [
+    "2:27"
+   ],
+   "he": "מַעַץ",
+   "tr": "Maatz"
+  },
+  {
+   "id": "jamin",
+   "n": "Jamin",
+   "p": "ram-j",
+   "v": [
+    "2:27"
+   ],
+   "he": "יָמִין",
+   "tr": "Yamin"
+  },
+  {
+   "id": "eker",
+   "n": "Eker",
+   "p": "ram-j",
+   "v": [
+    "2:27"
+   ],
+   "he": "עֵקֶר",
+   "tr": "Eker"
+  },
+  {
+   "id": "bunah",
+   "n": "Bunah",
+   "p": "jerahmeel",
+   "v": [
+    "2:25"
+   ],
+   "he": "בּוּנָה",
+   "tr": "Bunah"
+  },
+  {
+   "id": "oren",
+   "n": "Oren",
+   "p": "jerahmeel",
+   "v": [
+    "2:25"
+   ],
+   "he": "אֹרֶן",
+   "tr": "Oren"
+  },
+  {
+   "id": "ozem-j",
+   "n": "Ozem",
+   "p": "jerahmeel",
+   "v": [
+    "2:25"
+   ],
+   "he": "אֹצֶם",
+   "tr": "Otzem"
+  },
+  {
+   "id": "ahijah",
+   "n": "Ahijah",
+   "p": "jerahmeel",
+   "v": [
+    "2:25"
+   ],
+   "he": "אֲחִיָּה",
+   "tr": "Achiyah"
+  },
+  {
+   "id": "atarah",
+   "n": "Atarah",
+   "p": "jerahmeel",
+   "v": [
+    "2:26"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "עֲטָרָה",
+   "tr": "Atarah"
+  },
+  {
+   "id": "onam",
+   "n": "Onam",
+   "p": "atarah",
+   "v": [
+    "2:26",
+    "2:28"
+   ],
+   "he": "אוֹנָם",
+   "tr": "Onam"
+  },
+  {
+   "id": "shammai",
+   "n": "Shammai",
+   "p": "onam",
+   "v": [
+    "2:28",
+    "2:32"
+   ],
+   "he": "שַׁמַּי",
+   "tr": "Shammai"
+  },
+  {
+   "id": "nadab",
+   "n": "Nadab",
+   "p": "shammai",
+   "v": [
+    "2:28",
+    "2:30"
+   ],
+   "he": "נָדָב",
+   "tr": "Nadav"
+  },
+  {
+   "id": "seled",
+   "n": "Seled",
+   "p": "nadab",
+   "v": [
+    "2:30"
+   ],
+   "g": "died without children",
+   "he": "סֶלֶד",
+   "tr": "Seled"
+  },
+  {
+   "id": "appaim",
+   "n": "Appaim",
+   "p": "nadab",
+   "v": [
+    "2:30",
+    "2:31"
+   ],
+   "he": "אַפַּיִם",
+   "tr": "Appayim"
+  },
+  {
+   "id": "ishi",
+   "n": "Ishi",
+   "p": "appaim",
+   "v": [
+    "2:31"
+   ],
+   "he": "יִשְׁעִי",
+   "tr": "Yishi"
+  },
+  {
+   "id": "sheshan",
+   "n": "Sheshan",
+   "p": "ishi",
+   "v": [
+    "2:31",
+    "2:34",
+    "2:35"
+   ],
+   "g": "had only daughters",
+   "he": "שֵׁשָׁן",
+   "tr": "Sheshan"
+  },
+  {
+   "id": "ahlai",
+   "n": "Ahlai",
+   "p": "sheshan",
+   "v": [
+    "2:31"
+   ],
+   "note": "Called Sheshan's son, though 2:34 says he had no sons; perhaps Ahlai was the daughter who married Jarha.",
+   "he": "אַחְלָי",
+   "tr": "Achlay"
+  },
+  {
+   "id": "sheshan-d",
+   "n": "Sheshan's daughter",
+   "p": "sheshan",
+   "v": [
+    "2:35"
+   ],
+   "g": "married the Egyptian Jarha",
+   "sex": "f",
+   "he": "",
+   "tr": "",
+   "note": "Sheshan gave her to his Egyptian servant Jarha (2:34–35). Her line runs thirteen generations to Elishama."
+  },
+  {
+   "id": "attai",
+   "n": "Attai",
+   "p": "sheshan-d",
+   "v": [
+    "2:35",
+    "2:36"
+   ],
+   "kin": "son of Jarha the Egyptian and Sheshan's daughter",
+   "he": "עַתַּי",
+   "tr": "Attay"
+  },
+  {
+   "id": "nathan",
+   "n": "Nathan",
+   "p": "attai",
+   "v": [
+    "2:36"
+   ],
+   "he": "נָתָן",
+   "tr": "Natan"
+  },
+  {
+   "id": "zabad",
+   "n": "Zabad",
+   "p": "nathan",
+   "v": [
+    "2:36",
+    "2:37"
+   ],
+   "he": "זָבָד",
+   "tr": "Zavad"
+  },
+  {
+   "id": "ephlal",
+   "n": "Ephlal",
+   "p": "zabad",
+   "v": [
+    "2:37"
+   ],
+   "he": "אֶפְלָל",
+   "tr": "Eflal"
+  },
+  {
+   "id": "obed-j",
+   "n": "Obed",
+   "p": "ephlal",
+   "v": [
+    "2:37",
+    "2:38"
+   ],
+   "he": "עוֹבֵד",
+   "tr": "Oved"
+  },
+  {
+   "id": "jehu",
+   "n": "Jehu",
+   "p": "obed-j",
+   "v": [
+    "2:38"
+   ],
+   "he": "יֵהוּא",
+   "tr": "Yehu"
+  },
+  {
+   "id": "azariah-j",
+   "n": "Azariah",
+   "p": "jehu",
+   "v": [
+    "2:38",
+    "2:39"
+   ],
+   "he": "עֲזַרְיָה",
+   "tr": "Azaryah"
+  },
+  {
+   "id": "helez",
+   "n": "Helez",
+   "p": "azariah-j",
+   "v": [
+    "2:39"
+   ],
+   "he": "חֶלֶץ",
+   "tr": "Cheletz"
+  },
+  {
+   "id": "elasah",
+   "n": "Elasah",
+   "p": "helez",
+   "v": [
+    "2:39",
+    "2:40"
+   ],
+   "he": "אֶלְעָשָׂה",
+   "tr": "Elasah"
+  },
+  {
+   "id": "sismai",
+   "n": "Sismai",
+   "p": "elasah",
+   "v": [
+    "2:40"
+   ],
+   "he": "סִסְמַי",
+   "tr": "Sismay"
+  },
+  {
+   "id": "shallum",
+   "n": "Shallum",
+   "p": "sismai",
+   "v": [
+    "2:40",
+    "2:41"
+   ],
+   "he": "שַׁלּוּם",
+   "tr": "Shalum"
+  },
+  {
+   "id": "jekamiah",
+   "n": "Jekamiah",
+   "p": "shallum",
+   "v": [
+    "2:41"
+   ],
+   "he": "יְקַמְיָה",
+   "tr": "Yekamyah"
+  },
+  {
+   "id": "elishama",
+   "n": "Elishama",
+   "p": "jekamiah",
+   "v": [
+    "2:41"
+   ],
+   "he": "אֱלִישָׁמָע",
+   "tr": "Elishama"
+  },
+  {
+   "id": "abishur",
+   "n": "Abishur",
+   "p": "shammai",
+   "v": [
+    "2:28",
+    "2:29"
+   ],
+   "he": "אֲבִישׁוּר",
+   "tr": "Avishur"
+  },
+  {
+   "id": "abihail",
+   "n": "Abihail",
+   "p": "abishur",
+   "v": [
+    "2:29"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "אֲבִיהָיִל",
+   "tr": "Avihayil"
+  },
+  {
+   "id": "ahban",
+   "n": "Ahban",
+   "p": "abihail",
+   "v": [
+    "2:29"
+   ],
+   "he": "אַחְבָן",
+   "tr": "Achvan"
+  },
+  {
+   "id": "molid",
+   "n": "Molid",
+   "p": "abihail",
+   "v": [
+    "2:29"
+   ],
+   "he": "מוֹלִיד",
+   "tr": "Molid"
+  },
+  {
+   "id": "jada",
+   "n": "Jada",
+   "p": "onam",
+   "v": [
+    "2:28",
+    "2:32"
+   ],
+   "g": "brother of Shammai",
+   "he": "יָדָע",
+   "tr": "Yada"
+  },
+  {
+   "id": "jether-j",
+   "n": "Jether",
+   "p": "jada",
+   "v": [
+    "2:32"
+   ],
+   "g": "died without children",
+   "he": "יֶתֶר",
+   "tr": "Yeter"
+  },
+  {
+   "id": "jonathan",
+   "n": "Jonathan",
+   "p": "jada",
+   "v": [
+    "2:32",
+    "2:33"
+   ],
+   "he": "יוֹנָתָן",
+   "tr": "Yonatan"
+  },
+  {
+   "id": "peleth",
+   "n": "Peleth",
+   "p": "jonathan",
+   "v": [
+    "2:33"
+   ],
+   "he": "פֶּלֶת",
+   "tr": "Pelet"
+  },
+  {
+   "id": "zaza",
+   "n": "Zaza",
+   "p": "jonathan",
+   "v": [
+    "2:33"
+   ],
+   "he": "זָזָא",
+   "tr": "Zaza"
+  },
+  {
+   "id": "ram",
+   "n": "Ram",
+   "p": "hezron",
+   "v": [
+    "2:9",
+    "2:10"
+   ],
+   "g": "line of David",
+   "branch": "ram",
+   "he": "רָם",
+   "tr": "Ram"
+  },
+  {
+   "id": "amminadab",
+   "n": "Amminadab",
+   "p": "ram",
+   "v": [
+    "2:10"
+   ],
+   "he": "עַמִּינָדָב",
+   "tr": "Amminadav"
+  },
+  {
+   "id": "nahshon",
+   "n": "Nahshon",
+   "p": "amminadab",
+   "v": [
+    "2:10",
+    "2:11"
+   ],
+   "g": "leader of Judah",
+   "he": "נַחְשׁוֹן",
+   "tr": "Nachshon"
+  },
+  {
+   "id": "salmon",
+   "n": "Salmon",
+   "p": "nahshon",
+   "v": [
+    "2:11"
+   ],
+   "he": "שַׂלְמָא",
+   "tr": "Salma",
+   "note": "The Hebrew here reads Salma."
+  },
+  {
+   "id": "boaz",
+   "n": "Boaz",
+   "p": "salmon",
+   "v": [
+    "2:11",
+    "2:12"
+   ],
+   "he": "בֹּעַז",
+   "tr": "Boaz"
+  },
+  {
+   "id": "obed",
+   "n": "Obed",
+   "p": "boaz",
+   "v": [
+    "2:12"
+   ],
+   "he": "עוֹבֵד",
+   "tr": "Oved"
+  },
+  {
+   "id": "jesse",
+   "n": "Jesse",
+   "p": "obed",
+   "v": [
+    "2:12",
+    "2:13"
+   ],
+   "g": "seven sons and two daughters",
+   "he": "יִשַׁי",
+   "tr": "Yishai"
+  },
+  {
+   "id": "eliab",
+   "n": "Eliab",
+   "p": "jesse",
+   "v": [
+    "2:13"
+   ],
+   "g": "the firstborn",
+   "he": "אֱלִיאָב",
+   "tr": "Eliav"
+  },
+  {
+   "id": "abinadab",
+   "n": "Abinadab",
+   "p": "jesse",
+   "v": [
+    "2:13"
+   ],
+   "he": "אֲבִינָדָב",
+   "tr": "Avinadav"
+  },
+  {
+   "id": "shimea",
+   "n": "Shimea",
+   "p": "jesse",
+   "v": [
+    "2:13"
+   ],
+   "he": "שִׁמְעָא",
+   "tr": "Shimah, shima"
+  },
+  {
+   "id": "nethanel",
+   "n": "Nethanel",
+   "p": "jesse",
+   "v": [
+    "2:14"
+   ],
+   "he": "נְתַנְאֵל",
+   "tr": "Netanel"
+  },
+  {
+   "id": "raddai",
+   "n": "Raddai",
+   "p": "jesse",
+   "v": [
+    "2:14"
+   ],
+   "he": "רַדַּי",
+   "tr": "Radday"
+  },
+  {
+   "id": "ozem",
+   "n": "Ozem",
+   "p": "jesse",
+   "v": [
+    "2:15"
+   ],
+   "he": "אֹצֶם",
+   "tr": "Otzem"
+  },
+  {
+   "id": "david",
+   "n": "David",
+   "p": "jesse",
+   "v": [
+    "2:15"
+   ],
+   "g": "the seventh son",
+   "note": "1 Samuel 16:10–11 counts eight sons of Jesse, David the youngest; here David is the seventh, a number of honour.",
+   "he": "דָּוִיד",
+   "tr": "David"
+  },
+  {
+   "id": "zeruiah",
+   "n": "Zeruiah",
+   "p": "jesse",
+   "v": [
+    "2:16"
+   ],
+   "g": "mother of Joab",
+   "sex": "f",
+   "he": "צְרוּיָה",
+   "tr": "Tzeruyah"
+  },
+  {
+   "id": "abishai",
+   "n": "Abishai",
+   "p": "zeruiah",
+   "v": [
+    "2:16"
+   ],
+   "he": "אַבְשַׁי",
+   "tr": "Avshai"
+  },
+  {
+   "id": "joab",
+   "n": "Joab",
+   "p": "zeruiah",
+   "v": [
+    "2:16"
+   ],
+   "g": "commander of David's army",
+   "he": "יוֹאָב",
+   "tr": "Yoav"
+  },
+  {
+   "id": "asahel",
+   "n": "Asahel",
+   "p": "zeruiah",
+   "v": [
+    "2:16"
+   ],
+   "g": "swift as a gazelle",
+   "he": "עֲשָׂהאֵל",
+   "tr": "Asahel",
+   "note": "Killed by Abner (2 Samuel 2:18–23)."
+  },
+  {
+   "id": "abigail",
+   "n": "Abigail",
+   "p": "jesse",
+   "v": [
+    "2:16",
+    "2:17"
+   ],
+   "sex": "f",
+   "he": "אֲבִיגַיִל",
+   "tr": "Avigayil"
+  },
+  {
+   "id": "amasa",
+   "n": "Amasa",
+   "p": "abigail",
+   "v": [
+    "2:17"
+   ],
+   "kin": "son of Abigail and Jether the Ishmaelite",
+   "note": "Absalom's commander, later killed by Joab (2 Samuel 20:9–10).",
+   "he": "עֲמָשָׂא",
+   "tr": "Amasa"
+  },
+  {
+   "id": "caleb",
+   "n": "Caleb",
+   "p": "hezron",
+   "v": [
+    "2:9",
+    "2:18",
+    "2:42",
+    "2:46",
+    "2:48",
+    "2:49"
+   ],
+   "g": "Chelubai",
+   "branch": "caleb",
+   "forms": [
+    "Chelubai"
+   ],
+   "note": "Not the Caleb son of Jephunneh of the spies (4:15), though the clans are linked.",
+   "he": "כָּלֵב",
+   "tr": "Kalev"
+  },
+  {
+   "id": "azubah",
+   "n": "Azubah",
+   "p": "caleb",
+   "v": [
+    "2:18",
+    "2:19"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "עֲזוּבָה",
+   "tr": "Azuvah"
+  },
+  {
+   "id": "jesher",
+   "n": "Jesher",
+   "p": "azubah",
+   "v": [
+    "2:18"
+   ],
+   "he": "יֶשֶׁר",
+   "tr": "Yesher"
+  },
+  {
+   "id": "shobab",
+   "n": "Shobab",
+   "p": "azubah",
+   "v": [
+    "2:18"
+   ],
+   "he": "שׁוֹבָב",
+   "tr": "Shovav"
+  },
+  {
+   "id": "ardon",
+   "n": "Ardon",
+   "p": "azubah",
+   "v": [
+    "2:18"
+   ],
+   "he": "אַרְדּוֹן",
+   "tr": "Ardon"
+  },
+  {
+   "id": "jerioth",
+   "n": "Jerioth",
+   "p": "caleb",
+   "v": [
+    "2:18"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "note": "The Hebrew is unclear: Jerioth may be a second wife or Azubah's daughter.",
+   "he": "יְרִיעוֹת",
+   "tr": "Yeriot"
+  },
+  {
+   "id": "ephrath",
+   "n": "Ephrath",
+   "p": "caleb",
+   "v": [
+    "2:19"
+   ],
+   "g": "Ephrathah",
+   "rel": "wife",
+   "sex": "f",
+   "he": "אֶפְרָת",
+   "tr": "Efrat",
+   "forms": [
+    "Ephrathah"
+   ],
+   "note": "The name of the Bethlehem district (Micah 5:2)."
+  },
+  {
+   "id": "hur",
+   "n": "Hur",
+   "p": "ephrath",
+   "v": [
+    "2:19",
+    "2:20",
+    "2:50"
+   ],
+   "g": "firstborn of Ephrathah",
+   "note": "Hur held up Moses' hands with Aaron (Exodus 17:12).",
+   "trad": "Tradition makes Hur the son of Miriam (Sotah 11b).",
+   "he": "חוּר",
+   "tr": "Chur"
+  },
+  {
+   "id": "uri",
+   "n": "Uri",
+   "p": "hur",
+   "v": [
+    "2:20"
+   ],
+   "he": "אוּרִי",
+   "tr": "Uri"
+  },
+  {
+   "id": "bezalel",
+   "n": "Bezalel",
+   "p": "uri",
+   "v": [
+    "2:20"
+   ],
+   "g": "builder of the tabernacle",
+   "note": "Filled \"with the Spirit of God\" to make the tabernacle (Exodus 31:2–5).",
+   "he": "בְּצַלְאֵל",
+   "tr": "Betzalel"
+  },
+  {
+   "id": "shobal",
+   "n": "Shobal",
+   "p": "hur",
+   "v": [
+    "2:50",
+    "2:52"
+   ],
+   "g": "father of Kiriath-jearim",
+   "he": "שׁוֹבָל",
+   "tr": "Shoval"
+  },
+  {
+   "id": "haroeh",
+   "n": "Haroeh",
+   "p": "shobal",
+   "v": [
+    "2:52"
+   ],
+   "note": "With half the Manahathites and the clans of Kiriath-jearim (2:52–53).",
+   "he": "רֹאֶה",
+   "tr": "Roeh"
+  },
+  {
+   "id": "salma",
+   "n": "Salma",
+   "p": "hur",
+   "v": [
+    "2:51",
+    "2:54"
+   ],
+   "g": "father of Bethlehem",
+   "note": "His descendants include Bethlehem, the Netophathites and the Kenites of the house of Rechab (2:54–55).",
+   "he": "שַׂלְמָא",
+   "tr": "Salma"
+  },
+  {
+   "id": "hareph",
+   "n": "Hareph",
+   "p": "hur",
+   "v": [
+    "2:51"
+   ],
+   "g": "father of Beth-gader",
+   "he": "חָרֵף",
+   "tr": "Charef"
+  },
+  {
+   "id": "mesha",
+   "n": "Mesha",
+   "p": "caleb",
+   "v": [
+    "2:42"
+   ],
+   "g": "father of Ziph; the firstborn",
+   "he": "מֵישָׁע",
+   "tr": "Mesah"
+  },
+  {
+   "id": "mareshah",
+   "n": "Mareshah",
+   "p": "caleb",
+   "v": [
+    "2:42"
+   ],
+   "g": "father of Hebron",
+   "he": "מֵישָׁע",
+   "tr": "Mareshah"
+  },
+  {
+   "id": "hebron",
+   "n": "Hebron",
+   "p": "mareshah",
+   "v": [
+    "2:42",
+    "2:43"
+   ],
+   "he": "חֶבְרוֹן",
+   "tr": "Chevron"
+  },
+  {
+   "id": "korah",
+   "n": "Korah",
+   "p": "hebron",
+   "v": [
+    "2:43"
+   ],
+   "he": "קֹרַח",
+   "tr": "Korach"
+  },
+  {
+   "id": "tappuah",
+   "n": "Tappuah",
+   "p": "hebron",
+   "v": [
+    "2:43"
+   ],
+   "he": "תַּפֻּחַ",
+   "tr": "Tafuch"
+  },
+  {
+   "id": "rekem",
+   "n": "Rekem",
+   "p": "hebron",
+   "v": [
+    "2:43",
+    "2:44"
+   ],
+   "he": "רֶקֶם",
+   "tr": "Rekem"
+  },
+  {
+   "id": "shammai-r",
+   "n": "Shammai",
+   "p": "rekem",
+   "v": [
+    "2:44",
+    "2:45"
+   ],
+   "he": "שַׁמַּי",
+   "tr": "Shammai"
+  },
+  {
+   "id": "maon",
+   "n": "Maon",
+   "p": "shammai-r",
+   "v": [
+    "2:45"
+   ],
+   "g": "father of Beth-zur",
+   "he": "מָעוֹן",
+   "tr": "Maon"
+  },
+  {
+   "id": "shema",
+   "n": "Shema",
+   "p": "hebron",
+   "v": [
+    "2:43",
+    "2:44"
+   ],
+   "he": "שֶׁמַע",
+   "tr": "Shema"
+  },
+  {
+   "id": "raham",
+   "n": "Raham",
+   "p": "shema",
+   "v": [
+    "2:44"
+   ],
+   "g": "father of Jorkeam",
+   "he": "רַחַם",
+   "tr": "Racham"
+  },
+  {
+   "id": "ephah",
+   "n": "Ephah",
+   "p": "caleb",
+   "v": [
+    "2:46"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "concubine": true,
+   "he": "עֵיפָה",
+   "tr": "Efah"
+  },
+  {
+   "id": "haran",
+   "n": "Haran",
+   "p": "ephah",
+   "v": [
+    "2:46"
+   ],
+   "he": "חָרָן",
+   "tr": "Charan"
+  },
+  {
+   "id": "gazez-h",
+   "n": "Gazez",
+   "p": "haran",
+   "v": [
+    "2:46"
+   ],
+   "he": "גָּזֵז",
+   "tr": "Gazez"
+  },
+  {
+   "id": "moza",
+   "n": "Moza",
+   "p": "ephah",
+   "v": [
+    "2:46"
+   ],
+   "he": "מוֹצָא",
+   "tr": "Motza"
+  },
+  {
+   "id": "gazez",
+   "n": "Gazez",
+   "p": "ephah",
+   "v": [
+    "2:46"
+   ],
+   "he": "גָּזֵז",
+   "tr": "Gazez"
+  },
+  {
+   "id": "maacah",
+   "n": "Maacah",
+   "p": "caleb",
+   "v": [
+    "2:48"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "concubine": true,
+   "he": "מַעֲכָה",
+   "tr": "Maachah"
+  },
+  {
+   "id": "sheber",
+   "n": "Sheber",
+   "p": "maacah",
+   "v": [
+    "2:48"
+   ],
+   "he": "שֶׁבֶר",
+   "tr": "Shever"
+  },
+  {
+   "id": "tirhanah",
+   "n": "Tirhanah",
+   "p": "maacah",
+   "v": [
+    "2:48"
+   ],
+   "he": "תִּרְחֲנָה",
+   "tr": "Tirchanah"
+  },
+  {
+   "id": "shaaph",
+   "n": "Shaaph",
+   "p": "maacah",
+   "v": [
+    "2:49"
+   ],
+   "g": "father of Madmannah",
+   "he": "שַׁעַף",
+   "tr": "Shaaf"
+  },
+  {
+   "id": "sheva",
+   "n": "Sheva",
+   "p": "maacah",
+   "v": [
+    "2:49"
+   ],
+   "g": "father of Machbenah and Gibea",
+   "he": "שְׁוָא",
+   "tr": "Sheva"
+  },
+  {
+   "id": "acsah",
+   "n": "Acsah",
+   "p": "caleb",
+   "v": [
+    "2:49"
+   ],
+   "g": "Caleb's daughter",
+   "sex": "f",
+   "note": "Acsah is also the daughter of Caleb son of Jephunneh, given to Othniel (Joshua 15:16–17).",
+   "he": "עַכְסָה",
+   "tr": "Achsah"
+  },
+  {
+   "id": "jahdai",
+   "n": "Jahdai",
+   "p": "caleb",
+   "v": [
+    "2:47"
+   ],
+   "rel": "from",
+   "note": "His link to Caleb is not stated.",
+   "he": "יַהְדַּי",
+   "tr": "Yehday"
+  },
+  {
+   "id": "regem",
+   "n": "Regem",
+   "p": "jahdai",
+   "v": [
+    "2:47"
+   ],
+   "he": "רֶגֶם",
+   "tr": "Regem"
+  },
+  {
+   "id": "jotham",
+   "n": "Jotham",
+   "p": "jahdai",
+   "v": [
+    "2:47"
+   ],
+   "he": "יוֹתָם",
+   "tr": "Yotam"
+  },
+  {
+   "id": "geshan",
+   "n": "Geshan",
+   "p": "jahdai",
+   "v": [
+    "2:47"
+   ],
+   "he": "גֵּישָׁן",
+   "tr": "Geshan"
+  },
+  {
+   "id": "pelet",
+   "n": "Pelet",
+   "p": "jahdai",
+   "v": [
+    "2:47"
+   ],
+   "he": "פֶּלֶט",
+   "tr": "Pelet"
+  },
+  {
+   "id": "ephah-m",
+   "n": "Ephah",
+   "p": "jahdai",
+   "v": [
+    "2:47"
+   ],
+   "he": "עֵיפָה",
+   "tr": "Efah"
+  },
+  {
+   "id": "shaaph-j",
+   "n": "Shaaph",
+   "p": "jahdai",
+   "v": [
+    "2:47"
+   ],
+   "he": "שַׁעַף",
+   "tr": "Shaaf"
+  },
+  {
+   "id": "machir-d",
+   "n": "Machir's daughter",
+   "p": "hezron",
+   "v": [
+    "2:21"
+   ],
+   "g": "married at sixty",
+   "rel": "wife",
+   "sex": "f",
+   "he": "",
+   "tr": "",
+   "note": "Daughter of Machir \"the father of Gilead,\" of Manasseh."
+  },
+  {
+   "id": "segub",
+   "n": "Segub",
+   "p": "machir-d",
+   "v": [
+    "2:21",
+    "2:22"
+   ],
+   "he": "שְׂגוּב",
+   "tr": "Seguv"
+  },
+  {
+   "id": "jair",
+   "n": "Jair",
+   "p": "segub",
+   "v": [
+    "2:22"
+   ],
+   "g": "twenty-three cities in Gilead",
+   "note": "Havvoth-jair, \"the villages of Jair\" (Numbers 32:41).",
+   "he": "יָאִיר",
+   "tr": "Yair"
+  },
+  {
+   "id": "abijah",
+   "n": "Abijah",
+   "p": "hezron",
+   "v": [
+    "2:24"
+   ],
+   "g": "widow of Hezron",
+   "rel": "wife",
+   "sex": "f",
+   "he": "אֲבִיָּה",
+   "tr": "Aviyah"
+  },
+  {
+   "id": "ashhur",
+   "n": "Ashhur",
+   "p": "abijah",
+   "v": [
+    "2:24"
+   ],
+   "g": "father of Tekoa",
+   "note": "His family continues in 4:5–8.",
+   "he": "אַשְׁחוּר",
+   "tr": "Ashchur"
+  },
+  {
+   "id": "hamul",
+   "n": "Hamul",
+   "p": "perez",
+   "v": [
+    "2:5"
+   ],
+   "he": "חָמוּל",
+   "tr": "Chamul"
+  },
+  {
+   "id": "zerah",
+   "n": "Zerah",
+   "p": "tamar",
+   "v": [
+    "2:4",
+    "2:6"
+   ],
+   "he": "זֶרַח",
+   "tr": "Zerach"
+  },
+  {
+   "id": "zimri",
+   "n": "Zimri",
+   "p": "zerah",
+   "v": [
+    "2:6"
+   ],
+   "note": "Zabdi in Joshua 7:1.",
+   "he": "זִמְרִי",
+   "tr": "Zimri"
+  },
+  {
+   "id": "carmi",
+   "n": "Carmi",
+   "p": "zimri",
+   "v": [
+    "2:7"
+   ],
+   "rel": "from",
+   "note": "Joshua 7:1 makes Carmi son of Zabdi (Zimri).",
+   "he": "כַּרְמִי",
+   "tr": "Karmi"
+  },
+  {
+   "id": "achar",
+   "n": "Achar",
+   "p": "carmi",
+   "v": [
+    "2:7"
+   ],
+   "g": "\"trouble\"",
+   "forms": [
+    "Achan"
+   ],
+   "note": "Achan of Joshua 7: he took from the devoted things at Jericho. The Chronicler spells him Achar, \"trouble,\" after the Valley of Achor.",
+   "he": "עָכָר",
+   "tr": "Achar"
+  },
+  {
+   "id": "ethan",
+   "n": "Ethan",
+   "p": "zerah",
+   "v": [
+    "2:6",
+    "2:8"
+   ],
+   "g": "the Ezrahite?",
+   "note": "Probably the wise men of 1 Kings 4:31: \"Ethan the Ezrahite, Heman, Calcol and Darda.\"",
+   "he": "אֵיתָן",
+   "tr": "Etan"
+  },
+  {
+   "id": "azariah",
+   "n": "Azariah",
+   "p": "ethan",
+   "v": [
+    "2:8"
+   ],
+   "he": "עֲזַרְיָה",
+   "tr": "Azaryah"
+  },
+  {
+   "id": "heman",
+   "n": "Heman",
+   "p": "zerah",
+   "v": [
+    "2:6"
+   ],
+   "he": "הֵימָן",
+   "tr": "Heman"
+  },
+  {
+   "id": "calcol",
+   "n": "Calcol",
+   "p": "zerah",
+   "v": [
+    "2:6"
+   ],
+   "he": "כַּלְכֹּל",
+   "tr": "Kalkol"
+  },
+  {
+   "id": "dara",
+   "n": "Dara",
+   "p": "zerah",
+   "v": [
+    "2:6"
+   ],
+   "g": "Darda in 1 Kgs 4:31",
+   "he": "דָּרַע",
+   "tr": "Dara"
+  },
+  {
+   "id": "issachar",
+   "n": "Issachar",
+   "p": "israel",
+   "v": [
+    "2:1"
+   ],
+   "he": "יִשָּׂשכָר",
+   "tr": "Yissachar"
+  },
+  {
+   "id": "zebulun",
+   "n": "Zebulun",
+   "p": "israel",
+   "v": [
+    "2:1"
+   ],
+   "he": "זְבֻלוּן",
+   "tr": "Zevulun"
+  },
+  {
+   "id": "dan",
+   "n": "Dan",
+   "p": "israel",
+   "v": [
+    "2:2"
+   ],
+   "he": "דָּן",
+   "tr": "Dan"
+  },
+  {
+   "id": "joseph",
+   "n": "Joseph",
+   "p": "israel",
+   "v": [
+    "2:2"
+   ],
+   "he": "יוֹסֵף",
+   "tr": "Yosef"
+  },
+  {
+   "id": "benjamin",
+   "n": "Benjamin",
+   "p": "israel",
+   "v": [
+    "2:2"
+   ],
+   "he": "בִּנְיָמִן",
+   "tr": "Binyamin"
+  },
+  {
+   "id": "naphtali",
+   "n": "Naphtali",
+   "p": "israel",
+   "v": [
+    "2:2"
+   ],
+   "he": "נַפְתָּלִי",
+   "tr": "Naftali"
+  },
+  {
+   "id": "gad",
+   "n": "Gad",
+   "p": "israel",
+   "v": [
+    "2:2"
+   ],
+   "he": "גָּד",
+   "tr": "Gad"
+  },
+  {
+   "id": "asher",
+   "n": "Asher",
+   "p": "israel",
+   "v": [
+    "2:2"
+   ],
+   "he": "אָשֵׁר",
+   "tr": "Asher"
+  }
+ ]
+}

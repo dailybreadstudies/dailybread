@@ -1,0 +1,854 @@
+{
+ "id": "1ch-9-jerusalem",
+ "title": "Those Who Settled in Jerusalem",
+ "ref": "1 Chronicles 9:1–34",
+ "compact": true,
+ "branches": [
+  {
+   "id": "judah",
+   "name": "Judah",
+   "col": "ham"
+  },
+  {
+   "id": "benjamin",
+   "name": "Benjamin",
+   "col": "plum"
+  },
+  {
+   "id": "priests",
+   "name": "Priests",
+   "col": "japheth"
+  },
+  {
+   "id": "levites",
+   "name": "Levites",
+   "col": "teal"
+  }
+ ],
+ "intro": [
+  "\"The first to resettle their own property\" after the exile (9:2): heads of families from Judah and Benjamin, priests, Levites and gatekeepers. Each is introduced by his ancestry (\"Uthai son of Ammihud, son of Omri…\"), shown here from the earliest named ancestor down. A close parallel list is Nehemiah 11.",
+  "How each family joins its tribe is not stated; a dashed line marks it."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Parallel: Nehemiah 11:3–19. Scholarly summary after the standard commentaries.",
+ "anchor": {
+  "book": "1CH",
+  "c": 9,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "judah",
+   "n": "Judah",
+   "p": null,
+   "v": [
+    "9:3",
+    "9:4"
+   ],
+   "branch": "judah",
+   "he": "יְהוּדָה",
+   "tr": "Yehudah"
+  },
+  {
+   "id": "perez",
+   "n": "Perez",
+   "p": "judah",
+   "v": [
+    "9:4"
+   ],
+   "he": "פֶּרֶץ",
+   "tr": "Peretz"
+  },
+  {
+   "id": "bani",
+   "n": "Bani",
+   "p": "perez",
+   "v": [
+    "9:4"
+   ],
+   "he": "בָּנִי",
+   "tr": "Bani",
+   "rel": "from"
+  },
+  {
+   "id": "imri",
+   "n": "Imri",
+   "p": "bani",
+   "v": [
+    "9:4"
+   ],
+   "he": "אִמְרִי",
+   "tr": "Imri"
+  },
+  {
+   "id": "omri",
+   "n": "Omri",
+   "p": "imri",
+   "v": [
+    "9:4"
+   ],
+   "he": "עׇמְרִי",
+   "tr": "Omri"
+  },
+  {
+   "id": "ammihud",
+   "n": "Ammihud",
+   "p": "omri",
+   "v": [
+    "9:4"
+   ],
+   "he": "עַמִּיהוּד",
+   "tr": "Ammihud"
+  },
+  {
+   "id": "uthai",
+   "n": "Uthai",
+   "p": "ammihud",
+   "v": [
+    "9:4"
+   ],
+   "g": "of Perez",
+   "he": "עוּתַי",
+   "tr": "Utay"
+  },
+  {
+   "id": "asaiah",
+   "n": "Asaiah",
+   "p": "judah",
+   "v": [
+    "9:5"
+   ],
+   "g": "of the Shilonites",
+   "rel": "from",
+   "note": "The Shilonites are probably the clan of Shelah son of Judah.",
+   "he": "עֲשָׂיָה",
+   "tr": "Asayah"
+  },
+  {
+   "id": "zerah",
+   "n": "Zerah",
+   "p": "judah",
+   "v": [
+    "9:6"
+   ],
+   "he": "זֶרַח",
+   "tr": "Zerach"
+  },
+  {
+   "id": "jeuel",
+   "n": "Jeuel",
+   "p": "zerah",
+   "v": [
+    "9:6"
+   ],
+   "g": "with 690 relatives",
+   "rel": "from",
+   "he": "יְעוּאֵל",
+   "tr": "Yeuel"
+  },
+  {
+   "id": "benjamin",
+   "n": "Benjamin",
+   "p": null,
+   "v": [
+    "9:3",
+    "9:7"
+   ],
+   "branch": "benjamin",
+   "he": "בִנְיָמִן",
+   "tr": "Binyamin"
+  },
+  {
+   "id": "hassenuah",
+   "n": "Hassenuah",
+   "p": "benjamin",
+   "v": [
+    "9:7"
+   ],
+   "he": "הַסְּנֻאָה",
+   "tr": "Hasenuah",
+   "rel": "from"
+  },
+  {
+   "id": "hodaviah",
+   "n": "Hodaviah",
+   "p": "hassenuah",
+   "v": [
+    "9:7"
+   ],
+   "he": "הוֹדַוְיָה",
+   "tr": "Hodavyah"
+  },
+  {
+   "id": "meshullam",
+   "n": "Meshullam",
+   "p": "hodaviah",
+   "v": [
+    "9:7"
+   ],
+   "he": "מְשֻׁלָּם",
+   "tr": "Meshullam"
+  },
+  {
+   "id": "sallu",
+   "n": "Sallu",
+   "p": "meshullam",
+   "v": [
+    "9:7"
+   ],
+   "he": "סַלּוּא",
+   "tr": "Sallu"
+  },
+  {
+   "id": "jeroham",
+   "n": "Jeroham",
+   "p": "benjamin",
+   "v": [
+    "9:8"
+   ],
+   "rel": "from",
+   "he": "יְרֹחָם",
+   "tr": "Yerocham"
+  },
+  {
+   "id": "ibneiah",
+   "n": "Ibneiah",
+   "p": "jeroham",
+   "v": [
+    "9:8"
+   ],
+   "he": "יִבְנְיָה",
+   "tr": "Yivneyah"
+  },
+  {
+   "id": "michri",
+   "n": "Michri",
+   "p": "benjamin",
+   "v": [
+    "9:8"
+   ],
+   "rel": "from",
+   "he": "מִכְרִי",
+   "tr": "Michri"
+  },
+  {
+   "id": "uzzi",
+   "n": "Uzzi",
+   "p": "michri",
+   "v": [
+    "9:8"
+   ],
+   "he": "עֻזִּי",
+   "tr": "Uzzi"
+  },
+  {
+   "id": "elah",
+   "n": "Elah",
+   "p": "uzzi",
+   "v": [
+    "9:8"
+   ],
+   "he": "אֵלָה",
+   "tr": ""
+  },
+  {
+   "id": "ibnijah",
+   "n": "Ibnijah",
+   "p": "benjamin",
+   "v": [
+    "9:8"
+   ],
+   "rel": "from",
+   "he": "יִבְנִיָּה",
+   "tr": "Yivniyyah"
+  },
+  {
+   "id": "reuel",
+   "n": "Reuel",
+   "p": "ibnijah",
+   "v": [
+    "9:8"
+   ],
+   "he": "רְעוּאֵל",
+   "tr": "Reuel"
+  },
+  {
+   "id": "shephatiah",
+   "n": "Shephatiah",
+   "p": "reuel",
+   "v": [
+    "9:8"
+   ],
+   "he": "שְׁפַטְיָה",
+   "tr": "Shefatyah"
+  },
+  {
+   "id": "meshullam-2",
+   "n": "Meshullam",
+   "p": "shephatiah",
+   "v": [
+    "9:8"
+   ],
+   "he": "מְשֻׁלָּם",
+   "tr": "Meshullam"
+  },
+  {
+   "id": "priests",
+   "n": "The priests",
+   "p": null,
+   "v": [
+    "9:10"
+   ],
+   "branch": "priests",
+   "he": "הַכֹּהֲנִים",
+   "tr": "ha-Kohanim"
+  },
+  {
+   "id": "jedaiah",
+   "n": "Jedaiah",
+   "p": "priests",
+   "v": [
+    "9:10"
+   ],
+   "g": "a priestly course",
+   "rel": "from",
+   "note": "Jedaiah, Jehoiarib and Jachin are names of priestly divisions (24:7, 17).",
+   "he": "יְדַעְיָה",
+   "tr": "Yedayah"
+  },
+  {
+   "id": "jehoiarib",
+   "n": "Jehoiarib",
+   "p": "priests",
+   "v": [
+    "9:10"
+   ],
+   "g": "a priestly course",
+   "rel": "from",
+   "sch": "The Hasmoneans (Maccabees) belonged to the course of Joarib (1 Maccabees 2:1).",
+   "he": "יְהוֹיָרִיב",
+   "tr": "Yehoyariv"
+  },
+  {
+   "id": "jachin",
+   "n": "Jachin",
+   "p": "priests",
+   "v": [
+    "9:10"
+   ],
+   "g": "a priestly course",
+   "rel": "from",
+   "he": "יָכִין",
+   "tr": "Yachin"
+  },
+  {
+   "id": "ahitub",
+   "n": "Ahitub",
+   "p": "priests",
+   "v": [
+    "9:11"
+   ],
+   "rel": "from",
+   "he": "אֲחִיטוּב",
+   "tr": "Achituv"
+  },
+  {
+   "id": "meraioth",
+   "n": "Meraioth",
+   "p": "ahitub",
+   "v": [
+    "9:11"
+   ],
+   "he": "מְרָיוֹת",
+   "tr": "Meravot"
+  },
+  {
+   "id": "zadok",
+   "n": "Zadok",
+   "p": "meraioth",
+   "v": [
+    "9:11"
+   ],
+   "he": "צָדוֹק",
+   "tr": "Tzadok"
+  },
+  {
+   "id": "meshullam-p",
+   "n": "Meshullam",
+   "p": "zadok",
+   "v": [
+    "9:11"
+   ],
+   "he": "מְשֻׁלָּם",
+   "tr": "Meshullam"
+  },
+  {
+   "id": "hilkiah",
+   "n": "Hilkiah",
+   "p": "meshullam-p",
+   "v": [
+    "9:11"
+   ],
+   "he": "חִלְקִיָּה",
+   "tr": "Chilkiyahu"
+  },
+  {
+   "id": "azariah",
+   "n": "Azariah",
+   "p": "hilkiah",
+   "v": [
+    "9:11"
+   ],
+   "g": "chief official of God's temple",
+   "he": "עֲזַרְיָה",
+   "tr": "Azaryah"
+  },
+  {
+   "id": "malchijah",
+   "n": "Malchijah",
+   "p": "priests",
+   "v": [
+    "9:12"
+   ],
+   "rel": "from",
+   "he": "מַלְכִּיָּהוּ",
+   "tr": "Malkiyyah"
+  },
+  {
+   "id": "pashhur",
+   "n": "Pashhur",
+   "p": "malchijah",
+   "v": [
+    "9:12"
+   ],
+   "he": "פַּשְׁחוּר",
+   "tr": "Pashchur"
+  },
+  {
+   "id": "jeroham-p",
+   "n": "Jeroham",
+   "p": "pashhur",
+   "v": [
+    "9:12"
+   ],
+   "he": "יְרֹחָם",
+   "tr": "Yerocham"
+  },
+  {
+   "id": "adaiah",
+   "n": "Adaiah",
+   "p": "jeroham-p",
+   "v": [
+    "9:12"
+   ],
+   "he": "עֲדָיָה",
+   "tr": "Adayah"
+  },
+  {
+   "id": "immer",
+   "n": "Immer",
+   "p": "priests",
+   "v": [
+    "9:12"
+   ],
+   "rel": "from",
+   "he": "אִמֵּר",
+   "tr": "Immer"
+  },
+  {
+   "id": "meshillemith",
+   "n": "Meshillemith",
+   "p": "immer",
+   "v": [
+    "9:12"
+   ],
+   "he": "מְשִׁלֵּמִית",
+   "tr": "Meshillemit"
+  },
+  {
+   "id": "meshullam-i",
+   "n": "Meshullam",
+   "p": "meshillemith",
+   "v": [
+    "9:12"
+   ],
+   "he": "מְשֻׁלָּם",
+   "tr": "Meshullam"
+  },
+  {
+   "id": "jahzerah",
+   "n": "Jahzerah",
+   "p": "meshullam-i",
+   "v": [
+    "9:12"
+   ],
+   "he": "יַחְזֵרָה",
+   "tr": "Yachzerah"
+  },
+  {
+   "id": "adiel",
+   "n": "Adiel",
+   "p": "jahzerah",
+   "v": [
+    "9:12"
+   ],
+   "he": "עֲדִיאֵל",
+   "tr": "Adiel"
+  },
+  {
+   "id": "maasai",
+   "n": "Maasai",
+   "p": "adiel",
+   "v": [
+    "9:12"
+   ],
+   "he": "מַעֲשַׂי",
+   "tr": "Maasay"
+  },
+  {
+   "id": "eleazar",
+   "n": "Eleazar",
+   "p": "priests",
+   "v": [
+    "9:20"
+   ],
+   "rel": "from",
+   "he": "אֶלְעָזָר",
+   "tr": "Elazar"
+  },
+  {
+   "id": "phinehas",
+   "n": "Phinehas",
+   "p": "eleazar",
+   "v": [
+    "9:20"
+   ],
+   "g": "once over the gatekeepers",
+   "he": "פִּינְחָס",
+   "tr": "Pinchas"
+  },
+  {
+   "id": "levites",
+   "n": "The Levites",
+   "p": null,
+   "v": [
+    "9:14"
+   ],
+   "branch": "levites",
+   "he": "הַלְוִיִּם",
+   "tr": "ha-Leviyim"
+  },
+  {
+   "id": "merari",
+   "n": "Merari",
+   "p": "levites",
+   "v": [
+    "9:14"
+   ],
+   "rel": "from",
+   "he": "מְרָרִי",
+   "tr": "Merari"
+  },
+  {
+   "id": "hashabiah",
+   "n": "Hashabiah",
+   "p": "merari",
+   "v": [
+    "9:14"
+   ],
+   "rel": "from",
+   "he": "חֲשַׁבְיָה",
+   "tr": "Chashavyah"
+  },
+  {
+   "id": "azrikam",
+   "n": "Azrikam",
+   "p": "hashabiah",
+   "v": [
+    "9:14"
+   ],
+   "he": "עַזְרִיקָם",
+   "tr": "Azrikam"
+  },
+  {
+   "id": "hasshub",
+   "n": "Hasshub",
+   "p": "azrikam",
+   "v": [
+    "9:14"
+   ],
+   "he": "חַשּׁוּב",
+   "tr": "Chashshuv"
+  },
+  {
+   "id": "shemaiah",
+   "n": "Shemaiah",
+   "p": "hasshub",
+   "v": [
+    "9:14"
+   ],
+   "he": "שְׁמַעְיָה",
+   "tr": "Shemayah"
+  },
+  {
+   "id": "bakbakkar",
+   "n": "Bakbakkar",
+   "p": "levites",
+   "v": [
+    "9:15"
+   ],
+   "rel": "from",
+   "he": "בַּקְבַּקַּר",
+   "tr": "Bakbakkar"
+  },
+  {
+   "id": "heresh",
+   "n": "Heresh",
+   "p": "levites",
+   "v": [
+    "9:15"
+   ],
+   "rel": "from",
+   "he": "חֶרֶשׁ",
+   "tr": "Cheresh"
+  },
+  {
+   "id": "galal",
+   "n": "Galal",
+   "p": "levites",
+   "v": [
+    "9:15"
+   ],
+   "rel": "from",
+   "he": "גָּלָל",
+   "tr": "Galal"
+  },
+  {
+   "id": "asaph",
+   "n": "Asaph",
+   "p": "levites",
+   "v": [
+    "9:15"
+   ],
+   "g": "the singer",
+   "rel": "from",
+   "he": "אָסָף",
+   "tr": "Asaf"
+  },
+  {
+   "id": "zichri",
+   "n": "Zichri",
+   "p": "asaph",
+   "v": [
+    "9:15"
+   ],
+   "he": "זִכְרִי",
+   "tr": "Zichri"
+  },
+  {
+   "id": "mica",
+   "n": "Mica",
+   "p": "zichri",
+   "v": [
+    "9:15"
+   ],
+   "he": "מִיכָא",
+   "tr": "Mikah"
+  },
+  {
+   "id": "mattaniah",
+   "n": "Mattaniah",
+   "p": "mica",
+   "v": [
+    "9:15"
+   ],
+   "he": "מַתַּנְיָה",
+   "tr": "Matanyah"
+  },
+  {
+   "id": "jeduthun",
+   "n": "Jeduthun",
+   "p": "levites",
+   "v": [
+    "9:16"
+   ],
+   "g": "the singer",
+   "rel": "from",
+   "he": "יְדוּתוּן",
+   "tr": "Yedutun"
+  },
+  {
+   "id": "galal-2",
+   "n": "Galal",
+   "p": "jeduthun",
+   "v": [
+    "9:16"
+   ],
+   "he": "גָּלָל",
+   "tr": "Galal"
+  },
+  {
+   "id": "shemaiah-2",
+   "n": "Shemaiah",
+   "p": "galal-2",
+   "v": [
+    "9:16"
+   ],
+   "he": "שְׁמַעְיָה",
+   "tr": "Shemayah"
+  },
+  {
+   "id": "obadiah",
+   "n": "Obadiah",
+   "p": "shemaiah-2",
+   "v": [
+    "9:16"
+   ],
+   "he": "עֹבַדְיָה",
+   "tr": "Ovadyah"
+  },
+  {
+   "id": "elkanah",
+   "n": "Elkanah",
+   "p": "levites",
+   "v": [
+    "9:16"
+   ],
+   "rel": "from",
+   "he": "אֶלְקָנָה",
+   "tr": "Elkanah"
+  },
+  {
+   "id": "asa",
+   "n": "Asa",
+   "p": "elkanah",
+   "v": [
+    "9:16"
+   ],
+   "he": "אָסָא",
+   "tr": "Asa"
+  },
+  {
+   "id": "berechiah",
+   "n": "Berechiah",
+   "p": "asa",
+   "v": [
+    "9:16"
+   ],
+   "g": "of the Netophathite villages",
+   "he": "בֶּרֶכְיָה",
+   "tr": "Berechyah"
+  },
+  {
+   "id": "korah",
+   "n": "Korah",
+   "p": "levites",
+   "v": [
+    "9:19"
+   ],
+   "rel": "from",
+   "he": "קֹרַח",
+   "tr": "Korach"
+  },
+  {
+   "id": "ebiasaph",
+   "n": "Ebiasaph",
+   "p": "korah",
+   "v": [
+    "9:19"
+   ],
+   "he": "אֶבְיָסָף",
+   "tr": "Evyasaf"
+  },
+  {
+   "id": "kore",
+   "n": "Kore",
+   "p": "ebiasaph",
+   "v": [
+    "9:19"
+   ],
+   "he": "קוֹרֵא",
+   "tr": "Kore"
+  },
+  {
+   "id": "shallum",
+   "n": "Shallum",
+   "p": "kore",
+   "v": [
+    "9:17",
+    "9:19"
+   ],
+   "g": "chief of the gatekeepers",
+   "he": "שַׁלּוּם",
+   "tr": "Shalum"
+  },
+  {
+   "id": "mattithiah",
+   "n": "Mattithiah",
+   "p": "shallum",
+   "v": [
+    "9:31"
+   ],
+   "g": "baked the bread",
+   "he": "מַתִּתְיָה",
+   "tr": "Mattityah"
+  },
+  {
+   "id": "akkub",
+   "n": "Akkub",
+   "p": "levites",
+   "v": [
+    "9:17"
+   ],
+   "g": "gatekeeper",
+   "rel": "from",
+   "he": "עַקּוּב",
+   "tr": "Akkuv"
+  },
+  {
+   "id": "talmon",
+   "n": "Talmon",
+   "p": "levites",
+   "v": [
+    "9:17"
+   ],
+   "g": "gatekeeper",
+   "rel": "from",
+   "he": "טַלְמֹן",
+   "tr": "Talmon"
+  },
+  {
+   "id": "ahiman",
+   "n": "Ahiman",
+   "p": "levites",
+   "v": [
+    "9:17"
+   ],
+   "g": "gatekeeper",
+   "rel": "from",
+   "he": "אֲחִימַן",
+   "tr": "Achiman"
+  },
+  {
+   "id": "meshelemiah",
+   "n": "Meshelemiah",
+   "p": "levites",
+   "v": [
+    "9:21"
+   ],
+   "rel": "from",
+   "he": "מְשֶׁלֶמְיָה",
+   "tr": "Meshelemyah"
+  },
+  {
+   "id": "zechariah",
+   "n": "Zechariah",
+   "p": "meshelemiah",
+   "v": [
+    "9:21"
+   ],
+   "g": "gatekeeper of the Tent of Meeting",
+   "he": "זְכַרְיָה",
+   "tr": "Zecharyah"
+  }
+ ]
+}

@@ -1,0 +1,557 @@
+{
+ "id": "1ch-5-transjordan",
+ "title": "Reuben, Gad and East Manasseh",
+ "ref": "1 Chronicles 5:1–24",
+ "compact": true,
+ "branches": [
+  {
+   "id": "reuben",
+   "name": "Reuben",
+   "col": "japheth"
+  },
+  {
+   "id": "gad",
+   "name": "Gad",
+   "col": "ochre"
+  },
+  {
+   "id": "manasseh",
+   "name": "Half-Manasseh",
+   "col": "teal"
+  }
+ ],
+ "intro": [
+  "The two and a half tribes that settled east of the Jordan. Reuben was the firstborn, \"but his birthright was given to the sons of Joseph,\" while \"Judah prevailed over his brothers and a ruler came from him\" (5:1–2). These tribes were the first to go into exile, carried off by Tiglath-pileser III of Assyria around 733 BC (5:6, 26).",
+  "Most names are clan leaders recorded in the reigns of Jotham and Jeroboam II (5:17). Dashed lines mark families whose link is not given."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Scholarly summary after the standard commentaries (Japhet; Williamson; Knoppers).",
+ "anchor": {
+  "book": "1CH",
+  "c": 5,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "israel",
+   "n": "Israel",
+   "p": null,
+   "v": [
+    "5:1"
+   ],
+   "he": "יִשְׂרָאֵל",
+   "tr": "Israel"
+  },
+  {
+   "id": "reuben",
+   "n": "Reuben",
+   "p": "israel",
+   "v": [
+    "5:1",
+    "5:3"
+   ],
+   "g": "the firstborn",
+   "branch": "reuben",
+   "note": "He \"defiled his father's bed\" (Genesis 35:22; 49:4).",
+   "he": "רְאוּבֵן",
+   "tr": "Reuven"
+  },
+  {
+   "id": "hanoch",
+   "n": "Hanoch",
+   "p": "reuben",
+   "v": [
+    "5:3"
+   ],
+   "he": "חֲנוֹךְ",
+   "tr": "Chanoch"
+  },
+  {
+   "id": "pallu",
+   "n": "Pallu",
+   "p": "reuben",
+   "v": [
+    "5:3"
+   ],
+   "he": "פַּלּוּא",
+   "tr": "Pallu"
+  },
+  {
+   "id": "hezron",
+   "n": "Hezron",
+   "p": "reuben",
+   "v": [
+    "5:3"
+   ],
+   "he": "חֶצְרוֹן",
+   "tr": "Chetzron"
+  },
+  {
+   "id": "carmi",
+   "n": "Carmi",
+   "p": "reuben",
+   "v": [
+    "5:3"
+   ],
+   "he": "כַּרְמִי",
+   "tr": "Karmi"
+  },
+  {
+   "id": "joel",
+   "n": "Joel",
+   "p": "reuben",
+   "v": [
+    "5:4",
+    "5:8"
+   ],
+   "rel": "from",
+   "he": "יוֹאֵל",
+   "tr": "Yoel"
+  },
+  {
+   "id": "shemaiah",
+   "n": "Shemaiah",
+   "p": "joel",
+   "v": [
+    "5:4"
+   ],
+   "he": "שְׁמַעְיָה",
+   "tr": "Shemayah"
+  },
+  {
+   "id": "gog",
+   "n": "Gog",
+   "p": "shemaiah",
+   "v": [
+    "5:4"
+   ],
+   "he": "גּוֹג",
+   "tr": "Gog"
+  },
+  {
+   "id": "shimei",
+   "n": "Shimei",
+   "p": "gog",
+   "v": [
+    "5:4"
+   ],
+   "he": "שִׁמְעִי",
+   "tr": "Shimi"
+  },
+  {
+   "id": "micah",
+   "n": "Micah",
+   "p": "shimei",
+   "v": [
+    "5:5"
+   ],
+   "he": "מִיכָה",
+   "tr": "Michah"
+  },
+  {
+   "id": "reaiah",
+   "n": "Reaiah",
+   "p": "micah",
+   "v": [
+    "5:5"
+   ],
+   "he": "רְאָיָה",
+   "tr": "Reayah"
+  },
+  {
+   "id": "baal",
+   "n": "Baal",
+   "p": "reaiah",
+   "v": [
+    "5:5"
+   ],
+   "he": "בַּעַל",
+   "tr": ""
+  },
+  {
+   "id": "beerah",
+   "n": "Beerah",
+   "p": "baal",
+   "v": [
+    "5:6"
+   ],
+   "g": "exiled by Tiglath-pileser",
+   "note": "A leader of the Reubenites, carried into exile by Tiglath-pileser III of Assyria.",
+   "he": "בְּאֵרָה",
+   "tr": "Beerah"
+  },
+  {
+   "id": "shema",
+   "n": "Shema",
+   "p": "joel",
+   "v": [
+    "5:8"
+   ],
+   "rel": "from",
+   "he": "שֶׁמַע",
+   "tr": "Shema"
+  },
+  {
+   "id": "azaz",
+   "n": "Azaz",
+   "p": "shema",
+   "v": [
+    "5:8"
+   ],
+   "he": "עָזָז",
+   "tr": "Azaz"
+  },
+  {
+   "id": "bela",
+   "n": "Bela",
+   "p": "azaz",
+   "v": [
+    "5:8"
+   ],
+   "g": "settled at Aroer",
+   "note": "With Jeiel the chief and Zechariah, his relatives.",
+   "he": "בֶּלַע",
+   "tr": ""
+  },
+  {
+   "id": "gad",
+   "n": "Gad",
+   "p": "israel",
+   "v": [
+    "5:11"
+   ],
+   "branch": "gad",
+   "he": "גָּד",
+   "tr": "Gad"
+  },
+  {
+   "id": "joel-g",
+   "n": "Joel",
+   "p": "gad",
+   "v": [
+    "5:12"
+   ],
+   "g": "the chief",
+   "rel": "from",
+   "he": "יוֹאֵל",
+   "tr": "Yoel"
+  },
+  {
+   "id": "shapham",
+   "n": "Shapham",
+   "p": "gad",
+   "v": [
+    "5:12"
+   ],
+   "g": "the second",
+   "rel": "from",
+   "he": "שָׁפָם",
+   "tr": "Shafam"
+  },
+  {
+   "id": "jaanai",
+   "n": "Jaanai",
+   "p": "gad",
+   "v": [
+    "5:12"
+   ],
+   "rel": "from",
+   "he": "יַעֲנַי",
+   "tr": "Yaanay"
+  },
+  {
+   "id": "shaphat",
+   "n": "Shaphat",
+   "p": "gad",
+   "v": [
+    "5:12"
+   ],
+   "rel": "from",
+   "he": "שָׁפָט",
+   "tr": "Shafat"
+  },
+  {
+   "id": "buz",
+   "n": "Buz",
+   "p": "gad",
+   "v": [
+    "5:14"
+   ],
+   "rel": "from",
+   "he": "בּוּז",
+   "tr": "Buz"
+  },
+  {
+   "id": "jahdo",
+   "n": "Jahdo",
+   "p": "buz",
+   "v": [
+    "5:14"
+   ],
+   "he": "יַחְדּוֹ",
+   "tr": "Yachdo"
+  },
+  {
+   "id": "jeshishai",
+   "n": "Jeshishai",
+   "p": "jahdo",
+   "v": [
+    "5:14"
+   ],
+   "he": "יְשִׁישַׁי",
+   "tr": "Yeshisah"
+  },
+  {
+   "id": "michael-g",
+   "n": "Michael",
+   "p": "jeshishai",
+   "v": [
+    "5:14"
+   ],
+   "he": "מִיכָאֵל",
+   "tr": "Michael"
+  },
+  {
+   "id": "gilead",
+   "n": "Gilead",
+   "p": "michael-g",
+   "v": [
+    "5:14"
+   ],
+   "he": "גִּלְעָד",
+   "tr": "Gilad"
+  },
+  {
+   "id": "jaroah",
+   "n": "Jaroah",
+   "p": "gilead",
+   "v": [
+    "5:14"
+   ],
+   "he": "יָרוֹחַ",
+   "tr": "Yaroach"
+  },
+  {
+   "id": "huri",
+   "n": "Huri",
+   "p": "jaroah",
+   "v": [
+    "5:14"
+   ],
+   "he": "חוּרִי",
+   "tr": "Churi"
+  },
+  {
+   "id": "abihail",
+   "n": "Abihail",
+   "p": "huri",
+   "v": [
+    "5:14"
+   ],
+   "he": "אֲבִיחַיִל",
+   "tr": "Avichayil"
+  },
+  {
+   "id": "michael",
+   "n": "Michael",
+   "p": "abihail",
+   "v": [
+    "5:13"
+   ],
+   "he": "מִיכָאֵל",
+   "tr": "Michael"
+  },
+  {
+   "id": "meshullam",
+   "n": "Meshullam",
+   "p": "abihail",
+   "v": [
+    "5:13"
+   ],
+   "he": "מְשֻׁלָּם",
+   "tr": "Meshullam"
+  },
+  {
+   "id": "sheba",
+   "n": "Sheba",
+   "p": "abihail",
+   "v": [
+    "5:13"
+   ],
+   "he": "שֶׁבַע",
+   "tr": "Sheva"
+  },
+  {
+   "id": "jorai",
+   "n": "Jorai",
+   "p": "abihail",
+   "v": [
+    "5:13"
+   ],
+   "he": "יוֹרַי",
+   "tr": "Yoray"
+  },
+  {
+   "id": "jacan",
+   "n": "Jacan",
+   "p": "abihail",
+   "v": [
+    "5:13"
+   ],
+   "he": "יַעְכָּן",
+   "tr": "Yakan"
+  },
+  {
+   "id": "zia",
+   "n": "Zia",
+   "p": "abihail",
+   "v": [
+    "5:13"
+   ],
+   "he": "זִיעַ",
+   "tr": "Zia"
+  },
+  {
+   "id": "eber",
+   "n": "Eber",
+   "p": "abihail",
+   "v": [
+    "5:13"
+   ],
+   "he": "עֵבֶר",
+   "tr": "Ever"
+  },
+  {
+   "id": "guni",
+   "n": "Guni",
+   "p": "gad",
+   "v": [
+    "5:15"
+   ],
+   "rel": "from",
+   "he": "גּוּנִי",
+   "tr": "Guni"
+  },
+  {
+   "id": "abdiel",
+   "n": "Abdiel",
+   "p": "guni",
+   "v": [
+    "5:15"
+   ],
+   "he": "עַבְדִּיאֵל",
+   "tr": "Avdiel"
+  },
+  {
+   "id": "ahi",
+   "n": "Ahi",
+   "p": "abdiel",
+   "v": [
+    "5:15"
+   ],
+   "g": "head of their family",
+   "he": "אֲחִי",
+   "tr": "Achi"
+  },
+  {
+   "id": "joseph",
+   "n": "Joseph",
+   "p": "israel",
+   "v": [
+    "5:1",
+    "5:2"
+   ],
+   "g": "received the birthright",
+   "he": "יוֹסֵף",
+   "tr": "Yosef"
+  },
+  {
+   "id": "manasseh",
+   "n": "Manasseh",
+   "p": "joseph",
+   "v": [
+    "5:23"
+   ],
+   "g": "the half-tribe east of the Jordan",
+   "branch": "manasseh",
+   "he": "מְנַשֶּׁה",
+   "tr": "Menasheh"
+  },
+  {
+   "id": "epher",
+   "n": "Epher",
+   "p": "manasseh",
+   "v": [
+    "5:24"
+   ],
+   "rel": "from",
+   "he": "עֵפֶר",
+   "tr": "Efer"
+  },
+  {
+   "id": "ishi",
+   "n": "Ishi",
+   "p": "manasseh",
+   "v": [
+    "5:24"
+   ],
+   "rel": "from",
+   "he": "יִשְׁעִי",
+   "tr": "Yishi"
+  },
+  {
+   "id": "eliel",
+   "n": "Eliel",
+   "p": "manasseh",
+   "v": [
+    "5:24"
+   ],
+   "rel": "from",
+   "he": "אֱלִיאֵל",
+   "tr": "Eliel"
+  },
+  {
+   "id": "azriel",
+   "n": "Azriel",
+   "p": "manasseh",
+   "v": [
+    "5:24"
+   ],
+   "rel": "from",
+   "he": "עַזְרִיאֵל",
+   "tr": "Azriel"
+  },
+  {
+   "id": "jeremiah",
+   "n": "Jeremiah",
+   "p": "manasseh",
+   "v": [
+    "5:24"
+   ],
+   "rel": "from",
+   "he": "יִרְמְיָהוּ",
+   "tr": "Yirmeyahu"
+  },
+  {
+   "id": "hodaviah",
+   "n": "Hodaviah",
+   "p": "manasseh",
+   "v": [
+    "5:24"
+   ],
+   "rel": "from",
+   "he": "הוֹדַוְיָה",
+   "tr": "Hodavyah"
+  },
+  {
+   "id": "jahdiel",
+   "n": "Jahdiel",
+   "p": "manasseh",
+   "v": [
+    "5:24"
+   ],
+   "rel": "from",
+   "he": "יַחְדִּיאֵל",
+   "tr": "Yachdiel"
+  }
+ ]
+}

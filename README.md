@@ -129,7 +129,9 @@ name in the tree opens a card with the Hebrew (and, in the Gospels, Greek) name,
 tradition and scholarship. The reader's Hebrew-names setting applies inside the tree too.
 
 Trees: Genesis 4–5, 10, 11 and 22, 25, 29–30 and 35, 36 (Esau; the Horites), 46; Exodus 6; Ruth 4;
-1 Chronicles 3 and 6; Matthew 1; Luke 3.
+1 Chronicles 1, 2, 3, 4, 5, 6:1–15, 6:16–53, 7, 8:1–28, 9:1–34; Saul's family (1 Samuel 14; 1 Chronicles 8:29–40;
+9:35–44); Matthew 1; Luke 3. A tree may have several first ancestors, and verses may be given as "BOOK c:v"
+when a tree draws on more than one book.
 
 - `tools/build_trees.py` holds every tree except Genesis 10 (people, parents, verses, notes) and writes
   `data/trees/<id>.json` and `data/trees/index.json`. It looks up each name's Hebrew or Greek in
