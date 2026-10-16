@@ -119,6 +119,24 @@ below the verse. Loaded on `index.html`, which shows only finds marked ready wit
   The public site shows a find only when it is `ready` and `photoChecked` is true; the test page shows all.
 - `data/finds/ideas.json` lists finds suggested for later.
 
+## Family trees
+
+`assets/trees.js` and `assets/trees.css` (loaded on the test page `maps-test.html` for now) add a
+family-tree button beside the verse where a genealogy begins. On wide screens the tree opens in the
+free space left of the text (the text column does not move); on phones it opens as a sheet from the
+bottom. Names in the chapter are tappable (dotted underline on hover only): a tap opens the tree at that
+person, highlights the line back to the first ancestor and shows a card with the Hebrew name, verses,
+Jewish tradition, scholarship and a certainty label.
+
+- `data/trees/index.json` lists the trees, where each begins (`anchors`, with the verse range whose
+  names are linked) and a `status`. The public site shows only `ready` trees; the test page shows all.
+- `data/trees/<id>.json` holds `intro`, `branches`, `countNote`, `sources` and `people`: each with
+  `id`, `n` (name as in the BSB), `p` (parent id), `kind` (person | people | place), `count`
+  (1 = one of the seventy, 2 = counted by some, 0 = not counted), `v` (verses), `he`, `tr`, `g` (short
+  identification shown in the tree), `cert` (established | probable | possible | uncertain), `trad`,
+  `sch`, optional `note`, `forms` (other spellings in the text, e.g. "Kittites"), `rel: "from"` (drawn dashed).
+- Hebrew spellings follow the Hebrew text in `data/orig/`.
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).

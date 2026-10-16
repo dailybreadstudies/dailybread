@@ -1,0 +1,142 @@
+/* Daily Bread Online — family trees (assets/trees.js). Prefixed dbt-; uses the reader's colour tokens. */
+
+:root {
+  --dbt-japheth: #46708c;
+  --dbt-ham: #a3593a;
+  --dbt-shem: #5d7a37;
+  --dbt-root: #7a6a58;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="sepia"]) { --dbt-japheth: #8db5d1; --dbt-ham: #e09a7b; --dbt-shem: #a9c47f; --dbt-root: #b3a493; }
+}
+:root[data-theme="dark"] { --dbt-japheth: #8db5d1; --dbt-ham: #e09a7b; --dbt-shem: #a9c47f; --dbt-root: #b3a493; }
+.dbt-c-japheth { --dbt-col: var(--dbt-japheth); }
+.dbt-c-ham { --dbt-col: var(--dbt-ham); }
+.dbt-c-shem { --dbt-col: var(--dbt-shem); }
+.dbt-c-root { --dbt-col: var(--dbt-root); }
+
+/* Button beside the verse: same look as the map and archaeology buttons */
+.dbt-pin {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; margin: 0 0.35rem 0 0; padding: 0; vertical-align: -12px;
+  border: 1px solid var(--line-strong); border-radius: 19px; background: var(--surface-glass); color: var(--accent);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  cursor: pointer; text-indent: 0; line-height: 1; transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.dbt-pin svg { width: 18px; height: 18px; }
+.dbt-pin:hover, .dbt-pin[aria-pressed="true"] { border-color: var(--accent-soft); background: var(--tint); color: var(--accent-deep); }
+.dbt-pin:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+body:not(.dbm-margin) .dbt-pin { width: 32px; height: 32px; vertical-align: -9px; }
+body.dbm-margin .dbt-pin { position: absolute; left: -54px; margin: -1px 0 0; }
+body.dbm-margin .dbt-pin.dbt-n1 { left: -98px; }
+body.dbm-margin .dbt-pin.dbt-n2 { left: -142px; }
+
+/* Names in the text: no mark until hover */
+.dbt-name { cursor: pointer; text-decoration: underline dotted transparent; text-decoration-thickness: 1.5px; text-underline-offset: 3px; transition: text-decoration-color 0.15s, background 0.3s; border-radius: 2px; }
+.dbt-name:hover, .dbt-name:focus-visible { text-decoration-color: var(--accent-soft); outline: none; }
+.dbt-name.dbt-flash { background: var(--tint); text-decoration-color: var(--accent); }
+
+/* Side panel (wide screens): the free space left of the text; the text column does not move */
+.dbt-panel {
+  position: fixed; left: 32px; top: var(--tb-off, 0px); z-index: 150;
+  height: calc(100vh - var(--tb-off, 0px)); height: calc(100dvh - var(--tb-off, 0px));
+  overflow-y: auto; overflow-x: hidden; padding: 22px 8px 40px 0; scrollbar-width: thin;
+}
+/* Sheet (phones and narrow windows) */
+.dbt-sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 220; height: 78vh; height: 78dvh;
+  overflow-y: auto; overflow-x: hidden; padding: 16px 16px 40px; background: var(--paper);
+  border-top: 1px solid var(--line-strong); border-radius: 14px 14px 0 0; box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.18);
+  overscroll-behavior: contain;
+}
+.dbt-sheet .dbt-head { position: sticky; top: -16px; margin: -16px -16px 0.6rem; padding: 14px 16px 10px; background: var(--paper); z-index: 2; }
+
+/* The tree card */
+.dbt { font-family: var(--sans); color: var(--ink); line-height: 1.5; text-align: left; text-indent: 0; }
+.dbt-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.6rem;
+  font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+}
+.dbt-close {
+  display: inline-flex; align-items: center; gap: 0.35rem; flex: none; white-space: nowrap;
+  border: 1px solid var(--accent-line); background: var(--surface); border-radius: 999px; padding: 0.35rem 0.7rem;
+  cursor: pointer; color: var(--ink-soft); font: 500 0.6rem/1 var(--sans); letter-spacing: 0; text-transform: none;
+}
+.dbt-close svg { width: 0.6rem; height: 0.6rem; }
+.dbt-close:hover { border-color: var(--accent); color: var(--accent); }
+.dbt-msg { font-size: 0.75rem; color: var(--muted); }
+.dbt-title { font: 700 1.05rem/1.3 var(--display); color: var(--ink); margin: 0.2rem 0 0.6rem; }
+.dbt .dbt-p { font: 400 0.78rem/1.62 var(--sans); color: var(--ink-soft); margin: 0 0 0.6rem; }
+
+.dbt-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0.5rem; }
+.dbt-chip {
+  display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.65rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--accent-line); background: var(--surface); color: var(--ink-soft); font: 500 0.7rem/1 var(--sans);
+}
+.dbt-chip b { font-weight: 600; color: var(--muted); }
+.dbt-chip[aria-pressed="false"] { opacity: 0.5; }
+.dbt-chip:hover { border-color: var(--accent-soft); }
+.dbt-sw { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--dbt-col); }
+.dbt-legend { display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; margin: 0 0 0.9rem; font: 400 0.66rem/1.4 var(--sans); color: var(--muted); }
+.dbt-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.dbt-legend .dbt-dot { --dbt-col: var(--dbt-root); }
+
+/* Rows and lines */
+.dbt-tree { position: relative; padding: 0.2rem 0 0.4rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.dbt-lines { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+.dbt-ln { fill: none; stroke-width: 1; opacity: 0.5; stroke-linecap: round; stroke-linejoin: round; }
+.dbt-ln.dbt-on { stroke-width: 1.8; opacity: 1; }
+.dbt-ln.dbt-from { stroke-dasharray: 2 3; }
+.dbt-s-japheth { stroke: var(--dbt-japheth); }
+.dbt-s-ham { stroke: var(--dbt-ham); }
+.dbt-s-shem { stroke: var(--dbt-shem); }
+.dbt-s-root { stroke: var(--dbt-root); }
+.dbt-row { position: relative; }
+.dbt-row[hidden] { display: none; }
+.dbt-node {
+  display: flex; align-items: baseline; gap: 0.45rem; width: 100%; min-width: 0; padding: 0.22rem 0.3rem 0.22rem 0;
+  border: 0; background: none; cursor: pointer; text-align: left; color: var(--ink); font: inherit;
+}
+.dbt-node:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: -1px; border-radius: 3px; }
+.dbt-dot {
+  display: inline-block; flex: none; width: 9px; height: 9px; border-radius: 50%; box-sizing: border-box; align-self: center;
+  border: 1.4px solid var(--dbt-col); background: var(--paper); position: relative; z-index: 1;
+}
+.dbt-dot.dbt-in { background: var(--dbt-col); }
+.dbt-dot.dbt-some { background: linear-gradient(90deg, var(--dbt-col) 50%, var(--paper) 50%); }
+.dbt-nm { font: 400 0.86rem/1.35 var(--serif); white-space: nowrap; }
+.dbt-gl { font: 400 0.68rem/1.35 var(--sans); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.dbt-row[data-dbt-row="noah"] .dbt-nm, .dbt-row .dbt-node:has(.dbt-out) .dbt-nm { font-weight: 700; }
+.dbt-node:hover .dbt-nm { color: var(--accent-deep); }
+.dbt-row.dbt-path .dbt-nm { color: var(--dbt-col); font-weight: 600; }
+.dbt-row.dbt-sel .dbt-nm { color: var(--dbt-col); font-weight: 700; }
+.dbt-row.dbt-sel .dbt-dot { box-shadow: 0 0 0 3px var(--paper), 0 0 0 4.4px var(--dbt-col); }
+
+/* The person card, opened under the row */
+.dbt-card {
+  position: relative; z-index: 1;
+  margin: 0.15rem 0 0.7rem; padding: 0.65rem 0.8rem 0.7rem; border-left: 2px solid var(--dbt-col);
+  background: var(--tint); border-radius: 0 4px 4px 0; font: 400 0.76rem/1.58 var(--sans); color: var(--ink-soft);
+}
+.dbt-hebrow { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+.dbt-he { font-family: var(--hebrew); font-size: 1.55rem; line-height: 1.3; color: var(--ink); direction: rtl; unicode-bidi: isolate; }
+.dbt-tr { font: italic 400 0.85rem/1.3 var(--serif); color: var(--ink-soft); }
+.dbt-meta { margin: 0.1rem 0 0.4rem; font-size: 0.66rem; color: var(--muted); letter-spacing: 0.02em; }
+.dbt-id { margin: 0 0 0.3rem; font-weight: 600; color: var(--ink); }
+.dbt-cert { display: inline-block; margin-left: 0.35rem; padding: 0.05rem 0.45rem; border-radius: 999px; font: 600 0.56rem/1.5 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; vertical-align: 1px; border: 1px solid var(--accent-line); color: var(--muted); }
+.dbt-cert-established { color: var(--dbt-shem); border-color: currentColor; }
+.dbt-cert-probable { color: var(--dbt-japheth); border-color: currentColor; }
+.dbt-card h4 { margin: 0.55rem 0 0.1rem; font: 600 0.56rem/1.3 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-faint); }
+.dbt-card p { margin: 0 0 0.35rem; text-indent: 0; }
+.dbt-cnote { font-style: italic; }
+.dbt-kids, .dbt-verses { font-size: 0.7rem; color: var(--muted); }
+.dbt-verses { margin-top: 0.5rem !important; }
+.dbt-link, .dbt-vv { border: 0; background: none; padding: 0; cursor: pointer; font: inherit; color: var(--accent); text-decoration: underline dotted; text-underline-offset: 2px; }
+.dbt-vv { margin-left: 0.45rem; font-weight: 600; }
+.dbt-link:hover, .dbt-vv:hover { color: var(--accent-deep); }
+
+.dbt-note { margin: 0.7rem 0 0; font: italic 400 0.7rem/1.55 var(--sans); color: var(--muted); }
+.dbt-sources { margin: 0.7rem 0 0; font: 400 0.66rem/1.55 var(--sans); color: var(--muted); }
+.dbt-sources b { font-weight: 600; color: var(--ink-soft); }
+
+@media print { .dbt-pin, .dbt-panel, .dbt-sheet { display: none !important; } }

@@ -1,0 +1,11 @@
+{
+ "trees": [
+  {
+   "id": "gen-10-nations",
+   "title": "The Table of Nations",
+   "ref": "Genesis 10",
+   "status": "review",
+   "anchors": [{ "book": "GEN", "c": 10, "v": 1, "range": [1, 32] }]
+  }
+ ]
+}

@@ -1218,6 +1218,7 @@
     var root = document.getElementById('portions');
     if (window.DBMaps) { try { window.DBMaps.decorate(root); } catch (e) { /* maps are optional */ } }
     if (window.DBFinds) { try { window.DBFinds.decorate(root); } catch (e) { /* finds are optional */ } }
+    if (window.DBTrees) { try { window.DBTrees.decorate(root); } catch (e) { /* trees are optional */ } }
   }
 
   // ── Navigation ───────────────────────────────────────────────

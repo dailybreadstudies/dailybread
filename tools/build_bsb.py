@@ -138,6 +138,24 @@ PATCHES = [
 ]
 
 
+# Verse endings cut off in the source, completed from the official BSB text: (book, cut-off text, completion)
+TEXT_FIXES = [
+    ("GEN", "because in his days the earth was", " divided, and his brother was named Joktan."),   # Genesis 10:25
+]
+
+
+def apply_text_fixes(book):
+    for bid, cut, more in TEXT_FIXES:
+        if book["id"] != bid:
+            continue
+        for ch in book["chapters"]:
+            for bl in ch["b"]:
+                for i, it in enumerate(bl.get("c", [])):
+                    if isinstance(it, str) and it.rstrip().endswith(cut):
+                        bl["c"][i] = it.rstrip() + more
+    return book
+
+
 def apply_patches(filename, lines):
     for fname, anchor, after_chapter, insert in PATCHES:
         if fname != filename:
@@ -217,7 +235,7 @@ def main():
     for fn in sorted(os.listdir(src)):
         if not fn.endswith(".usfm"):
             continue
-        book = convert_book(os.path.join(src, fn))
+        book = apply_text_fixes(convert_book(os.path.join(src, fn)))
         index.append({"id": book["id"], "name": book["name"],
                       "chapters": len(book["chapters"])})
         with open(os.path.join(out, book["id"] + ".json"), "w", encoding="utf-8") as fh:
