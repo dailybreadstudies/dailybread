@@ -181,7 +181,7 @@
   }
 
   function open(id, personId) {
-    if (state.open === id) { if (personId) select(personId, true); return Promise.resolve(); }
+    if (state.open === id) { if (personId) select(personId, true, false); return Promise.resolve(); }
     if (state.open) close();
     closeOthers();
     state.open = id; state.sel = null; state.hidden = {};
@@ -194,7 +194,7 @@
       state.tree = t;
       fill(root, t);
       place();
-      if (personId) select(personId, true);
+      if (personId) select(personId, true, false);
     }).catch(function (err) {
       var m = root.querySelector('.dbt-msg'); if (m) m.textContent = 'This family tree could not load. (' + err.message + ')';
     });
@@ -271,7 +271,9 @@
   }
 
   // ── Picking a person ───────────────────────────────────────
-  function select(id, scroll) {
+  /* Highlight a person and the line back to the first ancestor; with card, also open the card under the row.
+     From the Bible text only the name is shown (no card), so the reader keeps the flow of the text. */
+  function select(id, scroll, card) {
     var t = state.tree;
     if (!t || !t.by[id]) return;
     var p = t.by[id];
@@ -282,17 +284,21 @@
       r.classList.remove('dbt-sel', 'dbt-path');
       r.querySelector('.dbt-node').setAttribute('aria-expanded', 'false');
     });
-    if (state.sel === id && !scroll) { state.sel = null; draw(); return; }
-    state.sel = id;
+    if (state.sel === id && state.card && card && !scroll) { card = false; }      // a second tap closes the card
+    state.sel = id; state.card = !!card;
     for (var q = t.by[p.p]; q; q = q.p ? t.by[q.p] : null) {
       var pr = root.querySelector('[data-dbt-row="' + q.id + '"]'); if (pr) pr.classList.add('dbt-path');
     }
     var row = root.querySelector('[data-dbt-row="' + id + '"]');
     row.classList.add('dbt-sel');
-    row.querySelector('.dbt-node').setAttribute('aria-expanded', 'true');
-    var card = el('div', 'dbt-card dbt-c-' + (p.br || 'root'), cardHTML(t, p));
-    card.style.marginLeft = Math.min(p.depth * IND + DOT + 8, 2 * IND + DOT + 8) + 'px';   // deep cards stay wide
-    row.after(card);
+    if (card) {
+      row.querySelector('.dbt-node').setAttribute('aria-expanded', 'true');
+      var cd = el('div', 'dbt-card dbt-c-' + (p.br || 'root'), cardHTML(t, p));
+      cd.style.marginLeft = Math.min(p.depth * IND + DOT + 8, 2 * IND + DOT + 8) + 'px';   // deep cards stay wide
+      row.after(cd);
+    } else if (scroll) {
+      row.classList.remove('dbt-ping'); void row.offsetWidth; row.classList.add('dbt-ping');
+    }
     draw();
     if (scroll) {
       var box = scroller();
@@ -364,7 +370,7 @@
   function onTreeClick(e) {
     if (e.target.closest('[data-dbt-close]')) { close(); return; }
     var pick = e.target.closest('[data-dbt-pick]');
-    if (pick) { var id = pick.getAttribute('data-dbt-pick'); select(id, pick.classList.contains('dbt-link')); return; }
+    if (pick) { var id = pick.getAttribute('data-dbt-pick'); select(id, pick.classList.contains('dbt-link'), true); return; }
     var br = e.target.closest('[data-dbt-branch]');
     if (br) { toggleBranch(br.getAttribute('data-dbt-branch')); return; }
     var go = e.target.closest('[data-dbt-goto]');

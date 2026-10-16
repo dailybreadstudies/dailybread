@@ -112,6 +112,11 @@ body.dbm-margin .dbt-pin.dbt-n2 { left: -142px; }
 .dbt-row.dbt-sel .dbt-nm { color: var(--dbt-col); font-weight: 700; }
 .dbt-row.dbt-sel .dbt-dot { box-shadow: 0 0 0 3px var(--paper), 0 0 0 4.4px var(--dbt-col); }
 
+/* Arriving from the text: a brief glow on the row */
+.dbt-row.dbt-ping .dbt-node { animation: dbt-ping 1.8s ease-out; border-radius: 3px; }
+@keyframes dbt-ping { 0%, 35% { background: var(--tint); } 100% { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .dbt-row.dbt-ping .dbt-node { animation: none; background: var(--tint); } }
+
 /* The person card, opened under the row */
 .dbt-card {
   position: relative; z-index: 1;
