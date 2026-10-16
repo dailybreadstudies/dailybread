@@ -1,0 +1,992 @@
+{
+ "id": "1ch-3-david",
+ "title": "The House of David",
+ "ref": "1 Chronicles 3",
+ "compact": true,
+ "branches": [
+  {
+   "id": "hebron",
+   "name": "Born in Hebron",
+   "col": "ochre"
+  },
+  {
+   "id": "jerusalem",
+   "name": "Born in Jerusalem",
+   "col": "japheth"
+  },
+  {
+   "id": "kings",
+   "name": "Kings of Judah",
+   "col": "ham"
+  },
+  {
+   "id": "exile",
+   "name": "After the exile",
+   "col": "teal"
+  }
+ ],
+ "branchToggle": false,
+ "intro": [
+  "David's sons born in Hebron and in Jerusalem, then the kings of Judah from Solomon to the exile, and the line of Jehoiachin (Jeconiah) after the exile through Zerubbabel, who led the return and rebuilt the Temple.",
+  "The Chronicler writes for the returned community: the promise to David (2 Samuel 7) is still alive in a known family."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi on 1 Chronicles 3; Babylonian Talmud, Sanhedrin 37b–38a and Kiddushin 76b. Parallel lists: 2 Samuel 3:2–5; 5:14–16; Matthew 1:6–13.",
+ "anchor": {
+  "book": "1CH",
+  "c": 3,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "david",
+   "n": "David",
+   "p": null,
+   "v": [
+    "3:1",
+    "3:4",
+    "3:9"
+   ],
+   "g": "reigned 40 years",
+   "note": "Seven and a half years in Hebron, thirty-three in Jerusalem (3:4).",
+   "he": "דָוִיד",
+   "tr": "David"
+  },
+  {
+   "id": "ahinoam",
+   "n": "Ahinoam",
+   "p": "david",
+   "v": [
+    "3:1"
+   ],
+   "g": "of Jezreel",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "hebron",
+   "he": "אֲחִינֹעַם",
+   "tr": "Achinoam"
+  },
+  {
+   "id": "amnon",
+   "n": "Amnon",
+   "p": "ahinoam",
+   "v": [
+    "3:1"
+   ],
+   "g": "the firstborn",
+   "note": "Killed by Absalom after he violated Tamar (2 Samuel 13).",
+   "he": "אַמְנֹן",
+   "tr": "Amnon"
+  },
+  {
+   "id": "abigail",
+   "n": "Abigail",
+   "p": "david",
+   "v": [
+    "3:1"
+   ],
+   "g": "of Carmel",
+   "rel": "wife",
+   "sex": "f",
+   "note": "Widow of Nabal (1 Samuel 25).",
+   "branch": "hebron",
+   "he": "אֲבִיגַיִל",
+   "tr": "Avigayil"
+  },
+  {
+   "id": "daniel",
+   "n": "Daniel",
+   "p": "abigail",
+   "v": [
+    "3:1"
+   ],
+   "g": "Chileab in 2 Sam 3:3",
+   "he": "דָּנִיֵּאל",
+   "tr": "Daniel"
+  },
+  {
+   "id": "maacah",
+   "n": "Maacah",
+   "p": "david",
+   "v": [
+    "3:2"
+   ],
+   "g": "daughter of King Talmai of Geshur",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "hebron",
+   "he": "מַעֲכָה",
+   "tr": "Maachah"
+  },
+  {
+   "id": "absalom",
+   "n": "Absalom",
+   "p": "maacah",
+   "v": [
+    "3:2"
+   ],
+   "g": "rebelled against David",
+   "he": "אַבְשָׁלוֹם",
+   "tr": "Avshalom"
+  },
+  {
+   "id": "haggith",
+   "n": "Haggith",
+   "p": "david",
+   "v": [
+    "3:2"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "hebron",
+   "he": "חַגִּית",
+   "tr": "Chaggit"
+  },
+  {
+   "id": "adonijah",
+   "n": "Adonijah",
+   "p": "haggith",
+   "v": [
+    "3:2"
+   ],
+   "g": "claimed the throne",
+   "note": "1 Kings 1–2.",
+   "he": "אֲדֹנִיָּה",
+   "tr": "Adoniyahu"
+  },
+  {
+   "id": "abital",
+   "n": "Abital",
+   "p": "david",
+   "v": [
+    "3:3"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "hebron",
+   "he": "אֲבִיטָל",
+   "tr": "Avital"
+  },
+  {
+   "id": "shephatiah",
+   "n": "Shephatiah",
+   "p": "abital",
+   "v": [
+    "3:3"
+   ],
+   "he": "שְׁפַטְיָה",
+   "tr": "Shefatyah"
+  },
+  {
+   "id": "eglah",
+   "n": "Eglah",
+   "p": "david",
+   "v": [
+    "3:3"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "hebron",
+   "he": "עֶגְלָה",
+   "tr": "Eglah"
+  },
+  {
+   "id": "ithream",
+   "n": "Ithream",
+   "p": "eglah",
+   "v": [
+    "3:3"
+   ],
+   "he": "יִתְרְעָם",
+   "tr": "Yitream"
+  },
+  {
+   "id": "bathsheba",
+   "n": "Bathsheba",
+   "p": "david",
+   "v": [
+    "3:5"
+   ],
+   "g": "daughter of Ammiel",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "jerusalem",
+   "note": "The Hebrew spells her name Bat-shua here.",
+   "he": "בַּת־שׁוּעַ",
+   "tr": "Bat-Shua"
+  },
+  {
+   "id": "shimea",
+   "n": "Shimea",
+   "p": "bathsheba",
+   "v": [
+    "3:5"
+   ],
+   "he": "שִׁמְעָא",
+   "tr": ""
+  },
+  {
+   "id": "shobab",
+   "n": "Shobab",
+   "p": "bathsheba",
+   "v": [
+    "3:5"
+   ],
+   "he": "שׁוֹבָב",
+   "tr": "Shovav"
+  },
+  {
+   "id": "nathan",
+   "n": "Nathan",
+   "p": "bathsheba",
+   "v": [
+    "3:5"
+   ],
+   "g": "Luke's line",
+   "note": "Luke traces Jesus' descent through Nathan (Luke 3:31).",
+   "he": "נָתָן",
+   "tr": "Natan"
+  },
+  {
+   "id": "solomon",
+   "n": "Solomon",
+   "p": "bathsheba",
+   "v": [
+    "3:5",
+    "3:10"
+   ],
+   "g": "built the Temple",
+   "branch": "kings",
+   "he": "שְׁלֹמֹה",
+   "tr": "Shlomo"
+  },
+  {
+   "id": "rehoboam",
+   "n": "Rehoboam",
+   "p": "solomon",
+   "v": [
+    "3:10"
+   ],
+   "g": "the kingdom divided",
+   "note": "Under him the ten northern tribes broke away (1 Kings 12).",
+   "he": "רְחַבְעָם",
+   "tr": "Rechavam"
+  },
+  {
+   "id": "abijah",
+   "n": "Abijah",
+   "p": "rehoboam",
+   "v": [
+    "3:10"
+   ],
+   "he": "אֲבִיָּה",
+   "tr": "Aviyah"
+  },
+  {
+   "id": "asa",
+   "n": "Asa",
+   "p": "abijah",
+   "v": [
+    "3:10"
+   ],
+   "g": "reformer",
+   "he": "אָסָא",
+   "tr": "Asa"
+  },
+  {
+   "id": "jehoshaphat",
+   "n": "Jehoshaphat",
+   "p": "asa",
+   "v": [
+    "3:10"
+   ],
+   "g": "reformer",
+   "he": "יְהוֹשָׁפָט",
+   "tr": "Yehoshafat"
+  },
+  {
+   "id": "joram",
+   "n": "Joram",
+   "p": "jehoshaphat",
+   "v": [
+    "3:11"
+   ],
+   "g": "married Ahab's daughter",
+   "he": "יוֹרָם",
+   "tr": "Yoram"
+  },
+  {
+   "id": "ahaziah",
+   "n": "Ahaziah",
+   "p": "joram",
+   "v": [
+    "3:11"
+   ],
+   "he": "אֲחַזְיָהוּ",
+   "tr": "Achazyahu"
+  },
+  {
+   "id": "joash",
+   "n": "Joash",
+   "p": "ahaziah",
+   "v": [
+    "3:11"
+   ],
+   "g": "saved as an infant",
+   "note": "Hidden in the Temple from Athaliah (2 Kings 11). Matthew 1:8 passes over Ahaziah, Joash and Amaziah.",
+   "he": "יוֹאָשׁ",
+   "tr": "Yoash"
+  },
+  {
+   "id": "amaziah",
+   "n": "Amaziah",
+   "p": "joash",
+   "v": [
+    "3:12"
+   ],
+   "he": "אֲמַצְיָהוּ",
+   "tr": "Amatzyahu"
+  },
+  {
+   "id": "azariah",
+   "n": "Azariah",
+   "p": "amaziah",
+   "v": [
+    "3:12"
+   ],
+   "g": "also called Uzziah",
+   "forms": [
+    "Uzziah"
+   ],
+   "he": "עֲזַרְיָה",
+   "tr": "Azaryah"
+  },
+  {
+   "id": "jotham",
+   "n": "Jotham",
+   "p": "azariah",
+   "v": [
+    "3:12"
+   ],
+   "he": "יוֹתָם",
+   "tr": "Yotam"
+  },
+  {
+   "id": "ahaz",
+   "n": "Ahaz",
+   "p": "jotham",
+   "v": [
+    "3:13"
+   ],
+   "note": "To him Isaiah gave the sign of Immanuel (Isaiah 7:14).",
+   "he": "אָחָז",
+   "tr": "Achaz"
+  },
+  {
+   "id": "hezekiah",
+   "n": "Hezekiah",
+   "p": "ahaz",
+   "v": [
+    "3:13"
+   ],
+   "g": "reformer",
+   "trad": "The Talmud says God wished to make Hezekiah the Messiah (Sanhedrin 94a).",
+   "he": "חִזְקִיָּהוּ",
+   "tr": "Chizkiyahu"
+  },
+  {
+   "id": "manasseh",
+   "n": "Manasseh",
+   "p": "hezekiah",
+   "v": [
+    "3:13"
+   ],
+   "g": "longest reign, 55 years",
+   "he": "מְנַשֶּׁה",
+   "tr": "Menasheh"
+  },
+  {
+   "id": "amon",
+   "n": "Amon",
+   "p": "manasseh",
+   "v": [
+    "3:14"
+   ],
+   "he": "אָמוֹן",
+   "tr": "Amon"
+  },
+  {
+   "id": "josiah",
+   "n": "Josiah",
+   "p": "amon",
+   "v": [
+    "3:14",
+    "3:15"
+   ],
+   "g": "found the Book of the Law",
+   "note": "2 Kings 22–23.",
+   "he": "יֹאשִׁיָּהוּ",
+   "tr": "Yoshiyahu"
+  },
+  {
+   "id": "johanan",
+   "n": "Johanan",
+   "p": "josiah",
+   "v": [
+    "3:15"
+   ],
+   "g": "the firstborn",
+   "he": "יוֹחָנָן",
+   "tr": "Yochanan"
+  },
+  {
+   "id": "jehoiakim",
+   "n": "Jehoiakim",
+   "p": "josiah",
+   "v": [
+    "3:15",
+    "3:16"
+   ],
+   "he": "יְהוֹיָקִים",
+   "tr": "Yehoyakim"
+  },
+  {
+   "id": "jeconiah",
+   "n": "Jeconiah",
+   "p": "jehoiakim",
+   "v": [
+    "3:16",
+    "3:17"
+   ],
+   "g": "Jehoiachin; taken captive",
+   "branch": "exile",
+   "note": "Exiled to Babylon in 597 BC; released by Evil-merodach (2 Kings 25:27–30). Babylonian ration tablets name \"Ya'ukin, king of Judah.\"",
+   "he": "יְכׇנְיָה",
+   "tr": "Yechonyah"
+  },
+  {
+   "id": "shealtiel",
+   "n": "Shealtiel",
+   "p": "jeconiah",
+   "v": [
+    "3:17"
+   ],
+   "he": "שְׁאַלְתִּיאֵל",
+   "tr": "Shealtiel"
+  },
+  {
+   "id": "malchiram",
+   "n": "Malchiram",
+   "p": "jeconiah",
+   "v": [
+    "3:18"
+   ],
+   "he": "מַלְכִּירָם",
+   "tr": "Malkiram"
+  },
+  {
+   "id": "pedaiah",
+   "n": "Pedaiah",
+   "p": "jeconiah",
+   "v": [
+    "3:18",
+    "3:19"
+   ],
+   "he": "פְּדָיָהוּ",
+   "tr": "Pedayah"
+  },
+  {
+   "id": "zerubbabel",
+   "n": "Zerubbabel",
+   "p": "pedaiah",
+   "v": [
+    "3:19"
+   ],
+   "g": "led the return",
+   "note": "Elsewhere \"son of Shealtiel\" (Ezra 3:2; Haggai 1:1); perhaps a levirate son or a grandson.",
+   "trad": "\"My signet ring\" (Haggai 2:23): the curse on Jeconiah (Jeremiah 22:30) is reversed in him, the rabbis said, because of exile and repentance (Pesikta de-Rav Kahana 24).",
+   "he": "זְרֻבָּבֶל",
+   "tr": "Zerubavel"
+  },
+  {
+   "id": "meshullam",
+   "n": "Meshullam",
+   "p": "zerubbabel",
+   "v": [
+    "3:19"
+   ],
+   "he": "מְשֻׁלָּם",
+   "tr": "Meshullam"
+  },
+  {
+   "id": "hananiah",
+   "n": "Hananiah",
+   "p": "zerubbabel",
+   "v": [
+    "3:19",
+    "3:21"
+   ],
+   "he": "חֲנַנְיָהוּ",
+   "tr": "Chananyah"
+  },
+  {
+   "id": "pelatiah",
+   "n": "Pelatiah",
+   "p": "hananiah",
+   "v": [
+    "3:21"
+   ],
+   "he": "פְּלַטְיָהוּ",
+   "tr": "Pelatyah"
+  },
+  {
+   "id": "jeshaiah",
+   "n": "Jeshaiah",
+   "p": "hananiah",
+   "v": [
+    "3:21"
+   ],
+   "he": "יְשַׁעְיָה",
+   "tr": "Yeshayah"
+  },
+  {
+   "id": "shecaniah",
+   "n": "Shecaniah",
+   "p": "hananiah",
+   "v": [
+    "3:21",
+    "3:22"
+   ],
+   "rel": "from",
+   "note": "The Hebrew of 3:21 is hard to follow; Shecaniah's link to Hananiah is not certain.",
+   "he": "שְׁכַנְיָה",
+   "tr": "Shechanyah"
+  },
+  {
+   "id": "shemaiah",
+   "n": "Shemaiah",
+   "p": "shecaniah",
+   "v": [
+    "3:22"
+   ],
+   "he": "שְׁמַעְיָהוּ",
+   "tr": "Shemayah"
+  },
+  {
+   "id": "hattush",
+   "n": "Hattush",
+   "p": "shemaiah",
+   "v": [
+    "3:22"
+   ],
+   "note": "Perhaps the Hattush who returned with Ezra (Ezra 8:2).",
+   "he": "חַטּוּשׁ",
+   "tr": "Chattush"
+  },
+  {
+   "id": "igal",
+   "n": "Igal",
+   "p": "shemaiah",
+   "v": [
+    "3:22"
+   ],
+   "he": "יִגְאָל",
+   "tr": "Yigal"
+  },
+  {
+   "id": "bariah",
+   "n": "Bariah",
+   "p": "shemaiah",
+   "v": [
+    "3:22"
+   ],
+   "he": "בָּרִיחַ",
+   "tr": "Bariach"
+  },
+  {
+   "id": "neariah",
+   "n": "Neariah",
+   "p": "shemaiah",
+   "v": [
+    "3:22",
+    "3:23"
+   ],
+   "he": "נְעַרְיָה",
+   "tr": "Nearyah"
+  },
+  {
+   "id": "elioenai",
+   "n": "Elioenai",
+   "p": "neariah",
+   "v": [
+    "3:23",
+    "3:24"
+   ],
+   "he": "אֶלְיוֹעֵינַי",
+   "tr": "Elyoenay"
+  },
+  {
+   "id": "hodaviah",
+   "n": "Hodaviah",
+   "p": "elioenai",
+   "v": [
+    "3:24"
+   ],
+   "he": "הוֹדַוְיָה",
+   "tr": "Hodavyah"
+  },
+  {
+   "id": "eliashib",
+   "n": "Eliashib",
+   "p": "elioenai",
+   "v": [
+    "3:24"
+   ],
+   "he": "אֶלְיָשִׁיב",
+   "tr": "Elyashiv"
+  },
+  {
+   "id": "pelaiah",
+   "n": "Pelaiah",
+   "p": "elioenai",
+   "v": [
+    "3:24"
+   ],
+   "he": "פְּלָיָה",
+   "tr": "Pelayah"
+  },
+  {
+   "id": "akkub",
+   "n": "Akkub",
+   "p": "elioenai",
+   "v": [
+    "3:24"
+   ],
+   "he": "עַקּוּב",
+   "tr": "Akkuv"
+  },
+  {
+   "id": "johanan-e",
+   "n": "Johanan",
+   "p": "elioenai",
+   "v": [
+    "3:24"
+   ],
+   "he": "יוֹחָנָן",
+   "tr": "Yochanan"
+  },
+  {
+   "id": "delaiah",
+   "n": "Delaiah",
+   "p": "elioenai",
+   "v": [
+    "3:24"
+   ],
+   "he": "דְּלָיָהוּ",
+   "tr": "Delayah"
+  },
+  {
+   "id": "anani",
+   "n": "Anani",
+   "p": "elioenai",
+   "v": [
+    "3:24"
+   ],
+   "g": "the last name in the line",
+   "trad": "The Targum on Chronicles reads Anani as \"the King Messiah who is to be revealed\" (from \"with the clouds,\" <i>ananei</i>, of Daniel 7:13).",
+   "he": "עֲנָנִי",
+   "tr": "Anani"
+  },
+  {
+   "id": "hizkiah",
+   "n": "Hizkiah",
+   "p": "neariah",
+   "v": [
+    "3:23"
+   ],
+   "he": "חִזְקִיָּהוּ",
+   "tr": "Chizkiyyah"
+  },
+  {
+   "id": "azrikam",
+   "n": "Azrikam",
+   "p": "neariah",
+   "v": [
+    "3:23"
+   ],
+   "he": "עַזְרִיקָם",
+   "tr": "Azrikam"
+  },
+  {
+   "id": "shaphat",
+   "n": "Shaphat",
+   "p": "shemaiah",
+   "v": [
+    "3:22"
+   ],
+   "he": "שָׁפָט",
+   "tr": "Shafat"
+  },
+  {
+   "id": "shelomith",
+   "n": "Shelomith",
+   "p": "zerubbabel",
+   "v": [
+    "3:19"
+   ],
+   "g": "their sister",
+   "sex": "f",
+   "sch": "A seal of \"Shelomith, maidservant of Elnathan the governor\" from the Persian period may name her.",
+   "he": "שְׁלֹמִית",
+   "tr": "Shelomit"
+  },
+  {
+   "id": "hashubah",
+   "n": "Hashubah",
+   "p": "zerubbabel",
+   "v": [
+    "3:20"
+   ],
+   "he": "חֲשֻׁבָה",
+   "tr": "Chashuvah"
+  },
+  {
+   "id": "ohel",
+   "n": "Ohel",
+   "p": "zerubbabel",
+   "v": [
+    "3:20"
+   ],
+   "he": "אֹהֶל",
+   "tr": "Ohel"
+  },
+  {
+   "id": "berechiah",
+   "n": "Berechiah",
+   "p": "zerubbabel",
+   "v": [
+    "3:20"
+   ],
+   "he": "בֶּרֶכְיָה",
+   "tr": "Berechyah"
+  },
+  {
+   "id": "hasadiah",
+   "n": "Hasadiah",
+   "p": "zerubbabel",
+   "v": [
+    "3:20"
+   ],
+   "he": "חֲסַדְיָה",
+   "tr": "Chasadyah"
+  },
+  {
+   "id": "jushab-hesed",
+   "n": "Jushab-hesed",
+   "p": "zerubbabel",
+   "v": [
+    "3:20"
+   ],
+   "he": "יוּשַׁב חֶסֶד",
+   "tr": "Yushav-Chesed"
+  },
+  {
+   "id": "shimei",
+   "n": "Shimei",
+   "p": "pedaiah",
+   "v": [
+    "3:19"
+   ],
+   "he": "שִׁמְעִי",
+   "tr": "Shimi"
+  },
+  {
+   "id": "shenazzar",
+   "n": "Shenazzar",
+   "p": "jeconiah",
+   "v": [
+    "3:18"
+   ],
+   "sch": "Often identified with Sheshbazzar, \"prince of Judah,\" who brought back the Temple vessels (Ezra 1:8).",
+   "he": "שֶׁנְאַצַּר",
+   "tr": "Shenatztzar"
+  },
+  {
+   "id": "jekamiah",
+   "n": "Jekamiah",
+   "p": "jeconiah",
+   "v": [
+    "3:18"
+   ],
+   "he": "יְקַמְיָה",
+   "tr": "Yekamyah"
+  },
+  {
+   "id": "hoshama",
+   "n": "Hoshama",
+   "p": "jeconiah",
+   "v": [
+    "3:18"
+   ],
+   "he": "הוֹשָׁמָע",
+   "tr": "Hoshama"
+  },
+  {
+   "id": "nedabiah",
+   "n": "Nedabiah",
+   "p": "jeconiah",
+   "v": [
+    "3:18"
+   ],
+   "he": "נְדַבְיָה",
+   "tr": "Nedavyah"
+  },
+  {
+   "id": "zedekiah-j",
+   "n": "Zedekiah",
+   "p": "jehoiakim",
+   "v": [
+    "3:16"
+   ],
+   "he": "צִדְקִיָּה",
+   "tr": "Tzidkiyahu"
+  },
+  {
+   "id": "zedekiah",
+   "n": "Zedekiah",
+   "p": "josiah",
+   "v": [
+    "3:15"
+   ],
+   "g": "last king of Judah",
+   "note": "Placed on the throne by Nebuchadnezzar; blinded and taken to Babylon in 586 BC.",
+   "he": "צִדְקִיָּהוּ",
+   "tr": "Tzidkiyahu"
+  },
+  {
+   "id": "shallum",
+   "n": "Shallum",
+   "p": "josiah",
+   "v": [
+    "3:15"
+   ],
+   "g": "Jehoahaz",
+   "note": "Reigned three months (Jeremiah 22:11).",
+   "he": "שַׁלּוּם",
+   "tr": "Shalum"
+  },
+  {
+   "id": "ibhar",
+   "n": "Ibhar",
+   "p": "david",
+   "v": [
+    "3:6"
+   ],
+   "branch": "jerusalem",
+   "he": "יִבְחָר",
+   "tr": "Yivchar"
+  },
+  {
+   "id": "elishua",
+   "n": "Elishua",
+   "p": "david",
+   "v": [
+    "3:6"
+   ],
+   "branch": "jerusalem",
+   "he": "אֱלִישָׁמָע",
+   "tr": "Elishama",
+   "note": "The Hebrew here reads Elishama, the same as 3:8; the BSB follows 2 Samuel 5:15 and 1 Chronicles 14:5, \"Elishua.\""
+  },
+  {
+   "id": "eliphelet",
+   "n": "Eliphelet",
+   "p": "david",
+   "v": [
+    "3:6"
+   ],
+   "branch": "jerusalem",
+   "he": "אֲלִיפֶלֶט",
+   "tr": "Elifelet"
+  },
+  {
+   "id": "nogah",
+   "n": "Nogah",
+   "p": "david",
+   "v": [
+    "3:7"
+   ],
+   "branch": "jerusalem",
+   "he": "נֹגַהּ",
+   "tr": "Nogah"
+  },
+  {
+   "id": "nepheg",
+   "n": "Nepheg",
+   "p": "david",
+   "v": [
+    "3:7"
+   ],
+   "branch": "jerusalem",
+   "he": "נֶפֶג",
+   "tr": "Nefeg"
+  },
+  {
+   "id": "japhia",
+   "n": "Japhia",
+   "p": "david",
+   "v": [
+    "3:7"
+   ],
+   "branch": "jerusalem",
+   "he": "יָפִיעַ",
+   "tr": "Yafia"
+  },
+  {
+   "id": "elishama",
+   "n": "Elishama",
+   "p": "david",
+   "v": [
+    "3:8"
+   ],
+   "branch": "jerusalem",
+   "he": "אֱלִישָׁמָע",
+   "tr": "Elishama"
+  },
+  {
+   "id": "eliada",
+   "n": "Eliada",
+   "p": "david",
+   "v": [
+    "3:8"
+   ],
+   "branch": "jerusalem",
+   "he": "אֶלְיָדָע",
+   "tr": "Elyada"
+  },
+  {
+   "id": "eliphelet-2",
+   "n": "Eliphelet",
+   "p": "david",
+   "v": [
+    "3:8"
+   ],
+   "branch": "jerusalem",
+   "he": "אֲלִיפֶלֶט",
+   "tr": "Elifelet"
+  },
+  {
+   "id": "tamar",
+   "n": "Tamar",
+   "p": "david",
+   "v": [
+    "3:9"
+   ],
+   "g": "their sister",
+   "sex": "f",
+   "branch": "jerusalem",
+   "note": "Daughter of Maacah, full sister of Absalom (2 Samuel 13).",
+   "he": "תָּמָר",
+   "tr": "Tamar"
+  }
+ ]
+}

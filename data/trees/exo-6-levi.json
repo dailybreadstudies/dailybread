@@ -1,0 +1,489 @@
+{
+ "id": "exo-6-levi",
+ "title": "Levi, Moses and Aaron",
+ "ref": "Exodus 6:14–25",
+ "col": "japheth",
+ "intro": [
+  "Placed between God's commission to Moses and his first meeting with Pharaoh, this genealogy shows who Moses and Aaron are: Levites, four generations from Jacob. It begins with Reuben and Simeon, the two older brothers, and then dwells on Levi, naming the clans that will serve at the tabernacle and the priestly line of Aaron to Phinehas."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi on Exodus 6; Mekhilta; Babylonian Talmud, Sotah 12a and Bava Batra 109b. Scholarly summary after the standard commentaries.",
+ "anchor": {
+  "book": "EXO",
+  "c": 6,
+  "v": 14
+ },
+ "people": [
+  {
+   "id": "israel",
+   "n": "Israel",
+   "p": null,
+   "v": [
+    "6:14"
+   ],
+   "g": "Jacob",
+   "he": "יִשְׂרָאֵל",
+   "tr": "Israel"
+  },
+  {
+   "id": "reuben",
+   "n": "Reuben",
+   "p": "israel",
+   "v": [
+    "6:14"
+   ],
+   "g": "the firstborn",
+   "he": "רְאוּבֵן",
+   "tr": "Reuven"
+  },
+  {
+   "id": "hanoch",
+   "n": "Hanoch",
+   "p": "reuben",
+   "v": [
+    "6:14"
+   ],
+   "he": "חֲנוֹךְ",
+   "tr": "Chanoch"
+  },
+  {
+   "id": "pallu",
+   "n": "Pallu",
+   "p": "reuben",
+   "v": [
+    "6:14"
+   ],
+   "he": "פַּלּוּא",
+   "tr": "Pallu"
+  },
+  {
+   "id": "hezron",
+   "n": "Hezron",
+   "p": "reuben",
+   "v": [
+    "6:14"
+   ],
+   "he": "חֶצְרֹן",
+   "tr": "Chetzron"
+  },
+  {
+   "id": "carmi",
+   "n": "Carmi",
+   "p": "reuben",
+   "v": [
+    "6:14"
+   ],
+   "he": "כַּרְמִי",
+   "tr": "Karmi"
+  },
+  {
+   "id": "simeon",
+   "n": "Simeon",
+   "p": "israel",
+   "v": [
+    "6:15"
+   ],
+   "he": "שִׁמְעוֹן",
+   "tr": "Shimon"
+  },
+  {
+   "id": "jemuel",
+   "n": "Jemuel",
+   "p": "simeon",
+   "v": [
+    "6:15"
+   ],
+   "he": "יְמוּאֵל",
+   "tr": "Yemuel"
+  },
+  {
+   "id": "jamin",
+   "n": "Jamin",
+   "p": "simeon",
+   "v": [
+    "6:15"
+   ],
+   "he": "יָמִין",
+   "tr": "Yamin"
+  },
+  {
+   "id": "ohad",
+   "n": "Ohad",
+   "p": "simeon",
+   "v": [
+    "6:15"
+   ],
+   "he": "אֹהַד",
+   "tr": "Ohad"
+  },
+  {
+   "id": "jachin",
+   "n": "Jachin",
+   "p": "simeon",
+   "v": [
+    "6:15"
+   ],
+   "he": "יָכִין",
+   "tr": "Yachin"
+  },
+  {
+   "id": "zohar",
+   "n": "Zohar",
+   "p": "simeon",
+   "v": [
+    "6:15"
+   ],
+   "he": "צֹחַר",
+   "tr": "Tzochar"
+  },
+  {
+   "id": "shaul",
+   "n": "Shaul",
+   "p": "simeon",
+   "v": [
+    "6:15"
+   ],
+   "g": "son of a Canaanite woman",
+   "he": "שָׁאוּל",
+   "tr": "Shaul"
+  },
+  {
+   "id": "levi",
+   "n": "Levi",
+   "p": "israel",
+   "v": [
+    "6:16"
+   ],
+   "g": "137 years",
+   "he": "לֵוִי",
+   "tr": "Levi"
+  },
+  {
+   "id": "gershon",
+   "n": "Gershon",
+   "p": "levi",
+   "v": [
+    "6:16",
+    "6:17"
+   ],
+   "g": "the Gershonites",
+   "he": "גֵּרְשׁוֹן",
+   "tr": "Gereshon"
+  },
+  {
+   "id": "libni",
+   "n": "Libni",
+   "p": "gershon",
+   "v": [
+    "6:17"
+   ],
+   "he": "לִבְנִי",
+   "tr": "Livni"
+  },
+  {
+   "id": "shimei",
+   "n": "Shimei",
+   "p": "gershon",
+   "v": [
+    "6:17"
+   ],
+   "he": "שִׁמְעִי",
+   "tr": "Shimi"
+  },
+  {
+   "id": "kohath",
+   "n": "Kohath",
+   "p": "levi",
+   "v": [
+    "6:16",
+    "6:18"
+   ],
+   "g": "133 years",
+   "note": "The Kohathites carried the ark and the holy furnishings (Numbers 4).",
+   "he": "קְהָת",
+   "tr": "Kehat"
+  },
+  {
+   "id": "amram",
+   "n": "Amram",
+   "p": "kohath",
+   "v": [
+    "6:18",
+    "6:20"
+   ],
+   "g": "137 years",
+   "he": "עַמְרָם",
+   "tr": "Amram"
+  },
+  {
+   "id": "jochebed",
+   "n": "Jochebed",
+   "p": "amram",
+   "v": [
+    "6:20"
+   ],
+   "g": "Amram's aunt",
+   "rel": "wife",
+   "sex": "f",
+   "note": "\"His father's sister\" (6:20), a marriage later forbidden (Leviticus 18:12).",
+   "trad": "Rashi on Genesis 46:15 counts her among the seventy who went down to Egypt: born \"between the walls\" as they arrived.",
+   "he": "יוֹכֶבֶד",
+   "tr": "Yocheved"
+  },
+  {
+   "id": "aaron",
+   "n": "Aaron",
+   "p": "jochebed",
+   "v": [
+    "6:20",
+    "6:23",
+    "6:25"
+   ],
+   "g": "the first high priest",
+   "note": "Born three years before Moses (Exodus 7:7).",
+   "trad": "\"Loving peace and pursuing peace\" (Mishnah Avot 1:12).",
+   "he": "אַהֲרֹן",
+   "tr": "Aharon"
+  },
+  {
+   "id": "elisheba",
+   "n": "Elisheba",
+   "p": "aaron",
+   "v": [
+    "6:23"
+   ],
+   "g": "sister of Nahshon of Judah",
+   "rel": "wife",
+   "sex": "f",
+   "note": "Through her the priestly line is joined to the house of Judah.",
+   "he": "אֱלִישֶׁבַע",
+   "tr": "Elisheva"
+  },
+  {
+   "id": "nadab",
+   "n": "Nadab",
+   "p": "elisheba",
+   "v": [
+    "6:23"
+   ],
+   "g": "died before the LORD",
+   "note": "Nadab and Abihu offered \"strange fire\" and died (Leviticus 10:1–2).",
+   "he": "נָדָב",
+   "tr": "Nadav"
+  },
+  {
+   "id": "abihu",
+   "n": "Abihu",
+   "p": "elisheba",
+   "v": [
+    "6:23"
+   ],
+   "g": "died before the LORD",
+   "he": "אֲבִיהוּא",
+   "tr": "Avihu"
+  },
+  {
+   "id": "eleazar",
+   "n": "Eleazar",
+   "p": "elisheba",
+   "v": [
+    "6:23",
+    "6:25"
+   ],
+   "g": "high priest after Aaron",
+   "he": "אֶלְעָזָר",
+   "tr": "Elazar"
+  },
+  {
+   "id": "phinehas",
+   "n": "Phinehas",
+   "p": "eleazar",
+   "v": [
+    "6:25"
+   ],
+   "g": "the zealous priest",
+   "note": "His mother was \"one of the daughters of Putiel\" (6:25). Given \"a covenant of perpetual priesthood\" (Numbers 25:13).",
+   "trad": "Bava Batra 109b identifies Putiel with Jethro, who \"fattened\" calves for idols, or with Joseph, who \"mastered\" his desire.",
+   "he": "פִּינְחָס",
+   "tr": "Pinchas"
+  },
+  {
+   "id": "ithamar",
+   "n": "Ithamar",
+   "p": "elisheba",
+   "v": [
+    "6:23"
+   ],
+   "g": "line of Eli",
+   "he": "אִיתָמָר",
+   "tr": "Itamar"
+  },
+  {
+   "id": "moses",
+   "n": "Moses",
+   "p": "jochebed",
+   "v": [
+    "6:20"
+   ],
+   "he": "מֹשֶׁה",
+   "tr": "Moshe"
+  },
+  {
+   "id": "izhar",
+   "n": "Izhar",
+   "p": "kohath",
+   "v": [
+    "6:18",
+    "6:21"
+   ],
+   "he": "יִצְהָר",
+   "tr": "Yitzhar"
+  },
+  {
+   "id": "korah",
+   "n": "Korah",
+   "p": "izhar",
+   "v": [
+    "6:21",
+    "6:24"
+   ],
+   "g": "led the rebellion",
+   "note": "He rebelled against Moses and Aaron (Numbers 16), but \"the sons of Korah did not die\" (Numbers 26:11); Psalms 42–49 and 84–88 bear their name.",
+   "he": "קֹרַח",
+   "tr": "Korach"
+  },
+  {
+   "id": "assir",
+   "n": "Assir",
+   "p": "korah",
+   "v": [
+    "6:24"
+   ],
+   "he": "אַסִּיר",
+   "tr": "Assir"
+  },
+  {
+   "id": "elkanah",
+   "n": "Elkanah",
+   "p": "korah",
+   "v": [
+    "6:24"
+   ],
+   "he": "אֶלְקָנָה",
+   "tr": "Elkanah"
+  },
+  {
+   "id": "abiasaph",
+   "n": "Abiasaph",
+   "p": "korah",
+   "v": [
+    "6:24"
+   ],
+   "he": "אֲבִיאָסָף",
+   "tr": "Aviasaf"
+  },
+  {
+   "id": "nepheg",
+   "n": "Nepheg",
+   "p": "izhar",
+   "v": [
+    "6:21"
+   ],
+   "he": "נֶפֶג",
+   "tr": "Nefeg"
+  },
+  {
+   "id": "zichri",
+   "n": "Zichri",
+   "p": "izhar",
+   "v": [
+    "6:21"
+   ],
+   "he": "זִכְרִי",
+   "tr": "Zichri"
+  },
+  {
+   "id": "hebron",
+   "n": "Hebron",
+   "p": "kohath",
+   "v": [
+    "6:18"
+   ],
+   "he": "חֶבְרוֹן",
+   "tr": "Chevron"
+  },
+  {
+   "id": "uzziel",
+   "n": "Uzziel",
+   "p": "kohath",
+   "v": [
+    "6:18",
+    "6:22"
+   ],
+   "he": "עֻזִּיאֵל",
+   "tr": "Uzziel"
+  },
+  {
+   "id": "mishael",
+   "n": "Mishael",
+   "p": "uzziel",
+   "v": [
+    "6:22"
+   ],
+   "note": "With Elzaphan he carried out the bodies of Nadab and Abihu (Leviticus 10:4).",
+   "he": "מִישָׁאֵל",
+   "tr": "Mishael"
+  },
+  {
+   "id": "elzaphan",
+   "n": "Elzaphan",
+   "p": "uzziel",
+   "v": [
+    "6:22"
+   ],
+   "he": "אֶלְצָפָן",
+   "tr": "Elitzafan"
+  },
+  {
+   "id": "sithri",
+   "n": "Sithri",
+   "p": "uzziel",
+   "v": [
+    "6:22"
+   ],
+   "he": "סִתְרִי",
+   "tr": "Sitri"
+  },
+  {
+   "id": "merari",
+   "n": "Merari",
+   "p": "levi",
+   "v": [
+    "6:16",
+    "6:19"
+   ],
+   "g": "the Merarites",
+   "he": "מְרָרִי",
+   "tr": "Merari"
+  },
+  {
+   "id": "mahli",
+   "n": "Mahli",
+   "p": "merari",
+   "v": [
+    "6:19"
+   ],
+   "he": "מַחְלִי",
+   "tr": "Machli"
+  },
+  {
+   "id": "mushi",
+   "n": "Mushi",
+   "p": "merari",
+   "v": [
+    "6:19"
+   ],
+   "he": "מוּשִׁי",
+   "tr": "Mushi"
+  }
+ ]
+}

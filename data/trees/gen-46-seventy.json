@@ -1,0 +1,936 @@
+{
+ "id": "gen-46-seventy",
+ "title": "The Seventy Who Went Down to Egypt",
+ "ref": "Genesis 46:8–27",
+ "branches": [
+  {
+   "id": "leah",
+   "name": "Leah",
+   "col": "japheth",
+   "count": 33
+  },
+  {
+   "id": "zilpah",
+   "name": "Zilpah",
+   "col": "ochre",
+   "count": 16
+  },
+  {
+   "id": "rachel",
+   "name": "Rachel",
+   "col": "ham",
+   "count": 14
+  },
+  {
+   "id": "bilhah",
+   "name": "Bilhah",
+   "col": "teal",
+   "count": 7
+  }
+ ],
+ "count": {
+  "legend": [
+   "among the seventy",
+   "counted by some",
+   "not counted"
+  ],
+  "card": [
+   "not counted",
+   "one of the seventy",
+   "counted by some"
+  ]
+ },
+ "intro": [
+  "\"The members of Jacob's family who went to Egypt were seventy in all\" (46:27): Leah's 33, Zilpah's 16, Rachel's 14 and Bilhah's 7. Seventy matches the seventy nations of Genesis 10: Israel's family stands for all the nations (Deuteronomy 32:8).",
+  "Leah's list has only 32 names once Er and Onan, who died in Canaan, are left out. Ibn Ezra counts Jacob himself; Rashi counts Jochebed, Levi's daughter, \"born between the walls\" as they entered Egypt (Numbers 26:59). Acts 7:14, following the Septuagint, gives 75."
+ ],
+ "countNote": "Filled dots are the seventy. Jacob is counted by some (Ibn Ezra); others count Jochebed in his place (Rashi).",
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi and Ibn Ezra on Genesis 46; Genesis Rabbah 94; Babylonian Talmud, Bava Batra 123b. Parallel lists: Numbers 26; 1 Chronicles 2–8.",
+ "anchor": {
+  "book": "GEN",
+  "c": 46,
+  "v": 8
+ },
+ "people": [
+  {
+   "id": "jacob",
+   "n": "Jacob",
+   "p": null,
+   "v": [
+    "46:8",
+    "46:15",
+    "46:18",
+    "46:19",
+    "46:22",
+    "46:25",
+    "46:26",
+    "46:27"
+   ],
+   "forms": [
+    "Israel"
+   ],
+   "count": 2,
+   "he": "יַעֲקֹב",
+   "tr": "Yaakov"
+  },
+  {
+   "id": "leah",
+   "n": "Leah",
+   "p": "jacob",
+   "v": [
+    "46:15",
+    "46:18"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "leah",
+   "he": "לֵאָה",
+   "tr": "Leah"
+  },
+  {
+   "id": "reuben",
+   "n": "Reuben",
+   "p": "leah",
+   "v": [
+    "46:8",
+    "46:9"
+   ],
+   "g": "Jacob's firstborn",
+   "count": 1,
+   "he": "רְאוּבֵן",
+   "tr": "Reuven"
+  },
+  {
+   "id": "hanoch",
+   "n": "Hanoch",
+   "p": "reuben",
+   "v": [
+    "46:9"
+   ],
+   "count": 1,
+   "he": "חֲנוֹךְ",
+   "tr": "Chanoch"
+  },
+  {
+   "id": "pallu",
+   "n": "Pallu",
+   "p": "reuben",
+   "v": [
+    "46:9"
+   ],
+   "count": 1,
+   "he": "פַּלּוּא",
+   "tr": "Pallu"
+  },
+  {
+   "id": "hezron-r",
+   "n": "Hezron",
+   "p": "reuben",
+   "v": [
+    "46:9"
+   ],
+   "count": 1,
+   "he": "חֶצְרֹן",
+   "tr": "Chetzron"
+  },
+  {
+   "id": "carmi",
+   "n": "Carmi",
+   "p": "reuben",
+   "v": [
+    "46:9"
+   ],
+   "count": 1,
+   "he": "כַּרְמִי",
+   "tr": "Karmi"
+  },
+  {
+   "id": "simeon",
+   "n": "Simeon",
+   "p": "leah",
+   "v": [
+    "46:10"
+   ],
+   "count": 1,
+   "he": "שִׁמְעוֹן",
+   "tr": "Shimon"
+  },
+  {
+   "id": "jemuel",
+   "n": "Jemuel",
+   "p": "simeon",
+   "v": [
+    "46:10"
+   ],
+   "count": 1,
+   "he": "יְמוּאֵל",
+   "tr": "Yemuel"
+  },
+  {
+   "id": "jamin",
+   "n": "Jamin",
+   "p": "simeon",
+   "v": [
+    "46:10"
+   ],
+   "count": 1,
+   "he": "יָמִין",
+   "tr": "Yamin"
+  },
+  {
+   "id": "ohad",
+   "n": "Ohad",
+   "p": "simeon",
+   "v": [
+    "46:10"
+   ],
+   "count": 1,
+   "he": "אֹהַד",
+   "tr": "Ohad"
+  },
+  {
+   "id": "jachin",
+   "n": "Jachin",
+   "p": "simeon",
+   "v": [
+    "46:10"
+   ],
+   "count": 1,
+   "he": "יָכִין",
+   "tr": "Yachin"
+  },
+  {
+   "id": "zohar",
+   "n": "Zohar",
+   "p": "simeon",
+   "v": [
+    "46:10"
+   ],
+   "count": 1,
+   "he": "צֹחַר",
+   "tr": "Tzochar"
+  },
+  {
+   "id": "shaul",
+   "n": "Shaul",
+   "p": "simeon",
+   "v": [
+    "46:10"
+   ],
+   "g": "son of a Canaanite woman",
+   "count": 1,
+   "trad": "Rashi: the son of Dinah, who had been with the Canaanite Shechem (Genesis 34).",
+   "he": "שָׁאוּל",
+   "tr": "Shaul"
+  },
+  {
+   "id": "levi",
+   "n": "Levi",
+   "p": "leah",
+   "v": [
+    "46:11"
+   ],
+   "count": 1,
+   "he": "לֵוִי",
+   "tr": "Levi"
+  },
+  {
+   "id": "gershon",
+   "n": "Gershon",
+   "p": "levi",
+   "v": [
+    "46:11"
+   ],
+   "count": 1,
+   "he": "גֵּרְשׁוֹן",
+   "tr": "Gereshon"
+  },
+  {
+   "id": "kohath",
+   "n": "Kohath",
+   "p": "levi",
+   "v": [
+    "46:11"
+   ],
+   "g": "grandfather of Moses",
+   "count": 1,
+   "he": "קְהָת",
+   "tr": "Kehat"
+  },
+  {
+   "id": "merari",
+   "n": "Merari",
+   "p": "levi",
+   "v": [
+    "46:11"
+   ],
+   "count": 1,
+   "he": "מְרָרִי",
+   "tr": "Merari"
+  },
+  {
+   "id": "judah",
+   "n": "Judah",
+   "p": "leah",
+   "v": [
+    "46:12"
+   ],
+   "count": 1,
+   "he": "יְהוּדָה",
+   "tr": "Yehudah"
+  },
+  {
+   "id": "er",
+   "n": "Er",
+   "p": "judah",
+   "v": [
+    "46:12"
+   ],
+   "g": "died in Canaan",
+   "count": 0,
+   "he": "עֵר",
+   "tr": "Er"
+  },
+  {
+   "id": "onan",
+   "n": "Onan",
+   "p": "judah",
+   "v": [
+    "46:12"
+   ],
+   "g": "died in Canaan",
+   "count": 0,
+   "he": "אוֹנָן",
+   "tr": "Onan"
+  },
+  {
+   "id": "shelah",
+   "n": "Shelah",
+   "p": "judah",
+   "v": [
+    "46:12"
+   ],
+   "count": 1,
+   "he": "שֵׁלָה",
+   "tr": "Shelah"
+  },
+  {
+   "id": "perez",
+   "n": "Perez",
+   "p": "judah",
+   "v": [
+    "46:12"
+   ],
+   "g": "ancestor of David",
+   "count": 1,
+   "he": "פֶּרֶץ",
+   "tr": "Peretz"
+  },
+  {
+   "id": "hezron",
+   "n": "Hezron",
+   "p": "perez",
+   "v": [
+    "46:12"
+   ],
+   "count": 1,
+   "he": "חֶצְרֹן",
+   "tr": "Chetzron"
+  },
+  {
+   "id": "hamul",
+   "n": "Hamul",
+   "p": "perez",
+   "v": [
+    "46:12"
+   ],
+   "count": 1,
+   "he": "חָמוּל",
+   "tr": "Chamul"
+  },
+  {
+   "id": "zerah",
+   "n": "Zerah",
+   "p": "judah",
+   "v": [
+    "46:12"
+   ],
+   "count": 1,
+   "he": "זֶרַח",
+   "tr": "Zerach"
+  },
+  {
+   "id": "issachar",
+   "n": "Issachar",
+   "p": "leah",
+   "v": [
+    "46:13"
+   ],
+   "count": 1,
+   "he": "יִשָּׂשכָר",
+   "tr": "Yissachar"
+  },
+  {
+   "id": "tola",
+   "n": "Tola",
+   "p": "issachar",
+   "v": [
+    "46:13"
+   ],
+   "count": 1,
+   "he": "תּוֹלָע",
+   "tr": "Tola"
+  },
+  {
+   "id": "puvah",
+   "n": "Puvah",
+   "p": "issachar",
+   "v": [
+    "46:13"
+   ],
+   "count": 1,
+   "he": "פֻוָּה",
+   "tr": "Puvah"
+  },
+  {
+   "id": "job",
+   "n": "Job",
+   "p": "issachar",
+   "v": [
+    "46:13"
+   ],
+   "g": "Jashub in Num 26:24",
+   "count": 1,
+   "he": "יוֹב",
+   "tr": "Yov"
+  },
+  {
+   "id": "shimron",
+   "n": "Shimron",
+   "p": "issachar",
+   "v": [
+    "46:13"
+   ],
+   "count": 1,
+   "he": "שִׁמְרֹן",
+   "tr": "Shimron"
+  },
+  {
+   "id": "zebulun",
+   "n": "Zebulun",
+   "p": "leah",
+   "v": [
+    "46:14"
+   ],
+   "count": 1,
+   "he": "זְבֻלוּן",
+   "tr": "Zevulun"
+  },
+  {
+   "id": "sered",
+   "n": "Sered",
+   "p": "zebulun",
+   "v": [
+    "46:14"
+   ],
+   "count": 1,
+   "he": "סֶרֶד",
+   "tr": "Sered"
+  },
+  {
+   "id": "elon",
+   "n": "Elon",
+   "p": "zebulun",
+   "v": [
+    "46:14"
+   ],
+   "count": 1,
+   "he": "אֵלוֹן",
+   "tr": "Elon"
+  },
+  {
+   "id": "jahleel",
+   "n": "Jahleel",
+   "p": "zebulun",
+   "v": [
+    "46:14"
+   ],
+   "count": 1,
+   "he": "יַחְלְאֵל",
+   "tr": "Yachleel"
+  },
+  {
+   "id": "dinah",
+   "n": "Dinah",
+   "p": "leah",
+   "v": [
+    "46:15"
+   ],
+   "sex": "f",
+   "count": 1,
+   "he": "דִּינָה",
+   "tr": "Dinah"
+  },
+  {
+   "id": "zilpah",
+   "n": "Zilpah",
+   "p": "jacob",
+   "v": [
+    "46:18"
+   ],
+   "g": "Leah's maidservant",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "zilpah",
+   "he": "זִלְפָּה",
+   "tr": "Zilpah"
+  },
+  {
+   "id": "gad",
+   "n": "Gad",
+   "p": "zilpah",
+   "v": [
+    "46:16"
+   ],
+   "count": 1,
+   "he": "גָּד",
+   "tr": "Gad"
+  },
+  {
+   "id": "ziphion",
+   "n": "Ziphion",
+   "p": "gad",
+   "v": [
+    "46:16"
+   ],
+   "count": 1,
+   "he": "צִפְיוֹן",
+   "tr": "Tzifyon"
+  },
+  {
+   "id": "haggi",
+   "n": "Haggi",
+   "p": "gad",
+   "v": [
+    "46:16"
+   ],
+   "count": 1,
+   "he": "חַגִּי",
+   "tr": "Chaggi"
+  },
+  {
+   "id": "shuni",
+   "n": "Shuni",
+   "p": "gad",
+   "v": [
+    "46:16"
+   ],
+   "count": 1,
+   "he": "שׁוּנִי",
+   "tr": "Shuni"
+  },
+  {
+   "id": "ezbon",
+   "n": "Ezbon",
+   "p": "gad",
+   "v": [
+    "46:16"
+   ],
+   "count": 1,
+   "he": "אֶצְבֹּן",
+   "tr": "Etzbon"
+  },
+  {
+   "id": "eri",
+   "n": "Eri",
+   "p": "gad",
+   "v": [
+    "46:16"
+   ],
+   "count": 1,
+   "he": "עֵרִי",
+   "tr": "Eri"
+  },
+  {
+   "id": "arodi",
+   "n": "Arodi",
+   "p": "gad",
+   "v": [
+    "46:16"
+   ],
+   "count": 1,
+   "he": "אֲרוֹדִי",
+   "tr": "Arodi"
+  },
+  {
+   "id": "areli",
+   "n": "Areli",
+   "p": "gad",
+   "v": [
+    "46:16"
+   ],
+   "count": 1,
+   "he": "אַרְאֵלִי",
+   "tr": "Areli"
+  },
+  {
+   "id": "asher",
+   "n": "Asher",
+   "p": "zilpah",
+   "v": [
+    "46:17"
+   ],
+   "count": 1,
+   "he": "אָשֵׁר",
+   "tr": "Asher"
+  },
+  {
+   "id": "imnah",
+   "n": "Imnah",
+   "p": "asher",
+   "v": [
+    "46:17"
+   ],
+   "count": 1,
+   "he": "יִמְנָה",
+   "tr": "Yimnah"
+  },
+  {
+   "id": "ishvah",
+   "n": "Ishvah",
+   "p": "asher",
+   "v": [
+    "46:17"
+   ],
+   "count": 1,
+   "he": "יִשְׁוָה",
+   "tr": "Yishvah"
+  },
+  {
+   "id": "ishvi",
+   "n": "Ishvi",
+   "p": "asher",
+   "v": [
+    "46:17"
+   ],
+   "count": 1,
+   "he": "יִשְׁוִי",
+   "tr": "Yishvi"
+  },
+  {
+   "id": "beriah",
+   "n": "Beriah",
+   "p": "asher",
+   "v": [
+    "46:17"
+   ],
+   "count": 1,
+   "he": "בְּרִיעָה",
+   "tr": "Beriyah"
+  },
+  {
+   "id": "heber",
+   "n": "Heber",
+   "p": "beriah",
+   "v": [
+    "46:17"
+   ],
+   "count": 1,
+   "he": "חֶבֶר",
+   "tr": "Chever"
+  },
+  {
+   "id": "malchiel",
+   "n": "Malchiel",
+   "p": "beriah",
+   "v": [
+    "46:17"
+   ],
+   "count": 1,
+   "he": "מַלְכִּיאֵל",
+   "tr": "Malkiel"
+  },
+  {
+   "id": "serah",
+   "n": "Serah",
+   "p": "asher",
+   "v": [
+    "46:17"
+   ],
+   "g": "their sister",
+   "sex": "f",
+   "count": 1,
+   "trad": "Midrash makes Serah daughter of Asher one of those who \"entered paradise alive\": she told Jacob that Joseph was alive and showed Moses where Joseph's bones lay (Targum Pseudo-Jonathan on 46:17; Sotah 13a).",
+   "he": "שֶׂרַח",
+   "tr": "Serach"
+  },
+  {
+   "id": "rachel",
+   "n": "Rachel",
+   "p": "jacob",
+   "v": [
+    "46:19",
+    "46:22",
+    "46:25"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "rachel",
+   "he": "רָחֵל",
+   "tr": "Rachel"
+  },
+  {
+   "id": "joseph",
+   "n": "Joseph",
+   "p": "rachel",
+   "v": [
+    "46:19",
+    "46:20",
+    "46:27"
+   ],
+   "g": "already in Egypt",
+   "count": 1,
+   "he": "יוֹסֵף",
+   "tr": "Yosef"
+  },
+  {
+   "id": "manasseh",
+   "n": "Manasseh",
+   "p": "joseph",
+   "v": [
+    "46:20"
+   ],
+   "g": "born in Egypt",
+   "count": 1,
+   "he": "מְנַשֶּׁה",
+   "tr": "Menasheh"
+  },
+  {
+   "id": "ephraim",
+   "n": "Ephraim",
+   "p": "joseph",
+   "v": [
+    "46:20"
+   ],
+   "g": "born in Egypt",
+   "count": 1,
+   "he": "אֶפְרַיִם",
+   "tr": "Efrayim"
+  },
+  {
+   "id": "benjamin",
+   "n": "Benjamin",
+   "p": "rachel",
+   "v": [
+    "46:19",
+    "46:21"
+   ],
+   "count": 1,
+   "he": "בִּנְיָמִן",
+   "tr": "Binyamin"
+  },
+  {
+   "id": "bela",
+   "n": "Bela",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "בֶּלַע",
+   "tr": "Bela"
+  },
+  {
+   "id": "becher",
+   "n": "Becher",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "בֶּכֶר",
+   "tr": "Becher"
+  },
+  {
+   "id": "ashbel",
+   "n": "Ashbel",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "אַשְׁבֵּל",
+   "tr": "Ashbel"
+  },
+  {
+   "id": "gera",
+   "n": "Gera",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "גֵּרָא",
+   "tr": "Gera"
+  },
+  {
+   "id": "naaman",
+   "n": "Naaman",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "נַעֲמָן",
+   "tr": "Naaman"
+  },
+  {
+   "id": "ehi",
+   "n": "Ehi",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "אֵחִי",
+   "tr": "Echi"
+  },
+  {
+   "id": "rosh",
+   "n": "Rosh",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "רֹאשׁ",
+   "tr": "Rosh"
+  },
+  {
+   "id": "muppim",
+   "n": "Muppim",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "מֻפִּים",
+   "tr": "Muppim"
+  },
+  {
+   "id": "huppim",
+   "n": "Huppim",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "חֻפִּים",
+   "tr": "Chuppim"
+  },
+  {
+   "id": "ard",
+   "n": "Ard",
+   "p": "benjamin",
+   "v": [
+    "46:21"
+   ],
+   "count": 1,
+   "he": "אַרְדְּ",
+   "tr": "Ard"
+  },
+  {
+   "id": "bilhah",
+   "n": "Bilhah",
+   "p": "jacob",
+   "v": [
+    "46:25"
+   ],
+   "g": "Rachel's maidservant",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "bilhah",
+   "he": "בִּלְהָה",
+   "tr": "Bilhah"
+  },
+  {
+   "id": "dan",
+   "n": "Dan",
+   "p": "bilhah",
+   "v": [
+    "46:23"
+   ],
+   "count": 1,
+   "he": "דָּן",
+   "tr": "Dan"
+  },
+  {
+   "id": "hushim",
+   "n": "Hushim",
+   "p": "dan",
+   "v": [
+    "46:23"
+   ],
+   "g": "Shuham in Num 26:42",
+   "count": 1,
+   "trad": "The midrash makes Hushim, deaf, the one who struck down Esau when he tried to stop Jacob's burial (Sotah 13a).",
+   "he": "חֻשִׁים",
+   "tr": "Chushim"
+  },
+  {
+   "id": "naphtali",
+   "n": "Naphtali",
+   "p": "bilhah",
+   "v": [
+    "46:24"
+   ],
+   "count": 1,
+   "he": "נַפְתָּלִי",
+   "tr": "Naftali"
+  },
+  {
+   "id": "jahzeel",
+   "n": "Jahzeel",
+   "p": "naphtali",
+   "v": [
+    "46:24"
+   ],
+   "count": 1,
+   "he": "יַחְצְאֵל",
+   "tr": "Yachtzeel"
+  },
+  {
+   "id": "guni",
+   "n": "Guni",
+   "p": "naphtali",
+   "v": [
+    "46:24"
+   ],
+   "count": 1,
+   "he": "גּוּנִי",
+   "tr": "Guni"
+  },
+  {
+   "id": "jezer",
+   "n": "Jezer",
+   "p": "naphtali",
+   "v": [
+    "46:24"
+   ],
+   "count": 1,
+   "he": "יֵצֶר",
+   "tr": "Yetzer"
+  },
+  {
+   "id": "shillem",
+   "n": "Shillem",
+   "p": "naphtali",
+   "v": [
+    "46:24"
+   ],
+   "count": 1,
+   "he": "שִׁלֵּם",
+   "tr": "Shillem"
+  }
+ ]
+}

@@ -1,0 +1,317 @@
+{
+ "id": "gen-29-jacob",
+ "title": "Jacob's Children",
+ "ref": "Genesis 29–30; 35",
+ "branches": [
+  {
+   "id": "leah",
+   "name": "Leah",
+   "col": "japheth"
+  },
+  {
+   "id": "bilhah",
+   "name": "Bilhah",
+   "col": "teal"
+  },
+  {
+   "id": "zilpah",
+   "name": "Zilpah",
+   "col": "ochre"
+  },
+  {
+   "id": "rachel",
+   "name": "Rachel",
+   "col": "ham"
+  }
+ ],
+ "intro": [
+  "The twelve sons of Jacob, the fathers of the tribes of Israel, are born to four mothers: Leah and Rachel, and their maidservants Zilpah and Bilhah. Each name is explained by the mother's words at the birth, many of them prayers. Dinah is the only daughter named.",
+  "The short line beside each name gives the meaning the text itself draws from it."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi on Genesis 29–30 and 35; Genesis Rabbah 70–73; Babylonian Talmud, Berakhot 7b and 60a.",
+ "anchor": {
+  "book": "GEN",
+  "c": 29,
+  "v": 31
+ },
+ "people": [
+  {
+   "id": "jacob",
+   "n": "Jacob",
+   "p": null,
+   "v": [
+    "30:1",
+    "30:2",
+    "30:4",
+    "35:22",
+    "35:23",
+    "35:26"
+   ],
+   "forms": [
+    "Israel"
+   ],
+   "note": "Renamed Israel (32:28; 35:10).",
+   "he": "יַעֲקֹב",
+   "tr": "Yaakov"
+  },
+  {
+   "id": "leah",
+   "n": "Leah",
+   "p": "jacob",
+   "v": [
+    "29:31",
+    "29:32",
+    "30:9",
+    "30:14",
+    "30:16",
+    "30:17",
+    "35:23"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "leah",
+   "he": "לֵאָה",
+   "tr": "Leah"
+  },
+  {
+   "id": "reuben",
+   "n": "Reuben",
+   "p": "leah",
+   "v": [
+    "29:32",
+    "30:14",
+    "35:22",
+    "35:23"
+   ],
+   "g": "\"the LORD has seen\"",
+   "note": "Jacob's firstborn: <i>re'u ben</i>, \"see, a son\"; \"the LORD has seen (<i>ra'ah</i>) my affliction.\"",
+   "trad": "The sages contrast Reuben, who sold nothing, with Esau, who sold his birthright (Berakhot 7b).",
+   "he": "רְאוּבֵן",
+   "tr": "Reuven"
+  },
+  {
+   "id": "simeon",
+   "n": "Simeon",
+   "p": "leah",
+   "v": [
+    "29:33",
+    "35:23"
+   ],
+   "g": "\"the LORD has heard\"",
+   "note": "From <i>shama</i>, \"to hear.\"",
+   "he": "שִׁמְעוֹן",
+   "tr": "Shimon"
+  },
+  {
+   "id": "levi",
+   "n": "Levi",
+   "p": "leah",
+   "v": [
+    "29:34",
+    "35:23"
+   ],
+   "g": "\"attached\"",
+   "note": "\"Now my husband will become attached (<i>yillaveh</i>) to me.\"",
+   "he": "לֵוִי",
+   "tr": "Levi"
+  },
+  {
+   "id": "judah",
+   "n": "Judah",
+   "p": "leah",
+   "v": [
+    "29:35",
+    "35:23"
+   ],
+   "g": "\"praise\"",
+   "note": "\"This time I will praise (<i>odeh</i>) the LORD.\"",
+   "trad": "\"Leah was the first to give thanks to the Holy One\" (Berakhot 7b). From Judah's name come <i>Yehudi</i>, \"Jew,\" and <i>todah</i>, \"thanks.\"",
+   "he": "יְהוּדָה",
+   "tr": "Yehudah"
+  },
+  {
+   "id": "issachar",
+   "n": "Issachar",
+   "p": "leah",
+   "v": [
+    "30:18",
+    "35:23"
+   ],
+   "g": "\"reward\"",
+   "note": "\"God has rewarded (<i>sekhar</i>) me.\"",
+   "he": "יִשָּׂשכָר",
+   "tr": "Yissachar"
+  },
+  {
+   "id": "zebulun",
+   "n": "Zebulun",
+   "p": "leah",
+   "v": [
+    "30:20",
+    "35:23"
+   ],
+   "g": "\"honour\"",
+   "note": "\"My husband will honour (<i>yizbeleni</i>) me.\"",
+   "he": "זְבֻלוּן",
+   "tr": "Zevulun"
+  },
+  {
+   "id": "dinah",
+   "n": "Dinah",
+   "p": "leah",
+   "v": [
+    "30:21"
+   ],
+   "g": "\"judgment\"",
+   "sex": "f",
+   "trad": "Berakhot 60a: Leah prayed that the child be a girl so that Rachel would not have fewer sons than the maidservants.",
+   "he": "דִּינָה",
+   "tr": "Dinah"
+  },
+  {
+   "id": "bilhah",
+   "n": "Bilhah",
+   "p": "jacob",
+   "v": [
+    "30:3",
+    "30:4",
+    "30:5",
+    "30:7",
+    "35:22",
+    "35:25"
+   ],
+   "g": "Rachel's maidservant",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "bilhah",
+   "he": "בִּלְהָה",
+   "tr": "Bilhah"
+  },
+  {
+   "id": "dan",
+   "n": "Dan",
+   "p": "bilhah",
+   "v": [
+    "30:6",
+    "35:25"
+   ],
+   "g": "\"He has vindicated\"",
+   "note": "\"God has vindicated (<i>danani</i>) me.\"",
+   "he": "דָּן",
+   "tr": "Dan"
+  },
+  {
+   "id": "naphtali",
+   "n": "Naphtali",
+   "p": "bilhah",
+   "v": [
+    "30:8",
+    "35:25"
+   ],
+   "g": "\"my wrestling\"",
+   "note": "\"In my great struggles (<i>naftulei</i>) I have wrestled with my sister.\"",
+   "he": "נַפְתָּלִי",
+   "tr": "Naftali"
+  },
+  {
+   "id": "zilpah",
+   "n": "Zilpah",
+   "p": "jacob",
+   "v": [
+    "30:9",
+    "30:10",
+    "30:12",
+    "35:26"
+   ],
+   "g": "Leah's maidservant",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "zilpah",
+   "he": "זִלְפָּה",
+   "tr": "Zilpah"
+  },
+  {
+   "id": "gad",
+   "n": "Gad",
+   "p": "zilpah",
+   "v": [
+    "30:11",
+    "35:26"
+   ],
+   "g": "\"good fortune\"",
+   "note": "\"How fortunate (<i>ba gad</i>)!\"",
+   "he": "גָּד",
+   "tr": "Gad"
+  },
+  {
+   "id": "asher",
+   "n": "Asher",
+   "p": "zilpah",
+   "v": [
+    "30:13",
+    "35:26"
+   ],
+   "g": "\"happy\"",
+   "note": "\"How happy (<i>be'oshri</i>) I am!\"",
+   "he": "אָשֵׁר",
+   "tr": "Asher"
+  },
+  {
+   "id": "rachel",
+   "n": "Rachel",
+   "p": "jacob",
+   "v": [
+    "29:31",
+    "30:1",
+    "30:2",
+    "30:3",
+    "30:7",
+    "30:8",
+    "30:14",
+    "30:15",
+    "30:22",
+    "35:16",
+    "35:19",
+    "35:20",
+    "35:24",
+    "35:25"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "rachel",
+   "note": "She died giving birth to Benjamin and was buried on the way to Ephrath; Rachel's tomb is still venerated near Bethlehem.",
+   "trad": "\"Rachel weeping for her children\" (Jeremiah 31:15): the midrash says she was buried by the road so she could pray for the exiles passing by (Rashi on 48:7).",
+   "he": "רָחֵל",
+   "tr": "Rachel"
+  },
+  {
+   "id": "joseph",
+   "n": "Joseph",
+   "p": "rachel",
+   "v": [
+    "30:24",
+    "35:24"
+   ],
+   "g": "\"may He add\"",
+   "note": "\"May the LORD add (<i>yosef</i>) to me another son\"; also \"God has taken away (<i>asaf</i>) my shame.\"",
+   "he": "יוֹסֵף",
+   "tr": "Yosef"
+  },
+  {
+   "id": "benjamin",
+   "n": "Benjamin",
+   "p": "rachel",
+   "v": [
+    "35:18",
+    "35:24"
+   ],
+   "g": "\"son of the right hand\"",
+   "forms": [
+    "Ben-oni"
+   ],
+   "note": "Rachel named him Ben-oni, \"son of my sorrow\"; Jacob called him Benjamin. The only son born in the land of Canaan.",
+   "he": "בִּנְיָמִין",
+   "tr": "Binyamin"
+  }
+ ]
+}

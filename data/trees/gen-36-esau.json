@@ -1,0 +1,307 @@
+{
+ "id": "gen-36-esau",
+ "title": "The Family of Esau",
+ "ref": "Genesis 36:1–19",
+ "branches": [
+  {
+   "id": "adah",
+   "name": "Adah",
+   "col": "ham"
+  },
+  {
+   "id": "basemath",
+   "name": "Basemath",
+   "col": "ochre"
+  },
+  {
+   "id": "oholibamah",
+   "name": "Oholibamah",
+   "col": "plum"
+  }
+ ],
+ "intro": [
+  "Esau, \"that is, Edom,\" settles in the hill country of Seir, south-east of the Dead Sea. His sons and grandsons become the chiefs (<i>alufim</i>) of Edom. Many of the names are clans and places of Edom known from the prophets (Teman, Kenaz, Korah).",
+  "The chapter goes on to the Horites of Seir (36:20–30) and to the kings who reigned in Edom \"before any king reigned over the Israelites\" (36:31–39)."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi on Genesis 36; Babylonian Talmud, Sanhedrin 99b. Scholarly summary after the standard commentaries.",
+ "anchor": {
+  "book": "GEN",
+  "c": 36,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "esau",
+   "n": "Esau",
+   "p": null,
+   "v": [
+    "36:1",
+    "36:2",
+    "36:4",
+    "36:5",
+    "36:9",
+    "36:10",
+    "36:14",
+    "36:15",
+    "36:19"
+   ],
+   "g": "Edom",
+   "forms": [
+    "Edom"
+   ],
+   "he": "עֵשָׂו",
+   "tr": "Esav"
+  },
+  {
+   "id": "adah",
+   "n": "Adah",
+   "p": "esau",
+   "v": [
+    "36:2",
+    "36:4",
+    "36:10",
+    "36:12",
+    "36:16"
+   ],
+   "g": "daughter of Elon the Hittite",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "adah",
+   "he": "עָדָה",
+   "tr": "Adah"
+  },
+  {
+   "id": "eliphaz",
+   "n": "Eliphaz",
+   "p": "adah",
+   "v": [
+    "36:4",
+    "36:10",
+    "36:11",
+    "36:12",
+    "36:15",
+    "36:16"
+   ],
+   "g": "Esau's firstborn",
+   "note": "Job's friend Eliphaz is \"the Temanite\" (Job 2:11).",
+   "he": "אֱלִיפַז",
+   "tr": "Elifaz"
+  },
+  {
+   "id": "teman",
+   "n": "Teman",
+   "p": "eliphaz",
+   "v": [
+    "36:11",
+    "36:15"
+   ],
+   "g": "region of Edom",
+   "sch": "A region (or town) of Edom, famed for wisdom (Jeremiah 49:7; Obadiah 9).",
+   "he": "תֵּימָן",
+   "tr": "Teiman"
+  },
+  {
+   "id": "omar",
+   "n": "Omar",
+   "p": "eliphaz",
+   "v": [
+    "36:11",
+    "36:15"
+   ],
+   "he": "אוֹמָר",
+   "tr": "Omar"
+  },
+  {
+   "id": "zepho",
+   "n": "Zepho",
+   "p": "eliphaz",
+   "v": [
+    "36:11",
+    "36:15"
+   ],
+   "he": "צְפוֹ",
+   "tr": "Tzefo"
+  },
+  {
+   "id": "gatam",
+   "n": "Gatam",
+   "p": "eliphaz",
+   "v": [
+    "36:11",
+    "36:16"
+   ],
+   "he": "גַּעְתָּם",
+   "tr": "Gatam"
+  },
+  {
+   "id": "kenaz",
+   "n": "Kenaz",
+   "p": "eliphaz",
+   "v": [
+    "36:11",
+    "36:15"
+   ],
+   "g": "the Kenizzites",
+   "note": "Caleb is called \"the Kenizzite\" (Numbers 32:12), and Othniel is \"son of Kenaz\" (Judges 1:13).",
+   "he": "קְנַז",
+   "tr": "Kenaz"
+  },
+  {
+   "id": "timna",
+   "n": "Timna",
+   "p": "eliphaz",
+   "v": [
+    "36:12"
+   ],
+   "g": "sister of the Horite Lotan",
+   "rel": "wife",
+   "sex": "f",
+   "concubine": true,
+   "trad": "The Talmud says Timna, a princess, wished to join Abraham's family and was turned away, so she became a concubine to Eliphaz; from her came Amalek (Sanhedrin 99b).",
+   "he": "תִּמְנָע",
+   "tr": "Timna"
+  },
+  {
+   "id": "amalek",
+   "n": "Amalek",
+   "p": "timna",
+   "v": [
+    "36:12",
+    "36:16"
+   ],
+   "g": "the Amalekites",
+   "note": "Ancestor of Israel's first enemy after the Exodus (Exodus 17:8–16; Deuteronomy 25:17–19).",
+   "he": "עֲמָלֵק",
+   "tr": "Amalek"
+  },
+  {
+   "id": "basemath",
+   "n": "Basemath",
+   "p": "esau",
+   "v": [
+    "36:3",
+    "36:4",
+    "36:10",
+    "36:13",
+    "36:17"
+   ],
+   "g": "daughter of Ishmael",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "basemath",
+   "he": "בָּשְׂמַת",
+   "tr": "Basemat"
+  },
+  {
+   "id": "reuel",
+   "n": "Reuel",
+   "p": "basemath",
+   "v": [
+    "36:4",
+    "36:10",
+    "36:13",
+    "36:17"
+   ],
+   "he": "רְעוּאֵל",
+   "tr": "Reuel"
+  },
+  {
+   "id": "nahath",
+   "n": "Nahath",
+   "p": "reuel",
+   "v": [
+    "36:13",
+    "36:17"
+   ],
+   "he": "נַחַת",
+   "tr": "Nachat"
+  },
+  {
+   "id": "zerah",
+   "n": "Zerah",
+   "p": "reuel",
+   "v": [
+    "36:13",
+    "36:17"
+   ],
+   "he": "זֶרַח",
+   "tr": "Zerach"
+  },
+  {
+   "id": "shammah",
+   "n": "Shammah",
+   "p": "reuel",
+   "v": [
+    "36:13",
+    "36:17"
+   ],
+   "he": "שַׁמָּה",
+   "tr": "Shammah"
+  },
+  {
+   "id": "mizzah",
+   "n": "Mizzah",
+   "p": "reuel",
+   "v": [
+    "36:13",
+    "36:17"
+   ],
+   "he": "מִזָּה",
+   "tr": "Mizzah"
+  },
+  {
+   "id": "oholibamah",
+   "n": "Oholibamah",
+   "p": "esau",
+   "v": [
+    "36:2",
+    "36:5",
+    "36:14",
+    "36:18"
+   ],
+   "g": "daughter of Anah the Horite",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "oholibamah",
+   "he": "אׇהֳלִיבָמָה",
+   "tr": "Oholivamah"
+  },
+  {
+   "id": "jeush",
+   "n": "Jeush",
+   "p": "oholibamah",
+   "v": [
+    "36:5",
+    "36:14",
+    "36:18"
+   ],
+   "he": "יְעוּשׁ",
+   "tr": "Yeush"
+  },
+  {
+   "id": "jalam",
+   "n": "Jalam",
+   "p": "oholibamah",
+   "v": [
+    "36:5",
+    "36:14",
+    "36:18"
+   ],
+   "he": "יַעְלָם",
+   "tr": "Yalam"
+  },
+  {
+   "id": "korah",
+   "n": "Korah",
+   "p": "oholibamah",
+   "v": [
+    "36:5",
+    "36:14",
+    "36:18"
+   ],
+   "note": "Not the Levite Korah of Numbers 16.",
+   "he": "קֹרַח",
+   "tr": "Korach"
+  }
+ ]
+}

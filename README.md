@@ -121,21 +121,29 @@ below the verse. Loaded on `index.html`, which shows only finds marked ready wit
 
 ## Family trees
 
-`assets/trees.js` and `assets/trees.css` (loaded on the test page `maps-test.html` for now) add a
-family-tree button beside the verse where a genealogy begins. On wide screens the tree opens in the
-free space left of the text (the text column does not move); on phones it opens as a sheet from the
-bottom. Names in the chapter are tappable (dotted underline on hover only): a tap opens the tree at that
-person, highlights the line back to the first ancestor and shows a card with the Hebrew name, verses,
-Jewish tradition, scholarship and a certainty label.
+`assets/trees.js` and `assets/trees.css` add a family-tree button beside the verse where a genealogy
+begins. On wide screens the tree opens in the free space left of the text (the text column does not move);
+on phones it opens as a sheet from the bottom. Names in the passage are tappable (dotted underline on hover
+only): a tap shows that person in the tree and highlights the line back to the first ancestor; tapping the
+name in the tree opens a card with the Hebrew (and, in the Gospels, Greek) name, verses, notes, Jewish
+tradition and scholarship. The reader's Hebrew-names setting applies inside the tree too.
 
-- `data/trees/index.json` lists the trees, where each begins (`anchors`, with the verse range whose
-  names are linked) and a `status`. The public site shows only `ready` trees; the test page shows all.
-- `data/trees/<id>.json` holds `intro`, `branches`, `countNote`, `sources` and `people`: each with
-  `id`, `n` (name as in the BSB), `p` (parent id), `kind` (person | people | place), `count`
-  (1 = one of the seventy, 2 = counted by some, 0 = not counted), `v` (verses), `he`, `tr`, `g` (short
-  identification shown in the tree), `cert` (established | probable | possible | uncertain), `trad`,
-  `sch`, optional `note`, `forms` (other spellings in the text, e.g. "Kittites"), `rel: "from"` (drawn dashed).
-- Hebrew spellings follow the Hebrew text in `data/orig/`.
+Trees: Genesis 4–5, 10, 11 and 22, 25, 29–30 and 35, 36 (Esau; the Horites), 46; Exodus 6; Ruth 4;
+1 Chronicles 3 and 6; Matthew 1; Luke 3.
+
+- `tools/build_trees.py` holds every tree except Genesis 10 (people, parents, verses, notes) and writes
+  `data/trees/<id>.json` and `data/trees/index.json`. It looks up each name's Hebrew or Greek in
+  `data/words/` and checks every Hebrew name against the Hebrew text in `data/orig/` (using this passage's
+  spelling where it differs). Edit the tree there and run `python3 tools/build_trees.py`.
+- `data/trees/gen-10-nations.json` (the Table of Nations) is edited by hand.
+- `data/trees/index.json`: each tree's `anchors` (verse where the button sits, and the verse range whose
+  names are linked) and `status` (`ready` shows on the public site; anything else only on `maps-test.html`).
+- Person fields: `id`, `n` (BSB name), `p` (parent id), `v` (verses, "c:v"), `g` (short line in the tree),
+  `kind`, `sex: "f"`, `rel` ("wife" = drawn dotted with her children under her; "from" = dashed),
+  `count` (with a tree-level `count` legend), `he`, `gr`, `tr`, `cert`, `trad`, `sch`, `note`, `forms`
+  (other spellings in the text), `kin` (overrides "son of …"). Tree fields: `compact` (an only child stays
+  in its parent's column, for long single lines), `branches` (coloured groups; `branchToggle: false` for
+  labels only), `col`, `intro`, `countNote`, `sources`.
 
 ## Rebuilding the BSB data
 

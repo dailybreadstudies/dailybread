@@ -1,0 +1,437 @@
+{
+ "id": "gen-11-shem-abram",
+ "title": "From Shem to Abram",
+ "ref": "Genesis 11; 22",
+ "compact": true,
+ "col": "shem",
+ "intro": [
+  "The second ten generations, from Shem to Abram, mirror the ten from Adam to Noah. Lifespans shorten sharply after the flood. The line then opens into Terah's family: Abram, Nahor and Haran, and their wives and children, who will reappear in the stories of Isaac and Jacob (Rebekah, Laban, Rachel and Leah descend from Nahor).",
+  "Ages are those of the Hebrew text. The Septuagint, followed by Luke 3:36, adds Cainan between Arphaxad and Shelah."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Mishnah Avot 5:2; Genesis Rabbah 38; Rashi on Genesis 11; Seder Olam. Scholarly summary after the standard commentaries.",
+ "anchor": {
+  "book": "GEN",
+  "c": 11,
+  "v": 10
+ },
+ "people": [
+  {
+   "id": "shem",
+   "n": "Shem",
+   "p": null,
+   "v": [
+    "11:10",
+    "11:11"
+   ],
+   "g": "600 years",
+   "note": "Father of Arphaxad at 100, two years after the flood; lived 600 years.",
+   "trad": "Identified by the sages with Melchizedek, king of Salem (Nedarim 32b).",
+   "he": "שֵׁם",
+   "tr": "Shem"
+  },
+  {
+   "id": "arphaxad",
+   "n": "Arphaxad",
+   "p": "shem",
+   "v": [
+    "11:10",
+    "11:11",
+    "11:12",
+    "11:13"
+   ],
+   "g": "438 years",
+   "note": "Father of Shelah at 35.",
+   "he": "אַרְפַּכְשַׁד",
+   "tr": "Arpachshad"
+  },
+  {
+   "id": "shelah",
+   "n": "Shelah",
+   "p": "arphaxad",
+   "v": [
+    "11:12",
+    "11:13",
+    "11:14",
+    "11:15"
+   ],
+   "g": "433 years",
+   "note": "Father of Eber at 30.",
+   "he": "שֶׁלַח",
+   "tr": "Shelach"
+  },
+  {
+   "id": "eber",
+   "n": "Eber",
+   "p": "shelah",
+   "v": [
+    "11:14",
+    "11:15",
+    "11:16",
+    "11:17"
+   ],
+   "g": "464 years",
+   "note": "Father of Peleg at 34. The eponym of the Hebrews.",
+   "he": "עֵבֶר",
+   "tr": "Ever"
+  },
+  {
+   "id": "peleg",
+   "n": "Peleg",
+   "p": "eber",
+   "v": [
+    "11:16",
+    "11:17",
+    "11:18",
+    "11:19"
+   ],
+   "g": "239 years",
+   "note": "\"In his days the earth was divided\" (10:25).",
+   "he": "פֶּלֶג",
+   "tr": "Peleg"
+  },
+  {
+   "id": "reu",
+   "n": "Reu",
+   "p": "peleg",
+   "v": [
+    "11:18",
+    "11:19",
+    "11:20",
+    "11:21"
+   ],
+   "g": "239 years",
+   "he": "רְעוּ",
+   "tr": "Reu"
+  },
+  {
+   "id": "serug",
+   "n": "Serug",
+   "p": "reu",
+   "v": [
+    "11:20",
+    "11:21",
+    "11:22",
+    "11:23"
+   ],
+   "g": "230 years",
+   "sch": "Sarugi, a town near Haran, is known from Assyrian texts.",
+   "he": "שְׂרוּג",
+   "tr": "Serug"
+  },
+  {
+   "id": "nahor-1",
+   "n": "Nahor",
+   "p": "serug",
+   "v": [
+    "11:22",
+    "11:23",
+    "11:24",
+    "11:25"
+   ],
+   "g": "148 years",
+   "note": "Grandfather of Abram, of the same name as Abram's brother.",
+   "he": "נָחוֹר",
+   "tr": "Nachor"
+  },
+  {
+   "id": "terah",
+   "n": "Terah",
+   "p": "nahor-1",
+   "v": [
+    "11:24",
+    "11:25",
+    "11:26",
+    "11:27",
+    "11:28",
+    "11:31",
+    "11:32"
+   ],
+   "g": "205 years",
+   "note": "He set out from Ur of the Chaldeans for Canaan and settled in Haran, where he died.",
+   "trad": "Joshua 24:2: \"Terah… worshiped other gods.\" The midrash tells of Abram smashing the idols in his father's shop (Genesis Rabbah 38:13).",
+   "sch": "Several family names (Terah, Nahor, Serug, Haran) match places in the region of Haran in upper Mesopotamia.",
+   "he": "תֶּרַח",
+   "tr": "Terach"
+  },
+  {
+   "id": "abram",
+   "n": "Abram",
+   "p": "terah",
+   "v": [
+    "11:26",
+    "11:27",
+    "11:29",
+    "11:31",
+    "22:20",
+    "22:23"
+   ],
+   "forms": [
+    "Abraham"
+   ],
+   "note": "Renamed Abraham, \"father of a multitude\" (17:5).",
+   "he": "אַבְרָם",
+   "tr": "Avram"
+  },
+  {
+   "id": "sarai",
+   "n": "Sarai",
+   "p": "abram",
+   "v": [
+    "11:29",
+    "11:30",
+    "11:31"
+   ],
+   "g": "barren",
+   "rel": "wife",
+   "sex": "f",
+   "note": "Renamed Sarah (17:15).",
+   "trad": "Rashi identifies Iscah (11:29) with Sarai.",
+   "he": "שָׂרַי",
+   "tr": "Sarai"
+  },
+  {
+   "id": "nahor",
+   "n": "Nahor",
+   "p": "terah",
+   "v": [
+    "11:26",
+    "11:27",
+    "11:29",
+    "22:20",
+    "22:23",
+    "22:24"
+   ],
+   "he": "נָחוֹר",
+   "tr": "Nachor"
+  },
+  {
+   "id": "milcah-w",
+   "n": "Milcah",
+   "p": "nahor",
+   "v": [
+    "22:20",
+    "22:23"
+   ],
+   "g": "daughter of Haran",
+   "rel": "wife",
+   "sex": "f",
+   "he": "מִלְכָּה",
+   "tr": "Milkah"
+  },
+  {
+   "id": "uz",
+   "n": "Uz",
+   "p": "milcah-w",
+   "v": [
+    "22:21"
+   ],
+   "g": "the firstborn",
+   "he": "עוּץ",
+   "tr": "Utz"
+  },
+  {
+   "id": "buz",
+   "n": "Buz",
+   "p": "milcah-w",
+   "v": [
+    "22:21"
+   ],
+   "sch": "Named with Dedan and Tema as an Arabian people (Jeremiah 25:23); Elihu in Job is a Buzite (Job 32:2).",
+   "he": "בּוּז",
+   "tr": "Buz"
+  },
+  {
+   "id": "kemuel",
+   "n": "Kemuel",
+   "p": "milcah-w",
+   "v": [
+    "22:21"
+   ],
+   "g": "father of Aram",
+   "he": "קְמוּאֵל",
+   "tr": "Kemuel"
+  },
+  {
+   "id": "aram",
+   "n": "Aram",
+   "p": "kemuel",
+   "v": [
+    "22:21"
+   ],
+   "he": "אֲרָם",
+   "tr": "Aram"
+  },
+  {
+   "id": "chesed",
+   "n": "Chesed",
+   "p": "milcah-w",
+   "v": [
+    "22:22"
+   ],
+   "sch": "Perhaps the eponym of the Chaldeans (<i>Kasdim</i>).",
+   "he": "כֶּשֶׂד",
+   "tr": "Kesed"
+  },
+  {
+   "id": "hazo",
+   "n": "Hazo",
+   "p": "milcah-w",
+   "v": [
+    "22:22"
+   ],
+   "he": "חֲזוֹ",
+   "tr": "Chazo"
+  },
+  {
+   "id": "pildash",
+   "n": "Pildash",
+   "p": "milcah-w",
+   "v": [
+    "22:22"
+   ],
+   "he": "פִּלְדָּשׁ",
+   "tr": "Pildash"
+  },
+  {
+   "id": "jidlaph",
+   "n": "Jidlaph",
+   "p": "milcah-w",
+   "v": [
+    "22:22"
+   ],
+   "he": "יִדְלָף",
+   "tr": "Yidlaf"
+  },
+  {
+   "id": "bethuel",
+   "n": "Bethuel",
+   "p": "milcah-w",
+   "v": [
+    "22:22",
+    "22:23"
+   ],
+   "g": "father of Rebekah",
+   "note": "Also father of Laban (24:29).",
+   "he": "בְּתוּאֵל",
+   "tr": "Betuel"
+  },
+  {
+   "id": "rebekah",
+   "n": "Rebekah",
+   "p": "bethuel",
+   "v": [
+    "22:23"
+   ],
+   "g": "wife of Isaac",
+   "sex": "f",
+   "he": "רִבְקָה",
+   "tr": "Rivkah"
+  },
+  {
+   "id": "reumah",
+   "n": "Reumah",
+   "p": "nahor",
+   "v": [
+    "22:24"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "concubine": true,
+   "he": "רְאוּמָה",
+   "tr": "Reumah"
+  },
+  {
+   "id": "tebah",
+   "n": "Tebah",
+   "p": "reumah",
+   "v": [
+    "22:24"
+   ],
+   "he": "טֶבַח",
+   "tr": "Tevach"
+  },
+  {
+   "id": "gaham",
+   "n": "Gaham",
+   "p": "reumah",
+   "v": [
+    "22:24"
+   ],
+   "he": "גַּחַם",
+   "tr": "Gacham"
+  },
+  {
+   "id": "tahash",
+   "n": "Tahash",
+   "p": "reumah",
+   "v": [
+    "22:24"
+   ],
+   "he": "תַּחַשׁ",
+   "tr": "Tachash"
+  },
+  {
+   "id": "maacah",
+   "n": "Maacah",
+   "p": "reumah",
+   "v": [
+    "22:24"
+   ],
+   "sch": "Probably the Aramean kingdom of Maacah north-east of the Sea of Galilee (2 Samuel 10:6).",
+   "he": "מַעֲכָה",
+   "tr": "Maachah"
+  },
+  {
+   "id": "haran",
+   "n": "Haran",
+   "p": "terah",
+   "v": [
+    "11:26",
+    "11:27",
+    "11:28",
+    "11:29",
+    "11:31"
+   ],
+   "g": "died in Ur",
+   "trad": "The midrash says he died in Nimrod's furnace, from which Abram was saved (Genesis Rabbah 38:13; Rashi on 11:28).",
+   "he": "הָרָן",
+   "tr": "Charan"
+  },
+  {
+   "id": "lot",
+   "n": "Lot",
+   "p": "haran",
+   "v": [
+    "11:27",
+    "11:31"
+   ],
+   "g": "went with Abram",
+   "he": "לוֹט",
+   "tr": "Lot"
+  },
+  {
+   "id": "milcah",
+   "n": "Milcah",
+   "p": "haran",
+   "v": [
+    "11:29"
+   ],
+   "g": "married her uncle Nahor",
+   "sex": "f",
+   "he": "מִלְכָּה",
+   "tr": "Milkah"
+  },
+  {
+   "id": "iscah",
+   "n": "Iscah",
+   "p": "haran",
+   "v": [
+    "11:29"
+   ],
+   "sex": "f",
+   "trad": "Rashi and the Talmud (Megillah 14a) identify Iscah with Sarai: \"she saw (<i>sakhah</i>) by the holy spirit.\"",
+   "he": "יִסְכָּה",
+   "tr": "Yiskah"
+  }
+ ]
+}

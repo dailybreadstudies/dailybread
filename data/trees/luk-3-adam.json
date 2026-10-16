@@ -1,0 +1,857 @@
+{
+ "id": "luk-3-adam",
+ "title": "From Adam to Jesus",
+ "ref": "Luke 3:23–38",
+ "compact": true,
+ "col": "teal",
+ "intro": [
+  "Luke gives the genealogy at the start of Jesus' ministry, after his baptism, and lists it upward from son to father: \"the son of Joseph, the son of Heli…\" all the way to \"the son of Adam, the son of God.\" Shown here from Adam down. There are 77 names (11 × 7).",
+  "Between David and Joseph, Luke's names differ from Matthew's almost entirely: he follows David's son Nathan rather than Solomon and the kings."
+ ],
+ "sources": "Greek names: the Greek text of Luke; Hebrew forms as in the Hebrew Bible where the person appears there. Julius Africanus in Eusebius, <i>Church History</i> 1.7. Scholarly summary after the standard commentaries (Fitzmyer; Bock; Brown, <i>The Birth of the Messiah</i>).",
+ "anchor": {
+  "book": "LUK",
+  "c": 3,
+  "v": 23
+ },
+ "people": [
+  {
+   "id": "adam",
+   "n": "Adam",
+   "p": null,
+   "v": [
+    "3:38"
+   ],
+   "g": "\"the son of God\"",
+   "note": "The list ends: \"the son of Adam, the son of God\" (3:38). Luke's genealogy reaches beyond Israel to all humanity.",
+   "he": "אָדָם",
+   "tr": "Adam",
+   "gr": "Ἀδάμ"
+  },
+  {
+   "id": "seth",
+   "n": "Seth",
+   "p": "adam",
+   "v": [
+    "3:38"
+   ],
+   "he": "שֵׁת",
+   "tr": "Shet",
+   "gr": "Σήθ"
+  },
+  {
+   "id": "enosh",
+   "n": "Enosh",
+   "p": "seth",
+   "v": [
+    "3:38"
+   ],
+   "he": "אֱנוֹשׁ",
+   "tr": "Enosh",
+   "gr": "Ἐνώς"
+  },
+  {
+   "id": "cainan",
+   "n": "Cainan",
+   "p": "enosh",
+   "v": [
+    "3:37"
+   ],
+   "he": "קֵינָן",
+   "tr": "Kenan",
+   "note": "Kenan of Genesis 5:9.",
+   "gr": "Καϊνάν"
+  },
+  {
+   "id": "mahalalel",
+   "n": "Mahalalel",
+   "p": "cainan",
+   "v": [
+    "3:37"
+   ],
+   "he": "מַהֲלַלְאֵל",
+   "tr": "Mahalalel",
+   "gr": "Μαλελεήλ"
+  },
+  {
+   "id": "jared",
+   "n": "Jared",
+   "p": "mahalalel",
+   "v": [
+    "3:37"
+   ],
+   "he": "יֶרֶד",
+   "tr": "Yered",
+   "gr": "Ἰάρεδ"
+  },
+  {
+   "id": "enoch",
+   "n": "Enoch",
+   "p": "jared",
+   "v": [
+    "3:37"
+   ],
+   "he": "חֲנוֹךְ",
+   "tr": "Chanoch",
+   "gr": "Ἐνώχ"
+  },
+  {
+   "id": "methuselah",
+   "n": "Methuselah",
+   "p": "enoch",
+   "v": [
+    "3:37"
+   ],
+   "he": "מְתוּשֶׁלַח",
+   "tr": "Metushelach",
+   "gr": "Μαθουσάλα"
+  },
+  {
+   "id": "lamech",
+   "n": "Lamech",
+   "p": "methuselah",
+   "v": [
+    "3:36"
+   ],
+   "he": "לֶמֶךְ",
+   "tr": "Lemech",
+   "gr": "Λάμεχ"
+  },
+  {
+   "id": "noah",
+   "n": "Noah",
+   "p": "lamech",
+   "v": [
+    "3:36"
+   ],
+   "he": "נֹחַ",
+   "tr": "Noach",
+   "gr": "Νῶε"
+  },
+  {
+   "id": "shem",
+   "n": "Shem",
+   "p": "noah",
+   "v": [
+    "3:36"
+   ],
+   "he": "שֵׁם",
+   "tr": "Shem",
+   "gr": "Σήμ"
+  },
+  {
+   "id": "arphaxad",
+   "n": "Arphaxad",
+   "p": "shem",
+   "v": [
+    "3:36"
+   ],
+   "he": "אַרְפַּכְשַׁד",
+   "tr": "Arpachshad",
+   "gr": "Ἀρφαξάδ"
+  },
+  {
+   "id": "cainan-2",
+   "n": "Cainan",
+   "p": "arphaxad",
+   "v": [
+    "3:36"
+   ],
+   "note": "Not in the Hebrew of Genesis 11; Luke follows the Septuagint, which adds Cainan between Arphaxad and Shelah.",
+   "he": "",
+   "tr": "",
+   "gr": "Καϊνάν"
+  },
+  {
+   "id": "shelah",
+   "n": "Shelah",
+   "p": "cainan-2",
+   "v": [
+    "3:35"
+   ],
+   "he": "שֶׁלַח",
+   "tr": "Shelach",
+   "gr": "Σαλά"
+  },
+  {
+   "id": "eber",
+   "n": "Eber",
+   "p": "shelah",
+   "v": [
+    "3:35"
+   ],
+   "he": "עֵבֶר",
+   "tr": "Ever",
+   "gr": "Ἐβέρ"
+  },
+  {
+   "id": "peleg",
+   "n": "Peleg",
+   "p": "eber",
+   "v": [
+    "3:35"
+   ],
+   "he": "פֶּלֶג",
+   "tr": "Peleg",
+   "gr": "Φάλεκ"
+  },
+  {
+   "id": "reu",
+   "n": "Reu",
+   "p": "peleg",
+   "v": [
+    "3:35"
+   ],
+   "he": "רְעוּ",
+   "tr": "Reu",
+   "gr": "Ῥαγαῦ"
+  },
+  {
+   "id": "serug",
+   "n": "Serug",
+   "p": "reu",
+   "v": [
+    "3:35"
+   ],
+   "he": "שְׂרוּג",
+   "tr": "Serug",
+   "gr": "Σαρούχ"
+  },
+  {
+   "id": "nahor",
+   "n": "Nahor",
+   "p": "serug",
+   "v": [
+    "3:34"
+   ],
+   "he": "נָחוֹר",
+   "tr": "Nachor",
+   "gr": "Ναχώρ"
+  },
+  {
+   "id": "terah",
+   "n": "Terah",
+   "p": "nahor",
+   "v": [
+    "3:34"
+   ],
+   "he": "תֶּרַח",
+   "tr": "Terach",
+   "gr": "Θάρα"
+  },
+  {
+   "id": "abraham",
+   "n": "Abraham",
+   "p": "terah",
+   "v": [
+    "3:34"
+   ],
+   "g": "father of the nation",
+   "he": "אַבְרָהָם",
+   "tr": "Avraham",
+   "gr": "Ἀβραάμ"
+  },
+  {
+   "id": "isaac",
+   "n": "Isaac",
+   "p": "abraham",
+   "v": [
+    "3:34"
+   ],
+   "he": "יִצְחָק",
+   "tr": "Yitzchak",
+   "gr": "Ἰσαάκ"
+  },
+  {
+   "id": "jacob",
+   "n": "Jacob",
+   "p": "isaac",
+   "v": [
+    "3:34"
+   ],
+   "he": "יַעֲקֹב",
+   "tr": "Yaakov",
+   "gr": "Ἰακώβ"
+  },
+  {
+   "id": "judah",
+   "n": "Judah",
+   "p": "jacob",
+   "v": [
+    "3:33"
+   ],
+   "he": "יְהוּדָה",
+   "tr": "Yehudah",
+   "gr": "Ἰούδας"
+  },
+  {
+   "id": "perez",
+   "n": "Perez",
+   "p": "judah",
+   "v": [
+    "3:33"
+   ],
+   "he": "פֶּרֶץ",
+   "tr": "Peretz",
+   "gr": "Φάρες"
+  },
+  {
+   "id": "hezron",
+   "n": "Hezron",
+   "p": "perez",
+   "v": [
+    "3:33"
+   ],
+   "he": "חֶצְרֹן",
+   "tr": "Chetzron",
+   "gr": "Ἐσρώμ"
+  },
+  {
+   "id": "arni",
+   "n": "Arni",
+   "p": "hezron",
+   "v": [
+    "3:33"
+   ],
+   "gr": "Ἀρνὶ",
+   "tr": "Arni"
+  },
+  {
+   "id": "admin",
+   "n": "Admin",
+   "p": "arni",
+   "v": [
+    "3:33"
+   ],
+   "gr": "Ἀδμίν",
+   "note": "Admin and Arni stand where Ram stands in Ruth 4:19 and Matthew; manuscripts vary here."
+  },
+  {
+   "id": "amminadab",
+   "n": "Amminadab",
+   "p": "admin",
+   "v": [
+    "3:33"
+   ],
+   "he": "עַמִּינָדָב",
+   "tr": "Amminadav",
+   "gr": "Ἀμιναδάβ"
+  },
+  {
+   "id": "nahshon",
+   "n": "Nahshon",
+   "p": "amminadab",
+   "v": [
+    "3:32"
+   ],
+   "he": "נַחְשׁוֹן",
+   "tr": "Nachshon",
+   "gr": "Ναασσών"
+  },
+  {
+   "id": "sala",
+   "n": "Sala",
+   "p": "nahshon",
+   "v": [
+    "3:32"
+   ],
+   "gr": "Σαλά",
+   "note": "The Septuagint form of Salmon (Ruth 4:20)."
+  },
+  {
+   "id": "boaz",
+   "n": "Boaz",
+   "p": "sala",
+   "v": [
+    "3:32"
+   ],
+   "he": "בֹּעַז",
+   "tr": "Boaz",
+   "gr": "Βοόζ"
+  },
+  {
+   "id": "obed",
+   "n": "Obed",
+   "p": "boaz",
+   "v": [
+    "3:32"
+   ],
+   "he": "עוֹבֵד",
+   "tr": "Oved",
+   "gr": "Ὠβήδ"
+  },
+  {
+   "id": "jesse",
+   "n": "Jesse",
+   "p": "obed",
+   "v": [
+    "3:32"
+   ],
+   "he": "יִשַׁי",
+   "tr": "Yishai",
+   "gr": "Ἰεσσαί"
+  },
+  {
+   "id": "david",
+   "n": "David",
+   "p": "jesse",
+   "v": [
+    "3:31"
+   ],
+   "g": "the king",
+   "he": "דָּוִד",
+   "tr": "David",
+   "gr": "Δαυείδ"
+  },
+  {
+   "id": "nathan",
+   "n": "Nathan",
+   "p": "david",
+   "v": [
+    "3:31"
+   ],
+   "g": "son of David",
+   "note": "Luke traces the line through Nathan, not Solomon (2 Samuel 5:14).",
+   "he": "נָתָן",
+   "tr": "Natan",
+   "gr": "Ναθάν"
+  },
+  {
+   "id": "mattatha",
+   "n": "Mattatha",
+   "p": "nathan",
+   "v": [
+    "3:31"
+   ],
+   "gr": "Ματταθά",
+   "he": "מַתַּתָּה",
+   "tr": ""
+  },
+  {
+   "id": "menna",
+   "n": "Menna",
+   "p": "mattatha",
+   "v": [
+    "3:31"
+   ],
+   "gr": "Μαϊνάν",
+   "tr": "Mainan"
+  },
+  {
+   "id": "melea",
+   "n": "Melea",
+   "p": "menna",
+   "v": [
+    "3:31"
+   ],
+   "gr": "Μελεᾶς",
+   "he": "מְלֵאָה",
+   "tr": ""
+  },
+  {
+   "id": "eliakim",
+   "n": "Eliakim",
+   "p": "melea",
+   "v": [
+    "3:30"
+   ],
+   "gr": "Ἐλιακείμ",
+   "he": "אֶלְיָקִים",
+   "tr": "Elyakim"
+  },
+  {
+   "id": "jonam",
+   "n": "Jonam",
+   "p": "eliakim",
+   "v": [
+    "3:30"
+   ],
+   "gr": "Ἰωνάν",
+   "tr": "Iōnan"
+  },
+  {
+   "id": "joseph",
+   "n": "Joseph",
+   "p": "jonam",
+   "v": [
+    "3:30"
+   ],
+   "he": "יוֹסֵף",
+   "tr": "Yosef",
+   "gr": "Ἰωσήφ"
+  },
+  {
+   "id": "judah-2",
+   "n": "Judah",
+   "p": "joseph",
+   "v": [
+    "3:30"
+   ],
+   "he": "יְהוּדָה",
+   "tr": "Yehudah",
+   "gr": "Ἰούδας"
+  },
+  {
+   "id": "simeon",
+   "n": "Simeon",
+   "p": "judah-2",
+   "v": [
+    "3:30"
+   ],
+   "he": "שִׁמְעוֹן",
+   "tr": "Shimon",
+   "gr": "Συμεών"
+  },
+  {
+   "id": "levi",
+   "n": "Levi",
+   "p": "simeon",
+   "v": [
+    "3:29"
+   ],
+   "he": "לֵוִי",
+   "tr": "Levi",
+   "gr": "Λευΐ"
+  },
+  {
+   "id": "matthat",
+   "n": "Matthat",
+   "p": "levi",
+   "v": [
+    "3:29"
+   ],
+   "gr": "Ματθάτ",
+   "he": "מַתָּת",
+   "tr": ""
+  },
+  {
+   "id": "jorim",
+   "n": "Jorim",
+   "p": "matthat",
+   "v": [
+    "3:29"
+   ],
+   "gr": "Ἰωρείμ",
+   "tr": "Iōreim"
+  },
+  {
+   "id": "eliezer",
+   "n": "Eliezer",
+   "p": "jorim",
+   "v": [
+    "3:29"
+   ],
+   "gr": "Ἐλιέζερ",
+   "he": "אֱלִיעֶזֶר",
+   "tr": ""
+  },
+  {
+   "id": "joshua",
+   "n": "Joshua",
+   "p": "eliezer",
+   "v": [
+    "3:29"
+   ],
+   "gr": "Ἰησοῦς",
+   "he": "יְהוֹשֻׁעַ",
+   "tr": "Yehoshua",
+   "note": "The Greek is <i>Iēsous</i>, the same name as Jesus."
+  },
+  {
+   "id": "er",
+   "n": "Er",
+   "p": "joshua",
+   "v": [
+    "3:28"
+   ],
+   "he": "עֵר",
+   "tr": "Er",
+   "gr": "Ἤρ"
+  },
+  {
+   "id": "elmadam",
+   "n": "Elmadam",
+   "p": "er",
+   "v": [
+    "3:28"
+   ],
+   "gr": "Ἐλμωδάμ",
+   "tr": "Elmōdam"
+  },
+  {
+   "id": "cosam",
+   "n": "Cosam",
+   "p": "elmadam",
+   "v": [
+    "3:28"
+   ],
+   "gr": "Κωσάμ",
+   "tr": "Kōsam"
+  },
+  {
+   "id": "addi",
+   "n": "Addi",
+   "p": "cosam",
+   "v": [
+    "3:28"
+   ],
+   "gr": "Ἀδδί",
+   "tr": "Addi"
+  },
+  {
+   "id": "melchi",
+   "n": "Melchi",
+   "p": "addi",
+   "v": [
+    "3:28"
+   ],
+   "gr": "Μελχί",
+   "he": "מֶלֶךְ",
+   "tr": ""
+  },
+  {
+   "id": "neri",
+   "n": "Neri",
+   "p": "melchi",
+   "v": [
+    "3:27"
+   ],
+   "gr": "Νηρί",
+   "he": "נֵרִיָּה",
+   "tr": ""
+  },
+  {
+   "id": "shealtiel",
+   "n": "Shealtiel",
+   "p": "neri",
+   "v": [
+    "3:27"
+   ],
+   "note": "Here son of Neri; in Matthew and 1 Chronicles 3:17 son of Jeconiah.",
+   "he": "שְׁאַלְתִּיאֵל",
+   "tr": "Shealtiel",
+   "gr": "Σαλαθιήλ"
+  },
+  {
+   "id": "zerubbabel",
+   "n": "Zerubbabel",
+   "p": "shealtiel",
+   "v": [
+    "3:27"
+   ],
+   "g": "led the return",
+   "he": "זְרֻבָּבֶל",
+   "tr": "Zerubavel",
+   "gr": "Ζοροβάβελ"
+  },
+  {
+   "id": "rhesa",
+   "n": "Rhesa",
+   "p": "zerubbabel",
+   "v": [
+    "3:27"
+   ],
+   "note": "Perhaps not a name but the Aramaic <i>resha</i>, \"prince,\" a title of Zerubbabel taken as a name.",
+   "gr": "Ῥησά",
+   "tr": "Rhēsa"
+  },
+  {
+   "id": "joanan",
+   "n": "Joanan",
+   "p": "rhesa",
+   "v": [
+    "3:27"
+   ],
+   "gr": "Ἰωανάν"
+  },
+  {
+   "id": "joda",
+   "n": "Joda",
+   "p": "joanan",
+   "v": [
+    "3:26"
+   ],
+   "gr": "Ἰωδά"
+  },
+  {
+   "id": "josech",
+   "n": "Josech",
+   "p": "joda",
+   "v": [
+    "3:26"
+   ],
+   "gr": "Ἰωσήχ"
+  },
+  {
+   "id": "semein",
+   "n": "Semein",
+   "p": "josech",
+   "v": [
+    "3:26"
+   ],
+   "gr": "Σεμεΐ",
+   "tr": "Semei"
+  },
+  {
+   "id": "mattathias",
+   "n": "Mattathias",
+   "p": "semein",
+   "v": [
+    "3:26"
+   ],
+   "gr": "Ματταθίας",
+   "tr": "Mattathias"
+  },
+  {
+   "id": "maath",
+   "n": "Maath",
+   "p": "mattathias",
+   "v": [
+    "3:26"
+   ],
+   "gr": "Μαάθ",
+   "tr": "Maath"
+  },
+  {
+   "id": "naggai",
+   "n": "Naggai",
+   "p": "maath",
+   "v": [
+    "3:25"
+   ],
+   "gr": "Ναγγαί",
+   "tr": "Nangai"
+  },
+  {
+   "id": "esli",
+   "n": "Esli",
+   "p": "naggai",
+   "v": [
+    "3:25"
+   ],
+   "gr": "Ἐσλί",
+   "tr": "Esli"
+  },
+  {
+   "id": "nahum",
+   "n": "Nahum",
+   "p": "esli",
+   "v": [
+    "3:25"
+   ],
+   "gr": "Ναούμ",
+   "tr": "Naoum"
+  },
+  {
+   "id": "amos",
+   "n": "Amos",
+   "p": "nahum",
+   "v": [
+    "3:25"
+   ],
+   "gr": "Ἀμώς",
+   "tr": "Amōs"
+  },
+  {
+   "id": "mattathias-2",
+   "n": "Mattathias",
+   "p": "amos",
+   "v": [
+    "3:25"
+   ],
+   "gr": "Ματταθίας",
+   "tr": "Mattathias"
+  },
+  {
+   "id": "joseph-2",
+   "n": "Joseph",
+   "p": "mattathias-2",
+   "v": [
+    "3:24"
+   ],
+   "he": "יוֹסֵף",
+   "tr": "Yosef",
+   "gr": "Ἰωσήφ"
+  },
+  {
+   "id": "jannai",
+   "n": "Jannai",
+   "p": "joseph-2",
+   "v": [
+    "3:24"
+   ],
+   "gr": "Ἰαννά",
+   "tr": "Ianna"
+  },
+  {
+   "id": "melchi-2",
+   "n": "Melchi",
+   "p": "jannai",
+   "v": [
+    "3:24"
+   ],
+   "gr": "Μελχί",
+   "he": "מֶלֶךְ",
+   "tr": ""
+  },
+  {
+   "id": "levi-2",
+   "n": "Levi",
+   "p": "melchi-2",
+   "v": [
+    "3:24"
+   ],
+   "he": "לֵוִי",
+   "tr": "Levi",
+   "gr": "Λευΐ"
+  },
+  {
+   "id": "matthat-2",
+   "n": "Matthat",
+   "p": "levi-2",
+   "v": [
+    "3:24"
+   ],
+   "gr": "Ματθάτ",
+   "he": "מַתָּת",
+   "tr": ""
+  },
+  {
+   "id": "heli",
+   "n": "Heli",
+   "p": "matthat-2",
+   "v": [
+    "3:23"
+   ],
+   "g": "Joseph's father in Luke",
+   "note": "Matthew names Joseph's father as Jacob. Since the early church two explanations have been offered: Luke gives Mary's line (Heli being her father, Joseph his son-in-law), or a levirate marriage made Joseph the legal son of one and the natural son of the other (Julius Africanus, in Eusebius, <i>Church History</i> 1.7).",
+   "gr": "Ἡλί",
+   "tr": "Hēli"
+  },
+  {
+   "id": "joseph-3",
+   "n": "Joseph",
+   "p": "heli",
+   "v": [
+    "3:23"
+   ],
+   "he": "יוֹסֵף",
+   "tr": "Yosef",
+   "gr": "Ἰωσήφ"
+  },
+  {
+   "id": "jesus",
+   "n": "Jesus",
+   "p": "joseph-3",
+   "v": [
+    "3:23"
+   ],
+   "g": "\"about thirty years old\"",
+   "he": "יֵשׁוּעַ",
+   "tr": "Yeshua",
+   "kin": "\"as was supposed,\" son of Joseph",
+   "note": "Luke writes that Jesus \"was regarded as the son of Joseph\" (3:23) and lists the line upward, from son to father, all the way to Adam.",
+   "gr": "Ἰησοῦς"
+  }
+ ]
+}

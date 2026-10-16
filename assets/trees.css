@@ -5,15 +5,24 @@
   --dbt-ham: #a3593a;
   --dbt-shem: #5d7a37;
   --dbt-root: #7a6a58;
+  --dbt-plum: #7d4f86;
+  --dbt-teal: #2f7a76;
+  --dbt-ochre: #9a7417;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):not([data-theme="sepia"]) { --dbt-japheth: #8db5d1; --dbt-ham: #e09a7b; --dbt-shem: #a9c47f; --dbt-root: #b3a493; }
+  :root:not([data-theme="light"]):not([data-theme="sepia"]) { --dbt-japheth: #8db5d1; --dbt-ham: #e09a7b; --dbt-shem: #a9c47f; --dbt-root: #b3a493; --dbt-plum: #c9a3d1; --dbt-teal: #7cc7c1; --dbt-ochre: #dcbc6a; }
 }
-:root[data-theme="dark"] { --dbt-japheth: #8db5d1; --dbt-ham: #e09a7b; --dbt-shem: #a9c47f; --dbt-root: #b3a493; }
+:root[data-theme="dark"] { --dbt-japheth: #8db5d1; --dbt-ham: #e09a7b; --dbt-shem: #a9c47f; --dbt-root: #b3a493; --dbt-plum: #c9a3d1; --dbt-teal: #7cc7c1; --dbt-ochre: #dcbc6a; }
 .dbt-c-japheth { --dbt-col: var(--dbt-japheth); }
 .dbt-c-ham { --dbt-col: var(--dbt-ham); }
 .dbt-c-shem { --dbt-col: var(--dbt-shem); }
 .dbt-c-root { --dbt-col: var(--dbt-root); }
+.dbt-c-plum { --dbt-col: var(--dbt-plum); }
+.dbt-c-teal { --dbt-col: var(--dbt-teal); }
+.dbt-c-ochre { --dbt-col: var(--dbt-ochre); }
+.dbt-s-plum { stroke: var(--dbt-plum); }
+.dbt-s-teal { stroke: var(--dbt-teal); }
+.dbt-s-ochre { stroke: var(--dbt-ochre); }
 
 /* Button beside the verse: same look as the map and archaeology buttons */
 .dbt-pin {
@@ -76,6 +85,8 @@ body.dbm-margin .dbt-pin.dbt-n2 { left: -142px; }
 .dbt-chip b { font-weight: 600; color: var(--muted); }
 .dbt-chip[aria-pressed="false"] { opacity: 0.5; }
 .dbt-chip:hover { border-color: var(--accent-soft); }
+.dbt-chip.dbt-static { cursor: default; }
+.dbt-chip.dbt-static:hover { border-color: var(--accent-line); }
 .dbt-sw { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--dbt-col); }
 .dbt-legend { display: flex; flex-wrap: wrap; gap: 0.2rem 0.9rem; margin: 0 0 0.9rem; font: 400 0.66rem/1.4 var(--sans); color: var(--muted); }
 .dbt-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
@@ -106,7 +117,7 @@ body.dbm-margin .dbt-pin.dbt-n2 { left: -142px; }
 .dbt-dot.dbt-some { background: linear-gradient(90deg, var(--dbt-col) 50%, var(--paper) 50%); }
 .dbt-nm { font: 400 0.86rem/1.35 var(--serif); white-space: nowrap; }
 .dbt-gl { font: 400 0.68rem/1.35 var(--sans); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-.dbt-row[data-dbt-row="noah"] .dbt-nm, .dbt-row .dbt-node:has(.dbt-out) .dbt-nm { font-weight: 700; }
+.dbt-row.dbt-headrow .dbt-nm { font-weight: 700; }
 .dbt-node:hover .dbt-nm { color: var(--accent-deep); }
 .dbt-row.dbt-path .dbt-nm { color: var(--dbt-col); font-weight: 600; }
 .dbt-row.dbt-sel .dbt-nm { color: var(--dbt-col); font-weight: 700; }
@@ -125,6 +136,8 @@ body.dbm-margin .dbt-pin.dbt-n2 { left: -142px; }
 }
 .dbt-hebrow { display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
 .dbt-he { font-family: var(--hebrew); font-size: 1.55rem; line-height: 1.3; color: var(--ink); direction: rtl; unicode-bidi: isolate; }
+.dbt-gr { font-family: var(--greek); font-size: 1.2rem; line-height: 1.3; color: var(--ink); }
+.dbt-wife .dbt-nm { font-style: italic; }
 .dbt-tr { font: italic 400 0.85rem/1.3 var(--serif); color: var(--ink-soft); }
 .dbt-meta { margin: 0.1rem 0 0.4rem; font-size: 0.66rem; color: var(--muted); letter-spacing: 0.02em; }
 .dbt-id { margin: 0 0 0.3rem; font-weight: 600; color: var(--ink); }

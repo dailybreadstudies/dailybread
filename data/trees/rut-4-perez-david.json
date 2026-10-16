@@ -1,0 +1,155 @@
+{
+ "id": "rut-4-perez-david",
+ "title": "From Perez to David",
+ "ref": "Ruth 4:18–22",
+ "compact": true,
+ "col": "ochre",
+ "intro": [
+  "The book of Ruth closes with ten generations from Perez, son of Judah and Tamar, to David. Boaz stands seventh, an honoured place in a ten-name list, and Ruth the Moabite, a foreigner who chose Israel's God, becomes the great-grandmother of the king.",
+  "The same line opens Matthew's genealogy of the Messiah (Matthew 1:3–6) and appears in 1 Chronicles 2:5–15."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Ruth Rabbah; Babylonian Talmud, Bava Batra 91b and Sotah 37a; Rashi on Ruth 4.",
+ "anchor": {
+  "book": "RUT",
+  "c": 4,
+  "v": 18
+ },
+ "people": [
+  {
+   "id": "perez",
+   "n": "Perez",
+   "p": null,
+   "v": [
+    "4:18"
+   ],
+   "g": "son of Judah and Tamar",
+   "note": "\"Breach\" (Genesis 38:29).",
+   "he": "פֶּרֶץ",
+   "tr": "Peretz"
+  },
+  {
+   "id": "hezron",
+   "n": "Hezron",
+   "p": "perez",
+   "v": [
+    "4:18",
+    "4:19"
+   ],
+   "he": "חֶצְרוֹן",
+   "tr": "Chetzron"
+  },
+  {
+   "id": "ram",
+   "n": "Ram",
+   "p": "hezron",
+   "v": [
+    "4:19"
+   ],
+   "he": "רָם",
+   "tr": "Ram"
+  },
+  {
+   "id": "amminadab",
+   "n": "Amminadab",
+   "p": "ram",
+   "v": [
+    "4:19",
+    "4:20"
+   ],
+   "note": "His daughter Elisheba married Aaron (Exodus 6:23).",
+   "he": "עַמִּינָדָב",
+   "tr": "Amminadav"
+  },
+  {
+   "id": "nahshon",
+   "n": "Nahshon",
+   "p": "amminadab",
+   "v": [
+    "4:20"
+   ],
+   "g": "prince of Judah",
+   "note": "Leader of the tribe of Judah in the wilderness (Numbers 1:7).",
+   "trad": "The midrash: at the Red Sea, Nahshon was the first to jump into the water, and so Judah earned the kingship (Sotah 37a).",
+   "he": "נַחְשׁוֹן",
+   "tr": "Nachshon"
+  },
+  {
+   "id": "salmon",
+   "n": "Salmon",
+   "p": "nahshon",
+   "v": [
+    "4:20",
+    "4:21"
+   ],
+   "note": "Matthew 1:5 names his wife as Rahab.",
+   "he": "שַׂלְמוֹן",
+   "tr": "Salmon"
+  },
+  {
+   "id": "boaz",
+   "n": "Boaz",
+   "p": "salmon",
+   "v": [
+    "4:13",
+    "4:21"
+   ],
+   "g": "the kinsman-redeemer",
+   "he": "בֹּעַז",
+   "tr": "Boaz"
+  },
+  {
+   "id": "ruth",
+   "n": "Ruth",
+   "p": "boaz",
+   "v": [
+    "4:13"
+   ],
+   "g": "the Moabite",
+   "rel": "wife",
+   "sex": "f",
+   "trad": "Ruth is read on Shavuot: as Israel accepted the Torah, she accepted God's covenant (\"your God will be my God\"). The Talmud counts David's line from her (Bava Batra 14b).",
+   "he": "רוּת",
+   "tr": "Rut"
+  },
+  {
+   "id": "obed",
+   "n": "Obed",
+   "p": "ruth",
+   "v": [
+    "4:17",
+    "4:21",
+    "4:22"
+   ],
+   "g": "\"servant\"",
+   "note": "\"A son has been born to Naomi\" (4:17): the neighbour women named him.",
+   "he": "עוֹבֵד",
+   "tr": "Oved"
+  },
+  {
+   "id": "jesse",
+   "n": "Jesse",
+   "p": "obed",
+   "v": [
+    "4:17",
+    "4:22"
+   ],
+   "g": "of Bethlehem",
+   "note": "\"A shoot will come forth from the stump of Jesse\" (Isaiah 11:1).",
+   "trad": "Counted among four who died without sin, only \"through the serpent's counsel\" (Shabbat 55b).",
+   "he": "יִשַׁי",
+   "tr": "Yishai"
+  },
+  {
+   "id": "david",
+   "n": "David",
+   "p": "jesse",
+   "v": [
+    "4:17",
+    "4:22"
+   ],
+   "g": "the king",
+   "he": "דָּוִד",
+   "tr": "David"
+  }
+ ]
+}

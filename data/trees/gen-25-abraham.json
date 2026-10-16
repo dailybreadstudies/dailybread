@@ -1,0 +1,472 @@
+{
+ "id": "gen-25-abraham",
+ "title": "Abraham's Sons",
+ "ref": "Genesis 25",
+ "branches": [
+  {
+   "id": "hagar",
+   "name": "Hagar",
+   "col": "ochre"
+  },
+  {
+   "id": "sarah",
+   "name": "Sarah",
+   "col": "shem"
+  },
+  {
+   "id": "keturah",
+   "name": "Keturah",
+   "col": "plum"
+  }
+ ],
+ "intro": [
+  "Abraham, \"father of a multitude of nations\" (17:5), has sons by three women. Ishmael's twelve sons parallel the twelve sons of Jacob; Keturah's sons are the peoples of the Arabian incense and caravan routes (Midian, Sheba, Dedan). The chosen line runs through Isaac to the twins Esau and Jacob."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi on Genesis 25; Genesis Rabbah 61; Josephus, Antiquities 1.238–241. Scholarly identifications after the standard commentaries and reference works.",
+ "anchor": {
+  "book": "GEN",
+  "c": 25,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "abraham",
+   "n": "Abraham",
+   "p": null,
+   "v": [
+    "25:1",
+    "25:5",
+    "25:7",
+    "25:12",
+    "25:19"
+   ],
+   "g": "175 years",
+   "note": "Lived 175 years and was buried with Sarah in the cave of Machpelah (25:7–10).",
+   "he": "אַבְרָהָם",
+   "tr": "Avraham"
+  },
+  {
+   "id": "hagar",
+   "n": "Hagar",
+   "p": "abraham",
+   "v": [
+    "25:12"
+   ],
+   "g": "Sarah's Egyptian maidservant",
+   "rel": "wife",
+   "sex": "f",
+   "branch": "hagar",
+   "concubine": true,
+   "he": "הָגָר",
+   "tr": "Hagar"
+  },
+  {
+   "id": "ishmael",
+   "n": "Ishmael",
+   "p": "hagar",
+   "v": [
+    "25:9",
+    "25:12",
+    "25:13",
+    "25:16",
+    "25:17"
+   ],
+   "g": "\"God hears\"; 137 years",
+   "note": "\"These were… twelve princes of their tribes\" (25:16), as promised in 17:20.",
+   "trad": "Rashi on 25:9 notes that Ishmael lets Isaac go first at their father's burial, a sign that he repented.",
+   "sch": "The Ishmaelites are the tribes of the north Arabian desert; several sons' names are known from Assyrian and Arabian sources.",
+   "he": "יִשְׁמָעֵאל",
+   "tr": "Yishmael"
+  },
+  {
+   "id": "nebaioth",
+   "n": "Nebaioth",
+   "p": "ishmael",
+   "v": [
+    "25:13"
+   ],
+   "g": "the firstborn",
+   "sch": "Perhaps the Nabayati of Assyrian records (often linked, uncertainly, with the later Nabataeans).",
+   "he": "נְבָיֹת",
+   "tr": "Nevavot"
+  },
+  {
+   "id": "kedar",
+   "n": "Kedar",
+   "p": "ishmael",
+   "v": [
+    "25:13"
+   ],
+   "g": "Qedar (N Arabia)",
+   "sch": "Qedar, the strongest Arab tribal confederation of the 8th–5th centuries BC; \"the tents of Kedar\" (Song 1:5; Isaiah 42:11).",
+   "he": "קֵדָר",
+   "tr": "Kedar"
+  },
+  {
+   "id": "adbeel",
+   "n": "Adbeel",
+   "p": "ishmael",
+   "v": [
+    "25:13"
+   ],
+   "sch": "Perhaps Idiba'ilu, an Arab people near Egypt's border in Tiglath-pileser III's records.",
+   "he": "אַדְבְּאֵל",
+   "tr": "Adbeel"
+  },
+  {
+   "id": "mibsam",
+   "n": "Mibsam",
+   "p": "ishmael",
+   "v": [
+    "25:13"
+   ],
+   "he": "מִבְשָׂם",
+   "tr": "Mivsam"
+  },
+  {
+   "id": "mishma",
+   "n": "Mishma",
+   "p": "ishmael",
+   "v": [
+    "25:14"
+   ],
+   "he": "מִשְׁמָע",
+   "tr": "Mishma"
+  },
+  {
+   "id": "dumah",
+   "n": "Dumah",
+   "p": "ishmael",
+   "v": [
+    "25:14"
+   ],
+   "g": "Dumat al-Jandal",
+   "sch": "The oasis of Dumat al-Jandal in northern Arabia (Isaiah 21:11).",
+   "he": "דּוּמָה",
+   "tr": "Dumah"
+  },
+  {
+   "id": "massa",
+   "n": "Massa",
+   "p": "ishmael",
+   "v": [
+    "25:14"
+   ],
+   "sch": "An Arab people; Agur and King Lemuel are \"of Massa\" (Proverbs 30:1; 31:1).",
+   "he": "מַשָּׂא",
+   "tr": "Massa"
+  },
+  {
+   "id": "hadad",
+   "n": "Hadad",
+   "p": "ishmael",
+   "v": [
+    "25:15"
+   ],
+   "he": "חֲדַד",
+   "tr": "Chadad"
+  },
+  {
+   "id": "tema",
+   "n": "Tema",
+   "p": "ishmael",
+   "v": [
+    "25:15"
+   ],
+   "g": "Tayma oasis",
+   "sch": "The oasis of Tayma in north-west Arabia, where the Babylonian king Nabonidus later lived for ten years.",
+   "he": "תֵּימָא",
+   "tr": "Tema"
+  },
+  {
+   "id": "jetur",
+   "n": "Jetur",
+   "p": "ishmael",
+   "v": [
+    "25:15"
+   ],
+   "g": "Ituraeans?",
+   "sch": "Probably the Ituraeans of the Lebanon and the Hauran (Luke 3:1).",
+   "he": "יְטוּר",
+   "tr": "Yetur"
+  },
+  {
+   "id": "naphish",
+   "n": "Naphish",
+   "p": "ishmael",
+   "v": [
+    "25:15"
+   ],
+   "he": "נָפִישׁ",
+   "tr": "Nafish"
+  },
+  {
+   "id": "kedemah",
+   "n": "Kedemah",
+   "p": "ishmael",
+   "v": [
+    "25:15"
+   ],
+   "g": "the last of twelve",
+   "he": "קֵדְמָה",
+   "tr": "Kedemah"
+  },
+  {
+   "id": "sarah",
+   "n": "Sarah",
+   "p": "abraham",
+   "v": [
+    "25:10"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "sarah",
+   "he": "שָׂרָה",
+   "tr": "Sarah"
+  },
+  {
+   "id": "isaac",
+   "n": "Isaac",
+   "p": "sarah",
+   "v": [
+    "25:5",
+    "25:6",
+    "25:9",
+    "25:11",
+    "25:19",
+    "25:20",
+    "25:21",
+    "25:26"
+   ],
+   "g": "\"he laughs\"",
+   "note": "Married Rebekah at forty; the twins were born when he was sixty (25:20, 26).",
+   "he": "יִצְחָק",
+   "tr": "Yitzchak"
+  },
+  {
+   "id": "rebekah",
+   "n": "Rebekah",
+   "p": "isaac",
+   "v": [
+    "25:20",
+    "25:21"
+   ],
+   "g": "daughter of Bethuel",
+   "rel": "wife",
+   "sex": "f",
+   "trad": "\"Rebekah went to inquire of the LORD\" (25:22): Rashi says to the study house of Shem and Eber.",
+   "he": "רִבְקָה",
+   "tr": "Rivkah"
+  },
+  {
+   "id": "esau",
+   "n": "Esau",
+   "p": "rebekah",
+   "v": [
+    "25:25",
+    "25:26"
+   ],
+   "g": "the firstborn twin; Edom",
+   "note": "\"Red… hairy\" (25:25): <i>admoni</i> and <i>se'ar</i> point to Edom and Seir.",
+   "he": "עֵשָׂו",
+   "tr": "Esav"
+  },
+  {
+   "id": "jacob",
+   "n": "Jacob",
+   "p": "rebekah",
+   "v": [
+    "25:26"
+   ],
+   "g": "\"heel-grasper\"",
+   "note": "Born \"grasping Esau's heel\" (<i>akev</i>); renamed Israel (32:28).",
+   "he": "יַעֲקֹב",
+   "tr": "Yaakov"
+  },
+  {
+   "id": "keturah",
+   "n": "Keturah",
+   "p": "abraham",
+   "v": [
+    "25:1",
+    "25:4"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "branch": "keturah",
+   "trad": "Rashi and Genesis Rabbah 61:4 identify Keturah with Hagar, taken back after Sarah's death.",
+   "he": "קְטוּרָה",
+   "tr": "Keturah"
+  },
+  {
+   "id": "zimran",
+   "n": "Zimran",
+   "p": "keturah",
+   "v": [
+    "25:2"
+   ],
+   "he": "זִמְרָן",
+   "tr": "Zimran"
+  },
+  {
+   "id": "jokshan",
+   "n": "Jokshan",
+   "p": "keturah",
+   "v": [
+    "25:2",
+    "25:3"
+   ],
+   "he": "יׇקְשָׁן",
+   "tr": "Yokshan"
+  },
+  {
+   "id": "sheba",
+   "n": "Sheba",
+   "p": "jokshan",
+   "v": [
+    "25:3"
+   ],
+   "g": "Saba (Arabia)",
+   "sch": "The incense people of Saba; Sheba and Dedan also appear among Cush's descendants in Genesis 10:7.",
+   "he": "שְׁבָא",
+   "tr": "Sheva"
+  },
+  {
+   "id": "dedan",
+   "n": "Dedan",
+   "p": "jokshan",
+   "v": [
+    "25:3"
+   ],
+   "g": "al-'Ula oasis",
+   "he": "דְּדָן",
+   "tr": "Dedan"
+  },
+  {
+   "id": "asshurim",
+   "n": "Asshurites",
+   "p": "dedan",
+   "v": [
+    "25:3"
+   ],
+   "he": "אַשּׁוּרִם",
+   "tr": "Ashurim"
+  },
+  {
+   "id": "letushim",
+   "n": "Letushites",
+   "p": "dedan",
+   "v": [
+    "25:3"
+   ],
+   "he": "לְטוּשִׁם",
+   "tr": "Letushim"
+  },
+  {
+   "id": "leummim",
+   "n": "Leummites",
+   "p": "dedan",
+   "v": [
+    "25:3"
+   ],
+   "he": "לְאֻמִּים",
+   "tr": "Leummim"
+  },
+  {
+   "id": "medan",
+   "n": "Medan",
+   "p": "keturah",
+   "v": [
+    "25:2"
+   ],
+   "he": "מְדָן",
+   "tr": "Medan"
+  },
+  {
+   "id": "midian",
+   "n": "Midian",
+   "p": "keturah",
+   "v": [
+    "25:2",
+    "25:4"
+   ],
+   "g": "the Midianites",
+   "note": "Moses' father-in-law Jethro was a priest of Midian (Exodus 3:1).",
+   "sch": "Tribes of north-west Arabia east of the Gulf of Aqaba.",
+   "he": "מִדְיָן",
+   "tr": "Midyan"
+  },
+  {
+   "id": "ephah",
+   "n": "Ephah",
+   "p": "midian",
+   "v": [
+    "25:4"
+   ],
+   "sch": "\"The young camels of Midian and Ephah\" (Isaiah 60:6); Assyrian Haiapa.",
+   "he": "עֵיפָה",
+   "tr": "Efah"
+  },
+  {
+   "id": "epher",
+   "n": "Epher",
+   "p": "midian",
+   "v": [
+    "25:4"
+   ],
+   "he": "עֵפֶר",
+   "tr": "Efer"
+  },
+  {
+   "id": "hanoch",
+   "n": "Hanoch",
+   "p": "midian",
+   "v": [
+    "25:4"
+   ],
+   "he": "חֲנֹךְ",
+   "tr": "Chanoch"
+  },
+  {
+   "id": "abida",
+   "n": "Abida",
+   "p": "midian",
+   "v": [
+    "25:4"
+   ],
+   "he": "אֲבִידָע",
+   "tr": "Avida"
+  },
+  {
+   "id": "eldaah",
+   "n": "Eldaah",
+   "p": "midian",
+   "v": [
+    "25:4"
+   ],
+   "he": "אֶלְדָּעָה",
+   "tr": "Eldaah"
+  },
+  {
+   "id": "ishbak",
+   "n": "Ishbak",
+   "p": "keturah",
+   "v": [
+    "25:2"
+   ],
+   "he": "יִשְׁבָּק",
+   "tr": "Yishbak"
+  },
+  {
+   "id": "shuah",
+   "n": "Shuah",
+   "p": "keturah",
+   "v": [
+    "25:2"
+   ],
+   "note": "Job's friend Bildad is a Shuhite (Job 2:11).",
+   "he": "שׁוּחַ",
+   "tr": "Shuach"
+  }
+ ]
+}

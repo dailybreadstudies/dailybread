@@ -1,0 +1,608 @@
+{
+ "id": "mat-1-messiah",
+ "title": "The Genealogy of the Messiah",
+ "ref": "Matthew 1:1–17",
+ "compact": true,
+ "branches": [
+  {
+   "id": "g1",
+   "name": "Abraham to David",
+   "col": "shem",
+   "count": 14
+  },
+  {
+   "id": "g2",
+   "name": "David to the exile",
+   "col": "ham",
+   "count": 14
+  },
+  {
+   "id": "g3",
+   "name": "Exile to the Messiah",
+   "col": "japheth",
+   "count": 14
+  }
+ ],
+ "branchToggle": false,
+ "intro": [
+  "\"The son of David, the son of Abraham\" (1:1): Matthew arranges the descent in three sets of fourteen. The number may echo the name David, whose Hebrew letters (D-V-D, 4 + 6 + 4) add up to fourteen.",
+  "Five women are named: Tamar, Rahab, Ruth, \"Uriah's wife\" and Mary. Several were foreigners, and each story has something irregular about it, preparing for the birth from Mary. The list moves through Solomon and the kings; Luke follows David's son Nathan instead."
+ ],
+ "countNote": "Matthew counts 14 + 14 + 14, but the third set names only 13 generations. Readers have counted Jeconiah twice, Mary as a generation, or Jesus and \"the Messiah\" separately. Between Joram and Uzziah, Matthew passes over three kings (Ahaziah, Joash and Amaziah).",
+ "sources": "Greek names: the Greek text of Matthew; Hebrew forms as in the Hebrew Bible. Babylonian Talmud, Sanhedrin 38a; Rashi. Scholarly summary after the standard commentaries (Davies and Allison; Brown, <i>The Birth of the Messiah</i>).",
+ "anchor": {
+  "book": "MAT",
+  "c": 1,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "abraham",
+   "n": "Abraham",
+   "p": null,
+   "v": [
+    "1:1",
+    "1:2",
+    "1:17"
+   ],
+   "branch": "g1",
+   "he": "אַבְרָהָם",
+   "tr": "Avraham",
+   "gr": "Ἀβραάμ"
+  },
+  {
+   "id": "isaac",
+   "n": "Isaac",
+   "p": "abraham",
+   "v": [
+    "1:2"
+   ],
+   "he": "יִצְחָק",
+   "tr": "Yitzchak",
+   "gr": "Ἰσαάκ"
+  },
+  {
+   "id": "jacob",
+   "n": "Jacob",
+   "p": "isaac",
+   "v": [
+    "1:2"
+   ],
+   "g": "and his brothers",
+   "he": "יַעֲקֹב",
+   "tr": "Yaakov",
+   "gr": "Ἰακώβ"
+  },
+  {
+   "id": "judah",
+   "n": "Judah",
+   "p": "jacob",
+   "v": [
+    "1:2",
+    "1:3"
+   ],
+   "he": "יְהוּדָה",
+   "tr": "Yehudah",
+   "gr": "Ἰούδας"
+  },
+  {
+   "id": "tamar",
+   "n": "Tamar",
+   "p": "judah",
+   "v": [
+    "1:3"
+   ],
+   "g": "Genesis 38",
+   "rel": "wife",
+   "sex": "f",
+   "note": "The first of the five women. She secured Judah's line when he failed her.",
+   "he": "תָּמָר",
+   "tr": "Tamar",
+   "gr": "Θάμαρ"
+  },
+  {
+   "id": "perez",
+   "n": "Perez",
+   "p": "tamar",
+   "v": [
+    "1:3"
+   ],
+   "he": "פֶּרֶץ",
+   "tr": "Peretz",
+   "gr": "Φάρες"
+  },
+  {
+   "id": "zerah",
+   "n": "Zerah",
+   "p": "tamar",
+   "v": [
+    "1:3"
+   ],
+   "g": "twin of Perez",
+   "he": "זֶרַח",
+   "tr": "Zerach",
+   "gr": "Ζαρά"
+  },
+  {
+   "id": "hezron",
+   "n": "Hezron",
+   "p": "perez",
+   "v": [
+    "1:3"
+   ],
+   "he": "חֶצְרֹן",
+   "tr": "Chetzron",
+   "gr": "Ἐσρώμ"
+  },
+  {
+   "id": "ram",
+   "n": "Ram",
+   "p": "hezron",
+   "v": [
+    "1:3",
+    "1:4"
+   ],
+   "he": "רָם",
+   "tr": "Ram",
+   "gr": "Ἀράμ"
+  },
+  {
+   "id": "amminadab",
+   "n": "Amminadab",
+   "p": "ram",
+   "v": [
+    "1:4"
+   ],
+   "he": "עַמִּינָדָב",
+   "tr": "Amminadav",
+   "gr": "Ἀμιναδάβ"
+  },
+  {
+   "id": "nahshon",
+   "n": "Nahshon",
+   "p": "amminadab",
+   "v": [
+    "1:4"
+   ],
+   "he": "נַחְשׁוֹן",
+   "tr": "Nachshon",
+   "gr": "Ναασσών"
+  },
+  {
+   "id": "salmon",
+   "n": "Salmon",
+   "p": "nahshon",
+   "v": [
+    "1:4",
+    "1:5"
+   ],
+   "he": "שַׂלְמוֹן",
+   "tr": "Salmon",
+   "gr": "Σαλμών"
+  },
+  {
+   "id": "rahab",
+   "n": "Rahab",
+   "p": "salmon",
+   "v": [
+    "1:5"
+   ],
+   "g": "of Jericho",
+   "rel": "wife",
+   "sex": "f",
+   "he": "רָחָב",
+   "tr": "Rachav",
+   "note": "The Canaanite of Jericho who hid the spies (Joshua 2). Only Matthew makes her Boaz's mother.",
+   "trad": "Rabbinic tradition makes Rahab the wife of Joshua and ancestor of eight prophets, Jeremiah among them (Megillah 14b).",
+   "gr": "Ῥαχάβ"
+  },
+  {
+   "id": "boaz",
+   "n": "Boaz",
+   "p": "rahab",
+   "v": [
+    "1:5"
+   ],
+   "he": "בֹּעַז",
+   "tr": "Boaz",
+   "gr": "Βοόζ"
+  },
+  {
+   "id": "ruth",
+   "n": "Ruth",
+   "p": "boaz",
+   "v": [
+    "1:5"
+   ],
+   "g": "the Moabite",
+   "rel": "wife",
+   "sex": "f",
+   "he": "רוּת",
+   "tr": "Rut",
+   "gr": "Ῥούθ"
+  },
+  {
+   "id": "obed",
+   "n": "Obed",
+   "p": "ruth",
+   "v": [
+    "1:5"
+   ],
+   "he": "עוֹבֵד",
+   "tr": "Oved",
+   "gr": "Ὠβήδ"
+  },
+  {
+   "id": "jesse",
+   "n": "Jesse",
+   "p": "obed",
+   "v": [
+    "1:5",
+    "1:6"
+   ],
+   "he": "יִשַׁי",
+   "tr": "Yishai",
+   "gr": "Ἰεσσαί"
+  },
+  {
+   "id": "david",
+   "n": "David",
+   "p": "jesse",
+   "v": [
+    "1:1",
+    "1:6",
+    "1:17"
+   ],
+   "g": "the king",
+   "he": "דָּוִד",
+   "tr": "David",
+   "gr": "Δαυείδ"
+  },
+  {
+   "id": "bathsheba",
+   "n": "Bathsheba",
+   "p": "david",
+   "v": [
+    "1:6"
+   ],
+   "g": "\"Uriah's wife\"",
+   "rel": "wife",
+   "sex": "f",
+   "he": "בַּת־שֶׁבַע",
+   "tr": "Bat-Sheva",
+   "note": "Matthew does not name her; he calls her \"the wife of Uriah,\" a Hittite."
+  },
+  {
+   "id": "solomon",
+   "n": "Solomon",
+   "p": "bathsheba",
+   "v": [
+    "1:6",
+    "1:7"
+   ],
+   "branch": "g2",
+   "he": "שְׁלֹמֹה",
+   "tr": "Shlomo",
+   "gr": "Σολομών"
+  },
+  {
+   "id": "rehoboam",
+   "n": "Rehoboam",
+   "p": "solomon",
+   "v": [
+    "1:7"
+   ],
+   "he": "רְחַבְעָם",
+   "tr": "Rechavam",
+   "gr": "Ῥοβοάμ"
+  },
+  {
+   "id": "abijah",
+   "n": "Abijah",
+   "p": "rehoboam",
+   "v": [
+    "1:7"
+   ],
+   "he": "אֲבִיָּה",
+   "tr": "Aviyah",
+   "gr": "Ἀβιά"
+  },
+  {
+   "id": "asa",
+   "n": "Asa",
+   "p": "abijah",
+   "v": [
+    "1:7",
+    "1:8"
+   ],
+   "g": "Asaph in some manuscripts",
+   "he": "אָסָא",
+   "tr": "Asa"
+  },
+  {
+   "id": "jehoshaphat",
+   "n": "Jehoshaphat",
+   "p": "asa",
+   "v": [
+    "1:8"
+   ],
+   "he": "יְהוֹשָׁפָט",
+   "tr": "Yehoshafat",
+   "gr": "Ἰωσαφάτ"
+  },
+  {
+   "id": "joram",
+   "n": "Joram",
+   "p": "jehoshaphat",
+   "v": [
+    "1:8"
+   ],
+   "he": "יוֹרָם",
+   "tr": "Yoram",
+   "gr": "Ἰωράμ"
+  },
+  {
+   "id": "uzziah",
+   "n": "Uzziah",
+   "p": "joram",
+   "v": [
+    "1:8",
+    "1:9"
+   ],
+   "g": "three kings omitted",
+   "note": "Matthew omits Ahaziah, Joash and Amaziah between Joram and Uzziah (compare 1 Chronicles 3:11–12).",
+   "gr": "Ὀζίας",
+   "he": "עֻזִּיָּה",
+   "tr": "Uzziyahu"
+  },
+  {
+   "id": "jotham",
+   "n": "Jotham",
+   "p": "uzziah",
+   "v": [
+    "1:9"
+   ],
+   "he": "יוֹתָם",
+   "tr": "Yotam",
+   "gr": "Ἰωάθαμ"
+  },
+  {
+   "id": "ahaz",
+   "n": "Ahaz",
+   "p": "jotham",
+   "v": [
+    "1:9"
+   ],
+   "he": "אָחָז",
+   "tr": "Achaz",
+   "gr": "Ἀχάζ"
+  },
+  {
+   "id": "hezekiah",
+   "n": "Hezekiah",
+   "p": "ahaz",
+   "v": [
+    "1:9",
+    "1:10"
+   ],
+   "he": "חִזְקִיָּהוּ",
+   "tr": "Chizkiyahu",
+   "gr": "Ἐζεκίας"
+  },
+  {
+   "id": "manasseh",
+   "n": "Manasseh",
+   "p": "hezekiah",
+   "v": [
+    "1:10"
+   ],
+   "he": "מְנַשֶּׁה",
+   "tr": "Menasheh",
+   "gr": "Μανασσῆς"
+  },
+  {
+   "id": "amon",
+   "n": "Amon",
+   "p": "manasseh",
+   "v": [
+    "1:10"
+   ],
+   "g": "Amos in some manuscripts",
+   "he": "אָמוֹן",
+   "tr": "Amon"
+  },
+  {
+   "id": "josiah",
+   "n": "Josiah",
+   "p": "amon",
+   "v": [
+    "1:10",
+    "1:11"
+   ],
+   "he": "יֹאשִׁיָּהוּ",
+   "tr": "Yoshiyahu",
+   "gr": "Ἰωσίας"
+  },
+  {
+   "id": "jeconiah",
+   "n": "Jeconiah",
+   "p": "josiah",
+   "v": [
+    "1:11",
+    "1:12"
+   ],
+   "g": "and his brothers; the exile",
+   "note": "Jehoiachin, Josiah's grandson (1 Chronicles 3:15–16). Jeremiah 22:30 says none of his offspring will sit on David's throne.",
+   "he": "יְכׇנְיָה",
+   "tr": "Yechonyah",
+   "gr": "Ἰεχονίας"
+  },
+  {
+   "id": "shealtiel",
+   "n": "Shealtiel",
+   "p": "jeconiah",
+   "v": [
+    "1:12"
+   ],
+   "branch": "g3",
+   "he": "שְׁאַלְתִּיאֵל",
+   "tr": "Shealtiel",
+   "gr": "Σαλαθιήλ"
+  },
+  {
+   "id": "zerubbabel",
+   "n": "Zerubbabel",
+   "p": "shealtiel",
+   "v": [
+    "1:12",
+    "1:13"
+   ],
+   "g": "led the return",
+   "he": "זְרֻבָּבֶל",
+   "tr": "Zerubavel",
+   "gr": "Ζοροβάβελ"
+  },
+  {
+   "id": "abiud",
+   "n": "Abiud",
+   "p": "zerubbabel",
+   "v": [
+    "1:13"
+   ],
+   "g": "not in the Old Testament",
+   "note": "From here to Joseph the names are not found in the Old Testament.",
+   "gr": "Ἀβιούδ",
+   "he": "אֲבִיָּהוּד",
+   "tr": ""
+  },
+  {
+   "id": "eliakim",
+   "n": "Eliakim",
+   "p": "abiud",
+   "v": [
+    "1:13"
+   ],
+   "gr": "Ἐλιακείμ",
+   "he": "אֶלְיָקִים",
+   "tr": "Elyakim"
+  },
+  {
+   "id": "azor",
+   "n": "Azor",
+   "p": "eliakim",
+   "v": [
+    "1:13",
+    "1:14"
+   ],
+   "gr": "Ἀζώρ",
+   "tr": "Azōr"
+  },
+  {
+   "id": "zadok",
+   "n": "Zadok",
+   "p": "azor",
+   "v": [
+    "1:14"
+   ],
+   "he": "צָדוֹק",
+   "tr": "Tzadok",
+   "gr": "Σαδώκ"
+  },
+  {
+   "id": "achim",
+   "n": "Achim",
+   "p": "zadok",
+   "v": [
+    "1:14"
+   ],
+   "gr": "Ἀχείμ",
+   "tr": "Acheim"
+  },
+  {
+   "id": "eliud",
+   "n": "Eliud",
+   "p": "achim",
+   "v": [
+    "1:14",
+    "1:15"
+   ],
+   "gr": "Ἐλιούδ",
+   "tr": "Elioud"
+  },
+  {
+   "id": "eleazar",
+   "n": "Eleazar",
+   "p": "eliud",
+   "v": [
+    "1:15"
+   ],
+   "he": "אֶלְעָזָר",
+   "tr": "Elazar",
+   "gr": "Ἐλεάζαρ"
+  },
+  {
+   "id": "matthan",
+   "n": "Matthan",
+   "p": "eleazar",
+   "v": [
+    "1:15"
+   ],
+   "gr": "Ματθάν",
+   "he": "מַתָּן",
+   "tr": ""
+  },
+  {
+   "id": "jacob-j",
+   "n": "Jacob",
+   "p": "matthan",
+   "v": [
+    "1:15",
+    "1:16"
+   ],
+   "g": "Joseph's father",
+   "he": "יַעֲקֹב",
+   "tr": "Yaakov",
+   "gr": "Ἰακώβ"
+  },
+  {
+   "id": "joseph",
+   "n": "Joseph",
+   "p": "jacob-j",
+   "v": [
+    "1:16"
+   ],
+   "g": "the husband of Mary",
+   "he": "יוֹסֵף",
+   "tr": "Yosef",
+   "gr": "Ἰωσήφ"
+  },
+  {
+   "id": "mary",
+   "n": "Mary",
+   "p": "joseph",
+   "v": [
+    "1:16"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "מִרְיָם",
+   "tr": "Miriam",
+   "gr": "Μαρία"
+  },
+  {
+   "id": "jesus",
+   "n": "Jesus",
+   "p": "mary",
+   "v": [
+    "1:1",
+    "1:16"
+   ],
+   "g": "\"who is called Christ\"",
+   "he": "יֵשׁוּעַ",
+   "tr": "Yeshua",
+   "kin": "born of Mary, wife of Joseph",
+   "note": "The pattern \"X was the father of Y\" breaks at the end: \"Joseph, the husband of Mary, of whom (she being the mother) was born Jesus\" (1:16).",
+   "gr": "Ἰησοῦς"
+  }
+ ]
+}

@@ -39,16 +39,25 @@
     return treeP[id] || (treeP[id] = getJSON('data/trees/' + id + '.json').then(prepare));
   }
 
-  /* Index the people: children, depth, branch */
+  /* Index the people: children, indent, branch, colour, verses as "c:v" */
   function prepare(t) {
-    var by = {}, kids = {};
+    var by = {}, kids = {}, cols = {};
+    (t.branches || []).forEach(function (b) { cols[b.id] = b.col || b.id; });
     t.people.forEach(function (p) { by[p.id] = p; kids[p.id] = []; });
     t.people.forEach(function (p) { if (p.p) kids[p.p].push(p); });
     t.people.forEach(function (p) {
-      var d = 0, q = p, br = p.branch || null;
-      while (q.p) { d++; q = by[q.p]; if (!br && q.branch) br = q.branch; }
-      p.depth = d; p.br = br; p.kids = kids[p.id];
+      var q = p, br = p.branch || null;
+      while (q.p) { q = by[q.p]; if (!br && q.branch) br = q.branch; }
+      p.br = br; p.col = (br && cols[br]) || t.col || 'root'; p.kids = kids[p.id];
+      p.vv = (p.v || []).map(function (v) { return typeof v === 'number' ? t.anchor.c + ':' + v : String(v); });
     });
+    // indent: one step per generation; in a compact tree an only child stays in its parent's column
+    (function walk(p, d) {
+      p.depth = d;
+      // (a wife's only child still steps in when she is one of several wives, so the families stay apart)
+      var keep = t.compact && p.kids.length === 1 && !(p.rel === 'wife' && p.p && by[p.p].kids.length > 1);
+      p.kids.forEach(function (k) { walk(k, d + (keep ? 0 : 1)); });
+    })(t.people.filter(function (p) { return !p.p; })[0], 0);
     t.by = by;
     t.root = t.people.filter(function (p) { return !p.p; })[0];
     return t;
@@ -86,19 +95,21 @@
           t.anchors.forEach(function (a) {
             if (a.book !== book) return;
             var hit = marks.filter(function (x) { return x[0] === a.c && x[1] === a.v; })[0];
-            if (!hit || scr.querySelector('.dbt-pin[data-dbt-open="' + t.id + '"]')) return;
+            var akey = t.id + '@' + a.c + ':' + a.v;
+            if (!hit || scr.querySelector('.dbt-pin[data-dbt-a="' + akey + '"]')) return;
             var target = hit[2];
             var block = target.closest('.scripture > *') || target.parentNode;
             block.classList.add('dbm-anchor', 'dbt-anchor');
             var pin = el('button', 'dbt-pin', ICON);
             pin.type = 'button';
             pin.setAttribute('data-dbt-open', t.id);
+            pin.setAttribute('data-dbt-a', akey);
             pin.setAttribute('aria-pressed', state.open === t.id ? 'true' : 'false');
             pin.setAttribute('aria-label', 'Family tree: ' + t.title + ' (' + t.ref + ')');
             pin.title = 'Family tree: ' + t.title + ' (' + t.ref + ')';
             // other buttons already at this verse: sit beside them
             var n = 0, prev = target.previousElementSibling;
-            while (prev && /(^| )(dbm-pin|dbf-pin)( |$)/.test(prev.className)) { n++; prev = prev.previousElementSibling; }
+            while (prev && /(^| )(dbm-pin|dbf-pin|dbt-pin)( |$)/.test(prev.className)) { n++; prev = prev.previousElementSibling; }
             if (n) pin.classList.add('dbt-n' + Math.min(n, 2));
             target.parentNode.insertBefore(pin, target);
             Promise.all([loadTree(t.id), hebrewNames()]).then(function (r) { linkNames(scr, a, r[0], r[1]); }).catch(function () { /* names stay plain */ });
@@ -110,7 +121,8 @@
   }
 
   function linkNames(scr, a, t, hn) {
-    if (scr.querySelector('.dbt-name[data-dbt-tree="' + t.id + '"]')) return;
+    var akey = t.id + '@' + a.c + ':' + a.v;
+    if (scr.querySelector('.dbt-name[data-dbt-a="' + akey + '"]')) return;
     var forms = {};
     t.people.forEach(function (p) {
       var list = (p.forms || []).slice();
@@ -135,7 +147,7 @@
         return NodeFilter.FILTER_ACCEPT;
       }
     });
-    while ((node = walker.nextNode())) if (c === a.c && v >= lo && v <= hi) texts.push([node, v]);
+    while ((node = walker.nextNode())) if (c === a.c && v >= lo && v <= hi) texts.push([node, c + ':' + v]);
     texts.forEach(function (tv) {
       var tn = tv[0], s = tn.nodeValue;
       re.lastIndex = 0;
@@ -144,11 +156,12 @@
       var frag = document.createDocumentFragment(), last = 0, mt;
       while ((mt = re.exec(s))) {
         var cands = forms[mt[1]];
-        var p = cands.filter(function (x) { return x.v.indexOf(tv[1]) >= 0; })[0] || cands[0];
+        var p = cands.filter(function (x) { return x.vv.indexOf(tv[1]) >= 0; })[0] || cands[0];
         frag.appendChild(document.createTextNode(s.slice(last, mt.index)));
         var span = el('span', 'dbt-name', esc(mt[1]));
         span.setAttribute('data-dbt-tree', t.id);
         span.setAttribute('data-dbt-id', p.id);
+        span.setAttribute('data-dbt-a', akey);
         span.setAttribute('role', 'button');
         span.tabIndex = 0;
         frag.appendChild(span);
@@ -214,7 +227,11 @@
     });
   }
 
-  function dotClass(p) { return p.count === 1 ? 'dbt-dot dbt-in' : p.count === 2 ? 'dbt-dot dbt-some' : 'dbt-dot dbt-out'; }
+  function dotClass(t, p) {
+    if (p.rel === 'wife') return 'dbt-dot dbt-out';
+    if (!t.count) return 'dbt-dot dbt-in';
+    return p.count === 1 ? 'dbt-dot dbt-in' : p.count === 2 ? 'dbt-dot dbt-some' : 'dbt-dot dbt-out';
+  }
 
   function fill(root, t) {
     var html = '<div class="dbt-head"><span>Family tree · ' + esc(t.ref) + '</span><button type="button" class="dbt-close" data-dbt-close>' + CLOSE + 'Close</button></div>';
@@ -222,15 +239,18 @@
     html += (t.intro || []).map(function (p) { return '<p class="dbt-p">' + nm(p) + '</p>'; }).join('');
     if (t.branches) {
       html += '<div class="dbt-bar">' + t.branches.map(function (b) {
-        return '<button type="button" class="dbt-chip" data-dbt-branch="' + esc(b.id) + '" aria-pressed="true"><i class="dbt-sw dbt-c-' + esc(b.id) + '"></i>' + esc(nm(b.name)) +
-          (b.count ? ' <b>' + b.count + '</b>' : '') + '</button>';
+        var inner = '<i class="dbt-sw dbt-c-' + esc(b.col || b.id) + '"></i>' + esc(nm(b.name)) + (b.count ? ' <b>' + b.count + '</b>' : '');
+        return t.branchToggle === false ? '<span class="dbt-chip dbt-static">' + inner + '</span>'
+          : '<button type="button" class="dbt-chip" data-dbt-branch="' + esc(b.id) + '" aria-pressed="true">' + inner + '</button>';
       }).join('') + '</div>';
     }
-    html += '<p class="dbt-legend"><span><i class="dbt-dot dbt-in"></i>among the seventy</span><span><i class="dbt-dot dbt-some"></i>counted by some</span><span><i class="dbt-dot dbt-out"></i>not counted</span></p>';
+    if (t.count) html += '<p class="dbt-legend"><span><i class="dbt-dot dbt-in"></i>' + esc(t.count.legend[0]) + '</span>' +
+      (t.count.legend[1] ? '<span><i class="dbt-dot dbt-some"></i>' + esc(t.count.legend[1]) + '</span>' : '') +
+      '<span><i class="dbt-dot dbt-out"></i>' + esc(t.count.legend[2]) + '</span></p>';
     html += '<div class="dbt-tree" role="tree"><svg class="dbt-lines" aria-hidden="true"></svg>';
     (function walk(p) {
-      html += '<div class="dbt-row dbt-c-' + esc(p.br || 'root') + '" role="treeitem" data-dbt-row="' + esc(p.id) + '" style="padding-left:' + (p.depth * IND) + 'px">' +
-        '<button type="button" class="dbt-node" data-dbt-pick="' + esc(p.id) + '" aria-expanded="false"><i class="' + dotClass(p) + '"></i>' +
+      html += '<div class="dbt-row dbt-c-' + esc(p.col) + (p.rel === 'wife' ? ' dbt-wife' : '') + (!p.p || p.branch ? ' dbt-headrow' : '') + '" role="treeitem" data-dbt-row="' + esc(p.id) + '" style="padding-left:' + (p.depth * IND) + 'px">' +
+        '<button type="button" class="dbt-node" data-dbt-pick="' + esc(p.id) + '" aria-expanded="false"><i class="' + dotClass(t, p) + '"></i>' +
         '<span class="dbt-nm">' + esc(nm(p.n)) + '</span>' + (p.g ? '<span class="dbt-gl">' + esc(p.g) + '</span>' : '') + '</button></div>';
       p.kids.forEach(walk);
     })(t.root);
@@ -267,16 +287,18 @@
       kids.forEach(function (k, i) {
         var b = pos[k.id], last = i === kids.length - 1;
         var d = 'M' + a[0] + ' ' + (a[1] + r + 2) + 'V' + (b[1] - rad) + 'Q' + a[0] + ' ' + b[1] + ' ' + (a[0] + rad) + ' ' + b[1] + 'H' + (b[0] - r - 3);
-        var cls = 'dbt-ln dbt-s-' + (k.br || 'root') + (onPath[k.id] && onPath[p.id] ? ' dbt-on' : '') + (k.rel === 'from' ? ' dbt-from' : '');
+        var cls = 'dbt-ln dbt-s-' + k.col + (onPath[k.id] && onPath[p.id] ? ' dbt-on' : '') + (k.rel === 'from' || k.rel === 'wife' ? ' dbt-from' : '');
         // siblings share the spine; draw it once (with the last child), ticks for the others
         if (!last) d = 'M' + a[0] + ' ' + b[1] + 'H' + (b[0] - r - 3);
+        // an only child in the same column (compact trees): a straight line down
+        if (Math.abs(b[0] - a[0]) < 2) d = 'M' + a[0] + ' ' + (a[1] + r + 2) + 'V' + (b[1] - r - 2);
         out += '<path class="' + cls + '" d="' + d + '"/>';
       });
       // a highlighted spine segment from the parent down to a highlighted child that is not the last
       kids.forEach(function (k, i) {
         if (i === kids.length - 1 || !(onPath[k.id] && onPath[p.id])) return;
         var b = pos[k.id];
-        out += '<path class="dbt-ln dbt-on dbt-s-' + (k.br || 'root') + '" d="M' + a[0] + ' ' + (a[1] + r + 2) + 'V' + b[1] + '"/>';
+        out += '<path class="dbt-ln dbt-on dbt-s-' + k.col + '" d=""M' + a[0] + ' ' + (a[1] + r + 2) + 'V' + b[1] + '"/>';
       });
     });
     svg.setAttribute('width', box.width);
@@ -307,7 +329,7 @@
     row.classList.add('dbt-sel');
     if (card) {
       row.querySelector('.dbt-node').setAttribute('aria-expanded', 'true');
-      var cd = el('div', 'dbt-card dbt-c-' + (p.br || 'root'), cardHTML(t, p));
+      var cd = el('div', 'dbt-card dbt-c-' + p.col, cardHTML(t, p));
       cd.style.marginLeft = Math.min(p.depth * IND + DOT + 8, 2 * IND + DOT + 8) + 'px';   // deep cards stay wide
       row.after(cd);
     } else if (scroll) {
@@ -326,18 +348,31 @@
 
   var KIND = { person: 'Person', people: 'People', place: 'Place or city' };
   var CERT = { established: 'Well established', probable: 'Probable', possible: 'Possible', uncertain: 'Uncertain' };
+  /* "son of Jacob and Leah", "wife of Jacob", "came from the Casluhim" */
+  function kin(t, p) {
+    if (p.kin) return nm(p.kin);
+    var par = p.p ? t.by[p.p] : null;
+    if (!par) return '';
+    if (p.rel === 'wife') return (p.concubine ? 'concubine of ' : 'wife of ') + nm(par.n);
+    if (p.rel === 'from') return 'came from ' + nm(par.n);
+    var word = p.sex === 'f' ? 'daughter of ' : 'son of ';
+    if (par.rel === 'wife' && par.p) return word + nm(t.by[par.p].n) + ' and ' + nm(par.n);
+    return word + nm(par.n);
+  }
   function cardHTML(t, p) {
-    var vv = (p.v || []).map(function (v) { return '<button type="button" class="dbt-vv" data-dbt-goto="' + v + '">' + t.anchor.c + ':' + v + '</button>'; }).join('');
-    var parent = p.p ? t.by[p.p] : null;
-    var html = '<div class="dbt-hebrow"><span class="dbt-he" lang="he" dir="rtl">' + esc(p.he) + '</span><span class="dbt-tr">' + esc(p.tr) + '</span></div>';
-    html += '<p class="dbt-meta">' + esc(KIND[p.kind] || '') +
-      (parent ? ' · ' + (p.rel === 'from' ? 'came from ' : 'son of ') + esc(nm(parent.n)) : '') +
-      ' · ' + (p.count === 1 ? 'one of the seventy' : p.count === 2 ? 'counted by some' : 'not counted') + '</p>';
+    var vv = (p.vv || []).map(function (v) { return '<button type="button" class="dbt-vv" data-dbt-goto="' + v + '">' + v + '</button>'; }).join('');
+    var html = '<div class="dbt-hebrow">' + (p.he ? '<span class="dbt-he" lang="he" dir="rtl">' + esc(p.he) + '</span>' : '') +
+      (p.gr ? '<span class="dbt-gr" lang="grc">' + esc(p.gr) + '</span>' : '') + (p.tr ? '<span class="dbt-tr">' + esc(p.tr) + '</span>' : '') + '</div>';
+    var meta = [KIND[p.kind] || '', kin(t, p)];
+    if (t.count && p.rel !== 'wife') meta.push(t.count.card[p.count || 0]);
+    html += '<p class="dbt-meta">' + meta.filter(Boolean).map(esc).join(' · ') + '</p>';
     if (p.g) html += '<p class="dbt-id">' + esc(p.g) + (p.cert ? ' <span class="dbt-cert dbt-cert-' + esc(p.cert) + '">' + esc(CERT[p.cert] || p.cert) + '</span>' : '') + '</p>';
     if (p.trad) html += '<h4>Jewish tradition</h4><p>' + nm(p.trad) + '</p>';
     if (p.sch) html += '<h4>Scholarship</h4><p>' + nm(p.sch) + '</p>';
     if (p.note) html += '<p class="dbt-cnote">' + nm(p.note) + '</p>';
-    if (p.kids && p.kids.length) html += '<p class="dbt-kids">' + (p.kids.length === 1 ? 'Son' : 'Sons') + ': ' + p.kids.map(function (k) {
+    var girls = p.kids.filter(function (k) { return k.sex === 'f' && k.rel !== 'wife'; }).length, wives = p.kids.filter(function (k) { return k.rel === 'wife'; }).length;
+    var kidsLabel = wives ? (wives === p.kids.length ? (wives === 1 ? 'Wife' : 'Wives') : 'Family') : girls ? (p.kids.length === 1 ? 'Daughter' : 'Children') : (p.kids.length === 1 ? 'Son' : 'Sons');
+    if (p.kids && p.kids.length) html += '<p class="dbt-kids">' + kidsLabel + ': ' + p.kids.map(function (k) {
       return '<button type="button" class="dbt-link" data-dbt-pick="' + esc(k.id) + '">' + esc(nm(k.n)) + '</button>';
     }).join(', ') + '</p>';
     html += '<p class="dbt-verses">In the text: ' + vv + '</p>';
@@ -363,9 +398,9 @@
   }
 
   /* Scroll the text to a verse of the tree's chapter and flash the person's name there */
-  function gotoVerse(v, id) {
+  function gotoVerse(cv, id) {
     var t = state.tree; if (!t) return;
-    var a = t.anchor, target = null;
+    var a = { book: t.anchor.book, c: parseInt(cv, 10) }, v = parseInt(String(cv).split(':')[1], 10), target = null;
     document.querySelectorAll('section.portion[data-book="' + a.book + '"] .scripture').forEach(function (scr) {
       var c = parseInt(scr.closest('section').getAttribute('data-c') || '1', 10);
       scr.querySelectorAll('.verse-num, .chapter-num').forEach(function (e) {
@@ -388,7 +423,7 @@
     var br = e.target.closest('[data-dbt-branch]');
     if (br) { toggleBranch(br.getAttribute('data-dbt-branch')); return; }
     var go = e.target.closest('[data-dbt-goto]');
-    if (go) { var sel = state.sel; gotoVerse(+go.getAttribute('data-dbt-goto'), sel); }
+    if (go) { var sel = state.sel; gotoVerse(go.getAttribute('data-dbt-goto'), sel); }
   }
 
   function close() {

@@ -19,21 +19,36 @@
   {
    "id": "japheth",
    "name": "Japheth",
-   "count": 14
+   "count": 14,
+   "col": "japheth"
   },
   {
    "id": "ham",
    "name": "Ham",
-   "count": 30
+   "count": 30,
+   "col": "ham"
   },
   {
    "id": "shem",
    "name": "Shem",
-   "count": 26
+   "count": 26,
+   "col": "shem"
   }
  ],
  "countNote": "Filled dots are the seventy. Nimrod (an individual) and the Philistines (\"from whom… came\") are counted differently by different readers; one of the two makes up Ham's thirty.",
  "sources": "Hebrew names: Miqra according to the Masorah. Jewish tradition: Josephus, <i>Antiquities</i> 1.122–147; Babylonian Talmud, Yoma 10a; Genesis Rabbah 37; Targum Pseudo-Jonathan; Rashi on Genesis 10. Scholarly identifications summarise the views found in the standard commentaries and reference works (e.g. Sarna, <i>JPS Torah Commentary: Genesis</i>; Wenham, <i>Genesis 1–15</i>; Westermann, <i>Genesis 1–11</i>; <i>Anchor Bible Dictionary</i>). Certainty labels are our own summary. Parallel list: 1 Chronicles 1:4–27.",
+ "count": {
+  "legend": [
+   "among the seventy",
+   "counted by some",
+   "not counted"
+  ],
+  "card": [
+   "not counted",
+   "one of the seventy",
+   "counted by some"
+  ]
+ },
  "people": [
   {
    "id": "noah",

@@ -1,0 +1,381 @@
+{
+ "id": "gen-5-adam-noah",
+ "title": "From Adam to Noah",
+ "ref": "Genesis 4–5",
+ "compact": true,
+ "branches": [
+  {
+   "id": "cain",
+   "name": "Cain's line",
+   "col": "ham"
+  },
+  {
+   "id": "seth",
+   "name": "Seth's line",
+   "col": "shem"
+  }
+ ],
+ "intro": [
+  "Two lines descend from Adam. Cain's line (Genesis 4) builds the first city and invents herding, music and metalwork, and ends in Lamech's boast of vengeance. Seth's line (Genesis 5) is a list of ten generations from Adam to Noah, each with the age at fatherhood and the length of life, framed by \"and he died\", except Enoch, whom \"God took.\"",
+  "Several names occur in both lines (Enoch, Lamech; Irad and Jared; Methushael and Methuselah). Ages are those of the Hebrew text; the Septuagint and the Samaritan Pentateuch give different figures."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi on Genesis 4–5; Genesis Rabbah 23–25; Babylonian Talmud; 1 Enoch. Scholarly summary after the standard commentaries (Sarna, Wenham, Westermann).",
+ "anchor": {
+  "book": "GEN",
+  "c": 4,
+  "v": 17
+ },
+ "people": [
+  {
+   "id": "adam",
+   "n": "Adam",
+   "p": null,
+   "v": [
+    "4:25",
+    "5:1",
+    "5:3",
+    "5:5"
+   ],
+   "g": "930 years",
+   "trad": "The midrash counts ten generations from Adam to Noah to show \"how great is His patience\" (Mishnah Avot 5:2).",
+   "note": "Father of Seth at 130; lived 930 years (5:3–5). Luke's genealogy ends with him: \"the son of Adam, the son of God\" (Luke 3:38).",
+   "he": "אָדָם",
+   "tr": "Adam"
+  },
+  {
+   "id": "cain",
+   "n": "Cain",
+   "p": "adam",
+   "v": [
+    "4:17",
+    "4:24",
+    "4:25"
+   ],
+   "g": "built the first city",
+   "branch": "cain",
+   "note": "He named his city after his son Enoch (4:17).",
+   "he": "קַיִן",
+   "tr": "Kayin"
+  },
+  {
+   "id": "enoch-c",
+   "n": "Enoch",
+   "p": "cain",
+   "v": [
+    "4:17"
+   ],
+   "g": "a city named after him",
+   "he": "חֲנוֹךְ",
+   "tr": "Chanoch"
+  },
+  {
+   "id": "irad",
+   "n": "Irad",
+   "p": "enoch-c",
+   "v": [
+    "4:18"
+   ],
+   "he": "עִירָד",
+   "tr": "Irad"
+  },
+  {
+   "id": "mehujael",
+   "n": "Mehujael",
+   "p": "irad",
+   "v": [
+    "4:18"
+   ],
+   "he": "מְחוּיָאֵל",
+   "tr": "Mechuyael"
+  },
+  {
+   "id": "methusael",
+   "n": "Methusael",
+   "p": "mehujael",
+   "v": [
+    "4:18"
+   ],
+   "he": "מְתוּשָׁאֵל",
+   "tr": "Metushael"
+  },
+  {
+   "id": "lamech-c",
+   "n": "Lamech",
+   "p": "methusael",
+   "v": [
+    "4:18",
+    "4:19",
+    "4:23",
+    "4:24"
+   ],
+   "g": "the song of vengeance",
+   "note": "The first man said to take two wives; his boast \"seventy-sevenfold\" (4:24) is answered by Jesus' \"seventy-seven times\" for forgiveness (Matthew 18:22).",
+   "he": "לֶמֶךְ",
+   "tr": "Lemech"
+  },
+  {
+   "id": "adah-l",
+   "n": "Adah",
+   "p": "lamech-c",
+   "v": [
+    "4:19",
+    "4:20",
+    "4:23"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "עָדָה",
+   "tr": "Adah"
+  },
+  {
+   "id": "jabal",
+   "n": "Jabal",
+   "p": "adah-l",
+   "v": [
+    "4:20"
+   ],
+   "g": "father of tent-dwelling herdsmen",
+   "he": "יָבָל",
+   "tr": "Yaval"
+  },
+  {
+   "id": "jubal",
+   "n": "Jubal",
+   "p": "adah-l",
+   "v": [
+    "4:21"
+   ],
+   "g": "father of harp and flute",
+   "he": "יוּבָל",
+   "tr": "Yuval"
+  },
+  {
+   "id": "zillah",
+   "n": "Zillah",
+   "p": "lamech-c",
+   "v": [
+    "4:19",
+    "4:22",
+    "4:23"
+   ],
+   "rel": "wife",
+   "sex": "f",
+   "he": "צִלָּה",
+   "tr": "Tzillah"
+  },
+  {
+   "id": "tubal-cain",
+   "n": "Tubal-cain",
+   "p": "zillah",
+   "v": [
+    "4:22"
+   ],
+   "g": "forger of bronze and iron",
+   "he": "תּוּבַל קַיִן",
+   "tr": "Tuval-Kayin"
+  },
+  {
+   "id": "naamah",
+   "n": "Naamah",
+   "p": "zillah",
+   "v": [
+    "4:22"
+   ],
+   "sex": "f",
+   "trad": "The midrash identifies her as the wife of Noah (Genesis Rabbah 23:3).",
+   "he": "נַעֲמָה",
+   "tr": "Naamah"
+  },
+  {
+   "id": "abel",
+   "n": "Abel",
+   "p": "adam",
+   "v": [
+    "4:25"
+   ],
+   "g": "killed by Cain",
+   "he": "הֶבֶל",
+   "tr": "Hevel"
+  },
+  {
+   "id": "seth",
+   "n": "Seth",
+   "p": "adam",
+   "v": [
+    "4:25",
+    "4:26",
+    "5:3",
+    "5:4",
+    "5:6",
+    "5:7",
+    "5:8"
+   ],
+   "g": "912 years",
+   "branch": "seth",
+   "note": "\"God has granted me another seed in place of Abel\" (4:25): the name sounds like <i>shat</i>, \"granted.\" Father of Enosh at 105; lived 912 years.",
+   "he": "שֵׁת",
+   "tr": "Shet"
+  },
+  {
+   "id": "enosh",
+   "n": "Enosh",
+   "p": "seth",
+   "v": [
+    "4:26",
+    "5:6",
+    "5:7",
+    "5:9",
+    "5:10",
+    "5:11"
+   ],
+   "g": "905 years",
+   "note": "\"At that time men began to call upon the name of the LORD\" (4:26). Father of Kenan at 90; lived 905 years.",
+   "trad": "Rashi reads the verse the other way: in his days men began to call idols by the name of the LORD.",
+   "he": "אֱנוֹשׁ",
+   "tr": "Enosh"
+  },
+  {
+   "id": "kenan",
+   "n": "Kenan",
+   "p": "enosh",
+   "v": [
+    "5:9",
+    "5:10",
+    "5:12",
+    "5:13",
+    "5:14"
+   ],
+   "g": "910 years",
+   "note": "Father of Mahalalel at 70; lived 910 years.",
+   "he": "קֵינָן",
+   "tr": "Kenan"
+  },
+  {
+   "id": "mahalalel",
+   "n": "Mahalalel",
+   "p": "kenan",
+   "v": [
+    "5:12",
+    "5:13",
+    "5:15",
+    "5:16",
+    "5:17"
+   ],
+   "g": "895 years",
+   "note": "Father of Jared at 65; lived 895 years.",
+   "he": "מַהֲלַלְאֵל",
+   "tr": "Mahalalel"
+  },
+  {
+   "id": "jared",
+   "n": "Jared",
+   "p": "mahalalel",
+   "v": [
+    "5:15",
+    "5:16",
+    "5:18",
+    "5:19",
+    "5:20"
+   ],
+   "g": "962 years",
+   "note": "Father of Enoch at 162; lived 962 years.",
+   "he": "יֶרֶד",
+   "tr": "Yered"
+  },
+  {
+   "id": "enoch",
+   "n": "Enoch",
+   "p": "jared",
+   "v": [
+    "5:18",
+    "5:19",
+    "5:21",
+    "5:22",
+    "5:23",
+    "5:24"
+   ],
+   "g": "365 years; \"God took him\"",
+   "note": "\"Enoch walked with God, and then he was no more, because God had taken him away\" (5:24). Hebrews 11:5 and Jude 14 recall him.",
+   "trad": "Second Temple literature made Enoch a revealer of heavenly secrets (the books of Enoch, quoted in Jude 14–15).",
+   "he": "חֲנוֹךְ",
+   "tr": "Chanoch"
+  },
+  {
+   "id": "methuselah",
+   "n": "Methuselah",
+   "p": "enoch",
+   "v": [
+    "5:21",
+    "5:22",
+    "5:25",
+    "5:26",
+    "5:27"
+   ],
+   "g": "969 years",
+   "note": "The longest life recorded. By the Hebrew figures he died in the year of the flood (187 + 182 + 600 = 969).",
+   "trad": "Rashi on 7:4: the seven days' wait before the flood were the days of mourning for Methuselah.",
+   "he": "מְתוּשֶׁלַח",
+   "tr": "Metushelach"
+  },
+  {
+   "id": "lamech",
+   "n": "Lamech",
+   "p": "methuselah",
+   "v": [
+    "5:25",
+    "5:26",
+    "5:28",
+    "5:30",
+    "5:31"
+   ],
+   "g": "777 years",
+   "note": "Father of Noah at 182; lived 777 years.",
+   "he": "לֶמֶךְ",
+   "tr": "Lemech"
+  },
+  {
+   "id": "noah",
+   "n": "Noah",
+   "p": "lamech",
+   "v": [
+    "5:29",
+    "5:30",
+    "5:32"
+   ],
+   "g": "\"may this one comfort us\"",
+   "note": "The name is explained by <i>nacham</i>, \"comfort\" (5:29). Father of Shem, Ham and Japheth after 500 years; lived 950 years (9:29).",
+   "he": "נֹחַ",
+   "tr": "Noach"
+  },
+  {
+   "id": "shem",
+   "n": "Shem",
+   "p": "noah",
+   "v": [
+    "5:32"
+   ],
+   "he": "שֵׁם",
+   "tr": "Shem"
+  },
+  {
+   "id": "ham",
+   "n": "Ham",
+   "p": "noah",
+   "v": [
+    "5:32"
+   ],
+   "he": "חָם",
+   "tr": "Cham"
+  },
+  {
+   "id": "japheth",
+   "n": "Japheth",
+   "p": "noah",
+   "v": [
+    "5:32"
+   ],
+   "he": "יֶפֶת",
+   "tr": "Yefet"
+  }
+ ]
+}

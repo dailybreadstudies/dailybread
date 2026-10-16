@@ -4,8 +4,275 @@
    "id": "gen-10-nations",
    "title": "The Table of Nations",
    "ref": "Genesis 10",
-   "status": "review",
-   "anchors": [{ "book": "GEN", "c": 10, "v": 1, "range": [1, 32] }]
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "GEN",
+     "c": 10,
+     "v": 1,
+     "range": [
+      1,
+      32
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gen-5-adam-noah",
+   "title": "From Adam to Noah",
+   "ref": "Genesis 4–5",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "GEN",
+     "c": 4,
+     "v": 17,
+     "range": [
+      17,
+      26
+     ]
+    },
+    {
+     "book": "GEN",
+     "c": 5,
+     "v": 1,
+     "range": [
+      1,
+      32
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gen-11-shem-abram",
+   "title": "From Shem to Abram",
+   "ref": "Genesis 11; 22",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "GEN",
+     "c": 11,
+     "v": 10,
+     "range": [
+      10,
+      32
+     ]
+    },
+    {
+     "book": "GEN",
+     "c": 22,
+     "v": 20,
+     "range": [
+      20,
+      24
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gen-25-abraham",
+   "title": "Abraham's Sons",
+   "ref": "Genesis 25",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "GEN",
+     "c": 25,
+     "v": 1,
+     "range": [
+      1,
+      26
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gen-29-jacob",
+   "title": "Jacob's Children",
+   "ref": "Genesis 29–30; 35",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "GEN",
+     "c": 29,
+     "v": 31,
+     "range": [
+      31,
+      35
+     ]
+    },
+    {
+     "book": "GEN",
+     "c": 30,
+     "v": 1,
+     "range": [
+      1,
+      24
+     ]
+    },
+    {
+     "book": "GEN",
+     "c": 35,
+     "v": 16,
+     "range": [
+      16,
+      26
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gen-36-esau",
+   "title": "The Family of Esau",
+   "ref": "Genesis 36:1–19",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "GEN",
+     "c": 36,
+     "v": 1,
+     "range": [
+      1,
+      19
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gen-36-seir",
+   "title": "The Horites of Seir",
+   "ref": "Genesis 36:20–30",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "GEN",
+     "c": 36,
+     "v": 20,
+     "range": [
+      20,
+      30
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gen-46-seventy",
+   "title": "The Seventy Who Went Down to Egypt",
+   "ref": "Genesis 46:8–27",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "GEN",
+     "c": 46,
+     "v": 8,
+     "range": [
+      8,
+      27
+     ]
+    }
+   ]
+  },
+  {
+   "id": "exo-6-levi",
+   "title": "Levi, Moses and Aaron",
+   "ref": "Exodus 6:14–25",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "EXO",
+     "c": 6,
+     "v": 14,
+     "range": [
+      14,
+      25
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rut-4-perez-david",
+   "title": "From Perez to David",
+   "ref": "Ruth 4:18–22",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "RUT",
+     "c": 4,
+     "v": 18,
+     "range": [
+      13,
+      22
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-3-david",
+   "title": "The House of David",
+   "ref": "1 Chronicles 3",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 3,
+     "v": 1,
+     "range": [
+      1,
+      24
+     ]
+    }
+   ]
+  },
+  {
+   "id": "1ch-6-priests",
+   "title": "The High Priests",
+   "ref": "1 Chronicles 6:1–15",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "1CH",
+     "c": 6,
+     "v": 1,
+     "range": [
+      1,
+      15
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mat-1-messiah",
+   "title": "The Genealogy of the Messiah",
+   "ref": "Matthew 1:1–17",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "MAT",
+     "c": 1,
+     "v": 1,
+     "range": [
+      1,
+      17
+     ]
+    }
+   ]
+  },
+  {
+   "id": "luk-3-adam",
+   "title": "From Adam to Jesus",
+   "ref": "Luke 3:23–38",
+   "status": "ready",
+   "anchors": [
+    {
+     "book": "LUK",
+     "c": 3,
+     "v": 23,
+     "range": [
+      23,
+      38
+     ]
+    }
+   ]
   }
  ]
 }

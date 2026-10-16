@@ -1,0 +1,412 @@
+{
+ "id": "1ch-6-priests",
+ "title": "The High Priests",
+ "ref": "1 Chronicles 6:1–15",
+ "compact": true,
+ "col": "japheth",
+ "intro": [
+  "The line of the high priests from Aaron to Jehozadak, who went into exile in 586 BC. His son Joshua (Jeshua) returned with Zerubbabel and served as high priest of the Second Temple (Haggai 1:1; Zechariah 3).",
+  "The list is selective. It leaves out the line of Ithamar (Eli and his descendants), and some names repeat (Amariah, Ahitub, Zadok, Azariah), as was common in priestly families."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah (Hebrew 5:27–41). Josephus, Antiquities 10.152–153; Babylonian Talmud, Yoma 9a. Parallel: Ezra 7:1–5.",
+ "anchor": {
+  "book": "1CH",
+  "c": 6,
+  "v": 1
+ },
+ "people": [
+  {
+   "id": "levi",
+   "n": "Levi",
+   "p": null,
+   "v": [
+    "6:1"
+   ],
+   "he": "לֵוִי",
+   "tr": "Levi"
+  },
+  {
+   "id": "gershon",
+   "n": "Gershon",
+   "p": "levi",
+   "v": [
+    "6:1"
+   ],
+   "he": "גֵּרְשׁוֹן",
+   "tr": "Gereshon"
+  },
+  {
+   "id": "kohath",
+   "n": "Kohath",
+   "p": "levi",
+   "v": [
+    "6:1",
+    "6:2"
+   ],
+   "he": "קְהָת",
+   "tr": "Kehat"
+  },
+  {
+   "id": "amram",
+   "n": "Amram",
+   "p": "kohath",
+   "v": [
+    "6:2",
+    "6:3"
+   ],
+   "he": "עַמְרָם",
+   "tr": "Amram"
+  },
+  {
+   "id": "aaron",
+   "n": "Aaron",
+   "p": "amram",
+   "v": [
+    "6:3"
+   ],
+   "g": "the first high priest",
+   "he": "אַהֲרֹן",
+   "tr": "Aharon"
+  },
+  {
+   "id": "nadab",
+   "n": "Nadab",
+   "p": "aaron",
+   "v": [
+    "6:3"
+   ],
+   "he": "נָדָב",
+   "tr": "Nadav"
+  },
+  {
+   "id": "abihu",
+   "n": "Abihu",
+   "p": "aaron",
+   "v": [
+    "6:3"
+   ],
+   "he": "אֲבִיהוּא",
+   "tr": "Avihu"
+  },
+  {
+   "id": "eleazar",
+   "n": "Eleazar",
+   "p": "aaron",
+   "v": [
+    "6:3",
+    "6:4"
+   ],
+   "g": "high priest",
+   "he": "אֶלְעָזָר",
+   "tr": "Elazar"
+  },
+  {
+   "id": "phinehas",
+   "n": "Phinehas",
+   "p": "eleazar",
+   "v": [
+    "6:4"
+   ],
+   "g": "high priest",
+   "he": "פִּינְחָס",
+   "tr": "Pinchas"
+  },
+  {
+   "id": "abishua",
+   "n": "Abishua",
+   "p": "phinehas",
+   "v": [
+    "6:4",
+    "6:5"
+   ],
+   "he": "אֲבִישׁוּעַ",
+   "tr": "Avishua"
+  },
+  {
+   "id": "bukki",
+   "n": "Bukki",
+   "p": "abishua",
+   "v": [
+    "6:5"
+   ],
+   "he": "בֻּקִּי",
+   "tr": "Bukki"
+  },
+  {
+   "id": "uzzi",
+   "n": "Uzzi",
+   "p": "bukki",
+   "v": [
+    "6:5",
+    "6:6"
+   ],
+   "he": "עֻזִּי",
+   "tr": "Uzzi"
+  },
+  {
+   "id": "zerahiah",
+   "n": "Zerahiah",
+   "p": "uzzi",
+   "v": [
+    "6:6"
+   ],
+   "he": "זְרַחְיָה",
+   "tr": "Zerachyah"
+  },
+  {
+   "id": "meraioth",
+   "n": "Meraioth",
+   "p": "zerahiah",
+   "v": [
+    "6:6",
+    "6:7"
+   ],
+   "he": "מְרָיוֹת",
+   "tr": "Meravot"
+  },
+  {
+   "id": "amariah",
+   "n": "Amariah",
+   "p": "meraioth",
+   "v": [
+    "6:7"
+   ],
+   "he": "אֲמַרְיָהוּ",
+   "tr": "Amaryah"
+  },
+  {
+   "id": "ahitub",
+   "n": "Ahitub",
+   "p": "amariah",
+   "v": [
+    "6:7",
+    "6:8"
+   ],
+   "he": "אֲחִיטוּב",
+   "tr": "Achituv"
+  },
+  {
+   "id": "zadok",
+   "n": "Zadok",
+   "p": "ahitub",
+   "v": [
+    "6:8"
+   ],
+   "g": "David's priest",
+   "note": "Anointed Solomon king (1 Kings 1:39); his descendants, \"the sons of Zadok,\" held the high priesthood (Ezekiel 44:15).",
+   "sch": "The Dead Sea Scroll community called its priests \"sons of Zadok\"; the name \"Sadducees\" probably comes from him.",
+   "he": "צָדוֹק",
+   "tr": "Tzadok"
+  },
+  {
+   "id": "ahimaaz",
+   "n": "Ahimaaz",
+   "p": "zadok",
+   "v": [
+    "6:8",
+    "6:9"
+   ],
+   "g": "the runner",
+   "note": "Ran with news of Absalom's defeat (2 Samuel 18:19–29).",
+   "he": "אֲחִימַעַץ",
+   "tr": "Achimaatz"
+  },
+  {
+   "id": "azariah-1",
+   "n": "Azariah",
+   "p": "ahimaaz",
+   "v": [
+    "6:9"
+   ],
+   "he": "עֲזַרְיָהוּ",
+   "tr": "Azaryah"
+  },
+  {
+   "id": "johanan",
+   "n": "Johanan",
+   "p": "azariah-1",
+   "v": [
+    "6:9",
+    "6:10"
+   ],
+   "he": "יוֹחָנָן",
+   "tr": "Yochanan"
+  },
+  {
+   "id": "azariah-2",
+   "n": "Azariah",
+   "p": "johanan",
+   "v": [
+    "6:10"
+   ],
+   "g": "priest in Solomon's Temple",
+   "he": "עֲזַרְיָה",
+   "tr": "Azaryah"
+  },
+  {
+   "id": "amariah-2",
+   "n": "Amariah",
+   "p": "azariah-2",
+   "v": [
+    "6:11"
+   ],
+   "he": "אֲמַרְיָהוּ",
+   "tr": "Amaryah"
+  },
+  {
+   "id": "ahitub-2",
+   "n": "Ahitub",
+   "p": "amariah-2",
+   "v": [
+    "6:11",
+    "6:12"
+   ],
+   "he": "אֲחִיטוּב",
+   "tr": "Achituv"
+  },
+  {
+   "id": "zadok-2",
+   "n": "Zadok",
+   "p": "ahitub-2",
+   "v": [
+    "6:12"
+   ],
+   "he": "צָדוֹק",
+   "tr": "Tzadok"
+  },
+  {
+   "id": "shallum",
+   "n": "Shallum",
+   "p": "zadok-2",
+   "v": [
+    "6:12",
+    "6:13"
+   ],
+   "g": "Meshullam in 9:11",
+   "he": "שַׁלּוּם",
+   "tr": "Shalum"
+  },
+  {
+   "id": "hilkiah",
+   "n": "Hilkiah",
+   "p": "shallum",
+   "v": [
+    "6:13"
+   ],
+   "g": "found the Book of the Law",
+   "note": "In Josiah's reign (2 Kings 22:8).",
+   "he": "חִלְקִיָּהוּ",
+   "tr": "Chilkiyahu"
+  },
+  {
+   "id": "azariah-3",
+   "n": "Azariah",
+   "p": "hilkiah",
+   "v": [
+    "6:13",
+    "6:14"
+   ],
+   "he": "עֲזַרְיָה",
+   "tr": "Azaryah"
+  },
+  {
+   "id": "seraiah",
+   "n": "Seraiah",
+   "p": "azariah-3",
+   "v": [
+    "6:14"
+   ],
+   "g": "executed at Riblah",
+   "note": "Put to death by Nebuchadnezzar (2 Kings 25:18–21). Ezra the scribe descended from him (Ezra 7:1).",
+   "he": "שְׂרָיָהוּ",
+   "tr": "Serayah"
+  },
+  {
+   "id": "jehozadak",
+   "n": "Jehozadak",
+   "p": "seraiah",
+   "v": [
+    "6:14",
+    "6:15"
+   ],
+   "g": "went into exile",
+   "note": "Father of Joshua the high priest of the return (Haggai 1:1).",
+   "he": "יְהוֹצָדָק",
+   "tr": "Yehotzadak"
+  },
+  {
+   "id": "ithamar",
+   "n": "Ithamar",
+   "p": "aaron",
+   "v": [
+    "6:3"
+   ],
+   "g": "line of Eli",
+   "he": "אִיתָמָר",
+   "tr": "Itamar"
+  },
+  {
+   "id": "moses",
+   "n": "Moses",
+   "p": "amram",
+   "v": [
+    "6:3"
+   ],
+   "he": "מֹשֶׁה",
+   "tr": "Moshe"
+  },
+  {
+   "id": "miriam",
+   "n": "Miriam",
+   "p": "amram",
+   "v": [
+    "6:3"
+   ],
+   "g": "the prophetess",
+   "sex": "f",
+   "trad": "Tradition credits the well that followed Israel in the wilderness to her merit (Taanit 9a).",
+   "he": "מִרְיָם",
+   "tr": "Miriam"
+  },
+  {
+   "id": "izhar",
+   "n": "Izhar",
+   "p": "kohath",
+   "v": [
+    "6:2"
+   ],
+   "he": "יִצְהָר",
+   "tr": "Yitzhar"
+  },
+  {
+   "id": "hebron",
+   "n": "Hebron",
+   "p": "kohath",
+   "v": [
+    "6:2"
+   ],
+   "he": "חֶבְרוֹן",
+   "tr": "Chevron"
+  },
+  {
+   "id": "uzziel",
+   "n": "Uzziel",
+   "p": "kohath",
+   "v": [
+    "6:2"
+   ],
+   "he": "עֻזִּיאֵל",
+   "tr": "Uzziel"
+  },
+  {
+   "id": "merari",
+   "n": "Merari",
+   "p": "levi",
+   "v": [
+    "6:1"
+   ],
+   "he": "מְרָרִי",
+   "tr": "Merari"
+  }
+ ]
+}

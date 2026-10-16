@@ -1,0 +1,332 @@
+{
+ "id": "gen-36-seir",
+ "title": "The Horites of Seir",
+ "ref": "Genesis 36:20–30",
+ "col": "ochre",
+ "intro": [
+  "The Horites were the earlier inhabitants of Seir, whom the descendants of Esau dispossessed (Deuteronomy 2:12). The two families intermarried: Timna, Lotan's sister, bore Amalek to Eliphaz, and Oholibamah daughter of Anah became Esau's wife."
+ ],
+ "sources": "Hebrew names: Miqra according to the Masorah. Rashi on Genesis 36. Scholarly summary after the standard commentaries.",
+ "anchor": {
+  "book": "GEN",
+  "c": 36,
+  "v": 20
+ },
+ "people": [
+  {
+   "id": "seir",
+   "n": "Seir",
+   "p": null,
+   "v": [
+    "36:20",
+    "36:21"
+   ],
+   "g": "the Horite",
+   "sch": "\"Horite\" was once linked with the Hurrians of Mesopotamia and Syria; many now read it as \"cave-dwellers\" (<i>chor</i>, \"cave\"), a local people of Edom.",
+   "he": "שֵׂעִיר",
+   "tr": "Seir"
+  },
+  {
+   "id": "lotan",
+   "n": "Lotan",
+   "p": "seir",
+   "v": [
+    "36:20",
+    "36:22",
+    "36:29"
+   ],
+   "he": "לוֹטָן",
+   "tr": "Lotan"
+  },
+  {
+   "id": "hori",
+   "n": "Hori",
+   "p": "lotan",
+   "v": [
+    "36:22"
+   ],
+   "he": "חֹרִי",
+   "tr": "Chori"
+  },
+  {
+   "id": "hemam",
+   "n": "Hemam",
+   "p": "lotan",
+   "v": [
+    "36:22"
+   ],
+   "he": "הֵימָם",
+   "tr": "Hemam"
+  },
+  {
+   "id": "shobal",
+   "n": "Shobal",
+   "p": "seir",
+   "v": [
+    "36:20",
+    "36:23",
+    "36:29"
+   ],
+   "he": "שׁוֹבָל",
+   "tr": "Shoval"
+  },
+  {
+   "id": "alvan",
+   "n": "Alvan",
+   "p": "shobal",
+   "v": [
+    "36:23"
+   ],
+   "he": "עַלְוָן",
+   "tr": "Alvan"
+  },
+  {
+   "id": "manahath",
+   "n": "Manahath",
+   "p": "shobal",
+   "v": [
+    "36:23"
+   ],
+   "he": "מָנַחַת",
+   "tr": "Manachat"
+  },
+  {
+   "id": "ebal",
+   "n": "Ebal",
+   "p": "shobal",
+   "v": [
+    "36:23"
+   ],
+   "he": "עֵיבָל",
+   "tr": "Eival"
+  },
+  {
+   "id": "shepho",
+   "n": "Shepho",
+   "p": "shobal",
+   "v": [
+    "36:23"
+   ],
+   "he": "שְׁפוֹ",
+   "tr": "Shefo"
+  },
+  {
+   "id": "onam",
+   "n": "Onam",
+   "p": "shobal",
+   "v": [
+    "36:23"
+   ],
+   "he": "אוֹנָם",
+   "tr": "Onam"
+  },
+  {
+   "id": "zibeon",
+   "n": "Zibeon",
+   "p": "seir",
+   "v": [
+    "36:20",
+    "36:24",
+    "36:29"
+   ],
+   "he": "צִבְעוֹן",
+   "tr": "Tzivon"
+  },
+  {
+   "id": "aiah",
+   "n": "Aiah",
+   "p": "zibeon",
+   "v": [
+    "36:24"
+   ],
+   "he": "אַיָּה",
+   "tr": "Ayyah"
+  },
+  {
+   "id": "anah-z",
+   "n": "Anah",
+   "p": "zibeon",
+   "v": [
+    "36:24"
+   ],
+   "g": "found the hot springs",
+   "note": "\"The Anah who found the hot springs in the wilderness as he was pasturing the donkeys of his father Zibeon\" (36:24).",
+   "trad": "Rashi reads <i>yemim</i> as mules: Anah bred the first mules.",
+   "he": "עֲנָה",
+   "tr": "Anah"
+  },
+  {
+   "id": "anah",
+   "n": "Anah",
+   "p": "seir",
+   "v": [
+    "36:20",
+    "36:25",
+    "36:29"
+   ],
+   "he": "עֲנָה",
+   "tr": "Anah"
+  },
+  {
+   "id": "dishon-a",
+   "n": "Dishon",
+   "p": "anah",
+   "v": [
+    "36:25"
+   ],
+   "he": "דִּשֹׁן",
+   "tr": "Dishon"
+  },
+  {
+   "id": "oholibamah",
+   "n": "Oholibamah",
+   "p": "anah",
+   "v": [
+    "36:25"
+   ],
+   "g": "wife of Esau",
+   "sex": "f",
+   "he": "אׇהֳלִיבָמָה",
+   "tr": "Oholivamah"
+  },
+  {
+   "id": "dishon",
+   "n": "Dishon",
+   "p": "seir",
+   "v": [
+    "36:21",
+    "36:26",
+    "36:30"
+   ],
+   "he": "דִּישֹׁן",
+   "tr": "Dishon"
+  },
+  {
+   "id": "hemdan",
+   "n": "Hemdan",
+   "p": "dishon",
+   "v": [
+    "36:26"
+   ],
+   "he": "חֶמְדָּן",
+   "tr": "Chemdan"
+  },
+  {
+   "id": "eshban",
+   "n": "Eshban",
+   "p": "dishon",
+   "v": [
+    "36:26"
+   ],
+   "he": "אֶשְׁבָּן",
+   "tr": "Eshban"
+  },
+  {
+   "id": "ithran",
+   "n": "Ithran",
+   "p": "dishon",
+   "v": [
+    "36:26"
+   ],
+   "he": "יִתְרָן",
+   "tr": "Yitran"
+  },
+  {
+   "id": "cheran",
+   "n": "Cheran",
+   "p": "dishon",
+   "v": [
+    "36:26"
+   ],
+   "he": "כְּרָן",
+   "tr": "Keran"
+  },
+  {
+   "id": "ezer",
+   "n": "Ezer",
+   "p": "seir",
+   "v": [
+    "36:21",
+    "36:27",
+    "36:30"
+   ],
+   "he": "אֵצֶר",
+   "tr": "Etzer"
+  },
+  {
+   "id": "bilhan",
+   "n": "Bilhan",
+   "p": "ezer",
+   "v": [
+    "36:27"
+   ],
+   "he": "בִּלְהָן",
+   "tr": "Bilhan"
+  },
+  {
+   "id": "zaavan",
+   "n": "Zaavan",
+   "p": "ezer",
+   "v": [
+    "36:27"
+   ],
+   "he": "זַעֲוָן",
+   "tr": "Zaavan"
+  },
+  {
+   "id": "akan",
+   "n": "Akan",
+   "p": "ezer",
+   "v": [
+    "36:27"
+   ],
+   "he": "עֲקָן",
+   "tr": "Akan"
+  },
+  {
+   "id": "dishan",
+   "n": "Dishan",
+   "p": "seir",
+   "v": [
+    "36:21",
+    "36:28",
+    "36:30"
+   ],
+   "he": "דִּישָׁן",
+   "tr": "Dishan"
+  },
+  {
+   "id": "uz",
+   "n": "Uz",
+   "p": "dishan",
+   "v": [
+    "36:28"
+   ],
+   "he": "עוּץ",
+   "tr": "Utz"
+  },
+  {
+   "id": "aran",
+   "n": "Aran",
+   "p": "dishan",
+   "v": [
+    "36:28"
+   ],
+   "he": "אֲרָן",
+   "tr": "Aran"
+  },
+  {
+   "id": "timna",
+   "n": "Timna",
+   "p": "seir",
+   "v": [
+    "36:22"
+   ],
+   "g": "Lotan's sister",
+   "sex": "f",
+   "note": "Concubine of Esau's son Eliphaz and mother of Amalek (36:12).",
+   "he": "תִּמְנָע",
+   "tr": "Timna"
+  }
+ ]
+}
