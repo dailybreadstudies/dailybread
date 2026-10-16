@@ -340,12 +340,6 @@
       keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-cities aria-pressed="true">' + SYM.city() + '<span>' + esc(spec.placesLabel || 'Places') +
         ' <span class="dbm-mini">' + SYM.uncertain() + 'uncertain</span><span class="dbm-mini">' + SYM.mount() + 'hill</span></span></button></li>';
     }
-    keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-roads aria-pressed="true">' +
-        '<svg viewBox="0 0 56 20"><line x1="3" y1="10" x2="54" y2="10" stroke="var(--dbm-road)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/></svg>' +
-        '<span>Main ancient roads <span class="dbm-vv">approximate</span></span></button></li>' +
-      '<li class="dbm-srow"><svg viewBox="0 0 56 20"><line x1="2" y1="7" x2="54" y2="7" stroke="var(--dbm-water-line)" stroke-width="1.8"/>' +
-        '<line x1="2" y1="14" x2="54" y2="14" stroke="var(--dbm-water-line)" stroke-width="1.4" stroke-dasharray="5 3.5"/></svg>' +
-        '<span>Rivers; seasonal wadis dashed</span></li>';
     keyHTML += '</ul>';
     root.querySelectorAll('[data-dbm-key]').forEach(function (k) { k.innerHTML = keyHTML; });
     var notes = (spec.notes || []).map(function (n) {
@@ -439,6 +433,7 @@
           ofm: { type: 'vector', url: BASEMAPS.waterways },
           roads: { type: 'geojson', data: (water.ancient && water.ancient.roads) || empty },
           streamnames: { type: 'geojson', data: (water.ancient && water.ancient.streams) || empty },
+          regions: { type: 'geojson', data: (water.ancient && water.ancient.regions) || empty },
           places: { type: 'geojson', data: places || empty },
           gareas: { type: 'geojson', data: groupAreas(spec) },
           gpoints: { type: 'geojson', data: groupPoints(spec, hn) },
@@ -455,7 +450,7 @@
           { id: 'sea-edge', type: 'line', source: 'sea', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1 } },
           { id: 'galilee', type: 'fill', source: 'galilee', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'deadsea', type: 'fill', source: 'deadsea', paint: { 'fill-color': css('--dbm-water') } },
-          { id: 'wadi', type: 'line', source: 'ofm', 'source-layer': 'waterway', minzoom: 7,
+          { id: 'wadi', type: 'line', source: 'ofm', 'source-layer': 'waterway', minzoom: 5,
             filter: ['all', ['in', ['get', 'class'], ['literal', ['river', 'stream']]], ['!=', ['get', 'intermittent'], 1]],
             layout: { 'line-cap': 'round', 'line-join': 'round' },
             paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.85,
@@ -465,7 +460,6 @@
             layout: { 'line-join': 'round' },
             paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.75, 'line-dasharray': [3, 2],
               'line-width': ['interpolate', ['linear'], ['zoom'], 7, ['match', ['get', 'class'], 'river', 1, 0.5], 12, ['match', ['get', 'class'], 'river', 2, 1.1]] } },
-          { id: 'jordan', type: 'line', source: 'jordan', paint: { 'line-color': css('--dbm-water-line'), 'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1.2, 13, 3] } },
           { id: 'roads', type: 'line', source: 'roads', layout: { 'line-cap': 'round', 'line-join': 'round' },
             paint: { 'line-color': css('--dbm-road'), 'line-opacity': 0.8, 'line-dasharray': [0.1, 2.2],
               'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.6, 12, 2.8] } }
@@ -507,6 +501,11 @@
 
   function addLayers(ctx, ml, spec) {
     var map = ctx.map;
+    map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 6, maxzoom: 11,
+      layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Regular']], 'text-transform': 'uppercase',
+        'text-letter-spacing': 0.6, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30,
+        'text-allow-overlap': false, 'text-padding': 6, 'symbol-sort-key': ['get', 'r'] },
+      paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2, 'text-opacity': 0.85 } });
     map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
       layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 12, 12],
         'text-letter-spacing': 0.04, 'text-optional': true },
@@ -698,7 +697,7 @@
     map.setLayoutProperty('street', 'visibility', m === 'modern' ? 'visible' : 'none');
     map.setLayoutProperty('sat', 'visibility', m === 'sat' ? 'visible' : 'none');
     map.setPaintProperty('hillshade', 'hillshade-exaggeration', m === 'ancient' ? 0.55 : m === 'modern' ? 0.2 : 0);
-    ['deadsea', 'sea', 'sea-edge', 'galilee', 'water-label', 'jordan', 'wadi', 'wadi-seasonal', 'stream-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' ? 'visible' : 'none'); });
+    ['deadsea', 'sea', 'sea-edge', 'galilee', 'water-label', 'region-label', 'wadi', 'wadi-seasonal', 'stream-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' ? 'visible' : 'none'); });
     ['roads', 'roads-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' && ctx.roadsOn !== false ? 'visible' : 'none'); });
     map.setPaintProperty('places-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-label'));
     map.setPaintProperty('gpoint-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-label'));
@@ -716,7 +715,8 @@
     map.setPaintProperty('hillshade', 'hillshade-accent-color', css('--dbm-shade'));
     ['deadsea', 'sea', 'galilee'].forEach(function (id) { map.setPaintProperty(id, 'fill-color', css('--dbm-water')); });
     map.setPaintProperty('sea-edge', 'line-color', css('--dbm-water-line'));
-    map.setPaintProperty('jordan', 'line-color', css('--dbm-water-line'));
+    map.setPaintProperty('region-label', 'text-color', css('--dbm-region'));
+    map.setPaintProperty('region-label', 'text-halo-color', css('--dbm-paper'));
     ['wadi', 'wadi-seasonal'].forEach(function (id) { map.setPaintProperty(id, 'line-color', css('--dbm-water-line')); });
     map.setPaintProperty('roads', 'line-color', css('--dbm-road'));
     ['roads-label', 'stream-label'].forEach(function (id) { map.setPaintProperty(id, 'text-halo-color', css('--dbm-paper')); });

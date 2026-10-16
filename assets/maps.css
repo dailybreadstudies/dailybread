@@ -16,6 +16,7 @@
   --dbm-other: #6d5a8c;
   --dbm-fire: #d9741c;
   --dbm-road: #a8998a;
+  --dbm-region: #1e1e1e;
   --dbm-badge-ink: #ffffff;
 }
 @media (prefers-color-scheme: dark) {
@@ -23,14 +24,14 @@
     --dbm-paper: #2a231c; --dbm-shade: #0c0907; --dbm-highlight: #5b4c3d;
     --dbm-water: #2c4248; --dbm-water-line: #4f7078; --dbm-label: #e3d8ca;
     --dbm-israel: #7fb3d4; --dbm-ambush: #9cc77c; --dbm-enemy: #e8907c; --dbm-other: #b9a6dc;
-    --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e; --dbm-road: #8d8172;
+    --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e; --dbm-road: #8d8172; --dbm-region: #e8e0d5;
   }
 }
 :root[data-theme="dark"] {
   --dbm-paper: #2a231c; --dbm-shade: #0c0907; --dbm-highlight: #5b4c3d;
   --dbm-water: #2c4248; --dbm-water-line: #4f7078; --dbm-label: #e3d8ca;
   --dbm-israel: #7fb3d4; --dbm-ambush: #9cc77c; --dbm-enemy: #e8907c; --dbm-other: #b9a6dc;
-  --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e; --dbm-road: #8d8172;
+  --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e; --dbm-road: #8d8172; --dbm-region: #e8e0d5;
 }
 
 /* ── Map button beside the verse ── */

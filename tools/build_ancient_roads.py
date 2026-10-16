@@ -57,6 +57,16 @@ STREAMS = [
 ]
 
 
+# Region names: [name, lon, lat, rank] (rank 1 shows first where names would collide)
+REGIONS = [
+    ("Galilee", 35.38, 32.93, 1), ("Gilead", 35.80, 32.25, 1), ("Bashan", 36.05, 32.85, 1), ("Moab", 35.80, 31.30, 1),
+    ("Edom", 35.55, 30.55, 1), ("Ammon", 36.05, 31.98, 2), ("Negev", 34.85, 31.05, 1), ("Shephelah", 34.88, 31.62, 2),
+    ("Hill country of Judah", 35.12, 31.47, 2), ("Hill country of Ephraim", 35.22, 32.08, 2), ("Sharon", 34.88, 32.38, 2),
+    ("Valley of Jezreel", 35.28, 32.60, 2), ("Philistia", 34.55, 31.55, 2), ("Wilderness of Judah", 35.32, 31.55, 3),
+    ("Arabah", 35.25, 30.50, 3), ("Wilderness of Zin", 34.90, 30.75, 3), ("Phoenicia", 35.32, 33.38, 2),
+]
+
+
 def places():
     best = {}
     for f in glob.glob(os.path.join(ROOT, 'data', 'maps', 'places', '*.json')):
@@ -100,6 +110,8 @@ def main():
                       'geometry': {'type': 'LineString', 'coordinates': catmull_rom(pts)}})
     out = {
         'roads': {'type': 'FeatureCollection', 'features': feats},
+        'regions': {'type': 'FeatureCollection', 'features': [
+            {'type': 'Feature', 'properties': {'n': n, 'r': r}, 'geometry': {'type': 'Point', 'coordinates': [x, y]}} for n, x, y, r in REGIONS]},
         'streams': {'type': 'FeatureCollection', 'features': [
             {'type': 'Feature', 'properties': {'n': n}, 'geometry': {'type': 'Point', 'coordinates': [x, y]}} for n, x, y in STREAMS]},
         'credit': 'Roads: main route corridors after standard reconstructions of biblical geography, drawn through '
