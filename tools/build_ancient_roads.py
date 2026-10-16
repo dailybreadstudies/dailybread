@@ -67,6 +67,15 @@ REGIONS = [
 ]
 
 
+def two_lines(name):
+    """Names of three words or more go on two lines, breaking before "of" where there is one."""
+    w = name.split()
+    if len(w) <= 2:
+        return name
+    cut = w.index('of') if 'of' in w[1:] else (len(w) + 1) // 2
+    return ' '.join(w[:cut]) + '\n' + ' '.join(w[cut:])
+
+
 def places():
     best = {}
     for f in glob.glob(os.path.join(ROOT, 'data', 'maps', 'places', '*.json')):
@@ -111,7 +120,7 @@ def main():
     out = {
         'roads': {'type': 'FeatureCollection', 'features': feats},
         'regions': {'type': 'FeatureCollection', 'features': [
-            {'type': 'Feature', 'properties': {'n': n, 'r': r}, 'geometry': {'type': 'Point', 'coordinates': [x, y]}} for n, x, y, r in REGIONS]},
+            {'type': 'Feature', 'properties': {'n': two_lines(n), 'r': r}, 'geometry': {'type': 'Point', 'coordinates': [x, y]}} for n, x, y, r in REGIONS]},
         'streams': {'type': 'FeatureCollection', 'features': [
             {'type': 'Feature', 'properties': {'n': n}, 'geometry': {'type': 'Point', 'coordinates': [x, y]}} for n, x, y in STREAMS]},
         'credit': 'Roads: main route corridors after standard reconstructions of biblical geography, drawn through '

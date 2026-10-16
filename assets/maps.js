@@ -503,7 +503,7 @@
     var map = ctx.map;
     map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 6, maxzoom: 11,
       layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Regular']], 'text-transform': 'uppercase',
-        'text-letter-spacing': 0.6, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30,
+        'text-letter-spacing': 0.6, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30, 'text-line-height': 1.55,
         'text-allow-overlap': false, 'text-padding': 6, 'symbol-sort-key': ['get', 'r'] },
       paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2, 'text-opacity': 0.85 } });
     map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
