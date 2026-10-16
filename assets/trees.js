@@ -54,7 +54,19 @@
     return t;
   }
 
-  var state = { open: null, tree: null, root: null, mode: null, sel: null, hidden: {} };
+  var state = { open: null, tree: null, root: null, mode: null, sel: null, hidden: {}, heb: false, hn: null };
+
+  /* The reader's "Hebrew names" setting (Sephardic forms from data/hebrew-names.json) applies here too */
+  function hebOn() {
+    try { return !!JSON.parse(localStorage.getItem('dbs-settings') || '{}').hebrewNames; } catch (e) { return false; }
+  }
+  function replacer(map) {
+    var keys = Object.keys(map).filter(function (k) { return k[0] !== '_' && map[k] !== k; }).sort(function (a, b) { return b.length - a.length; });
+    if (!keys.length) return function (x) { return x; };
+    var re = new RegExp('(?<![A-Za-z\\-])(' + keys.map(function (k) { return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')(?![A-Za-z]|-[a-z])', 'g');
+    return function (x) { return String(x).replace(re, function (m, n) { return map[n]; }); };
+  }
+  function nm(x) { return state.heb && state.hn ? state.hn(x) : x; }
 
   // ── Buttons beside verses, names in the text ───────────────
   function decorate(root) {
@@ -189,9 +201,11 @@
     var root = state.root = el('article', 'dbt', '<div class="dbt-head"><span>Family tree</span><button type="button" class="dbt-close" data-dbt-close>' + CLOSE + 'Close</button></div><p class="dbt-msg">Loading…</p>');
     root.addEventListener('click', onTreeClick);
     place();
-    return loadTree(id).then(function (t) {
+    return Promise.all([loadTree(id), hebrewNames()]).then(function (res) {
+      var t = res[0];
       if (state.root !== root) return;
       state.tree = t;
+      state.hn = replacer(res[1]); state.heb = hebOn();
       fill(root, t);
       place();
       if (personId) select(personId, true, false);
@@ -205,10 +219,10 @@
   function fill(root, t) {
     var html = '<div class="dbt-head"><span>Family tree · ' + esc(t.ref) + '</span><button type="button" class="dbt-close" data-dbt-close>' + CLOSE + 'Close</button></div>';
     html += '<h3 class="dbt-title">' + esc(t.title) + '</h3>';
-    html += (t.intro || []).map(function (p) { return '<p class="dbt-p">' + p + '</p>'; }).join('');
+    html += (t.intro || []).map(function (p) { return '<p class="dbt-p">' + nm(p) + '</p>'; }).join('');
     if (t.branches) {
       html += '<div class="dbt-bar">' + t.branches.map(function (b) {
-        return '<button type="button" class="dbt-chip" data-dbt-branch="' + esc(b.id) + '" aria-pressed="true"><i class="dbt-sw dbt-c-' + esc(b.id) + '"></i>' + esc(b.name) +
+        return '<button type="button" class="dbt-chip" data-dbt-branch="' + esc(b.id) + '" aria-pressed="true"><i class="dbt-sw dbt-c-' + esc(b.id) + '"></i>' + esc(nm(b.name)) +
           (b.count ? ' <b>' + b.count + '</b>' : '') + '</button>';
       }).join('') + '</div>';
     }
@@ -217,11 +231,11 @@
     (function walk(p) {
       html += '<div class="dbt-row dbt-c-' + esc(p.br || 'root') + '" role="treeitem" data-dbt-row="' + esc(p.id) + '" style="padding-left:' + (p.depth * IND) + 'px">' +
         '<button type="button" class="dbt-node" data-dbt-pick="' + esc(p.id) + '" aria-expanded="false"><i class="' + dotClass(p) + '"></i>' +
-        '<span class="dbt-nm">' + esc(p.n) + '</span>' + (p.g ? '<span class="dbt-gl">' + esc(p.g) + '</span>' : '') + '</button></div>';
+        '<span class="dbt-nm">' + esc(nm(p.n)) + '</span>' + (p.g ? '<span class="dbt-gl">' + esc(p.g) + '</span>' : '') + '</button></div>';
       p.kids.forEach(walk);
     })(t.root);
     html += '</div>';
-    if (t.countNote) html += '<p class="dbt-note">' + t.countNote + '</p>';
+    if (t.countNote) html += '<p class="dbt-note">' + nm(t.countNote) + '</p>';
     if (t.sources) html += '<p class="dbt-sources"><b>Sources.</b> ' + t.sources + '</p>';
     root.innerHTML = html;
     var tree = root.querySelector('.dbt-tree');
@@ -317,14 +331,14 @@
     var parent = p.p ? t.by[p.p] : null;
     var html = '<div class="dbt-hebrow"><span class="dbt-he" lang="he" dir="rtl">' + esc(p.he) + '</span><span class="dbt-tr">' + esc(p.tr) + '</span></div>';
     html += '<p class="dbt-meta">' + esc(KIND[p.kind] || '') +
-      (parent ? ' · ' + (p.rel === 'from' ? 'came from ' : 'son of ') + esc(parent.n) : '') +
+      (parent ? ' · ' + (p.rel === 'from' ? 'came from ' : 'son of ') + esc(nm(parent.n)) : '') +
       ' · ' + (p.count === 1 ? 'one of the seventy' : p.count === 2 ? 'counted by some' : 'not counted') + '</p>';
     if (p.g) html += '<p class="dbt-id">' + esc(p.g) + (p.cert ? ' <span class="dbt-cert dbt-cert-' + esc(p.cert) + '">' + esc(CERT[p.cert] || p.cert) + '</span>' : '') + '</p>';
-    if (p.trad) html += '<h4>Jewish tradition</h4><p>' + p.trad + '</p>';
-    if (p.sch) html += '<h4>Scholarship</h4><p>' + p.sch + '</p>';
-    if (p.note) html += '<p class="dbt-cnote">' + p.note + '</p>';
+    if (p.trad) html += '<h4>Jewish tradition</h4><p>' + nm(p.trad) + '</p>';
+    if (p.sch) html += '<h4>Scholarship</h4><p>' + nm(p.sch) + '</p>';
+    if (p.note) html += '<p class="dbt-cnote">' + nm(p.note) + '</p>';
     if (p.kids && p.kids.length) html += '<p class="dbt-kids">' + (p.kids.length === 1 ? 'Son' : 'Sons') + ': ' + p.kids.map(function (k) {
-      return '<button type="button" class="dbt-link" data-dbt-pick="' + esc(k.id) + '">' + esc(k.n) + '</button>';
+      return '<button type="button" class="dbt-link" data-dbt-pick="' + esc(k.id) + '">' + esc(nm(k.n)) + '</button>';
     }).join(', ') + '</p>';
     html += '<p class="dbt-verses">In the text: ' + vv + '</p>';
     return html;
@@ -391,6 +405,20 @@
     if (!state.open) return;
     if (!visible(pinFor(state.open)) && !document.querySelector('.dbt-name[data-dbt-tree="' + state.open + '"]')) { close(); return; }
     setPins();
+    relabel();
+  }
+  /* The Hebrew names setting changed while the tree is open: redraw it in place */
+  function relabel() {
+    if (!state.tree || !state.root || hebOn() === state.heb) return;
+    state.heb = hebOn();
+    var sel = state.sel, card = state.card, hidden = state.hidden, box = scroller(), top = box ? box.scrollTop : 0;
+    if (state.ro) { state.ro.disconnect(); state.ro = null; }
+    state.sel = null; state.hidden = {};
+    fill(state.root, state.tree);
+    Object.keys(hidden).forEach(function (br) { if (hidden[br]) toggleBranch(br, false); });
+    if (sel) select(sel, false, card);
+    if (box) box.scrollTop = top;
+    draw();
   }
 
   // ── Page-wide events ───────────────────────────────────────
