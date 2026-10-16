@@ -32,7 +32,7 @@
   var SOURCES_NOTE = '<b>Sources.</b> Scripture: Berean Standard Bible (public domain). Places and identifications: ' +
     '<a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0), with Jordan and Dead Sea ' +
     'outlines from OpenStreetMap; seas from Natural Earth. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap ' +
-    'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Ancient roads: main route corridors after standard reconstructions, approximate between cities. Map engine: MapLibre GL.';
+    'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
   function getJSON(url) {
