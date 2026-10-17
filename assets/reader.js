@@ -2054,8 +2054,9 @@
     ['Prophets', 'נְבִיאִים', ['JOS', 'JDG', '1SA', '2SA', '1KI', '2KI', 'ISA', 'JER', 'EZK', 'HOS', 'JOL', 'AMO', 'OBA',
       'JON', 'MIC', 'NAM', 'HAB', 'ZEP', 'HAG', 'ZEC', 'MAL']],
     ['Writings', 'כְּתוּבִים', ['PSA', 'PRO', 'JOB', 'SNG', 'RUT', 'LAM', 'ECC', 'EST', 'DAN', 'EZR', 'NEH', '1CH', '2CH']],
-    ['Apostles', 'שְׁלִיחִים', ['MAT', 'MRK', 'LUK', 'JHN', 'ACT', 'ROM', '1CO', '2CO', 'GAL', 'EPH', 'PHP', 'COL', '1TH',
-      '2TH', '1TI', '2TI', 'TIT', 'PHM', 'HEB', 'JAS', '1PE', '2PE', '1JN', '2JN', '3JN', 'JUD', 'REV']]
+    // Eastern order: the General Letters come before Paul's Letters and Hebrews
+    ['Apostles', 'שְׁלִיחִים', ['MAT', 'MRK', 'LUK', 'JHN', 'ACT', 'JAS', '1PE', '2PE', '1JN', '2JN', '3JN', 'JUD',
+      'ROM', '1CO', '2CO', 'GAL', 'EPH', 'PHP', 'COL', '1TH', '2TH', '1TI', '2TI', 'TIT', 'PHM', 'HEB', 'REV']]
   ];
   function groupOf(id) {
     for (var i = 0; i < GROUPS.length; i++) if (GROUPS[i][2].indexOf(id) >= 0) return GROUPS[i];
@@ -2181,7 +2182,7 @@
   }
 
   function neighbour(book, c, dir) {
-    var order = bookIndex.map(function (b) { return b.id; });
+    var order = [].concat.apply([], GROUPS.map(function (g) { return g[2]; }));   // the Bible menu's order
     var i = order.indexOf(book);
     if (dir > 0) {
       if (c < chapterCount(book)) return { book: book, c: c + 1 };
