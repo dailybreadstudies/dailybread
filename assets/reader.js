@@ -1705,7 +1705,7 @@
       var items = [];
       (events || []).forEach(function (ev) {
         if (CATEGORY_SKIP[ev.category] && !(isShabbat && ev.category === 'parashat')) return;
-        items.push({ title: niceTitle(ev.title), he: ev.hebrew || '', memo: ev.memo || '' });
+        items.push({ title: niceTitle(ev.title), he: ev.hebrew || '', memo: ev.memo || '', parasha: ev.category === 'parashat' });
       });
       // Occasions from the plan that Hebcal does not list (e.g. Shabbat Machar Chodesh)
       if (occasion) {
@@ -1746,6 +1746,13 @@
       var html = items.map(function (it, i) {
         var lead = i === 0 ? '<span class="lead">' + label + '</span> ' : '';
         if (it.own) return '<p class="own-note">' + lead + richText(i === 0 ? afterLead(it.own) : it.own) + '</p>';
+        // "Today the Torah portion Noach (Noah) פרשת נח is read in synagogues around the world."
+        if (it.parasha) {
+          var pname = it.title.replace(/^Parashat\s+/, '');
+          var pmean = day.parsha && day.parsha.meaning && day.parsha.name === pname ? ' (' + escapeAttr(day.parsha.meaning) + ')' : '';
+          return '<p>' + lead + (lead ? 'the' : 'The') + ' Torah portion <span class="today-title">' + escapeAttr(pname) + '</span>' + pmean +
+            (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') + ' is read in synagogues around the world.</p>';
+        }
         return '<p>' + lead +
           '<span class="today-title">' + escapeAttr(it.title) + '</span>' +
           (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') +
@@ -1822,7 +1829,8 @@
       if (!document.body.contains(line) || !t) return;
       var parts = [];
       // "Today the candle lighting time for Shabbat is 17:21 in Jerusalem"
-      if (t.havdalah[iso]) parts.push('havdalah is at <strong>' + t.havdalah[iso] + '</strong>');
+      if (t.havdalah[iso]) parts.push('havdalah time marking the end of ' +
+        (new Date(iso + 'T12:00:00').getDay() === 6 ? 'Shabbat' : 'the festival') + ' is at <strong>' + t.havdalah[iso] + '</strong>');
       if (t.candles[iso]) parts.push('the candle lighting time for <span class="cl-for">' +
         (new Date(iso + 'T12:00:00').getDay() === 5 ? 'Shabbat' : 'Yom Tov') + '</span> is <strong>' + t.candles[iso] + '</strong>');
       if (!parts.length) return;
