@@ -1271,7 +1271,7 @@
           var fs = Math.min(9.5, (w - 4) / lines.length - 1.5, (h - 30) / (longest * 0.78));
           var tip = v.name + ' · ' + (v.wordsRead ? pctText(v.wordsRead, v.words).replace('&lt;', '<') + ' read' : 'not started');
           out += '<g transform="' + tf + '"><a class="bs-bk' + (done ? ' done' : '') + (dim ? ' dim' : '') + '" href="./?r=' + v.ids[0] + '.1" style="--c:var(--bb' + sh[0] + ')"' +
-            ' aria-label="' + escapeAttr(tip) + '"><title>' + escapeAttr(tip) + '</title>' +
+            ' aria-label="' + escapeAttr(tip) + '"><title>' + escapeAttr(tip) + '</title><g class="bs-lift">' +
             '<rect class="bs-body" x="0" y="' + (-h) + '" width="' + w.toFixed(2) + '" height="' + h + '" rx="1.5"/>' +
             (share > 0 ? '<rect class="bs-fill" x="0.6" y="' + (-h * share + 0.6).toFixed(2) + '" width="' + (w - 1.2).toFixed(2) + '" height="' + Math.max(0, h * share - 1.2).toFixed(2) + '"/>' : '') +
             '<line class="bs-band" x1="2.5" x2="' + (w - 2.5).toFixed(2) + '" y1="' + (-h + 9) + '" y2="' + (-h + 9) + '"/>' +
@@ -1280,7 +1280,7 @@
               var cx = w / 2 + (li - (lines.length - 1) / 2) * (fs + 2.5) + fs * 0.36;
               return '<text transform="translate(' + cx.toFixed(2) + ' ' + (-h + 15) + ') rotate(-90)" text-anchor="end" style="font-size:' + fs.toFixed(1) + 'px">' + escapeAttr(l) + '</text>';
             }).join('') +
-            '</a></g>';
+            '</g></a></g>';
           spans[spans.length - 1].x1 = leans ? px + w + 10 : x + w;
           x = leans ? px + w * Math.cos(rad) + GAP + 1 : x + w + GAP;
           prevH = h; i++;

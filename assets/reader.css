@@ -933,11 +933,12 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
 .bs-bk.done text { fill: var(--paper); }
 .bs-bk.done .bs-band { stroke: var(--paper); opacity: 0.8; }
 .bs-bk.dim { opacity: 0.35; }
-.bs-bk > * { transition: transform 0.18s ease; }
-.bs-bk:hover > *, .bs-bk:focus-visible > * { transform: translateY(-4px); }
+/* lift the whole spine: the CSS transform goes on a wrapper, never on the text (that would replace its rotation) */
+.bs-lift { transition: transform 0.18s ease; }
+.bs-bk:hover .bs-lift, .bs-bk:focus-visible .bs-lift { transform: translateY(-4px); }
 .bs-bk:hover .bs-body, .bs-bk:focus-visible .bs-body { stroke-width: 1.8; }
 .bs-bk:focus { outline: none; }
-@media (prefers-reduced-motion: reduce) { .bs-bk > * { transition: none; } .bs-bk:hover > *, .bs-bk:focus-visible > * { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .bs-lift { transition: none; } .bs-bk:hover .bs-lift, .bs-bk:focus-visible .bs-lift { transform: none; } }
 
 .bb-past { list-style: none; margin: 0; padding: 0; font-family: var(--sans); font-size: 0.86rem; }
 .bb-past li { display: grid; grid-template-columns: 4em 1fr auto; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--rule); color: var(--ink-soft); }
