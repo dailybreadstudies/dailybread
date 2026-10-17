@@ -43,6 +43,20 @@ def sym(t, at, key, vv, moves=(), label=None, offset=None):
     return d
 
 
+def smooth(pts, steps=8):
+    """Catmull-Rom curve through the points (for hand-drawn outlines)."""
+    ext = [pts[0]] + pts + [pts[-1]]
+    out = []
+    for i in range(1, len(ext) - 2):
+        p0, p1, p2, p3 = ext[i - 1], ext[i], ext[i + 1], ext[i + 2]
+        for k in range(steps):
+            t = k / steps
+            out.append([round(0.5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t * t +
+                                     (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t ** 3), 5) for j in (0, 1)])
+    out.append(pts[-1])
+    return out
+
+
 BOAT = [1.4, 1.1]          # dashed: by boat or uncertain
 P = {  # shared coordinates
     'Ur': [46.1035, 30.9625], 'Haran': [39.03278, 36.86444], 'Shechem': [35.28194, 32.21361], 'Bethel': [35.24139, 31.92278],
@@ -83,7 +97,7 @@ MAPS_OUT.append({
               '"The Oaks of Mamre at Hebron," where Abram settled and built an altar (13:18). The enclosure built here by Herod and the church built by Constantine marked the traditional site.', 'aeb9e97/mamre'),
         named('Hebron', P['Hebron'], 'below', 'Tel Rumeida, Hebron', 'Hebron, near Mamre, where Abram settled (13:18) and where he later bought the cave of Machpelah (23:19).', 'a85151a/hebron'),
         named('Zoar', [35.48766, 31.0369], 'right', 'es-Safi?, south-east of the Dead Sea', 'The plain of the Jordan was well watered "all the way to Zoar" (13:10); Lot later fled there (19:22).', 'aacfcda/zoar'),
-        named('Sodom', [35.449, 31.208], 'right', 'site disputed',
+        named('Sodom', [35.535, 31.252], 'right', 'site disputed',
               'Lot "pitched his tent toward Sodom" (13:12). Its site is debated: many place the cities of the plain near the south end of the Dead Sea (Bab edh-Dhra and Numeira); others at Tall el-Hammam, north-east of the Dead Sea in the Jordan plain Lot looked down on from Bethel.', 'a0aa664/sodom'),
     ],
     'moves': [
@@ -115,7 +129,7 @@ MAPS_OUT.append({
             'At each stop Abram builds an altar and "calls on the name of the LORD," marking out the land he has been promised: Shechem in the north, Bethel in the centre, Hebron in the south. '
             'The same three places become centres of Israel\'s later history. Jewish tradition reads the journeys of the fathers as a sign for the children, <i>ma\'aseh avot siman la-banim</i> (Ramban on 12:6): the descent to Egypt in famine and the return with wealth foreshadow Israel\'s own story.']},
     ],
-    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Seas and rivers: Natural Earth (public domain); Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate. Map engine: MapLibre GL.',
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Seas and rivers: Natural Earth (public domain); Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate. Map engine: MapLibre GL.',
 })
 
 # ─────────────────────────── 2. The war of the kings (Genesis 14) ───────────────────────────
@@ -154,7 +168,7 @@ MAPS_OUT.append({
         mv(3, 'enemy', 'v. 7', 'They turn back to En-mishpat (Kadesh), the Amalekites and Hazazon-tamar',
            [[35.0, 29.55], [34.82, 29.9], [34.6, 30.3], [34.42, 30.65], [34.75, 30.8], [35.05, 31.0], [35.28, 31.25], [35.39, 31.46]], at=0.3),
         mv(4, 'enemy', 'vv. 11–12', 'With the goods of Sodom and Gomorrah, and Lot, they head home to the north',
-           [[35.4, 31.35], [35.42, 31.62], [35.5, 31.86], [35.55, 32.3], [35.58, 32.75], [35.61, 33.08], [35.652, 33.235]], at=0.45, dash=[2, 1.4]),
+           [[35.375, 31.31], [35.37, 31.4], [35.38, 31.46], [35.395, 31.62], [35.5, 31.86], [35.55, 32.3], [35.58, 32.75], [35.61, 33.08], [35.652, 33.235]], at=0.45, dash=[2, 1.4]),
         mv(5, 'israel', 'vv. 13–14', 'Abram and his 318 trained men set out from Mamre in pursuit, as far as Dan',
            [P['Mamre'], [35.13, 31.65], [35.21, 31.78], [35.24, 31.95], [35.28, 32.2], [35.3, 32.5], [35.42, 32.78], [35.56, 33.02], [35.64, 33.22]], at=0.55),
         mv(6, 'israel', 'v. 15', 'A night attack at Dan; Abram routs them and pursues to Hobah, north of Damascus',
@@ -164,7 +178,7 @@ MAPS_OUT.append({
     ],
     'symbols': [
         sym('battle', [35.47, 31.2], 'Four kings against five in the Valley of Siddim; the kings of Sodom and Gomorrah fall into the tar pits', 'vv. 8–10', moves=[3, 4]),
-        sym('captured', [35.5, 31.34], 'Lot is carried off from Sodom', 'v. 12', moves=[4], offset=[10, 0]),
+        sym('captured', [35.37, 31.27], 'Lot is carried off from Sodom', 'v. 12', moves=[4], offset=[-10, 0]),
         sym('battle', [35.7, 33.27], 'Abram divides his men and attacks by night', 'v. 15', moves=[6]),
         sym('altar', [35.255, 31.79], 'Melchizedek, priest of God Most High, brings bread and wine and blesses Abram; Abram gives him a tenth', 'vv. 18–20', moves=[7], offset=[10, -6]),
     ],
@@ -198,6 +212,9 @@ MAPS_OUT.append({
               'Luke places the feeding of the 5,000 near Bethsaida (Luke 9:10). Its site is debated: et-Tell, on a hill above the old shoreline, or el-Araj by the lake, where a Byzantine church was found in 2019.', 'a91b732/bethsaida-1'),
         named('Tabgha', [35.548, 32.873], 'below', 'Heptapegon, "seven springs"', 'The traditional site of the feeding of the 5,000 since the fourth century, with its mosaic of loaves and fishes.'),
     ],
+    'outlines': [{'key': 'North shore in Jesus\' day: one proposed reconstruction (approximate)', 'label': 'proposed 1st-century shore',
+                  'coords': smooth([[35.6065, 32.8907], [35.6095, 32.8965], [35.6155, 32.9025], [35.6245, 32.9058], [35.6345, 32.9045],
+                             [35.6405, 32.8975], [35.6435, 32.8885], [35.6418, 32.8795], [35.6365, 32.8705]])}],
     'alternates': {'for': 'Bethsaida', 'bounds': [[35.6, 32.875], [35.66, 32.925]], 'sites': [{'name': 'el-Araj', 'll': [35.6272, 32.8938]}]},
     'moves': [
         mv(1, 'israel', '13:53–54', 'After the parables Jesus leaves for His hometown, Nazareth, where they take offense at Him',
@@ -218,12 +235,13 @@ MAPS_OUT.append({
             'Herod Antipas ruled Galilee and Perea. Josephus says John was imprisoned and executed at Machaerus, Herod\'s fortress east of the Dead Sea (<i>Antiquities</i> 18.116–119), well beyond this map. The news sends Jesus to "a solitary place" (14:13).']},
         {'h': 'The shoreline then and now', 'p': [
             'The lake stood at much the same level in the first century as today, around 209–211 m below sea level: Mendel Nun\'s survey of the ancient harbours found breakwaters at about −211 to −212 m. '
-            'The one real change is in the north-east. The Jordan has since carried silt into the bay and built the Beteiha plain, so in Jesus\' day the water probably came closer to Bethsaida than the modern shore shows. How much closer is debated, and is part of the argument between et-Tell and el-Araj.']},
+            'The one real change is in the north-east. The Jordan has since carried silt into the bay and built the Beteiha plain, so in Jesus\' day the water probably came closer to Bethsaida than the modern shore shows. How much closer is debated, and is part of the argument between et-Tell and el-Araj. '
+            'The dashed line follows the reconstruction proposed by the Bethsaida Excavations Project geologists (Shroder and others), with a lagoon reaching the foot of et-Tell; it is approximate, and on that view el-Araj would then have been under water. The el-Araj excavators argue instead that their site stood on the first-century shore.']},
         {'h': 'The lake', 'p': [
             'The Sea of Galilee (Kinneret) is about 21 km long and 12 km wide, some 210 m below sea level. Winds funnel down from the surrounding hills, so sudden storms are common, especially in the evening (14:24). '
             'The fourth watch (14:25) ran from about 3 to 6 a.m.']},
     ],
-    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
 })
 
 # ─────────────────────────── 4. The northern journeys (Matthew 15–17) ───────────────────────────
@@ -272,7 +290,7 @@ MAPS_OUT.append({
         {'h': 'At the gates of Hades', 'p': [
             'The cave at Banias was thought to lead down to the underworld. Against that backdrop Jesus says, "on this rock I will build My church, and the gates of Hades will not prevail against it" (16:18).']},
     ],
-    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
 })
 
 

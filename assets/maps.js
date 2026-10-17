@@ -31,8 +31,8 @@
     waterways: 'https://tiles.openfreemap.org/planet'
   };
   var SOURCES_NOTE = '<b>Sources.</b> Scripture: Berean Standard Bible (public domain). Places and identifications: ' +
-    '<a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0), with Jordan, Dead Sea and Sea of Galilee ' +
-    'outlines from OpenStreetMap; seas from Natural Earth. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap ' +
+    '<a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0), with the Jordan and Sea of Galilee from OpenStreetMap and the ancient Dead Sea ' +
+    'outline from OpenBible.info; seas from Natural Earth. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap ' +
     'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
@@ -361,6 +361,12 @@
       keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-cities aria-pressed="true">' + SYM.city() + '<span>' + esc(spec.placesLabel || 'Places') +
         ' <span class="dbm-mini">' + SYM.uncertain() + 'uncertain</span><span class="dbm-mini">' + SYM.mount() + 'hill</span></span></button></li>';
     }
+    // proposed old outlines (e.g. a former shoreline): a dashed line that can be switched off
+    (spec.outlines || []).forEach(function (o, i) {
+      keyHTML += '<li><button type="button" class="dbm-krow" data-dbm-outline="' + i + '" aria-pressed="true">' +
+        '<svg viewBox="0 0 56 20"><path d="M2 14 Q16 2 30 8 T54 6" fill="none" stroke="var(--dbm-water-line)" stroke-width="2.2" stroke-dasharray="4 3" stroke-linecap="round"/></svg>' +
+        '<span>' + esc(o.key) + (o.vv ? ' <span class="dbm-vv">' + esc(o.vv) + '</span>' : '') + '</span></button></li>';
+    });
     if (spec.world) {                                  // wide maps: how sure each dot is
       var dot = function (o) { return '<svg viewBox="0 0 56 20"><circle cx="28" cy="10" r="4.6" fill="var(--dbm-label)" fill-opacity="' + o + '" stroke="var(--dbm-paper)" stroke-width="1.4"/></svg>'; };
       keyHTML += '<li class="dbm-srow">' + dot(1) + '<span>Likely or possible location</span></li><li class="dbm-srow">' + dot(0.5) + '<span>Uncertain: only a proposal</span></li>';
@@ -407,6 +413,11 @@
         if (window.innerWidth >= 760) fitDefault(ctx, reduceMotion ? 0 : 600);
       }
       else if ((b = t.closest('[data-dbm-alt]'))) toggleAlt(ctx, b);
+      else if ((b = t.closest('[data-dbm-outline]'))) {
+        var oi = b.getAttribute('data-dbm-outline'), on = b.getAttribute('aria-pressed') !== 'true';
+        ctx.root.querySelectorAll('[data-dbm-outline="' + oi + '"]').forEach(function (x) { x.setAttribute('aria-pressed', String(on)); });
+        ['outline-' + oi, 'outline-label-' + oi].forEach(function (id) { if (ctx.map && ctx.map.getLayer(id)) ctx.map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none'); });
+      }
     });
   }
 
@@ -497,8 +508,6 @@
           { id: 'sea-edge', type: 'line', source: 'sea', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1 } },
           { id: 'nrivers', type: 'line', source: 'nrivers', layout: { 'line-cap': 'round', 'line-join': 'round' },
             paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.95, 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.2, 7, 2] } },
-          { id: 'galilee', type: 'fill', source: 'galilee', paint: { 'fill-color': css('--dbm-water') } },
-          { id: 'deadsea', type: 'fill', source: 'deadsea', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'wadi', type: 'line', source: 'ofm', 'source-layer': 'waterway', minzoom: 5,
             filter: ['all', ['in', ['get', 'class'], ['literal', ['river', 'stream']]], ['!=', ['get', 'intermittent'], 1]],
             layout: { 'line-cap': 'round', 'line-join': 'round' },
@@ -509,6 +518,9 @@
             layout: { 'line-join': 'round' },
             paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.75, 'line-dasharray': [3, 2],
               'line-width': ['interpolate', ['linear'], ['zoom'], 7, ['match', ['get', 'class'], 'river', 1, 0.5], 12, ['match', ['get', 'class'], 'river', 2, 1.1]] } },
+          // the lakes are drawn over the river lines, so the Jordan's course through them does not show
+          { id: 'galilee', type: 'fill', source: 'galilee', paint: { 'fill-color': css('--dbm-water') } },
+          { id: 'deadsea', type: 'fill', source: 'deadsea', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'roads', type: 'line', source: 'roads', layout: { 'line-cap': 'round', 'line-join': 'round' },
             paint: { 'line-color': css('--dbm-road'), 'line-opacity': 0.8, 'line-dasharray': [0.1, 2.2],
               'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.6, 12, 2.8] } }
@@ -551,6 +563,14 @@
 
   function addLayers(ctx, ml, spec) {
     var map = ctx.map;
+    (spec.outlines || []).forEach(function (o, i) {
+      map.addSource('outline-' + i, { type: 'geojson', data: { type: 'Feature', properties: { label: o.label || '' }, geometry: { type: 'LineString', coordinates: o.coords } } });
+      map.addLayer({ id: 'outline-' + i, type: 'line', source: 'outline-' + i, layout: { 'line-cap': 'round', 'line-join': 'round' },
+        paint: { 'line-color': css('--dbm-water-line'), 'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1.2, 14, 2.4], 'line-dasharray': [2.5, 2], 'line-opacity': 0.9 } });
+      if (o.label) map.addLayer({ id: 'outline-label-' + i, type: 'symbol', source: 'outline-' + i, minzoom: 11,
+        layout: { 'text-field': ['get', 'label'], 'text-font': ['literal', ['Noto Sans Italic']], 'symbol-placement': 'line', 'text-size': 11, 'text-offset': [0, -0.8] },
+        paint: { 'text-color': css('--dbm-water-line'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
+    });
     map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 6, maxzoom: 11,
       layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Regular']], 'text-transform': 'uppercase',
         'text-letter-spacing': 0.6, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30, 'text-line-height': 1.55,

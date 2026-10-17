@@ -326,11 +326,19 @@
    "text": "With the goods of Sodom and Gomorrah, and Lot, they head home to the north",
    "coords": [
     [
-     35.4,
-     31.35
+     35.375,
+     31.31
     ],
     [
-     35.42,
+     35.37,
+     31.4
+    ],
+    [
+     35.38,
+     31.46
+    ],
+    [
+     35.395,
      31.62
     ],
     [
@@ -500,8 +508,8 @@
   {
    "type": "captured",
    "at": [
-    35.5,
-    31.34
+    35.37,
+    31.27
    ],
    "key": "Lot is carried off from Sodom",
    "vv": "v. 12",
@@ -509,7 +517,7 @@
     4
    ],
    "offset": [
-    10,
+    -10,
     0
    ]
   },

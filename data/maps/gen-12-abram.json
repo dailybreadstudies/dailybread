@@ -179,8 +179,8 @@
   {
    "name": "Sodom",
    "ll": [
-    35.449,
-    31.208
+    35.535,
+    31.252
    ],
    "label": "right",
    "site": "site disputed",
@@ -517,5 +517,5 @@
    ]
   }
  ],
- "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Seas and rivers: Natural Earth (public domain); Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate. Map engine: MapLibre GL."
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Seas and rivers: Natural Earth (public domain); Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate. Map engine: MapLibre GL."
 }
