@@ -56,10 +56,10 @@ def kidsify(html, page):
     html = re.sub(r'<body([^>]*)>', lambda m: '<body%s data-edition="kids">' % m.group(1), html, count=1)
     html = re.sub(r'<a class="tb-logo".*?</a>', lambda m: logo_html(), html, count=1, flags=re.S)
     html = re.sub(r'<nav class="tb-nav".*?</nav>', lambda m: nav(page), html, count=1, flags=re.S)
-    html = html.replace('href="give.html"', 'href="../give.html"')
+    html = html.replace('href="give.html"', 'href="../give.html"').replace('href="contact.html"', 'href="../contact.html"')
     html = html.replace('<a href="about.html">About Daily Bread</a>', '<a href="about.html">About Daily Bread for Kids</a>')
-    html = html.replace('On this site, the English biblical text is adapted from the Berean Standard Bible (BSB) with its translation notes.',
-                        'On this site, the English biblical text is adapted from the Berean Standard Bible (BSB) with its translation notes. '
+    html = html.replace('built on the solid scholarship of the Berean Standard Bible (BSB), with its translation notes.',
+                        'built on the solid scholarship of the Berean Standard Bible (BSB), with its translation notes. '
                         '“Did you know?” and the questions are from the Daily Bread for Kids journal © 2026 John Enarson; '
                         'Scripture quoted there is from the New American Standard Bible® (NASB), © The Lockman Foundation, used by permission.', 1)
     html = re.sub(r'\s*<p class="sp-group">Reading Plan</p>.*?(?=\s*<p class="sp-group">Page</p>)', '', html, count=1, flags=re.S)

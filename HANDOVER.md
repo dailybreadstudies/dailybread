@@ -12,6 +12,9 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 
 ## Pages
 - `index.html` — **Today** (the daily readings). First-time visitors to the home page are sent to About once (`dbs-visited`).
+- `contact.html` — **Contact** form (linked from every footer: “If you find a mistake, please let us know”). Sends through FormSubmit
+  (formsubmit.co, no account) to arielmedia@thewatchman.org. The very first message triggers a one-time activation email to that
+  address; click its link once, and later messages arrive directly. `contact.html?from=…` pre-fills “Where”.
 - `progress.html` — **Progress** (same reader script, `data-page="progress"`).
 - `about.html` — **About**: full-width scrolling page with its own `<style>`; journal photo `assets/img/journal*.jpg` with parallax.
 - `maps-test.html` — copy of index for trying map changes (keep its settings panel and blessings in step with index).
