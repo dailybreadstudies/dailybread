@@ -1063,9 +1063,9 @@
     ['Gospels & Acts', 'בְּשׂוֹרוֹת', ['MAT', 'MRK', 'LUK', 'JHN', 'ACT'], 3]
   ];
   var WHOLE = KIDS ? 'of the 10 books' : 'of the Bible';   // the circle's centre label
-  function bibleTally(y) {
+  function bibleTally(y, groups) {
     var read = readVerses(yearRefs(y), sizeLast), maxWords = 0;
-    var sections = (KIDS ? KIDS_GROUPS : GROUPS).map(function (g, gi) {
+    var sections = (groups || (KIDS ? KIDS_GROUPS : GROUPS)).map(function (g, gi) {
       var sec = { name: g[0], he: g[1].replace(/[֑-ׇ]/g, ''), n: g[3] === undefined ? gi : g[3], words: 0, wordsRead: 0, verses: 0, versesRead: 0, books: [] };
       g[2].forEach(function (id) {
         var size = bibleSize[id] || [];
@@ -1171,6 +1171,7 @@
               '<span class="bb-bpct' + (b.wordsRead ? '' : ' is-zero') + '">' + pctText(b.wordsRead, b.words) + '</span></div>';
           }).join('') + '</div>';
       }).join('') + (KIDS ? kidsExtraHtml() : '') + '</div></details>';
+    html += shelvesHtml();
     // Earlier Daily Bread years, kept when a new year begins
     var past = Object.keys(progress.archive).sort().reverse();
     if (past.length) {
@@ -1216,6 +1217,86 @@
           (100 * b.r / b.n).toFixed(2) + '%"></span></span></span>' +
           '<span class="bb-bpct' + (b.r ? '' : ' is-zero') + '">' + b.r + '/' + b.n + '</span></div>';
       }).join('') + '</div>';
+  }
+
+  // ── The Bible on four shelves ───────────────────────────────
+  // Every book as a spine, as thick as its text is long, in its traditional group; the spine fills from the
+  // bottom as it is read, and a tap opens the book in the reader. Samuel, Kings and Chronicles are one volume each.
+  var SHELVES = [
+    [0, [['', ['GEN', 'EXO', 'LEV', 'NUM', 'DEU']]], 'DEU'],
+    [1, [['Former Prophets', ['JOS', 'JDG', '1SA+2SA', '1KI+2KI']], ['Latter Prophets', ['ISA', 'JER', 'EZK']],
+         ['The Twelve', ['HOS', 'JOL', 'AMO', 'OBA', 'JON', 'MIC', 'NAM', 'HAB', 'ZEP', 'HAG', 'ZEC', 'MAL']]], 'MAL'],
+    [2, [['', ['PSA', 'PRO', 'JOB']], ['Five Megillot', ['SNG', 'RUT', 'LAM', 'ECC', 'EST']], ['', ['DAN', 'EZR', 'NEH', '1CH+2CH']]], '1CH+2CH'],
+    [3, [['Gospels', ['MAT', 'MRK', 'LUK', 'JHN']], ['', ['ACT']], ['General Letters', ['JAS', '1PE', '2PE', '1JN', '2JN', '3JN', 'JUD']],
+         ['Paul’s Letters', ['ROM', '1CO', '2CO', 'GAL', 'EPH', 'PHP', 'COL', '1TH', '2TH', '1TI', '2TI', 'TIT', 'PHM']], ['', ['HEB']], ['', ['REV']]], 'HEB']
+  ];
+  function shelvesHtml() {
+    var t = bibleTally(undefined, GROUPS), byId = {};
+    t.sections.forEach(function (sec) { sec.books.forEach(function (b) { byId[b.id] = b; }); });
+    var tenIds = {};
+    KIDS_GROUPS.forEach(function (g) { g[2].forEach(function (id) { tenIds[id] = 1; }); });
+    var W = 740, PAD = 4, GAP = 2, BUNDLE_GAP = 13, BASE_H = 128, SHELF_GAP = 96, LEAN = 11, MIN_W = 13, MAX_W = 38;
+    var HEIGHTS = [0, -10, -4, -16, -7, 0, -12, -3, -9, -14, -5], rad = LEAN * Math.PI / 180;
+    var vols = {}, maxWords = 0;
+    SHELVES.forEach(function (sh) { sh[1].forEach(function (bd) { bd[1].forEach(function (key) {
+      var ids = key.split('+'), v = { key: key, ids: ids, words: 0, wordsRead: 0 };
+      ids.forEach(function (id) { var b = byId[id] || {}; v.words += b.words || 0; v.wordsRead += b.wordsRead || 0; });
+      v.name = ids.length > 1 ? '1 & 2 ' + bookLabel(ids[0]).replace(/^1 /, '') : bookLabel(ids[0]);
+      maxWords = Math.max(maxWords, v.words);
+      vols[key] = v;
+    }); }); });
+    function width(words) { return MIN_W + (MAX_W - MIN_W) * Math.sqrt(words / maxWords); }
+    var out = '', y = 46;
+    SHELVES.forEach(function (sh, si) {
+      var g = GROUPS[sh[0]], n = 0;
+      sh[1].forEach(function (bd) { n += bd[1].length; });
+      out += '<text class="bs-label" x="' + PAD + '" y="' + (y - 16) + '">' + g[0].toUpperCase() + '</text>' +
+        '<text class="bs-he" x="' + (PAD + g[0].length * 15.4 + 12) + '" y="' + (y - 15) + '">' + noNikud(g[1]) + '</text>' +
+        '<text class="bs-count" x="' + (W - PAD) + '" y="' + (y - 16) + '" text-anchor="end">' + n + (n === 1 ? ' volume' : ' volumes') + '</text>';
+      var base = y + BASE_H, x = PAD + 2, prevH = BASE_H, i = 0, spans = [];
+      sh[1].forEach(function (bd, bi) {
+        bd[1].forEach(function (key, k) {
+          var v = vols[key], leans = key === sh[2], w = width(v.words), h = BASE_H + HEIGHTS[(i + si * 3) % HEIGHTS.length] - 4, px = x;
+          if (k === 0 && bi > 0 && !leans) x += BUNDLE_GAP;
+          if (k === 0) spans.push({ name: bd[0], x0: x, single: bd[1].length === 1 });
+          var share = v.words ? v.wordsRead / v.words : 0, done = share >= 0.995;
+          var dim = KIDS && !v.ids.some(function (id) { return tenIds[id]; }) && !v.wordsRead;
+          var tf;
+          if (leans) { px = x + Math.min(prevH, h * Math.cos(rad)) * Math.tan(rad); tf = 'translate(' + px.toFixed(2) + ' ' + base + ') rotate(' + (-LEAN) + ')'; }
+          else tf = 'translate(' + x.toFixed(2) + ' ' + base + ')';
+          // one line up the spine; a two-book volume has "1 & 2" on a line of its own beside the name
+          var lines = v.ids.length > 1 ? ['1 & 2', v.name.replace(/^1 & 2 /, '')] : [v.name];
+          lines = lines.map(function (l) { return l.toUpperCase(); });
+          var longest = Math.max.apply(null, lines.map(function (l) { return l.length; }));
+          var fs = Math.min(9.5, (w - 4) / lines.length - 1.5, (h - 30) / (longest * 0.78));
+          var tip = v.name + ' · ' + (v.wordsRead ? pctText(v.wordsRead, v.words).replace('&lt;', '<') + ' read' : 'not started');
+          out += '<g transform="' + tf + '"><a class="bs-bk' + (done ? ' done' : '') + (dim ? ' dim' : '') + '" href="./?r=' + v.ids[0] + '.1" style="--c:var(--bb' + sh[0] + ')"' +
+            ' aria-label="' + escapeAttr(tip) + '"><title>' + escapeAttr(tip) + '</title>' +
+            '<rect class="bs-body" x="0" y="' + (-h) + '" width="' + w.toFixed(2) + '" height="' + h + '" rx="1.5"/>' +
+            (share > 0 ? '<rect class="bs-fill" x="0.6" y="' + (-h * share + 0.6).toFixed(2) + '" width="' + (w - 1.2).toFixed(2) + '" height="' + Math.max(0, h * share - 1.2).toFixed(2) + '"/>' : '') +
+            '<line class="bs-band" x1="2.5" x2="' + (w - 2.5).toFixed(2) + '" y1="' + (-h + 9) + '" y2="' + (-h + 9) + '"/>' +
+            '<line class="bs-band" x1="2.5" x2="' + (w - 2.5).toFixed(2) + '" y1="-9" y2="-9"/>' +
+            lines.map(function (l, li) {
+              var cx = w / 2 + (li - (lines.length - 1) / 2) * (fs + 2.5) + fs * 0.36;
+              return '<text transform="translate(' + cx.toFixed(2) + ' ' + (-h + 15) + ') rotate(-90)" text-anchor="end" style="font-size:' + fs.toFixed(1) + 'px">' + escapeAttr(l) + '</text>';
+            }).join('') +
+            '</a></g>';
+          spans[spans.length - 1].x1 = leans ? px + w + 10 : x + w;
+          x = leans ? px + w * Math.cos(rad) + GAP + 1 : x + w + GAP;
+          prevH = h; i++;
+        });
+      });
+      out += '<rect class="bs-board" x="0" y="' + base + '" width="' + W + '" height="3" rx="1.5"/>';
+      spans.forEach(function (sp) {
+        if (sp.name && !sp.single) out += '<text class="bs-bundle" x="' + ((sp.x0 + sp.x1) / 2).toFixed(1) + '" y="' + (base + 17) + '" text-anchor="middle">' + sp.name + '</text>';
+      });
+      y = base + SHELF_GAP;
+    });
+    return '<h2 class="pg-h">On the shelf</h2>' +
+      '<p class="pg-blurb">' + (KIDS ? 'Your 10 books stand out; the others fill in as you read their Shabbat and holiday passages. ' : '') +
+      'Every book of the Bible as it stands on the shelf, as thick as it is long. Each spine fills from the bottom as you read it. ' +
+      'Tap a book to open it.</p>' +
+      '<div class="bs-box"><svg class="bs-shelves" viewBox="0 0 ' + W + ' ' + (y - SHELF_GAP + 26) + '" role="group" aria-label="The books of the Bible on four shelves">' + out + '</svg></div>';
   }
   var bbOpen = false;
   document.addEventListener('toggle', function (e) {

@@ -916,6 +916,29 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
 }
 
 .pg-blurb { font-family: var(--serif); font-size: 1rem; line-height: 1.7; color: var(--ink-soft); margin: -0.2rem 0 1.4rem; }
+/* The Bible on four shelves (Progress page) */
+.bs-box { width: min(760px, calc(100vw - 32px)); margin: 0.6rem 0 2.4rem calc(50% - min(380px, 50vw - 16px)); overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.bs-shelves { display: block; width: 100%; min-width: 600px; height: auto; }
+.bs-label { font: 600 17px var(--sans); letter-spacing: 0.2em; fill: var(--accent); }
+.bs-he { font: 400 19px var(--hebrew); fill: var(--muted); }
+.bs-count, .bs-bundle { font: 400 12px var(--sans); fill: var(--muted); }
+.bs-bundle { font-size: 9.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.bs-board { fill: var(--line-strong); }
+.bs-bk { cursor: pointer; }
+.bs-bk .bs-body { fill: var(--paper); stroke: var(--heading); stroke-width: 1.2; transition: stroke-width 0.15s; }
+.bs-bk .bs-fill { fill: var(--c); opacity: 0.32; }
+.bs-bk .bs-band { stroke: var(--heading); stroke-width: 1; opacity: 0.55; }
+.bs-bk text { font: 600 9.5px var(--sans); letter-spacing: 0.1em; fill: var(--c); }
+.bs-bk.done .bs-fill { opacity: 1; }
+.bs-bk.done text { fill: var(--paper); }
+.bs-bk.done .bs-band { stroke: var(--paper); opacity: 0.8; }
+.bs-bk.dim { opacity: 0.35; }
+.bs-bk > * { transition: transform 0.18s ease; }
+.bs-bk:hover > *, .bs-bk:focus-visible > * { transform: translateY(-4px); }
+.bs-bk:hover .bs-body, .bs-bk:focus-visible .bs-body { stroke-width: 1.8; }
+.bs-bk:focus { outline: none; }
+@media (prefers-reduced-motion: reduce) { .bs-bk > * { transition: none; } .bs-bk:hover > *, .bs-bk:focus-visible > * { transform: none; } }
+
 .bb-past { list-style: none; margin: 0; padding: 0; font-family: var(--sans); font-size: 0.86rem; }
 .bb-past li { display: grid; grid-template-columns: 4em 1fr auto; gap: 10px; padding: 6px 0; border-bottom: 1px solid var(--rule); color: var(--ink-soft); }
 .bb-past-y { color: var(--heading); font-variant-numeric: tabular-nums; }

@@ -78,6 +78,9 @@ Names & Terms: Messianic Filter, Hebrew Names.
   1–22 Tishrei counting to the year before. On load, marks from earlier years move to `progress.archive[year]`
   (readings stored with their passages) and show under "Past years". When the 5788 plan is loaded, update
   PLAN_START/PLAN_END/PLAN_YEAR in reader.js.
+- **On the shelf** (bottom of Progress, after By book): all books as spines on four shelves (`SHELVES` in reader.js: traditional groups,
+  Eastern order, 1 & 2 Samuel / Kings / Chronicles as single volumes, one leaning book per shelf). Thickness = length of text;
+  spines fill from the bottom as read; a tap opens the book. On Kids the 10 books stand out.
 - Page order: stats → To catch up → Day by day → Your Bible (blurb, circle, sections) → By book (blurb, all 66 books
   folded behind "Show all 66 books") → Past years → privacy note + "Clear this year's progress".
 Stored only in the browser: `localStorage['dbs-progress'] = { read: { 'YYYY-MM-DD': [1,2,4] }, since }` (reading numbers

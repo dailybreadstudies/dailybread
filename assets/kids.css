@@ -109,3 +109,6 @@ html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb1: #e3a2cd; --bb3: #F9CE7A; }
 /* Progress, By book: Shabbat and holiday passages from other books (berry, like the holy days) */
 .kids .bb-extra-note { font-size: 0.9rem; line-height: 1.55; color: var(--muted); margin: -0.2rem 0 0.8rem; }
 .kids .bb-extra .bb-bpct { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Progress, On the shelf: Kids titles */
+.kids .bs-label { font: 700 18px var(--kid-font); letter-spacing: 0.12em; }
