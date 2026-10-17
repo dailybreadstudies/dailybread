@@ -53,6 +53,8 @@ Page: Text Size, Appearance (Light/Sepia/Dark/Auto), Typeface, Justified Text (s
 Bible Text: Verse Numbers (switch, on by default — hidden numbers stay in the DOM for maps/notes), Divine Name
 (LORD/ADONAI/HASHEM), Original Languages (Off/Under Verses/Only) + Hebrew Marks.
 Names & Terms: Messianic Filter, Hebrew Names.
+- Original Languages → "Apostles In": Greek (SBLGNT) / Hebrew (Delitzsch, `data/orig-hent/`, non-commercial licence) / Both; setting `ntOrig`.
+
 
 ## Progress
 - **Your Bible** (new): every reading marked complete counts its verses (union, so re-reading doesn't double count),

@@ -32,7 +32,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true, apostlesTwice: false, apostlesSince: null };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc' };
   try {
     var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -355,12 +355,14 @@
         html += '<p class="' + cls + '">' + inner + '</p>';
       }
     }
-    var orig = settings.original !== 'off' && origCache[book.id + ':data'];
+    var origs = settings.original !== 'off' ? origsFor(book.id) : [];
+    var orig = origs.length ? origs : null;
+    var greek = origs.filter(function (o) { return o.n; })[0];
     var tnotes = [];
     if (orig) {
       // Greek textual notes, numbered in reading order so the k-th marker opens the k-th note
-      if (orig.n) units.forEach(function (u) {
-        (orig.n[u.c + ':' + u.v] || []).forEach(function (t) {
+      if (greek) units.forEach(function (u) {
+        (greek.n[u.c + ':' + u.v] || []).forEach(function (t) {
           tnotes.push({ id: 'p' + pIndex + '-tn' + tnotes.length, ref: u.c + ':' + u.v, html: t });
         });
       });
@@ -537,6 +539,28 @@
 
   // ── Original languages (Hebrew: MAM via Sefaria; Greek: SBLGNT) ──
   var origCache = {};
+  // Hebrew New Testament (Delitzsch) for the Apostles readings
+  var NT_IDS = ['MAT', 'MRK', 'LUK', 'JHN', 'ACT', 'ROM', '1CO', '2CO', 'GAL', 'EPH', 'PHP', 'COL', '1TH', '2TH', '1TI', '2TI',
+    'TIT', 'PHM', 'HEB', 'JAS', '1PE', '2PE', '1JN', '2JN', '3JN', 'JUD', 'REV'];
+  function isNT(id) { return NT_IDS.indexOf(id) >= 0; }
+  function loadOrigHe(id) {
+    var key = id + ':he';
+    if (!origCache[key]) {
+      origCache[key] = getJSON('data/orig-hent/' + id + '.json').then(function (d) { origCache[key + 'data'] = d; return d; })
+        .catch(function () { delete origCache[key]; return null; });
+    }
+    return origCache[key];
+  }
+  // Which original texts to show for a book: Hebrew Bible for the Tanakh; Greek, Hebrew or both for the Apostles
+  function origSources(id) {
+    if (!isNT(id)) return ['main'];
+    var o = settings.ntOrig || 'grc';
+    return o === 'both' ? ['main', 'he'] : o === 'he' ? ['he'] : ['main'];
+  }
+  function origsFor(id) {
+    return origSources(id).map(function (k) { return k === 'he' ? origCache[id + ':hedata'] : origCache[id + ':data']; })
+      .filter(Boolean);
+  }
   function loadOrig(id) {
     if (!origCache[id]) {
       origCache[id] = getJSON('data/orig/' + id + '.json').then(function (d) { origCache[id + ':data'] = d; return d; })
@@ -548,25 +572,27 @@
     var t = orig.v[key];
     if (!t) return '';
     if (link) t = link(t);
-    t = wrapWords(t, orig.lang === 'he' ? 'he' : 'grc', orig.id, key);
+    if (!orig.nt) t = wrapWords(t, orig.lang === 'he' ? 'he' : 'grc', orig.id, key);   // no word study data for the Hebrew NT
     if (orig.lang === 'he' && !settings.cantillation) {
       t = t.replace(/[\u0591-\u05AF\u05BD]/g, '').replace(/\s*\u05C0\s*/g, ' ').replace(/\u2009/g, '');
     }
     return t.replace(/\s{2,}/g, ' ');
   }
-  function renderOriginal(units, orig, multiChapter, tnotes) {
+  function renderOriginal(units, origs, multiChapter, tnotes) {
     var markerNo = 0;
     // Opening apparatus marks (⸀ ⸁ ⸂ ⸄) become buttons that open their note; closing marks stay plain
     var linkMarks = function (t) {
-      return t.replace(/<span class="tcm">([\u2E00\u2E01\u2E02\u2E04])<\/span>/g, function (all, mk) {
+      return t.replace(/<span class="tcm">([⸀⸁⸂⸄])<\/span>/g, function (all, mk) {
         var n = tnotes && tnotes[markerNo++];
         if (!n) return all;
         return '<button type="button" class="fn-ref tcm-ref" id="' + n.id + '-ref" data-fn="' + n.id +
           '" aria-label="Greek textual note" aria-expanded="false">' + mk + '</button>';
       });
     };
-    var lang = orig.lang === 'he' ? 'he' : 'grc';
-    var attrs = ' class="vp-orig ' + lang + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '');
+    var attrsOf = function (o) {
+      var lang = o.lang === 'he' ? 'he' : 'grc';
+      return ' class="vp-orig ' + lang + (o.nt ? ' he-nt' : '') + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '');
+    };
     var num = function (u) {
       if (u.v === 0) return '';
       if (u.v === 1 && multiChapter) return '<span class="chapter-num">' + u.c + '</span>';
@@ -575,30 +601,37 @@
     var html = '';
     if (settings.original === 'under') {
       units.forEach(function (u) {
-        var o = origText(orig, u.c + ':' + u.v, linkMarks);
-        html += '<div class="vp' + (u.v === 0 ? ' vp-title' : '') + '"><p class="vp-en">' + num(u) + u.html + '</p>' +
-          (o ? '<p' + attrs + '>' + o + '</p>' : '') + '</div>';
+        html += '<div class="vp' + (u.v === 0 ? ' vp-title' : '') + '"><p class="vp-en">' + num(u) + u.html + '</p>';
+        origs.forEach(function (o) {
+          var t = origText(o, u.c + ':' + u.v, o.n ? linkMarks : null);
+          if (t) html += '<p' + attrsOf(o) + '>' + t + '</p>';
+        });
+        html += '</div>';
       });
       return html;
     }
-    // Original only: flowing text; poetry one verse per line
-    var para = '';
-    var flush = function () { if (para) html += '<p' + attrs.replace('vp-orig', 'vp-orig vo-para') + '>' + para + '</p>'; para = ''; };
-    units.forEach(function (u) {
-      var o = origText(orig, u.c + ':' + u.v, linkMarks);
-      if (!o) return;
-      var n = u.v === 0 ? '' : '<sup class="verse-num" data-v="' + u.v + '">' + u.v + '</sup>';
-      if (u.poetic || u.v === 0) {
-        flush();
-        html += '<p' + attrs.replace('vp-orig', 'vp-orig vo-line') + '>' + n + o + '</p>';
-        if (u.stanzaAfter) html += '<div class="stanza"></div>';
-        return;
-      }
-      var breakHere = lang === 'he' ? /class="pe"/.test(para.slice(-40)) : u.newPara;
-      if (breakHere) flush();
-      para += (para ? ' ' : '') + n + o;
+    // Original only: flowing text; poetry one verse per line. With Greek and Hebrew both chosen, one after the other.
+    origs.forEach(function (o) {
+      var lang = o.lang === 'he' ? 'he' : 'grc', attrs = attrsOf(o), block = '', para = '';
+      var flush = function () { if (para) block += '<p' + attrs.replace('vp-orig', 'vp-orig vo-para') + '>' + para + '</p>'; para = ''; };
+      units.forEach(function (u) {
+        var t = origText(o, u.c + ':' + u.v, o.n ? linkMarks : null);
+        if (!t) return;
+        var n = u.v === 0 ? '' : '<sup class="verse-num" data-v="' + u.v + '">' + u.v + '</sup>';
+        if (u.poetic || u.v === 0) {
+          flush();
+          block += '<p' + attrs.replace('vp-orig', 'vp-orig vo-line') + '>' + n + t + '</p>';
+          if (u.stanzaAfter) block += '<div class="stanza"></div>';
+          return;
+        }
+        var breakHere = lang === 'he' && !o.nt ? /class="pe"/.test(para.slice(-40)) : u.newPara;
+        if (breakHere) flush();
+        para += (para ? ' ' : '') + n + t;
+      });
+      flush();
+      if (origs.length > 1) block = '<p class="vo-label">' + (o.nt ? 'Hebrew · Delitzsch' : 'Greek · SBLGNT') + '</p>' + block;
+      html += block;
     });
-    flush();
     return '<div class="orig-only">' + html + '</div>';
   }
 
@@ -1400,6 +1433,11 @@
     });
     var cantRow = panel.querySelector('.sp-cant-row');
     if (cantRow) cantRow.hidden = settings.original === 'off';
+    var ntRow = panel.querySelector('.sp-nt-row');
+    if (ntRow) ntRow.hidden = settings.original === 'off';
+    panel.querySelectorAll('[data-ntorig]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-ntorig') === (settings.ntOrig || 'grc')));
+    });
     panel.querySelectorAll('[data-theme-opt]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-opt') === settings.theme));
     });
@@ -1436,6 +1474,9 @@
     } else if (t.hasAttribute('data-orig')) {
       settings.original = t.getAttribute('data-orig');
       applyLook();
+      rerender();
+    } else if (t.hasAttribute('data-ntorig')) {
+      settings.ntOrig = t.getAttribute('data-ntorig');
       rerender();
     } else if (t.hasAttribute('data-cant')) {
       settings.cantillation = t.getAttribute('data-cant') === 'on';
@@ -2032,7 +2073,11 @@
 
   function neededOrig(ids) {
     if (settings.original === 'off') return Promise.resolve();
-    return Promise.all(ids.map(loadOrig));
+    var jobs = [];
+    ids.forEach(function (id) {
+      origSources(id).forEach(function (k) { jobs.push(k === 'he' ? loadOrigHe(id) : loadOrig(id)); });
+    });
+    return Promise.all(jobs);
   }
   function rerender() {
     if (!current) return;

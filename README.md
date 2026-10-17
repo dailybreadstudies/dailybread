@@ -147,6 +147,19 @@ when a tree draws on more than one book.
   in its parent's column, for long single lines), `branches` (coloured groups; `branchToggle: false` for
   labels only), `col`, `intro`, `countNote`, `sources`.
 
+## Hebrew New Testament (Delitzsch)
+
+For the Apostles readings, Original Languages can show the Greek, the Hebrew of Franz Delitzsch, or both (menu: "Apostles In").
+`data/orig-hent/` is built from https://github.com/HebrewNewTestament/HebDelitzsch (Delitzsch 1885; vowel pointing
+© 2003 Streams in the Negev, free for non-commercial use — see `data/orig-hent/LICENSE.md`):
+
+```
+git clone --depth 1 https://github.com/HebrewNewTestament/HebDelitzsch /tmp/hd
+python3 tools/build_hebnt.py /tmp/hd/base.osis data/orig-hent
+```
+
+Word study is not available on the Hebrew New Testament (no tagged data); the Greek line keeps it.
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).
