@@ -1,0 +1,30 @@
+{
+  "date": "2027-10-17",
+  "hebrewDate": "16 Tishrei 5788",
+  "parsha": {
+    "name": "Sukkot",
+    "meaning": "Tabernacles"
+  },
+  "note": "* It is customary among the Jewish people, since ancient times, to double the festival sabbath (yom tov) outside Israel.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 22:26-23:44"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1KI 8:2-21"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 13:22-30"
+    }
+  ]
+}

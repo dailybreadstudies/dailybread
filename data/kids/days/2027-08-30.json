@@ -1,0 +1,24 @@
+{
+  "date": "2027-08-30",
+  "hebrewDate": "27 Av 5787",
+  "parsha": {
+    "name": "Shoftim",
+    "meaning": "Judges"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 17:14-20"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 9:32-43"
+    }
+  ]
+}

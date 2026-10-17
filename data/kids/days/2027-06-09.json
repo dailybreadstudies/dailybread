@@ -1,0 +1,25 @@
+{
+  "date": "2027-06-09",
+  "hebrewDate": "4 Sivan 5787",
+  "parsha": {
+    "name": "Shavuot",
+    "meaning": "Feast of Weeks"
+  },
+  "note": "Moses wrote the first 68 chapters of the Torah on this day (according to tradition, see Exodus 24:4). ”Moses wrote down all the words of the LORD.” Day 48 of the Omer",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 16:1-3"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 4:1-26"
+    }
+  ]
+}

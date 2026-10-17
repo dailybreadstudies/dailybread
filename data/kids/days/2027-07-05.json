@@ -1,0 +1,26 @@
+{
+  "date": "2027-07-05",
+  "hebrewDate": "30 Sivan 5787",
+  "parsha": {
+    "name": "Korach",
+    "meaning": "Korah"
+  },
+  "occasion": "Rosh Chodesh Day 1",
+  "note": "The memorial of Lt. Col. John Henry Patterson (of blessed memory), a Christian Zionist pioneer who died in 1947 CE (5707). Patterson was an Irish Christian, British soldier, hunter, and author. During World War I, he led the Jewish Legion, the first Jewish fighting force in almost 2,000 years. At his funeral in Israel, he was called “The Godfather of the IDF.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 16:14-19"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 11:1-16"
+    }
+  ]
+}

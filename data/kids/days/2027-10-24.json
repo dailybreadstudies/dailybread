@@ -1,0 +1,35 @@
+{
+  "date": "2027-10-24",
+  "hebrewDate": "23 Tishrei 5788",
+  "parsha": {
+    "name": "Vezot HaBracha",
+    "meaning": "This Is the Blessing"
+  },
+  "note": "King Solomon sent the people of Israel home after they celebrated the dedication of the Holy Temple for 14 days (see 2 Chronicles 7:10). Simchat Torah (Rejoicing of the Torah) is the last day after the Feast of Tabernacles (see Leviticus 23:36). We celebrate having read the whole Torah and we start “in the beginning” again in Genesis. * In Israel, this holiday is celebrated the day before.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 33:1-34:12"
+    },
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 1:1-2:3"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JOS 1"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 28:23-31"
+    }
+  ]
+}

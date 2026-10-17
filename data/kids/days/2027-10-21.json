@@ -1,0 +1,24 @@
+{
+  "date": "2027-10-21",
+  "hebrewDate": "20 Tishrei 5788",
+  "parsha": {
+    "name": "Sukkot",
+    "meaning": "Tabernacles"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 16:1-3"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 28:1-16"
+    }
+  ]
+}

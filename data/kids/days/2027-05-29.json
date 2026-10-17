@@ -1,0 +1,31 @@
+{
+  "date": "2027-05-29",
+  "hebrewDate": "22 Iyar 5787",
+  "parsha": {
+    "name": "Bechukotai",
+    "meaning": "In My Statutes"
+  },
+  "occasion": "Shabbat",
+  "note": "God gave Israel the commandment of the Shabbat (according to tradition, see Exodus 16:23–29). “Tomorrow is to be a day of rest, a holy Sabbath to the LORD. So bake what you want to bake and boil what you want to boil. Save whatever is left and keep it until morning’” (NIV). Day 37 of the Omer",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 27:29-34"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JER 16:19-17:14"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 12:18-29"
+    }
+  ]
+}

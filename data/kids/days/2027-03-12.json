@@ -1,0 +1,25 @@
+{
+  "date": "2027-03-12",
+  "hebrewDate": "3 Adar II 5787",
+  "parsha": {
+    "name": "Pekudei",
+    "meaning": "Countings"
+  },
+  "note": "The building of the second Holy Temple was completed (see Ezra 6:15). “This Temple was completed on the third day of the month Adar; it was the sixth year of the reign of King Darius.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 40:17-27"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 3:15-28"
+    }
+  ]
+}

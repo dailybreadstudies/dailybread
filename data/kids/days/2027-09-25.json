@@ -1,0 +1,31 @@
+{
+  "date": "2027-09-25",
+  "hebrewDate": "23 Elul 5787",
+  "parsha": {
+    "name": "Nitzavim–Vayelech",
+    "meaning": "Standing–He Went"
+  },
+  "occasion": "Shabbat",
+  "note": "Leil Slichot (Night of Repentance Prayers). “Slichot” are prayers of repentance, especially those that begin this evening and continue each night leading up to the High Holidays of Rosh HaShanah and Yom Kippur.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 31:20-30"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 61:10-63:9"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 12:1-17"
+    }
+  ]
+}

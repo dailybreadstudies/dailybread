@@ -1,0 +1,25 @@
+{
+  "date": "2027-04-13",
+  "hebrewDate": "6 Nisan 5787",
+  "parsha": {
+    "name": "Metzora",
+    "meaning": "Leper"
+  },
+  "note": "The brother of Messiah, the Apostle Yaakov HaTzadik (James the Righteous) was killed in Jerusalem (see historical records: Antiquities 20.197–201, Ecclesiastical Histories 2.23.4,10–18). “But those in the city who seemed most moderate and skilled in the Torah were very angry at this, and sent secretly to the king, requesting him to order [the high priest] Ananus to cease such proceedings.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 14:21-32"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 11:29-44"
+    }
+  ]
+}

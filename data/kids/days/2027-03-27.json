@@ -1,0 +1,31 @@
+{
+  "date": "2027-03-27",
+  "hebrewDate": "18 Adar II 5787",
+  "parsha": {
+    "name": "Tsav",
+    "meaning": "Command"
+  },
+  "occasion": "Shabbat",
+  "note": "Shabbat Parah (Red Heifer Sabbath) is the next to last Sabbath before the month of Nisan. To celebrate Passover in the Holy Temple, a red cow (heifer) was needed for the people's cleansing. The story of the red heifer is read to remind everyone that Nisan and Passover are coming soon (see Numbers 19 and John 11:55).",
+  "prompts": [
+    "How does the Haftarah connect to this special Shabbat?",
+    "How do the Apostles connect to this special day?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 8:30-36"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "EZK 36:16-38"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 15:6-15"
+    }
+  ]
+}

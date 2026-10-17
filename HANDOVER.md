@@ -21,7 +21,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - Same reader, Kids look: `kids/index.html` + `kids/progress.html` are generated from the Classic pages by
   `tools/make_kids_pages.py` (run it after editing index.html/progress.html); `kids/about.html` by hand.
 - Menu: Classic shows TODAY · PROGRESS · ABOUT · KIDS; Kids shows TODAY · PROGRESS · ABOUT · CLASSIC (+ GIVE).
-- Plan loaded so far: 4 Oct – 21 Nov 2026 (the parser reads the whole year; widen the dates and rebuild).
+- Plan: the whole 5787 Kids year is loaded (4 Oct 2026 – 24 Oct 2027, 386 days).
 - Style: `docs/KIDS-STYLE.md` (black to read, jungle teal to tap, golden yellow for here/well done, berry for holy days; Baloo 2).
 - Kids defaults: Messianic Filter on (the journal says Yeshua, Messiah, Torah). Reading-plan options hidden.
 

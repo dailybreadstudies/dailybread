@@ -1,0 +1,25 @@
+{
+  "date": "2027-05-11",
+  "hebrewDate": "4 Iyar 5787",
+  "parsha": {
+    "name": "Emor",
+    "meaning": "Speak"
+  },
+  "note": "Yom HaZikaron is Israel's Memorial Day for fallen soldiers and victims of terrorism. At 8:00 p.m. on the evening before, sirens sound throughout Israel and most of the country stand for 1 minute of silence. At 11:00 a.m., the siren sounds for 2 minutes and again the nation stops to remember those who died. Day 19 of the Omer",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 22:17-33"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 19:11-27"
+    }
+  ]
+}

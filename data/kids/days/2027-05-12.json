@@ -1,0 +1,24 @@
+{
+  "date": "2027-05-12",
+  "hebrewDate": "5 Iyar 5787",
+  "parsha": {
+    "name": "Emor",
+    "meaning": "Speak"
+  },
+  "note": "In 1948 CE, David Ben-Gurion made Israel's declaration of independence. We “hereby declare the establishment of a Jewish state in Eretz-Israel, to be known as the State of Israel … Placing our trust in the ‘Rock of Israel,’ we affix our signatures to this proclamation.” The new state was recognized that night by the United States, soon followed by the USSR (now Russia). At the same time, it was attacked by five Arab countries. Yom Ha'Atzmaut (Israel Independence Day) is normally celebrated on the 5th of Iyar, but it is moved earlier or later if the celebration would conflict with Shabbat. Day 20 of the Omer",
+  "prompts": [
+    "What verse spoke to you most today and why?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 23:1-22"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 19:28-48"
+    }
+  ]
+}

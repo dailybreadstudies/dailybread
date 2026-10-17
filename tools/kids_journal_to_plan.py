@@ -25,11 +25,12 @@ LABELS = {'TORAH PORTION': 'Torah', 'TORAH': 'Torah', 'GOSPEL PORTION': 'Gospels
           'HAFTARAH': 'Haftarah', 'APOSTLES': 'Apostles', 'MAFTIR': 'Maftir', 'PROPHETS': 'Haftarah'}
 HEAD = re.compile(r'^(SUNDAY|MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SHABBAT|SATURDAY)\s+(\d{1,2})\s+([A-Z]+)$')
 READING = re.compile(r'^([A-Z][A-Z ]+?)\s{2,}(\S.*)$')
+CONTINUED = re.compile(r'^(?:[123] )?[A-Z][a-z]+(?: (?:of )?[A-Z][a-z]+)? \d+[:\d–\-\[\], ]*;?$')   # "Micah 7:18–20"
 PROMPT = re.compile(r'^(What|Did|How|Who|Why|Write|Draw|Can|Is|Are|Do)\b.*\?$')
 
 
 def clean_ref(s):
-    s = re.sub(r'\[[^\]]*\]', '', s).strip()
+    s = re.sub(r'\[[^\]]*\]', '', s).strip().rstrip(';').strip()
     return s.replace('-', '–')
 
 
@@ -68,9 +69,12 @@ def parse(pdf, first, last):
             i += 1                                          # occasion lines
         while i < len(lines):
             r = READING.match(lines[i])
-            if not r or r.group(1) not in LABELS:
+            if r and r.group(1) in LABELS:
+                readings.append([LABELS[r.group(1)], clean_ref(r.group(2))])
+            elif readings and CONTINUED.match(lines[i]):
+                readings.append([readings[-1][0], clean_ref(lines[i])])   # a second reference under the same label
+            else:
                 break
-            readings.append([LABELS[r.group(1)], clean_ref(r.group(2))])
             i += 1
         for ln in lines[i:]:
             if ln.startswith('THIS WEEK IS CALLED'):
@@ -81,6 +85,7 @@ def parse(pdf, first, last):
                 notes.append(ln)
         note = join_lines(notes)
         note = re.sub(r'^Today in History:\s*', '', note)
+        note = re.sub(r'^Day \d+ of the Omer\.?\s*', '', note)   # the Omer count already comes from Hebcal in the Today box
         day = {'date': iso, 'readings': readings}
         if prompts:
             day['prompts'] = prompts

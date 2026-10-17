@@ -1,0 +1,31 @@
+{
+  "date": "2027-06-12",
+  "hebrewDate": "7 Sivan 5787",
+  "parsha": {
+    "name": "Shavuot",
+    "meaning": "Feast of Weeks"
+  },
+  "occasion": "Shabbat",
+  "note": "* It is customary among the Jewish people, since ancient times, to double the festival sabbath (yom tov) outside Israel.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 14:22-16:17"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "HAB 2:20-3:19"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2CO 3:7-18"
+    }
+  ]
+}

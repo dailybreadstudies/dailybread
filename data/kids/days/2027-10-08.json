@@ -1,0 +1,24 @@
+{
+  "date": "2027-10-08",
+  "hebrewDate": "7 Tishrei 5788",
+  "parsha": {
+    "name": "Ha’azinu",
+    "meaning": "Listen"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 32:29-39"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 23:23-35"
+    }
+  ]
+}

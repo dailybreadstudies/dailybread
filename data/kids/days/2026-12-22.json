@@ -1,0 +1,25 @@
+{
+  "date": "2026-12-22",
+  "hebrewDate": "12 Tevet 5787",
+  "parsha": {
+    "name": "Vayechi",
+    "meaning": "He Lived"
+  },
+  "note": "The Prophet Ezekiel received a prophecy against the kingdom of Egypt. God gave him seven prophecies against Egypt and almost all of them mention the date (see Ezekiel 29–32). “In the tenth year, in the tenth month, on the twelfth of the month, the word of the LORD came to me saying, ‘Son of man, set your face against Pharaoh king of Egypt and prophesy against him and against all Egypt.’”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 48:17-22"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 27:1-14"
+    }
+  ]
+}

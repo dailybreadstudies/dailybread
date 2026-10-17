@@ -1,0 +1,31 @@
+{
+  "date": "2027-07-10",
+  "hebrewDate": "5 Tamuz 5787",
+  "parsha": {
+    "name": "Korach",
+    "meaning": "Korah"
+  },
+  "occasion": "Shabbat",
+  "note": "Ezekiel the Prophet saw a vision of God's glory that looked like a chariot (see Ezekiel 1). “Now it came about in the thirtieth year, on the fifth day of the fourth month, while I was by the river Chebar among the exiles, the heavens were opened and I saw visions of God.”",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 18:21-32"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1SA 11:14-12:22"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JUD 1:5-25"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2027-08-12",
+  "hebrewDate": "9 Av 5787",
+  "parsha": {
+    "name": "Va’etchanan",
+    "meaning": "I Pleaded"
+  },
+  "note": "The Fast of Av (Tisha B'Av) is the biblical “fast of the fifth month” (Zechariah 7:3; 8:19) and lasts from sunset to sunset. It's the saddest day of the year, when many tragedies happened. But in the Final Redemption, it will be turned into a festival. Today in History: All the men of fighting age who rebelled and refused to go into the Promised Land were condemned to wander 40 years and die in the wilderness (tradition, Numbers 14). In the year 586 BCE, the Babylonians destroyed the first Holy Temple (see 2 Kings 25:9). In the year 70 CE, the Romans burned down the second Holy Temple. In 133 CE, the Romans crushed the Jewish “Bar Kochba” revolt at the city of Beitar. In 1290 CE, King Edward I forced all Jewish people to leave England. In 1492 CE, King Ferdinand and Queen Isabella expelled all Jewish people from Spain. In 1941 CE, just before the 9th of Av, the German Nazis decide to try to kill all Jews. In 1942 CE, the Nazis began taking masses of Jews from Warsaw, Poland to kill them in camps.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 5:22-6:3"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JER 8:13-9:23"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 19:41-48"
+    }
+  ]
+}

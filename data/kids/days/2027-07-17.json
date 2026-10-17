@@ -1,0 +1,30 @@
+{
+  "date": "2027-07-17",
+  "hebrewDate": "12 Tamuz 5787",
+  "parsha": {
+    "name": "Chukat–Balak",
+    "meaning": "Statute–Balak"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 23:27-25:9"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "MIC 5:7-6:8"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2PE 2:1-22"
+    }
+  ]
+}

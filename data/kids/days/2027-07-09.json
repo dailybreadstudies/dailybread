@@ -1,0 +1,24 @@
+{
+  "date": "2027-07-09",
+  "hebrewDate": "4 Tamuz 5787",
+  "parsha": {
+    "name": "Korach",
+    "meaning": "Korah"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 17:10-18:20"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 12:20-36"
+    }
+  ]
+}

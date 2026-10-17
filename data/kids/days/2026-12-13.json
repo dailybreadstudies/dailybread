@@ -1,0 +1,24 @@
+{
+  "date": "2026-12-13",
+  "hebrewDate": "3 Tevet 5787",
+  "parsha": {
+    "name": "Vayigash",
+    "meaning": "He Drew Near"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 44:18-30"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 24:29-44"
+    }
+  ]
+}

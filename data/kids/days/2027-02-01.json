@@ -1,0 +1,25 @@
+{
+  "date": "2027-02-01",
+  "hebrewDate": "24 Shvat 5787",
+  "parsha": {
+    "name": "Mishpatim",
+    "meaning": "Judgments"
+  },
+  "note": "In the days of the Persian Empire, Zechariah the Prophet saw a vision of four colored horses standing among myrtle trees (see Zechariah 1:7). It's also the memorial of the “Even Tzohar,” Rabbi Yechiel Tzvi Lichtenstein (of blessed memory). He was a Messianic Jewish pioneer who died in 1912 CE (5672). He was born in 1831 in Moldavia and became a disciple of Yeshua while studying in Yeshiva. He wrote a very important Hebrew commentary on the Apostolic Scriptures (New Testament).",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 21:20-22:4"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MRK 10:23-31"
+    }
+  ]
+}

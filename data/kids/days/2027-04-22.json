@@ -1,0 +1,30 @@
+{
+  "date": "2027-04-22",
+  "hebrewDate": "15 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "note": "A first fruits of barley sheaves were harvested in the evening (see Leviticus 23:10). The people of Israel left Egypt (see Exodus 12:28–51). “And on that same day the LORD brought the sons of Israel out of the land of Egypt by their hosts.”",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 12:21-51"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JOS 3:5-7; 5:2-6:1; 6:27"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 5:6-8"
+    }
+  ]
+}

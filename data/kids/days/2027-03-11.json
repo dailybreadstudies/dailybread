@@ -1,0 +1,25 @@
+{
+  "date": "2027-03-11",
+  "hebrewDate": "2 Adar II 5787",
+  "parsha": {
+    "name": "Pekudei",
+    "meaning": "Countings"
+  },
+  "note": "Yeshua paid the half-shekel for the Holy Temple (possible date, see Matthew 17:24–27). “When they came to Capernaum, those who collected the two-drachma tax came to Peter and said, ‘Does your teacher not pay the two-drachma tax?’ He said, ‘Yes.’”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 40:1-16"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 3:1-14"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2027-04-15",
+  "hebrewDate": "8 Nisan 5787",
+  "parsha": {
+    "name": "Metzora",
+    "meaning": "Leper"
+  },
+  "note": "The priests entered the First Temple to cleanse it during King Hezekiah’s time (see 2 Chronicles 29:17). “Now they began the consecration on the first day of the first month, and on the eighth day of the month they entered the porch of the LORD. Then they consecrated the house of the LORD in eight days, and finished on the sixteenth day of the first month.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 14:54-15:15"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 12:13-34"
+    }
+  ]
+}

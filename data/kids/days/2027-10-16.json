@@ -1,0 +1,30 @@
+{
+  "date": "2027-10-16",
+  "hebrewDate": "15 Tishrei 5788",
+  "parsha": {
+    "name": "Sukkot",
+    "meaning": "Tabernacles"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 23:23-44"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ZEC 14"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 7:9-17"
+    }
+  ]
+}

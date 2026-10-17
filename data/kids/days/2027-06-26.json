@@ -1,0 +1,30 @@
+{
+  "date": "2027-06-26",
+  "hebrewDate": "21 Sivan 5787",
+  "parsha": {
+    "name": "Beha’alotcha",
+    "meaning": "When You Set Up"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 11:30-12:16"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ZEC 2:10-4:7"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "EPH 5:8-21"
+    }
+  ]
+}

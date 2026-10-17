@@ -1,0 +1,25 @@
+{
+  "date": "2027-04-18",
+  "hebrewDate": "11 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "note": "Messiah went to Jerusalem, cursed a fig tree, and cleansed the Holy Temple (see Matthew 21:10–16). “And He entered the Temple and began to drive out those who were buying and selling in the Temple, and overturned the tables of the money changers and the seats of those who were selling doves; and He would not permit anyone to carry [anything] through the Temple.” (Mark 11:15–16).",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 33:12-16"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 12:49-59"
+    }
+  ]
+}

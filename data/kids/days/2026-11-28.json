@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-28",
+  "hebrewDate": "18 Kislev 5787",
+  "parsha": {
+    "name": "Vayishlach",
+    "meaning": "He Sent"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 36:20-43"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "OBA 1"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 11:20-22"
+    }
+  ]
+}

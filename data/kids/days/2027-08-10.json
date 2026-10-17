@@ -1,0 +1,25 @@
+{
+  "date": "2027-08-10",
+  "hebrewDate": "7 Av 5787",
+  "parsha": {
+    "name": "Va’etchanan",
+    "meaning": "I Pleaded"
+  },
+  "note": "The Babylonians laid siege to the First Temple (see 2 Kings 25:8). “Now on the seventh day of the fifth month, which was the nineteenth year of King Nebuchadnezzar, king of Babylon, Nebuzaradan the captain of the guard, a servant of the king of Babylon, came to Jerusalem.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 4:41-49"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 3:1-10"
+    }
+  ]
+}

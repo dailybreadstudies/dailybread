@@ -1,0 +1,25 @@
+{
+  "date": "2027-02-21",
+  "hebrewDate": "14 Adar I 5787",
+  "parsha": {
+    "name": "Ki Tisa",
+    "meaning": "When You Count"
+  },
+  "note": "Purim Katan: In a Jewish leap year, there are two months called Adar. Purim is celebrated in the second Adar. But on the 14th day of the first Adar, there is a small joyful day called Purim Katan, which means “Little Purim.” It is not the full Purim celebration, but it is still a happy day when people do not fast or give sad speeches.",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 30:11-31:17"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MRK 14:53-65"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "date": "2027-03-20",
+  "hebrewDate": "11 Adar II 5787",
+  "parsha": {
+    "name": "Vayikra",
+    "meaning": "He Called"
+  },
+  "occasion": "Shabbat",
+  "note": "Shabbat Zachor (Sabbath of Remembrance) is the Sabbath right before Purim. There is a special reading about how the Amalekites attacked Israel in the wilderness. In the Purim story, Haman was likely a descendant of the Amalekites.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 5:11-6:7"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1SA 15:2-34"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 10:1-22"
+    }
+  ]
+}

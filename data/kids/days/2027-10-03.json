@@ -1,0 +1,30 @@
+{
+  "date": "2027-10-03",
+  "hebrewDate": "2 Tishrei 5788",
+  "parsha": {
+    "name": "Rosh HaShanah",
+    "meaning": "Feast of Trumpets"
+  },
+  "note": "Family leaders studied Torah with Ezra the Scribe (see Nehemiah 8:13). “Then on the second day the heads of fathers’ households of all the people, the priests and the Levites were gathered to Ezra the scribe that they might gain insight into the words of the Torah.” * This is the only festival (yom tov) to fall on a New Moon. Since ancient times, Israel therefore celebrates the holiday for two days.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 22"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JER 31:2-20"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 15:35-58"
+    }
+  ]
+}

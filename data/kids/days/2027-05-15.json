@@ -1,0 +1,30 @@
+{
+  "date": "2027-05-15",
+  "hebrewDate": "8 Iyar 5787",
+  "parsha": {
+    "name": "Emor",
+    "meaning": "Speak"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 24:1-23"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "EZK 44:15-31"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "COL 2:16-3:4"
+    }
+  ]
+}

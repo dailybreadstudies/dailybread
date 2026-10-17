@@ -1,0 +1,25 @@
+{
+  "date": "2027-06-18",
+  "hebrewDate": "13 Sivan 5787",
+  "parsha": {
+    "name": "Nasso",
+    "meaning": "Take Up"
+  },
+  "note": "Seven days after God’s glory rested on Sinai, Moses went up the mountain (according to tradition, see Exodus 24:15–18). “…the cloud covered it for six days; and on the seventh day He called to Moses from the midst of the cloud.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 7:42-71"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 6:16-34"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "date": "2027-04-29",
+  "hebrewDate": "22 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "note": "* It is customary among the Jewish people, since ancient times, to double the festival sabbath (yom tov) outside Israel. Day 7 of the Omer",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 15:19-16:17"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 10:32-12:6"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 19:11-20:6"
+    }
+  ]
+}

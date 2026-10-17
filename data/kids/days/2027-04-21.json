@@ -1,0 +1,25 @@
+{
+  "date": "2027-04-21",
+  "hebrewDate": "14 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "note": "Messiah was condemned to death, killed on a cross, and buried in a tomb (see Matthew 26:57–27:61). In memory of the day, we read Mark 15. The Passover lambs were also slaughtered in the Holy Temple in the afternoon (see Exodus 12:6; Deuteronomy 16:6). Ta’anit Bechorot (Fast of the Firstborn) is a unique fast day on the Jewish calendar. Only firstborn Jewish men fast in memory and gratitude for being saved from the Plague of the Firstborn in Egypt (see Exodus 12:29).",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 34:1-3"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MRK 15"
+    }
+  ]
+}

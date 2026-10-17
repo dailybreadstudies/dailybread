@@ -1,0 +1,30 @@
+{
+  "date": "2027-06-11",
+  "hebrewDate": "6 Sivan 5787",
+  "parsha": {
+    "name": "Shavuot",
+    "meaning": "Feast of Weeks"
+  },
+  "note": "God gave the Torah on Mount Sinai (see Exodus 19:16–25), ”its smoke ascended like the smoke of a furnace, and the whole mountain quaked violently. When the sound of the trumpet grew louder and louder…” The Spirit of God was poured out on the disciples in the Holy Temple (see Acts 2). ”Suddenly there came from heaven a noise like a violent rushing wind...” The day King David was born, and the day he died (according to tradition, 1 Kings 2:10).",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 19:1-20:26"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "EZK 1:1-28; 3:12"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 2:1-41"
+    }
+  ]
+}

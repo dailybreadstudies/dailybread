@@ -1,0 +1,31 @@
+{
+  "date": "2027-04-17",
+  "hebrewDate": "10 Nisan 5787",
+  "parsha": {
+    "name": "Metzora",
+    "meaning": "Leper"
+  },
+  "occasion": "Shabbat",
+  "note": "Messiah rode into Jerusalem, visited the Temple and returned to Bethany on the Mount of Olives (see Matthew 21:1–9). The Passover lambs were selected on this day (see Exodus 12:3). The people of Israel also crossed the Jordan with Joshua on this day (see Joshua 4:19). The Prophet Ezekiel saw a vision of a new Temple plan, never built before (possible date, see Ezekiel 40–48). Shabbat HaGadol (The Great Sabbath) is the last Sabbath before Passover. A special reading from the Prophet Malachi is read. It includes the promise of Elijah’s coming before the “great” day of the LORD.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 15:29-33"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "MAL 3-4"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 5:24-34"
+    }
+  ]
+}

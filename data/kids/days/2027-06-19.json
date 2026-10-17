@@ -1,0 +1,30 @@
+{
+  "date": "2027-06-19",
+  "hebrewDate": "14 Sivan 5787",
+  "parsha": {
+    "name": "Nasso",
+    "meaning": "Take Up"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 7:72-89"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JDG 13:2-25"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 21:17-26"
+    }
+  ]
+}

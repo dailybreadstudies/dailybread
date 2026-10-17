@@ -1,0 +1,31 @@
+{
+  "date": "2027-06-05",
+  "hebrewDate": "29 Iyar 5787",
+  "parsha": {
+    "name": "Bamidbar",
+    "meaning": "In the Wilderness"
+  },
+  "occasion": "Shabbat Machar Chodesh",
+  "note": "Shabbat Machar Chodesh is the Sabbath just before a New Moon. A special portion from the Prophets is read which says, “Tomorrow is the new moon...” (1 Samuel 20:18). This story also speaks about David’s empty seat. In Luke 1:26–33, an angel tells Miriam that her son, Yeshua, will receive the throne of David forever. Day 44 of the Omer",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 4:1-20"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1SA 20:18-42"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "LUK 1:26-38"
+    }
+  ]
+}

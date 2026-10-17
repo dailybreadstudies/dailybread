@@ -1,0 +1,25 @@
+{
+  "date": "2027-08-01",
+  "hebrewDate": "27 Tamuz 5787",
+  "parsha": {
+    "name": "Dvarim",
+    "meaning": "Words"
+  },
+  "note": "PSST! It's time to order the new Daily Bread for Kids for next year! Go to: arielmedia.shop and get a special discount when you use the following Promo Code: NEXTYEAR",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 1:1-10"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 21:1-14"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2027-08-19",
+  "hebrewDate": "16 Av 5787",
+  "parsha": {
+    "name": "Ekev",
+    "meaning": "Consequence"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 10:12-11:9"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 6"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2027-09-08",
+  "hebrewDate": "6 Elul 5787",
+  "parsha": {
+    "name": "Ki Tetze",
+    "meaning": "When You Go Out"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 23:7-23"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 12:12-25"
+    }
+  ]
+}

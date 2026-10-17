@@ -1,0 +1,31 @@
+{
+  "date": "2027-04-10",
+  "hebrewDate": "3 Nisan 5787",
+  "parsha": {
+    "name": "Tazria",
+    "meaning": "She Will Conceive"
+  },
+  "occasion": "Shabbat",
+  "note": "The Levites were ordained for service in the Tabernacle (according to tradition, Numbers 8:5–22). ”Then after that the Levites went in to perform their service in the tent of meeting before Aaron and before his sons.”",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 13:55-59"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "2KI 4:42-5:19"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 1:40-45"
+    }
+  ]
+}

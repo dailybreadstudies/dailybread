@@ -1,0 +1,31 @@
+{
+  "date": "2027-05-08",
+  "hebrewDate": "1 Iyar 5787",
+  "parsha": {
+    "name": "Kedoshim",
+    "meaning": "Holy"
+  },
+  "occasion": "Shabbat",
+  "note": "Moses took a census of the people in the wilderness (see Numbers 1). Construction began on the second Holy Temple (see Ezra 3:8). Day 16 of the Omer",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 20:23-27"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 66"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1JN 4:7-21"
+    }
+  ]
+}

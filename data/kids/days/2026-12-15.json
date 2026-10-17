@@ -1,0 +1,25 @@
+{
+  "date": "2026-12-15",
+  "hebrewDate": "5 Tevet 5787",
+  "parsha": {
+    "name": "Vayigash",
+    "meaning": "He Drew Near"
+  },
+  "note": "Ezekiel the Prophet received a report in Babylon that Jerusalem has been captured by the Babylonians (see Ezekiel 33:21). “Now in the twelfth year of our exile, on the fifth of the tenth month, the refugees from Jerusalem came to me, saying, ‘The city has been taken.’”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 45:8-18"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 25:14-30"
+    }
+  ]
+}

@@ -60,7 +60,7 @@ The Kids edition lives in `kids/` (Today, Progress, About) with its own plan in 
 It runs on the same `reader.js` (`<body data-edition="kids">`). First-time visitors to `kids/` see the Kids About page.
 
 ```
-python3 tools/kids_journal_to_plan.py DB_Kids_5787.pdf tools/plan-kids-5787.json 2026-10-04 2026-11-21   # dates optional
+python3 tools/kids_journal_to_plan.py DB_Kids_5787.pdf tools/plan-kids-5787.json   # optional: FIRST_DATE LAST_DATE
 python3 tools/make_days.py tools/plan-kids-5787.json data/kids/days
 python3 tools/make_kids_pages.py        # after any change to index.html or progress.html
 ```

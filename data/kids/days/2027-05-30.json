@@ -1,0 +1,25 @@
+{
+  "date": "2027-05-30",
+  "hebrewDate": "23 Iyar 5787",
+  "parsha": {
+    "name": "Bamidbar",
+    "meaning": "In the Wilderness"
+  },
+  "note": "The day Moses struck the rock at Horeb and water for the people came from it (according to tradition, see Exodus 17:1–7). The memorial of Count Von Zinzendorf (of blessed memory), a Christian Zionist and Messianic pioneer who died in 1760 CE (5520). Zinzendorf was a famous Christian leader who had a vision for the national and spiritual restoration of Israel to her Land. With that goal, he encouraged the start of communities of Torah-faithful, Jewish disciples in several countries. Day 38 of the Omer",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 1:1-19"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 24:13-35"
+    }
+  ]
+}

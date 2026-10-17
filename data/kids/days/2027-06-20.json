@@ -1,0 +1,25 @@
+{
+  "date": "2027-06-20",
+  "hebrewDate": "15 Sivan 5787",
+  "parsha": {
+    "name": "Beha’alotcha",
+    "meaning": "When You Set Up"
+  },
+  "note": "The day the patriarch Judah was born and also the date he died (according to tradition, see Genesis 29:35; Exodus 1:6). “And she conceived again and bore a son and said, ‘This time I will praise the LORD.’ Therefore she named him Judah. Then she stopped bearing.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 8:1-14"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 6:35-51"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2027-05-17",
+  "hebrewDate": "10 Iyar 5787",
+  "parsha": {
+    "name": "Behar",
+    "meaning": "On the Mountain"
+  },
+  "note": "The day Eli the High Priest died (according to tradition, see 1 Samuel 4:18). “When he mentioned the ark of God, Eli fell off the seat backward beside the gate, and his neck was broken and he died, for he was old and heavy. Thus he judged Israel forty years.” Day 25 of the Omer",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 25:14-18"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 21:1-19"
+    }
+  ]
+}

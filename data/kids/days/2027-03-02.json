@@ -1,0 +1,24 @@
+{
+  "date": "2027-03-02",
+  "hebrewDate": "23 Adar I 5787",
+  "parsha": {
+    "name": "Vayak’hel",
+    "meaning": "He Assembled"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 35:30-36:7"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 1:18-25"
+    }
+  ]
+}

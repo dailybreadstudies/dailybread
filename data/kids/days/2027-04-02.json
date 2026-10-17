@@ -1,0 +1,24 @@
+{
+  "date": "2027-04-02",
+  "hebrewDate": "24 Adar II 5787",
+  "parsha": {
+    "name": "Shmini",
+    "meaning": "Eighth"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 11:1-32"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 9:1-17"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "date": "2026-12-26",
+  "hebrewDate": "16 Tevet 5787",
+  "parsha": {
+    "name": "Vayechi",
+    "meaning": "He Lived"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 50:21-26"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1KI 2:1-12"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 7:1-8"
+    }
+  ]
+}

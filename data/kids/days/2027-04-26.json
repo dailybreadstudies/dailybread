@@ -1,0 +1,24 @@
+{
+  "date": "2027-04-26",
+  "hebrewDate": "19 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 16:18-24"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 14:25-15:10"
+    }
+  ]
+}

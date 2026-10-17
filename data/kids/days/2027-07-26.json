@@ -1,0 +1,24 @@
+{
+  "date": "2027-07-26",
+  "hebrewDate": "21 Tamuz 5787",
+  "parsha": {
+    "name": "Mattot–Massei",
+    "meaning": "Tribes–Journeys"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 31:13-54"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 19:1-16"
+    }
+  ]
+}

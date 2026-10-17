@@ -1,0 +1,25 @@
+{
+  "date": "2027-08-13",
+  "hebrewDate": "10 Av 5787",
+  "parsha": {
+    "name": "Va’etchanan",
+    "meaning": "I Pleaded"
+  },
+  "note": "The Prophet Ezekiel received a rebuke from the LORD for some elders of Israel in Babylon (see Ezekiel 20). In the year 586 BCE, the Babylonians burned the first Holy Temple and the rest of Jerusalem (see Jeremiah 52:12). In the year 70 CE, the second Holy Temple continued to burn (according to tradition). In 2005 CE, the Israeli military forced thousands of Jews to leave their homes and their land in Gush Katif in Gaza. Some in the Israeli government thought this would help bring peace for Israel, but it did not. The Three Weeks of sadness, between the Fast of Tamuz and the Fast of Av, come to an end.",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 6:4-25"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 4:1-22"
+    }
+  ]
+}

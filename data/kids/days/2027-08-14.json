@@ -1,0 +1,31 @@
+{
+  "date": "2027-08-14",
+  "hebrewDate": "11 Av 5787",
+  "parsha": {
+    "name": "Va’etchanan",
+    "meaning": "I Pleaded"
+  },
+  "occasion": "Shabbat",
+  "note": "Shabbat Nachamu (Sabbath of Consolation) is the Sabbath that comes after the 9th of Av. It gets its name from the Haftarah in Isaiah 40, “Comfort, O comfort My people [Nachamu, nachamu ami].” It is the first of the 7 “Haftarot of Comfort.” The encouraging prophetic readings on Shabbat lead all the way up to Rosh HaShanah (Trumpets).",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 7:1-11"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 40:1-26"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1PE 1:18-25"
+    }
+  ]
+}

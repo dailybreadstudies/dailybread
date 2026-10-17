@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-24",
+  "hebrewDate": "14 Kislev 5787",
+  "parsha": {
+    "name": "Vayishlach",
+    "meaning": "He Sent"
+  },
+  "note": "The day Reuben was born (according to tradition, see Genesis 29:32). ”Leah conceived and bore a son and named him Reuben, for she said, ’Because the LORD has seen my affliction; surely now my husband will love me.’”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 32:30-33:5"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 18:15-35"
+    }
+  ]
+}

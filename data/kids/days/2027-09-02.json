@@ -1,0 +1,26 @@
+{
+  "date": "2027-09-02",
+  "hebrewDate": "30 Av 5787",
+  "parsha": {
+    "name": "Shoftim",
+    "meaning": "Judges"
+  },
+  "occasion": "Rosh Chodesh Day 1",
+  "note": "Moses carved out new stone tablets on this day (according to tradition, see Exodus 34:1). “Cut out for yourself two stone tablets like the former ones, and I will write on the tablets the words that were on the former tablets which you shattered.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 18:14-19:13"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 10:24-33"
+    }
+  ]
+}

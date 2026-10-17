@@ -1,0 +1,26 @@
+{
+  "date": "2027-08-04",
+  "hebrewDate": "1 Av 5787",
+  "parsha": {
+    "name": "Dvarim",
+    "meaning": "Words"
+  },
+  "occasion": "Rosh Chodesh",
+  "note": "Aaron, Moses' brother, died on this day (see Numbers 33:38). He died “the fortieth year after the sons of Israel had come from the land of Egypt, on the first day in the fifth month.” After traveling from Babylon, Ezra the Scribe arrived in Jerusalem (see Ezra 7:1–9). The memorial of Rabbi Paul Feivel Levertoff (of blessed memory), a Messianic Jewish pioneer who died in 1954 CE (5714). Levertoff was born in 1878 into an Orthodox Jewish family in Belarus. After graduating from the prestigious Volozhin Yeshiva, he became a believer in Yeshua as Messiah. He also became a leading voice for others like himself.",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 1:39-2:1"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 1:15-26"
+    }
+  ]
+}

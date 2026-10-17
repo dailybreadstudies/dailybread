@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-30",
+  "hebrewDate": "20 Kislev 5787",
+  "parsha": {
+    "name": "Vayeshev",
+    "meaning": "He Settled"
+  },
+  "note": "During pouring rain in Jerusalem, Ezra the Scribe spoke to the Jewish people about a great sin (see Ezra 10:9–15). ”So all the men of Judah and Benjamin assembled at Jerusalem within the three days. It was the ninth month on the twentieth of the month.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 37:12-22"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 21:1-17"
+    }
+  ]
+}

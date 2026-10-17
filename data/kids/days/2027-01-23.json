@@ -1,0 +1,30 @@
+{
+  "date": "2027-01-23",
+  "hebrewDate": "15 Shvat 5787",
+  "parsha": {
+    "name": "Beshalach",
+    "meaning": "When He Sent"
+  },
+  "occasion": "Shabbat",
+  "note": "Shabbat Shirah (Sabbath of Song) is when the Torah portion “Beshalach” is read. In Exodus 15, we read the jubilant “Song at the Sea.” In the Haftarah, we read the “Song of Deborah” (see Judges 5). From the Apostles, we also read the Song of Moses and the Lamb (see Revelation 15). Tu BiShvat (New Year of the Trees): In the Torah, God says that the fruit from newly planted trees in Israel is forbidden for three years (see Leviticus 19:23–25). Instead of counting the age of each tree, all are counted from the 15th of Shvat (Tu BiShvat), the New Year of the Trees. Today, Tu BiShvat is celebrated by planting trees in Israel, and with a festive meal, somewhat similar to Passover. It celebrates the Land of Israel and its fruit.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 17"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JDG 4:4-5:31"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "REV 19:1-9"
+    }
+  ]
+}

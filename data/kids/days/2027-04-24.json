@@ -1,0 +1,31 @@
+{
+  "date": "2027-04-24",
+  "hebrewDate": "17 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "occasion": "Shabbat",
+  "note": "Counting of the Omer: God told Israel to count 50 days (7 weeks) from the waving of the Omer, when Messiah rose from the dead, until Shavuot (Feast of Weeks) when the Torah and the Spirit were given (see Leviticus 23). The custom is to do this on the eve of every new day. (See arielmedia.shop for a kids Omercounting resource.) Day 2 of the Omer",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 33:12-34:26"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "EZK 37:1-14"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "EPH 5:25-33"
+    }
+  ]
+}

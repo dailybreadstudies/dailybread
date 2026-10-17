@@ -1,0 +1,25 @@
+{
+  "date": "2027-04-08",
+  "hebrewDate": "1 Nisan 5787",
+  "parsha": {
+    "name": "Tazria",
+    "meaning": "She Will Conceive"
+  },
+  "occasion": "Rosh Chodesh",
+  "note": "The LORD gave Israel their first Torah commandment. It was to sanctify the new month, Rosh Chodesh, and to make Nisan the first month of the spiritual year (according to tradition, see Exodus 12:1–2). The Tabernacle was first set up in the wilderness today (see Exodus 40:2,17). King Hezekiah began rededicating the First Temple to the LORD (see 2 Chronicles 29:17). The Prophet Ezekiel received a prophecy against Egypt. God gave him seven prophecies against Egypt and almost all of them mention the date (see Ezekiel 29:17–18). Today is the memorial of Major General Orde Wingate (of blessed memory). He was a Christian Zionist pioneer who died in 1944 CE (5704). Wingate was a British officer who helped train the first soldiers of Israel's Defence Forces (IDF). He became known as “The Father of the IDF.” After he died fighting in World War II, the Jews of Jerusalem prayed, “May the name of Orde Wingate be remembered in the book of redemption of the House of Israel for eternity.”",
+  "prompts": [
+    "What verse spoke to you most today and why?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 13:29-39"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 10:13-24"
+    }
+  ]
+}

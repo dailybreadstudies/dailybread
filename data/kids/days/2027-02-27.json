@@ -1,0 +1,30 @@
+{
+  "date": "2027-02-27",
+  "hebrewDate": "20 Adar I 5787",
+  "parsha": {
+    "name": "Ki Tisa",
+    "meaning": "When You Count"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 34:27-35"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1KI 18:1-39"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2CO 3:7-18"
+    }
+  ]
+}

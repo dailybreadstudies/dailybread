@@ -1,0 +1,25 @@
+{
+  "date": "2027-01-20",
+  "hebrewDate": "12 Shvat 5787",
+  "parsha": {
+    "name": "Beshalach",
+    "meaning": "When He Sent"
+  },
+  "note": "The memorial of Reverend William Hechler (of blessed memory), a Christian Zionist pioneer who died in 1931 CE (5691). Hechler was an Anglican minister who helped Theodor Herzl, the famous Jewish leader of modern Zionism. Herzl called him the “first Christian Zionist.” The two remained friends and Hechler recorded Herzl’s last words, “Greet Palestine for me. I gave my heart’s blood for my people.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 14:26-15:26"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MRK 7:14-23"
+    }
+  ]
+}

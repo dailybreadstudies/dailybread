@@ -1,0 +1,30 @@
+{
+  "date": "2027-04-23",
+  "hebrewDate": "16 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "note": "Messiah rose from the dead during the night, “on the third day.” Afterwards, he appeared to his disciples (see Luke 24). An Omer of barley was waved in the Holy Temple as firstfruits of the harvest (see Leviticus 23:10–11). In the days of King Hezekiah, the rededication of the first Holy Temple was finished (see 2 Chronicles 29:17). * It is customary among the Jewish people, since ancient times, to double the festival sabbath (yom tov) outside Israel.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 22:26-23:44"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "2KI 23:1-9; 23:21-25"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MRK 16:1-20"
+    }
+  ]
+}

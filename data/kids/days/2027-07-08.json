@@ -1,0 +1,25 @@
+{
+  "date": "2027-07-08",
+  "hebrewDate": "3 Tamuz 5787",
+  "parsha": {
+    "name": "Korach",
+    "meaning": "Korah"
+  },
+  "note": "Joshua commanded the sun and moon to stand still during the battle with the Amorites (according to tradition, see Joshua 10:11–14). “There was no day like that before it or after it, when the LORD listened to the voice of a man; for the LORD fought for Israel.“",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 17:1-9"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 12:1-19"
+    }
+  ]
+}

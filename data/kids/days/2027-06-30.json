@@ -1,0 +1,24 @@
+{
+  "date": "2027-06-30",
+  "hebrewDate": "25 Sivan 5787",
+  "parsha": {
+    "name": "Shlach",
+    "meaning": "Send"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 14:26-15:7"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 9:1-23"
+    }
+  ]
+}

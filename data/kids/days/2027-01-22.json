@@ -1,0 +1,24 @@
+{
+  "date": "2027-01-22",
+  "hebrewDate": "14 Shvat 5787",
+  "parsha": {
+    "name": "Beshalach",
+    "meaning": "When He Sent"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 16:11-36"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MRK 8:1-21"
+    }
+  ]
+}

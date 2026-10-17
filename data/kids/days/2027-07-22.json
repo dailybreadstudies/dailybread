@@ -1,0 +1,24 @@
+{
+  "date": "2027-07-22",
+  "hebrewDate": "17 Tamuz 5787",
+  "parsha": {
+    "name": "Pinchas",
+    "meaning": "Phinehas"
+  },
+  "note": "Moses broke the stone tablets in anger because of the sin of the Golden Calf. He then destroyed the idol the same day (according to tradition, Exodus 32:6–35). During the Babylonian siege in 586 BCE, the daily Temple offerings stopped because of the famine (tradition). During the Roman siege in 70 CE, the Romans broke through the walls of Jerusalem (according to tradition). The Fast of Tamuz is a shorter fast on the Jewish calendar and lasts from sunrise to sunset. It is one of four similar fast days. The fast remembers the breaching of Jerusalem's walls. The Prophets promise these fast days will someday “become joy, gladness, and cheerful feasts for the house of Judah’” (see Zechariah 8:19). The \"Three Weeks\" of sadness begin, leading up to the saddest day of the year: the 9th of Av.",
+  "prompts": [
+    "What verse spoke to you most today and why?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 28:1-15"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 17:20-26"
+    }
+  ]
+}

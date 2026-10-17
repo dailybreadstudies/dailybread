@@ -1,0 +1,25 @@
+{
+  "date": "2027-04-05",
+  "hebrewDate": "27 Adar II 5787",
+  "parsha": {
+    "name": "Tazria",
+    "meaning": "She Will Conceive"
+  },
+  "note": "King Jehoiachin was fully released from Babylonian prison (see 2 Kings 25:27–30). The Babylonians killed Zedekiah, the last king of Judah, today (according to tradition, see Jeremiah 52:11).",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 13:6-17"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 9:28-43"
+    }
+  ]
+}

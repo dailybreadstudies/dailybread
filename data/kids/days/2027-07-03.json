@@ -1,0 +1,30 @@
+{
+  "date": "2027-07-03",
+  "hebrewDate": "28 Sivan 5787",
+  "parsha": {
+    "name": "Shlach",
+    "meaning": "Send"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this season of correction?",
+    "How do the Apostles connect to this season of correction?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 15:27-41"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JOS 2:1-24"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 3:7-4:11"
+    }
+  ]
+}

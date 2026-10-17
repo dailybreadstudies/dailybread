@@ -1,0 +1,24 @@
+{
+  "date": "2027-03-08",
+  "hebrewDate": "29 Adar I 5787",
+  "parsha": {
+    "name": "Pekudei",
+    "meaning": "Countings"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 39:2-21"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 2:1-20"
+    }
+  ]
+}

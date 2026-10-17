@@ -1,0 +1,25 @@
+{
+  "date": "2027-04-09",
+  "hebrewDate": "2 Nisan 5787",
+  "parsha": {
+    "name": "Tazria",
+    "meaning": "She Will Conceive"
+  },
+  "note": "The first red heifer was prepared in the wilderness (according to tradition, see Numbers 19:1–22). “Speak to the sons of Israel that they bring you an unblemished red heifer in which is no defect and on which a yoke has never been placed.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 13:40-54"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 10:25-37"
+    }
+  ]
+}

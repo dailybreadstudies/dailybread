@@ -1,0 +1,30 @@
+{
+  "date": "2027-07-31",
+  "hebrewDate": "26 Tamuz 5787",
+  "parsha": {
+    "name": "Mattot–Massei",
+    "meaning": "Tribes–Journeys"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to these weeks of consolation?",
+    "How do the Apostles connect to this week's Haftarah?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 35:9-36:13"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JER 2:4-28; 3:4"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JAS 4:1-12"
+    }
+  ]
+}

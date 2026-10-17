@@ -1,0 +1,24 @@
+{
+  "date": "2027-04-04",
+  "hebrewDate": "26 Adar II 5787",
+  "parsha": {
+    "name": "Tazria",
+    "meaning": "She Will Conceive"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 12:1-13:5"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 9:18-27"
+    }
+  ]
+}

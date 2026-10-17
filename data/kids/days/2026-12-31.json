@@ -1,0 +1,25 @@
+{
+  "date": "2026-12-31",
+  "hebrewDate": "21 Tevet 5787",
+  "parsha": {
+    "name": "Shmot",
+    "meaning": "Names"
+  },
+  "note": "The day Simeon was born (according to tradition, see Genesis 29:33). ”Then she conceived again and bore a son and said, ’Because the LORD has heard that I am unloved, He has therefore given me this son also.’ So she named him Simeon.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 3:16-4:17"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MRK 2:1-12"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-29",
+  "hebrewDate": "19 Kislev 5787",
+  "parsha": {
+    "name": "Vayeshev",
+    "meaning": "He Settled"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 37:1-11"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 20:17-34"
+    }
+  ]
+}

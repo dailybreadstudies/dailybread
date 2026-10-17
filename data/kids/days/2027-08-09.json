@@ -1,0 +1,24 @@
+{
+  "date": "2027-08-09",
+  "hebrewDate": "6 Av 5787",
+  "parsha": {
+    "name": "Va’etchanan",
+    "meaning": "I Pleaded"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 4:5-40"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 2:37-47"
+    }
+  ]
+}

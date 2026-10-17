@@ -1,0 +1,25 @@
+{
+  "date": "2026-12-04",
+  "hebrewDate": "24 Kislev 5787",
+  "parsha": {
+    "name": "Vayeshev",
+    "meaning": "He Settled"
+  },
+  "note": "Haggai the Prophet received a prophecy to encourage the people and Zerubbabel the Governor to rebuild the Holy Temple (see Haggai 2:10–18). ”Do consider from this day onward, from the twenty-fourth day of the ninth month; from the day when the Temple of the LORD was founded, consider...”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 39:7-23"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 22:15-33"
+    }
+  ]
+}

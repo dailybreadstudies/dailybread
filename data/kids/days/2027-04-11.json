@@ -1,0 +1,24 @@
+{
+  "date": "2027-04-11",
+  "hebrewDate": "4 Nisan 5787",
+  "parsha": {
+    "name": "Metzora",
+    "meaning": "Leper"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 14:1-12"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 10:38-11:13"
+    }
+  ]
+}

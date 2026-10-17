@@ -1,0 +1,25 @@
+{
+  "date": "2027-08-18",
+  "hebrewDate": "15 Av 5787",
+  "parsha": {
+    "name": "Ekev",
+    "meaning": "Consequence"
+  },
+  "note": "Tu B'Av (the 15th of Av) is known as the “Festival of Love.” In ancient times, people celebrated that the yearly gathering of wood for the Temple altar was finished. The daughters of Jerusalem would go out to dance in the vineyards. Whoever was not married would go there to find a bride (tradition, see b.Taanit 31a).",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 10:1-11"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 5:33-42"
+    }
+  ]
+}

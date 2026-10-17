@@ -1,0 +1,25 @@
+{
+  "date": "2027-09-27",
+  "hebrewDate": "25 Elul 5787",
+  "parsha": {
+    "name": "Rosh HaShanah",
+    "meaning": "Feast of Trumpets"
+  },
+  "note": "The first day of creation, six days before the traditional date when Adam was created on Rosh HaShanah (Trumpets), see Genesis 1:1–5. “Then God said, ‘Let there be light’; and there was light.” Nehemiah finished rebuilding Jerusalem’s walls (see Nehemiah 6:15).",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 21:5-8"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 19:21-41"
+    }
+  ]
+}

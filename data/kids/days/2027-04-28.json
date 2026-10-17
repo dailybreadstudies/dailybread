@@ -1,0 +1,30 @@
+{
+  "date": "2027-04-28",
+  "hebrewDate": "21 Nisan 5787",
+  "parsha": {
+    "name": "Pesach",
+    "meaning": "Passover"
+  },
+  "note": "Seven days after leaving Egypt, the people of Israel crossed the Sea of Reeds, also called the “Red Sea” (according to tradition, see Exodus 14–15). “The sons of Israel went through the midst of the sea on the dry land, and the waters were like a wall to them on their right hand and on their left.” Day 6 of the Omer",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 13:17-15:26"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "2SA 22"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 10:1-4"
+    }
+  ]
+}

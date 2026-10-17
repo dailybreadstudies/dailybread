@@ -1,0 +1,31 @@
+{
+  "date": "2027-05-01",
+  "hebrewDate": "24 Nisan 5787",
+  "parsha": {
+    "name": "Acharei Mot",
+    "meaning": "After the Death"
+  },
+  "occasion": "Shabbat",
+  "note": "Messiah appeared to the disciples and to Thomas (possible date, see John 20:24–29). “After eight days His disciples were again inside, and Thomas with them. Yeshua came, the doors having been shut, and stood in their midst and said, ‘Peace be with you.’” In the time of the Persian Empire, Daniel saw a vision by the river Tigris (see Daniel 10:4). Day 9 of the Omer",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 17:8-18:30"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "AMO 9:7-15"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 5:12-21"
+    }
+  ]
+}

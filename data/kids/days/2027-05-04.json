@@ -1,0 +1,25 @@
+{
+  "date": "2027-05-04",
+  "hebrewDate": "27 Nisan 5787",
+  "parsha": {
+    "name": "Kedoshim",
+    "meaning": "Holy"
+  },
+  "note": "The day Joshua died (according to tradition, see Joshua 24:29). “It came about after these things that Joshua the son of Nun, the servant of the LORD, died, being one hundred and ten years old.” Yom HaShoah, Israel's Holocaust Memorial Day: In Israel, sirens sound at 10:00 a.m. Most of the country and traffic come to a complete stop, observing 2 minutes of standing silence to remember those who died. Day 12 of the Omer",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 19:23-32"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 17:11-19"
+    }
+  ]
+}

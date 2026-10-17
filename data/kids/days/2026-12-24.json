@@ -1,0 +1,24 @@
+{
+  "date": "2026-12-24",
+  "hebrewDate": "14 Tevet 5787",
+  "parsha": {
+    "name": "Vayechi",
+    "meaning": "He Lived"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 49:19-26"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 27:32-56"
+    }
+  ]
+}

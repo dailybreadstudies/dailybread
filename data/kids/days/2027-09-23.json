@@ -1,0 +1,24 @@
+{
+  "date": "2027-09-23",
+  "hebrewDate": "21 Elul 5787",
+  "parsha": {
+    "name": "Nitzavim–Vayelech",
+    "meaning": "Standing–He Went"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 31:7-13"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "ACT 18:1-11"
+    }
+  ]
+}

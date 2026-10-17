@@ -1,0 +1,25 @@
+{
+  "date": "2027-03-23",
+  "hebrewDate": "14 Adar II 5787",
+  "parsha": {
+    "name": "Tsav",
+    "meaning": "Command"
+  },
+  "note": "The Jewish people in the Persian Empire feasted and rejoiced for being saved from their enemies (see Esther 9:17), “on the fourteenth day they rested and made it a day of feasting and rejoicing.” Moses had his “brit mila,” his circumcision on this day, according to tradition.",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 7:11-38"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 6:27-38"
+    }
+  ]
+}

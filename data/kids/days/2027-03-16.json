@@ -1,0 +1,25 @@
+{
+  "date": "2027-03-16",
+  "hebrewDate": "7 Adar II 5787",
+  "parsha": {
+    "name": "Vayikra",
+    "meaning": "He Called"
+  },
+  "note": "The day Moses was born, and the day he died (according to tradition, see Exodus 2:1–2; Deuteronomy 34:5–6). “So Moses the servant of the LORD died there in the land of Moab, according to the word of the LORD. And He buried him in the valley in the land of Moab, opposite Beth-peor; but no man knows his burial place to this day.”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 2:7-16"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "LUK 4:14-30"
+    }
+  ]
+}

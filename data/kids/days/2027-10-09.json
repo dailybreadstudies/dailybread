@@ -1,0 +1,41 @@
+{
+  "date": "2027-10-09",
+  "hebrewDate": "8 Tishrei 5788",
+  "parsha": {
+    "name": "Ha’azinu",
+    "meaning": "Listen"
+  },
+  "occasion": "Shabbat",
+  "note": "Under King Solomon, Israel began a 14-day dedication ceremony for the First Temple (see 1 Kings 8). If Messiah was born on Rosh HaShanah, this was the day of Yeshua's “brit mila,” his circumcision ceremony (possible date, see Luke 2:21). Shabbat Shuvah (Sabbath of Return) falls during the days of awe and repentance, between Rosh HaShanah and Yom Kippur. The name “Shabbat Shuvah” comes from the Haftarah in Hosea 14, “Return [shuvah], O Israel, to the LORD your God.” Shuvah means “return” or “repent.”",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 32:40-52"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "HOS 14:1-9"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "MIC 7:18-20"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JOL 2:15-27"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 12:1-17"
+    }
+  ]
+}

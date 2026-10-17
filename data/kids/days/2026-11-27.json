@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-27",
+  "hebrewDate": "17 Kislev 5787",
+  "parsha": {
+    "name": "Vayishlach",
+    "meaning": "He Sent"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 35:12-36:19"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 20:1-16"
+    }
+  ]
+}

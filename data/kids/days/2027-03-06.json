@@ -1,0 +1,36 @@
+{
+  "date": "2027-03-06",
+  "hebrewDate": "27 Adar I 5787",
+  "parsha": {
+    "name": "Vayak’hel",
+    "meaning": "He Assembled"
+  },
+  "occasion": "Shabbat",
+  "note": "Shabbat Shkalim (Sabbath of Shekels) falls on (or just before) the 1st of Adar (or Adar II). It adds a special reading from Exodus 30:11–16. This helped remind the men of Israel to give half a shekel to support the Temple in time for Passover. In Temple times, the money was collected at this time of year.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 38:1-20"
+    },
+    {
+      "label": "Maftir",
+      "he": "מַפְטִיר",
+      "ref": "EXO 30:11-16"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "2KI 12:1-16"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "HEB 9:1-14"
+    }
+  ]
+}

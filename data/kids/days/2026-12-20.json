@@ -1,0 +1,25 @@
+{
+  "date": "2026-12-20",
+  "hebrewDate": "10 Tevet 5787",
+  "parsha": {
+    "name": "Vayechi",
+    "meaning": "He Lived"
+  },
+  "note": "King Nebuchadnezzar of Babylon came with his whole army and began the siege against Jerusalem (see 2 Kings 25:1). Far away in Babylon, God told the Prophet Ezekiel that the siege to destroy Jerusalem had begun that day, and to write it down (see Ezekiel 24). Fast of Tevet (Asara BeTevet) is a shorter fast on the Jewish calendar and lasts from sunrise to sunset. It is one of four similar fast days mentioned in the Prophets (see Zechariah 8:19). The fast is in memory of the siege and terrible destruction of Jerusalem and God's Temple.",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 47:28-48:9"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 26:36-56"
+    }
+  ]
+}

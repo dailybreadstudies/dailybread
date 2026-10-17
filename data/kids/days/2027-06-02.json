@@ -1,0 +1,25 @@
+{
+  "date": "2027-06-02",
+  "hebrewDate": "26 Iyar 5787",
+  "parsha": {
+    "name": "Bamidbar",
+    "meaning": "In the Wilderness"
+  },
+  "note": "The Apostles waited in Jerusalem, praying during the last 10 days of the Omer count (see Acts 1:4). “Do not leave Jerusalem, but wait for the gift my Father promised…Then they returned to Jerusalem from the hill called the Mount of Olives…They all joined together constantly in prayer” (NIV). Day 41 of the Omer",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 3:1-13"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 1:19-34"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "date": "2027-04-03",
+  "hebrewDate": "25 Adar II 5787",
+  "parsha": {
+    "name": "Shmini",
+    "meaning": "Eighth"
+  },
+  "occasion": "Shabbat",
+  "note": "King Jehoiachin was brought out of Babylonian prison (see Jeremiah 52:31–34). It seems he was not completely freed until two days later (see 2 Kings 25:27–30). Shabbat HaChodesh (Sabbath of the New Month) is the last Sabbath before the month of Nisan. Passover is celebrated in Nisan and a special reading about the new month and Passover is added (see Exodus 12).",
+  "prompts": [
+    "How does the Haftarah connect to this holiday?",
+    "How do the Apostles connect to this holiday?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 11:33-47"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "EZK 45:16-46:18"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "ACT 5:1-11"
+    }
+  ]
+}

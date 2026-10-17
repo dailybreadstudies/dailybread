@@ -1,0 +1,24 @@
+{
+  "date": "2027-06-03",
+  "hebrewDate": "27 Iyar 5787",
+  "parsha": {
+    "name": "Bamidbar",
+    "meaning": "In the Wilderness"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 3:14-39"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 1:35-51"
+    }
+  ]
+}

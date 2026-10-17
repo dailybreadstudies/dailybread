@@ -1,0 +1,24 @@
+{
+  "date": "2027-02-22",
+  "hebrewDate": "15 Adar I 5787",
+  "parsha": {
+    "name": "Ki Tisa",
+    "meaning": "When You Count"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 31:18-33:11"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MRK 14:66-72"
+    }
+  ]
+}

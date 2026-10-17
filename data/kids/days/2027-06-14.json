@@ -1,0 +1,24 @@
+{
+  "date": "2027-06-14",
+  "hebrewDate": "9 Sivan 5787",
+  "parsha": {
+    "name": "Nasso",
+    "meaning": "Take Up"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 4:38-49"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 5:1-18"
+    }
+  ]
+}

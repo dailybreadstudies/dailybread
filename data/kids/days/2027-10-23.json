@@ -1,0 +1,31 @@
+{
+  "date": "2027-10-23",
+  "hebrewDate": "22 Tishrei 5788",
+  "parsha": {
+    "name": "Sukkot",
+    "meaning": "Tabernacles"
+  },
+  "occasion": "Shabbat",
+  "note": "Messiah disqualified all witnesses against a woman caught in sin. He told her, “go and sin no more” (possible date, see John 7:53–8:11). “Early in the morning He came again into the Temple, and all the people were coming to Him …”",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "DEU 16:9-17"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1KI 8:54-9:1"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 7:53-8:12"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "date": "2027-03-13",
+  "hebrewDate": "4 Adar II 5787",
+  "parsha": {
+    "name": "Pekudei",
+    "meaning": "Countings"
+  },
+  "occasion": "Shabbat",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "EXO 40:28-38"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1KI 7:51-8:21"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "MAT 21:12-16"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "date": "2027-07-16",
+  "hebrewDate": "11 Tamuz 5787",
+  "parsha": {
+    "name": "Chukat–Balak",
+    "meaning": "Statute–Balak"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 22:39-23:26"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "JHN 15:1-17"
+    }
+  ]
+}

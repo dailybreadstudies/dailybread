@@ -1,0 +1,31 @@
+{
+  "date": "2026-12-05",
+  "hebrewDate": "25 Kislev 5787",
+  "parsha": {
+    "name": "Vayeshev",
+    "meaning": "He Settled"
+  },
+  "occasion": "Shabbat",
+  "note": "Exactly three years after the Syrian Greeks had defiled the Holy Temple, the Maccabees recaptured it and dedicated it to the LORD again with a great celebration (see the historical book 1 Maccabees 4) Messiah visited the Holy Temple during Hanukkah (see John 10:22). “Then came Hanukkah; it was winter in Jerusalem. Yeshua was walking in the Temple around Solomon’s Colonnade...” (TLV). Suggested Historical Reading: 1 Maccabees 1–2",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 40"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ZEC 2:10-4:7"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JHN 10:22-38"
+    }
+  ]
+}

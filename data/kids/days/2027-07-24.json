@@ -1,0 +1,31 @@
+{
+  "date": "2027-07-24",
+  "hebrewDate": "19 Tamuz 5787",
+  "parsha": {
+    "name": "Pinchas",
+    "meaning": "Phinehas"
+  },
+  "occasion": "Shabbat",
+  "note": "After the Fast of Tamuz, and for the next 10 Shabbats, the Haftarah from the Prophets is no longer connected to the weekly Torah portion. Instead, they are about the calendar season and its history. First come 3 rebukes during the “Three Weeks” of sadness. After 9th of Av, come 7 weeks of comforting messages from the Prophets.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "NUM 29:12-40"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "JER 1:1-2:3"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1CO 6:9-20"
+    }
+  ]
+}

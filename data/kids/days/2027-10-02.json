@@ -1,0 +1,31 @@
+{
+  "date": "2027-10-02",
+  "hebrewDate": "1 Tishrei 5788",
+  "parsha": {
+    "name": "Rosh HaShanah",
+    "meaning": "Feast of Trumpets"
+  },
+  "occasion": "Shabbat",
+  "note": "God created Adam and Eve on Rosh Hashanah (according to tradition, see Genesis 1:26). The waters of the Great Flood drained and the dove did not return. Noah removed the cover of the ark, but he stayed inside (possible date, see Genesis 8). Abraham bound his son Isaac to offer him on Mount Moriah on this day (according to tradition, see Genesis 22). The daily sacrifice resumed on God's altar, but the Second Temple itself was not yet rebuilt (see Ezra 3:6). Ezra the Scribe read the Torah to the exiles who had returned to Jerusalem (see Nehemiah 8:1). It may be the day Messiah was born in Bethlehem of Judah (possible date, see Luke 2). The \"Days of Awe\" begin, the ten days from Rosh HaShanah to Yom Kippur.",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 21:1-34"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "1SA 1:1-2:10"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "1TH 4:13-18"
+    }
+  ]
+}

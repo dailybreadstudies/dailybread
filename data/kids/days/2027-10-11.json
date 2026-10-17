@@ -1,0 +1,35 @@
+{
+  "date": "2027-10-11",
+  "hebrewDate": "10 Tishrei 5788",
+  "parsha": {
+    "name": "Yom Kippur",
+    "meaning": "Day of Atonement"
+  },
+  "note": "Moses returned with new stone tablets on this day (according to tradition, see Exodus 34:28–29). Yeshua discussed the driving out of demons, blasphemy, and the sign of Jonah (possible date, see Matthew 12:22). About year 60 CE, the Apostle Shaul Paul was a prisoner on a boat to Rome (see Acts 27:9). “Considerable time had passed and the voyage was now dangerous, since even the fast [of Yom Kippur] was already over.”",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "LEV 16"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "ISA 57:14-58:14"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "JAS 4:1-12"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "2PE 3:9-14"
+    }
+  ]
+}
