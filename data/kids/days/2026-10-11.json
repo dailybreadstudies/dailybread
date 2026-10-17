@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-11",
+  "hebrewDate": "30 Tishrei 5787",
+  "parsha": {
+    "name": "Noach",
+    "meaning": "Noah"
+  },
+  "occasion": "Rosh Chodesh Day 1",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 6:9-22"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 4:1-11"
+    }
+  ]
+}

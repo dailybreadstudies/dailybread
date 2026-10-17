@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-15",
+  "hebrewDate": "4 Cheshvan 5787",
+  "parsha": {
+    "name": "Noach",
+    "meaning": "Noah"
+  },
+  "prompts": [
+    "What verse spoke to you most today?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 9:8-17"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 5:27-37"
+    }
+  ]
+}

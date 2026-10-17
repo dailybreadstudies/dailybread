@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-12",
+  "hebrewDate": "2 Kislev 5787",
+  "parsha": {
+    "name": "Toldot",
+    "meaning": "Generations"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 26:30-27:27"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 13:44-58"
+    }
+  ]
+}

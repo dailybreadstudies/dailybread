@@ -2,6 +2,7 @@
 """Turn the Daily Bread plan (tools/plan-<year>.json) into day files for the site.
 
 Usage:  python3 tools/make_days.py tools/plan-5787.json
+        python3 tools/make_days.py tools/plan-kids-5787.json data/kids/days     (Daily Bread for Kids)
 
 The plan is made from the journal PDF by tools/journal_to_plan.py, and can be corrected by hand. One line per day:
     {"date": "2026-10-11", "hebrewDate": "30 Tishrei 5787", "parasha": ["Noach", "Noah"],
@@ -26,7 +27,7 @@ BSB = os.path.join(ROOT, 'data', 'bsb')
 HE = {
     'Torah': 'תּוֹרָה', 'Rosh Chodesh': 'רֹאשׁ חֹדֶשׁ', 'Maftir': 'מַפְטִיר', 'Prophets': 'נְבִיאִים',
     'Haftarah': 'הַפְטָרָה', 'Writings': 'כְּתוּבִים', 'Apostles': 'שְׁלִיחִים', 'Synagogue': 'בֵּית הַכְּנֶסֶת',
-    'Evening': 'עַרְבִית', 'Morning': 'שַׁחֲרִית', 'Afternoon': 'מִנְחָה',
+    'Gospels': 'בְּשׂוֹרוֹת', 'Evening': 'עַרְבִית', 'Morning': 'שַׁחֲרִית', 'Afternoon': 'מִנְחָה',
 }
 ALIASES = {'psalm': 'PSA', 'ps': 'PSA', 'song of songs': 'SNG', 'jacob/james': 'JAS', 'jacob (james)': 'JAS', 'jacob': 'JAS',
            'judah/jude': 'JUD', 'jude': 'JUD'}
@@ -97,7 +98,10 @@ def to_refs(text, names, chapters):
 
 
 def main():
+    global DAYS
     plan = json.load(open(sys.argv[1], encoding='utf-8'))
+    if len(sys.argv) > 2:
+        DAYS = os.path.join(ROOT, sys.argv[2])
     names, chapters = load_books()
     os.makedirs(DAYS, exist_ok=True)
     for day in plan:
@@ -138,6 +142,9 @@ def main():
             out['occasion'] = day['occasion']
         if old.get('intro'):
             out['intro'] = old['intro']
+        for k in ('note', 'prompts'):                      # Kids journal: its own "Today in History" and journaling prompts
+            if day.get(k):
+                out[k] = day[k]
         out['portions'] = portions
         with open(path, 'w', encoding='utf-8') as fh:
             fh.write(json.dumps(out, ensure_ascii=False, indent=2) + '\n')

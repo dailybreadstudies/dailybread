@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-18",
+  "hebrewDate": "8 Kislev 5787",
+  "parsha": {
+    "name": "Vayetze",
+    "meaning": "He Went Out"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 30:14-27"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 16:1-12"
+    }
+  ]
+}

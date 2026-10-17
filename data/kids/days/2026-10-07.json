@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-07",
+  "hebrewDate": "26 Tishrei 5787",
+  "parsha": {
+    "name": "Beresheet",
+    "meaning": "In the Beginning"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something you need to do in your life?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 3:22-4:18"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 2:13-23"
+    }
+  ]
+}

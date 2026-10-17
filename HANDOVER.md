@@ -17,6 +17,14 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - `maps-test.html` — copy of index for trying map changes (keep its settings panel and blessings in step with index).
 - Shared top bar on all pages: John's SVG wordmark (assets/img/logo-dark.svg, inlined in each page, fill = theme heading colour, 15px tall; on phones the logo is centred with the menu on a second row, top bar 96px) + TODAY · PROGRESS · ABOUT (right end reserved for future sign-in). Passage search ("Go to … Gen 1", `#quick-go`) sits at the right end of the top bar on desktop only (scrolls away with it; hidden on phones). The Bible / calendar / A/א buttons stay pinned.
 
+## Daily Bread for Kids (kids/)
+- Same reader, Kids look: `kids/index.html` + `kids/progress.html` are generated from the Classic pages by
+  `tools/make_kids_pages.py` (run it after editing index.html/progress.html); `kids/about.html` by hand.
+- Menu: Classic shows TODAY · PROGRESS · ABOUT · KIDS; Kids shows TODAY · PROGRESS · ABOUT · CLASSIC (+ GIVE).
+- Plan loaded so far: 4 Oct – 21 Nov 2026 (the parser reads the whole year; widen the dates and rebuild).
+- Style: `docs/KIDS-STYLE.md` (black to read, jungle teal to tap, golden yellow for here/well done, berry for holy days; Baloo 2).
+- Kids defaults: Messianic Filter on (the journal says Yeshua, Messiah, Torah). Reading-plan options hidden.
+
 ## Code
 - `assets/history.js` — when each history entry / calendar note falls (shared with `tools/build_history.mjs`).
 - `assets/reader.js` — everything on Today/Progress (one IIFE). `assets/reader.css` — all styles and colour tokens

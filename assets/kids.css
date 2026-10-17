@@ -1,0 +1,102 @@
+/* Daily Bread for Kids — the Kids edition's look, loaded after reader.css on the pages in kids/.
+   Approved style (Oct 2026, see docs/KIDS-STYLE.md):
+   black = everything you read · jungle teal = everything you tap · golden yellow = "you are here" and "well done"
+   · berry = Shabbat and Yom Tov only. One Kids typeface, Baloo 2, for titles, labels, menu and buttons;
+   the Bible text stays in Source Serif 4. */
+
+html.kids {
+  --kid-teal: #348F89;          /* jungle teal: links, labels, circles, buttons */
+  --kid-teal-deep: #25706b;     /* hover / pressed */
+  --kid-gold: #F9CE7A;          /* golden yellow: current page, completed */
+  --kid-berry: #993F7C;         /* Shabbat and Yom Tov */
+  --kid-font: 'Baloo 2', 'Nunito', 'Helvetica Neue', Arial, sans-serif;
+
+  --accent: var(--kid-teal);
+  --accent-deep: var(--kid-teal-deep);
+  --accent-soft: #5aa9a3;
+  --accent-faint: #86bfba;
+  --accent-line: #cfe6e4;
+  --line-strong: #c4dedb;
+  --tint: #eef7f6;
+  --rule: #e2efee;
+  --done: #1f1f1f;
+  --done-bg: var(--kid-gold);
+  --done-line: var(--kid-gold);
+  --heading: #1f1f1f;
+  --display: var(--kid-font);
+}
+@media (prefers-color-scheme: dark) {
+  html.kids:not([data-theme="light"]):not([data-theme="sepia"]) {
+    --kid-teal: #74c4bd; --kid-teal-deep: #a6ddd8; --kid-berry: #e3a2cd; --accent: var(--kid-teal); --accent-deep: var(--kid-teal-deep); --done-bg: var(--kid-gold); --done-line: var(--kid-gold); --muted: #9fb3b1; --ink-soft: #c9d6d4; --faint-text: #7f9997;
+    --paper: #102221; --surface: #152b2a; --surface-glass: rgba(21, 43, 42, 0.92); --tint: #183433;
+    --rule: #22403f; --accent-line: #2b4f4d; --line-strong: #2f5553; --accent-soft: #5fa8a1; --accent-faint: #4f8a85;
+    --pop: #22403f; --pop-edge: #2f5553; --on-accent: #102221; --track: #2f5553;
+    --done: #1f1f1f; --heading: #efeae4;
+  }
+}
+html.kids[data-theme="dark"] {
+  --kid-teal: #74c4bd; --kid-teal-deep: #a6ddd8; --kid-berry: #e3a2cd; --accent: var(--kid-teal); --accent-deep: var(--kid-teal-deep); --done-bg: var(--kid-gold); --done-line: var(--kid-gold); --muted: #9fb3b1; --ink-soft: #c9d6d4; --faint-text: #7f9997;
+  --paper: #102221; --surface: #152b2a; --surface-glass: rgba(21, 43, 42, 0.92); --tint: #183433;
+  --rule: #22403f; --accent-line: #2b4f4d; --line-strong: #2f5553; --accent-soft: #5fa8a1; --accent-faint: #4f8a85;
+  --pop: #22403f; --pop-edge: #2f5553; --on-accent: #102221; --track: #2f5553;
+  --done: #1f1f1f; --heading: #efeae4;
+}
+
+html.kids[data-theme="sepia"] { --accent: var(--kid-teal); --accent-deep: var(--kid-teal-deep); --done-bg: var(--kid-gold); --done-line: var(--kid-gold); --heading: #2e2419; }
+.page-date .nw { white-space: nowrap; }
+
+/* Top bar: black logo with "for KIDS" in teal; menu in Baloo 2 */
+.kids .tb-logo-img.kids-logo { height: 30px; width: auto; }
+.kids .kids-logo .kl-kids { fill: var(--kid-teal); }
+.kids .tb-nav a, .kids .tb-give, .kids .tb-give-m { font-family: var(--kid-font); font-weight: 700; font-size: 14px; letter-spacing: 0.09em; }
+.kids .tb-nav a[aria-current="page"] { border-bottom-color: var(--kid-gold); }
+.kids .tb-nav a.tb-classic { color: var(--muted); }
+
+/* Page header: date and weekday */
+.kids .page-date { font-family: var(--kid-font); font-weight: 700; font-size: 2.1rem; letter-spacing: -0.01em; line-height: 1.15; }
+.kids .page-date.is-holy { color: var(--kid-berry); }
+.kids .page-parsha.page-weekday { font: 700 1.05rem/1.5 var(--kid-font); letter-spacing: 0.09em; color: var(--muted); margin-bottom: 0.25rem; }
+.kids .page-weekday .day-event { color: var(--kid-teal); }
+.kids .page-weekday.is-holy, .kids .page-weekday.is-holy .day-event { color: var(--kid-berry); }
+
+/* Readings list: teal labels, yellow circle with a black check when done */
+.kids .dp-label { font: 700 0.9rem/1.2 var(--kid-font); letter-spacing: 0.09em; color: var(--kid-teal); }
+.kids .dp-check { border: 2px solid var(--kid-teal); position: relative; }
+.kids .dp-item.is-read .dp-check { background: var(--kid-gold); border-color: var(--kid-gold); color: #1f1f1f; }
+.kids .dp-item.is-current .dp-check { border-color: var(--kid-teal); }
+
+/* Section titles and chapter titles */
+.kids .division-label { font: 700 1rem/1.4 var(--kid-font); letter-spacing: 0.16em; color: var(--kid-teal); }
+.kids .chapter-head { font-family: var(--kid-font); font-weight: 700; font-size: 2.1rem; letter-spacing: -0.01em; line-height: 1.15; }
+.kids .apparatus-title, .kids .lead { font-family: var(--kid-font); font-weight: 700; letter-spacing: 0.09em; }
+.kids .pg-h { font-family: var(--kid-font); font-weight: 700; }
+.kids .pg-stats b, .kids .bb-c-pct { font-family: var(--kid-font); font-weight: 700; }
+
+/* Buttons */
+.kids .nav-btn, .kids .done-btn { font-family: var(--kid-font); font-weight: 600; font-size: 1rem; letter-spacing: 0; }
+.kids .done-btn { position: relative; }
+.kids .done-btn[aria-pressed="true"] { background: var(--kid-gold); border-color: var(--kid-gold); color: #1f1f1f; }
+
+/* Kids journal prompts in the Today box */
+.kids .kid-prompts { margin: 0.9rem 0 0; padding: 0; list-style: none; }
+.kids .kid-prompts li { position: relative; padding-left: 1.3em; margin-bottom: 0.35rem; color: var(--ink-soft); font-style: italic; }
+.kids .kid-prompts li::before { content: ""; position: absolute; left: 0.2em; top: 0.72em; width: 0.42em; height: 0.42em; border-radius: 50%; background: var(--kid-gold); }
+
+/* "Well done": a burst of yellow rays when a reading is marked complete */
+.kid-ray { position: absolute; left: 50%; top: 50%; width: 3px; height: 9px; margin: -4.5px 0 0 -1.5px; border-radius: 2px;
+  background: var(--kid-gold); pointer-events: none; animation: kid-ray 0.6s ease-out forwards; z-index: 2; }
+@keyframes kid-ray {
+  0% { transform: rotate(var(--a)) translateY(calc(var(--r0, 10px) * -1)) scaleY(0.3); opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: rotate(var(--a)) translateY(calc(var(--r1, 24px) * -1)) scaleY(1); opacity: 0; }
+}
+.kid-pop { animation: kid-pop 0.35s ease-out; }
+@keyframes kid-pop { 0% { transform: scale(1); } 45% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .kid-ray { display: none; } .kid-pop { animation: none; } }
+
+@media (max-width: 640px) {
+  .kids .tb-logo-img.kids-logo { height: 28px; }
+  .kids .tb-nav a, .kids .tb-give-m { font-size: 12.5px; letter-spacing: 0.07em; }
+  .kids .page-date { font-size: 1.8rem; }
+  .kids .chapter-head { font-size: 1.8rem; }
+}

@@ -13,8 +13,9 @@
 (function () {
   'use strict';
 
-  var ENGINE_JS = 'assets/vendor/maplibre-gl/maplibre-gl.js';
-  var ENGINE_CSS = 'assets/vendor/maplibre-gl/maplibre-gl.css';
+  var ROOT = document.body && document.body.getAttribute('data-edition') === 'kids' ? '../' : '';   // Kids pages live in kids/
+  var ENGINE_JS = ROOT + 'assets/vendor/maplibre-gl/maplibre-gl.js';
+  var ENGINE_CSS = ROOT + 'assets/vendor/maplibre-gl/maplibre-gl.css';
   var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Background maps. Change a provider here and nowhere else. */

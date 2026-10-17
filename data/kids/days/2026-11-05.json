@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-05",
+  "hebrewDate": "25 Cheshvan 5787",
+  "parsha": {
+    "name": "Chayei Sarah",
+    "meaning": "Sara’s Life"
+  },
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 24:53-67"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 12:15-21"
+    }
+  ]
+}

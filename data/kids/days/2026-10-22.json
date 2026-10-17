@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-22",
+  "hebrewDate": "11 Cheshvan 5787",
+  "parsha": {
+    "name": "Lech Lecha",
+    "meaning": "Go Forth"
+  },
+  "note": "The day Methuselah died (according to tradition, see Genesis 5:27). ”So all the days of Methuselah were nine hundred and sixty-nine years, and he died.” It's also the day the matriarch Rachel died (according to tradition, see Genesis 35:18–20). ”It came about as her soul was departing (for she died), that she named him Ben-oni; but his father called him Benjamin. So Rachel died and was buried on the way to Ephrath (that is, Bethlehem).”",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 14:21-15:6"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 8:1-13"
+    }
+  ]
+}

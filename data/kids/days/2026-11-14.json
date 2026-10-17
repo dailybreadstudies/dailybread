@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-14",
+  "hebrewDate": "4 Kislev 5787",
+  "parsha": {
+    "name": "Toldot",
+    "meaning": "Generations"
+  },
+  "occasion": "Shabbat",
+  "note": "The Prophet Zechariah received a prophecy about fasting the right way (see Zechariah 7:1–14). “In the fourth year of King Darius, the word of the LORD came to Zechariah on the fourth day of the ninth month, the month of Kislev” (NIV).",
+  "prompts": [
+    "How does the Haftarah connect to this week's Torah Portion?",
+    "How do the Apostles connect to this week's Torah Portion?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 28:5-9"
+    },
+    {
+      "label": "Haftarah",
+      "he": "הַפְטָרָה",
+      "ref": "MAL 1:1-2:7"
+    },
+    {
+      "label": "Apostles",
+      "he": "שְׁלִיחִים",
+      "ref": "COL 2:16-3:4"
+    }
+  ]
+}

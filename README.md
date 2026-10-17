@@ -53,6 +53,22 @@ node tools/build_history.mjs 2027-03-01 2027-04-30 --csv dates.csv   # another r
 Dates are worked out in the browser (`assets/history.js`, using the browser's own Hebrew calendar), so the same
 file keeps working in later years.
 
+## Daily Bread for Kids
+
+The Kids edition lives in `kids/` (Today, Progress, About) with its own plan in `data/kids/days/`, its own look
+(`assets/kids.css`, style in `docs/KIDS-STYLE.md`) and its own settings and progress in the browser (`dbs-kids-…` keys).
+It runs on the same `reader.js` (`<body data-edition="kids">`). First-time visitors to `kids/` see the Kids About page.
+
+```
+python3 tools/kids_journal_to_plan.py DB_Kids_5787.pdf tools/plan-kids-5787.json 2026-10-04 2026-11-21   # dates optional
+python3 tools/make_days.py tools/plan-kids-5787.json data/kids/days
+python3 tools/make_kids_pages.py        # after any change to index.html or progress.html
+```
+
+The Kids plan takes its Hebrew dates, occasions and Torah portion names from `tools/plan-5787.json`; each day file also
+keeps the journal's "Today in History" text (`note`, shown as "Did you know?") and its journaling questions (`prompts`,
+shown as "Think about it"). `kids/about.html` is written by hand; its pictures are cut from the journal PDF.
+
 ## Original languages
 
 `data/orig/<BOOK>.json` holds the Hebrew (Miqra according to the Masorah, CC BY-SA 4.0) and Greek

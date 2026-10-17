@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-03",
+  "hebrewDate": "23 Cheshvan 5787",
+  "parsha": {
+    "name": "Chayei Sarah",
+    "meaning": "Sara’s Life"
+  },
+  "note": "The Maccabees removed the stones of the defiled altar from the Holy Temple (according to tradition, see the historical book 1 Maccabees 4:43). The memorial of Rabbi Daniel Zion (of blessed memory), a Messianic Jewish pioneer who died in 1979 CE (5740). Rabbi Zion was one of the chief rabbis of Bulgaria during World War II and a believer in Yeshua. He helped save 800 Jews from the Nazis, but ended up a prisoner himself. He survived and, in 1949, he moved to Israel.",
+  "prompts": [
+    "What verse spoke to you most today and why?",
+    "Did you learn something about God?"
+  ],
+  "portions": [
+    {
+      "label": "Torah",
+      "he": "תּוֹרָה",
+      "ref": "GEN 24:10-26"
+    },
+    {
+      "label": "Gospels",
+      "he": "בְּשׂוֹרוֹת",
+      "ref": "MAT 11:16-30"
+    }
+  ]
+}

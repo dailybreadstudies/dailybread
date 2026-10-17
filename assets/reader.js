@@ -28,17 +28,22 @@
     window.addEventListener('resize', place);
     place();
   })();
-  try { localStorage.setItem('dbs-visited', '1'); } catch (e) { /* ignore */ }
+  // Which edition: Classic (the site root) or Daily Bread for Kids (the pages in kids/, data in data/kids/)
+  var KIDS = document.body.getAttribute('data-edition') === 'kids';
+  var KEY = KIDS ? 'dbs-kids-' : 'dbs-';                   // each edition keeps its own settings and progress
+  var DAYS_DIR = KIDS ? 'data/kids/days/' : 'data/days/';
+  var ROOT_URL = KIDS ? '../' : '';                         // the shared pages (Give, Classic) from here
+  try { localStorage.setItem(KEY + 'visited', '1'); } catch (e) { /* ignore */ }
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: false, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc' };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: KIDS, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc' };
   try {
-    var saved = JSON.parse(localStorage.getItem('dbs-settings') || '{}');
+    var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
   } catch (e) { /* storage unavailable: use defaults */ }
   function saveSettings() {
-    try { localStorage.setItem('dbs-settings', JSON.stringify(settings)); } catch (e) { /* ignore */ }
+    try { localStorage.setItem(KEY + 'settings', JSON.stringify(settings)); } catch (e) { /* ignore */ }
   }
   function applyLook() {
     document.documentElement.style.fontSize = SIZES[settings.size] + '%';
@@ -672,8 +677,9 @@
     // Title: "14 Oct. / 3 Cheshvan", then the weekday, then the Torah portion
     var dObj = new Date(day.date + 'T12:00:00');
     var MON = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'Jun.', 'Jul.', 'Aug.', 'Sep.', 'Oct.', 'Nov.', 'Dec.'];
-    var titleDate = dObj.getDate() + ' ' + MON[dObj.getMonth()] +
-      (day.hebrewDate ? ' / ' + day.hebrewDate.replace(/\s+\d{4}$/, '') : '');
+    if (KIDS) MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var titleDate = '<span class="nw">' + dObj.getDate() + ' ' + MON[dObj.getMonth()] + '</span>' +
+      (day.hebrewDate ? ' / <span class="nw">' + day.hebrewDate.replace(/\s+\d{4}$/, '') + '</span>' : '');
     var isSat = dObj.getDay() === 6;
     var header = '<h2 class="page-date' + (isSat ? ' is-holy' : '') + '" id="page-date">' +
       '<button type="button" class="day-step" data-day="' + (prevDay || '') + '"' + (prevDay ? '' : ' disabled') + ' aria-label="Previous day">&lsaquo;</button>' +
@@ -698,7 +704,7 @@
           '<span class="dp-label">' + p.label + '</span><span class="dp-ref">' + displayRef(r) + '</span></a></li>';
       }).join('') + '</ol>';
     document.getElementById('day-header').innerHTML = header;
-    document.title = 'Daily Bread Online · ' + dateText;
+    document.title = (KIDS ? 'Daily Bread for Kids · ' : 'Daily Bread Online · ') + dateText;
 
     // Portions
     var total = day.portions.length;
@@ -751,7 +757,7 @@
   // Numbers are the day's readings in order (1 = Torah …). "since" is set by "pick up from today", so older
   // unread readings stop counting as catch-up. Older saves ({ done: { date: 1 } }) meant the whole day.
   var PLAN_START = '2026-10-04', PLAN_END = '2027-10-24', PLAN_YEAR = 5787;   // the 5787 Daily Bread year
-  var JOURNAL_URL = 'https://arielmedia.shop/collections/dailybread';
+  var JOURNAL_URL = KIDS ? 'https://arielmedia.shop/products/dailybread2027boys' : 'https://arielmedia.shop/collections/dailybread';
   var plan = {};                                            // date -> [[label, ref], …] as shown (see trackPlan)
   var fullPlan = {};                                        // date -> [[label, ref, optional?], …] from data/days/index.json
 
@@ -786,13 +792,13 @@
   function counts(iso, x) { return !x[2] || (settings.apostlesSince && iso >= settings.apostlesSince); }
   var progress = { read: {}, since: null, done: null, chapters: {}, archive: {} };
   try {
-    var savedProg = JSON.parse(localStorage.getItem('dbs-progress') || 'null');
+    var savedProg = JSON.parse(localStorage.getItem(KEY + 'progress') || 'null');
     if (savedProg) progress = { read: savedProg.read || {}, since: savedProg.since || null, done: savedProg.done || null,
       chapters: savedProg.chapters || {}, archive: savedProg.archive || {} };
   } catch (e) { /* storage unavailable: progress lasts for this visit only */ }
   function saveProgress() {
     try {
-      localStorage.setItem('dbs-progress', JSON.stringify({ read: progress.read, since: progress.since,
+      localStorage.setItem(KEY + 'progress', JSON.stringify({ read: progress.read, since: progress.since,
         chapters: progress.chapters, archive: progress.archive }));
     } catch (e) { /* ignore */ }
   }
@@ -902,7 +908,7 @@
       '</nav>' +
       '<p class="done-next"></p>' +
       (n === total ? '<p class="journal-line">Studies find we understand more when we read on paper, and remember more when we write by hand. ' +
-        'The printed <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread journal</a> follows this plan day by day.</p>' : '') +
+        'The printed <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread' + (KIDS ? ' for Kids' : '') + ' journal</a> follows this plan day by day.</p>' : '') +
       '</div>';
   }
 
@@ -976,7 +982,7 @@
     if (!from) {
       var other = Object.keys(progress.chapters).length || Object.keys(progress.archive).length;
       box.innerHTML = html + '<div class="pg-empty"><p>Your progress will appear here.</p>' +
-        '<p>At the end of each reading, tap <em>Mark Torah Complete</em>, <em>Mark Prophets Complete</em> and so on. ' +
+        '<p>At the end of each reading, tap <em>Mark Torah Complete</em>, <em>Mark ' + (KIDS ? 'Gospels' : 'Prophets') + ' Complete</em> and so on. ' +
         'This page then shows what you have read, section by section, and anything left to catch up.</p>' +
         '<p><a class="pg-btn" href="./">Go to today’s reading</a></p></div>' + (other ? bibleProgressHtml() : '') + privacyNote();
       return;
@@ -1199,9 +1205,28 @@
 
   function privacyNote() {
     return (totalRead() >= 20 ? '<p class="pg-give">If Daily Bread is helping you, you can help keep it free for others. ' +
-      '<a href="give.html">Give</a></p>' : '') +
+      '<a href="' + ROOT_URL + 'give.html">Give</a></p>' : '') +
       '<p class="pg-note pg-privacy">Your progress is kept in this browser, on this device only. Nothing is sent to us, ' +
       'and clearing your browser data erases it.</p>';
+  }
+
+  // Daily Bread for Kids: a short burst of yellow rays around what was just marked complete
+  function kidBurst(el) {
+    if (!el || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    var host = el.closest('.dp-check, .done-btn') || el;
+    var box = host.getBoundingClientRect(), at = el.getBoundingClientRect();
+    var wrap = document.createElement('span');
+    wrap.style.cssText = 'position:absolute;pointer-events:none;width:0;height:0;left:' + (at.left - box.left + at.width / 2) + 'px;top:' + (at.top - box.top + at.height / 2) + 'px';
+    for (var i = 0; i < 8; i++) {
+      var r = document.createElement('span');
+      r.className = 'kid-ray';
+      r.style.setProperty('--a', (i * 45) + 'deg');
+      if (host.classList.contains('done-btn')) { r.style.setProperty('--r0', '9px'); r.style.setProperty('--r1', '20px'); }
+      wrap.appendChild(r);
+    }
+    host.appendChild(wrap);
+    el.classList.remove('kid-pop'); void el.offsetWidth; el.classList.add('kid-pop');
+    setTimeout(function () { wrap.remove(); }, 700);
   }
 
   function openReading(date, n) {
@@ -1216,6 +1241,7 @@
       var nowDone = !isRead(d, n);
       setRead(d, n, nowDone);
       drawProgress();
+      if (KIDS && nowDone) kidBurst(mark.classList.contains('done-btn') ? mark.querySelector('svg') || mark : mark);
       if (calMonth && !calPanel.hidden) drawCalendar();
       // The Complete button at the end of a reading: show the blue for a moment, then go on like Next
       if (nowDone && mark.classList.contains('done-btn')) {
@@ -1687,7 +1713,7 @@
     Promise.all([hebcalDay(day.date), historyFor(day)]).then(function (res) {
       var events = res[0], mine = res[1];
       if (!document.body.contains(box)) return;
-      fillHistory(day, mine.history);
+      fillHistory(day, mine.history, mine.prompts);
       // John's own note for a day Hebcal names replaces Hebcal's description
       var notes = mine.notes.map(function (n) { return { text: n.text, hebcal: DBHistory.hebcalTitle(n).toLowerCase(), used: false }; });
       function noteFor(title) {
@@ -1762,6 +1788,7 @@
   // ── "This day" notes and "Today in History" (data/history.json, built from data/history.csv) ──
   var historyData = null;
   function historyFor(day) {
+    if (KIDS) return Promise.resolve({ notes: [], history: day.note ? [{ text: day.note }] : [], prompts: day.prompts || [] });
     if (!window.DBHistory) return Promise.resolve({ notes: [], history: [] });
     if (!historyData) historyData = getJSON('data/history.json').catch(function () { historyData = null; return { entries: [] }; });
     return historyData.then(function (data) {
@@ -1784,14 +1811,18 @@
     }
     return PLAIN_START.test(text) ? text.charAt(0).toLowerCase() + text.slice(1) : text;
   }
-  function fillHistory(day, list) {
+  function fillHistory(day, list, prompts) {
     var box = document.getElementById('history-box');
     if (!box) return;
-    if (!list.length) { box.hidden = true; box.innerHTML = ''; return; }
-    var label = 'Today in History';
+    prompts = prompts || [];
+    if (!list.length && !prompts.length) { box.hidden = true; box.innerHTML = ''; return; }
+    var label = KIDS ? 'Did you know?' : 'Today in History';
     box.innerHTML = list.map(function (e, i) {
-      return '<p class="hist-text">' + (i === 0 ? '<span class="lead">' + label + '</span> ' + richText(afterLead(e.text, true)) : richText(e.text)) + '</p>';
-    }).join('');
+      return '<p class="hist-text">' + (i === 0 ? '<span class="lead">' + label + '</span> ' + richText(KIDS ? e.text : afterLead(e.text, true)) : richText(e.text)) + '</p>';
+    }).join('') +
+      // Daily Bread for Kids: the journal's questions, to think about (or write about in the journal)
+      (prompts.length ? '<p class="hist-text kid-think"><span class="lead">Think about it</span></p><ul class="kid-prompts">' +
+        prompts.map(function (q) { return '<li>' + escapeAttr(q) + '</li>'; }).join('') + '</ul>' : '');
     applyDivineName(box);
     box.hidden = false;
   }
@@ -2170,7 +2201,7 @@
     var ref = labelRef(data.id, c);
     document.getElementById('day-header').innerHTML =
       '<p class="bible-back"><button type="button" class="back-today">&larr; Back to today’s Daily Bread</button></p>';
-    document.title = ref + ' · Daily Bread Online';
+    document.title = ref + (KIDS ? ' · Daily Bread for Kids' : ' · Daily Bread Online');
     var html = '<section class="portion active bible-view" data-book="' + data.id + '" data-c="' + c + '" aria-label="' + escapeAttr(ref) + '">' +
       '<p class="division-label">' + g[0] + ' <span class="he">' + noNikud(g[1]) + '</span></p>' +
       '<h2 class="chapter-head chapter-nav">' +
@@ -2353,7 +2384,7 @@
 
   function loadDay(date, replace) {
     if (PAGE !== 'today') { location.href = './?d=' + date; return new Promise(function () {}); }
-    return getJSON('data/days/' + date + '.json').then(function (day) {
+    return getJSON(DAYS_DIR + date + '.json').then(function (day) {
       day = trackDay(day);
       var ids = day.portions.map(function (p) { return parseRef(p.ref).book; })
         .filter(function (v, i, a) { return a.indexOf(v) === i; });
@@ -2381,7 +2412,7 @@
   });
 
   // ── Start ────────────────────────────────────────────────────
-  Promise.all([getJSON('data/days/index.json'), getJSON('data/bsb/index.json'),
+  Promise.all([getJSON(DAYS_DIR + 'index.json'), getJSON('data/bsb/index.json'),
                getJSON('data/hebrew-names.json').catch(function () { return {}; })])
     .then(function (res) {
       planDays = res[0].days.slice().sort();
