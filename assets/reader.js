@@ -1170,7 +1170,7 @@
               '<span class="bb-lane"><span class="bb-bbar" style="width:' + len.toFixed(2) + '%"><span style="width:' + done.toFixed(2) + '%"></span></span></span>' +
               '<span class="bb-bpct' + (b.wordsRead ? '' : ' is-zero') + '">' + pctText(b.wordsRead, b.words) + '</span></div>';
           }).join('') + '</div>';
-      }).join('') + '</div></details>';
+      }).join('') + (KIDS ? kidsExtraHtml() : '') + '</div></details>';
     // Earlier Daily Bread years, kept when a new year begins
     var past = Object.keys(progress.archive).sort().reverse();
     if (past.length) {
@@ -1184,6 +1184,38 @@
       }).join('') + '</ul>';
     }
     return html;
+  }
+  // Daily Bread for Kids: the passages read on Shabbat and holidays from books outside the 10 (Haftarah, Apostles).
+  // One row per book the plan visits; the bar is as long as the verses planned in that book and fills as they are read.
+  function kidsExtraHtml() {
+    var ten = {};
+    KIDS_GROUPS.forEach(function (g) { g[2].forEach(function (id) { ten[id] = 1; }); });
+    var planned = [];
+    Object.keys(fullPlan).forEach(function (d) { (fullPlan[d] || []).forEach(function (x) { planned.push(x[1]); }); });
+    var want = readVerses(planned, sizeLast), got = readVerses(yearRefs(), sizeLast), rows = [], max = 0;
+    GROUPS.forEach(function (g) {
+      g[2].forEach(function (id) {
+        if (ten[id] || !want[id]) return;
+        var n = 0, r = 0;
+        Object.keys(want[id]).forEach(function (c) {
+          Object.keys(want[id][c]).forEach(function (v) { n++; if (got[id] && got[id][c] && got[id][c][v]) r++; });
+        });
+        max = Math.max(max, n);
+        rows.push({ id: id, n: n, r: r });
+      });
+    });
+    if (!rows.length) return '';
+    var all = rows.reduce(function (a, b) { return a + b.n; }, 0), allRead = rows.reduce(function (a, b) { return a + b.r; }, 0);
+    return '<div class="bb-group bb-s1 bb-extra"><p class="bb-ghead"><span class="bb-name">Shabbat &amp; holiday readings</span>' +
+      '<span class="bb-pct">' + pctText(allRead, all) + '</span></p>' +
+      '<p class="bb-extra-note">Passages from other books, read on Shabbat and holidays. Each bar shows the verses this year’s plan reads in that book.</p>' +
+      rows.map(function (b) {
+        return '<div class="bb-book" title="' + escapeAttr(bookLabel(b.id) + ': ' + b.n + (b.n === 1 ? ' verse' : ' verses') + ' in this year’s plan') + '">' +
+          '<span class="bb-bname">' + escapeAttr(bookLabel(b.id)) + '</span>' +
+          '<span class="bb-lane"><span class="bb-bbar" style="width:' + Math.max(3, 100 * b.n / max).toFixed(2) + '%"><span style="width:' +
+          (100 * b.r / b.n).toFixed(2) + '%"></span></span></span>' +
+          '<span class="bb-bpct' + (b.r ? '' : ' is-zero') + '">' + b.r + '/' + b.n + '</span></div>';
+      }).join('') + '</div>';
   }
   var bbOpen = false;
   document.addEventListener('toggle', function (e) {

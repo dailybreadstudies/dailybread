@@ -49,9 +49,9 @@ html.kids[data-theme="sepia"] { --accent: var(--kid-teal); --accent-deep: var(--
 .kids .tb-logo-img.kids-logo { height: 44px; width: auto; }
 
 /* Progress: the 10 books, Torah in teal, Gospels & Acts in golden yellow */
-html.kids { --bb0: #348F89; --bb3: #e0a93b; }
-html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb3: #F9CE7A; }
-@media (prefers-color-scheme: dark) { html.kids:not([data-theme="light"]):not([data-theme="sepia"]) { --bb0: #74c4bd; --bb3: #F9CE7A; } }
+html.kids { --bb0: #348F89; --bb1: #993F7C; --bb3: #e0a93b; }
+html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb1: #e3a2cd; --bb3: #F9CE7A; }
+@media (prefers-color-scheme: dark) { html.kids:not([data-theme="light"]):not([data-theme="sepia"]) { --bb0: #74c4bd; --bb1: #e3a2cd; --bb3: #F9CE7A; } }
 .kids .kids-logo .kl-kids { fill: var(--kid-teal); }
 .kids .tb-nav a, .kids .tb-give, .kids .tb-give-m { font-family: var(--kid-font); font-weight: 700; font-size: 14px; letter-spacing: 0.09em; }
 .kids .tb-nav a[aria-current="page"] { border-bottom-color: var(--kid-gold); }
@@ -105,3 +105,7 @@ html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb3: #F9CE7A; }
   .kids .page-date { font-size: 1.8rem; }
   .kids .chapter-head { font-size: 1.8rem; }
 }
+
+/* Progress, By book: Shabbat and holiday passages from other books (berry, like the holy days) */
+.kids .bb-extra-note { font-size: 0.9rem; line-height: 1.55; color: var(--muted); margin: -0.2rem 0 0.8rem; }
+.kids .bb-extra .bb-bpct { font-variant-numeric: tabular-nums; white-space: nowrap; }
