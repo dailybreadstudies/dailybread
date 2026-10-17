@@ -45,6 +45,12 @@
     .ab-btn:hover { background: var(--paper); border-color: var(--accent-soft); }
     .ab-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
     .ab-btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+    .ab-btn.give { background: var(--heading); border-color: var(--heading); color: var(--paper); }
+    .ab-btn.give:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--paper); }
+    .ab-keep { display: flex; align-items: center; justify-content: space-between; gap: 18px 28px; flex-wrap: wrap;
+      margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+    .ab-keep p { margin: 0; font-size: 1.05rem; line-height: 1.6; color: var(--ink-soft, var(--ink)); max-width: 34em; }
+    .ab-keep b { color: var(--heading); font-weight: 600; }
     .ab-scroll { display: block; margin: 4.5rem auto 0; width: 1px; height: 56px; background: linear-gradient(var(--accent-soft), transparent); }
 
     /* Quote */
@@ -241,6 +247,10 @@
       <li class="rv d3"><b>Jewish calendar</b><span>Today’s Hebrew date, Feasts and Shabbat times where you are.</span></li>
       <li class="rv d3"><b>Your progress</b><span>Kept in your browser on this device only. Nothing is sent to us.</span></li>
     </ul>
+    <div class="ab-keep rv d2">
+      <p><b>Help keep it free.</b> No subscriptions, no advertising, no tracking — made possible by those who give.</p>
+      <a class="ab-btn give" href="give.html">Give</a>
+    </div>
   </div>
 </section>
 
@@ -263,17 +273,6 @@
       <p class="ab-stat rv d3"><b>Made to last the year</b><span>Hardcover, Smyth-sewn, with a ribbon marker.
         Classic and Women’s editions, and Daily Bread for Kids.</span></p>
     </div>
-  </div>
-</section>
-
-<!-- 8b · Give -->
-<section class="ab-sec tint ab-give">
-  <div class="ab-in">
-    <p class="ab-eyebrow rv">Keep it free</p>
-    <h2 class="ab-h rv d1">Free for everyone, <em>made possible by those who give.</em></h2>
-    <p class="ab-p rv d2">Daily Bread Online has no subscriptions, no advertising and no tracking. Gifts support the ministry of
-      Daily Bread and Ariel Media, a publishing ministry of The Watchman International, Inc., a 501(c)(3) nonprofit.</p>
-    <div class="ab-btns rv d3" style="justify-content:flex-start"><a class="ab-btn primary" href="give.html">Give</a></div>
   </div>
 </section>
 
