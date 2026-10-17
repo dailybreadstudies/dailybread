@@ -571,7 +571,7 @@
   {
    "id": "gospels",
    "name": "Named elsewhere in the Gospels",
-   "color": "#3c7f8a",
+   "color": "var(--dbm-city)",
    "places": [
     {
      "n": "Cana",
@@ -685,7 +685,7 @@
   {
    "id": "herod",
    "name": "Herod's cities, palaces and fortresses",
-   "color": "#8a6a2e",
+   "color": "var(--dbm-city)",
    "places": [
     {
      "n": "Sepphoris",
@@ -753,7 +753,7 @@
   {
    "id": "other",
    "name": "Other places of the time",
-   "color": "#6b6f8a",
+   "color": "var(--dbm-city)",
    "places": [
     {
      "n": "Mount Tabor",

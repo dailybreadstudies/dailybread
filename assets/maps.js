@@ -593,10 +593,10 @@
         paint: { 'text-color': css('--dbm-water-line'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
     });
     map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 6, maxzoom: 11,
-      layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Regular']], 'text-transform': 'uppercase',
-        'text-letter-spacing': 0.6, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30, 'text-line-height': 1.55,
+      layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Bold']], 'text-transform': 'uppercase',
+        'text-letter-spacing': 0.5, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30, 'text-line-height': 1.55,
         'text-allow-overlap': false, 'text-padding': 6, 'symbol-sort-key': ['get', 'r'] },
-      paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2, 'text-opacity': 0.85 } });
+      paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4, 'text-opacity': 0.9 } });
     map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
       layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 12, 12],
         'text-letter-spacing': 0.04, 'text-optional': true },
@@ -625,12 +625,12 @@
     map.addLayer({ id: 'places-label', type: 'symbol', source: 'places', minzoom: 7.5,
       layout: {
         'text-field': ['coalesce', ['get', 'd'], ['get', 'n']],
-        'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Regular']]],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 13, 12.5],
+        'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Bold']]],
+        'text-size': ['interpolate', ['linear'], ['zoom'], 8, 9.5, 13, 12],
         'text-variable-anchor': ['top', 'right', 'left', 'bottom'], 'text-radial-offset': 0.6, 'text-justify': 'auto', 'text-optional': true,
         'symbol-sort-key': ['-', 2, ['get', 'c']]
       },
-      paint: { 'text-color': css('--dbm-label'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
+      paint: { 'text-color': css('--dbm-city'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
     ['places-dot', 'places-mount'].forEach(function (id) {
       map.on('click', id, function (e) {
         var f = e.features[0];
@@ -647,11 +647,11 @@
       paint: { 'circle-color': ['get', 'color'], 'circle-radius': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 3.6, 6, 5, 9, 6.5] : ['interpolate', ['linear'], ['zoom'], 6, 2.6, 10, 4.2, 14, 6],
         'circle-stroke-color': css('--dbm-paper'), 'circle-stroke-width': 1.2, 'circle-opacity': ['case', ['==', ['get', 'c'], 0], 0.55, 1] } });
     map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gplabels', minzoom: spec.world ? 2 : spec.groupLabelZoom || 8.3,
-      layout: { 'text-field': ['get', 'd'], 'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Regular']]],
-        'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 10, 6, 11.5, 9, 14] : ['interpolate', ['linear'], ['zoom'], 8.3, 10, 13, 12.5],
+      layout: { 'text-field': ['get', 'd'], 'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Bold']]],
+        'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 10, 6, 11.5, 9, 14] : ['interpolate', ['linear'], ['zoom'], 7, 9.5, 13, 12],
         'text-transform': spec.world ? 'uppercase' : 'none', 'text-letter-spacing': spec.world ? 0.12 : 0, 'text-variable-anchor': ['top', 'right', 'left', 'bottom'],
         'text-radial-offset': 0.6, 'text-justify': 'auto', 'text-optional': true },
-      paint: { 'text-color': css('--dbm-label'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
+      paint: { 'text-color': css('--dbm-city'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
     map.addLayer({ id: 'garea-label', type: 'symbol', source: 'galabels', filter: ['==', ['get', 'kind'], 'label'],
       layout: { 'text-field': ['get', 'name'], 'text-font': ['literal', ['Noto Sans Bold']], 'text-transform': 'uppercase', 'text-letter-spacing': 0.18,
         'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 17, 6, 24, 9, 30] : ['interpolate', ['linear'], ['zoom'], 6, 10, 10, 15],
@@ -698,11 +698,12 @@
 
   /* Groups: places in an allotment, a clan's towns, a list of kings. Each group may carry an
      approximate area drawn around its towns (made by tools/build_joshua_maps.py). */
+  function colorOf(c) { var m = /^var\((--[\w-]+)\)$/.exec(c || ''); return m ? css(m[1]) : c; }
   function groupAreas(spec) {
     var feats = [];
     (spec.groups || []).forEach(function (g) {
-      if (g.area) feats.push({ type: 'Feature', properties: { g: g.id, color: g.color, kind: 'area' }, geometry: { type: 'Polygon', coordinates: [g.area] } });
-      if (g.labelAt) feats.push({ type: 'Feature', properties: { g: g.id, color: g.color, kind: 'label', name: g.short || g.name }, geometry: { type: 'Point', coordinates: g.labelAt } });
+      if (g.area) feats.push({ type: 'Feature', properties: { g: g.id, color: colorOf(g.color), kind: 'area' }, geometry: { type: 'Polygon', coordinates: [g.area] } });
+      if (g.labelAt) feats.push({ type: 'Feature', properties: { g: g.id, color: colorOf(g.color), kind: 'label', name: g.short || g.name }, geometry: { type: 'Point', coordinates: g.labelAt } });
     });
     return { type: 'FeatureCollection', features: feats };
   }
@@ -710,7 +711,7 @@
     var feats = [];
     (spec.groups || []).forEach(function (g) {
       (g.places || []).forEach(function (p) {
-        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, gf: g.firstNamed ? 1 : 0, color: g.color, n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '', note: p.note || '' },
+        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, gf: g.firstNamed ? 1 : 0, color: colorOf(g.color), n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '', note: p.note || '' },
           geometry: { type: 'Point', coordinates: p.ll } });
       });
     });
@@ -817,8 +818,8 @@
     map.setPaintProperty('hillshade', 'hillshade-exaggeration', m === 'ancient' ? 0.55 : m === 'modern' ? 0.2 : 0);
     ['deadsea', 'sea', 'sea-edge', 'galilee', 'water-label', 'region-label', 'wadi', 'wadi-seasonal', 'stream-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' ? 'visible' : 'none'); });
     ['roads', 'roads-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' && ctx.roadsOn !== false ? 'visible' : 'none'); });
-    map.setPaintProperty('places-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-label'));
-    map.setPaintProperty('gpoint-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-label'));
+    map.setPaintProperty('places-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-city'));
+    map.setPaintProperty('gpoint-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-city'));
     map.setPaintProperty('gpoint-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
     map.setPaintProperty('garea-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
     map.setPaintProperty('places-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
@@ -849,6 +850,10 @@
     map.setPaintProperty('gpoint-label', 'text-halo-color', css('--dbm-paper'));
     map.setPaintProperty('garea-label', 'text-halo-color', css('--dbm-paper'));
     map.setPaintProperty('places-dot', 'circle-color', placeFill());
+    if ((ctx.spec.groups || []).some(function (g) { return /^var\(/.test(g.color); })) {
+      ['gareas', 'galabels'].forEach(function (id) { map.getSource(id).setData(groupAreas(ctx.spec)); });
+      ['gpoints', 'gplabels'].forEach(function (id) { map.getSource(id).setData(groupPoints(ctx.spec, ctx.hn)); });
+    }
     hillImage(map);
     setMode(ctx, ctx.mode || 'ancient');
   }

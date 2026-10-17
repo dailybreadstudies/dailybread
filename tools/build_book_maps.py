@@ -197,9 +197,9 @@ PLACES = [
 
 GROUPS = [
     ('book', 'Named in {book}', '#a0443a'),
-    ('gospels', 'Named elsewhere in the Gospels', '#3c7f8a'),
-    ('herod', 'Herod\'s cities, palaces and fortresses', '#8a6a2e'),
-    ('other', 'Other places of the time', '#6b6f8a'),
+    ('gospels', 'Named elsewhere in the Gospels', 'var(--dbm-city)'),
+    ('herod', 'Herod\'s cities, palaces and fortresses', 'var(--dbm-city)'),
+    ('other', 'Other places of the time', 'var(--dbm-city)'),
 ]
 
 WATER = [  # the map's own water labels (the Old Testament maps say "Sea of Kinnereth")
