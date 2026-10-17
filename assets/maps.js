@@ -830,6 +830,19 @@
         (p.ob ? '<a href="https://www.openbible.info/geo/ancient/' + esc(p.ob) + '" target="_blank" rel="noopener">OpenBible.info entry ↗</a>' : '') + '</div>');
       return p.ll;
     }
+    // a town in one of the map's groups (a tribe's allotment, a city of refuge…): show it with its group, turning the group on if needed
+    var hits = [];
+    (ctx.spec.groups || []).forEach(function (g) {
+      (g.places || []).forEach(function (q) { if (q.n === name) hits.push([g, q]); });
+    });
+    if (hits.length) {
+      var hit = hits.filter(function (h) { return ctx.gshown && ctx.gshown.has(h[0].id); })[0] || hits[0], g = hit[0], q = hit[1];
+      if (ctx.gshown && !ctx.gshown.has(g.id)) { ctx.gshown.add(g.id); applyVisibility(ctx); }
+      var also = hits.filter(function (h) { return h[0] !== g; }).map(function (h) { return h[0].name; });
+      showPopup(ctx, q.ll, placePopup({ n: q.n, d: displayName(q.n, ctx.hn), m: q.m || '', c: q.c, f: q.f || '', u: q.u || '', note: q.note || '' }, ctx.spec,
+        g.name + (also.length ? ' · also ' + also.join(', ') : '')));
+      return q.ll;
+    }
     var f = ctx.places && ctx.places.features.filter(function (x) { return x.properties.n === name; })[0];
     if (!f) return null;
     showPopup(ctx, f.geometry.coordinates, placePopup(f.properties, ctx.spec));

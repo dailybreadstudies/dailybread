@@ -422,9 +422,11 @@ index_path = os.path.join(MAPS, 'index.json')
 index = json.load(open(index_path, encoding='utf-8'))
 ours = {m['id'] for m in MAPS_OUT}
 index['maps'] = [e for e in index['maps'] if e['id'] not in ours]
+from map_links import auto_links   # every drawn place that the passage names becomes tappable
 for m in MAPS_OUT:
     m.setdefault('bounds', bounds_of(m))
     m.setdefault('moves', [])
+    m['links'] = auto_links(m)
     with open(os.path.join(MAPS, m['id'] + '.json'), 'w', encoding='utf-8') as fh:
         json.dump(m, fh, ensure_ascii=False, separators=(',', ':'))
     e = {'id': m['id'], 'title': m['title'], 'ref': m['ref'], 'book': 'JOS', 'c': m['anchor']['c'], 'v': m['anchor']['v'], 'links': m['links']}
