@@ -282,7 +282,7 @@ TREES.append(dict(
         P('gaham', 'Gaham', 'reumah', ['22:24']),
         P('tahash', 'Tahash', 'reumah', ['22:24']),
         P('maacah', 'Maacah', 'reumah', ['22:24'], sch='Probably the Aramean kingdom of Maacah north-east of the Sea of Galilee (2 Samuel 10:6).'),
-        P('haran', 'Haran', 'terah', ['11:26', '11:27', '11:28', '11:29', '11:31'], 'died in Ur',
+        P('haran', 'Haran', 'terah', ['11:26', '11:27', '11:28', '11:29', '11:31'], 'died in Ur', hn='Haran',
           trad='The midrash says he died in Nimrod\'s furnace, from which Abram was saved (Genesis Rabbah 38:13; Rashi on 11:28).'),
         P('lot', 'Lot', 'haran', ['11:27', '11:31'], 'went with Abram'),
         P('milcah', 'Milcah', 'haran', ['11:29'], 'married her uncle Nahor', sex='f'),

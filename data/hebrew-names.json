@@ -521,5 +521,30 @@
   "Jobab": "Yovav",
   "Uz": "Utz",
   "Hul": "Chul",
-  "Gether": "Geter"
+  "Gether": "Geter",
+
+  "_byVerseAbout": "Verses where an English name stands for a different Hebrew name than usual. Haran, Abram's brother, is הָרָן (he), not the city חָרָן (chet). A list gives the forms in order of appearance in the verse.",
+  "_byVerse": {
+      "GEN 11:26": {
+          "Haran": "Haran"
+      },
+      "GEN 11:27": {
+          "Haran": "Haran"
+      },
+      "GEN 11:28": {
+          "Haran": "Haran"
+      },
+      "GEN 11:29": {
+          "Haran": "Haran"
+      },
+      "GEN 11:31": {
+          "Haran": [
+              "Haran",
+              "Charan"
+          ]
+      },
+      "1CH 23:9": {
+          "Haran": "Haran"
+      }
+  }
 }

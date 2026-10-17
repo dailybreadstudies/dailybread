@@ -83,6 +83,8 @@
     return function (x) { return String(x).replace(re, function (m, n) { return map[n]; }); };
   }
   function nm(x) { return state.heb && state.hn ? state.hn(x) : x; }
+  /* A person's name under the Hebrew-names setting; p.hn overrides it where the usual form is wrong for this person */
+  function dn(p) { return state.heb && p.hn ? p.hn : nm(p.n); }
 
   // ── Buttons beside verses, names in the text ───────────────
   function decorate(root) {
@@ -135,7 +137,7 @@
       var list = (p.forms || []).slice();
       if (!/\(/.test(p.n)) list.push(p.n);
       list.forEach(function (f) {
-        [f, hn[f]].forEach(function (k) { if (k) (forms[k] = forms[k] || []).push(p); });
+        [f, p.hn || hn[f]].forEach(function (k) { if (k) (forms[k] = forms[k] || []).push(p); });
       });
     });
     var keys = Object.keys(forms).sort(function (x, y) { return y.length - x.length; });
@@ -258,7 +260,7 @@
     t.roots.forEach(function walk(p) {
       html += '<div class="dbt-row dbt-c-' + esc(p.col) + (p.rel === 'wife' ? ' dbt-wife' : '') + (!p.p || p.branch ? ' dbt-headrow' : '') + '" role="treeitem" data-dbt-row="' + esc(p.id) + '" style="padding-left:' + (p.depth * IND) + 'px">' +
         '<button type="button" class="dbt-node" data-dbt-pick="' + esc(p.id) + '" aria-expanded="false"><i class="' + dotClass(t, p) + '"></i>' +
-        '<span class="dbt-nm">' + esc(nm(p.n)) + '</span>' + (p.g ? '<span class="dbt-gl">' + esc(p.g) + '</span>' : '') + '</button></div>';
+        '<span class="dbt-nm">' + esc(dn(p)) + '</span>' + (p.g ? '<span class="dbt-gl">' + esc(p.g) + '</span>' : '') + '</button></div>';
       p.kids.forEach(function (k) { walk(k); });
     });
     html += '</div>';
@@ -360,11 +362,11 @@
     if (p.kin) return nm(p.kin);
     var par = p.p ? t.by[p.p] : null;
     if (!par) return '';
-    if (p.rel === 'wife') return (p.concubine ? 'concubine of ' : 'wife of ') + nm(par.n);
-    if (p.rel === 'from') return 'came from ' + nm(par.n);
+    if (p.rel === 'wife') return (p.concubine ? 'concubine of ' : 'wife of ') + dn(par);
+    if (p.rel === 'from') return 'came from ' + dn(par);
     var word = p.sex === 'f' ? 'daughter of ' : 'son of ';
-    if (par.rel === 'wife' && par.p) return word + nm(t.by[par.p].n) + ' and ' + nm(par.n);
-    return word + nm(par.n);
+    if (par.rel === 'wife' && par.p) return word + dn(t.by[par.p]) + ' and ' + dn(par);
+    return word + dn(par);
   }
   function cardHTML(t, p) {
     var vv = (p.vv || []).map(function (v) { return '<button type="button" class="dbt-vv" data-dbt-goto="' + v + '">' + vlabel(t, v) + '</button>'; }).join('');
@@ -380,7 +382,7 @@
     var girls = p.kids.filter(function (k) { return k.sex === 'f' && k.rel !== 'wife'; }).length, wives = p.kids.filter(function (k) { return k.rel === 'wife'; }).length;
     var kidsLabel = wives ? (wives === p.kids.length ? (wives === 1 ? 'Wife' : 'Wives') : 'Family') : girls ? (p.kids.length === 1 ? 'Daughter' : 'Children') : (p.kids.length === 1 ? 'Son' : 'Sons');
     if (p.kids && p.kids.length) html += '<p class="dbt-kids">' + kidsLabel + ': ' + p.kids.map(function (k) {
-      return '<button type="button" class="dbt-link" data-dbt-pick="' + esc(k.id) + '">' + esc(nm(k.n)) + '</button>';
+      return '<button type="button" class="dbt-link" data-dbt-pick="' + esc(k.id) + '">' + esc(dn(k)) + '</button>';
     }).join(', ') + '</p>';
     html += '<p class="dbt-verses">In the text: ' + vv + '</p>';
     return html;
