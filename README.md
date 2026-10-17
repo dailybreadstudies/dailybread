@@ -209,3 +209,8 @@ python3 tools/build_bsb.py /tmp/bsb data/bsb
 ```
 
 Scripture quotations are from the Berean Standard Bible (BSB), which has been dedicated to the public domain.
+
+## Updating scripts and styles
+
+After changing anything in `assets/`, run `python3 tools/stamp_assets.py`. It adds `?v=<hash>` to the
+script and stylesheet links in every page, so browsers load the new file at once instead of a cached copy.
