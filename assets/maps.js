@@ -366,7 +366,8 @@
                           : '<svg viewBox="0 0 56 20"><circle cx="28" cy="10" r="4.6" fill="' + g.color + '" stroke="var(--dbm-paper)" stroke-width="1.4"/></svg>';
           return '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-group="' + esc(g.id) + '" aria-pressed="' + (ctx.gshown.has(g.id)) + '">' + sw +
             '<span>' + esc(g.name) + ' <span class="dbm-vv">' + esc(g.vv || '') + (g.places ? ' · ' + g.places.length + (g.places.length === 1 ? ' place' : ' places') : '') + '</span></span></button></li>';
-        }).join('') + '</ul>';
+        }).join('') + (groups.some(function (g) { return (g.places || []).some(function (p) { return p.k === 'mount'; }); })
+          ? '<li class="dbm-srow"><svg viewBox="0 0 56 20"><path d="M28 4.5 34.5 15.5H21.5Z" fill="var(--dbm-label)" stroke="var(--dbm-paper)" stroke-width="1.2" stroke-linejoin="round"/></svg><span>Mountain or hill</span></li>' : '') + '</ul>';
     }
     var symSeen = {};
     var keyOther = (spec.symbols && spec.symbols.length) || spec.places || (spec.outlines && spec.outlines.length) || spec.world;
@@ -593,10 +594,10 @@
         paint: { 'text-color': css('--dbm-water-line'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
     });
     map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 6, maxzoom: 11,
-      layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Bold']], 'text-transform': 'uppercase',
-        'text-letter-spacing': 0.5, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30, 'text-line-height': 1.55,
+      layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Regular']], 'text-transform': 'uppercase',
+        'text-letter-spacing': 0.6, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30, 'text-line-height': 1.55,
         'text-allow-overlap': false, 'text-padding': 6, 'symbol-sort-key': ['get', 'r'] },
-      paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4, 'text-opacity': 0.9 } });
+      paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2, 'text-opacity': 0.85 } });
     map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
       layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 12, 12],
         'text-letter-spacing': 0.04, 'text-optional': true },
@@ -643,7 +644,12 @@
       paint: { 'fill-color': ['get', 'color'], 'fill-opacity': 0.13 } });
     map.addLayer({ id: 'garea-line', type: 'line', source: 'gareas', filter: ['==', ['get', 'kind'], 'area'],
       layout: { 'line-join': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': 1.6, 'line-opacity': 0.75, 'line-dasharray': [3, 2] } });
-    map.addLayer({ id: 'gpoint', type: 'circle', source: 'gpoints',
+    groupHills(map, spec);
+    map.addLayer({ id: 'gpoint-mount', type: 'symbol', source: 'gpoints', filter: ['==', ['get', 'k'], 'mount'],
+      layout: { 'icon-image': ['get', 'tri'], 'icon-allow-overlap': true, 'icon-ignore-placement': true,
+        'icon-size': ['interpolate', ['linear'], ['zoom'], 6, 0.75, 10, 1, 14, 1.25] },
+      paint: { 'icon-opacity': ['case', ['==', ['get', 'c'], 0], 0.6, 1] } });
+    map.addLayer({ id: 'gpoint', type: 'circle', source: 'gpoints', filter: ['!=', ['get', 'k'], 'mount'],
       paint: { 'circle-color': ['get', 'color'], 'circle-radius': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 3.6, 6, 5, 9, 6.5] : ['interpolate', ['linear'], ['zoom'], 6, 2.6, 10, 4.2, 14, 6],
         'circle-stroke-color': css('--dbm-paper'), 'circle-stroke-width': 1.2, 'circle-opacity': ['case', ['==', ['get', 'c'], 0], 0.55, 1] } });
     map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gplabels', minzoom: spec.world ? 2 : spec.groupLabelZoom || 8.3,
@@ -657,12 +663,14 @@
         'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 17, 6, 24, 9, 30] : ['interpolate', ['linear'], ['zoom'], 6, 10, 10, 15],
         'text-allow-overlap': false, 'text-padding': 4 },
       paint: { 'text-color': ['get', 'color'], 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.6 } });
-    map.on('click', 'gpoint', function (e) {
-      var f = e.features[0];
-      showPopup(ctx, f.geometry.coordinates, placePopup(f.properties, spec, f.properties.gname));
+    ['gpoint', 'gpoint-mount'].forEach(function (id) {
+      map.on('click', id, function (e) {
+        var f = e.features[0];
+        showPopup(ctx, f.geometry.coordinates, placePopup(f.properties, spec, f.properties.gname));
+      });
+      map.on('mouseenter', id, function () { map.getCanvas().style.cursor = 'pointer'; });
+      map.on('mouseleave', id, function () { map.getCanvas().style.cursor = ''; });
     });
-    map.on('mouseenter', 'gpoint', function () { map.getCanvas().style.cursor = 'pointer'; });
-    map.on('mouseleave', 'gpoint', function () { map.getCanvas().style.cursor = ''; });
     map.addLayer({ id: 'moves-casing', type: 'line', source: 'moves', layout: { 'line-cap': 'round', 'line-join': 'round' },
       paint: { 'line-color': css('--dbm-paper'), 'line-width': 6.5, 'line-opacity': 0.7 } });
     (spec.moves || []).forEach(function (m) {
@@ -698,6 +706,20 @@
 
   /* Groups: places in an allotment, a clan's towns, a list of kings. Each group may carry an
      approximate area drawn around its towns (made by tools/build_joshua_maps.py). */
+  function triKey(c) { return String(c).replace(/[^a-zA-Z0-9]/g, ''); }
+  /* One triangle image per group colour, for group places that are mountains or hills */
+  function groupHills(map, spec) {
+    (spec.groups || []).forEach(function (g) {
+      var col = colorOf(g.color), id = 'dbm-tri-' + triKey(col);
+      var r = 2, w = 16 * r, h = 14 * r, c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      var x = c.getContext('2d');
+      x.beginPath(); x.moveTo(w / 2, 1.5 * r); x.lineTo(w - 1.5 * r, h - 1.5 * r); x.lineTo(1.5 * r, h - 1.5 * r); x.closePath();
+      x.lineJoin = 'round'; x.lineWidth = 1.4 * r; x.fillStyle = col; x.fill(); x.strokeStyle = css('--dbm-paper'); x.stroke();
+      var img = x.getImageData(0, 0, w, h);
+      if (map.hasImage(id)) map.updateImage(id, img); else map.addImage(id, img, { pixelRatio: r });
+    });
+  }
   function colorOf(c) { var m = /^var\((--[\w-]+)\)$/.exec(c || ''); return m ? css(m[1]) : c; }
   function groupAreas(spec) {
     var feats = [];
@@ -711,7 +733,7 @@
     var feats = [];
     (spec.groups || []).forEach(function (g) {
       (g.places || []).forEach(function (p) {
-        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, gf: g.firstNamed ? 1 : 0, color: colorOf(g.color), n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '', note: p.note || '' },
+        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, gf: g.firstNamed ? 1 : 0, color: colorOf(g.color), k: p.k || '', tri: 'dbm-tri-' + triKey(colorOf(g.color)), n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '', note: p.note || '' },
           geometry: { type: 'Point', coordinates: p.ll } });
       });
     });
@@ -800,8 +822,9 @@
     ctx.map.setFilter('moves-casing', ['in', ['get', 'n'], ['literal', Array.from(ctx.shown)]]);
     ['places-dot', 'places-mount', 'places-label'].forEach(function (id) { ctx.map.setLayoutProperty(id, 'visibility', ctx.citiesOn ? 'visible' : 'none'); });
     var gl = ['literal', Array.from(ctx.gshown || [])];
-    ['garea-fill', 'garea-line', 'garea-label', 'gpoint', 'gpoint-label'].forEach(function (id) {
-      var base = id.indexOf('garea') === 0 ? ['==', ['get', 'kind'], id === 'garea-label' ? 'label' : 'area'] : null;
+    ['garea-fill', 'garea-line', 'garea-label', 'gpoint', 'gpoint-mount', 'gpoint-label'].forEach(function (id) {
+      var base = id.indexOf('garea') === 0 ? ['==', ['get', 'kind'], id === 'garea-label' ? 'label' : 'area']
+        : id === 'gpoint' ? ['!=', ['get', 'k'], 'mount'] : id === 'gpoint-mount' ? ['==', ['get', 'k'], 'mount'] : null;
       var f = ['in', ['get', 'g'], gl];
       ctx.map.setFilter(id, base ? ['all', base, f] : f);
     });
@@ -850,6 +873,7 @@
     map.setPaintProperty('gpoint-label', 'text-halo-color', css('--dbm-paper'));
     map.setPaintProperty('garea-label', 'text-halo-color', css('--dbm-paper'));
     map.setPaintProperty('places-dot', 'circle-color', placeFill());
+    groupHills(map, ctx.spec);
     if ((ctx.spec.groups || []).some(function (g) { return /^var\(/.test(g.color); })) {
       ['gareas', 'galabels'].forEach(function (id) { map.getSource(id).setData(groupAreas(ctx.spec)); });
       ['gpoints', 'gplabels'].forEach(function (id) { map.getSource(id).setData(groupPoints(ctx.spec, ctx.hn)); });

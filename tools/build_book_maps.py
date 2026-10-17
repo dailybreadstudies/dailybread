@@ -268,6 +268,8 @@ def build(b):
             continue
         ref, _ = first(verses, [p['n']] + p.get('aka', []))
         q = {'n': p['n'], 'll': p['ll'], 'c': p['c'], 'm': p.get('m', '')}
+        if p['n'].startswith('Mount') or p['n'] in ('Golgotha',):
+            q['k'] = 'mount'                  # drawn as a triangle
         if p.get('u'):
             q['u'] = p['u']
         q['note'] = p['note']

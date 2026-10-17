@@ -491,6 +491,7 @@
      ],
      "c": 2,
      "m": "",
+     "k": "mount",
      "u": "ac2c4c5/mount-of-olives",
      "note": "The ridge east of the Temple, across the Kidron. The triumphal entry begins here (21:1); here Jesus speaks of the end of the age (24:3).",
      "f": "21:1"
@@ -514,6 +515,7 @@
      ],
      "c": 1,
      "m": "Church of the Holy Sepulchre",
+     "k": "mount",
      "u": "a631d35/golgotha",
      "note": "\"The place of the skull\" (Matthew 27:33), outside the city wall of that time. The Church of the Holy Sepulchre marks the site venerated since at least the 4th century.",
      "f": "27:33"
@@ -629,6 +631,7 @@
      ],
      "c": 2,
      "m": "Har Brakha, Nablus",
+     "k": "mount",
      "u": "a30e967/mount-gerizim",
      "note": "The Samaritans' holy mountain. Their temple there was destroyed by John Hyrcanus (about 111 BC), but they still worshipped on it (John 4:20).",
      "f": "John 4:20 (\"this mountain\")"
@@ -763,6 +766,7 @@
      ],
      "c": 1,
      "m": "Har Tavor",
+     "k": "mount",
      "note": "Traditional Mount of the Transfiguration (\"a high mountain,\" Matthew 17:1) since the 4th century. Mount Hermon, nearer Caesarea Philippi, is the other main proposal."
     },
     {
@@ -773,6 +777,7 @@
      ],
      "c": 2,
      "m": "",
+     "k": "mount",
      "note": "The great snow mountain above Caesarea Philippi, about 2,800 m. Many scholars place the Transfiguration on its slopes (Matthew 17:1)."
     },
     {
@@ -783,6 +788,7 @@
      ],
      "c": 0,
      "m": "above Tabgha (traditional)",
+     "k": "mount",
      "note": "The hillside above Capernaum where tradition places the Sermon on the Mount (\"He went up on the mountain,\" Matthew 5:1)."
     },
     {
