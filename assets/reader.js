@@ -1203,7 +1203,9 @@
   });
 
   function privacyNote() {
-    return '<p class="pg-note pg-privacy">Your progress is kept in this browser, on this device only. Nothing is sent to us, ' +
+    return (totalRead() >= 20 ? '<p class="pg-give">If Daily Bread is helping you, you can help keep it free for others. ' +
+      '<a href="give.html">Give</a></p>' : '') +
+      '<p class="pg-note pg-privacy">Your progress is kept in this browser, on this device only. Nothing is sent to us, ' +
       'and clearing your browser data erases it.</p>';
   }
 
