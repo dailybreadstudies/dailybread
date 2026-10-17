@@ -579,12 +579,14 @@
         'circle-stroke-color': css('--dbm-paper'), 'circle-stroke-width': 1.2, 'circle-opacity': ['case', ['==', ['get', 'c'], 0], 0.55, 1] } });
     map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gplabels', minzoom: spec.world ? 2 : 8.3,
       layout: { 'text-field': ['get', 'd'], 'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Regular']]],
-        'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 10, 7, 13] : ['interpolate', ['linear'], ['zoom'], 8.3, 10, 13, 12.5], 'text-variable-anchor': ['top', 'right', 'left', 'bottom'],
+        'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 10, 6, 11.5, 9, 14] : ['interpolate', ['linear'], ['zoom'], 8.3, 10, 13, 12.5],
+        'text-transform': spec.world ? 'uppercase' : 'none', 'text-letter-spacing': spec.world ? 0.12 : 0, 'text-variable-anchor': ['top', 'right', 'left', 'bottom'],
         'text-radial-offset': 0.6, 'text-justify': 'auto', 'text-optional': true },
       paint: { 'text-color': css('--dbm-label'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
     map.addLayer({ id: 'garea-label', type: 'symbol', source: 'galabels', filter: ['==', ['get', 'kind'], 'label'],
       layout: { 'text-field': ['get', 'name'], 'text-font': ['literal', ['Noto Sans Bold']], 'text-transform': 'uppercase', 'text-letter-spacing': 0.18,
-        'text-size': ['interpolate', ['linear'], ['zoom'], 6, 10, 10, 15], 'text-allow-overlap': false, 'text-padding': 4 },
+        'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 17, 6, 24, 9, 30] : ['interpolate', ['linear'], ['zoom'], 6, 10, 10, 15],
+        'text-allow-overlap': false, 'text-padding': 4 },
       paint: { 'text-color': ['get', 'color'], 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.6 } });
     map.on('click', 'gpoint', function (e) {
       var f = e.features[0];
