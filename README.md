@@ -126,10 +126,21 @@ python3 tools/build_map_places.py /tmp/obgeo data/maps/places
 
 ### Story maps (Genesis, Matthew)
 
-`tools/build_story_maps.py` holds hand-drawn maps outside Joshua: Abram's journey (Genesis 11:31–13:18, a wide
-"world" map), the war of the kings (Genesis 14), around the Sea of Galilee (Matthew 13–14) and the northern
+`tools/build_story_maps.py` holds hand-drawn maps outside Joshua: Abram's journey (Genesis 11:31–12:20, a wide
+"world" map), Abram and Lot part (Genesis 13), the war of the kings (Genesis 14), around the Sea of Galilee (Matthew 13–14) and the northern
 journeys (Matthew 15–17). A map can sit at more than one passage: `also: [{c, v, range, links}]` in the map
 file and its index entry gives it a button and tappable names in each. Symbol types added: boat, loaves, keys, mount.
+
+### Book maps (Matthew)
+
+`tools/build_book_maps.py` makes one general map per book: *The Land of Israel in the First Century* for Matthew
+(`mat-land`). Its index entry has `"bookwide": true`, so its place and region names are tappable in every chapter
+of the book; a chapter with its own map keeps that map's links, and the book map links the rest. Tapping a name
+opens the book map beside the text (or below the paragraph on phones) and flies to it. Places come in four
+groups: named in the book (found in its BSB text), named elsewhere in the Gospels, Herod's cities, palaces and
+fortresses, and other places of the time. Regions (Galilee, Judea, Idumea, Perea, Decapolis, Philip's lands…)
+have their own labels and notes (`regions`, replacing the Old Testament ones); `aliases` point text forms such as
+"Gadarenes" or "Samaritans" to a place or region. Add MRK, LUK or JHN to `BOOKS` to give that Gospel the same map.
 
 ## Archaeology finds
 

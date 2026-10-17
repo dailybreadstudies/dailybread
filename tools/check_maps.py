@@ -28,6 +28,11 @@ Map file format (data/maps/<id>.json):
                                coords is one line [[lon, lat], …] or several lines [[[lon, lat], …], …]
   symbols [{type, at, label, key, vv, moves, offset}] type: camp | ambush | fire | battle | sun | moon | hail | cave | captured
   notes [{h, p[], alternates}] notes shown under the key (p may contain <i>, <b>, <a>)
+  bookwide true                a book's general map: its links are tappable in every chapter of the book
+  aliases {form: name}         text forms that point to a place or region ("Gadarenes": "Gadara")
+  regions [{n, ll, r, label, hide, z, note}]  the map's own region labels (replacing the default ones); hide: tappable only
+  waterNames [{n, s, ll}]      the map's own sea and river labels
+  groupLabelZoom               zoom from which group place names show (default 8.3)
   world true                   optional: a wide map (seas and rivers from data/maps/base/world.json, labels at low zoom)
   siteLabel, sources           optional: popup label for p.m ("Region"), and this map's own sources line
   groups [{id, name, color, vv, places[{n, ll, c, m, f, u, note}], area, labelAt, hidden}]
@@ -139,6 +144,27 @@ for entry in index.get('maps', []):
             text = text + ' ' + t2
     if entry.get('also') != m.get('also'):
         bad(mid, 'index.json "also" differs from the map file')
+    if m.get('bookwide') or entry.get('bookwide'):
+        # a book's general map: its names may occur anywhere in the book
+        if not (m.get('bookwide') and entry.get('bookwide')):
+            bad(mid, 'bookwide must be set in both index.json and the map file')
+        data = book(a.get('book', ''))
+        text = ' '.join(chapter_text(a['book'], c)[0] for c in range(1, len(data['chapters']) + 1)) if data else text
+        if entry.get('aliases', {}) != m.get('aliases', {}):
+            bad(mid, 'index.json aliases differ from the map file')
+    targets = {p.get('n') for g in m.get('groups', []) for p in g.get('places', [])} | {r.get('n') for r in m.get('regions', [])}
+    for al_from, al_to in m.get('aliases', {}).items():
+        if al_from not in m.get('links', []):
+            bad(mid, 'alias %r is not in links' % al_from)
+        if al_to not in targets:
+            bad(mid, 'alias %r points to %r, which is not on the map' % (al_from, al_to))
+    for r in m.get('regions', []):
+        if not r.get('n') or not is_ll(r.get('ll')):
+            bad(mid, 'region %r needs a name and valid coordinates' % r.get('n'))
+    if m.get('bookwide'):
+        for name in m.get('links', []):
+            if m.get('aliases', {}).get(name, name) not in targets:
+                bad(mid, 'link %r is not a place or region on the map' % name)
     named = {p.get('name') for p in m.get('named', [])}
     for name in m.get('links', []):
         if text and not re.search(r'(?<![A-Za-z])' + re.escape(name) + r'(?![A-Za-z])', text):

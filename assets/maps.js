@@ -127,17 +127,23 @@
       if (!maps.length) return;
       root.querySelectorAll('section.portion[data-book]').forEach(function (sec) {
         var book = sec.getAttribute('data-book');
-        var here = maps.filter(function (m) { return m.book === book; });
+        // chapter maps first, so a chapter keeps its own map's links; the book's general map links what is left
+        var here = maps.filter(function (m) { return m.book === book; })
+          .sort(function (a, b) { return (a.bookwide ? 1 : 0) - (b.bookwide ? 1 : 0); });
         if (!here.length) return;
         var scr = sec.querySelector('.scripture');
         if (!scr) return;
         var c = parseInt(sec.getAttribute('data-c') || '1', 10);
-        var marks = [];                                       // [chapter, verse, element] in reading order
+        var marks = [], bookLinks = [];                       // [chapter, verse, element] in reading order
         scr.querySelectorAll('.verse-num, .chapter-num').forEach(function (e) {
           if (e.classList.contains('chapter-num')) { c = parseInt(e.textContent, 10) || c; marks.push([c, 1, e]); }
           else marks.push([c, parseInt(e.getAttribute('data-v'), 10), e]);
         });
         here.forEach(function (m) {
+          if (m.bookwide && m.links && m.links.length && !sec.hasAttribute('data-dbm-book')) {
+            sec.setAttribute('data-dbm-book', m.id);
+            bookLinks.push(m);
+          }
           var hit = marks.filter(function (x) { return x[0] === m.c && x[1] === m.v; })[0];
           if (!hit || scr.querySelector('.dbm-pin[data-dbm-at="' + m.id + '@' + m.c + ':' + m.v + '"]')) return;
           var target = hit[2];
@@ -151,8 +157,9 @@
           pin.setAttribute('aria-label', 'Show map: ' + m.title + ' (' + m.ref + ')');
           pin.title = 'Map: ' + m.title + ' (' + m.ref + ')';
           target.parentNode.insertBefore(pin, target);
-          if (m.links && m.links.length) linkPlaces(scr, marks, m, hn);
+          if (m.links && m.links.length && !m.bookwide) linkPlaces(scr, marks, m, hn);
         });
+        bookLinks.forEach(function (m) { linkPlaces(scr, marks, m, hn); });
       });
       updateMargin();
       afterRender();
@@ -162,17 +169,19 @@
   /* Wrap the map's place names in the chapter so a tap shows them on the map */
   function linkPlaces(scr, marks, m, hn) {
     var forms = {};
+    var al = m.aliases || {};                          // "Gadarenes" → Gadara, "Samaritans" → Samaria
     m.links.forEach(function (n) {
-      forms[n] = n;
+      var to = al[n] || n;
+      forms[n] = to;
       var h = hn[n] || n.split(' ').map(function (w) { return hn[w] || w; }).join(' ');
-      if (h !== n) forms[h] = n;
+      if (h !== n) forms[h] = to;
     });
     var keys = Object.keys(forms).sort(function (a, b) { return b.length - a.length; });
     var re = new RegExp('(?<![A-Za-z\\-])(' + keys.map(function (k) { return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')(?![A-Za-z]|-[a-z])', 'g');
     var c = parseInt(scr.closest('section').getAttribute('data-c') || '1', 10);
     var walker = document.createTreeWalker(scr, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, {
       acceptNode: function (n) {
-        if (n.nodeType === 1) return n.matches('button, sup, .dbm-place, .fn-ref, .dbm') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_SKIP;
+        if (n.nodeType === 1) return n.matches('button, sup, .dbm-place, .dbt-name, .fn-ref, .dbm, .dbf, .dbt, h1, h2, h3, h4, .section-heading, .s1, .s2, .r') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_SKIP;
         return NodeFilter.FILTER_ACCEPT;
       }
     });
@@ -184,7 +193,7 @@
     while ((node = all.nextNode())) {
       if (node.nodeType === 1 && node.classList.contains('chapter-num')) { c = parseInt(node.textContent, 10) || c; v = 1; }
       else if (node.nodeType === 1 && node.classList.contains('verse-num')) v = parseInt(node.getAttribute('data-v'), 10) || v;
-      else if (node.nodeType === 3 && c === m.c && v >= lo && v <= hi) inCh.add(node);
+      else if (node.nodeType === 3 && (m.bookwide || (c === m.c && v >= lo && v <= hi))) inCh.add(node);
     }
     while ((node = walker.nextNode())) if (inCh.has(node)) texts.push(node);
     texts.forEach(function (t) {
@@ -224,13 +233,21 @@
     document.body.classList.toggle('dbm-margin', free >= 64);
   }
   function pinFor(id) { return document.querySelector('.dbm-pin[data-dbm-open="' + id + '"]'); }
+  /* What the map belongs to on the page: its button, or (a book map opened from the text) the name tapped */
+  function anchorFor(id) {
+    var pin = pinFor(id);
+    if (visible(pin)) return pin;
+    if (state.anchor && document.contains(state.anchor) && visible(state.anchor)) return state.anchor;
+    var pl = Array.prototype.filter.call(document.querySelectorAll('.dbm-place[data-dbm-map="' + id + '"]'), visible)[0];
+    return pl || pin;
+  }
   function visible(e) { return !!(e && e.offsetParent !== null); }
 
   function placeAtlas() {
     var ctx = state.ctx;
     if (!ctx) return;
     var w = sideWidth();
-    var pin = pinFor(state.open);
+    var pin = anchorFor(state.open);
     if (w) {
       var panel = document.querySelector('.dbm-panel') || document.body.appendChild(el('aside', 'dbm-panel'));
       panel.setAttribute('aria-label', 'Map');
@@ -243,7 +260,7 @@
       state.mode = 'side';
     } else {
       document.body.classList.remove('dbm-side');
-      var block = pin && (pin.closest('.dbm-anchor') || pin.parentNode);
+      var block = pin && (pin.closest('.dbm-anchor') || pin.closest('.scripture > *') || pin.parentNode);
       if (block && ctx.root.previousSibling !== block) block.after(ctx.root);
       var p = document.querySelector('.dbm-panel'); if (p) p.remove();
       state.mode = 'inline';
@@ -252,10 +269,11 @@
     if (ctx.map) requestAnimationFrame(function () { ctx.map.resize(); });
   }
 
-  function open(id, then) {
+  function open(id, then, from) {
     if (state.open === id && state.ctx) { if (then) whenReady(then); return; }
     if (state.open) close();
     state.open = id;
+    state.anchor = from || null;
     setPins();
     var ctx = state.ctx = buildAtlas(id);
     placeAtlas();
@@ -278,7 +296,7 @@
     }
     var p = document.querySelector('.dbm-panel'); if (p) p.remove();
     document.body.classList.remove('dbm-side');
-    state.open = null; state.ctx = null; state.mode = null;
+    state.open = null; state.ctx = null; state.mode = null; state.anchor = null;
     setPins();
     updateMargin();
   }
@@ -292,7 +310,7 @@
   /* After the reader redraws (new day, new chapter, changed setting) */
   function afterRender() {
     if (!state.open) return;
-    var pin = pinFor(state.open);
+    var pin = anchorFor(state.open);
     if (!visible(pin)) { close(); return; }
     setPins();
     if (state.mode === 'inline') placeAtlas();
@@ -351,7 +369,8 @@
         }).join('') + '</ul>';
     }
     var symSeen = {};
-    keyHTML += (spec.symbols && spec.symbols.length ? '<h4>Symbols</h4>' : '<h4>Map</h4>') + '<ul>' + (spec.symbols || []).filter(function (s) {
+    var keyOther = (spec.symbols && spec.symbols.length) || spec.places || (spec.outlines && spec.outlines.length) || spec.world;
+    keyHTML += (spec.symbols && spec.symbols.length ? '<h4>Symbols</h4>' : keyOther ? '<h4>Map</h4>' : '') + '<ul>' + (spec.symbols || []).filter(function (s) {
       var k = s.type + '|' + s.key;                   // one key row per distinct event (same symbol and wording counted once)
       if (symSeen[k]) return false; symSeen[k] = true; return true;
     }).map(function (s) {
@@ -483,11 +502,13 @@
           sat: { type: 'raster', tileSize: 256, maxzoom: BASEMAPS.sat.maxzoom, tiles: BASEMAPS.sat.tiles, attribution: BASEMAPS.sat.attribution },
           sea: { type: 'geojson', data: water.sea }, galilee: { type: 'geojson', data: water.galilee },
           deadsea: { type: 'geojson', data: water.deadSea }, jordan: { type: 'geojson', data: water.jordan },
-          waternames: { type: 'geojson', data: water.names },
+          waternames: { type: 'geojson', data: spec.waterNames ? pointsOf(spec.waterNames, function (w) { return { n: w.n, s: w.s || '' }; }) : water.names },
           ofm: { type: 'vector', url: BASEMAPS.waterways },
           roads: { type: 'geojson', data: (water.ancient && water.ancient.roads) || empty },
           streamnames: { type: 'geojson', data: (water.ancient && water.ancient.streams) || empty },
-          regions: { type: 'geojson', data: (water.ancient && water.ancient.regions) || empty },
+          regions: { type: 'geojson', data: spec.regions
+            ? pointsOf(spec.regions.filter(function (r) { return !r.hide; }), function (r) { return { n: r.label || displayName(r.n, hn), r: r.r || 1 }; })
+            : (water.ancient && water.ancient.regions) || empty },
           places: { type: 'geojson', data: places || empty },
           gareas: { type: 'geojson', data: groupAreas(spec) },
           gpoints: { type: 'geojson', data: groupPoints(spec, hn) },
@@ -625,7 +646,7 @@
     map.addLayer({ id: 'gpoint', type: 'circle', source: 'gpoints',
       paint: { 'circle-color': ['get', 'color'], 'circle-radius': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 3.6, 6, 5, 9, 6.5] : ['interpolate', ['linear'], ['zoom'], 6, 2.6, 10, 4.2, 14, 6],
         'circle-stroke-color': css('--dbm-paper'), 'circle-stroke-width': 1.2, 'circle-opacity': ['case', ['==', ['get', 'c'], 0], 0.55, 1] } });
-    map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gplabels', minzoom: spec.world ? 2 : 8.3,
+    map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gplabels', minzoom: spec.world ? 2 : spec.groupLabelZoom || 8.3,
       layout: { 'text-field': ['get', 'd'], 'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Regular']]],
         'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 10, 6, 11.5, 9, 14] : ['interpolate', ['linear'], ['zoom'], 8.3, 10, 13, 12.5],
         'text-transform': spec.world ? 'uppercase' : 'none', 'text-letter-spacing': spec.world ? 0.12 : 0, 'text-variable-anchor': ['top', 'right', 'left', 'bottom'],
@@ -668,8 +689,9 @@
   function placePopup(p, spec, gname) {
     var conf = ['Location uncertain', 'Possible location', 'Likely location'][p.c] || '';
     var bookName = spec.placesName || (spec.places === 'JOS' || /^josh-/.test(spec.id) ? 'Joshua' : spec.places);
+    function ref(f) { return /[A-Za-z]/.test(f) ? esc(f) : esc(bookName) + ' ' + esc(f); }   // "John 2:1" is given whole
     return '<div class="dbm-pp"><h4>' + esc(p.d || p.n) + '</h4><p class="site">' + (p.m ? (spec.siteLabel || 'Modern site') + ': ' + esc(p.m) + ' · ' : '') + conf + '</p>' +
-      (gname ? '<p>' + esc(gname) + (p.f ? ', ' + esc(bookName) + ' ' + esc(p.f) : '') + '.</p>' : '<p>First named in ' + esc(bookName) + ' at ' + esc(p.f) + '.</p>') +
+      (gname && !p.gf ? '<p>' + esc(gname) + (p.f ? ', ' + ref(p.f) : '') + '.</p>' : p.f ? '<p>First named in ' + esc(bookName) + ' at ' + esc(p.f) + '.</p>' : '') +
       (p.note ? '<p>' + esc(p.note) + '</p>' : '') +
       (p.u ? '<a href="https://www.openbible.info/geo/ancient/' + esc(p.u) + '" target="_blank" rel="noopener">OpenBible.info entry ↗</a>' : '') + '</div>';
   }
@@ -688,11 +710,15 @@
     var feats = [];
     (spec.groups || []).forEach(function (g) {
       (g.places || []).forEach(function (p) {
-        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, color: g.color, n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '', note: p.note || '' },
+        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, gf: g.firstNamed ? 1 : 0, color: g.color, n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '', note: p.note || '' },
           geometry: { type: 'Point', coordinates: p.ll } });
       });
     });
     return { type: 'FeatureCollection', features: feats };
+  }
+
+  function pointsOf(list, props) {
+    return { type: 'FeatureCollection', features: list.map(function (x) { return { type: 'Feature', properties: props(x), geometry: { type: 'Point', coordinates: x.ll } }; }) };
   }
 
   /* A movement is one line, or several lines (e.g. five armies marching at once) */
@@ -889,9 +915,14 @@
       var hit = hits.filter(function (h) { return ctx.gshown && ctx.gshown.has(h[0].id); })[0] || hits[0], g = hit[0], q = hit[1];
       if (ctx.gshown && !ctx.gshown.has(g.id)) { ctx.gshown.add(g.id); applyVisibility(ctx); }
       var also = hits.filter(function (h) { return h[0] !== g; }).map(function (h) { return h[0].name; });
-      showPopup(ctx, q.ll, placePopup({ n: q.n, d: displayName(q.n, ctx.hn), m: q.m || '', c: q.c, f: q.f || '', u: q.u || '', note: q.note || '' }, ctx.spec,
+      showPopup(ctx, q.ll, placePopup({ n: q.n, d: displayName(q.n, ctx.hn), m: q.m || '', c: q.c, f: q.f || '', u: q.u || '', note: q.note || '', gf: g.firstNamed ? 1 : 0 }, ctx.spec,
         g.name + (also.length ? ' · also ' + also.join(', ') : '')));
       return q.ll;
+    }
+    var r = (ctx.spec.regions || []).filter(function (x) { return x.n === name; })[0];
+    if (r) {
+      showPopup(ctx, r.ll, '<div class="dbm-pp"><h4>' + esc(displayName(r.n, ctx.hn)) + '</h4><p class="site">Region</p><p>' + esc(r.note || '') + '</p></div>');
+      return r.ll;
     }
     var f = ctx.places && ctx.places.features.filter(function (x) { return x.properties.n === name; })[0];
     if (!f) return null;
@@ -902,7 +933,9 @@
     var ll = showNamed(ctx, name);
     if (!ll) return;
     var near = (ctx.spec.named || []).some(function (x) { return x.name === name; });
-    ctx.map.flyTo({ center: ll, zoom: near ? 13.6 : 11.5, duration: reduceMotion ? 0 : 1400 });
+    var region = (ctx.spec.regions || []).filter(function (x) { return x.n === name; })[0];
+    var zoom = region ? region.z || 8.4 : near ? 13.6 : ctx.spec.bookwide ? 10 : 11.5;
+    ctx.map.flyTo({ center: ll, zoom: zoom, duration: reduceMotion ? 0 : 1400 });
   }
 
   // ── Page-wide events ───────────────────────────────────────
@@ -917,7 +950,7 @@
     var pl = e.target.closest('.dbm-place');
     if (pl) {
       var name = pl.getAttribute('data-dbm-place');
-      open(pl.getAttribute('data-dbm-map'), function (ctx) { flyTo(ctx, name); });
+      open(pl.getAttribute('data-dbm-map'), function (ctx) { flyTo(ctx, name); }, pl);
       if (state.mode === 'inline' && state.ctx) state.ctx.root.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
     }
   });
@@ -942,7 +975,7 @@
     new MutationObserver(function () {
       if (!state.open) return;
       clearTimeout(timer);                         // give a redraw time to put the map buttons back
-      timer = setTimeout(function () { if (state.open && !visible(pinFor(state.open))) close(); }, 400);
+      timer = setTimeout(function () { if (state.open && !visible(anchorFor(state.open))) close(); }, 400);
     }).observe(portions, { attributes: true, subtree: true, attributeFilter: ['class'] });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watchPortions); else watchPortions();
