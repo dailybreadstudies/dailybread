@@ -262,20 +262,20 @@
    "text": "Leaving the Pharisees, they cross to the other side",
    "coords": [
     [
-     35.525,
-     32.83
+     35.52,
+     32.826
     ],
     [
      35.57,
-     32.86
+     32.856
     ],
     [
-     35.61,
-     32.89
+     35.605,
+     32.872
     ],
     [
-     35.628,
-     32.905
+     35.62,
+     32.884
     ]
    ],
    "dash": [
@@ -424,5 +424,5 @@
    ]
   }
  ],
- "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
 }

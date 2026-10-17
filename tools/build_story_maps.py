@@ -115,7 +115,7 @@ MAPS_OUT.append({
             'At each stop Abram builds an altar and "calls on the name of the LORD," marking out the land he has been promised: Shechem in the north, Bethel in the centre, Hebron in the south. '
             'The same three places become centres of Israel\'s later history. Jewish tradition reads the journeys of the fathers as a sign for the children, <i>ma\'aseh avot siman la-banim</i> (Ramban on 12:6): the descent to Egypt in famine and the return with wealth foreshadow Israel\'s own story.']},
     ],
-    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Seas, lakes and rivers: Natural Earth (public domain). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate. Map engine: MapLibre GL.',
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Seas and rivers: Natural Earth (public domain); Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate. Map engine: MapLibre GL.',
 })
 
 # ─────────────────────────── 2. The war of the kings (Genesis 14) ───────────────────────────
@@ -180,7 +180,7 @@ MAPS_OUT.append({
 })
 
 # ─────────────────────────── 3. Around the Sea of Galilee (Matthew 13–14) ───────────────────────────
-FEED = [35.642, 32.884]
+FEED = [35.632, 32.879]
 MAPS_OUT.append({
     'id': 'mat-13-galilee', 'title': 'Around the Sea of Galilee', 'ref': 'Matthew 13–14',
     'anchor': {'book': 'MAT', 'c': 13, 'v': 1}, 'range': [1, 58],
@@ -201,26 +201,29 @@ MAPS_OUT.append({
     'alternates': {'for': 'Bethsaida', 'bounds': [[35.6, 32.875], [35.66, 32.925]], 'sites': [{'name': 'el-Araj', 'll': [35.6272, 32.8938]}]},
     'moves': [
         mv(1, 'israel', '13:53–54', 'After the parables Jesus leaves for His hometown, Nazareth, where they take offense at Him',
-           [P['Capernaum'], [35.55, 32.862], [35.5, 32.83], [35.45, 32.785], [35.39, 32.75], [35.33, 32.72], P['Nazareth']], at=0.5),
+           [P['Capernaum'], [35.553, 32.877], [35.528, 32.862], [35.5, 32.83], [35.45, 32.785], [35.39, 32.75], [35.33, 32.72], P['Nazareth']], at=0.5),
         mv(2, 'israel', '14:13', 'Hearing of John\'s death, Jesus withdraws by boat to a solitary place', [[35.577, 32.876], [35.6, 32.872], [35.625, 32.876], FEED], at=0.5, dash=BOAT),
         mv(3, 'other', '14:13', 'The crowds follow on foot from the towns', [[35.578, 32.884], [35.6, 32.895], [35.63, 32.903], [35.643, 32.892]], at=0.55, dash=[0.1, 1.8], w=2.6),
         mv(4, 'israel', '14:22–34', 'The disciples row against the wind; Jesus comes to them walking on the sea; they land at Gennesaret',
-           [FEED, [35.62, 32.872], [35.595, 32.86], [35.565, 32.853], [35.535, 32.854]], at=0.5, dash=BOAT),
+           [FEED, [35.62, 32.868], [35.595, 32.86], [35.565, 32.853], [35.5325, 32.853]], at=0.5, dash=BOAT),
     ],
     'symbols': [
         sym('boat', [35.578, 32.872], 'He teaches the crowds in parables from a boat', '13:1–3', label='Parables', offset=[10, 8]),
         sym('loaves', FEED, 'Five loaves and two fish: the 5,000 fed', '14:15–21', moves=[2, 3], label='5,000 fed'),
         sym('mount', [35.65, 32.898], 'He goes up on the mountain alone to pray', '14:23', moves=[4]),
-        sym('boat', [35.585, 32.857], 'Jesus walks on the sea; Peter walks, sinks and is caught', '14:25–33', moves=[4], label='On the water'),
+        sym('boat', [35.588, 32.858], 'Jesus walks on the sea; Peter walks, sinks and is caught', '14:25–33', moves=[4], label='On the water'),
     ],
     'notes': [
         {'h': 'Herod and John', 'p': [
             'Herod Antipas ruled Galilee and Perea. Josephus says John was imprisoned and executed at Machaerus, Herod\'s fortress east of the Dead Sea (<i>Antiquities</i> 18.116–119), well beyond this map. The news sends Jesus to "a solitary place" (14:13).']},
+        {'h': 'The shoreline then and now', 'p': [
+            'The lake stood at much the same level in the first century as today, around 209–211 m below sea level: Mendel Nun\'s survey of the ancient harbours found breakwaters at about −211 to −212 m. '
+            'The one real change is in the north-east. The Jordan has since carried silt into the bay and built the Beteiha plain, so in Jesus\' day the water probably came closer to Bethsaida than the modern shore shows. How much closer is debated, and is part of the argument between et-Tell and el-Araj.']},
         {'h': 'The lake', 'p': [
             'The Sea of Galilee (Kinneret) is about 21 km long and 12 km wide, some 210 m below sea level. Winds funnel down from the surrounding hills, so sudden storms are common, especially in the evening (14:24). '
             'The fourth watch (14:25) ran from about 3 to 6 a.m.']},
     ],
-    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
 })
 
 # ─────────────────────────── 4. The northern journeys (Matthew 15–17) ───────────────────────────
@@ -252,7 +255,7 @@ MAPS_OUT.append({
         mv(2, 'israel', '15:29', 'Back by way of Sidon and the Decapolis (Mark 7:31) to a mountain by the Sea of Galilee',
            [[35.22, 33.25], [35.27, 33.42], [35.36, 33.53], [35.52, 33.42], [35.64, 33.25], [35.7, 33.05], [35.69, 32.9], EAST], at=0.35),
         mv(3, 'israel', '15:39', 'By boat to the region of Magadan', [EAST, [35.62, 32.83], [35.57, 32.828], [35.525, 32.826]], at=0.5, dash=BOAT),
-        mv(4, 'israel', '16:4–5', 'Leaving the Pharisees, they cross to the other side', [[35.525, 32.83], [35.57, 32.86], [35.61, 32.89], [35.628, 32.905]], at=0.5, dash=BOAT),
+        mv(4, 'israel', '16:4–5', 'Leaving the Pharisees, they cross to the other side', [[35.52, 32.826], [35.57, 32.856], [35.605, 32.872], [35.62, 32.884]], at=0.5, dash=BOAT),
         mv(5, 'israel', '16:13', 'North to the region of Caesarea Philippi', [[35.63, 32.91], [35.64, 33.0], [35.62, 33.1], [35.65, 33.19], [35.685, 33.24]], at=0.5),
         mv(6, 'israel', '17:1', '"After six days": up a high mountain with Peter, James and John', [[35.7, 33.25], [35.76, 33.3], [35.81, 33.36], [35.845, 33.405]], at=0.5, dash=[2, 1.4]),
         mv(7, 'israel', '17:22–24', 'Through Galilee and back to Capernaum', [[35.69, 33.23], [35.63, 33.12], [35.6, 33.0], [35.58, 32.9]], at=0.5),
@@ -269,7 +272,7 @@ MAPS_OUT.append({
         {'h': 'At the gates of Hades', 'p': [
             'The cave at Banias was thought to lead down to the underworld. Against that backdrop Jesus says, "on this rock I will build My church, and the gates of Hades will not prevail against it" (16:18).']},
     ],
-    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
 })
 
 

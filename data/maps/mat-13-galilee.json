@@ -127,7 +127,11 @@
      32.88111
     ],
     [
-     35.55,
+     35.553,
+     32.877
+    ],
+    [
+     35.528,
      32.862
     ],
     [
@@ -172,8 +176,8 @@
      32.876
     ],
     [
-     35.642,
-     32.884
+     35.632,
+     32.879
     ]
    ],
    "dash": [
@@ -219,12 +223,12 @@
    "text": "The disciples row against the wind; Jesus comes to them walking on the sea; they land at Gennesaret",
    "coords": [
     [
-     35.642,
-     32.884
+     35.632,
+     32.879
     ],
     [
      35.62,
-     32.872
+     32.868
     ],
     [
      35.595,
@@ -235,8 +239,8 @@
      32.853
     ],
     [
-     35.535,
-     32.854
+     35.5325,
+     32.853
     ]
    ],
    "dash": [
@@ -263,8 +267,8 @@
   {
    "type": "loaves",
    "at": [
-    35.642,
-    32.884
+    35.632,
+    32.879
    ],
    "key": "Five loaves and two fish: the 5,000 fed",
    "vv": "14:15–21",
@@ -289,8 +293,8 @@
   {
    "type": "boat",
    "at": [
-    35.585,
-    32.857
+    35.588,
+    32.858
    ],
    "key": "Jesus walks on the sea; Peter walks, sinks and is caught",
    "vv": "14:25–33",
@@ -308,11 +312,17 @@
    ]
   },
   {
+   "h": "The shoreline then and now",
+   "p": [
+    "The lake stood at much the same level in the first century as today, around 209–211 m below sea level: Mendel Nun's survey of the ancient harbours found breakwaters at about −211 to −212 m. The one real change is in the north-east. The Jordan has since carried silt into the bay and built the Beteiha plain, so in Jesus' day the water probably came closer to Bethsaida than the modern shore shows. How much closer is debated, and is part of the argument between et-Tell and el-Araj."
+   ]
+  },
+  {
    "h": "The lake",
    "p": [
     "The Sea of Galilee (Kinneret) is about 21 km long and 12 km wide, some 210 m below sea level. Winds funnel down from the surrounding hills, so sudden storms are common, especially in the evening (14:24). The fourth watch (14:25) ran from about 3 to 6 a.m."
    ]
   }
  ],
- "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
 }

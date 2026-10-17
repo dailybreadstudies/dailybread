@@ -31,7 +31,7 @@
     waterways: 'https://tiles.openfreemap.org/planet'
   };
   var SOURCES_NOTE = '<b>Sources.</b> Scripture: Berean Standard Bible (public domain). Places and identifications: ' +
-    '<a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0), with Jordan and Dead Sea ' +
+    '<a href="https://www.openbible.info/geo/" target="_blank" rel="noopener">OpenBible.info</a> (CC BY 4.0), with Jordan, Dead Sea and Sea of Galilee ' +
     'outlines from OpenStreetMap; seas from Natural Earth. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap ' +
     'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
@@ -367,10 +367,17 @@
     }
     keyHTML += '</ul>';
     root.querySelectorAll('[data-dbm-key]').forEach(function (k) { k.innerHTML = keyHTML; });
+    var ALT_BTN = '<p><button type="button" class="dbm-link" data-dbm-alt>Show the other proposed sites on the map</button></p>';
+    var flagged = (spec.notes || []).some(function (n) { return n.alternates; });
     var notes = (spec.notes || []).map(function (n) {
       return '<h3>' + esc(n.h) + '</h3>' + n.p.map(function (p) { return '<p>' + p + '</p>'; }).join('') +
-        (n.alternates && spec.alternates ? '<p><button type="button" class="dbm-link" data-dbm-alt>Show the other proposed sites on the map</button></p>' : '');
+        (n.alternates && spec.alternates ? ALT_BTN : '');
     }).join('');
+    // a map with other proposed sites always offers the button, even without a note for it
+    if (spec.alternates && !flagged) {
+      var names = spec.alternates.sites.map(function (a) { return esc(a.name); }).join(', ');
+      notes += '<h3>Where was ' + esc(displayName(spec.alternates.for, hn)) + '?</h3><p>Other proposed sites: ' + names + '.</p>' + ALT_BTN;
+    }
     root.querySelector('.dbm-notes').innerHTML = notes + '<p class="dbm-src">' + (spec.sources ? '<b>Sources.</b> ' + spec.sources : SOURCES_NOTE) + '</p>';
   }
 
@@ -836,7 +843,7 @@
       ctx.map.fitBounds(alt.bounds, { padding: 40, duration: reduceMotion ? 0 : 1200 });
       if (state.mode === 'inline') ctx.frame.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
     } else { (ctx.altMarks || []).forEach(function (m) { m.remove(); }); ctx.altMarks = []; }
-    b.textContent = ctx.altOn ? 'Hide the other proposed sites' : 'Show the other proposed sites on the map';
+    ctx.root.querySelectorAll('[data-dbm-alt]').forEach(function (x) { x.textContent = ctx.altOn ? 'Hide the other proposed sites' : 'Show the other proposed sites on the map'; });
   }
 
   var popup = null;
@@ -847,7 +854,9 @@
   function showNamed(ctx, name) {
     var p = (ctx.spec.named || []).filter(function (x) { return x.name === name; })[0];
     if (p) {
-      showPopup(ctx, p.ll, '<div class="dbm-pp"><h4>' + esc(displayName(p.name, ctx.hn)) + '</h4><p class="site">Modern site: ' + esc(p.site) + '</p><p>' + esc(p.note) + '</p>' +
+      var altBtn = ctx.spec.alternates && ctx.spec.alternates.for === p.name
+        ? '<p><button type="button" class="dbm-link" data-dbm-alt>' + (ctx.altOn ? 'Hide the other proposed sites' : 'Show the other proposed sites') + '</button></p>' : '';
+      showPopup(ctx, p.ll, '<div class="dbm-pp"><h4>' + esc(displayName(p.name, ctx.hn)) + '</h4><p class="site">Modern site: ' + esc(p.site) + '</p><p>' + esc(p.note) + '</p>' + altBtn +
         (p.ob ? '<a href="https://www.openbible.info/geo/ancient/' + esc(p.ob) + '" target="_blank" rel="noopener">OpenBible.info entry ↗</a>' : '') + '</div>');
       return p.ll;
     }
