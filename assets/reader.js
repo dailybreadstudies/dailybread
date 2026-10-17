@@ -1057,10 +1057,16 @@
     return out;
   }
   function sizeLast(book, c) { var s = bibleSize[book]; return s && s[c - 1] ? s[c - 1][0] : 0; }
+  // Daily Bread for Kids reads 10 books in the year: the Torah, and the Gospels with Acts
+  var KIDS_GROUPS = [
+    ['Torah', 'תּוֹרָה', ['GEN', 'EXO', 'LEV', 'NUM', 'DEU'], 0],
+    ['Gospels & Acts', 'בְּשׂוֹרוֹת', ['MAT', 'MRK', 'LUK', 'JHN', 'ACT'], 3]
+  ];
+  var WHOLE = KIDS ? 'of the 10 books' : 'of the Bible';   // the circle's centre label
   function bibleTally(y) {
     var read = readVerses(yearRefs(y), sizeLast), maxWords = 0;
-    var sections = GROUPS.map(function (g, gi) {
-      var sec = { name: g[0], he: g[1].replace(/[֑-ׇ]/g, ''), n: gi, words: 0, wordsRead: 0, verses: 0, versesRead: 0, books: [] };
+    var sections = (KIDS ? KIDS_GROUPS : GROUPS).map(function (g, gi) {
+      var sec = { name: g[0], he: g[1].replace(/[֑-ׇ]/g, ''), n: g[3] === undefined ? gi : g[3], words: 0, wordsRead: 0, verses: 0, versesRead: 0, books: [] };
       g[2].forEach(function (id) {
         var size = bibleSize[id] || [];
         var book = { id: id, words: 0, wordsRead: 0, verses: 0, versesRead: 0, chapters: size.length, runs: [] };
@@ -1120,19 +1126,24 @@
       a += span + GAP;
     });
     var mid = '<text class="bb-c-pct" x="120" y="118" text-anchor="middle">' + pctText(t.all.wordsRead, t.all.words) + '</text>' +
-      '<text class="bb-c-lbl" x="120" y="140" text-anchor="middle">of the Bible</text>' +
+      '<text class="bb-c-lbl" x="120" y="140" text-anchor="middle">' + WHOLE + '</text>' +
       '<text class="bb-c-sub" x="120" y="158" text-anchor="middle">' + num(t.all.versesRead) + ' of ' + num(t.all.verses) + ' verses</text>';
     return '<svg class="bb-ring" viewBox="0 0 240 240" role="img" aria-label="' +
-      escapeAttr(pctText(t.all.wordsRead, t.all.words).replace('&lt;', 'under ') + ' of the Bible read') + '">' +
+      escapeAttr(pctText(t.all.wordsRead, t.all.words).replace('&lt;', 'under ') + ' ' + WHOLE + ' read') + '">' +
       '<g fill="none" stroke-width="' + W + '">' + svg + '</g><g class="bb-hits" fill="none" stroke-width="' + (W + 14) + '">' + hits + '</g>' +
       '<g class="bb-centre" data-pct="' + pctText(t.all.wordsRead, t.all.words) + '" data-sub="' + num(t.all.versesRead) + ' of ' + num(t.all.verses) + ' verses">' + mid + '</g></svg>';
   }
   function bibleProgressHtml() {
     var t = bibleTally(), max = t.maxWords;
-    var html = '<h2 class="pg-h">Your Bible <span>' + PLAN_YEAR + ' &middot; by length of text</span></h2>' +
-      '<p class="pg-blurb">Every reading you mark complete, and every chapter you mark read in the Bible reader, fills in its verses here. ' +
-      'The circle is the whole Bible, each part drawn to the length of its text, so you can watch the Scriptures fill in as the year goes by. ' +
-      'Touch a part of the circle to see that book.</p>' +
+    var html = (KIDS
+      ? '<h2 class="pg-h">Your 10 Books <span>' + PLAN_YEAR + ' &middot; by length of text</span></h2>' +
+        '<p class="pg-blurb">This year you read 10 books: the five books of the Torah, and the four Gospels with Acts. ' +
+        'Every reading you mark complete fills in its verses here, so you can watch the circle fill up as the year goes by. ' +
+        'Touch a part of the circle to see that book.</p>'
+      : '<h2 class="pg-h">Your Bible <span>' + PLAN_YEAR + ' &middot; by length of text</span></h2>' +
+        '<p class="pg-blurb">Every reading you mark complete, and every chapter you mark read in the Bible reader, fills in its verses here. ' +
+        'The circle is the whole Bible, each part drawn to the length of its text, so you can watch the Scriptures fill in as the year goes by. ' +
+        'Touch a part of the circle to see that book.</p>') +
       '<div class="bb-wrap">' + bibleRingSvg(t) + '<div class="bb-secs">' +
       t.sections.map(function (sec) {
         return '<div class="bb-sec bb-s' + sec.n + '"><span class="bb-key"></span><span class="bb-name">' + sec.name + '</span>' +
@@ -1144,9 +1155,10 @@
     var started = 0;
     t.sections.forEach(function (sec) { sec.books.forEach(function (b) { if (b.versesRead) started++; }); });
     html += '<h2 class="pg-h">By book</h2>' +
-      '<p class="pg-blurb">From Obadiah’s single chapter to the hundred and fifty Psalms, each bar is drawn to the length of its book ' +
+      '<p class="pg-blurb">' + (KIDS ? 'From Mark, the shortest, to Genesis, the longest, each bar is drawn to the length of its book ' :
+        'From Obadiah’s single chapter to the hundred and fifty Psalms, each bar is drawn to the length of its book ') +
       'and fills in as you read.</p>' +
-      '<details class="bb-all"' + (bbOpen ? ' open' : '') + '><summary><span class="bb-all-open">Show all 66 books</span>' +
+      '<details class="bb-all"' + (bbOpen || KIDS ? ' open' : '') + '><summary><span class="bb-all-open">Show all ' + (KIDS ? '10' : '66') + ' books</span>' +
       '<span class="bb-all-close">Hide the books</span><span class="bb-all-n">' + started + ' started</span></summary><div class="bb-books">' +
       t.sections.map(function (sec) {
         return '<div class="bb-group bb-s' + sec.n + '"><p class="bb-ghead"><span class="bb-name">' + sec.name +
@@ -1165,7 +1177,7 @@
       html += '<h2 class="pg-h">Past years</h2><ul class="bb-past">' + past.map(function (y) {
         var a = progress.archive[y], pt = bibleTally(+y);
         var n = Object.keys(a.read).reduce(function (sum, d) { return sum + a.read[d].length; }, 0);
-        return '<li><span class="bb-past-y">' + y + '</span><span>' + pctText(pt.all.wordsRead, pt.all.words) + ' of the Bible</span>' +
+        return '<li><span class="bb-past-y">' + y + '</span><span>' + pctText(pt.all.wordsRead, pt.all.words) + ' ' + WHOLE + '</span>' +
           '<span class="bb-past-n">' + [n ? num(n) + (n === 1 ? ' reading' : ' readings') : '',
             Object.keys(a.chapters).length ? num(Object.keys(a.chapters).length) + (Object.keys(a.chapters).length === 1 ? ' chapter' : ' chapters') : '']
             .filter(Boolean).join(' &middot; ') + '</span></li>';
@@ -1187,7 +1199,7 @@
       hit.classList.add('is-on');
       tx[0].innerHTML = hit.getAttribute('data-pct'); tx[1].textContent = hit.getAttribute('data-label'); tx[2].textContent = hit.getAttribute('data-sub');
     } else {
-      tx[0].innerHTML = c.getAttribute('data-pct'); tx[1].textContent = 'of the Bible'; tx[2].textContent = c.getAttribute('data-sub');
+      tx[0].innerHTML = c.getAttribute('data-pct'); tx[1].textContent = WHOLE; tx[2].textContent = c.getAttribute('data-sub');
     }
   }
   document.addEventListener('mouseover', function (e) {
