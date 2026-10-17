@@ -340,13 +340,17 @@
       keyHTML += '<li><button type="button" class="dbm-krow dbm-cities" data-dbm-cities aria-pressed="true">' + SYM.city() + '<span>' + esc(spec.placesLabel || 'Places') +
         ' <span class="dbm-mini">' + SYM.uncertain() + 'uncertain</span><span class="dbm-mini">' + SYM.mount() + 'hill</span></span></button></li>';
     }
+    if (spec.world) {                                  // wide maps: how sure each dot is
+      var dot = function (o) { return '<svg viewBox="0 0 56 20"><circle cx="28" cy="10" r="4.6" fill="var(--dbm-label)" fill-opacity="' + o + '" stroke="var(--dbm-paper)" stroke-width="1.4"/></svg>'; };
+      keyHTML += '<li class="dbm-srow">' + dot(1) + '<span>Likely or possible location</span></li><li class="dbm-srow">' + dot(0.5) + '<span>Uncertain: only a proposal</span></li>';
+    }
     keyHTML += '</ul>';
     root.querySelectorAll('[data-dbm-key]').forEach(function (k) { k.innerHTML = keyHTML; });
     var notes = (spec.notes || []).map(function (n) {
       return '<h3>' + esc(n.h) + '</h3>' + n.p.map(function (p) { return '<p>' + p + '</p>'; }).join('') +
         (n.alternates && spec.alternates ? '<p><button type="button" class="dbm-link" data-dbm-alt>Show the other proposed sites on the map</button></p>' : '');
     }).join('');
-    root.querySelector('.dbm-notes').innerHTML = notes + '<p class="dbm-src">' + SOURCES_NOTE + '</p>';
+    root.querySelector('.dbm-notes').innerHTML = notes + '<p class="dbm-src">' + (spec.sources ? '<b>Sources.</b> ' + spec.sources : SOURCES_NOTE) + '</p>';
   }
 
   function wireAtlas(ctx) {
@@ -384,9 +388,20 @@
     Promise.all([loadEngine(), getJSON('data/maps/' + ctx.id + '.json'), getJSON('data/maps/base/water.json'), hebrewNames(),
                  getJSON('data/maps/base/ancient.json').catch(function () { return null; })])
       .then(function (res) {
+        if (!res[1].world) return res;
+        // A wide map (e.g. the Table of Nations): seas, lakes and great rivers of the whole region
+        return getJSON('data/maps/base/world.json').then(function (w) {
+          var water = res[2];
+          water.sea = w.sea; water.rivers = w.rivers; water.box = w.box;
+          water.names = { type: 'FeatureCollection', features: water.names.features.filter(function (f) { return f.properties.n === 'The Great Sea'; })
+            .map(function (f) { return { type: 'Feature', properties: f.properties, geometry: { type: 'Point', coordinates: [20.5, 34.6] } }; }).concat(w.names.features) };
+          return res;
+        });
+      })
+      .then(function (res) {
         if (state.ctx !== ctx) return;                       // closed while loading
         var spec = res[1], water = res[2], hn = res[3];
-        water.ancient = res[4];
+        water.ancient = spec.world ? null : res[4];
         fillAtlas(ctx, spec, hn);
         var placesP = spec.places ? getJSON('data/maps/places/' + spec.places + '.json').catch(function () { return null; }) : Promise.resolve(null);
         return placesP.then(function (places) {
@@ -437,6 +452,10 @@
           places: { type: 'geojson', data: places || empty },
           gareas: { type: 'geojson', data: groupAreas(spec) },
           gpoints: { type: 'geojson', data: groupPoints(spec, hn) },
+          // labels in sources of their own, so the dots and areas still draw if the label font cannot load
+          galabels: { type: 'geojson', data: groupAreas(spec) },
+          gplabels: { type: 'geojson', data: groupPoints(spec, hn) },
+          nrivers: { type: 'geojson', data: water.rivers || empty },
           moves: { type: 'geojson', data: { type: 'FeatureCollection', features: (spec.moves || []).map(function (m) {
             return { type: 'Feature', properties: { n: m.n }, geometry: { type: 'MultiLineString', coordinates: linesOf(m) } }; }) } }
         },
@@ -448,6 +467,8 @@
               'hillshade-shadow-color': css('--dbm-shade'), 'hillshade-highlight-color': css('--dbm-highlight'), 'hillshade-accent-color': css('--dbm-shade') } },
           { id: 'sea', type: 'fill', source: 'sea', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'sea-edge', type: 'line', source: 'sea', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1 } },
+          { id: 'nrivers', type: 'line', source: 'nrivers', layout: { 'line-cap': 'round', 'line-join': 'round' },
+            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.95, 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.2, 7, 2] } },
           { id: 'galilee', type: 'fill', source: 'galilee', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'deadsea', type: 'fill', source: 'deadsea', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'wadi', type: 'line', source: 'ofm', 'source-layer': 'waterway', minzoom: 5,
@@ -467,7 +488,8 @@
       },
       bounds: spec.bounds,
       fitBoundsOptions: { padding: { top: 80, bottom: 36, left: 28, right: 28 } },
-      maxZoom: 16, minZoom: 5
+      maxZoom: spec.world ? 11 : 16, minZoom: spec.world ? 2.6 : 5,
+      maxBounds: spec.world && water.box ? water.box : undefined
     });
     if (window.ResizeObserver) { ctx.ro = new ResizeObserver(function () { map.resize(); }); ctx.ro.observe(ctx.frame); }
     map.addControl(new ml.NavigationControl({ showCompass: true, visualizePitch: true }), 'bottom-right');
@@ -553,14 +575,14 @@
     map.addLayer({ id: 'garea-line', type: 'line', source: 'gareas', filter: ['==', ['get', 'kind'], 'area'],
       layout: { 'line-join': 'round' }, paint: { 'line-color': ['get', 'color'], 'line-width': 1.6, 'line-opacity': 0.75, 'line-dasharray': [3, 2] } });
     map.addLayer({ id: 'gpoint', type: 'circle', source: 'gpoints',
-      paint: { 'circle-color': ['get', 'color'], 'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 2.6, 10, 4.2, 14, 6],
+      paint: { 'circle-color': ['get', 'color'], 'circle-radius': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 3.6, 6, 5, 9, 6.5] : ['interpolate', ['linear'], ['zoom'], 6, 2.6, 10, 4.2, 14, 6],
         'circle-stroke-color': css('--dbm-paper'), 'circle-stroke-width': 1.2, 'circle-opacity': ['case', ['==', ['get', 'c'], 0], 0.55, 1] } });
-    map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gpoints', minzoom: 8.3,
+    map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gplabels', minzoom: spec.world ? 2 : 8.3,
       layout: { 'text-field': ['get', 'd'], 'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Regular']]],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 8.3, 10, 13, 12.5], 'text-variable-anchor': ['top', 'right', 'left', 'bottom'],
+        'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 10, 7, 13] : ['interpolate', ['linear'], ['zoom'], 8.3, 10, 13, 12.5], 'text-variable-anchor': ['top', 'right', 'left', 'bottom'],
         'text-radial-offset': 0.6, 'text-justify': 'auto', 'text-optional': true },
       paint: { 'text-color': css('--dbm-label'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
-    map.addLayer({ id: 'garea-label', type: 'symbol', source: 'gareas', filter: ['==', ['get', 'kind'], 'label'],
+    map.addLayer({ id: 'garea-label', type: 'symbol', source: 'galabels', filter: ['==', ['get', 'kind'], 'label'],
       layout: { 'text-field': ['get', 'name'], 'text-font': ['literal', ['Noto Sans Bold']], 'text-transform': 'uppercase', 'text-letter-spacing': 0.18,
         'text-size': ['interpolate', ['linear'], ['zoom'], 6, 10, 10, 15], 'text-allow-overlap': false, 'text-padding': 4 },
       paint: { 'text-color': ['get', 'color'], 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.6 } });
@@ -596,9 +618,10 @@
   function placePopup(p, spec, gname) {
     var conf = ['Location uncertain', 'Possible location', 'Likely location'][p.c] || '';
     var bookName = spec.placesName || (spec.places === 'JOS' || /^josh-/.test(spec.id) ? 'Joshua' : spec.places);
-    return '<div class="dbm-pp"><h4>' + esc(p.d || p.n) + '</h4><p class="site">' + (p.m ? 'Modern site: ' + esc(p.m) + ' · ' : '') + conf + '</p>' +
+    return '<div class="dbm-pp"><h4>' + esc(p.d || p.n) + '</h4><p class="site">' + (p.m ? (spec.siteLabel || 'Modern site') + ': ' + esc(p.m) + ' · ' : '') + conf + '</p>' +
       (gname ? '<p>' + esc(gname) + (p.f ? ', ' + esc(bookName) + ' ' + esc(p.f) : '') + '.</p>' : '<p>First named in ' + esc(bookName) + ' at ' + esc(p.f) + '.</p>') +
-      '<a href="https://www.openbible.info/geo/ancient/' + esc(p.u) + '" target="_blank" rel="noopener">OpenBible.info entry ↗</a></div>';
+      (p.note ? '<p>' + esc(p.note) + '</p>' : '') +
+      (p.u ? '<a href="https://www.openbible.info/geo/ancient/' + esc(p.u) + '" target="_blank" rel="noopener">OpenBible.info entry ↗</a>' : '') + '</div>';
   }
 
   /* Groups: places in an allotment, a clan's towns, a list of kings. Each group may carry an
@@ -615,7 +638,7 @@
     var feats = [];
     (spec.groups || []).forEach(function (g) {
       (g.places || []).forEach(function (p) {
-        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, color: g.color, n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '' },
+        feats.push({ type: 'Feature', properties: { g: g.id, gname: g.name, color: g.color, n: p.n, d: displayName(p.n, hn), m: p.m || '', c: p.c, f: p.f || '', u: p.u || '', note: p.note || '' },
           geometry: { type: 'Point', coordinates: p.ll } });
       });
     });

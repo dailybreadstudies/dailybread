@@ -97,6 +97,11 @@ git clone --depth 1 https://github.com/openbibleinfo/Bible-Geocoding-Data /tmp/o
 python3 tools/build_map_places.py /tmp/obgeo data/maps/places
 ```
 
+- Genesis 10, **The Table of Nations** (`data/maps/gen-10-nations.json`, edited by hand): a wide map (`"world": true`)
+  with the peoples of Japheth, Ham and Shem and Nimrod's cities as coloured groups; each dot has a certainty (`c`: 2 likely,
+  1 possible, 0 uncertain), a region (`m`) and a short note with the evidence (`note`). Wide maps use the seas, lakes and
+  great rivers in `data/maps/base/world.json` (Natural Earth, public domain), built by `python3 tools/build_world_water.py`
+  (instructions at the top of the script).
 - Check every map before publishing: `python3 tools/check_maps.py`
 - Background maps (terrain, street, satellite) are set in one place at the top of `assets/maps.js`.
 - Ancient view extras, shared by every map: rivers and wadis from OpenStreetMap (OpenFreeMap vector tiles,

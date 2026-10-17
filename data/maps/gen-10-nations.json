@@ -1,0 +1,731 @@
+{
+ "id": "gen-10-nations",
+ "title": "The Table of Nations",
+ "ref": "Genesis 10",
+ "anchor": {
+  "book": "GEN",
+  "c": 10,
+  "v": 1
+ },
+ "range": [
+  1,
+  32
+ ],
+ "world": true,
+ "siteLabel": "Region",
+ "placesName": "Genesis",
+ "bounds": [
+  [
+   19.5,
+   12.5
+  ],
+  [
+   56.5,
+   44.5
+  ]
+ ],
+ "links": [],
+ "groupsLabel": "Noah’s sons",
+ "groups": [
+  {
+   "id": "japheth",
+   "name": "Japheth",
+   "color": "#3f6aa8",
+   "vv": "10:2-5",
+   "labelAt": [
+    30.6,
+    40.9
+   ],
+   "places": [
+    {
+     "n": "Gomer",
+     "ll": [
+      35.0,
+      39.6
+     ],
+     "c": 2,
+     "m": "Central Turkey (Cappadocia)",
+     "f": "10:2",
+     "note": "Usually identified with the Gimirrai of Assyrian records, the Cimmerians: a people from north of the Black Sea who settled in Anatolia in the 8th–7th centuries BC. Ezekiel 38:6 places Gomer in the far north."
+    },
+    {
+     "n": "Magog",
+     "ll": [
+      42.5,
+      43.3
+     ],
+     "c": 0,
+     "m": "North of the Caucasus?",
+     "f": "10:2",
+     "note": "Uncertain. Josephus identified Magog with the Scythians north of the Black Sea and the Caucasus; others link the name with Lydia. Ezekiel 38–39 places “Gog, of the land of Magog” in the far north."
+    },
+    {
+     "n": "Madai",
+     "ll": [
+      48.5,
+      34.8
+     ],
+     "c": 2,
+     "m": "Northwestern Iran (Media)",
+     "f": "10:2",
+     "note": "The Medes, an Iranian people of the Zagros mountains, with their capital at Ecbatana (modern Hamadan). Madai is the Hebrew name for Media throughout the Bible."
+    },
+    {
+     "n": "Javan",
+     "ll": [
+      27.3,
+      38.3
+     ],
+     "c": 2,
+     "m": "Western Turkey and the Aegean (Ionia)",
+     "f": "10:2",
+     "note": "The Ionians, the Greeks of the Aegean coast and islands. In later books Javan stands for Greece (Daniel 8:21); it is still the Hebrew name for Greece."
+    },
+    {
+     "n": "Tubal",
+     "ll": [
+      36.0,
+      38.4
+     ],
+     "c": 2,
+     "m": "South-central Turkey",
+     "f": "10:2",
+     "note": "Tabal of the Assyrian records, a kingdom in south-central Anatolia. The Bible usually names Tubal together with Meshech (Ezekiel 27:13; 38:2)."
+    },
+    {
+     "n": "Meshech",
+     "ll": [
+      32.4,
+      39.5
+     ],
+     "c": 2,
+     "m": "Central Turkey (Phrygia)",
+     "f": "10:2",
+     "note": "The Mushki of Assyrian records, linked with the Phrygians of central Anatolia, whose King Mita is the Midas of Greek legend."
+    },
+    {
+     "n": "Tiras",
+     "ll": [
+      26.0,
+      41.4
+     ],
+     "c": 0,
+     "m": "Thrace or the Aegean?",
+     "f": "10:2",
+     "note": "Uncertain. Josephus identified Tiras with the Thracians. Many scholars link the name with the Tursha, one of the Sea Peoples, sometimes connected with the Tyrsenians (Etruscans)."
+    },
+    {
+     "n": "Ashkenaz",
+     "ll": [
+      45.6,
+      37.9
+     ],
+     "c": 1,
+     "m": "Around Lake Urmia, northwestern Iran",
+     "f": "10:3",
+     "note": "Probably the Ashkuza of Assyrian records, a Scythian people near Lake Urmia. Jeremiah 51:27 names Ashkenaz with Ararat and Minni. In medieval Jewish usage the name came to mean Germany."
+    },
+    {
+     "n": "Riphath",
+     "ll": [
+      33.5,
+      41.4
+     ],
+     "c": 0,
+     "m": "Northern Turkey?",
+     "f": "10:3",
+     "note": "Unknown. Josephus placed Riphath in Paphlagonia on the Black Sea coast. 1 Chronicles 1:6 spells the name Diphath."
+    },
+    {
+     "n": "Togarmah",
+     "ll": [
+      37.3,
+      38.7
+     ],
+     "c": 1,
+     "m": "Eastern Turkey",
+     "f": "10:3",
+     "note": "Probably Tegarama (Til-garimmu), a city and region of eastern Anatolia near modern Gürün. Ezekiel 27:14 mentions its horses and mules; Ezekiel 38:6 places Beth-togarmah in the far north."
+    },
+    {
+     "n": "Elishah",
+     "ll": [
+      32.5,
+      35.15
+     ],
+     "c": 1,
+     "m": "Cyprus?",
+     "f": "10:4",
+     "note": "Often identified with Alashiya, an ancient name for Cyprus or part of it. Ezekiel 27:7 speaks of purple cloth “from the coasts of Elishah”. Others suggest Sicily or southern Italy."
+    },
+    {
+     "n": "Tarshish",
+     "ll": [
+      -6.3,
+      37.3
+     ],
+     "c": 1,
+     "m": "Southern Spain (Tartessos)?",
+     "f": "10:4",
+     "note": "A distant port reached by the “ships of Tarshish” (1 Kings 10:22; Jonah 1:3). Often identified with Tartessos in southern Spain; Sardinia and Tarsus in Cilicia have also been proposed."
+    },
+    {
+     "n": "Kittites",
+     "ll": [
+      33.62,
+      34.92
+     ],
+     "c": 2,
+     "m": "Cyprus (Kition, modern Larnaca)",
+     "f": "10:4",
+     "note": "Kittim, named after Kition, the Phoenician city on Cyprus. Later the name widened to the islands and coasts of the west (Daniel 11:30); the Dead Sea Scrolls use it for Rome."
+    },
+    {
+     "n": "Rodanites",
+     "ll": [
+      28.0,
+      36.3
+     ],
+     "c": 1,
+     "m": "Rhodes?",
+     "f": "10:4",
+     "note": "Rodanim, as 1 Chronicles 1:7 and the Greek Septuagint read: the people of Rhodes. Some Hebrew manuscripts of Genesis read Dodanim; the Hebrew letters d and r look very much alike."
+    }
+   ]
+  },
+  {
+   "id": "ham",
+   "name": "Ham",
+   "color": "#b0582f",
+   "vv": "10:6-20",
+   "labelAt": [
+    28.0,
+    23.5
+   ],
+   "places": [
+    {
+     "n": "Cush",
+     "ll": [
+      32.5,
+      19.0
+     ],
+     "c": 2,
+     "m": "Sudan (ancient Nubia)",
+     "f": "10:6",
+     "note": "Kush, the kingdom on the Nile south of Egypt (Nubia, in modern Sudan), called Ethiopia in Greek. Some scholars think the Cush who fathered Nimrod (10:8) points instead to the Kassites of Mesopotamia."
+    },
+    {
+     "n": "Mizraim",
+     "ll": [
+      31.2,
+      28.6
+     ],
+     "c": 2,
+     "m": "Egypt",
+     "f": "10:6",
+     "note": "Mitsrayim, the Hebrew name of Egypt, still its name in Hebrew today."
+    },
+    {
+     "n": "Put",
+     "ll": [
+      21.8,
+      32.2
+     ],
+     "c": 1,
+     "m": "Libya?",
+     "f": "10:6",
+     "note": "Usually identified with Libya, west of Egypt, as in the Septuagint and Josephus. Others suggest Punt on the African coast of the Red Sea."
+    },
+    {
+     "n": "Canaan",
+     "ll": [
+      34.95,
+      32.3
+     ],
+     "c": 2,
+     "m": "Israel, Lebanon and coastal Syria",
+     "f": "10:6",
+     "note": "The land west of the Jordan, from Sidon to Gaza (10:19), named after Canaan, whose “sons” are listed in 10:15–18."
+    },
+    {
+     "n": "Seba",
+     "ll": [
+      33.7,
+      16.9
+     ],
+     "c": 0,
+     "m": "Sudan (Meroë)?",
+     "f": "10:7",
+     "note": "Uncertain. Named with Egypt and Cush (Isaiah 43:3; 45:14); Josephus places Seba at Meroë on the upper Nile. Others link it with Saba in Arabia."
+    },
+    {
+     "n": "Havilah",
+     "ll": [
+      42.8,
+      25.6
+     ],
+     "c": 0,
+     "m": "Arabia",
+     "f": "10:7",
+     "note": "A region of Arabia, “from Havilah to Shur, which is near the border of Egypt” (Genesis 25:18). The same name is listed among Joktan’s sons (10:29), and at the river Pishon (2:11)."
+    },
+    {
+     "n": "Sabtah",
+     "ll": [
+      46.8,
+      15.4
+     ],
+     "c": 0,
+     "m": "Yemen (Shabwa)?",
+     "f": "10:7",
+     "note": "Uncertain. Often linked with Shabwa, the ancient capital of Hadramaut in southern Arabia."
+    },
+    {
+     "n": "Raamah",
+     "ll": [
+      44.2,
+      17.6
+     ],
+     "c": 0,
+     "m": "Southwestern Arabia",
+     "f": "10:7",
+     "note": "Uncertain. A trading people of Arabia named with Sheba (Ezekiel 27:22), often placed near Najran."
+    },
+    {
+     "n": "Sheba",
+     "ll": [
+      45.33,
+      15.42
+     ],
+     "c": 2,
+     "m": "Yemen (Saba, around Marib)",
+     "f": "10:7",
+     "note": "Saba, the kingdom of the queen of Sheba (1 Kings 10), centred on Marib in Yemen. A Sheba is also listed among Joktan’s sons (10:28); both lists may reflect the trade routes of southern Arabia."
+    },
+    {
+     "n": "Dedan",
+     "ll": [
+      37.92,
+      26.62
+     ],
+     "c": 2,
+     "m": "Al-Ula, northwestern Saudi Arabia",
+     "f": "10:7",
+     "note": "The oasis of al-Ula in northwestern Arabia, a centre of the incense trade (Ezekiel 27:20; Isaiah 21:13)."
+    },
+    {
+     "n": "Ludites",
+     "ll": [
+      27.6,
+      28.4
+     ],
+     "c": 0,
+     "m": "North Africa, or Lydia?",
+     "f": "10:13",
+     "note": "Unknown. Listed among the peoples of Egypt, so perhaps a people of North Africa; some identify them with the Lydians of Anatolia (compare Lud, 10:22)."
+    },
+    {
+     "n": "Lehabites",
+     "ll": [
+      25.2,
+      30.8
+     ],
+     "c": 1,
+     "m": "Libya",
+     "f": "10:13",
+     "note": "Probably the Libyans (Lubim, 2 Chronicles 12:3; Nahum 3:9), west of Egypt."
+    },
+    {
+     "n": "Naphtuhites",
+     "ll": [
+      31.0,
+      30.8
+     ],
+     "c": 0,
+     "m": "The Nile Delta?",
+     "f": "10:13",
+     "note": "Uncertain. Perhaps the people of Lower Egypt, the Nile Delta."
+    },
+    {
+     "n": "Pathrusites",
+     "ll": [
+      32.65,
+      25.7
+     ],
+     "c": 2,
+     "m": "Upper Egypt",
+     "f": "10:14",
+     "note": "The people of Pathros, the “southern land” of Egypt (Upper Egypt) around Thebes (Jeremiah 44:1, 15; Ezekiel 30:14)."
+    },
+    {
+     "n": "Caphtorites",
+     "ll": [
+      24.9,
+      35.2
+     ],
+     "c": 2,
+     "m": "Crete",
+     "f": "10:14",
+     "note": "Caphtor is generally identified with Crete, Keftiu in Egyptian records. Amos 9:7 and Jeremiah 47:4 say the Philistines came from Caphtor."
+    },
+    {
+     "n": "Sidon",
+     "ll": [
+      35.37,
+      33.56
+     ],
+     "c": 2,
+     "m": "Sidon, Lebanon",
+     "f": "10:15",
+     "note": "Canaan’s firstborn: Sidon on the Lebanese coast, one of the oldest Phoenician cities."
+    },
+    {
+     "n": "Hittites",
+     "ll": [
+      35.1,
+      31.53
+     ],
+     "c": 1,
+     "m": "Around Hebron; also Anatolia and Syria",
+     "f": "10:15",
+     "note": "The Bible’s “sons of Heth” lived among the Canaanites around Hebron (Genesis 23). The great Hittite empire had its capital at Hattusa in central Anatolia, and Hittite kingdoms later ruled northern Syria (1 Kings 10:29)."
+    },
+    {
+     "n": "Jebusites",
+     "ll": [
+      35.235,
+      31.775
+     ],
+     "c": 2,
+     "m": "Jerusalem",
+     "f": "10:16",
+     "note": "The people of Jebus, Jerusalem before David took it (2 Samuel 5:6–9)."
+    },
+    {
+     "n": "Amorites",
+     "ll": [
+      36.9,
+      34.1
+     ],
+     "c": 1,
+     "m": "Syria and the hill country of Canaan",
+     "f": "10:16",
+     "note": "The Amurru, “westerners” in Mesopotamian records. A kingdom of Amurru lay in Lebanon and western Syria; the Bible places Amorites in the hill country of Canaan and east of the Jordan."
+    },
+    {
+     "n": "Hivites",
+     "ll": [
+      35.75,
+      33.3
+     ],
+     "c": 1,
+     "m": "Below Mount Hermon; also Shechem and Gibeon",
+     "f": "10:17",
+     "note": "Found at Shechem (Genesis 34:2), at Gibeon (Joshua 9:7) and “below Hermon in the land of Mizpah” (Joshua 11:3)."
+    },
+    {
+     "n": "Arkites",
+     "ll": [
+      36.05,
+      34.53
+     ],
+     "c": 2,
+     "m": "Tell Arqa, northern Lebanon",
+     "f": "10:17",
+     "note": "Irqata, Tell Arqa near Tripoli in northern Lebanon."
+    },
+    {
+     "n": "Sinites",
+     "ll": [
+      35.95,
+      35.3
+     ],
+     "c": 0,
+     "m": "Coastal Syria?",
+     "f": "10:17",
+     "note": "Uncertain. Perhaps Siyannu, a town near Jableh on the Syrian coast."
+    },
+    {
+     "n": "Arvadites",
+     "ll": [
+      35.86,
+      34.86
+     ],
+     "c": 2,
+     "m": "Arwad, Syria",
+     "f": "10:18",
+     "note": "The island city of Arwad off the Syrian coast (Ezekiel 27:8)."
+    },
+    {
+     "n": "Zemarites",
+     "ll": [
+      36.05,
+      34.72
+     ],
+     "c": 2,
+     "m": "Tell Kazel, Syria",
+     "f": "10:18",
+     "note": "Sumur (Simyra), Tell Kazel near the Syrian coast."
+    },
+    {
+     "n": "Hamathites",
+     "ll": [
+      36.75,
+      35.13
+     ],
+     "c": 2,
+     "m": "Hama, Syria",
+     "f": "10:18",
+     "note": "Hamath on the Orontes, modern Hama."
+    }
+   ]
+  },
+  {
+   "id": "nimrod",
+   "name": "Nimrod’s kingdom",
+   "short": "Nimrod",
+   "color": "#7d5ea8",
+   "vv": "10:8-12",
+   "places": [
+    {
+     "n": "Babylon",
+     "ll": [
+      44.42,
+      32.54
+     ],
+     "c": 2,
+     "m": "Babylon, Iraq",
+     "f": "10:10",
+     "note": "Babel, the city of the tower (11:9), on the Euphrates south of Baghdad."
+    },
+    {
+     "n": "Erech",
+     "ll": [
+      45.64,
+      31.32
+     ],
+     "c": 2,
+     "m": "Uruk (Warka), Iraq",
+     "f": "10:10",
+     "note": "Uruk, one of the oldest cities of Sumer."
+    },
+    {
+     "n": "Accad",
+     "ll": [
+      44.25,
+      33.1
+     ],
+     "c": 0,
+     "m": "Central Iraq (site not found)",
+     "f": "10:10",
+     "note": "Agade, the capital of Sargon of Akkad. Its site has not been found; it lay in central Iraq, probably near Baghdad or Sippar."
+    },
+    {
+     "n": "Nineveh",
+     "ll": [
+      43.15,
+      36.36
+     ],
+     "c": 2,
+     "m": "Mosul, Iraq",
+     "f": "10:11",
+     "note": "The great Assyrian capital on the Tigris, opposite modern Mosul (Jonah 1:2)."
+    },
+    {
+     "n": "Calah",
+     "ll": [
+      43.33,
+      36.1
+     ],
+     "c": 2,
+     "m": "Nimrud, Iraq",
+     "f": "10:11",
+     "note": "Kalhu, modern Nimrud, an Assyrian royal city on the Tigris."
+    },
+    {
+     "n": "Resen",
+     "ll": [
+      43.24,
+      36.23
+     ],
+     "c": 0,
+     "m": "Between Nineveh and Calah",
+     "f": "10:12",
+     "note": "Unknown; the text places it between Nineveh and Calah."
+    }
+   ]
+  },
+  {
+   "id": "shem",
+   "name": "Shem",
+   "color": "#3d8059",
+   "vv": "10:21-31",
+   "labelAt": [
+    45.0,
+    28.6
+   ],
+   "places": [
+    {
+     "n": "Elam",
+     "ll": [
+      48.26,
+      32.19
+     ],
+     "c": 2,
+     "m": "Southwestern Iran (Susa)",
+     "f": "10:22",
+     "note": "Elam, the land east of the Tigris with its capital at Susa (Shushan, Esther 1:2)."
+    },
+    {
+     "n": "Asshur",
+     "ll": [
+      43.26,
+      35.46
+     ],
+     "c": 2,
+     "m": "Northern Iraq (Assyria)",
+     "f": "10:22",
+     "note": "Assyria, named after its first capital, Ashur on the Tigris."
+    },
+    {
+     "n": "Arphaxad",
+     "ll": [
+      44.39,
+      35.47
+     ],
+     "c": 0,
+     "m": "Uncertain",
+     "f": "10:22",
+     "note": "Unknown. Abraham descends from Arphaxad (11:10–26). Josephus linked him with the Chaldeans; others suggest Arrapha, modern Kirkuk."
+    },
+    {
+     "n": "Lud",
+     "ll": [
+      28.04,
+      38.49
+     ],
+     "c": 1,
+     "m": "Western Turkey (Lydia)",
+     "f": "10:22",
+     "note": "Usually the Lydians of western Anatolia, whose capital was Sardis."
+    },
+    {
+     "n": "Aram",
+     "ll": [
+      37.7,
+      35.6
+     ],
+     "c": 2,
+     "m": "Syria",
+     "f": "10:22",
+     "note": "The Arameans, whose kingdoms spread across Syria and upper Mesopotamia. Aram-Damascus was Israel’s neighbour; Laban lived in Aram-naharaim (24:10)."
+    },
+    {
+     "n": "Uz",
+     "ll": [
+      36.4,
+      30.2
+     ],
+     "c": 0,
+     "m": "East of the Jordan (Edom)?",
+     "f": "10:23",
+     "note": "The land of Job (Job 1:1). Lamentations 4:21 links Uz with Edom; others place it in the Hauran or northern Arabia."
+    },
+    {
+     "n": "Mash",
+     "ll": [
+      41.0,
+      37.4
+     ],
+     "c": 0,
+     "m": "Southeastern Turkey?",
+     "f": "10:23",
+     "note": "Uncertain; perhaps Mount Masius (Tur Abdin). 1 Chronicles 1:17 reads Meshech."
+    },
+    {
+     "n": "Hazarmaveth",
+     "ll": [
+      48.8,
+      15.9
+     ],
+     "c": 2,
+     "m": "Hadramaut, Yemen",
+     "f": "10:26",
+     "note": "Hadramaut in southern Arabia; the Hebrew and Arabic names match closely."
+    },
+    {
+     "n": "Sheleph",
+     "ll": [
+      44.0,
+      14.6
+     ],
+     "c": 0,
+     "m": "Yemen?",
+     "f": "10:26",
+     "note": "Uncertain. A South Arabian tribe named Salif is known in Yemen."
+    },
+    {
+     "n": "Uzal",
+     "ll": [
+      44.2,
+      15.35
+     ],
+     "c": 0,
+     "m": "Sana’a, Yemen?",
+     "f": "10:27",
+     "note": "Arab tradition gives Azal as the old name of Sana’a, the capital of Yemen. Ezekiel 27:19 mentions trade from Uzal."
+    },
+    {
+     "n": "Sheba",
+     "ll": [
+      45.6,
+      15.1
+     ],
+     "c": 2,
+     "m": "Yemen (Saba, around Marib)",
+     "f": "10:28",
+     "note": "Saba in Yemen. Sheba is also listed among the sons of Cush (10:7); both lists may reflect the trade routes of southern Arabia."
+    },
+    {
+     "n": "Ophir",
+     "ll": [
+      40.9,
+      23.5
+     ],
+     "c": 0,
+     "m": "Arabia, Africa or India?",
+     "f": "10:29",
+     "note": "Famous for its gold (1 Kings 9:28). Its site is unknown; proposals include western or southern Arabia, the African coast and India. The ancient gold mine of Mahd adh-Dhahab in western Arabia is one candidate."
+    },
+    {
+     "n": "Sephar",
+     "ll": [
+      54.1,
+      17.0
+     ],
+     "c": 0,
+     "m": "Zafar, Oman?",
+     "f": "10:30",
+     "note": "The eastern limit of Joktan’s descendants, often identified with Zafar on the coast of Dhofar in southern Arabia."
+    }
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "About this map",
+   "p": [
+    "Genesis 10 lists the descendants of Noah’s three sons. Most of the names are peoples and lands rather than single persons, and many can be recognised in the records of Assyria, Egypt and Greece, in other books of the Bible, and in Josephus (<i>Antiquities</i> 1.122–147).",
+    "The dots show where each people is found in the ancient sources, mostly in the period of the kings and prophets, not where it began. Faint dots mark identifications that are only proposals. Tap a dot to see how sure the identification is, and why.",
+    "Nimrod’s cities (10:10–12) are shown in their own colour. Tarshish (10:4) lies far to the west, probably in southern Spain; drag the map to see it."
+   ]
+  },
+  {
+   "h": "Not on the map",
+   "p": [
+    "Some names cannot be placed: Sabteca (10:7); Calneh and Rehoboth-Ir (10:10–11); the Anamites and Casluhites (10:13–14); the Girgashites (10:16); Hul and Gether (10:23); and most of Joktan’s sons, Almodad, Jerah, Hadoram, Diklah, Obal, Abimael and Jobab (10:26–29), with Mesha (10:30). Shelah, Eber and Peleg (10:24–25) are persons in Abraham’s line."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Identifications summarised from the standard commentaries and Bible atlases, Assyrian, Egyptian and Greek sources, and Josephus. Seas, lakes and rivers: Natural Earth (public domain). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map engine: MapLibre GL."
+}

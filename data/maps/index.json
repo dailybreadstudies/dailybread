@@ -1,6 +1,19 @@
 {
  "maps": [
   {
+   "id": "gen-10-nations",
+   "title": "The Table of Nations",
+   "ref": "Genesis 10",
+   "book": "GEN",
+   "c": 10,
+   "v": 1,
+   "links": [],
+   "range": [
+    1,
+    32
+   ]
+  },
+  {
    "id": "josh-2-spies",
    "title": "The Spies at Jericho",
    "ref": "Joshua 2",

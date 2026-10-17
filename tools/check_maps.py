@@ -8,7 +8,7 @@ would show a broken or misleading map:
 
 - the map's verse (book, chapter, verse) exists in the BSB text in data/bsb/
 - every map listed in index.json has a file, and the file agrees with the index
-- coordinates are numbers inside the Near East / Mediterranean region
+- coordinates are numbers inside the Near East / Mediterranean region (Spain to Persia, Sudan to the Black Sea)
 - movements have unique numbers, at least two points, a known side and valid dashes
 - symbols are of a known type and only link to movements that exist
 - the places layer named by the map exists in data/maps/places/
@@ -28,7 +28,9 @@ Map file format (data/maps/<id>.json):
                                coords is one line [[lon, lat], …] or several lines [[[lon, lat], …], …]
   symbols [{type, at, label, key, vv, moves, offset}] type: camp | ambush | fire | battle | sun | moon | hail | cave | captured
   notes [{h, p[], alternates}] notes shown under the key (p may contain <i>, <b>, <a>)
-  groups [{id, name, color, vv, places[{n, ll, c, m, f, u}], area, labelAt, hidden}]
+  world true                   optional: a wide map (seas and rivers from data/maps/base/world.json, labels at low zoom)
+  siteLabel, sources           optional: popup label for p.m ("Region"), and this map's own sources line
+  groups [{id, name, color, vv, places[{n, ll, c, m, f, u, note}], area, labelAt, hidden}]
                                coloured sets of places (tribal allotments, clans, kings); area is an
                                approximate closed ring drawn around them (tools/build_joshua_maps.py)
 Exits with status 1 if any problem is found.
@@ -52,7 +54,7 @@ def bad(map_id, msg):
 
 def is_ll(p):
     return (isinstance(p, list) and len(p) == 2 and all(isinstance(x, (int, float)) for x in p)
-            and 20 < p[0] < 60 and 20 < p[1] < 45)
+            and -20 < p[0] < 70 and 0 < p[1] < 50)     # the Mediterranean, Arabia and Persia (wide maps such as Genesis 10)
 
 
 book_cache = {}
