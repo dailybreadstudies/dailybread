@@ -1,7 +1,7 @@
 {
  "id": "gen-12-abram",
  "title": "Abram's Journey",
- "ref": "Genesis 11:31–13:18",
+ "ref": "Genesis 11:31–12:20",
  "anchor": {
   "book": "GEN",
   "c": 12,
@@ -21,14 +21,6 @@
    ],
    "links": [
     "Ur"
-   ]
-  },
-  {
-   "c": 13,
-   "v": 1,
-   "range": [
-    1,
-    18
    ]
   }
  ],
@@ -52,11 +44,7 @@
   "Bethel",
   "Ai",
   "Negev",
-  "Egypt",
-  "Sodom",
-  "Zoar",
-  "Mamre",
-  "Hebron"
+  "Egypt"
  ],
  "named": [
   {
@@ -142,50 +130,6 @@
    "label": "below",
    "site": "the eastern Nile Delta",
    "note": "In famine, people of Canaan went down to Egypt, where the Nile kept the land fed. A painting in the tomb of Khnumhotep II at Beni Hasan (about 1890 BC) shows a party of 37 \"Asiatics\" with their donkeys arriving in Egypt."
-  },
-  {
-   "name": "Mamre",
-   "ll": [
-    35.10534,
-    31.55654
-   ],
-   "label": "left",
-   "site": "Ramat el-Khalil, north of Hebron",
-   "note": "\"The Oaks of Mamre at Hebron,\" where Abram settled and built an altar (13:18). The enclosure built here by Herod and the church built by Constantine marked the traditional site.",
-   "ob": "aeb9e97/mamre"
-  },
-  {
-   "name": "Hebron",
-   "ll": [
-    35.10222,
-    31.52509
-   ],
-   "label": "below",
-   "site": "Tel Rumeida, Hebron",
-   "note": "Hebron, near Mamre, where Abram settled (13:18) and where he later bought the cave of Machpelah (23:19).",
-   "ob": "a85151a/hebron"
-  },
-  {
-   "name": "Zoar",
-   "ll": [
-    35.48766,
-    31.0369
-   ],
-   "label": "right",
-   "site": "es-Safi?, south-east of the Dead Sea",
-   "note": "The plain of the Jordan was well watered \"all the way to Zoar\" (13:10); Lot later fled there (19:22).",
-   "ob": "aacfcda/zoar"
-  },
-  {
-   "name": "Sodom",
-   "ll": [
-    35.535,
-    31.252
-   ],
-   "label": "right",
-   "site": "site disputed",
-   "note": "Lot \"pitched his tent toward Sodom\" (13:12). Its site is debated: many place the cities of the plain near the south end of the Dead Sea (Bab edh-Dhra and Numeira); others at Tall el-Hammam, north-east of the Dead Sea in the Jordan plain Lot looked down on from Bethel.",
-   "ob": "a0aa664/sodom"
   }
  ],
  "moves": [
@@ -360,105 +304,6 @@
      30.82
     ]
    ]
-  },
-  {
-   "n": 5,
-   "side": "israel",
-   "vv": "13:1–4",
-   "at": 0.35,
-   "text": "Sent away by Pharaoh: back through the Negev to the altar between Bethel and Ai",
-   "coords": [
-    [
-     31.75,
-     30.82
-    ],
-    [
-     32.45,
-     30.72
-    ],
-    [
-     33.3,
-     30.74
-    ],
-    [
-     34.2,
-     30.9
-    ],
-    [
-     34.88,
-     31.12
-    ],
-    [
-     35.1,
-     31.42
-    ],
-    [
-     35.2,
-     31.72
-    ],
-    [
-     35.235,
-     31.9
-    ]
-   ],
-   "dash": [
-    2,
-    1.4
-   ]
-  },
-  {
-   "n": 6,
-   "side": "other",
-   "vv": "13:10–12",
-   "at": 0.6,
-   "text": "Lot chooses the well-watered plain of the Jordan and moves toward Sodom",
-   "coords": [
-    [
-     35.24139,
-     31.92278
-    ],
-    [
-     35.35,
-     31.87
-    ],
-    [
-     35.46,
-     31.82
-    ],
-    [
-     35.55,
-     31.8
-    ]
-   ]
-  },
-  {
-   "n": 7,
-   "side": "israel",
-   "vv": "13:18",
-   "at": 0.5,
-   "text": "Abram moves his tent to the Oaks of Mamre at Hebron",
-   "coords": [
-    [
-     35.245,
-     31.91
-    ],
-    [
-     35.22,
-     31.8
-    ],
-    [
-     35.17,
-     31.68
-    ],
-    [
-     35.13,
-     31.6
-    ],
-    [
-     35.10534,
-     31.55654
-    ]
-   ]
   }
  ],
  "symbols": [
@@ -488,18 +333,6 @@
    "vv": "12:7–8; 13:4, 18",
    "moves": [
     3
-   ]
-  },
-  {
-   "type": "altar",
-   "at": [
-    35.125,
-    31.565
-   ],
-   "key": "Altars Abram built: at Shechem, between Bethel and Ai, and at Mamre",
-   "vv": "12:7–8; 13:4, 18",
-   "moves": [
-    7
    ]
   }
  ],

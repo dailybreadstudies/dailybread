@@ -69,14 +69,14 @@ P = {  # shared coordinates
 
 MAPS_OUT = []
 
-# ─────────────────────────── 1. Abram's journey (Genesis 11:31–13:18) ───────────────────────────
+# ─────────────────────────── 1. Abram's journey (Genesis 11:31–12:20) ───────────────────────────
 MAPS_OUT.append({
-    'id': 'gen-12-abram', 'title': "Abram's Journey", 'ref': 'Genesis 11:31–13:18',
+    'id': 'gen-12-abram', 'title': "Abram's Journey", 'ref': 'Genesis 11:31–12:20',
     'anchor': {'book': 'GEN', 'c': 12, 'v': 1}, 'range': [1, 20],
-    'also': [{'c': 11, 'v': 31, 'range': [27, 32], 'links': ['Ur']}, {'c': 13, 'v': 1, 'range': [1, 18]}],
+    'also': [{'c': 11, 'v': 31, 'range': [27, 32], 'links': ['Ur']}],
     'world': True, 'siteLabel': 'Site', 'placesName': 'Genesis',
     'bounds': [[30.6, 29.6], [47.2, 37.6]],
-    'links': ['Haran', 'Shechem', 'Moreh', 'Bethel', 'Ai', 'Negev', 'Egypt', 'Sodom', 'Zoar', 'Mamre', 'Hebron'],
+    'links': ['Haran', 'Shechem', 'Moreh', 'Bethel', 'Ai', 'Negev', 'Egypt'],
     'named': [
         named('Ur', P['Ur'], 'below', 'Tell el-Muqayyar, southern Iraq',
               'Ur "of the Chaldeans" (11:28, 31): the great Sumerian city by the Euphrates, excavated by Leonard Woolley in 1922–34, with its ziggurat to the moon-god Nanna and the royal tombs. Local tradition places Abraham\'s birthplace at Urfa (Şanlıurfa) near Haran instead, but the southern city is the usual identification.'),
@@ -93,12 +93,6 @@ MAPS_OUT.append({
               'The arid south of Canaan, from Beersheba southward: grazing land in good years, the first to suffer in a drought.'),
         named('Egypt', P['Egypt'], 'below', 'the eastern Nile Delta',
               'In famine, people of Canaan went down to Egypt, where the Nile kept the land fed. A painting in the tomb of Khnumhotep II at Beni Hasan (about 1890 BC) shows a party of 37 "Asiatics" with their donkeys arriving in Egypt.'),
-        named('Mamre', P['Mamre'], 'left', 'Ramat el-Khalil, north of Hebron',
-              '"The Oaks of Mamre at Hebron," where Abram settled and built an altar (13:18). The enclosure built here by Herod and the church built by Constantine marked the traditional site.', 'aeb9e97/mamre'),
-        named('Hebron', P['Hebron'], 'below', 'Tel Rumeida, Hebron', 'Hebron, near Mamre, where Abram settled (13:18) and where he later bought the cave of Machpelah (23:19).', 'a85151a/hebron'),
-        named('Zoar', [35.48766, 31.0369], 'right', 'es-Safi?, south-east of the Dead Sea', 'The plain of the Jordan was well watered "all the way to Zoar" (13:10); Lot later fled there (19:22).', 'aacfcda/zoar'),
-        named('Sodom', [35.535, 31.252], 'right', 'site disputed',
-              'Lot "pitched his tent toward Sodom" (13:12). Its site is debated: many place the cities of the plain near the south end of the Dead Sea (Bab edh-Dhra and Numeira); others at Tall el-Hammam, north-east of the Dead Sea in the Jordan plain Lot looked down on from Bethel.', 'a0aa664/sodom'),
     ],
     'moves': [
         mv(1, 'other', '11:31', 'Terah takes Abram, Sarai and Lot from Ur toward Canaan, but they settle in Haran',
@@ -109,17 +103,10 @@ MAPS_OUT.append({
            [P['Shechem'], [35.27, 32.08], [35.25, 31.93], [35.2, 31.7], [35.1, 31.48], [34.95, 31.25], P['Negev']], at=0.4),
         mv(4, 'israel', '12:10–20', 'Famine: down to Egypt, where Sarai is taken into Pharaoh\'s palace',
            [P['Negev'], [34.45, 31.18], [33.9, 31.1], [33.2, 31.05], [32.5, 30.95], P['Egypt']], at=0.5),
-        mv(5, 'israel', '13:1–4', 'Sent away by Pharaoh: back through the Negev to the altar between Bethel and Ai',
-           [P['Egypt'], [32.45, 30.72], [33.3, 30.74], [34.2, 30.9], [34.88, 31.12], [35.1, 31.42], [35.2, 31.72], [35.235, 31.9]], at=0.35, dash=[2, 1.4]),
-        mv(6, 'other', '13:10–12', 'Lot chooses the well-watered plain of the Jordan and moves toward Sodom',
-           [P['Bethel'], [35.35, 31.87], [35.46, 31.82], [35.55, 31.8]], at=0.6),
-        mv(7, 'israel', '13:18', 'Abram moves his tent to the Oaks of Mamre at Hebron',
-           [[35.245, 31.91], [35.22, 31.8], [35.17, 31.68], [35.13, 31.6], P['Mamre']], at=0.5),
     ],
     'symbols': [
         sym('altar', [35.30, 32.19], 'Altars Abram built: at Shechem, between Bethel and Ai, and at Mamre', '12:7–8; 13:4, 18', moves=[2], offset=[8, 6]),
         sym('altar', [35.255, 31.935], 'Altars Abram built: at Shechem, between Bethel and Ai, and at Mamre', '12:7–8; 13:4, 18', moves=[3]),
-        sym('altar', [35.125, 31.565], 'Altars Abram built: at Shechem, between Bethel and Ai, and at Mamre', '12:7–8; 13:4, 18', moves=[7]),
     ],
     'notes': [
         {'h': 'The scale of the journey', 'p': [
@@ -130,6 +117,53 @@ MAPS_OUT.append({
             'The same three places become centres of Israel\'s later history. Jewish tradition reads the journeys of the fathers as a sign for the children, <i>ma\'aseh avot siman la-banim</i> (Ramban on 12:6): the descent to Egypt in famine and the return with wealth foreshadow Israel\'s own story.']},
     ],
     'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Seas and rivers: Natural Earth (public domain); Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate. Map engine: MapLibre GL.',
+})
+
+# ─────────────────────────── 1b. Abram and Lot part (Genesis 13) ───────────────────────────
+MAPS_OUT.append({
+    'id': 'gen-13-lot', 'title': 'Abram and Lot Part', 'ref': 'Genesis 13',
+    'anchor': {'book': 'GEN', 'c': 13, 'v': 1}, 'range': [1, 18],
+    'places': 'GEN', 'placesLabel': 'Places named in Genesis',
+    'bounds': [[34.55, 30.85], [35.85, 32.05]],
+    'links': ['Egypt', 'Negev', 'Bethel', 'Ai', 'Zoar', 'Sodom', 'Mamre', 'Hebron'],
+    'named': [
+        named('Egypt', [34.62, 30.93], 'right', 'toward Egypt, off the map to the south-west', 'Abram comes up from Egypt "very rich in livestock, silver and gold" (13:1–2).'),
+        named('Negev', P['Negev'], 'below', 'the dry south, around Beersheba', 'Abram journeys "from the Negev to Bethel" by stages (13:3).'),
+        named('Bethel', P['Bethel'], 'left', 'Beitin',
+              'Back "to the place where his tent had been at first, between Bethel and Ai, where he had first built the altar," Abram calls on the name of the LORD (13:3–4). From the ridge east of Bethel there is a wide view down to the Jordan valley.', 'a64f355/bethel-1'),
+        named('Ai', P['Ai'], 'right', 'et-Tell', 'East of Bethel (13:3).', 'a7e13e1/ai-1'),
+        named('Plain of the Jordan', [35.6, 31.86], 'right', 'the round plain north of the Dead Sea',
+              'Hebrew <i>kikkar ha-Yarden</i>, "the circle of the Jordan": "well watered everywhere, like the garden of the LORD, like the land of Egypt" (13:10). Lot chooses it and moves east (13:11).'),
+        named('Mamre', P['Mamre'], 'left', 'Ramat el-Khalil, north of Hebron',
+              '"The Oaks of Mamre at Hebron," where Abram settled and built an altar (13:18). The enclosure built here by Herod and the church built by Constantine marked the traditional site.', 'aeb9e97/mamre'),
+        named('Hebron', P['Hebron'], 'below', 'Tel Rumeida, Hebron', 'Hebron, near Mamre, where Abram settled (13:18) and where he later bought the cave of Machpelah (23:19).', 'a85151a/hebron'),
+        named('Zoar', [35.48766, 31.0369], 'right', 'es-Safi?, south-east of the Dead Sea', 'The plain of the Jordan was well watered "all the way to Zoar" (13:10); Lot later fled there (19:22).', 'aacfcda/zoar'),
+        named('Sodom', [35.535, 31.252], 'right', 'site disputed',
+              'Lot "pitched his tent toward Sodom" (13:12). Its site is debated: many place the cities of the plain near the south end of the Dead Sea (Bab edh-Dhra and Numeira); others at Tall el-Hammam, north-east of the Dead Sea in the Jordan plain Lot looked down on from Bethel.', 'a0aa664/sodom'),
+    ],
+    'alternates': {'for': 'Sodom', 'bounds': [[35.3, 31.0], [35.85, 31.95]],
+                   'sites': [{'name': 'Tall el-Hammam', 'll': [35.6733, 31.8403]}]},
+    'moves': [
+        mv(1, 'israel', '13:1–4', 'Sent away by Pharaoh: back through the Negev to the altar between Bethel and Ai',
+           [P['Egypt'], [32.45, 30.72], [33.3, 30.74], [34.2, 30.9], [34.88, 31.12], [35.1, 31.42], [35.2, 31.72], [35.235, 31.9]], at=0.35, dash=[2, 1.4]),
+        mv(2, 'other', '13:10–12', 'Lot chooses the well-watered plain of the Jordan and moves toward Sodom',
+           [P['Bethel'], [35.35, 31.87], [35.46, 31.82], [35.55, 31.8]], at=0.6),
+        mv(3, 'israel', '13:18', 'Abram moves his tent to the Oaks of Mamre at Hebron',
+           [[35.235, 31.915], [35.17, 31.83], [35.1, 31.72], [35.075, 31.63], P['Mamre']], at=0.5),
+    ],
+    'symbols': [
+        sym('altar', [35.255, 31.935], 'Abram returns to his altar between Bethel and Ai and calls on the name of the LORD', '13:4', moves=[1]),
+        sym('altar', [35.125, 31.565], 'Abram builds an altar to the LORD at Mamre', '13:18', moves=[3]),
+    ],
+    'notes': [
+        {'h': 'Separating', 'p': [
+            'Abram and Lot have too many flocks for the land to carry, "and the Canaanites and Perizzites were also living in the land" (13:6–7). Abram, the elder, gives Lot the choice. '
+            'Lot looks east from the heights by Bethel and chooses by sight: the well-watered plain, "before the LORD destroyed Sodom and Gomorrah" (13:10). Abram stays in Canaan, and the LORD tells him to look north, south, east and west: "all the land that you see I will give to you and your offspring forever" (13:14–15).']},
+        {'h': 'Where were Sodom and the plain?', 'p': [
+            'The "plain of the Jordan" (<i>kikkar</i>) is most naturally the round plain north of the Dead Sea, which Lot could see from Bethel. That fits the excavators of Tall el-Hammam, who identify it with Sodom. '
+            'The traditional view puts Sodom and the other cities of the plain at the south end of the sea (Bab edh-Dhra and Numeira), near Zoar, where 14:3 places the Valley of Siddim "that is, the Salt Sea." Use the alternative-site button to compare.']},
+    ],
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
 })
 
 # ─────────────────────────── 2. The war of the kings (Genesis 14) ───────────────────────────
@@ -190,7 +224,7 @@ MAPS_OUT.append({
             'The priest-king of Salem appears only here and in Psalm 110:4, "a priest forever in the order of Melchizedek," which Hebrews 5–7 applies to Jesus. '
             'The sages identified him with Shem son of Noah (Nedarim 32b; Targum Pseudo-Jonathan on 14:18). His blessing names God as <i>El Elyon</i>, "God Most High, Creator of heaven and earth," and Abram adopts the title as his own (14:22).']},
     ],
-    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Map engine: MapLibre GL.',
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Map engine: MapLibre GL.',
 })
 
 # ─────────────────────────── 3. Around the Sea of Galilee (Matthew 13–14) ───────────────────────────

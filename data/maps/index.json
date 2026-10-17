@@ -16,7 +16,7 @@
   {
    "id": "gen-12-abram",
    "title": "Abram's Journey",
-   "ref": "Genesis 11:31–13:18",
+   "ref": "Genesis 11:31–12:20",
    "book": "GEN",
    "c": 12,
    "v": 1,
@@ -27,11 +27,7 @@
     "Bethel",
     "Ai",
     "Negev",
-    "Egypt",
-    "Sodom",
-    "Zoar",
-    "Mamre",
-    "Hebron"
+    "Egypt"
    ],
    "range": [
     1,
@@ -48,15 +44,29 @@
      "links": [
       "Ur"
      ]
-    },
-    {
-     "c": 13,
-     "v": 1,
-     "range": [
-      1,
-      18
-     ]
     }
+   ]
+  },
+  {
+   "id": "gen-13-lot",
+   "title": "Abram and Lot Part",
+   "ref": "Genesis 13",
+   "book": "GEN",
+   "c": 13,
+   "v": 1,
+   "links": [
+    "Egypt",
+    "Negev",
+    "Bethel",
+    "Ai",
+    "Zoar",
+    "Sodom",
+    "Mamre",
+    "Hebron"
+   ],
+   "range": [
+    1,
+    18
    ]
   },
   {

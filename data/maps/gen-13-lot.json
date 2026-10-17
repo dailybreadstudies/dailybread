@@ -1,0 +1,298 @@
+{
+ "id": "gen-13-lot",
+ "title": "Abram and Lot Part",
+ "ref": "Genesis 13",
+ "anchor": {
+  "book": "GEN",
+  "c": 13,
+  "v": 1
+ },
+ "range": [
+  1,
+  18
+ ],
+ "places": "GEN",
+ "placesLabel": "Places named in Genesis",
+ "bounds": [
+  [
+   34.55,
+   30.85
+  ],
+  [
+   35.85,
+   32.05
+  ]
+ ],
+ "links": [
+  "Egypt",
+  "Negev",
+  "Bethel",
+  "Ai",
+  "Zoar",
+  "Sodom",
+  "Mamre",
+  "Hebron"
+ ],
+ "named": [
+  {
+   "name": "Egypt",
+   "ll": [
+    34.62,
+    30.93
+   ],
+   "label": "right",
+   "site": "toward Egypt, off the map to the south-west",
+   "note": "Abram comes up from Egypt \"very rich in livestock, silver and gold\" (13:1–2)."
+  },
+  {
+   "name": "Negev",
+   "ll": [
+    34.85,
+    31.08
+   ],
+   "label": "below",
+   "site": "the dry south, around Beersheba",
+   "note": "Abram journeys \"from the Negev to Bethel\" by stages (13:3)."
+  },
+  {
+   "name": "Bethel",
+   "ll": [
+    35.24139,
+    31.92278
+   ],
+   "label": "left",
+   "site": "Beitin",
+   "note": "Back \"to the place where his tent had been at first, between Bethel and Ai, where he had first built the altar,\" Abram calls on the name of the LORD (13:3–4). From the ridge east of Bethel there is a wide view down to the Jordan valley.",
+   "ob": "a64f355/bethel-1"
+  },
+  {
+   "name": "Ai",
+   "ll": [
+    35.26111,
+    31.91694
+   ],
+   "label": "right",
+   "site": "et-Tell",
+   "note": "East of Bethel (13:3).",
+   "ob": "a7e13e1/ai-1"
+  },
+  {
+   "name": "Plain of the Jordan",
+   "ll": [
+    35.6,
+    31.86
+   ],
+   "label": "right",
+   "site": "the round plain north of the Dead Sea",
+   "note": "Hebrew <i>kikkar ha-Yarden</i>, \"the circle of the Jordan\": \"well watered everywhere, like the garden of the LORD, like the land of Egypt\" (13:10). Lot chooses it and moves east (13:11)."
+  },
+  {
+   "name": "Mamre",
+   "ll": [
+    35.10534,
+    31.55654
+   ],
+   "label": "left",
+   "site": "Ramat el-Khalil, north of Hebron",
+   "note": "\"The Oaks of Mamre at Hebron,\" where Abram settled and built an altar (13:18). The enclosure built here by Herod and the church built by Constantine marked the traditional site.",
+   "ob": "aeb9e97/mamre"
+  },
+  {
+   "name": "Hebron",
+   "ll": [
+    35.10222,
+    31.52509
+   ],
+   "label": "below",
+   "site": "Tel Rumeida, Hebron",
+   "note": "Hebron, near Mamre, where Abram settled (13:18) and where he later bought the cave of Machpelah (23:19).",
+   "ob": "a85151a/hebron"
+  },
+  {
+   "name": "Zoar",
+   "ll": [
+    35.48766,
+    31.0369
+   ],
+   "label": "right",
+   "site": "es-Safi?, south-east of the Dead Sea",
+   "note": "The plain of the Jordan was well watered \"all the way to Zoar\" (13:10); Lot later fled there (19:22).",
+   "ob": "aacfcda/zoar"
+  },
+  {
+   "name": "Sodom",
+   "ll": [
+    35.535,
+    31.252
+   ],
+   "label": "right",
+   "site": "site disputed",
+   "note": "Lot \"pitched his tent toward Sodom\" (13:12). Its site is debated: many place the cities of the plain near the south end of the Dead Sea (Bab edh-Dhra and Numeira); others at Tall el-Hammam, north-east of the Dead Sea in the Jordan plain Lot looked down on from Bethel.",
+   "ob": "a0aa664/sodom"
+  }
+ ],
+ "alternates": {
+  "for": "Sodom",
+  "bounds": [
+   [
+    35.3,
+    31.0
+   ],
+   [
+    35.85,
+    31.95
+   ]
+  ],
+  "sites": [
+   {
+    "name": "Tall el-Hammam",
+    "ll": [
+     35.6733,
+     31.8403
+    ]
+   }
+  ]
+ },
+ "moves": [
+  {
+   "n": 1,
+   "side": "israel",
+   "vv": "13:1–4",
+   "at": 0.35,
+   "text": "Sent away by Pharaoh: back through the Negev to the altar between Bethel and Ai",
+   "coords": [
+    [
+     31.75,
+     30.82
+    ],
+    [
+     32.45,
+     30.72
+    ],
+    [
+     33.3,
+     30.74
+    ],
+    [
+     34.2,
+     30.9
+    ],
+    [
+     34.88,
+     31.12
+    ],
+    [
+     35.1,
+     31.42
+    ],
+    [
+     35.2,
+     31.72
+    ],
+    [
+     35.235,
+     31.9
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 2,
+   "side": "other",
+   "vv": "13:10–12",
+   "at": 0.6,
+   "text": "Lot chooses the well-watered plain of the Jordan and moves toward Sodom",
+   "coords": [
+    [
+     35.24139,
+     31.92278
+    ],
+    [
+     35.35,
+     31.87
+    ],
+    [
+     35.46,
+     31.82
+    ],
+    [
+     35.55,
+     31.8
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "israel",
+   "vv": "13:18",
+   "at": 0.5,
+   "text": "Abram moves his tent to the Oaks of Mamre at Hebron",
+   "coords": [
+    [
+     35.235,
+     31.915
+    ],
+    [
+     35.17,
+     31.83
+    ],
+    [
+     35.1,
+     31.72
+    ],
+    [
+     35.075,
+     31.63
+    ],
+    [
+     35.10534,
+     31.55654
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "altar",
+   "at": [
+    35.255,
+    31.935
+   ],
+   "key": "Abram returns to his altar between Bethel and Ai and calls on the name of the LORD",
+   "vv": "13:4",
+   "moves": [
+    1
+   ]
+  },
+  {
+   "type": "altar",
+   "at": [
+    35.125,
+    31.565
+   ],
+   "key": "Abram builds an altar to the LORD at Mamre",
+   "vv": "13:18",
+   "moves": [
+    3
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "Separating",
+   "p": [
+    "Abram and Lot have too many flocks for the land to carry, \"and the Canaanites and Perizzites were also living in the land\" (13:6–7). Abram, the elder, gives Lot the choice. Lot looks east from the heights by Bethel and chooses by sight: the well-watered plain, \"before the LORD destroyed Sodom and Gomorrah\" (13:10). Abram stays in Canaan, and the LORD tells him to look north, south, east and west: \"all the land that you see I will give to you and your offspring forever\" (13:14–15)."
+   ]
+  },
+  {
+   "h": "Where were Sodom and the plain?",
+   "p": [
+    "The \"plain of the Jordan\" (<i>kikkar</i>) is most naturally the round plain north of the Dead Sea, which Lot could see from Bethel. That fits the excavators of Tall el-Hammam, who identify it with Sodom. The traditional view puts Sodom and the other cities of the plain at the south end of the sea (Bab edh-Dhra and Numeira), near Zoar, where 14:3 places the Valley of Siddim \"that is, the Salt Sea.\" Use the alternative-site button to compare."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}
