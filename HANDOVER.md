@@ -86,6 +86,13 @@ in the day's order). Progress page: year bar, totals, by-section bars, catch-up 
 - Minimal, airy, brown accent; no clutter; text set exactly as he words it; don't push the journal aggressively.
 - Removed on purpose: Ariel Media mark above the date, unfoldingWord study notes, "Name style" option, "Day N of 386" line on Today, Hebrew in the readings list.
 
+## Preparing next year's plan (5788) — checklist
+- Load the new Classic plan (journal PDF → `tools/plan-5788.json` → `make_days.py`) and the Kids plan (`kids_journal_to_plan.py` → `make_days.py … data/kids/days`).
+- Update `PLAN_START`, `PLAN_END`, `PLAN_YEAR` in `assets/reader.js`.
+- Update the fixed year text on both About pages: `about.html` (“The current study year 5787 runs from Oct 4, 2026 – Oct 24, 2027”)
+  and `kids/about.html` (“The reading plan covers October 4, 2026 – October 24, 2027 (Simchat Torah 5787 through Simchat Torah 5788)”).
+  Also check the Kids journal product link (`dailybread2027boys`) and any “15 years strong!” style counts.
+
 ## Ideas discussed, not built yet
 - **Sign-in, progress sync and the Ariel Media email list: full plan agreed in `docs/SIGN-IN-PLAN.md`** (start once dailybread.online is connected).
 - Four section progress bars across the whole year (needs the full plan loaded).
