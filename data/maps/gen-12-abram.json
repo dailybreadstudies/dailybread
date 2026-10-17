@@ -1,0 +1,521 @@
+{
+ "id": "gen-12-abram",
+ "title": "Abram's Journey",
+ "ref": "Genesis 11:31–13:18",
+ "anchor": {
+  "book": "GEN",
+  "c": 12,
+  "v": 1
+ },
+ "range": [
+  1,
+  20
+ ],
+ "also": [
+  {
+   "c": 11,
+   "v": 31,
+   "range": [
+    27,
+    32
+   ],
+   "links": [
+    "Ur"
+   ]
+  },
+  {
+   "c": 13,
+   "v": 1,
+   "range": [
+    1,
+    18
+   ]
+  }
+ ],
+ "world": true,
+ "siteLabel": "Site",
+ "placesName": "Genesis",
+ "bounds": [
+  [
+   30.6,
+   29.6
+  ],
+  [
+   47.2,
+   37.6
+  ]
+ ],
+ "links": [
+  "Haran",
+  "Shechem",
+  "Moreh",
+  "Bethel",
+  "Ai",
+  "Negev",
+  "Egypt",
+  "Sodom",
+  "Zoar",
+  "Mamre",
+  "Hebron"
+ ],
+ "named": [
+  {
+   "name": "Ur",
+   "ll": [
+    46.1035,
+    30.9625
+   ],
+   "label": "below",
+   "site": "Tell el-Muqayyar, southern Iraq",
+   "note": "Ur \"of the Chaldeans\" (11:28, 31): the great Sumerian city by the Euphrates, excavated by Leonard Woolley in 1922–34, with its ziggurat to the moon-god Nanna and the royal tombs. Local tradition places Abraham's birthplace at Urfa (Şanlıurfa) near Haran instead, but the southern city is the usual identification."
+  },
+  {
+   "name": "Haran",
+   "ll": [
+    39.03278,
+    36.86444
+   ],
+   "label": "right",
+   "site": "Harran, south-east Turkey",
+   "note": "A city of the moon-god Sin on the Balikh river, on the main road between Mesopotamia and Syria. Terah settled and died here (11:31–32); Abram left from here at seventy-five (12:4). Rebekah's family and Laban lived in the region (24:10; 29:4).",
+   "ob": "a6d9af3/haran"
+  },
+  {
+   "name": "Shechem",
+   "ll": [
+    35.28194,
+    32.21361
+   ],
+   "label": "right",
+   "site": "Tell Balatah, Nablus",
+   "note": "In the pass between Mount Ebal and Mount Gerizim. At \"the Oak of Moreh\" here the LORD first promised the land to Abram's offspring, and Abram built his first altar in Canaan (12:6–7).",
+   "ob": "adf74d4/shechem"
+  },
+  {
+   "name": "Moreh",
+   "ll": [
+    35.29,
+    32.205
+   ],
+   "label": "below",
+   "site": "near Tell Balatah",
+   "note": "\"The Oak of Moreh,\" probably \"the teacher's oak,\" a sacred tree at Shechem (12:6; compare Deuteronomy 11:30)."
+  },
+  {
+   "name": "Bethel",
+   "ll": [
+    35.24139,
+    31.92278
+   ],
+   "label": "left",
+   "site": "Beitin",
+   "note": "Abram pitched his tent \"with Bethel to the west and Ai to the east\" and built an altar (12:8); he came back to the same place after Egypt (13:3–4). From these heights Lot looked down on the plain of the Jordan.",
+   "ob": "a64f355/bethel-1"
+  },
+  {
+   "name": "Ai",
+   "ll": [
+    35.26111,
+    31.91694
+   ],
+   "label": "right",
+   "site": "et-Tell",
+   "note": "East of Bethel. The city Joshua later took (Joshua 7–8).",
+   "ob": "a7e13e1/ai-1"
+  },
+  {
+   "name": "Negev",
+   "ll": [
+    34.85,
+    31.08
+   ],
+   "label": "below",
+   "site": "the dry south, around Beersheba",
+   "note": "The arid south of Canaan, from Beersheba southward: grazing land in good years, the first to suffer in a drought."
+  },
+  {
+   "name": "Egypt",
+   "ll": [
+    31.75,
+    30.82
+   ],
+   "label": "below",
+   "site": "the eastern Nile Delta",
+   "note": "In famine, people of Canaan went down to Egypt, where the Nile kept the land fed. A painting in the tomb of Khnumhotep II at Beni Hasan (about 1890 BC) shows a party of 37 \"Asiatics\" with their donkeys arriving in Egypt."
+  },
+  {
+   "name": "Mamre",
+   "ll": [
+    35.10534,
+    31.55654
+   ],
+   "label": "left",
+   "site": "Ramat el-Khalil, north of Hebron",
+   "note": "\"The Oaks of Mamre at Hebron,\" where Abram settled and built an altar (13:18). The enclosure built here by Herod and the church built by Constantine marked the traditional site.",
+   "ob": "aeb9e97/mamre"
+  },
+  {
+   "name": "Hebron",
+   "ll": [
+    35.10222,
+    31.52509
+   ],
+   "label": "below",
+   "site": "Tel Rumeida, Hebron",
+   "note": "Hebron, near Mamre, where Abram settled (13:18) and where he later bought the cave of Machpelah (23:19).",
+   "ob": "a85151a/hebron"
+  },
+  {
+   "name": "Zoar",
+   "ll": [
+    35.48766,
+    31.0369
+   ],
+   "label": "right",
+   "site": "es-Safi?, south-east of the Dead Sea",
+   "note": "The plain of the Jordan was well watered \"all the way to Zoar\" (13:10); Lot later fled there (19:22).",
+   "ob": "aacfcda/zoar"
+  },
+  {
+   "name": "Sodom",
+   "ll": [
+    35.449,
+    31.208
+   ],
+   "label": "right",
+   "site": "site disputed",
+   "note": "Lot \"pitched his tent toward Sodom\" (13:12). Its site is debated: many place the cities of the plain near the south end of the Dead Sea (Bab edh-Dhra and Numeira); others at Tall el-Hammam, north-east of the Dead Sea in the Jordan plain Lot looked down on from Bethel.",
+   "ob": "a0aa664/sodom"
+  }
+ ],
+ "moves": [
+  {
+   "n": 1,
+   "side": "other",
+   "vv": "11:31",
+   "at": 0.55,
+   "text": "Terah takes Abram, Sarai and Lot from Ur toward Canaan, but they settle in Haran",
+   "coords": [
+    [
+     46.1035,
+     30.9625
+    ],
+    [
+     45.6,
+     31.42
+    ],
+    [
+     44.95,
+     32.05
+    ],
+    [
+     44.3,
+     32.62
+    ],
+    [
+     43.4,
+     33.45
+    ],
+    [
+     42.1,
+     34.3
+    ],
+    [
+     40.9,
+     34.55
+    ],
+    [
+     40.1,
+     35.2
+    ],
+    [
+     39.35,
+     35.95
+    ],
+    [
+     39.03278,
+     36.86444
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "vv": "12:4–6",
+   "at": 0.45,
+   "text": "At the LORD's call Abram leaves Haran for Canaan, as far as Shechem",
+   "coords": [
+    [
+     39.03278,
+     36.86444
+    ],
+    [
+     38.3,
+     36.6
+    ],
+    [
+     37.2,
+     36.2
+    ],
+    [
+     36.8,
+     35.4
+    ],
+    [
+     36.72,
+     34.74
+    ],
+    [
+     36.5,
+     34.0
+    ],
+    [
+     36.30639,
+     33.51111
+    ],
+    [
+     35.95,
+     33.05
+    ],
+    [
+     35.62,
+     32.75
+    ],
+    [
+     35.45,
+     32.45
+    ],
+    [
+     35.28194,
+     32.21361
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "israel",
+   "vv": "12:8–9",
+   "at": 0.4,
+   "text": "On to the hills between Bethel and Ai, then by stages toward the Negev",
+   "coords": [
+    [
+     35.28194,
+     32.21361
+    ],
+    [
+     35.27,
+     32.08
+    ],
+    [
+     35.25,
+     31.93
+    ],
+    [
+     35.2,
+     31.7
+    ],
+    [
+     35.1,
+     31.48
+    ],
+    [
+     34.95,
+     31.25
+    ],
+    [
+     34.85,
+     31.08
+    ]
+   ]
+  },
+  {
+   "n": 4,
+   "side": "israel",
+   "vv": "12:10–20",
+   "at": 0.5,
+   "text": "Famine: down to Egypt, where Sarai is taken into Pharaoh's palace",
+   "coords": [
+    [
+     34.85,
+     31.08
+    ],
+    [
+     34.45,
+     31.18
+    ],
+    [
+     33.9,
+     31.1
+    ],
+    [
+     33.2,
+     31.05
+    ],
+    [
+     32.5,
+     30.95
+    ],
+    [
+     31.75,
+     30.82
+    ]
+   ]
+  },
+  {
+   "n": 5,
+   "side": "israel",
+   "vv": "13:1–4",
+   "at": 0.35,
+   "text": "Sent away by Pharaoh: back through the Negev to the altar between Bethel and Ai",
+   "coords": [
+    [
+     31.75,
+     30.82
+    ],
+    [
+     32.45,
+     30.72
+    ],
+    [
+     33.3,
+     30.74
+    ],
+    [
+     34.2,
+     30.9
+    ],
+    [
+     34.88,
+     31.12
+    ],
+    [
+     35.1,
+     31.42
+    ],
+    [
+     35.2,
+     31.72
+    ],
+    [
+     35.235,
+     31.9
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 6,
+   "side": "other",
+   "vv": "13:10–12",
+   "at": 0.6,
+   "text": "Lot chooses the well-watered plain of the Jordan and moves toward Sodom",
+   "coords": [
+    [
+     35.24139,
+     31.92278
+    ],
+    [
+     35.35,
+     31.87
+    ],
+    [
+     35.46,
+     31.82
+    ],
+    [
+     35.55,
+     31.8
+    ]
+   ]
+  },
+  {
+   "n": 7,
+   "side": "israel",
+   "vv": "13:18",
+   "at": 0.5,
+   "text": "Abram moves his tent to the Oaks of Mamre at Hebron",
+   "coords": [
+    [
+     35.245,
+     31.91
+    ],
+    [
+     35.22,
+     31.8
+    ],
+    [
+     35.17,
+     31.68
+    ],
+    [
+     35.13,
+     31.6
+    ],
+    [
+     35.10534,
+     31.55654
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "altar",
+   "at": [
+    35.3,
+    32.19
+   ],
+   "key": "Altars Abram built: at Shechem, between Bethel and Ai, and at Mamre",
+   "vv": "12:7–8; 13:4, 18",
+   "moves": [
+    2
+   ],
+   "offset": [
+    8,
+    6
+   ]
+  },
+  {
+   "type": "altar",
+   "at": [
+    35.255,
+    31.935
+   ],
+   "key": "Altars Abram built: at Shechem, between Bethel and Ai, and at Mamre",
+   "vv": "12:7–8; 13:4, 18",
+   "moves": [
+    3
+   ]
+  },
+  {
+   "type": "altar",
+   "at": [
+    35.125,
+    31.565
+   ],
+   "key": "Altars Abram built: at Shechem, between Bethel and Ai, and at Mamre",
+   "vv": "12:7–8; 13:4, 18",
+   "moves": [
+    7
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "The scale of the journey",
+   "p": [
+    "From Ur to Haran along the Euphrates is about 1,000 km, and from Haran to Shechem about 700 km more: months of travel at the pace of flocks. The route follows the \"Fertile Crescent,\" the arc of watered land between the desert and the mountains, avoiding the Syrian desert."
+   ]
+  },
+  {
+   "h": "Promise and land",
+   "p": [
+    "At each stop Abram builds an altar and \"calls on the name of the LORD,\" marking out the land he has been promised: Shechem in the north, Bethel in the centre, Hebron in the south. The same three places become centres of Israel's later history. Jewish tradition reads the journeys of the fathers as a sign for the children, <i>ma'aseh avot siman la-banim</i> (Ramban on 12:6): the descent to Egypt in famine and the return with wealth foreshadow Israel's own story."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Seas, lakes and rivers: Natural Earth (public domain). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate. Map engine: MapLibre GL."
+}

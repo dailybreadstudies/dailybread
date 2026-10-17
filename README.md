@@ -124,6 +124,13 @@ python3 tools/build_map_places.py /tmp/obgeo data/maps/places
   seasonal ones dashed), and `data/maps/base/ancient.json` (built by `python3 tools/build_ancient_roads.py`) with the main ancient road corridors (drawn through
   OpenBible.info sites, approximate between cities) and labels with the biblical names of the main streams.
 
+### Story maps (Genesis, Matthew)
+
+`tools/build_story_maps.py` holds hand-drawn maps outside Joshua: Abram's journey (Genesis 11:31–13:18, a wide
+"world" map), the war of the kings (Genesis 14), around the Sea of Galilee (Matthew 13–14) and the northern
+journeys (Matthew 15–17). A map can sit at more than one passage: `also: [{c, v, range, links}]` in the map
+file and its index entry gives it a button and tappable names in each. Symbol types added: boat, loaves, keys, mount.
+
 ## Archaeology finds
 
 A small button beside a verse opens a card about an archaeological find: a picture or two, key facts and a

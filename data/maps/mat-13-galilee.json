@@ -1,0 +1,318 @@
+{
+ "id": "mat-13-galilee",
+ "title": "Around the Sea of Galilee",
+ "ref": "Matthew 13–14",
+ "anchor": {
+  "book": "MAT",
+  "c": 13,
+  "v": 1
+ },
+ "range": [
+  1,
+  58
+ ],
+ "also": [
+  {
+   "c": 14,
+   "v": 1,
+   "range": [
+    1,
+    36
+   ]
+  }
+ ],
+ "places": "MAT",
+ "placesLabel": "Places named in Matthew",
+ "placesName": "Matthew",
+ "bounds": [
+  [
+   35.27,
+   32.67
+  ],
+  [
+   35.71,
+   32.95
+  ]
+ ],
+ "links": [
+  "Gennesaret"
+ ],
+ "named": [
+  {
+   "name": "Capernaum",
+   "ll": [
+    35.575,
+    32.88111
+   ],
+   "label": "above",
+   "site": "Tell Hum (Kfar Nahum)",
+   "note": "Jesus' base in Galilee, \"His own town\" (9:1). \"The house\" of 13:1 and 13:36 is probably Peter's (8:14): under the octagonal Byzantine church a first-century house, honoured by early believers, has been excavated. The white limestone synagogue seen today is later, built over the black basalt foundations of an earlier one.",
+   "ob": "af2161c/capernaum"
+  },
+  {
+   "name": "Nazareth",
+   "ll": [
+    35.29769,
+    32.70214
+   ],
+   "label": "below",
+   "site": "Nazareth",
+   "note": "His hometown (13:54; 2:23): in the first century a small village in the hills above the Jezreel Valley.",
+   "ob": "af5884f/nazareth"
+  },
+  {
+   "name": "Gennesaret",
+   "ll": [
+    35.522,
+    32.858
+   ],
+   "label": "left",
+   "site": "the plain of Ginosar",
+   "note": "The fertile plain on the north-west shore; Josephus praises its climate and fruit (<i>Jewish War</i> 3.516–521). The \"Galilee boat,\" a fishing boat of the first century, was found in the mud here in 1986."
+  },
+  {
+   "name": "Bethsaida",
+   "ll": [
+    35.63096,
+    32.91038
+   ],
+   "label": "right",
+   "site": "et-Tell, or el-Araj by the shore",
+   "note": "Luke places the feeding of the 5,000 near Bethsaida (Luke 9:10). Its site is debated: et-Tell, on a hill above the old shoreline, or el-Araj by the lake, where a Byzantine church was found in 2019.",
+   "ob": "a91b732/bethsaida-1"
+  },
+  {
+   "name": "Tabgha",
+   "ll": [
+    35.548,
+    32.873
+   ],
+   "label": "below",
+   "site": "Heptapegon, \"seven springs\"",
+   "note": "The traditional site of the feeding of the 5,000 since the fourth century, with its mosaic of loaves and fishes."
+  }
+ ],
+ "alternates": {
+  "for": "Bethsaida",
+  "bounds": [
+   [
+    35.6,
+    32.875
+   ],
+   [
+    35.66,
+    32.925
+   ]
+  ],
+  "sites": [
+   {
+    "name": "el-Araj",
+    "ll": [
+     35.6272,
+     32.8938
+    ]
+   }
+  ]
+ },
+ "moves": [
+  {
+   "n": 1,
+   "side": "israel",
+   "vv": "13:53–54",
+   "at": 0.5,
+   "text": "After the parables Jesus leaves for His hometown, Nazareth, where they take offense at Him",
+   "coords": [
+    [
+     35.575,
+     32.88111
+    ],
+    [
+     35.55,
+     32.862
+    ],
+    [
+     35.5,
+     32.83
+    ],
+    [
+     35.45,
+     32.785
+    ],
+    [
+     35.39,
+     32.75
+    ],
+    [
+     35.33,
+     32.72
+    ],
+    [
+     35.29769,
+     32.70214
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "vv": "14:13",
+   "at": 0.5,
+   "text": "Hearing of John's death, Jesus withdraws by boat to a solitary place",
+   "coords": [
+    [
+     35.577,
+     32.876
+    ],
+    [
+     35.6,
+     32.872
+    ],
+    [
+     35.625,
+     32.876
+    ],
+    [
+     35.642,
+     32.884
+    ]
+   ],
+   "dash": [
+    1.4,
+    1.1
+   ]
+  },
+  {
+   "n": 3,
+   "side": "other",
+   "vv": "14:13",
+   "at": 0.55,
+   "text": "The crowds follow on foot from the towns",
+   "coords": [
+    [
+     35.578,
+     32.884
+    ],
+    [
+     35.6,
+     32.895
+    ],
+    [
+     35.63,
+     32.903
+    ],
+    [
+     35.643,
+     32.892
+    ]
+   ],
+   "dash": [
+    0.1,
+    1.8
+   ],
+   "w": 2.6
+  },
+  {
+   "n": 4,
+   "side": "israel",
+   "vv": "14:22–34",
+   "at": 0.5,
+   "text": "The disciples row against the wind; Jesus comes to them walking on the sea; they land at Gennesaret",
+   "coords": [
+    [
+     35.642,
+     32.884
+    ],
+    [
+     35.62,
+     32.872
+    ],
+    [
+     35.595,
+     32.86
+    ],
+    [
+     35.565,
+     32.853
+    ],
+    [
+     35.535,
+     32.854
+    ]
+   ],
+   "dash": [
+    1.4,
+    1.1
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "boat",
+   "at": [
+    35.578,
+    32.872
+   ],
+   "key": "He teaches the crowds in parables from a boat",
+   "vv": "13:1–3",
+   "label": "Parables",
+   "offset": [
+    10,
+    8
+   ]
+  },
+  {
+   "type": "loaves",
+   "at": [
+    35.642,
+    32.884
+   ],
+   "key": "Five loaves and two fish: the 5,000 fed",
+   "vv": "14:15–21",
+   "moves": [
+    2,
+    3
+   ],
+   "label": "5,000 fed"
+  },
+  {
+   "type": "mount",
+   "at": [
+    35.65,
+    32.898
+   ],
+   "key": "He goes up on the mountain alone to pray",
+   "vv": "14:23",
+   "moves": [
+    4
+   ]
+  },
+  {
+   "type": "boat",
+   "at": [
+    35.585,
+    32.857
+   ],
+   "key": "Jesus walks on the sea; Peter walks, sinks and is caught",
+   "vv": "14:25–33",
+   "moves": [
+    4
+   ],
+   "label": "On the water"
+  }
+ ],
+ "notes": [
+  {
+   "h": "Herod and John",
+   "p": [
+    "Herod Antipas ruled Galilee and Perea. Josephus says John was imprisoned and executed at Machaerus, Herod's fortress east of the Dead Sea (<i>Antiquities</i> 18.116–119), well beyond this map. The news sends Jesus to \"a solitary place\" (14:13)."
+   ]
+  },
+  {
+   "h": "The lake",
+   "p": [
+    "The Sea of Galilee (Kinneret) is about 21 km long and 12 km wide, some 210 m below sea level. Winds funnel down from the surrounding hills, so sudden storms are common, especially in the evening (14:24). The fourth watch (14:25) ran from about 3 to 6 a.m."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}

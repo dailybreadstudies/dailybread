@@ -43,7 +43,8 @@ import sys
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 MAPS = os.path.join(ROOT, 'data', 'maps')
 SIDES = {'israel', 'ambush', 'enemy', 'other'}
-SYMBOLS = {'camp', 'ambush', 'fire', 'battle', 'sun', 'moon', 'hail', 'cave', 'captured', 'altar', 'stones', 'tabernacle', 'tomb', 'circuit'}
+SYMBOLS = {'camp', 'ambush', 'fire', 'battle', 'sun', 'moon', 'hail', 'cave', 'captured', 'altar', 'stones', 'tabernacle', 'tomb', 'circuit',
+           'boat', 'loaves', 'keys', 'mount'}
 LABELS = {'below', 'above', 'left', 'right'}
 problems = []
 
@@ -129,6 +130,15 @@ for entry in index.get('maps', []):
             bad(mid, 'range ends at verse %s, which does not exist' % rng[1])
     if entry.get('range') != m.get('range'):
         bad(mid, 'index.json range differs from the map file')
+    # a map may also sit at other passages ("also": [{c, v, range, links}]); its names may occur in any of them
+    for al in entry.get('also', []):
+        t2, v2 = chapter_text(a.get('book', ''), al.get('c', 0))
+        if t2 is None or al.get('v') not in v2:
+            bad(mid, 'also: verse %s:%s does not exist' % (al.get('c'), al.get('v')))
+        elif text is not None:
+            text = text + ' ' + t2
+    if entry.get('also') != m.get('also'):
+        bad(mid, 'index.json "also" differs from the map file')
     named = {p.get('name') for p in m.get('named', [])}
     for name in m.get('links', []):
         if text and not re.search(r'(?<![A-Za-z])' + re.escape(name) + r'(?![A-Za-z])', text):

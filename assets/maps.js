@@ -45,7 +45,21 @@
   function settings() { try { return JSON.parse(localStorage.getItem('dbs-settings') || '{}'); } catch (e) { return {}; } }
 
   var registryP = null, hebrewP = null;
-  function registry() { return registryP || (registryP = getJSON('data/maps/index.json').then(function (j) { return j.maps || []; }).catch(function () { return []; })); }
+  /* A map can sit at more than one passage: "also": [{c, v, range, links}] in its index entry */
+  function registry() {
+    return registryP || (registryP = getJSON('data/maps/index.json').then(function (j) {
+      var out = [];
+      (j.maps || []).forEach(function (m) {
+        out.push(m);
+        (m.also || []).forEach(function (a) {
+          var copy = {}; Object.keys(m).forEach(function (k) { if (k !== 'also') copy[k] = m[k]; });
+          copy.c = a.c; copy.v = a.v; copy.range = a.range; if (a.links) copy.links = a.links;
+          out.push(copy);
+        });
+      });
+      return out;
+    }).catch(function () { return []; }));
+  }
   function hebrewNames() { return hebrewP || (hebrewP = getJSON('data/hebrew-names.json').catch(function () { return {}; })); }
   function displayName(name, hn) {
     if (!settings().hebrewNames || !hn) return name;
@@ -84,11 +98,15 @@
     circuit: function (c) { return '<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="' + c + '" stroke-width="2" stroke-dasharray="4 2.5"/><path d="M18.5 4.5l1.5 4-4.2.6" fill="none" stroke="' + c + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; },
     city: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="var(--paper)" stroke="var(--dbm-label)" stroke-width="1.8"/></svg>'; },
     uncertain: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="var(--dbm-label)" stroke-width="1.4" stroke-dasharray="2 1.5"/></svg>'; },
+    boat: function (c) { return '<svg width="26" height="22" viewBox="0 0 26 22"><path d="M13 2.5v11" stroke="' + c + '" stroke-width="1.6"/><path d="M13.8 3.5l7 9.5h-7Z" fill="' + c + '" opacity="0.75"/><path d="M2 14.5h22l-3.8 5.2H5.8Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2" stroke-linejoin="round"/></svg>'; },
+    loaves: function (c) { return '<svg width="26" height="20" viewBox="0 0 26 20"><ellipse cx="8.5" cy="12" rx="6.5" ry="5" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/><ellipse cx="17.5" cy="9" rx="6.5" ry="5" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/><path d="M14.5 8.2q3-1.6 6 0M5.5 11.2q3-1.6 6 0" fill="none" stroke="var(--dbm-paper)" stroke-width="1.1" stroke-linecap="round"/></svg>'; },
+    keys: function (c) { return '<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="7.5" cy="7.5" r="4.6" fill="none" stroke="' + c + '" stroke-width="2.4"/><path d="M10.8 10.8l9 9M16.5 16.5l2.4-2.4M19 19l2-2" fill="none" stroke="' + c + '" stroke-width="2.4" stroke-linecap="round"/></svg>'; },
     mount: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2.2 L12.2 11.4 L1.8 11.4 Z" fill="var(--accent-soft)" stroke="var(--dbm-label)" stroke-width="1.2" stroke-linejoin="round"/></svg>'; }
   };
   var SYM_COLOR = { camp: 'var(--dbm-israel)', ambush: 'var(--dbm-ambush)', fire: 'var(--dbm-fire)', battle: 'var(--dbm-enemy)',
     sun: 'var(--dbm-fire)', moon: 'var(--dbm-label)', hail: 'var(--dbm-water-line)', cave: 'var(--dbm-enemy)', captured: 'var(--dbm-israel)',
-    altar: 'var(--dbm-fire)', stones: 'var(--dbm-label)', tabernacle: 'var(--dbm-israel)', tomb: 'var(--dbm-label)', circuit: 'var(--dbm-israel)' };
+    altar: 'var(--dbm-fire)', stones: 'var(--dbm-label)', tabernacle: 'var(--dbm-israel)', tomb: 'var(--dbm-label)', circuit: 'var(--dbm-israel)',
+    boat: 'var(--dbm-israel)', loaves: 'var(--dbm-fire)', keys: 'var(--dbm-fire)' };
   var MAP_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M9 4v13.5M15 6.5V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
   function sideColor(side) { return 'var(--dbm-' + (['israel', 'ambush', 'enemy'].indexOf(side) >= 0 ? side : 'other') + ')'; }
 
@@ -121,13 +139,14 @@
         });
         here.forEach(function (m) {
           var hit = marks.filter(function (x) { return x[0] === m.c && x[1] === m.v; })[0];
-          if (!hit || scr.querySelector('.dbm-pin[data-dbm-open="' + m.id + '"]')) return;
+          if (!hit || scr.querySelector('.dbm-pin[data-dbm-at="' + m.id + '@' + m.c + ':' + m.v + '"]')) return;
           var target = hit[2];
           var block = target.closest('.scripture > *') || target.parentNode;
           block.classList.add('dbm-anchor');
           var pin = el('button', 'dbm-pin', MAP_ICON);
           pin.type = 'button';
           pin.setAttribute('data-dbm-open', m.id);
+          pin.setAttribute('data-dbm-at', m.id + '@' + m.c + ':' + m.v);
           pin.setAttribute('aria-pressed', state.open === m.id ? 'true' : 'false');
           pin.setAttribute('aria-label', 'Show map: ' + m.title + ' (' + m.ref + ')');
           pin.title = 'Map: ' + m.title + ' (' + m.ref + ')';
@@ -333,7 +352,8 @@
     }
     var symSeen = {};
     keyHTML += (spec.symbols && spec.symbols.length ? '<h4>Symbols</h4>' : '<h4>Map</h4>') + '<ul>' + (spec.symbols || []).filter(function (s) {
-      if (symSeen[s.type]) return false; symSeen[s.type] = true; return true;
+      var k = s.type + '|' + s.key;                   // one key row per distinct event (same symbol and wording counted once)
+      if (symSeen[k]) return false; symSeen[k] = true; return true;
     }).map(function (s) {
       return '<li class="dbm-srow" data-dbm-sym="' + esc(s.type) + '">' + SYM[s.type](SYM_COLOR[s.type]) + '<span>' + esc(s.key) + ' <span class="dbm-vv">' + esc(s.vv || '') + '</span></span></li>';
     }).join('');

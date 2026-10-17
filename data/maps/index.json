@@ -14,6 +14,85 @@
    ]
   },
   {
+   "id": "gen-12-abram",
+   "title": "Abram's Journey",
+   "ref": "Genesis 11:31–13:18",
+   "book": "GEN",
+   "c": 12,
+   "v": 1,
+   "links": [
+    "Haran",
+    "Shechem",
+    "Moreh",
+    "Bethel",
+    "Ai",
+    "Negev",
+    "Egypt",
+    "Sodom",
+    "Zoar",
+    "Mamre",
+    "Hebron"
+   ],
+   "range": [
+    1,
+    20
+   ],
+   "also": [
+    {
+     "c": 11,
+     "v": 31,
+     "range": [
+      27,
+      32
+     ],
+     "links": [
+      "Ur"
+     ]
+    },
+    {
+     "c": 13,
+     "v": 1,
+     "range": [
+      1,
+      18
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gen-14-kings",
+   "title": "The War of the Kings",
+   "ref": "Genesis 14",
+   "book": "GEN",
+   "c": 14,
+   "v": 1,
+   "links": [
+    "Ashteroth-karnaim",
+    "Ham",
+    "Shaveh-kiriathaim",
+    "Mount Seir",
+    "El-paran",
+    "En-mishpat",
+    "Hazazon-tamar",
+    "Valley of Siddim",
+    "Sodom",
+    "Gomorrah",
+    "Admah",
+    "Zeboiim",
+    "Zoar",
+    "Mamre",
+    "Dan",
+    "Hobah",
+    "Damascus",
+    "Valley of Shaveh",
+    "Salem"
+   ],
+   "range": [
+    1,
+    24
+   ]
+  },
+  {
    "id": "josh-2-spies",
    "title": "The Spies at Jericho",
    "ref": "Joshua 2",
@@ -723,6 +802,68 @@
    "range": [
     1,
     33
+   ]
+  },
+  {
+   "id": "mat-13-galilee",
+   "title": "Around the Sea of Galilee",
+   "ref": "Matthew 13–14",
+   "book": "MAT",
+   "c": 13,
+   "v": 1,
+   "links": [
+    "Gennesaret"
+   ],
+   "range": [
+    1,
+    58
+   ],
+   "also": [
+    {
+     "c": 14,
+     "v": 1,
+     "range": [
+      1,
+      36
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mat-15-north",
+   "title": "The Northern Journeys",
+   "ref": "Matthew 15:21–17:27",
+   "book": "MAT",
+   "c": 15,
+   "v": 21,
+   "links": [
+    "Tyre",
+    "Sidon",
+    "Magadan",
+    "Caesarea Philippi",
+    "Capernaum"
+   ],
+   "range": [
+    21,
+    39
+   ],
+   "also": [
+    {
+     "c": 16,
+     "v": 1,
+     "range": [
+      1,
+      28
+     ]
+    },
+    {
+     "c": 17,
+     "v": 1,
+     "range": [
+      1,
+      27
+     ]
+    }
    ]
   }
  ]

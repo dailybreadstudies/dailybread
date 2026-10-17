@@ -1,0 +1,560 @@
+{
+ "id": "gen-14-kings",
+ "title": "The War of the Kings",
+ "ref": "Genesis 14",
+ "anchor": {
+  "book": "GEN",
+  "c": 14,
+  "v": 1
+ },
+ "range": [
+  1,
+  24
+ ],
+ "places": "GEN",
+ "placesLabel": "Places named in Genesis",
+ "bounds": [
+  [
+   34.15,
+   29.4
+  ],
+  [
+   37.3,
+   34.35
+  ]
+ ],
+ "links": [
+  "Ashteroth-karnaim",
+  "Ham",
+  "Shaveh-kiriathaim",
+  "Mount Seir",
+  "El-paran",
+  "En-mishpat",
+  "Hazazon-tamar",
+  "Valley of Siddim",
+  "Sodom",
+  "Gomorrah",
+  "Admah",
+  "Zeboiim",
+  "Zoar",
+  "Mamre",
+  "Dan",
+  "Hobah",
+  "Damascus",
+  "Valley of Shaveh",
+  "Salem"
+ ],
+ "named": [
+  {
+   "name": "Ashteroth-karnaim",
+   "ll": [
+    36.02,
+    32.82
+   ],
+   "label": "right",
+   "site": "Tell Ashtara and Sheikh Sa'd, southern Syria",
+   "note": "Two neighbouring cities of Bashan; the Rephaites were remembered as giants (Deuteronomy 3:11). Og king of Bashan later reigned at Ashtaroth (Deuteronomy 1:4)."
+  },
+  {
+   "name": "Ham",
+   "ll": [
+    35.81238,
+    32.51421
+   ],
+   "label": "right",
+   "site": "Tell Ham, northern Jordan",
+   "note": "Home of the Zuzites, perhaps the Zamzummites of Deuteronomy 2:20.",
+   "ob": "a7a5f29/ham-1"
+  },
+  {
+   "name": "Shaveh-kiriathaim",
+   "ll": [
+    35.75,
+    31.6
+   ],
+   "label": "right",
+   "site": "Khirbet el-Qureiyat?, Moab",
+   "note": "\"The plain of Kiriathaim,\" in Moab (Numbers 32:37). The Emites were the earlier people of Moab (Deuteronomy 2:10–11)."
+  },
+  {
+   "name": "Mount Seir",
+   "ll": [
+    35.55,
+    30.55
+   ],
+   "label": "right",
+   "site": "the Edomite highlands",
+   "note": "The hill country later held by Esau's descendants; the Horites lived here first (Genesis 36:20; Deuteronomy 2:12)."
+  },
+  {
+   "name": "El-paran",
+   "ll": [
+    35.0,
+    29.55
+   ],
+   "label": "right",
+   "site": "probably Elath, at the head of the Gulf of Aqaba",
+   "note": "\"El-paran, which is near the desert\": the southernmost point of the campaign, probably later Elath."
+  },
+  {
+   "name": "En-mishpat",
+   "ll": [
+    34.42222,
+    30.64833
+   ],
+   "label": "left",
+   "site": "Ain el-Qudeirat (Kadesh-barnea)",
+   "note": "\"En-mishpat (that is, Kadesh),\" \"the spring of judgment\": the great oasis where Israel later camped for many years (Numbers 20:1; Deuteronomy 1:46)."
+  },
+  {
+   "name": "Hazazon-tamar",
+   "ll": [
+    35.39,
+    31.46
+   ],
+   "label": "right",
+   "site": "En-gedi (2 Chronicles 20:2), or Tamar further south",
+   "note": "The Amorites of Hazazon-tamar. 2 Chronicles 20:2 equates it with En-gedi on the Dead Sea; some prefer Tamar (Ein Hatzeva) in the Arabah."
+  },
+  {
+   "name": "Valley of Siddim",
+   "ll": [
+    35.44,
+    31.12
+   ],
+   "label": "right",
+   "site": "the south end of the Dead Sea?",
+   "note": "\"The Valley of Siddim (that is, the Salt Sea),\" \"full of tar pits\" (14:3, 10): bitumen still rises from the Dead Sea. The text implies the valley later lay under the sea, which suggests its shallow southern basin."
+  },
+  {
+   "name": "Mamre",
+   "ll": [
+    35.10534,
+    31.55654
+   ],
+   "label": "below",
+   "site": "Ramat el-Khalil, north of Hebron",
+   "note": "Abram lived \"near the Oaks of Mamre the Amorite,\" his ally (14:13).",
+   "ob": "aeb9e97/mamre"
+  },
+  {
+   "name": "Dan",
+   "ll": [
+    35.652,
+    33.249
+   ],
+   "label": "left",
+   "site": "Tel Dan",
+   "note": "The city was called Laish until the tribe of Dan took it (Judges 18:29); the narrator uses the later name. A mudbrick city gate of the Middle Bronze Age still stands here.",
+   "ob": "a513646/dan"
+  },
+  {
+   "name": "Hobah",
+   "ll": [
+    37.06667,
+    34.25
+   ],
+   "label": "left",
+   "site": "unknown; \"north (literally \"left\") of Damascus\"",
+   "note": "Not identified. Facing east, \"left\" is north.",
+   "ob": "a6779cd/hobah"
+  },
+  {
+   "name": "Salem",
+   "ll": [
+    35.2342,
+    31.7767
+   ],
+   "label": "above",
+   "site": "Jerusalem",
+   "note": "Salem is Jerusalem (Psalm 76:2). Melchizedek, its priest-king, brings bread and wine and blesses Abram (14:18–20)."
+  },
+  {
+   "name": "Valley of Shaveh",
+   "ll": [
+    35.238,
+    31.765
+   ],
+   "label": "left",
+   "site": "the Kidron valley by Jerusalem?",
+   "note": "\"The King's Valley\" (14:17), where Absalom later set up his pillar (2 Samuel 18:18); Josephus places it near Jerusalem."
+  }
+ ],
+ "alternates": {
+  "for": "Hazazon-tamar",
+  "bounds": [
+   [
+    35.1,
+    30.65
+   ],
+   [
+    35.55,
+    31.6
+   ]
+  ],
+  "sites": [
+   {
+    "name": "Tamar (Ein Hatzeva)",
+    "ll": [
+     35.247,
+     30.78
+    ]
+   }
+  ]
+ },
+ "moves": [
+  {
+   "n": 1,
+   "side": "enemy",
+   "vv": "v. 5",
+   "at": 0.3,
+   "text": "The four kings march south, defeating the Rephaites, Zuzites and Emites",
+   "coords": [
+    [
+     36.32,
+     33.62
+    ],
+    [
+     36.2,
+     33.2
+    ],
+    [
+     36.02,
+     32.82
+    ],
+    [
+     35.81,
+     32.51
+    ],
+    [
+     35.86,
+     32.1
+    ],
+    [
+     35.8,
+     31.82
+    ],
+    [
+     35.75,
+     31.6
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "enemy",
+   "vv": "v. 6",
+   "at": 0.5,
+   "text": "…and the Horites of Mount Seir, as far as El-paran",
+   "coords": [
+    [
+     35.75,
+     31.6
+    ],
+    [
+     35.72,
+     31.3
+    ],
+    [
+     35.65,
+     31.0
+    ],
+    [
+     35.58,
+     30.7
+    ],
+    [
+     35.45,
+     30.25
+    ],
+    [
+     35.25,
+     29.85
+    ],
+    [
+     35.0,
+     29.55
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "enemy",
+   "vv": "v. 7",
+   "at": 0.3,
+   "text": "They turn back to En-mishpat (Kadesh), the Amalekites and Hazazon-tamar",
+   "coords": [
+    [
+     35.0,
+     29.55
+    ],
+    [
+     34.82,
+     29.9
+    ],
+    [
+     34.6,
+     30.3
+    ],
+    [
+     34.42,
+     30.65
+    ],
+    [
+     34.75,
+     30.8
+    ],
+    [
+     35.05,
+     31.0
+    ],
+    [
+     35.28,
+     31.25
+    ],
+    [
+     35.39,
+     31.46
+    ]
+   ]
+  },
+  {
+   "n": 4,
+   "side": "enemy",
+   "vv": "vv. 11–12",
+   "at": 0.45,
+   "text": "With the goods of Sodom and Gomorrah, and Lot, they head home to the north",
+   "coords": [
+    [
+     35.4,
+     31.35
+    ],
+    [
+     35.42,
+     31.62
+    ],
+    [
+     35.5,
+     31.86
+    ],
+    [
+     35.55,
+     32.3
+    ],
+    [
+     35.58,
+     32.75
+    ],
+    [
+     35.61,
+     33.08
+    ],
+    [
+     35.652,
+     33.235
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 5,
+   "side": "israel",
+   "vv": "vv. 13–14",
+   "at": 0.55,
+   "text": "Abram and his 318 trained men set out from Mamre in pursuit, as far as Dan",
+   "coords": [
+    [
+     35.10534,
+     31.55654
+    ],
+    [
+     35.13,
+     31.65
+    ],
+    [
+     35.21,
+     31.78
+    ],
+    [
+     35.24,
+     31.95
+    ],
+    [
+     35.28,
+     32.2
+    ],
+    [
+     35.3,
+     32.5
+    ],
+    [
+     35.42,
+     32.78
+    ],
+    [
+     35.56,
+     33.02
+    ],
+    [
+     35.64,
+     33.22
+    ]
+   ]
+  },
+  {
+   "n": 6,
+   "side": "israel",
+   "vv": "v. 15",
+   "at": 0.5,
+   "text": "A night attack at Dan; Abram routs them and pursues to Hobah, north of Damascus",
+   "coords": [
+    [
+     35.652,
+     33.249
+    ],
+    [
+     35.9,
+     33.38
+    ],
+    [
+     36.2,
+     33.48
+    ],
+    [
+     36.6,
+     33.8
+    ],
+    [
+     37.06,
+     34.25
+    ]
+   ]
+  },
+  {
+   "n": 7,
+   "side": "israel",
+   "vv": "vv. 16–17",
+   "at": 0.6,
+   "text": "Abram brings back Lot and the goods; the king of Sodom and Melchizedek meet him at the Valley of Shaveh",
+   "coords": [
+    [
+     37.0,
+     34.2
+    ],
+    [
+     36.3,
+     33.45
+    ],
+    [
+     35.9,
+     33.0
+    ],
+    [
+     35.6,
+     32.62
+    ],
+    [
+     35.55,
+     32.2
+    ],
+    [
+     35.5,
+     31.87
+    ],
+    [
+     35.42,
+     31.85
+    ],
+    [
+     35.3,
+     31.79
+    ],
+    [
+     35.245,
+     31.768
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "battle",
+   "at": [
+    35.47,
+    31.2
+   ],
+   "key": "Four kings against five in the Valley of Siddim; the kings of Sodom and Gomorrah fall into the tar pits",
+   "vv": "vv. 8–10",
+   "moves": [
+    3,
+    4
+   ]
+  },
+  {
+   "type": "captured",
+   "at": [
+    35.5,
+    31.34
+   ],
+   "key": "Lot is carried off from Sodom",
+   "vv": "v. 12",
+   "moves": [
+    4
+   ],
+   "offset": [
+    10,
+    0
+   ]
+  },
+  {
+   "type": "battle",
+   "at": [
+    35.7,
+    33.27
+   ],
+   "key": "Abram divides his men and attacks by night",
+   "vv": "v. 15",
+   "moves": [
+    6
+   ]
+  },
+  {
+   "type": "altar",
+   "at": [
+    35.255,
+    31.79
+   ],
+   "key": "Melchizedek, priest of God Most High, brings bread and wine and blesses Abram; Abram gives him a tenth",
+   "vv": "vv. 18–20",
+   "moves": [
+    7
+   ],
+   "offset": [
+    10,
+    -6
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "The four kings",
+   "p": [
+    "Amraphel of Shinar (Babylonia), Arioch of Ellasar, Chedorlaomer of Elam and Tidal \"king of Goiim\" (\"nations\"). Older scholars identified Amraphel with Hammurabi; that is now generally given up. Chedorlaomer is a good Elamite name (<i>Kudur-</i>, \"servant of,\" with the goddess Lagamar), Arioch resembles Arriwuk of the Mari texts, and Tidal the Hittite royal name Tudhaliya. Elam really did dominate southern Mesopotamia at times in the early second millennium."
+   ]
+  },
+  {
+   "h": "Melchizedek",
+   "p": [
+    "The priest-king of Salem appears only here and in Psalm 110:4, \"a priest forever in the order of Melchizedek,\" which Hebrews 5–7 applies to Jesus. The sages identified him with Shem son of Noah (Nedarim 32b; Targum Pseudo-Jonathan on 14:18). His blessing names God as <i>El Elyon</i>, \"God Most High, Creator of heaven and earth,\" and Abram adopts the title as his own (14:22)."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Map engine: MapLibre GL."
+}
