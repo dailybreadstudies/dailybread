@@ -110,15 +110,21 @@
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({ name: name, email: email, topic: form.elements.topic.value, where: form.elements.page.value.trim(), message: msg,
           _subject: 'Daily Bread Online: ' + form.elements.topic.value, _replyto: email, _template: 'table' })
-      }).then(function (r) { return r.json().then(function (j) { if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || 'not sent'); }); })
+      }).then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || ('not sent, ' + r.status));
+        });
+      })
         .then(function () {
           form.outerHTML = '<div class="ct-done"><b>Thank you!</b><p>Your message has been sent. We will reply to ' +
             email.replace(/[<>&"]/g, '') + ' as soon as we can.</p></div>';
         })
-        .catch(function () {
+        .catch(function (err) {
           send.disabled = false; status.className = 'ct-status err';
+          var why = String(err && err.message || '').replace(/[<>&"]/g, '');
           status.innerHTML = 'Sorry, the message could not be sent. Please try again, or write to ' +
-            '<a href="mailto:arielmedia@thewatchman.org">arielmedia@thewatchman.org</a>.';
+            '<a href="mailto:arielmedia@thewatchman.org">arielmedia@thewatchman.org</a>.' +
+            (why && why !== 'not sent' ? '<br><small>(' + why + ')</small>' : '');
         });
     });
   })();
