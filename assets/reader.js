@@ -921,6 +921,9 @@
           : '<button class="nav-btn primary" data-go="1">Return to Start &#8635;</button>') +
       '</nav>' +
       '<p class="done-next"></p>' +
+      (!KIDS && label === 'Torah' && current && current.day.parsha ? '<p class="journal-line deeper-line">Go deeper into <em>' + current.day.parsha.name +
+        '</em> with the commentary <a href="learn.html#messiah-in-the-torah"><em>Messiah in the Torah</em></a> and the weekly ' +
+        '<a href="learn.html#torah-class">Daily Bread Torah Class</a>.</p>' : '') +
       (n === total ? '<p class="journal-line">Studies find we understand more when we read on paper, and remember more when we write by hand. ' +
         'The printed <a href="' + JOURNAL_URL + '" rel="noopener">Daily Bread' + (KIDS ? ' for Kids' : '') + ' journal</a> follows this plan day by day.</p>' : '') +
       '</div>';

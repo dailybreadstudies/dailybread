@@ -808,17 +808,28 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 .tb-give:hover, .tb-give-m:hover { color: var(--accent-deep); }
 .tb-give[aria-current="page"], .tb-give-m[aria-current="page"] { border-bottom-color: var(--accent-soft); }
 .tb-nav .tb-give-m { display: none; }
+.tb-br { display: none; }   /* phones: the menu breaks into two rows here (tools/set_menu.py) */
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 @media (max-width: 700px) {   /* phones: logo centred, the menu centred on the row below */
-  :root { --topbar-h: 96px; }
+  :root { --topbar-h: 122px; }
   .topbar { grid-template-columns: 1fr; justify-items: center; align-content: center; row-gap: 12px; }
   .tb-logo, .tb-nav { justify-self: center; }
   .tb-nav { gap: 26px; }
   .tb-nav a { font-size: 12px; letter-spacing: 0.14em; padding: 4px 0 5px; }
   .tb-end { display: none; }
-  .tb-nav { gap: 22px; }
+  .tb-nav { gap: 10px 22px; flex-wrap: wrap; justify-content: center; }
+  .tb-br { display: block; flex-basis: 100%; height: 0; }
   .tb-nav .tb-give-m { display: inline-block; font-size: 12px; letter-spacing: 0.14em; padding: 4px 0 5px; color: var(--heading); }
+}
+@media (max-width: 360px) { .tb-nav { column-gap: 16px; } .tb-nav a, .tb-nav .tb-give-m { letter-spacing: 0.1em; } }
+@media (min-width: 701px) and (max-width: 1000px) {   /* narrow desktops: a tighter menu */
+  .tb-nav { gap: 20px; }
+  .tb-nav a { font-size: 12px; letter-spacing: 0.12em; }
+}
+@media (min-width: 701px) and (max-width: 880px) {   /* tablets: no room for passage search beside the menu */
+  .tb-end .quick-go { display: none; }
+  .tb-nav { gap: 16px; }
 }
 @media print { .topbar { display: none; } }
 
