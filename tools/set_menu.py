@@ -3,15 +3,15 @@
 
     python3 tools/set_menu.py      (then python3 tools/make_kids_pages.py for the Kids copies)
 
-Order: TODAY · PROGRESS · KIDS · LISTEN · LEARN · ABOUT (+ GIVE). On phones the menu takes two rows; the break
-(<span class="tb-br">) falls after LISTEN. To add or reorder a menu item, change MENU here and run it again.
+Order: TODAY · PROGRESS · LISTEN · LEARN · ABOUT · KIDS (+ GIVE). On phones the menu takes two rows; the break
+(<span class="tb-br">) falls after LEARN. KIDS sits last, as the switch to the Kids edition (Kids has CLASSIC in the same place). To add or reorder a menu item, change MENU here and run it again.
 """
 import os
 import re
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-MENU = [('./', 'Today', 'index.html'), ('progress.html', 'Progress', 'progress.html'), ('kids/', 'Kids', None),
-        ('listen.html', 'Listen', 'listen.html'), None, ('learn.html', 'Learn', 'learn.html'), ('about.html', 'About', 'about.html')]
+MENU = [('./', 'Today', 'index.html'), ('progress.html', 'Progress', 'progress.html'), ('listen.html', 'Listen', 'listen.html'),
+        ('learn.html', 'Learn', 'learn.html'), None, ('about.html', 'About', 'about.html'), ('kids/', 'Kids', None)]
 PAGES = ['index.html', 'progress.html', 'learn.html', 'listen.html', 'about.html', 'contact.html', 'give.html', 'maps-test.html']
 
 
