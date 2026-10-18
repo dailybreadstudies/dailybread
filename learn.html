@@ -36,6 +36,7 @@
     .ln-sec.no-art { grid-template-columns: 1fr; }
     .ln-art { margin: 0; background: #f2f2f2; border-radius: 12px; overflow: hidden; }
     .ln-art img { display: block; width: 100%; height: auto; }
+    .ln-art-wide { background: none; }
     .ln-art-icon { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: var(--tint); color: var(--accent); }
     .ln-art-icon svg { width: 46%; height: auto; }
     .ln-sec h2 { font-family: var(--display); font-weight: 300; font-size: 1.85rem; line-height: 1.2; color: var(--heading); margin: 0 0 0.3rem; letter-spacing: -0.01em; }
@@ -64,6 +65,7 @@
       .ln-sec { grid-template-columns: 1fr; gap: 1.6rem; padding: 2.4rem 0; }
       .ln-art { max-width: 15rem; margin: 0 auto; }
       .ln-art-icon { display: none; }
+      .ln-art-wide { max-width: none; }
       .ln-tools { grid-template-columns: 1fr; }
     }
   </style>
@@ -113,10 +115,8 @@
   </section>
 
   <section class="ln-sec" id="torah-class">
-    <div class="ln-art ln-art-icon" aria-hidden="true">
-      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="6" y="10" width="36" height="24" rx="3"/><path d="M21 17.5v9l7.5-4.5z" fill="currentColor"/><path d="M17 40h14M24 34v6"/></svg>
-    </div>
+    <figure class="ln-art ln-art-wide"><a href="https://www.larsenarson.com/torah" rel="noopener"><img src="assets/img/torah-class.jpg" width="800" height="478"
+      alt="Lars Enarson teaching a Daily Bread Torah Class video lesson"></a></figure>
     <div>
       <h2>Daily Bread Torah Class</h2>
       <p class="ln-by">Learn Torah in light of Messiah with Lars Enarson</p>
