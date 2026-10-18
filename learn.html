@@ -54,7 +54,15 @@
     .ln-btn:hover { background: var(--accent-deep); color: var(--paper); }
     .ln-btn:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
     .ln-via { font: 400 0.8rem var(--sans); color: var(--muted); }
-    .ln-tools { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 2rem; }
+    .ln-tools { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem 2.4rem; }
+    .ln-tools li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: start; }
+    .ln-ic { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line-strong); color: var(--accent);
+      display: inline-flex; align-items: center; justify-content: center; background: var(--paper); }
+    .ln-ic svg { width: 24px; height: 24px; flex: none; }
+    .ln-ic-pill { width: auto; width: 64px; padding: 0; border-radius: 24px; font-family: var(--display); font-size: 1.05rem; gap: 4px; }
+    .ln-ic-sep { color: var(--line-strong); }
+    .ln-ic-he { font-family: var(--hebrew); }
+    .ln-tools li > div { padding-top: 2px; }
     .ln-tools b { display: block; font: 600 0.74rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
     .ln-tools span { font-size: 0.98rem; line-height: 1.65; color: var(--ink-soft); }
     .ln-tools a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
@@ -90,14 +98,12 @@
       <h2>Study tools on Daily Bread Online</h2>
       <p class="ln-by">Already in the reader</p>
       <ul class="ln-tools">
-        <li><b>Original languages</b><span>Under A/א, show the Hebrew and Greek under each verse, or on its own. Tap a Hebrew
-          or Greek word to see its meaning and form.</span></li>
-        <li><b>Bible maps</b><span>Where a passage has a map, a map button sits beside the verse. Tap it to follow the places and
-          journeys.</span></li>
-        <li><b>The whole Bible</b><span>The book button opens any book and chapter, and the calendar takes you to any day of
-          the plan.</span></li>
-        <li><b>Your progress</b><span>Mark each reading complete and watch your Bible fill in, book by book, on the
-          <a href="progress.html">Progress</a> page.</span></li>
+        <li><span class="ln-ic ln-ic-pill" aria-hidden="true"><span class="ln-ic-en">A</span><span class="ln-ic-sep">/</span><span class="ln-ic-he">א</span></span><div><b>Original languages</b><span>Under A/א, show the Hebrew and Greek under each verse, or on its own. Tap a Hebrew or Greek word to see its meaning and form.</span></div></li>
+        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z"/><path d="M9 4v13.5M15 6.5V20"/></svg></span><div><b>Bible maps</b><span>Where a passage has a map, a map button sits beside the verse. Tap it to follow the places and journeys.</span></div></li>
+        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.2 5 7.6 4.5 4 4.5v13.5c3.6 0 6.2.5 8 2 1.8-1.5 4.4-2 8-2V4.5c-3.6 0-6.2.5-8 2z"/><path d="M12 6.5V20"/></svg></span><div><b>The whole Bible</b><span>The book button opens any book and chapter of the Bible.</span></div></li>
+        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/></svg></span><div><b>Any day of the plan</b><span>The calendar takes you to any day of the reading plan, with its Hebrew date and holy days.</span></div></li>
+        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span><div><b>Listen along</b><span>When the day has a <a href="listen.html">podcast</a> episode, LISTEN under the readings plays it while you read.</span></div></li>
+        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></svg></span><div><b>Your progress</b><span>Mark each reading complete and watch your Bible fill in, book by book, on the <a href="progress.html">Progress</a> page.</span></div></li>
       </ul>
     </div>
   </section>

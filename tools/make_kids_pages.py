@@ -48,8 +48,14 @@ def kidsify(html, page):
                   '<meta name="description" content="Daily Bible readings for children: the weekly Torah portion and the Gospels, '
                   'following the Daily Bread for Kids reading plan.">', html, count=1)
     html = html.replace('&display=swap" rel="stylesheet">', '&family=Baloo+2:wght@500;600;700&display=swap" rel="stylesheet">', 1)
-    html = html.replace('<link rel="stylesheet" href="../assets/reader.css">',
-                        '<link rel="stylesheet" href="../assets/reader.css">\n  <link rel="stylesheet" href="../assets/kids.css">', 1)
+    # Kids look: kids.css right after reader.css (the links may carry ?v= stamps from tools/stamp_assets.py)
+    html = re.sub(r'(<link rel="stylesheet" href="\.\./assets/reader\.css(?:\?v=[0-9a-f]+)?">)',
+                  r'\1\n  <link rel="stylesheet" href="../assets/kids.css">', html, count=1)
+    if '../assets/kids.css' not in html:
+        raise SystemExit('make_kids_pages: could not add kids.css')
+    # The Busy Moms podcast is not offered on Kids
+    html = re.sub(r'\s*<link rel="stylesheet" href="\.\./assets/podcast\.css[^"]*">', '', html)
+    html = re.sub(r'<script src="\.\./assets/podcast\.js[^"]*"></script>\n?', '', html)
     html = html.replace("'dbs-settings'", "'dbs-kids-settings'").replace("'dbs-progress'", "'dbs-kids-progress'") \
                .replace("'dbs-visited'", "'dbs-kids-visited'")
     html = html.replace('</head>', FETCH_SHIM + '</head>', 1)
