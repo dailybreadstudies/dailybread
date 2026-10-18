@@ -17,6 +17,8 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
   connected, add the new address to the form's settings at web3forms.com. `contact.html?from=…` pre-fills “Where”.
 - `progress.html` — **Progress** (same reader script, `data-page="progress"`).
 - `about.html` — **About**: full-width scrolling page with its own `<style>`; journal photo `assets/img/journal*.jpg` with parallax.
+- `listen.html` — **Listen**: the Daily Bread for Busy Moms podcast (today's episode with its readings, recent episodes,
+  podcast-app links, Patreon). Not in the top menu yet (see the navigation plan); linked from the LISTEN row on Today.
 - `maps-test.html` — copy of index for trying map changes (keep its settings panel and blessings in step with index).
 - Shared top bar on all pages: John's SVG wordmark (assets/img/logo-dark.svg, inlined in each page, fill = theme heading colour, 15px tall; on phones the logo is centred with the menu on a second row, top bar 96px) + TODAY · PROGRESS · ABOUT (right end reserved for future sign-in). Passage search ("Go to … Gen 1", `#quick-go`) sits at the right end of the top bar on desktop only (scrolls away with it; hidden on phones). The Bible / calendar / A/א buttons stay pinned.
 
@@ -27,6 +29,14 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - Plan: the whole 5787 Kids year is loaded (4 Oct 2026 – 24 Oct 2027, 386 days).
 - Style: `docs/KIDS-STYLE.md` (black to read, jungle teal to tap, golden yellow for here/well done, berry for holy days; Baloo 2).
 - Kids defaults: Messianic Filter on (the journal says Yeshua, Messiah, Torah). Reading-plan options hidden.
+
+## Podcast (Daily Bread for Busy Moms)
+- The podcast follows the plan day by day (titles like "Sunday 18 Oct - 7 Cheshvan", out the evening before).
+- `.github/workflows/podcast.yml` runs `tools/fetch_podcast.py` every two hours and commits `data/podcast/moms.json`
+  (date → title, mp3, length). Run it by hand from the Actions tab ("Podcast episodes" → Run workflow).
+- `assets/podcast.js/.css`: a LISTEN row closes the readings list on Today when the day has an episode; playing docks a
+  player at the bottom (pause, back 15 s, speed, remembers where you stopped, lock-screen controls). Not shown on Kids.
+  A Kids podcast can reuse it with its own feed file.
 
 ## Code
 - `assets/history.js` — when each history entry / calendar note falls (shared with `tools/build_history.mjs`).

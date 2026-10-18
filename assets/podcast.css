@@ -1,0 +1,69 @@
+/* Daily Bread Online — podcast (assets/podcast.js) */
+
+/* LISTEN row at the end of the day's readings: same three columns as the readings above it */
+.dp-listen { display: contents; }
+.dp-listen > * { margin-top: 0.85rem; }
+.pod-btn { flex: none; align-self: center; width: 20px; height: 20px; padding: 0; border-radius: 50%;
+  border: 1.5px solid var(--accent-soft); background: none; color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s; }
+.pod-btn svg { width: 10px; height: 10px; }
+.pod-btn svg path[d^="M8"] { transform: translateX(0.5px); }
+.pod-btn:hover { border-color: var(--accent); background: var(--tint); }
+.pod-btn:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.dp-listen.is-open .pod-btn { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.pod-label { cursor: pointer; user-select: none; }
+.pod-label:hover { color: var(--accent-deep); }
+.pod-meta { font: 400 0.84rem/1.35 var(--sans); color: var(--muted); }
+.pod-meta a.pod-show { color: inherit; text-decoration: none; }
+.pod-meta a.pod-show:hover { color: var(--accent-deep); text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+.dp-listen.is-playing .pod-len { color: var(--accent); }
+@media (max-width: 700px) { .pod-meta { font-size: 0.8rem; } }
+
+/* The docked player: stays at the bottom of the screen while an episode is open, so you can read along */
+.pod-dock { position: fixed; z-index: 230; left: 50%; transform: translateX(-50%);
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: min(36rem, calc(100vw - 24px));
+  display: grid; grid-template-columns: auto 1fr auto auto auto; align-items: center; column-gap: 6px;
+  padding: 8px 8px 8px 10px; border-radius: 16px; border: 1px solid var(--line-strong);
+  background: var(--surface-glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 10px 30px var(--shadow); font-family: var(--sans); color: var(--ink);
+  animation: pd-in 0.22s ease-out; }
+.pod-dock[hidden] { display: none; }
+@keyframes pd-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@media (prefers-reduced-motion: reduce) { .pod-dock { animation: none; } }
+.pd-play { width: 42px; height: 42px; border-radius: 50%; border: none; background: var(--heading); color: var(--paper);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; margin-right: 4px; }
+.pd-play svg { width: 16px; height: 16px; }
+.pd-play:hover { background: var(--accent-deep); }
+.pd-main { min-width: 0; }
+.pd-title { display: flex; align-items: baseline; gap: 8px; min-width: 0; font-size: 0.82rem; line-height: 1.3; }
+.pd-ep { font-weight: 600; color: var(--heading); white-space: nowrap; }
+.pd-show { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.pd-bar { display: flex; align-items: center; gap: 8px; margin-top: 3px; font: 500 0.7rem/1 var(--sans); color: var(--muted);
+  font-variant-numeric: tabular-nums; }
+.pd-time, .pd-dur { flex: none; min-width: 2.6em; }
+.pd-dur { text-align: right; }
+.pd-seek { --pd-fill: 0%; flex: 1; min-width: 0; height: 18px; margin: 0; background: none; cursor: pointer;
+  -webkit-appearance: none; appearance: none; }
+.pd-seek::-webkit-slider-runnable-track { height: 4px; border-radius: 2px;
+  background: linear-gradient(to right, var(--accent) var(--pd-fill), var(--track) var(--pd-fill)); }
+.pd-seek::-moz-range-track { height: 4px; border-radius: 2px; background: var(--track); }
+.pd-seek::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--accent); }
+.pd-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; margin-top: -4px; border-radius: 50%;
+  background: var(--accent); border: none; }
+.pd-seek::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: none; }
+.pd-seek:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; border-radius: 4px; }
+.pd-icon { height: 36px; min-width: 36px; padding: 0 6px; border: none; border-radius: 10px; background: none; color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer;
+  font: 600 0.78rem/1 var(--sans); font-variant-numeric: tabular-nums; }
+.pd-icon:hover { background: var(--tint); color: var(--accent-deep); }
+.pd-play:focus-visible, .pd-icon:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.pd-rate { min-width: 44px; }
+.pd-close { color: var(--muted); }
+html.pod-docked body { padding-bottom: 10rem; }
+@media (max-width: 480px) {
+  .pod-dock { column-gap: 2px; padding: 7px 6px 7px 8px; }
+  .pd-show { display: none; }
+  .pd-icon { min-width: 32px; padding: 0 4px; }
+}
+@media print { .pod-dock { display: none; } }

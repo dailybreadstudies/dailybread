@@ -704,6 +704,7 @@
           '<span class="dp-label">' + p.label + '</span><span class="dp-ref">' + displayRef(r) + '</span></a></li>';
       }).join('') + '</ol>';
     document.getElementById('day-header').innerHTML = header;
+    addListen(day.date);
     document.title = (KIDS ? 'Daily Bread for Kids · ' : 'Daily Bread Online · ') + dateText;
 
     // Portions
@@ -746,6 +747,19 @@
     decorateMaps();
     fillToday(day);
     drawProgress();
+  }
+
+  // The Daily Bread for Busy Moms podcast follows the plan: when the day has an episode, a LISTEN row closes the
+  // readings list (assets/podcast.js plays it in a player docked at the bottom, so you can read along)
+  function addListen(date) {
+    if (KIDS || !window.DBPodcast) return;
+    window.DBPodcast.ready.then(function () {
+      if (!current || current.day.date !== date) return;
+      var ol = document.querySelector('#day-header .day-plan');
+      if (!ol || ol.querySelector('.dp-listen')) return;
+      var item = window.DBPodcast.listenItem(date);
+      if (item) { ol.insertAdjacentHTML('beforeend', item); window.DBPodcast.refresh(); }
+    });
   }
 
   // ── Reading progress (kept on this device only) ─────────────

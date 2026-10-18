@@ -1,0 +1,38 @@
+# Keeps data/podcast/moms.json up to date with the Daily Bread for Busy Moms feed, so each day on the Today page
+# can offer that day's episode. New episodes come out the evening before (Israel time), and on Friday mornings.
+name: Podcast episodes
+
+on:
+  schedule:
+    - cron: '20 */2 * * *'     # every two hours
+  workflow_dispatch: {}        # "Run workflow" button on GitHub (Actions tab)
+  push:
+    paths:
+      - tools/fetch_podcast.py
+      - .github/workflows/podcast.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: podcast
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch the feed
+        run: python3 tools/fetch_podcast.py
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet -- data/podcast && [ -z "$(git ls-files --others --exclude-standard data/podcast)" ]; then
+            echo "No new episodes."; exit 0
+          fi
+          git config user.name "Daily Bread podcast bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/podcast
+          git commit -m "Podcast: new episodes"
+          git pull --rebase origin main
+          git push
