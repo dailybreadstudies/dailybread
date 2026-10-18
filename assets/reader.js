@@ -1241,7 +1241,7 @@
     SHELVES.forEach(function (sh) { sh[1].forEach(function (bd) { bd[1].forEach(function (key) {
       var ids = key.split('+'), v = { key: key, ids: ids, words: 0, wordsRead: 0 };
       ids.forEach(function (id) { var b = byId[id] || {}; v.words += b.words || 0; v.wordsRead += b.wordsRead || 0; });
-      v.name = ids.length > 1 ? '1 & 2 ' + bookLabel(ids[0]).replace(/^1 /, '') : bookLabel(ids[0]);
+      v.name = ids.length > 1 ? bookLabel(ids[0]).replace(/^1 /, '') + ' 1 & 2' : bookLabel(ids[0]);   // "Samuel 1 & 2"
       maxWords = Math.max(maxWords, v.words);
       vols[key] = v;
     }); }); });
@@ -1264,8 +1264,8 @@
           var tf;
           if (leans) { px = x + Math.min(prevH, h * Math.cos(rad)) * Math.tan(rad); tf = 'translate(' + px.toFixed(2) + ' ' + base + ') rotate(' + (-LEAN) + ')'; }
           else tf = 'translate(' + x.toFixed(2) + ' ' + base + ')';
-          // one line up the spine; a two-book volume has "1 & 2" on a line of its own beside the name
-          var lines = v.ids.length > 1 ? ['1 & 2', v.name.replace(/^1 & 2 /, '')] : [v.name];
+          // one line up the spine; a two-book volume has "1 & 2" on a line of its own after the name
+          var lines = v.ids.length > 1 ? [v.name.replace(/ 1 & 2$/, ''), '1 & 2'] : [v.name];
           lines = lines.map(function (l) { return l.toUpperCase(); });
           var longest = Math.max.apply(null, lines.map(function (l) { return l.length; }));
           var fs = Math.min(9.5, (w - 4) / lines.length - 1.5, (h - 30) / (longest * 0.78));
