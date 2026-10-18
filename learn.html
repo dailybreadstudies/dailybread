@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Learn · Daily Bread Online</title>
-  <meta name="description" content="Go deeper in the Word: Messiah in the Torah, the weekly Torah commentary by Lars Enarson, the Daily Bread Torah Class, and the study tools on Daily Bread Online.">
+  <meta name="description" content="Go deeper in the Word: the study tools of Daily Bread Online, Messiah in the Torah by Lars Enarson, and the Daily Bread Torah Class.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Hebrew:wght@400;500&display=swap" rel="stylesheet">
@@ -15,71 +15,157 @@
     document.documentElement.classList.add('js');
     try { localStorage.setItem('dbs-visited', '1'); } catch (e) {}
   </script>
-    <style>
-    body.learn { display: block; padding: calc(var(--topbar-h) + 3rem) 20px 4rem; line-height: 1.7; }
-    .ln { max-width: 46rem; margin: 0 auto; }
-    .ln-eyebrow { font: 600 0.74rem var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft); margin: 0 0 1rem; text-align: center; }
-    .ln-h { font-family: var(--display); font-weight: 300; color: var(--heading); letter-spacing: -0.02em; text-align: center;
-      font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.12; margin: 0 0 1.4rem; text-wrap: balance; }
-    .ln-h em { font-style: italic; color: var(--accent); }
-    .ln-lead { font-size: 1.15rem; line-height: 1.75; color: var(--ink-soft); text-align: center; margin: 0 auto 2.6rem; max-width: 35rem; }
+  <style>
+    body.about { display: block; padding: var(--topbar-h) 0 0; line-height: 1.7; }
 
-    .ln-week { max-width: 36rem; margin: 0 auto 4rem; padding: 22px 26px; border: 1px solid var(--line-strong); border-radius: 14px; text-align: center; }
-    .ln-week[hidden] { display: none; }
-    .ln-k { font: 600 0.7rem var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); margin: 0 0 0.4rem; }
-    .ln-week-name { font-family: var(--display); font-weight: 300; font-size: 1.7rem; line-height: 1.25; color: var(--heading); margin: 0 0 0.6rem; }
-    .ln-week-name span { font-size: 1.05rem; color: var(--muted); }
-    .ln-week p.ln-week-text { margin: 0; font-size: 1rem; line-height: 1.65; color: var(--ink-soft); }
-    .ln-week a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+    .ab-sec { min-height: 88vh; display: flex; align-items: center; padding: clamp(80px, 12vh, 140px) clamp(20px, 6vw, 80px);
+      border-top: 1px solid var(--rule); }
+    .ab-sec.tint { background: var(--tint); }
+    .ab-in { width: 100%; max-width: 1080px; margin: 0 auto; }
+    .ab-eyebrow { font: 600 0.74rem var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft);
+      margin: 0 0 1.4rem; }
+    .ab-h { font-family: var(--display); font-weight: 300; color: var(--heading); letter-spacing: -0.02em;
+      font-size: clamp(2.1rem, 5.2vw, 4.2rem); line-height: 1.12; margin: 0 0 1.6rem; max-width: 16em; text-wrap: balance; }
+    .ab-h em { font-style: italic; color: var(--accent); }
+    .ab-p { font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.75; color: var(--ink-soft); max-width: 36em; margin: 0 0 1.1rem; }
+    .ab-p:last-child { margin-bottom: 0; }
+    .ab-p a, .ab-small a, .ab-stat a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+    .ab-p a:hover { color: var(--accent-deep); }
+    .ab-small { font: 400 0.85rem/1.7 var(--sans); color: var(--muted); max-width: 44em; margin: 1.8rem 0 0; }
 
-    .ln-sec { display: grid; grid-template-columns: 15rem 1fr; gap: 2.6rem; align-items: start; padding: 3rem 0; border-top: 1px solid var(--rule); }
-    .ln-sec.no-art { grid-template-columns: 1fr; }
-    .ln-sec.ln-first { margin-bottom: 3rem; }
-    .ln-art { margin: 0; background: #f2f2f2; border-radius: 12px; overflow: hidden; }
-    .ln-art img { display: block; width: 100%; height: auto; }
-    .ln-art-wide { background: none; }
-    .ln-art-icon { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; background: var(--tint); color: var(--accent); }
-    .ln-art-icon svg { width: 46%; height: auto; }
-    .ln-sec h2 { font-family: var(--display); font-weight: 300; font-size: 1.85rem; line-height: 1.2; color: var(--heading); margin: 0 0 0.3rem; letter-spacing: -0.01em; }
-    .ln-by { font: 500 0.8rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 1.1rem; }
-    .ln-body { font-size: 1.03rem; line-height: 1.8; color: var(--ink-soft); }
-    .ln-body p { margin: 0 0 1rem; }
-    .ln-body em { color: var(--ink); }
-    .ln-facts { list-style: none; margin: 1.2rem 0 1.6rem; padding: 0; display: grid; gap: 0.35rem; }
-    .ln-facts li { position: relative; padding-left: 1.3em; font: 400 0.92rem/1.55 var(--sans); color: var(--ink-soft); }
-    .ln-facts li::before { content: ''; position: absolute; left: 0.2em; top: 0.62em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-soft); }
-    .ln-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
-    .ln-btn { display: inline-flex; align-items: center; height: 48px; padding: 0 26px; border-radius: 24px; background: var(--heading); color: var(--paper);
-      font: 600 0.82rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
-    .ln-btn:hover { background: var(--accent-deep); color: var(--paper); }
-    .ln-btn:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
-    .ln-via { font: 400 0.8rem var(--sans); color: var(--muted); }
-    .ln-tools { list-style: none; margin: 0.6rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem 2.4rem; }
-    .ln-tools li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: start; }
-    .ln-ic { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--line-strong); color: var(--accent);
-      display: inline-flex; align-items: center; justify-content: center; background: var(--paper); }
-    .ln-ic svg { width: 24px; height: 24px; flex: none; }
-    .ln-ic-pill { width: auto; width: 64px; padding: 0; border-radius: 24px; font-family: var(--display); font-size: 1.05rem; gap: 4px; }
+    /* Hero */
+    .ab-hero { min-height: calc(100vh - var(--topbar-h)); border-top: none; text-align: center; }
+    .ab-hero .ab-in { max-width: 980px; }
+    .ab-hero .ab-h { font-size: clamp(2.4rem, 6.4vw, 5.2rem); max-width: none; margin-bottom: 1.8rem; }
+    .ab-hero .ab-p { margin: 0 auto; }
+    .ab-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 2.6rem; }
+    .ab-btn { display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 26px; border-radius: 25px;
+      font: 600 0.82rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--line-strong); color: var(--accent); transition: background 0.15s, border-color 0.15s, color 0.15s; }
+    .ab-btn:hover { background: var(--paper); border-color: var(--accent-soft); }
+    .ab-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .ab-btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+    .ab-btn.give { background: var(--heading); border-color: var(--heading); color: var(--paper); }
+    .ab-btn.give:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--paper); }
+    .ab-keep { display: flex; align-items: center; justify-content: space-between; gap: 18px 28px; flex-wrap: wrap;
+      margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+    .ab-keep p { margin: 0; font-size: 1.05rem; line-height: 1.6; color: var(--ink-soft, var(--ink)); max-width: 34em; }
+    .ab-keep b { color: var(--heading); font-weight: 600; }
+    .ab-scroll { display: block; margin: 4.5rem auto 0; width: 1px; height: 56px; background: linear-gradient(var(--accent-soft), transparent); }
+
+    /* Quote */
+    .ab-quote { font-family: var(--display); font-weight: 300; font-style: italic; color: var(--heading);
+      font-size: clamp(1.6rem, 3.4vw, 2.7rem); line-height: 1.35; max-width: 22em; margin: 0 0 1.4rem; text-wrap: balance; }
+    .ab-cite { font: 500 0.82rem var(--sans); letter-spacing: 0.06em; color: var(--accent-soft); margin: 0 0 2.6rem; }
+    .ab-cite a { color: inherit; text-decoration: none; }
+    .ab-cite a:hover { text-decoration: underline; }
+
+    /* The four sections */
+    .ab-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+      margin: 2.6rem 0 0; }
+    .ab-four > div { background: var(--paper); padding: 28px 22px 26px; }
+    .ab-sec.tint .ab-four > div { background: var(--tint); }
+    .ab-four .he { display: block; text-align: left; font-family: var(--hebrew); font-size: 1.15rem; line-height: 1.3; color: var(--accent); margin-bottom: 0.3rem; }
+    .ab-four b { display: block; font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1.2; letter-spacing: -0.01em; color: var(--heading); margin-bottom: 0.55rem; }
+    .ab-four span:last-child { font-size: 0.95rem; line-height: 1.55; color: var(--muted); }
+
+    /* Feasts strip */
+    .ab-feasts { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; grid-template-columns: repeat(7, 1fr);
+      border-top: 1px solid var(--line-strong); }
+    .ab-feasts li { padding: 18px 10px 0 0; font: 500 0.74rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); position: relative; }
+    .ab-feasts li::before { content: ''; position: absolute; top: -4px; left: 0; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent-soft); }
+    .ab-feasts .he { display: block; text-align: left; font-family: var(--hebrew); font-size: 1.5rem; line-height: 1.3;
+      letter-spacing: 0; text-transform: none; color: var(--accent); margin-bottom: 0.3rem; }
+
+    /* Feature list */
+    .ab-feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 40px; margin: 2.8rem 0 0; padding: 0; list-style: none; }
+    .ab-feats li { border-top: 1px solid var(--line-strong); padding-top: 14px; }
+    .ab-feats b { display: block; font: 600 0.8rem var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .ab-feats span { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); }
+
+    /* Two columns */
+    .ab-two { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 6vw, 90px); align-items: center; }
+    .ab-stat { border-left: 2px solid var(--accent-line); padding: 4px 0 4px 26px; margin: 0 0 30px; }
+    .ab-stat:last-child { margin-bottom: 0; }
+    .ab-stat b { display: block; font-family: var(--display); font-weight: 300; font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.3; color: var(--heading); margin-bottom: 0.4rem; }
+    .ab-stat span { font: 400 0.9rem/1.6 var(--sans); color: var(--muted); }
+
+    /* Photo section: the journal, darkened, moving slowly behind the text */
+    .ab-photo { position: relative; overflow: hidden; background: #111111; border-top: none; color: #fff; }
+    .ab-photo-bg { position: absolute; left: 0; right: 0; top: -15%; height: 130%; z-index: 0;
+      background: url('assets/img/journal.jpg') center / cover no-repeat; will-change: transform; }
+    .ab-photo-bg::after { content: ''; position: absolute; inset: 0; background: rgba(17, 17, 17, 0.6); }
+    .ab-photo .ab-in { position: relative; z-index: 1; }
+    .ab-photo .ab-eyebrow { color: #e9d9c6; }
+    .ab-photo .ab-h, .ab-photo .ab-stat b { color: #ffffff; }
+    .ab-photo .ab-h em { color: #f0dcc4; }
+    .ab-photo .ab-p, .ab-photo .ab-stat span { color: rgba(255, 255, 255, 0.92); }
+    .ab-photo .ab-stat { border-left-color: rgba(255, 255, 255, 0.45); }
+    .ab-photo .ab-btn.primary { background: #ffffff; border-color: #ffffff; color: #3b2c20; }
+    .ab-photo .ab-btn.primary:hover { background: #f0e6da; border-color: #f0e6da; }
+    @media (max-width: 860px) { .ab-photo-bg { background-image: url('assets/img/journal-sm.jpg'); } .ab-photo-bg::after { background: rgba(17, 17, 17, 0.68); } }
+
+    /* Closing */
+    .ab-end { min-height: 70vh; text-align: center; }
+    .ab-end .ab-h, .ab-end .ab-p { margin-left: auto; margin-right: auto; }
+    .ab-foot { padding: 28px clamp(20px, 6vw, 80px) 40px; border-top: 1px solid var(--rule); font: 400 0.74rem/1.9 var(--sans); color: var(--faint-text); }
+    .ab-foot .ab-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; }
+    .ab-foot a { color: inherit; text-underline-offset: 2px; text-decoration-color: var(--rule); }
+
+    /* Reveal on scroll */
+    .js .rv { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2,.7,.2,1); }
+    .js .rv.d1 { transition-delay: 0.12s; } .js .rv.d2 { transition-delay: 0.24s; } .js .rv.d3 { transition-delay: 0.36s; }
+    .js .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 860px) {
+      .ab-four { grid-template-columns: repeat(2, 1fr); }
+      .ab-feats { grid-template-columns: repeat(2, 1fr); }
+      .ab-two { grid-template-columns: 1fr; }
+      .ab-feasts { grid-template-columns: repeat(4, 1fr); row-gap: 28px; }
+    }
+    @media (max-width: 520px) {
+      .ab-sec { min-height: 0; padding: 88px 20px; }
+      .ab-hero { min-height: 100vh; }
+      .ab-four, .ab-feats { grid-template-columns: 1fr; }
+      .ab-feasts { grid-template-columns: repeat(2, 1fr); }
+      .ab-btn { width: 100%; justify-content: center; }
+    }
+
+    /* Learn */
+    .ln-hero { min-height: calc(80vh - var(--topbar-h)); }
+    .ln-tools { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 44px; }
+    .ln-tools li { display: grid; grid-template-columns: 64px 1fr; column-gap: 18px; row-gap: 2px; align-items: start; }
+    .ln-tools .ln-ic { grid-row: span 2; }
+    .ln-tools b { font: 600 0.8rem var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); padding-top: 4px; }
+    .ln-tools span:last-child { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); }
+    .ln-tools a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+    .ln-ic { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line-strong); color: var(--accent); background: var(--paper);
+      display: inline-flex; align-items: center; justify-content: center; }
+    .ln-ic svg { width: 25px; height: 25px; flex: none; }
+    .ln-ic-pill { width: 64px; border-radius: 26px; gap: 4px; font-family: var(--display); font-size: 1.1rem; }
     .ln-ic-sep { color: var(--line-strong); }
     .ln-ic-he { font-family: var(--hebrew); }
-    .ln-tools li > div { padding-top: 2px; }
-    .ln-tools b { display: block; font: 600 0.74rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.3rem; }
-    .ln-tools span { font-size: 0.98rem; line-height: 1.65; color: var(--ink-soft); }
-    .ln-tools a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
-    .ln-small { margin-top: 1rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font: 400 0.78rem/1.8 var(--sans); color: var(--faint-text); }
-    .ln-small a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
-    @media (max-width: 700px) {
-      body.learn { padding: calc(var(--topbar-h) + 2rem) 16px 3rem; }
-      .ln-week { padding: 18px 18px; margin-bottom: 3rem; }
-      .ln-sec { grid-template-columns: 1fr; gap: 1.6rem; padding: 2.4rem 0; }
-      .ln-art { max-width: 15rem; margin: 0 auto; }
-      .ln-art-icon { display: none; }
-      .ln-art-wide { max-width: none; }
-      .ln-tools { grid-template-columns: 1fr; }
+    .ln-book { margin: 0; border-radius: 14px; overflow: hidden; background: #f2f2f2; }
+    .ln-book img { display: block; width: 100%; height: auto; }
+    .ln-week[hidden] { display: none; }
+    .ln-class .ab-in { display: flex; justify-content: flex-end; }
+    .ln-class-text { max-width: 33rem; }
+    .ln-class .ab-photo-bg { background-image: url('assets/img/torah-class-wide.jpg'); background-position: 55% center; }
+    .ln-class .ab-photo-bg::after { background: linear-gradient(90deg, rgba(17,17,17,0.1) 0%, rgba(17,17,17,0.2) 30%, rgba(17,17,17,0.78) 50%, rgba(17,17,17,0.85) 100%); }
+    .ln-class .ab-stat { margin-bottom: 22px; }
+    @media (max-width: 960px) { .ln-tools { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 860px) {
+      .ln-book { max-width: 22rem; }
+      .ln-class .ab-photo-bg { background-image: url('assets/img/torah-class.jpg'); }
+      .ln-class .ab-photo-bg::after { background: rgba(17, 17, 17, 0.72); }
     }
+    @media (max-width: 600px) { .ln-tools { grid-template-columns: 1fr; gap: 28px; } }
   </style>
 </head>
-<body class="learn">
+<body class="about learn">
 
 <header class="topbar" id="topbar">
   <a class="tb-logo" href="./" aria-label="Daily Bread Online, today’s reading"><svg class="tb-logo-img" viewBox="0 0 114.51 11.33" aria-hidden="true" focusable="false"><path d="M.06,11.25c-.07-.14-.09-.63,0-.72.67-.04,1.03-.11,1.35-.18.34-.09.56-.27.59-.86.05-1.12.04-2.45.04-3.96,0-1.08.02-3.19-.02-3.85-.05-.56-.29-.7-.76-.81-.23-.05-.56-.11-1.01-.16-.04-.11-.02-.59.07-.7.31,0,1.73.05,2.27.05,1.01,0,1.71-.05,3.6-.05,1.58,0,2.92.43,3.87,1.26,1.15,1.01,1.76,2.41,1.76,4.12,0,2.43-1.1,3.84-2.2,4.63-1.1.83-2.52,1.3-4.56,1.3-1.08,0-2.94-.04-4.48-.05H.06ZM4.18,10.01c.38.31,1.13.43,1.8.43.86,0,1.71-.16,2.54-.92.85-.77,1.42-1.96,1.42-3.85s-.68-3.29-2.09-4.16c-.79-.5-1.82-.7-2.99-.7-.34,0-.68.02-.88.11-.05.04-.16.18-.16.25-.04.32-.04,2.79-.04,4.25s0,3.58.04,3.84c.02.22.13.59.36.76Z"/><path d="M14.52,8.79c.79-1.89,2.54-6.41,2.94-7.58.14-.41.31-.88.36-1.17.09.02.32.02.67.02.43,0,.63,0,.72-.02.09.36.2.7.32,1.06.36,1.01,2.36,6.27,3.06,7.87.58,1.28.72,1.39,2.09,1.57.11.07.04.63-.04.72-.47-.02-1.33-.05-2.36-.05-1.08,0-2.25.05-2.61.05-.07-.09-.09-.63,0-.72.4-.05.77-.11,1.04-.2.22-.09.25-.32.22-.45-.23-.76-.7-1.98-.99-2.68-.04-.09-.14-.13-.18-.13-.32-.02-1.15-.02-1.82-.02-1.15,0-1.26,0-1.46.02-.09,0-.22.13-.22.16-.38,1.03-.85,2.2-.85,2.56,0,.34.07.47.59.59.23.05.63.11.95.14.07.09.04.63-.05.72-.36,0-1.3-.05-2.5-.05s-1.76.05-2.11.05c-.07-.09-.07-.63,0-.72,1.33-.18,1.58-.29,2.21-1.75ZM18.01,2.2c-.31.95-.95,2.61-1.3,3.69,0,.05.02.11.07.13.2.02.9.02,1.42.02.45,0,.95,0,1.19-.02.05,0,.11-.09.09-.18-.34-.94-1.06-2.93-1.37-3.65-.02,0-.07-.02-.11.02Z"/><path d="M25.15,0c.36,0,1.53.05,2.48.05s2.09-.05,2.57-.05c.07.11.09.58,0,.7-.49.05-.81.09-1.06.16-.43.11-.5.32-.54.86-.05.77-.04,2.07-.04,3.65,0,1.67.02,3.37.05,4,.02.56.11.81.68.95.27.05.68.13,1.21.2.09.07.04.65-.05.72-.4,0-1.69-.05-2.65-.05-1.06,0-2.39.05-2.72.05-.11-.05-.11-.65-.02-.72.49-.05.74-.09,1.01-.14.58-.14.65-.4.7-.76.07-.52.05-1.58.05-4.54,0-1.51.02-2.54-.04-3.38-.04-.49-.09-.68-.47-.79-.32-.09-.67-.14-1.21-.22-.09-.09-.05-.61.02-.7Z"/><path d="M31.76,0c.61,0,1.22.05,2.52.05,1.4,0,2.05-.04,2.45-.05.11.11.09.58,0,.7-.5.05-.81.14-1.06.18-.43.11-.49.36-.5.68-.04.7-.05,1.85-.05,3.71,0,2.75,0,3.69.05,4.39.02.29.31.47.38.5.54.14,2.09.13,2.94.13.4,0,.74-.11,1.13-.74.34-.52.76-1.35,1.06-2.05.18-.02.63.16.74.31-.13.74-.67,2.65-1.03,3.24-.05.16-.25.23-.79.23-1.28,0-4.34-.09-5.29-.09s-2.59.05-2.92.05c-.11-.07-.13-.65-.02-.72.67-.07,1.01-.09,1.4-.2.43-.13.5-.38.54-.67.04-.5.05-3.26.05-4.3,0-1.89.02-3.01-.02-3.51-.02-.67-.11-.88-.56-.97-.23-.05-.67-.13-1.08-.18-.09-.13-.05-.61.05-.7Z"/><path d="M40.69,0c.38,0,1.51.05,2.27.05.63,0,2.03-.04,2.25-.05.11.07.14.61.02.7-.22.05-.58.11-.7.14-.22.07-.18.25-.11.41.47.99,1.8,3.58,2.18,4.2.02.02.11.02.14-.02.63-.99,1.87-3.29,2.18-3.96.11-.27.14-.52-.32-.61-.25-.05-.52-.09-.94-.16-.09-.11-.04-.65.07-.7.58.02,1.46.05,2.12.05,1.01,0,1.46-.02,2.02-.05.13.04.14.63.04.7-.27.05-.49.09-.76.16-.54.13-.79.32-1.39,1.19-.79,1.21-2,3.33-2.48,4.25-.09.16-.18.5-.18.65,0,.56.02,1.31.04,2.25.02.83.13,1.04.56,1.15.31.07.83.13,1.31.2.07.07.04.63-.07.7-.52,0-1.49-.05-2.68-.05-1.51,0-2.45.05-2.92.05-.09-.07-.11-.65,0-.7.54-.07,1.06-.13,1.39-.22.49-.13.63-.36.63-.95.04-.88.02-1.28.02-2.07,0-.25-.05-.63-.16-.86-.36-.85-1.39-2.74-2.16-4.12-.63-1.12-.79-1.3-1.55-1.49-.22-.05-.45-.07-.85-.13-.09-.09-.07-.61.04-.7Z"/><path d="M57.07,0c.16,0,.9.05,2.12.05,1.15,0,2.09-.04,3.21-.04,1.39,0,3.29.5,3.29,2.59,0,1.03-.72,1.85-1.66,2.25-.05.02-.05.05,0,.07,1.33.34,2.5,1.17,2.5,2.75s-.95,2.52-2.34,3.13c-.85.38-1.89.5-2.95.5-.81,0-3.24-.09-4.45-.07-.13-.05-.14-.63-.04-.72.29-.02.94-.07,1.24-.16.43-.11.58-.22.63-.86.04-.56.04-2.56.04-3.98,0-1.94.02-3.26,0-3.91-.02-.5-.2-.67-.54-.76-.27-.05-.72-.11-1.08-.16-.09-.09-.07-.63.02-.7ZM64.66,8.08c0-1.58-1.15-2.48-3.26-2.48-.09,0-.76-.02-.92.02-.05.02-.11.05-.11.09,0,1.13-.02,2.95.04,3.67.04.31.25.74.52.86.29.16.94.2,1.39.2,1.24,0,2.34-.7,2.34-2.36ZM60.58.88c-.07.02-.16.2-.16.29-.02.65-.04,2.34-.04,3.51,0,.04.05.09.09.09.23.02.81.04,1.3.04.68,0,1.08-.09,1.3-.2.58-.29.85-.92.85-1.6,0-1.57-1.08-2.16-2.68-2.16-.11,0-.41,0-.65.04Z"/><path d="M68.05,0c.4,0,1.66.05,2.27.05,1.48,0,2.5-.02,3.17-.02,2.14,0,3.37,1.3,3.37,2.84s-.9,2.39-2.03,2.92c-.04.02-.05.11-.04.14.63.99,1.96,2.7,2.84,3.66.68.7.9.77,2.18.99.09.05,0,.67-.14.7-.85,0-2.38,0-3.11-.38-.27-.16-.56-.38-.92-.79-.68-.85-1.67-2.38-2.36-3.39-.11-.14-.31-.22-.45-.23-.23-.04-1.08-.04-1.35-.04-.02,0-.07.07-.07.11,0,.99,0,2.56.04,3.02.04.49.18.68.65.77.29.07.61.11,1.1.16.09.09.05.65-.05.72-.42,0-1.19-.05-2.65-.05-1.19,0-2.05.05-2.47.05-.11-.13-.11-.61,0-.72.41-.04.7-.09.97-.14.43-.09.61-.27.65-.97.04-.36.05-2.65.05-3.65,0-2.41,0-3.62-.02-4.03-.02-.54-.13-.72-.61-.85-.31-.07-.65-.13-1.06-.18-.09-.11-.05-.63.05-.7ZM71.58.92c-.05.04-.14.2-.14.29-.04.67-.04,3.06-.04,4.3,0,.04.04.09.09.09,1.71,0,2.21-.09,2.45-.22.59-.31,1.06-.99,1.06-1.91,0-1.69-.81-2.67-2.74-2.67-.11,0-.49.04-.68.11Z"/><path d="M80.02,0c.49,0,1.67.05,2.7.05h3.64c.7,0,1.66-.02,2.09-.05.04.02.09.07.09.11-.13.5-.29,1.8-.31,2.57-.11.13-.72.11-.81.04-.02-.5-.11-.76-.2-1.06-.14-.45-.32-.61-.83-.65-.27-.02-2.63-.02-2.79,0-.14.04-.25.29-.25.4,0,1.24-.02,2.3-.02,3.51,0,.04.05.13.11.13.94,0,1.98.02,2.7-.05.27-.04.41-.2.5-.47.07-.22.14-.5.2-.79.18-.07.74-.04.83.07-.04.41-.13,1.1-.13,1.78,0,.61.02,1.21.04,1.76-.11.09-.74.11-.85,0-.09-.43-.09-.59-.18-.83-.07-.27-.25-.4-.5-.43-.59-.07-1.78-.05-2.61-.05-.05,0-.11.07-.11.14,0,1.17,0,2.57.04,3.29,0,.29.18.63.41.72.36.11,2.65.09,3.04.09.49,0,.76-.14,1.13-.68.29-.38.63-1.12.83-1.55.14-.02.67.14.76.27-.09.59-.47,1.94-.79,2.59-.09.22-.23.36-1.15.36-1.91,0-3.65-.07-4.97-.07-1.21,0-2.43.05-3.19.05-.09-.07-.11-.61-.02-.72.63-.07,1.21-.13,1.55-.22.43-.11.56-.34.59-.92.04-.31.02-2.2.02-4.19,0-1.58,0-3.12-.02-3.44-.04-.59-.11-.76-.52-.88-.25-.07-.59-.13-1.08-.2-.09-.11-.05-.59.05-.68Z"/><path d="M92.38,8.79c.79-1.89,2.54-6.41,2.93-7.58.14-.41.31-.88.36-1.17.09.02.32.02.67.02.43,0,.63,0,.72-.02.09.36.2.7.32,1.06.36,1.01,2.36,6.27,3.06,7.87.58,1.28.72,1.39,2.09,1.57.11.07.04.63-.04.72-.47-.02-1.33-.05-2.36-.05-1.08,0-2.25.05-2.61.05-.07-.09-.09-.63,0-.72.4-.05.77-.11,1.04-.2.22-.09.25-.32.22-.45-.23-.76-.7-1.98-.99-2.68-.04-.09-.14-.13-.18-.13-.32-.02-1.15-.02-1.82-.02-1.15,0-1.26,0-1.46.02-.09,0-.22.13-.22.16-.38,1.03-.85,2.2-.85,2.56,0,.34.07.47.59.59.23.05.63.11.96.14.07.09.04.63-.05.72-.36,0-1.3-.05-2.5-.05s-1.76.05-2.11.05c-.07-.09-.07-.63,0-.72,1.33-.18,1.58-.29,2.21-1.75ZM95.87,2.2c-.31.95-.95,2.61-1.3,3.69,0,.05.02.11.07.13.2.02.9.02,1.42.02.45,0,.95,0,1.19-.02.05,0,.11-.09.09-.18-.34-.94-1.06-2.93-1.37-3.65-.02,0-.07-.02-.11.02Z"/><path d="M102.73,11.25c-.07-.14-.09-.63,0-.72.67-.04,1.03-.11,1.35-.18.34-.09.56-.27.59-.86.05-1.12.04-2.45.04-3.96,0-1.08.02-3.19-.02-3.85-.05-.56-.29-.7-.76-.81-.23-.05-.56-.11-1.01-.16-.04-.11-.02-.59.07-.7.31,0,1.73.05,2.27.05,1.01,0,1.71-.05,3.6-.05,1.58,0,2.92.43,3.87,1.26,1.15,1.01,1.76,2.41,1.76,4.12,0,2.43-1.1,3.84-2.2,4.63-1.1.83-2.52,1.3-4.56,1.3-1.08,0-2.93-.04-4.48-.05h-.54ZM106.86,10.01c.38.31,1.13.43,1.8.43.86,0,1.71-.16,2.54-.92.85-.77,1.42-1.96,1.42-3.85s-.68-3.29-2.09-4.16c-.79-.5-1.82-.7-2.99-.7-.34,0-.68.02-.88.11-.05.04-.16.18-.16.25-.04.32-.04,2.79-.04,4.25s0,3.58.04,3.84c.02.22.13.59.36.76Z"/></svg></a>
@@ -87,117 +173,138 @@
   <div class="tb-end"><a class="tb-give" href="give.html">Give</a></div>
 </header>
 
-<main class="ln">
-  <p class="ln-eyebrow">Learn</p>
-  <h1 class="ln-h">Go <em>deeper</em> in the Word</h1>
-  <p class="ln-lead">Daily Bread takes you through the whole Bible in a year, with the weekly Torah portion at its heart.
-    When you want to understand more deeply what you are reading, these are trusted companions for the journey.</p>
-
-  <section class="ln-sec no-art ln-first" id="tools">
-    <div>
-      <h2>Study tools on Daily Bread Online</h2>
-      <p class="ln-by">Already in the reader</p>
-      <ul class="ln-tools">
-        <li><span class="ln-ic ln-ic-pill" aria-hidden="true"><span class="ln-ic-en">A</span><span class="ln-ic-sep">/</span><span class="ln-ic-he">א</span></span><div><b>Original languages</b><span>Under A/א, show the Hebrew and Greek under each verse, or on its own. Tap a Hebrew or Greek word to see its meaning and form.</span></div></li>
-        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z"/><path d="M9 4v13.5M15 6.5V20"/></svg></span><div><b>Bible maps</b><span>Where a passage has a map, a map button sits beside the verse. Tap it to follow the places and journeys.</span></div></li>
-        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.2 5 7.6 4.5 4 4.5v13.5c3.6 0 6.2.5 8 2 1.8-1.5 4.4-2 8-2V4.5c-3.6 0-6.2.5-8 2z"/><path d="M12 6.5V20"/></svg></span><div><b>The whole Bible</b><span>The book button opens any book and chapter of the Bible.</span></div></li>
-        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/></svg></span><div><b>Any day of the plan</b><span>The calendar takes you to any day of the reading plan, with its Hebrew date and holy days.</span></div></li>
-        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span><div><b>Listen along</b><span>When the day has a <a href="listen.html">podcast</a> episode, LISTEN under the readings plays it while you read.</span></div></li>
-        <li><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></svg></span><div><b>Your progress</b><span>Mark each reading complete and watch your Bible fill in, book by book, on the <a href="progress.html">Progress</a> page.</span></div></li>
-      </ul>
+<!-- 1 · Hero -->
+<section class="ab-sec ab-hero ln-hero">
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">Learn</p>
+    <h1 class="ab-h rv d1">Go <em>deeper</em> in the Word.</h1>
+    <p class="ab-p rv d2">Tools for studying what you read each day, and trusted companions for the weekly Torah portion.</p>
+    <div class="ab-btns rv d3">
+      <a class="ab-btn primary" href="#tools">Study tools</a>
+      <a class="ab-btn" href="#messiah-in-the-torah">Torah commentary</a>
+      <a class="ab-btn" href="#torah-class">Torah Class</a>
     </div>
-  </section>
+    <span class="ab-scroll rv d3" aria-hidden="true"></span>
+  </div>
+</section>
 
-  <section class="ln-week" id="ln-week" hidden aria-live="polite"></section>
+<!-- 2 · Study tools -->
+<section class="ab-sec tint" id="tools">
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">Daily Bread Online · Free</p>
+    <h2 class="ab-h rv d1">Study tools, <em>built into the reader.</em></h2>
+    <ul class="ln-tools">
+      <li class="rv d1"><span class="ln-ic ln-ic-pill" aria-hidden="true"><span>A</span><span class="ln-ic-sep">/</span><span class="ln-ic-he">א</span></span><b>Original languages</b><span>The Hebrew and Greek under each verse, or on its own.</span></li>
+      <li class="rv d1"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></span><b>Word study</b><span>Tap any Hebrew or Greek word for its meaning and form.</span></li>
+      <li class="rv d1"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z"/><path d="M9 4v13.5M15 6.5V20"/></svg></span><b>Bible maps</b><span>Interactive maps beside the verses they bring to life.</span></li>
+      <li class="rv d2"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><circle cx="6" cy="18.5" r="2.2"/><circle cx="18" cy="18.5" r="2.2"/><path d="M12 7.2V12M6 16.3V12h12v4.3"/></svg></span><b>Family trees</b><span>Tap a name in a genealogy and find it in the family tree.</span></li>
+      <li class="rv d2"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 20.5h17M5 17.5h14M6.5 17.5V9.5M10.2 17.5V9.5M13.8 17.5V9.5M17.5 17.5V9.5M4 9.5h16L12 4 4 9.5z"/></svg></span><b>Archaeology</b><span>A growing library of finds that shed light on the text, beside the verses.</span></li>
+      <li class="rv d2"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/></svg></span><b>Biblical calendar</b><span>Hebrew dates, the Feasts, Shabbat times and Today in History.</span></li>
+      <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.2 5 7.6 4.5 4 4.5v13.5c3.6 0 6.2.5 8 2 1.8-1.5 4.4-2 8-2V4.5c-3.6 0-6.2.5-8 2z"/><path d="M12 6.5V20"/></svg></span><b>The whole Bible</b><span>Open any book and chapter, or any day of the plan.</span></li>
+      <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13l11-6.5z" fill="currentColor"/></svg></span><b>Listen along</b><span>The <a href="listen.html">Daily Bread for Busy Moms</a> podcast, day by day.</span></li>
+      <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></svg></span><b>Your progress</b><span>Mark each reading and watch your Bible fill in, book by book.</span></li>
+    </ul>
+  </div>
+</section>
 
-  <section class="ln-sec" id="messiah-in-the-torah">
-    <figure class="ln-art"><img src="assets/img/messiah-in-the-torah.jpg" width="720" height="780"
+<!-- 3 · Messiah in the Torah -->
+<section class="ab-sec" id="messiah-in-the-torah">
+  <div class="ab-in ab-two">
+    <div>
+      <p class="ab-eyebrow rv">Torah commentary · Lars Enarson</p>
+      <h2 class="ab-h rv d1">Messiah in the <em>Torah.</em></h2>
+      <p class="ab-p rv d2">A one-year course through the weekly Torah portions, written over twelve years with one goal:
+        discipleship to Jesus.</p>
+      <p class="ab-stat rv d2"><b>Every Torah portion</b><span>Plus the five annual feasts. The textbooks of the Daily Bread Torah Class.</span></p>
+      <p class="ab-stat rv d3"><b>Two hardcover volumes</b><span>1,328 pages. Vol. I: Genesis 1 – Leviticus 15 · Vol. II: Leviticus 16 – Deuteronomy 34.</span></p>
+      <p class="ab-stat ln-week rv d3" id="ln-week" hidden></p>
+      <div class="ab-btns rv d3" style="justify-content:flex-start">
+        <a class="ab-btn primary" href="https://arielmedia.shop/products/torah-2vol-set-te" rel="noopener">Get the two-volume set</a>
+      </div>
+    </div>
+    <figure class="ln-book rv d2"><img src="assets/img/messiah-in-the-torah.jpg" width="720" height="780"
       alt="Messiah in the Torah, Volumes I and II, by Lars Enarson"></figure>
-    <div>
-      <h2>Messiah in the Torah</h2>
-      <p class="ln-by">Weekly Bible commentaries by Lars Enarson</p>
-      <div class="ln-body">
-        <p><em>Torah</em> does not mean “law” in the modern sense. It means “instruction” and “teaching.” In every synagogue
-          around the world a portion of the Torah is read each Sabbath, and the apostles encouraged disciples who were not
-          Jewish to follow these readings (Acts 15:21). Every Christian needs to study the Torah to understand the message of
-          the Bible and who Jesus really is.</p>
-        <p>For twelve years Bible teacher Lars Enarson worked on a commentary on the weekly Torah portion. Many commentaries are
-          filled with an abundance of knowledge; the goal of this one is discipleship to Jesus. It focuses on two things: the
-          centrality of Messiah, and practical discipleship to him in everything.</p>
-      </div>
-      <ul class="ln-facts">
-        <li>Every weekly Torah portion, plus the five annual feasts</li>
-        <li>Vol. I: Genesis 1 – Leviticus 15 · Vol. II: Leviticus 16 – Deuteronomy 34</li>
-        <li>1,328 pages, hardcover, two volumes</li>
-        <li>The textbooks for the Daily Bread Torah Class</li>
-      </ul>
-      <div class="ln-cta">
-        <a class="ln-btn" href="https://arielmedia.shop/products/torah-2vol-set-te" rel="noopener">Get the two-volume set</a>
-        <span class="ln-via">Ariel Media shop</span>
+  </div>
+</section>
+
+<!-- 4 · Torah Class -->
+<section class="ab-sec ab-photo ln-class" id="torah-class">
+  <div class="ab-photo-bg" aria-hidden="true"></div>
+  <div class="ab-in">
+    <div class="ln-class-text">
+      <p class="ab-eyebrow rv">Daily Bread Torah Class</p>
+      <h2 class="ab-h rv d1">Learn Torah <em>in light of Messiah.</em></h2>
+      <p class="ab-p rv d2">Each week Lars Enarson introduces the Torah portion you are reading in a video lesson, with the
+        commentary as a PDF.</p>
+      <p class="ab-stat rv d2"><b>A lesson for every portion</b><span>Released weekly. Join any time in the year.</span></p>
+      <p class="ab-stat rv d3"><b>$29 a month</b><span>Cancel any time. Try two weeks free.</span></p>
+      <div class="ab-btns rv d3" style="justify-content:flex-start">
+        <a class="ab-btn primary" href="https://www.larsenarson.com/torah" rel="noopener">Try two weeks free</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="ln-sec" id="torah-class">
-    <figure class="ln-art ln-art-wide"><a href="https://www.larsenarson.com/torah" rel="noopener"><img src="assets/img/torah-class.jpg" width="800" height="478"
-      alt="Lars Enarson teaching a Daily Bread Torah Class video lesson"></a></figure>
-    <div>
-      <h2>Daily Bread Torah Class</h2>
-      <p class="ln-by">Learn Torah in light of Messiah with Lars Enarson</p>
-      <div class="ln-body">
-        <p>Get a thorough foundation in the Torah, the part of the Bible many Christians know least, yet which forms the basis
-          for all Scriptural revelation. The Torah is an interpretive key that unlocks the rest of the Bible.</p>
-        <p>Each week brings a video lesson introducing that week’s Torah portion and the PDF commentary for it, following the
-          same Daily Bread reading plan you read here. Join students around the world, any time in the year.</p>
-      </div>
-      <ul class="ln-facts">
-        <li>A video lesson for every Torah portion, released weekly</li>
-        <li>The weekly commentary as a PDF</li>
-        <li>$29 a month, cancel any time · try two weeks free</li>
-      </ul>
-      <div class="ln-cta">
-        <a class="ln-btn" href="https://www.larsenarson.com/torah" rel="noopener">Try two weeks free</a>
-        <span class="ln-via">larsenarson.com/torah</span>
-      </div>
-    </div>
-  </section>
-
-  <p class="ln-small"><a href="./">Daily Bread Online</a> · <a href="about.html">About Daily Bread</a> · <a href="listen.html">Listen</a> ·
-    <a href="contact.html">Contact</a> · Published by <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a></p>
-</main>
+<footer class="ab-foot">
+  <div class="ab-in">
+    <span>Daily Bread Online · Published by <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a> · <a href="about.html">About Daily Bread</a> · <a href="listen.html">Listen</a> · <a href="give.html">Support this ministry</a> · <a href="contact.html">Contact</a></span>
+  </div>
+</footer>
 
 <script>
-(function () {
-  'use strict';
-  document.documentElement.style.setProperty('--tb-off', '0px');   /* the top bar scrolls away with the page */
-  function iso(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
-  function getJSON(u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
-  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
-  // Which volume of Messiah in the Torah covers a Torah reading: Vol. I = Genesis 1 – Leviticus 15
-  function volume(ref) {
-    var m = /^(\w{3})\s+(\d+)/.exec(ref || '');
-    if (!m) return '';
-    if (m[1] === 'GEN' || m[1] === 'EXO' || (m[1] === 'LEV' && +m[2] <= 15)) return 'Vol. I';
-    if (m[1] === 'LEV' || m[1] === 'NUM' || m[1] === 'DEU') return 'Vol. II';
-    return '';
-  }
-  getJSON('data/days/index.json').then(function (idx) {
-    var today = iso(new Date()), days = (idx.days || []).slice().sort();
-    var day = days.filter(function (d) { return d <= today; }).pop() || days[0];
-    if (!day) return;
-    var torah = ((idx.plan || {})[day] || []).filter(function (x) { return x[0] === 'Torah'; })[0];
-    return getJSON('data/days/' + day + '.json').then(function (d) {
-      if (!d || !d.parsha) return;
-      var vol = volume(torah && torah[1]);
-      var box = document.getElementById('ln-week');
-      box.innerHTML = '<p class="ln-k">This week’s Torah portion</p>' +
-        '<p class="ln-week-name"><em>' + esc(d.parsha.name) + '</em>' + (d.parsha.meaning ? ' <span>(' + esc(d.parsha.meaning) + ')</span>' : '') + '</p>' +
-        '<p class="ln-week-text">Go deeper in ' + (vol ? '<a href="#messiah-in-the-torah"><em>Messiah in the Torah</em>, ' + vol + '</a>' : '<a href="#messiah-in-the-torah"><em>Messiah in the Torah</em></a>') +
-        ', and in this week’s lesson of the <a href="#torah-class">Daily Bread Torah Class</a>.</p>';
-      box.hidden = false;
-    });
-  }).catch(function () {});
-})();
+  (function () {
+    var els = document.querySelectorAll('.rv');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+  // Gentle parallax for the class photo
+  (function () {
+    var bg = document.querySelector('.ab-photo-bg');
+    if (!bg || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    var sec = bg.parentNode, ticking = false;
+    function move() {
+      ticking = false;
+      var r = sec.getBoundingClientRect(), vh = window.innerHeight;
+      if (r.bottom < 0 || r.top > vh) return;
+      var t = (r.top + r.height / 2 - vh / 2) / (vh + r.height);   // -0.5 … 0.5 while on screen
+      bg.style.transform = 'translate3d(0,' + (t * 0.2 * r.height).toFixed(1) + 'px,0)';
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(move); } }, { passive: true });
+    window.addEventListener('resize', move);
+    move();
+  })();
+</script>
+<script>
+  // This week's Torah portion, and which volume of Messiah in the Torah covers it (Vol. I = Genesis 1 – Leviticus 15)
+  (function () {
+    function iso(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+    function getJSON(u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+    function volume(ref) {
+      var m = /^(\w{3})\s+(\d+)/.exec(ref || '');
+      if (!m) return '';
+      if (m[1] === 'GEN' || m[1] === 'EXO' || (m[1] === 'LEV' && +m[2] <= 15)) return 'Volume I';
+      if (m[1] === 'LEV' || m[1] === 'NUM' || m[1] === 'DEU') return 'Volume II';
+      return '';
+    }
+    getJSON('data/days/index.json').then(function (idx) {
+      var today = iso(new Date()), days = (idx.days || []).slice().sort();
+      var day = days.filter(function (d) { return d <= today; }).pop() || days[0];
+      if (!day) return;
+      var torah = ((idx.plan || {})[day] || []).filter(function (x) { return x[0] === 'Torah'; })[0];
+      return getJSON('data/days/' + day + '.json').then(function (d) {
+        var vol = volume(torah && torah[1]);
+        if (!d || !d.parsha || !vol) return;
+        var el = document.getElementById('ln-week');
+        el.innerHTML = '<b>This week: <em>' + esc(d.parsha.name) + '</em></b><span>The commentary for this week’s portion is in ' + vol + '.</span>';
+        el.hidden = false;
+        el.classList.add('in');
+      });
+    }).catch(function () {});
+  })();
 </script>
 </body>
 </html>

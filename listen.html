@@ -124,8 +124,7 @@
       <span>Subscribe free</span></a>
     <p class="ls-sub-where" id="ls-sub-where">on Apple Podcasts</p>
     <p class="ls-sub-note">A new episode every day, on your phone the evening before. Also on
-      <a href="https://podcasts.apple.com/us/podcast/daily-bread-for-busy-moms/id1110282074" target="_blank" rel="noopener" data-app="apple">Apple Podcasts</a> ·
-      <a href="https://soundcloud.com/busymoms" target="_blank" rel="noopener" data-app="soundcloud">SoundCloud</a> ·
+      <a href="https://soundcloud.com/busymoms" target="_blank" rel="noopener">SoundCloud</a>, or
       <button type="button" class="ls-linkbtn" id="ls-copy" data-feed="https://feeds.soundcloud.com/users/soundcloud:users:219183508/sounds.rss">copy the feed address</button>
       for any other podcast app.</p>
   </section>
@@ -221,11 +220,11 @@
         (day.parsha ? (day.hebrewDate ? ' · ' : '') + 'Torah Portion: <em>' + esc(day.parsha.name) + '</em>' : '');
     });
 
-    // Recent episodes, 14 at a time
+    // Recent episodes, 7 at a time
     var list = document.getElementById('ls-list'), more = document.getElementById('ls-more'), shown = 0;
     var rest = dates.filter(function (d) { return d !== feat; });
     function showMore() {
-      var next = rest.slice(shown, shown + 14);
+      var next = rest.slice(shown, shown + 7);
       shown += next.length;
       list.insertAdjacentHTML('beforeend', next.map(function (d) {
         var e = data.episodes[d];
@@ -262,14 +261,6 @@
   });
   obs.observe(document.getElementById('ls-now'), { attributes: true, attributeFilter: ['class'] });
 
-  // The big button: Apple Podcasts on Apple devices, SoundCloud elsewhere (both are the Busy Moms team's own channels)
-  (function () {
-    var ua = navigator.userAgent || '', apple = /iPhone|iPad|iPod|Macintosh/.test(ua);
-    var pick = document.querySelector('.ls-sub-note a[data-app="' + (apple ? 'apple' : 'soundcloud') + '"]');
-    if (!pick) return;
-    document.getElementById('ls-sub-main').href = pick.href;
-    document.getElementById('ls-sub-where').textContent = apple ? 'on Apple Podcasts' : 'on SoundCloud';
-  })();
   document.getElementById('ls-copy').addEventListener('click', function () {
     var b = this, feed = b.getAttribute('data-feed');
     var done = function () { b.textContent = 'feed address copied'; setTimeout(function () { b.textContent = 'copy the feed address'; }, 2500); };
