@@ -82,8 +82,7 @@
     <p class="ct-status" id="ct-status" role="status" aria-live="polite"></p>
   </form>
 
-  <p class="gv-small">Your message is sent by email to Ariel Media. We use your address only to reply, and nothing is stored on this site.
-    You can also write to <a href="mailto:arielmedia@thewatchman.org">arielmedia@thewatchman.org</a>.<br>
+  <p class="gv-small">Your message is sent by email to Ariel Media. We use your address only to reply, and nothing is stored on this site.<br>
     <a href="./">Daily Bread Online</a> · <a href="about.html">About Daily Bread</a> · Published by <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a></p>
 </main>
 
@@ -109,7 +108,7 @@
       fetch('https://api.web3forms.com/submit', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
-          access_key: 'd3d7e7a2-23ba-466c-8b24-771174999c0b',   // Web3Forms key: delivers to arielmedia@thewatchman.org (safe to publish)
+          access_key: 'd3d7e7a2-23ba-466c-8b24-771174999c0b',   // Web3Forms key (safe to publish): delivers to Ariel Media's inbox
           subject: 'Daily Bread Online: ' + form.elements.topic.value,
           from_name: 'Daily Bread Online',
           name: name, email: email, replyto: email,
@@ -128,8 +127,7 @@
         .catch(function (err) {
           send.disabled = false; status.className = 'ct-status err';
           var why = String(err && err.message || '').replace(/[<>&"]/g, '');
-          status.innerHTML = 'Sorry, the message could not be sent. Please try again, or write to ' +
-            '<a href="mailto:arielmedia@thewatchman.org">arielmedia@thewatchman.org</a>.' +
+          status.innerHTML = 'Sorry, the message could not be sent. Please check your connection and try again in a moment.' +
             (why && why !== 'not sent' ? '<br><small>(' + why + ')</small>' : '');
         });
     });
