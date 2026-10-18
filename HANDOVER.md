@@ -19,10 +19,10 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - `about.html` — **About**: full-width scrolling page with its own `<style>`; journal photo `assets/img/journal*.jpg` with parallax.
 - `listen.html` — **Listen**: the Daily Bread for Busy Moms podcast (today's episode with its readings, recent episodes,
   podcast-app links, Patreon).
-- `learn.html` — **Learn**: "This week's Torah portion" (which volume covers it), *Messiah in the Torah* (2-vol set,
+- `learn.html` — **Learn**: Study tools (first), then "This week's Torah portion" (which volume covers it), *Messiah in the Torah* (2-vol set,
   arielmedia.shop/products/torah-2vol-set-te, image assets/img/messiah-in-the-torah.jpg), Daily Bread Torah Class
   (larsenarson.com/torah; one lesson per portion; **price $29/month and 2-week trial are written in the page — update if they change**),
-  and Study tools. Planned next: Introduction to the Bible articles.
+  Planned next: Introduction to the Bible articles.
 - After the Torah reading on Today (Classic only), one quiet line: "Go deeper into <portion> with … Messiah in the Torah … Torah Class".
 - `maps-test.html` — copy of index for trying map changes (keep its settings panel and blessings in step with index).
 - Shared top bar on all pages: John's SVG wordmark (assets/img/logo-dark.svg, inlined in each page, fill = theme heading colour, 15px tall; on phones the logo is centred with the menu below it) + TODAY · PROGRESS · KIDS · LISTEN · LEARN · ABOUT (+ GIVE; right end reserved for future sign-in). The menu is written into
