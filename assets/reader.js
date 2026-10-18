@@ -1479,7 +1479,7 @@
     if (step && step.getAttribute('data-day')) { loadDay(step.getAttribute('data-day')); return; }
     var go = e.target.closest('[data-go]');
     if (go) { goTo(+go.getAttribute('data-go')); return; }
-    var link = e.target.closest('.day-plan a');
+    var link = e.target.closest('.day-plan a.dp-row');
     if (link) { e.preventDefault(); goTo(+link.getAttribute('href').slice(1)); return; }
     var back = e.target.closest('.fn-label');
     if (back) {

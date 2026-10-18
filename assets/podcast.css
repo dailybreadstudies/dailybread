@@ -38,7 +38,9 @@
 .pd-main { min-width: 0; }
 .pd-title { display: flex; align-items: baseline; gap: 8px; min-width: 0; font-size: 0.82rem; line-height: 1.3; }
 .pd-ep { font-weight: 600; color: var(--heading); white-space: nowrap; }
-.pd-show { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.pd-show { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; text-decoration: none; }
+.pd-show:hover, .pd-show.pd-invite { color: var(--accent); }
+.pd-show:hover { text-decoration: underline; text-underline-offset: 3px; }
 .pd-bar { display: flex; align-items: center; gap: 8px; margin-top: 3px; font: 500 0.7rem/1 var(--sans); color: var(--muted);
   font-variant-numeric: tabular-nums; }
 .pd-time, .pd-dur { flex: none; min-width: 2.6em; }
@@ -64,6 +66,7 @@ html.pod-docked body { padding-bottom: 10rem; }
 @media (max-width: 480px) {
   .pod-dock { column-gap: 2px; padding: 7px 6px 7px 8px; }
   .pd-show { display: none; }
+  .pd-show.pd-invite { display: inline; }
   .pd-icon { min-width: 32px; padding: 0 4px; }
 }
 @media print { .pod-dock { display: none; } }

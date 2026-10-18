@@ -87,7 +87,7 @@
     dock.innerHTML =
       '<button type="button" class="pd-play" aria-label="Play">' + ICON_PLAY + '</button>' +
       '<div class="pd-main">' +
-        '<div class="pd-title"><span class="pd-ep"></span><span class="pd-show">Daily Bread for Busy Moms</span></div>' +
+        '<div class="pd-title"><span class="pd-ep"></span><a class="pd-show" href="' + base + 'listen.html#subscribe">Daily Bread for Busy Moms</a></div>' +
         '<div class="pd-bar"><span class="pd-time">0:00</span>' +
           '<input class="pd-seek" type="range" min="0" max="100" step="1" value="0" aria-label="Position">' +
           '<span class="pd-dur">0:00</span></div>' +
@@ -127,6 +127,9 @@
     audio.addEventListener('timeupdate', function () { tick(); remember(false); });
     audio.addEventListener('ended', function () {
       if (current) { delete saved.pos[current.ep.u]; save(); }
+      var show = dock.querySelector('.pd-show');            // at the end: an invitation to subscribe
+      show.textContent = 'Subscribe free for tomorrow’s episode';
+      show.classList.add('pd-invite');
       sync();
     });
     audio.addEventListener('error', function () {
@@ -181,6 +184,9 @@
       current = { date: date, ep: ep };
       audio.src = ep.u;
       dock.querySelector('.pd-ep').textContent = dayName(date);
+      var show = dock.querySelector('.pd-show');
+      show.textContent = 'Daily Bread for Busy Moms';
+      show.classList.remove('pd-invite');
       dock.querySelector('.pd-ep').title = ep.t;
       tick();
       if ('mediaSession' in navigator) {
