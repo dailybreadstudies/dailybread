@@ -112,3 +112,14 @@ html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb1: #e3a2cd; --bb3: #F9CE7A; }
 
 /* Progress, On the shelf: Kids titles */
 .kids .bs-label { font: 700 18px var(--kid-font); letter-spacing: 0.12em; }
+/* Kids shelf: the 10 books in full colour, the part read in a deeper shade; the rest grey */
+.kids .bs-bk.ten .bs-body { fill: var(--c); }
+.kids .bs-bk.ten .bs-fill, .kids .bs-bk.ten.done .bs-fill { fill: #000; opacity: 0.3; }
+.kids .bs-bk.ten text { fill: #fff; }
+.kids .bs-bk.ten .bs-band { stroke: #fff; opacity: 0.75; }
+.kids .bs-bk.dim { opacity: 0.32; }
+.kids .bs-bk.dim text { fill: var(--muted); }
+@media (prefers-color-scheme: dark) { html.kids:not([data-theme="light"]):not([data-theme="sepia"]) .bs-bk.ten text { fill: #102221; }
+  html.kids:not([data-theme="light"]):not([data-theme="sepia"]) .bs-bk.ten .bs-band { stroke: #102221; } }
+html.kids[data-theme="dark"] .bs-bk.ten text { fill: #102221; }
+html.kids[data-theme="dark"] .bs-bk.ten .bs-band { stroke: #102221; }

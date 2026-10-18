@@ -1201,6 +1201,7 @@
         Object.keys(want[id]).forEach(function (c) {
           Object.keys(want[id][c]).forEach(function (v) { n++; if (got[id] && got[id][c] && got[id][c][v]) r++; });
         });
+        if (!r) return;                                   // a book joins the list once its first passage is read
         max = Math.max(max, n);
         rows.push({ id: id, n: n, r: r });
       });
@@ -1260,7 +1261,9 @@
           if (k === 0 && bi > 0 && !leans) x += BUNDLE_GAP;
           if (k === 0) spans.push({ name: bd[0], x0: x, single: bd[1].length === 1 });
           var share = v.words ? v.wordsRead / v.words : 0, done = share >= 0.995;
-          var dim = KIDS && !v.ids.some(function (id) { return tenIds[id]; }) && !v.wordsRead;
+          // Kids: the 10 books stand in full colour (the read part deepens); every other book stays grey, without progress
+          var ten = KIDS && v.ids.some(function (id) { return tenIds[id]; }), dim = KIDS && !ten;
+          if (dim) { share = 0; done = false; }
           var tf;
           if (leans) { px = x + Math.min(prevH, h * Math.cos(rad)) * Math.tan(rad); tf = 'translate(' + px.toFixed(2) + ' ' + base + ') rotate(' + (-LEAN) + ')'; }
           else tf = 'translate(' + x.toFixed(2) + ' ' + base + ')';
@@ -1269,8 +1272,8 @@
           lines = lines.map(function (l) { return l.toUpperCase(); });
           var longest = Math.max.apply(null, lines.map(function (l) { return l.length; }));
           var fs = Math.min(9.5, (w - 4) / lines.length - 1.5, (h - 30) / (longest * 0.78));
-          var tip = v.name + ' · ' + (v.wordsRead ? pctText(v.wordsRead, v.words).replace('&lt;', '<') + ' read' : 'not started');
-          out += '<g transform="' + tf + '"><a class="bs-bk' + (done ? ' done' : '') + (dim ? ' dim' : '') + '" href="./?r=' + v.ids[0] + '.1" style="--c:var(--bb' + sh[0] + ')"' +
+          var tip = v.name + (dim ? '' : ' · ' + (v.wordsRead ? pctText(v.wordsRead, v.words).replace('&lt;', '<') + ' read' : 'not started'));
+          out += '<g transform="' + tf + '"><a class="bs-bk' + (done ? ' done' : '') + (dim ? ' dim' : '') + (ten ? ' ten' : '') + '" href="./?r=' + v.ids[0] + '.1" style="--c:var(--bb' + sh[0] + ')"' +
             ' aria-label="' + escapeAttr(tip) + '"><title>' + escapeAttr(tip) + '</title><g class="bs-lift">' +
             '<rect class="bs-body" x="0" y="' + (-h) + '" width="' + w.toFixed(2) + '" height="' + h + '" rx="1.5"/>' +
             (share > 0 ? '<rect class="bs-fill" x="0.6" y="' + (-h * share + 0.6).toFixed(2) + '" width="' + (w - 1.2).toFixed(2) + '" height="' + Math.max(0, h * share - 1.2).toFixed(2) + '"/>' : '') +
@@ -1293,9 +1296,9 @@
       y = base + SHELF_GAP;
     });
     return '<h2 class="pg-h">On the shelf</h2>' +
-      '<p class="pg-blurb">' + (KIDS ? 'Your 10 books stand out; the others fill in as you read their Shabbat and holiday passages. ' : '') +
-      'Every book of the Bible as it stands on the shelf, as thick as it is long. Each spine fills from the bottom as you read it. ' +
-      'Tap a book to open it.</p>' +
+      '<p class="pg-blurb">' + (KIDS
+        ? 'Your 10 books stand out in colour on the shelf, each as thick as it is long. As you read, the colour deepens from the bottom up. Tap a book to open it.'
+        : 'Every book of the Bible as it stands on the shelf, as thick as it is long. Each spine fills from the bottom as you read it. Tap a book to open it.') + '</p>' +
       '<div class="bs-box"><svg class="bs-shelves" viewBox="0 0 ' + W + ' ' + (y - SHELF_GAP + 26) + '" role="group" aria-label="The books of the Bible on four shelves">' + out + '</svg></div>';
   }
   var bbOpen = false;
