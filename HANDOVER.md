@@ -21,7 +21,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
   podcast-app links, Patreon).
 - `learn.html` — **Learn**, in the About page style (full-width sections, reveal on scroll): hero; Study tools (9 icon tiles:
   languages, word study, maps, family trees, archaeology, calendar, whole Bible, listen, progress); *Messiah in the Torah*
-  (arielmedia.shop/products/torah-2vol-set-te, assets/img/messiah-in-the-torah.jpg, live "This week: <portion> … Volume I/II");
+  (arielmedia.shop/products/torah-2vol-set-te, assets/img/messiah-in-the-torah.webp + .png fallback, transparent, 760px wide, live "This week: <portion> … Volume I/II");
   Daily Bread Torah Class over the photo assets/img/torah-class-wide.jpg (larsenarson.com/torah; one lesson per portion;
   **$29/month and the 2-week trial are written in the page — update if they change**). Planned next: Introduction to the Bible.
 - After the Torah reading on Today (Classic only), one quiet line: "Go deeper into <portion> with … Messiah in the Torah … Torah Class".

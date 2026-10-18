@@ -148,7 +148,9 @@
     .ln-ic-pill { width: 64px; border-radius: 26px; gap: 4px; font-family: var(--display); font-size: 1.1rem; }
     .ln-ic-sep { color: var(--line-strong); }
     .ln-ic-he { font-family: var(--hebrew); }
-    .ln-book { margin: 0; border-radius: 14px; overflow: hidden; background: #f2f2f2; }
+    .ln-book { margin: 0 auto; max-width: 400px; }
+    .ln-book img { transition: transform 0.3s ease; }
+    .ln-book a:hover img { transform: translateY(-4px); }
     .ln-book img { display: block; width: 100%; height: auto; }
     .ln-week[hidden] { display: none; }
     .ln-class .ab-in { display: flex; justify-content: flex-end; }
@@ -158,7 +160,7 @@
     .ln-class .ab-stat { margin-bottom: 22px; }
     @media (max-width: 960px) { .ln-tools { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 860px) {
-      .ln-book { max-width: 22rem; }
+      .ln-book { max-width: 18rem; }
       .ln-class .ab-photo-bg { background-image: url('assets/img/torah-class.jpg'); }
       .ln-class .ab-photo-bg::after { background: rgba(17, 17, 17, 0.72); }
     }
@@ -222,8 +224,9 @@
         <a class="ab-btn primary" href="https://arielmedia.shop/products/torah-2vol-set-te" rel="noopener">Get the two-volume set</a>
       </div>
     </div>
-    <figure class="ln-book rv d2"><img src="assets/img/messiah-in-the-torah.jpg" width="720" height="780"
-      alt="Messiah in the Torah, Volumes I and II, by Lars Enarson"></figure>
+    <figure class="ln-book rv d2"><a href="https://arielmedia.shop/products/torah-2vol-set-te" rel="noopener"><picture><source srcset="assets/img/messiah-in-the-torah.webp" type="image/webp">
+      <img src="assets/img/messiah-in-the-torah.png" width="760" height="1051" loading="lazy" decoding="async"
+      alt="Messiah in the Torah, Volumes I and II, by Lars Enarson"></picture></a></figure>
   </div>
 </section>
 
