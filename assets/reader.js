@@ -742,7 +742,7 @@
     document.getElementById('portions').innerHTML = html;
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
-    goTo(portionFromHash(), false);
+    goTo(location.hash ? portionFromHash() : firstUnread(day.date, total), false);   // no #n: pick up where the reader left off
     decorateMaps();
     fillToday(day);
     drawProgress();
@@ -1436,6 +1436,11 @@
   }
 
   // ── Navigation ───────────────────────────────────────────────
+  // The first reading of a day not yet marked complete (or the first, when all are done)
+  function firstUnread(date, total) {
+    for (var k = 1; k <= total; k++) if (!isRead(date, k)) return k;
+    return 1;
+  }
   function portionFromHash() {
     var n = parseInt(location.hash.replace('#', ''), 10);
     return document.getElementById('portion-' + n) ? n : 1;
@@ -2526,7 +2531,7 @@
         list.forEach(function (b) { books[b.id] = b; });
         var url = location.pathname + '?d=' + date;
         if (replace) history.replaceState({ d: date }, '', url + location.hash);
-        else { history.pushState({ d: date }, '', url + '#1'); window.scrollTo(0, 0); }
+        else { history.pushState({ d: date }, '', url); window.scrollTo(0, 0); }
         renderDay(day, books);
       });
     }).catch(function (err) {
