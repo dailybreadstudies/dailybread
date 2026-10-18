@@ -90,7 +90,7 @@
 <script>
   /* The top bar scrolls away with the page */
   document.documentElement.style.setProperty('--tb-off', '0px');
-  /* Send through FormSubmit (formsubmit.co), which emails the message to Ariel Media */
+  /* Send through Web3Forms (web3forms.com), which emails the message to Ariel Media */
   (function () {
     var form = document.getElementById('ct-form'), status = document.getElementById('ct-status'), send = document.getElementById('ct-send');
     // "Where": filled in from a link such as contact.html?from=Genesis%2011
@@ -106,10 +106,16 @@
       }
       if (form.elements._honey.value) return;
       send.disabled = true; status.className = 'ct-status'; status.textContent = 'Sending…';
-      fetch('https://formsubmit.co/ajax/arielmedia@thewatchman.org', {
+      fetch('https://api.web3forms.com/submit', {
         method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, topic: form.elements.topic.value, where: form.elements.page.value.trim(), message: msg,
-          _subject: 'Daily Bread Online: ' + form.elements.topic.value, _replyto: email, _template: 'table' })
+        body: JSON.stringify({
+          access_key: 'd3d7e7a2-23ba-466c-8b24-771174999c0b',   // Web3Forms key: delivers to arielmedia@thewatchman.org (safe to publish)
+          subject: 'Daily Bread Online: ' + form.elements.topic.value,
+          from_name: 'Daily Bread Online',
+          name: name, email: email, replyto: email,
+          topic: form.elements.topic.value, where: form.elements.page.value.trim() || '(not given)', message: msg,
+          page: location.href, botcheck: form.elements._honey.value
+        })
       }).then(function (r) {
         return r.json().catch(function () { return {}; }).then(function (j) {
           if (!r.ok || String(j.success) !== 'true') throw new Error(j.message || ('not sent, ' + r.status));
