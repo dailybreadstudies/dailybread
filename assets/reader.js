@@ -2182,6 +2182,9 @@
     '1thess': '1TH', '2thess': '2TH', '1tim': '1TI', '2tim': '2TI', '1pet': '1PE', '2pet': '2PE', '1jn': '1JN', '2jn': '2JN', '3jn': '3JN'
   };
   function findBook(text) {
+    // A book id as the site's own links write it ("SNG", "1SA", "JUD"): exact, in capitals
+    var id = String(text).trim();
+    if (/^[1-3]?[A-Z]{2,3}$/.test(id) && bookIndex.some(function (b) { return b.id === id; })) return id;
     var key = String(text).toLowerCase().replace(/[\s.]/g, '').replace(/^i{1,3}(?=[a-z])/, function (r) { return r.length; });
     if (!key) return null;
     if (ALIASES[key]) return ALIASES[key];
