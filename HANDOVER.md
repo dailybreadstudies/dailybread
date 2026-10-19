@@ -85,7 +85,8 @@ the page also shows one section of Lars Enarson’s *Messiah in the Torah*, Vol.
 the book and the Torah Class (learn.html). The Dig deeper box then shows a second option, “Commentary”
 (`deeper.html?d=DATE#commentary`). Weeks without an entry show only the word study. Now filled: Lech Lecha (“Abraham Was
 a Soul Winner”), Vayera (“The Binding of Isaac”, first part), Chayei Sarah (“Sarah’s Death”), Toldot (“The Birth Right”),
-taken from the textbook PDF with pdftotext -layout; check Hebrew words by hand when adding more.
+Vayetze (“God’s Unshakable Promise to Jacob”), Vayishlach (“Jacob Wrestles with God”), Vayeshev (“Joseph Is Rejected
+by His Brothers”), Miketz (“Joseph Is Exalted”), taken from the textbook PDF with pdftotext -layout; check Hebrew words by hand when adding more.
 
 ## Settings menu (A/א) — four groups
 Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;
