@@ -114,8 +114,13 @@
       set('cm-eyebrow', 'Commentary · <em>' + esc(day.parsha.name) + '</em>');
       set('cm-hero-title', esc(comm.title).replace(/^(.*?)(\S+\s+\S+)$/, '$1<em>$2</em>'));
       set('cm-hero-from', 'An excerpt from Lars Enarson’s commentary on <em>' + esc(day.parsha.name) + '</em>, from <em>Messiah in the Torah</em>, Vol. I.');
+      var first = true;
       set('cm-body', comm.blocks.map(function (b) {
         var t = lordify(esc(b.t));
+        if (b.k !== 'q' && first) {   // drop cap on the first paragraph of the commentary itself
+          first = false;
+          return '<p class="cm-p cm-first"><span class="dc" aria-hidden="true">' + t.charAt(0) + '</span><span class="visually-hidden">' + t.charAt(0) + '</span>' + t.slice(1) + '</p>';
+        }
         return b.k === 'q' ? '<blockquote class="cm-q"><p>' + t + '</p></blockquote>' : '<p class="cm-p">' + t + '</p>';
       }).join('') + (comm.excerpt ? '<p class="cm-p cm-more">…</p>' : ''));
       set('cm-portion', esc(day.parsha.name));
