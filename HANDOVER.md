@@ -72,6 +72,13 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 7. Each reading ends with Previous · **Mark <Section> Complete** · Next (soft blue when complete; then auto-advances
    to the next unfinished reading after ~1 s), plus the journal line after the last reading.
 
+## Day complete → Dig deeper
+When every reading of a day is marked complete, the end of each reading shows “Well done!” (Kids: “Great job!”) and a
+**Dig deeper** option: a word study with one Hebrew word (Torah) and one Greek word (Apostles/Gospels), with its meaning,
+where it is in today’s text (tap to jump there) and how often it is used. Words are picked per day by
+`python3 tools/build_word_picks.py` → `data/word-picks.json`, `data/kids/word-picks.json`; choose a word by hand in
+`tools/word-picks-fixed.json`. Planned next option: a short section of Lars Enarson’s weekly Torah commentary.
+
 ## Settings menu (A/א) — four groups
 Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;
 the two are then labelled Gospels (Matthew–Acts) / Epistles (Romans–Revelation). The optional reading is always last in
