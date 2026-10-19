@@ -12,8 +12,8 @@
   var box = document.getElementById('deeper');
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-  function getJSON(url) {
-    return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + ' (' + r.status + ')'); return r.json(); });
+  function getJSON(url, fresh) {
+    return fetch(url, fresh ? { cache: 'no-cache' } : undefined).then(function (r) { if (!r.ok) throw new Error(url + ' (' + r.status + ')'); return r.json(); });
   }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
@@ -155,7 +155,7 @@
     getJSON('data/words/lex-he.json'),
     getJSON('data/words/lex-grc.json'),
     getJSON('data/bsb/index.json'),
-    KIDS ? Promise.resolve({}) : getJSON('data/commentary.json').catch(function () { return {}; })
+    KIDS ? Promise.resolve({}) : getJSON('data/commentary.json', true).catch(function () { return {}; })
   ]).then(function (res) {
     var day = res[0], picks = res[1][date] || [], lex = { he: res[2], grc: res[3] };
     var comm = day.parsha && (res[5].portions || {})[day.parsha.name];
