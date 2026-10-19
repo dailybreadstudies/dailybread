@@ -81,12 +81,35 @@
       '</section>';
   }
 
+  // The verse in Hebrew (Miqra according to the Masorah) or Greek (SBLGNT), with the studied word marked.
+  // Word i of the verse (counting maqaf-joined words separately) is word i of data/words, as picked in word-picks.json.
+  var ORIG = {};
+  var HEB_WORD = /[\u05D0-\u05EA\u0591-\u05BD\u05BF\u05C1\u05C2\u05C4\u05C5\u05C7\u034F]+/g;   // words joined by maqaf count separately, as in the word data
+  var GRK_WORD = /[\u0370-\u03FF\u1F00-\u1FFF\u02BC\u2019]+/g;
+  function origVerse(orig, key, idx) {
+    var t = orig && orig.v && orig.v[key];
+    if (!t) return null;
+    var lang = orig.lang === 'he' ? 'he' : 'grc', re = lang === 'he' ? HEB_WORD : GRK_WORD, n = 0, skip = 0;
+    var html = String(t).split(/(<[^>]+>)/).map(function (part) {
+      if (part.charAt(0) === '<') {
+        if (/^<span class="(?:kt|pe|se|tcm)"/.test(part)) { skip++; return ''; }
+        if (skip && /^<\/span>/.test(part)) { skip--; return ''; }
+        return '';
+      }
+      if (skip) return lang === 'he' ? '' : part;
+      return part.replace(re, function (w) { return n++ === idx ? '\u0001' + w + '\u0002' : w; });
+    }).join('');
+    if (lang === 'he') html = html.replace(/[\u0591-\u05AF\u05BD]/g, '').replace(/\s*\u05C0\s*/g, ' ').replace(/\u2009/g, '');
+    html = esc(html.replace(/\s{2,}/g, ' ').trim()).replace('\u0001', '<mark>').replace('\u0002', '</mark>');
+    return { lang: lang, html: html };
+  }
   function cardsHtml(day, picks, lex, books, names) {
     return picks.map(function (p, i) {
           var e = lex[p.lang][p.s] || [], ref = p.ref.split(' '), cv = ref[1].split(':');
           var n = 0, label = '';
           day.portions.forEach(function (x, k) { if (!n && x.ref.split(' ')[0] === ref[0]) { n = k + 1; label = x.label; } });
           var vt = books[ref[0]] && books[ref[0]].chapters ? verseText(books[ref[0]], +cv[0], +cv[1], p.here) : '';
+          var ot = origVerse(ORIG[ref[0]], ref[1], p.i);
           var where = (names[ref[0]] || ref[0]) + ' ' + cv[0] + ':' + cv[1];
           return '<article class="wcard" data-lang="' + p.lang + '">' +
             '<p class="wc-lang">' + (p.lang === 'he' ? 'Hebrew' : 'Greek') + (label ? ' · from the ' + esc(label) + ' reading' : '') + '</p>' +
@@ -96,7 +119,9 @@
               '<p class="wc-tr">' + esc(translit(e[1])) + '</p>' +
               '<p class="wc-gloss">' + esc(e[2] || '') + '</p>' +
               (e[3] && p.lang === 'he' ? '<p class="wc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
-              (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p><cite>' + esc(where) + '</cite></blockquote>' : '') +
+              (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p>' +
+                (ot ? '<p class="wc-orig ' + ot.lang + '" lang="' + ot.lang + '"' + (ot.lang === 'he' ? ' dir="rtl"' : '') + '>' + ot.html + '</p>' : '') +
+                '<cite>' + esc(where) + '</cite></blockquote>' : '') +
               '<p class="wc-count">Here translated “' + esc(cleanHere(p.here)) + '”. Used ' + p.n + ' times in the Bible.</p>' +
               '<p class="wc-links">' + (n ? '<a href="./?d=' + date + '#' + n + '">Read it in ' + esc(where) + '</a>' : '') +
               '<a href="https://www.stepbible.org/?q=strong=' + esc(p.s) + '" target="_blank" rel="noopener">Every use on STEPBible &rarr;</a></p>' +
@@ -167,7 +192,10 @@
     document.title = 'Dig deeper · ' + (KIDS ? 'Daily Bread for Kids' : 'Daily Bread Online');
     var books = {};
     picks.forEach(function (p) { books[p.ref.split(' ')[0]] = 1; });
-    return Promise.all(Object.keys(books).map(function (b) { return getJSON('data/bsb/' + b + '.json').then(function (j) { books[b] = j; }); }))
+    return Promise.all(Object.keys(books).map(function (b) {
+      return Promise.all([getJSON('data/bsb/' + b + '.json'), getJSON('data/orig/' + b + '.json').catch(function () { return null; })])
+        .then(function (r) { books[b] = r[0]; ORIG[b] = r[1]; });
+    }))
       .then(function () {
         // Rich layout (marketing-style page with photo sections, deeper.html): the page carries its own headings
         if (RICH) return drawRich(day, picks, lex, books, names, comm, when);

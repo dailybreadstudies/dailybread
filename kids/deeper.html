@@ -155,6 +155,11 @@
     #deeper .wc-lemma { font-size: clamp(3rem, 8vw, 4.4rem); }
     #deeper .wc-lang { font-size: 0.72rem; letter-spacing: 0.2em; }
     #deeper .wc-reveal { height: 46px; padding: 0 24px; border-radius: 23px; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.78rem; }
+    #deeper .wc-orig { font-size: 1.35rem; line-height: 1.8; color: var(--ink); margin: 0.5rem 0 0.4rem; }
+    #deeper .wc-orig.he { font-family: var(--hebrew); text-align: right; font-size: 1.5rem; }
+    #deeper .wc-orig.grc { font-family: var(--greek); }
+    #deeper .wc-orig mark { background: var(--done-bg); color: inherit; padding: 0 3px; border-radius: 3px; box-shadow: inset 0 -2px 0 var(--done); }
+    .kids #deeper .wc-orig mark { background: var(--kid-gold); color: #1f1f1f; box-shadow: none; }
     #cm-body .cm-p { font-size: clamp(1.08rem, 1.4vw, 1.2rem); line-height: 1.85; }
     .cm-q { border-left-color: var(--accent-line); margin-bottom: 2rem; }
     /* Drop cap: three lines tall, in the heading face and the accent colour */
@@ -240,11 +245,11 @@
 
 <footer class="ab-foot">
   <div class="ab-in">
-    <span>Daily Bread Online · Published by <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a> · Word study: <a href="https://www.stepbible.org" rel="noopener">STEPBible.org</a>, CC BY 4.0 · Commentary © Lars Enarson, used by permission · <a href="../contact.html">Contact</a></span>
+    <span>Daily Bread Online · Published by <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a> · Word study: <a href="https://www.stepbible.org" rel="noopener">STEPBible.org</a>, CC BY 4.0 · Hebrew: Miqra according to the Masorah (<a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>) · Greek: SBL Greek New Testament (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>) · Commentary © Lars Enarson, used by permission · <a href="../contact.html">Contact</a></span>
   </div>
 </footer>
 
-<script src="../assets/deeper.js?v=052db81c"></script>
+<script src="../assets/deeper.js?v=02e7d0eb"></script>
 <script>
   (function () {
     function reveal() {
