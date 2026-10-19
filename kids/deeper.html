@@ -13,51 +13,269 @@
   <link rel="stylesheet" href="../assets/reader.css?v=06a8884f">
   <link rel="stylesheet" href="../assets/kids.css">
   <script>
-    /* Apply a saved Light/Dark choice before the page paints (avoids a flash) */
     try { var t = JSON.parse(localStorage.getItem('dbs-kids-settings') || '{}').theme;
           if (t === 'light' || t === 'dark' || t === 'sepia') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+    document.documentElement.classList.add('js');
   </script>
+  <style>
+    body.about { display: block; padding: var(--topbar-h) 0 0; line-height: 1.7; }
+
+    .ab-sec { min-height: 88vh; display: flex; align-items: center; padding: clamp(80px, 12vh, 140px) clamp(20px, 6vw, 80px);
+      border-top: 1px solid var(--rule); }
+    .ab-sec.tint { background: var(--tint); }
+    .ab-in { width: 100%; max-width: 1080px; margin: 0 auto; }
+    .ab-eyebrow { font: 600 0.74rem var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft);
+      margin: 0 0 1.4rem; }
+    .ab-h { font-family: var(--display); font-weight: 300; color: var(--heading); letter-spacing: -0.02em;
+      font-size: clamp(2.1rem, 5.2vw, 4.2rem); line-height: 1.12; margin: 0 0 1.6rem; max-width: 16em; text-wrap: balance; }
+    .ab-h em { font-style: italic; color: var(--accent); }
+    .ab-p { font-size: clamp(1.05rem, 1.5vw, 1.25rem); line-height: 1.75; color: var(--ink-soft); max-width: 36em; margin: 0 0 1.1rem; }
+    .ab-p:last-child { margin-bottom: 0; }
+    .ab-p a, .ab-small a, .ab-stat a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+    .ab-p a:hover { color: var(--accent-deep); }
+    .ab-small { font: 400 0.85rem/1.7 var(--sans); color: var(--muted); max-width: 44em; margin: 1.8rem 0 0; }
+
+    /* Hero */
+    .ab-hero { min-height: calc(100vh - var(--topbar-h)); border-top: none; text-align: center; }
+    .ab-hero .ab-in { max-width: 980px; }
+    .ab-hero .ab-h { font-size: clamp(2.4rem, 6.4vw, 5.2rem); max-width: none; margin-bottom: 1.8rem; }
+    .ab-hero .ab-p { margin: 0 auto; }
+    .ab-btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 2.6rem; }
+    .ab-btn { display: inline-flex; align-items: center; gap: 8px; height: 50px; padding: 0 26px; border-radius: 25px;
+      font: 600 0.82rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+      border: 1px solid var(--line-strong); color: var(--accent); transition: background 0.15s, border-color 0.15s, color 0.15s; }
+    .ab-btn:hover { background: var(--paper); border-color: var(--accent-soft); }
+    .ab-btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .ab-btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+    .ab-btn.give { background: var(--heading); border-color: var(--heading); color: var(--paper); }
+    .ab-btn.give:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--paper); }
+    .ab-keep { display: flex; align-items: center; justify-content: space-between; gap: 18px 28px; flex-wrap: wrap;
+      margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+    .ab-keep p { margin: 0; font-size: 1.05rem; line-height: 1.6; color: var(--ink-soft, var(--ink)); max-width: 34em; }
+    .ab-keep b { color: var(--heading); font-weight: 600; }
+    .ab-scroll { display: block; margin: 4.5rem auto 0; width: 1px; height: 56px; background: linear-gradient(var(--accent-soft), transparent); }
+
+    /* Quote */
+    .ab-quote { font-family: var(--display); font-weight: 300; font-style: italic; color: var(--heading);
+      font-size: clamp(1.6rem, 3.4vw, 2.7rem); line-height: 1.35; max-width: 22em; margin: 0 0 1.4rem; text-wrap: balance; }
+    .ab-cite { font: 500 0.82rem var(--sans); letter-spacing: 0.06em; color: var(--accent-soft); margin: 0 0 2.6rem; }
+    .ab-cite a { color: inherit; text-decoration: none; }
+    .ab-cite a:hover { text-decoration: underline; }
+
+    /* The four sections */
+    .ab-four { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+      margin: 2.6rem 0 0; }
+    .ab-four > div { background: var(--paper); padding: 28px 22px 26px; }
+    .ab-sec.tint .ab-four > div { background: var(--tint); }
+    .ab-four .he { display: block; text-align: left; font-family: var(--hebrew); font-size: 1.15rem; line-height: 1.3; color: var(--accent); margin-bottom: 0.3rem; }
+    .ab-four b { display: block; font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1.2; letter-spacing: -0.01em; color: var(--heading); margin-bottom: 0.55rem; }
+    .ab-four span:last-child { font-size: 0.95rem; line-height: 1.55; color: var(--muted); }
+
+    /* Feasts strip */
+    .ab-feasts { list-style: none; padding: 0; margin: 3rem 0 0; display: grid; grid-template-columns: repeat(7, 1fr);
+      border-top: 1px solid var(--line-strong); }
+    .ab-feasts li { padding: 18px 10px 0 0; font: 500 0.74rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); position: relative; }
+    .ab-feasts li::before { content: ''; position: absolute; top: -4px; left: 0; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent-soft); }
+    .ab-feasts .he { display: block; text-align: left; font-family: var(--hebrew); font-size: 1.5rem; line-height: 1.3;
+      letter-spacing: 0; text-transform: none; color: var(--accent); margin-bottom: 0.3rem; }
+
+    /* Feature list */
+    .ab-feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 40px; margin: 2.8rem 0 0; padding: 0; list-style: none; }
+    .ab-feats li { border-top: 1px solid var(--line-strong); padding-top: 14px; }
+    .ab-feats b { display: block; font: 600 0.8rem var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .ab-feats span { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); }
+
+    /* Two columns */
+    .ab-two { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 6vw, 90px); align-items: center; }
+    .ab-stat { border-left: 2px solid var(--accent-line); padding: 4px 0 4px 26px; margin: 0 0 30px; }
+    .ab-stat:last-child { margin-bottom: 0; }
+    .ab-stat b { display: block; font-family: var(--display); font-weight: 300; font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.3; color: var(--heading); margin-bottom: 0.4rem; }
+    .ab-stat span { font: 400 0.9rem/1.6 var(--sans); color: var(--muted); }
+
+    /* Photo section: the journal, darkened, moving slowly behind the text */
+    .ab-photo { position: relative; overflow: hidden; background: #111111; border-top: none; color: #fff; }
+    .ab-photo-bg { position: absolute; left: 0; right: 0; top: -15%; height: 130%; z-index: 0;
+      background: center / cover no-repeat; will-change: transform; }
+    .ab-photo-bg::after { content: ''; position: absolute; inset: 0; background: rgba(17, 17, 17, 0.6); }
+    .ab-photo .ab-in { position: relative; z-index: 1; }
+    .ab-photo .ab-eyebrow { color: #e9d9c6; }
+    .ab-photo .ab-h, .ab-photo .ab-stat b { color: #ffffff; }
+    .ab-photo .ab-h em { color: #f0dcc4; }
+    .ab-photo .ab-p, .ab-photo .ab-stat span { color: rgba(255, 255, 255, 0.92); }
+    .ab-photo .ab-stat { border-left-color: rgba(255, 255, 255, 0.45); }
+    .ab-photo .ab-btn.primary { background: #ffffff; border-color: #ffffff; color: #3b2c20; }
+    .ab-photo .ab-btn.primary:hover { background: #f0e6da; border-color: #f0e6da; }
+
+    /* Closing */
+    .ab-end { min-height: 70vh; text-align: center; }
+    .ab-end .ab-h, .ab-end .ab-p { margin-left: auto; margin-right: auto; }
+    .ab-foot { padding: 28px clamp(20px, 6vw, 80px) 40px; border-top: 1px solid var(--rule); font: 400 0.74rem/1.9 var(--sans); color: var(--faint-text); }
+    .ab-foot .ab-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; }
+    .ab-foot a { color: inherit; text-underline-offset: 2px; text-decoration-color: var(--rule); }
+
+    /* Reveal on scroll */
+    .js .rv { opacity: 0; transform: translateY(26px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2,.7,.2,1); }
+    .js .rv.d1 { transition-delay: 0.12s; } .js .rv.d2 { transition-delay: 0.24s; } .js .rv.d3 { transition-delay: 0.36s; }
+    .js .rv.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 860px) {
+      .ab-four { grid-template-columns: repeat(2, 1fr); }
+      .ab-feats { grid-template-columns: repeat(2, 1fr); }
+      .ab-two { grid-template-columns: 1fr; }
+      .ab-feasts { grid-template-columns: repeat(4, 1fr); row-gap: 28px; }
+    }
+    @media (max-width: 520px) {
+      .ab-sec { min-height: 0; padding: 88px 20px; }
+      .ab-hero { min-height: 100vh; }
+      .ab-four, .ab-feats { grid-template-columns: 1fr; }
+      .ab-feasts { grid-template-columns: repeat(2, 1fr); }
+      .ab-btn { width: 100%; justify-content: center; }
+    }
+
+
+    /* Dig deeper: word study and commentary, in the style of the About and Learn pages */
+    .cm-only[hidden] { display: none !important; }
+    .dp-hero { min-height: calc(78vh - var(--topbar-h)); }
+    .dp-sec-photo .ab-photo-bg, .ab-photo .ab-photo-bg { background-image: none; opacity: 0; transition: opacity 0.6s ease; }
+    .ab-photo .ab-photo-bg.has-photo { opacity: 1; }
+    .dp-hero .ab-photo-bg { background-position: 60% 30%; }
+    .dp-hero .ab-photo-bg::after { background: linear-gradient(90deg, rgba(17,17,17,0.86) 0%, rgba(17,17,17,0.72) 45%, rgba(17,17,17,0.25) 100%); }
+    .cm-hero .ab-photo-bg { background-position: 60% 55%; }
+    .cm-hero .ab-photo-bg::after { background: linear-gradient(0deg, rgba(17,17,17,0.82) 0%, rgba(17,17,17,0.45) 55%, rgba(17,17,17,0.25) 100%); }
+    .cm-hero { min-height: 82vh; align-items: flex-end; }
+    .dp-hero .ab-h, .cm-hero .ab-h { max-width: 13em; }
+    .ab-photo .ab-btn:not(.primary) { color: #fff; border-color: rgba(255,255,255,0.5); }
+    .ab-photo .ab-btn:not(.primary):hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+    .dp-sec { min-height: 0; }
+    .dp-col { max-width: 40rem; margin: 0 auto; }
+    #deeper .wcard { background: var(--paper); padding: 34px 28px 28px; border-radius: 18px; margin-bottom: 22px; }
+    #deeper .wc-lemma { font-size: clamp(3rem, 8vw, 4.4rem); }
+    #deeper .wc-lang { font-size: 0.72rem; letter-spacing: 0.2em; }
+    #deeper .wc-reveal { height: 46px; padding: 0 24px; border-radius: 23px; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.78rem; }
+    #cm-body .cm-p { font-size: clamp(1.08rem, 1.4vw, 1.2rem); line-height: 1.85; }
+    .cm-q { border-left-color: var(--accent-line); margin-bottom: 2rem; }
+    /* Drop cap: three lines tall, in the heading face and the accent colour */
+    #cm-body .dc { float: left; font-family: var(--display); font-weight: 300; color: var(--accent);
+      font-size: 5.3em; line-height: 0.78; margin: 0.08em 0.07em 0 -0.04em; }
+    .dp-more .ab-two { align-items: center; }
+    .dp-back { text-align: center; padding: 0 0 70px; margin: 0; }
+    @media (max-width: 860px) {
+      .dp-hero .ab-photo-bg::after { background: rgba(17,17,17,0.66); }
+    }
+    @media (max-width: 520px) { #deeper .wcard { padding: 26px 18px 22px; } .cm-hero { min-height: 72vh; } }
+  </style>
   <script>
     /* Kids pages live in kids/: shared data files are one folder up */
     (function () { var f = window.fetch; window.fetch = function (u, o) {
       if (typeof u === 'string' && /^data\//.test(u)) u = '../' + u; return f.call(this, u, o); }; })();
   </script>
 </head>
-<body data-page="deeper" data-edition="kids">
 
+<body class="about dp-rich" data-page="deeper" data-edition="kids">
 <header class="topbar" id="topbar">
   <a class="tb-logo" href="./" aria-label="Daily Bread for Kids, today’s reading"><svg class="tb-logo-img kids-logo" viewBox="0 0 78.67 29.14" aria-hidden="true" focusable="false"><path d="M0,0h5.58l1.08,1.04v10.67l-1.08,1.06H0l.24-.82V.81l-.24-.81ZM2.37,10.37l.25.25h1.63l.25-.25V2.35l-.25-.25h-1.63l-.25.25v8.01Z"/><path d="M15.84,12.77h-2.67l.18-.5-.47-1.95-.25-.25h-2.1l-.25.25-.47,1.95.19.5h-2.67l.42-.86L10.36.74l-.24-.74h2.91l-.23.74,2.62,11.17.42.86ZM10.97,7.91h1.24l.2-.19-.82-4.08-.82,4.08.2.19Z"/><path d="M19.27,12.77h-2.64l.27-.81V.82l-.27-.82h2.64l-.27.82v11.14l.27.81Z"/><path d="M26.96,12.77h-6.38l.27-.81V.82l-.27-.82h2.64l-.25.82v9.58l.25.23h3.26l.87-.23-.39,2.37Z"/><path d="M31.36,11.96l.24.81h-2.6l.27-.81v-3.65l-2.6-7.38-.62-.94h3.14l-.3.5,1.43,4.69,1.43-4.69-.3-.5h3.14l-.62.94-2.59,7.38v3.65Z"/><path d="M39.38,0h5.58l1.08,1.04v4.17l-1.09,1.06,1.09,1.08v4.37l-1.08,1.06h-5.58l.27-.82V.81l-.27-.81ZM41.77,4.97l.25.23h1.63l.25-.23v-2.62l-.25-.25h-1.63l-.25.25v2.62ZM43.65,7.34h-1.63l-.25.25v2.77l.25.25h1.63l.25-.25v-2.77l-.25-.25Z"/><path d="M47.48,12.77l.27-.81V.82l-.27-.82h5.58l1.08,1.04v5.81l-1.08,1.08.92,3.98.34.86h-2.64l.19-.79-.91-3.85-.17-.2h-.69l-.25.25v3.78l.27.81h-2.64ZM51.75,5.81l.25-.24v-3.19l-.25-.24h-1.65l-.25.24v3.19l.25.24h1.65Z"/><path d="M55.58,12.77l.27-.82V.81l-.27-.81h6.38l.39,2.35-.87-.25h-3.28l-.25.25v2.64l.25.25h1.08l.82-.27v2.67l-.82-.27h-1.08l-.25.23v2.76l.25.25h3.28l.87-.25-.39,2.4h-6.38Z"/><path d="M71.23,12.77h-2.67l.18-.5-.47-1.95-.25-.25h-2.1l-.25.25-.47,1.95.19.5h-2.67l.42-.86,2.62-11.17-.24-.74h2.91l-.23.74,2.62,11.17.42.86ZM66.36,7.91h1.24l.2-.19-.82-4.08-.82,4.08.2.19Z"/><path d="M72.02,0h5.58l1.08,1.04v10.67l-1.08,1.06h-5.58l.24-.82V.81l-.24-.81ZM74.39,10.37l.25.25h1.63l.25-.25V2.35l-.25-.25h-1.63l-.25.25v8.01Z"/><g class="kl-kids"><path d="M20.64,20.43l-.05-.76c-.14-.68-.29-.86-.52-.86-.15.21-.17.55-.17,1.02,0,.5.12,1.46.22,2.59.17-.05.5-.05.72-.1l.83-.16c.34.54.43,1.06.36,1.61-1.11.23-1.13.18-1.77.32l.02.36c.02.5.06,1,.1,1.5.06.93.12,1.67.21,2.17.02.13.11.56.12.7-.56.28-1.36.37-2.17.29,0-.28-.1-1.54-.1-1.54l-.09-1.06s-.07-1.2-.13-2.15c-.2.01-.73.05-.87.07-.15-.28-.2-.65-.2-.91,0-.12-.05-.48-.02-.83h1.01s-.1-1.49-.1-1.49c-.06-.8-.1-1.29-.1-1.51,0-1.83.64-2.73,1.92-2.73.27,0,.56.05.85.14.58.2.98.58,1.28,1.14.12.26.34,1.01.55,1.63l-.26.18c-.29.22-.84.33-1.65.36Z"/><path d="M27.68,26.25c-.54.7-1.24,1.08-2.16,1.08s-1.73-.38-2.32-1.13c-.58-.71-.72-1.44-.72-2.26,0-1.42,1.01-2.86,2.8-2.86,1.29,0,2.9,1,2.95,3.01-.01.75-.06,1.51-.54,2.16ZM25.12,22.86c-.48,0-.69.56-.69.85,0,.7.49,1.71,1.09,1.71s.82-.53.82-.86c0-.17-.04-.38-.09-.61-.14-.5-.66-1.08-1.14-1.08Z"/><path d="M34.36,23.78s-1.28.23-1.88.23l.04-.91c0-.21-.06-.45-.22-.42-.31.07-.45.16-.95.71l-.29.44c-.01.48-.05,1.02-.02,1.57.01.58,0,.66.1,2.1l-2.26-.04v-.98c.09-1.42.14-2.16.1-3.84-.01-.66-.04-.98-.1-1.68.48-.21,2.05-.39,2.05-.39.02.53.07,1.15.07,1.15.27-.25.92-.96,1.3-1.01.64-.09,1.06.09,1.44.5.36.36.61,1.23.6,1.76l.02.8Z"/><path d="M43.32,21.46h.01l-1.44,1.18h.01c-.1.07-.38.26-.77.5h.01s-.18.11-.18.11c.59.63.95,1.03,1.12,1.19.57.59,1.09,1.08,1.56,1.46l.97.81c-.09.37-.18.7-.32.96-.16.31-.41.58-.65.77l-1.36-1.22c-.43-.39-1.36-1.45-1.82-2.11-.02.7,0,1.84-.04,2.33-.01.16.01.75,0,.86-.75.2-1.44.15-2.09-.18l.05-.69c.01-1.36.05-2.74.06-4.11,0-.36.02-.95.07-1.74.04-.81.05-2.74.05-3.12.77-.18,1.47-.17,2.09-.04l-.17,2.81c.55-.39,1.36-.95,2.12-1.65l.66-.6c.64.44,1.07.93,1.3,1.41l-.61.5-.64.55Z"/><path d="M45.58,23.67c0-.1-.01-.22-.01-.33-.04-.66-.28-3.59-.36-4.37.74-.21,1.82-.18,2.21-.12.09.6.02,1.2.09,1.88.06.74.07,1.9.15,3.03.05.79.13,2.76.2,3.56l-2.14.05-.05-1.74c-.04-.79-.05-1.42-.09-1.95Z"/><path d="M54.24,25.58c-.61,1.09-2.43,1.87-4.45,2.35l-1.11-6.55c-.21.06-.45.1-.64.14-.18-.43-.25-.77-.28-.98-.02-.11-.07-.37-.06-.82.53-.11,1.45-.31,1.65-.33,1.42-.25,2.75-.17,3.59.31.68.41,1.46,1.46,1.65,2.69.18,1.27.05,2.46-.34,3.21ZM51.81,21.38c-.31-.17-.75-.25-1.17-.26.27,1.54.47,2.65.79,4.29.26-.12.88-.23,1.02-.74.17-.47.25-1.11.05-2.17-.1-.6-.5-.99-.69-1.12Z"/><path d="M61.02,27.08h.01c-.25.52-.61.95-1.15,1.35-.48.36-1.03.54-1.68.54s-1.27-.18-1.82-.58h.01c-.28-.18-1.06-1.27-1.01-2.36,0-.14.03-.59.03-.72.76-.25,1.44-.27,2.06-.07l-.03.72c-.02.36,0,.82.01.87.09.27.52.31.6.32.14.01.34-.13.61-.42.2-.2.28-.36.43-.66.09-.21.15-.5.15-.87,0-.21-.05-.52-.09-.57-.17-.22-.5-.29-1.01-.38-.8-.11-1.61-.34-2.08-.93-.28-.36-.39-.69-.44-1.02-.02-.23-.02-.52-.02-.81v-.2c0-.81.09-1.84.66-2.52.56-.63,1.34-.82,2.17-.77.98.09,1.67.34,1.98.72h-.01c.33.39.52.84.55,1.33v1.3l-2.05-.02v-1.2c-.01-.1-.02-.2-.04-.21-.18-.13-.41-.15-.52-.15-.18,0-.34.1-.52.29-.15.17-.2.7-.2,1.13,0,.23.04.52.11.76.09.31.32.45.66.5,1.24.18,2.12.54,2.51,1.01.32.41.52.98.52,1.73,0,.66-.15,1.3-.43,1.88Z"/></g></svg></a>
   <nav class="tb-nav" aria-label="Main"><a href="./">Today</a><a href="progress.html">Progress</a><a href="about.html">About</a><a class="tb-classic" href="../">Classic</a><a class="tb-give-m" href="../give.html">Give</a></nav>
-  <div class="tb-end">
-  <a class="tb-give" href="../give.html">Give</a>
-  </div>
+  <div class="tb-end"><a class="tb-give" href="../give.html">Give</a></div>
 </header>
 
-<main class="reader" id="reader">
-  <div class="deeper-page" id="deeper"><p class="status">Loading…</p></div>
-  <footer class="reader-footer">
-    <p class="credits" id="credits"><a href="about.html">About Daily Bread for Kids</a> · <a href="../give.html">Support this ministry</a>. The biblical text is presented in a classic English translation style, built on the solid scholarship of the Berean Standard Bible (BSB), with its translation notes. “Did you know?” and the questions are from the Daily Bread for Kids journal © 2026 John Enarson; Scripture quoted there is from the New American Standard Bible® (NASB), © The Lockman Foundation, used by permission.
-      Hebrew: Miqra according to the Masorah, from
-      <a href="https://en.wikisource.org/wiki/User:Dovi/Miqra_according_to_the_Masorah#beginning" rel="noopener">Hebrew Wikisource</a>
-      (as published on Sefaria), <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>.
-      Greek: SBL Greek New Testament, copyright 2010 Society of Biblical Literature and Logos Bible Software,
-      <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>, with its textual apparatus.
-      Hebrew New Testament: Franz Delitzsch (8th ed., 1885), vowel pointing © 2003 Streams in the Negev, free for non-commercial use, via <a href="https://github.com/HebrewNewTestament/HebDelitzsch" rel="noopener">HebDelitzsch</a>.
-      Word study: <a href="https://www.stepbible.org" rel="noopener">STEPBible.org</a> (Tyndale House, Cambridge), CC BY 4.0.
-      Fonts: SBL Hebrew and SBL Greek, Tiro Typeworks / Society of Biblical Literature.
-      Jewish calendar and Shabbat times: <a href="https://www.hebcal.com/" rel="noopener">Hebcal.com</a>, CC BY 4.0. Parts of this site were prepared with the help of large language models. If you find a mistake, please <a href="../contact.html">let us know</a>.</p>
-    <button type="button" class="credits-more" aria-controls="credits" aria-expanded="false">more</button>
-  </footer>
-</main>
+<!-- 1 · Word study -->
+<section class="ab-sec ab-photo dp-hero" id="words-top">
+  <div class="ab-photo-bg" aria-hidden="true"></div>
+  <div class="ab-in">
+    <p class="ab-eyebrow rv">Dig deeper · <span id="dp-when"></span></p>
+    <h1 class="ab-h rv d1">Two words. <em>Can you read them?</em></h1>
+    <p class="ab-p rv d2">One word in Hebrew and one in Greek, from today’s readings, in the languages they were first written in.
+      Make a guess, then reveal the meaning and the verse where you read it today.</p>
+    <div class="ab-btns rv d3" style="justify-content:flex-start">
+      <a class="ab-btn primary" href="#words">Word study</a>
+      <a class="ab-btn cm-only" href="#commentary">Commentary</a>
+    </div>
+  </div>
+</section>
 
-<script src="../assets/deeper.js?v=4b4a4b39"></script>
+<section class="ab-sec tint dp-sec" id="words">
+  <div class="ab-in dp-col">
+    <p class="ab-eyebrow rv">Word study</p>
+    <div id="deeper" class="rv d1"><p class="status">Loading…</p></div>
+  </div>
+</section>
+
+<!-- 2 · Commentary -->
+<section class="ab-sec ab-photo cm-hero cm-only" id="commentary">
+  <div class="ab-photo-bg" aria-hidden="true"></div>
+  <div class="ab-in">
+    <p class="ab-eyebrow rv" id="cm-eyebrow">Commentary</p>
+    <h2 class="ab-h rv d1" id="cm-hero-title"></h2>
+    <p class="ab-p rv d2" id="cm-hero-from"></p>
+  </div>
+</section>
+
+<section class="ab-sec dp-sec cm-only">
+  <div class="ab-in dp-col" id="cm-body"></div>
+</section>
+
+<!-- 3 · Keep going -->
+<section class="ab-sec tint dp-sec dp-more cm-only">
+  <div class="ab-in ab-two">
+    <div>
+      <p class="ab-eyebrow rv">Keep reading · Lars Enarson</p>
+      <h2 class="ab-h rv d1">The whole portion, <em>every week.</em></h2>
+      <p class="ab-p rv d2"><em>Messiah in the Torah</em> goes through every Torah portion of the year. In the Daily Bread Torah Class,
+        Lars introduces each week’s portion, this week <em id="cm-portion"></em>, in a short video lesson.</p>
+      <div class="ab-btns rv d3" style="justify-content:flex-start">
+        <a class="ab-btn primary" href="https://arielmedia.shop/products/torah-2vol-set-te" rel="noopener">Get the commentary</a>
+        <a class="ab-btn" href="https://www.larsenarson.com/torah" rel="noopener">Try the Torah Class free</a>
+      </div>
+    </div>
+    <figure class="ln-book rv d2" style="margin:0 auto;max-width:320px"><a href="learn.html#messiah-in-the-torah"><picture><source srcset="assets/img/messiah-in-the-torah.webp" type="image/webp">
+      <img src="../assets/img/messiah-in-the-torah.png" width="760" height="1051" loading="lazy" decoding="async" style="display:block;width:100%;height:auto"
+      alt="Messiah in the Torah, Volumes I and II, by Lars Enarson"></picture></a></figure>
+  </div>
+</section>
+
+<section class="dp-sec" style="padding-top:56px"><p class="dp-back"><a id="dp-back" href="./">&larr; Back to today’s readings</a></p></section>
+
+<footer class="ab-foot">
+  <div class="ab-in">
+    <span>Daily Bread Online · Published by <a href="https://arielmedia.shop" rel="noopener">Ariel Media</a> · Word study: <a href="https://www.stepbible.org" rel="noopener">STEPBible.org</a>, CC BY 4.0 · Commentary © Lars Enarson, used by permission · <a href="../contact.html">Contact</a></span>
+  </div>
+</footer>
+
+<script src="../assets/deeper.js?v=6517cbed"></script>
 <script>
-  /* Footer credits: "more" opens the full list */
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('.credits-more'); if (!b) return;
-    var f = b.closest('.reader-footer'), open = !f.classList.contains('is-open');
-    f.classList.toggle('is-open', open); b.setAttribute('aria-expanded', String(open)); b.textContent = open ? 'less' : 'more';
-  });
+  (function () {
+    function reveal() {
+      var els = document.querySelectorAll('.rv:not(.in)');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    }
+    reveal();
+    document.addEventListener('deeper-ready', reveal);
+  })();
+  // Gentle parallax for the photo sections
+  (function () {
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var bgs = Array.prototype.slice.call(document.querySelectorAll('.ab-photo-bg')), ticking = false;
+    function move() {
+      ticking = false;
+      var vh = window.innerHeight;
+      bgs.forEach(function (bg) {
+        var r = bg.parentNode.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        var t = (r.top + r.height / 2 - vh / 2) / (vh + r.height);
+        bg.style.transform = 'translate3d(0,' + (t * 0.2 * r.height).toFixed(1) + 'px,0)';
+      });
+    }
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(move); } }, { passive: true });
+    window.addEventListener('resize', move);
+    move();
+  })();
 </script>
 </body>
 </html>

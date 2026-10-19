@@ -1,5 +1,5 @@
 {
- "note": "Excerpts from Lars Enarson, Messiah in the Torah (Ariel Media), one per Torah portion, shown on the Dig deeper page in the weeks of that portion. Keyed by the parasha name used in data/days/*.json.",
+ "note": "Excerpts from Lars Enarson, Messiah in the Torah (Ariel Media), one per Torah portion, shown on the Dig deeper page in the weeks of that portion. Keyed by the parasha name used in data/days/*.json. Optional \"image\": the photo for the commentary section (assets/img/<image>.jpg and <image>-sm.jpg); without it a general image is used.",
  "portions": {
   "Lech Lecha": {
    "title": "Abraham Was a Soul Winner",
@@ -49,7 +49,8 @@
      "t": "It is never too late to begin making disciples. On the contrary, the older we get the more wisdom we have to give others. One of the rabbis in the time of Yeshua said, “Be scrupulous in your tithing and make many disciples!” These are good rules to follow. Abraham and Sarah did both. They tithed (Gen 14:20), and they had many disciples (Gen 14:14)."
     }
    ],
-   "book": "Messiah in the Torah, Vol. I"
+   "book": "Messiah in the Torah, Vol. I",
+   "image": "deeper-caravan"
   },
   "Vayera": {
    "title": "The Binding of Isaac",
@@ -116,7 +117,8 @@
      "t": "Among the Jewish people, this whole passage is called “the binding of Isaac” or just “the binding.” The Hebrew word that is used is akedah (עֲקֵדָה). This is the only time that this form of the word occurs in the Scriptures. According to Rashi, the word means that the hands and feet of Isaac were tied behind his back and they were tied so hard that it left marks on Isaac’s hands and feet. It is obvious that the old man Abraham could not have done this to Isaac without his consent. He submitted to his father all the way unto death. The binding of Isaac was a unique event pointing forward to the most unique event in human history: the sacrifice of Messiah at Golgotha!"
     }
    ],
-   "book": "Messiah in the Torah, Vol. I"
+   "book": "Messiah in the Torah, Vol. I",
+   "image": "deeper-ram"
   },
   "Chayei Sarah": {
    "title": "Sarah’s Death",
@@ -186,7 +188,8 @@
      "t": "We will look closer at this prophetic picture later."
     }
    ],
-   "book": "Messiah in the Torah, Vol. I"
+   "book": "Messiah in the Torah, Vol. I",
+   "image": "deeper-mourning"
   },
   "Toldot": {
    "title": "The Birth Right",
@@ -220,7 +223,9 @@
      "t": "Esau, however, never repented. He simply added one more wife to his harem. The unholy and sexually immoral son of Isaac married the daughter of the unholy and sexually immoral son of Abraham. This marriage only made the situation worse, but Esau did not understand this. He was completely ignorant of spiritual things."
     }
    ],
-   "book": "Messiah in the Torah, Vol. I"
+   "book": "Messiah in the Torah, Vol. I",
+   "image": "deeper-esau",
+   "em": "Birth Right"
   },
   "Vayetze": {
    "title": "God’s Unshakable Promise to Jacob",

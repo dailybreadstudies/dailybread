@@ -104,15 +104,30 @@
         }).join('');
   }
   var RICH = document.body.classList.contains('dp-rich');
+  var IMG = (document.body.getAttribute('data-edition') === 'kids' ? '../' : '') + 'assets/img/';
+  function photo(id, name) {
+    var bg = document.querySelector('#' + id + ' .ab-photo-bg');
+    if (!bg || !name) return;
+    var small = window.innerWidth * (window.devicePixelRatio || 1) <= 1100;
+    bg.style.backgroundImage = 'url(' + IMG + name + (small ? '-sm' : '') + '.jpg)';
+    bg.classList.add('has-photo');
+  }
   function drawRich(day, picks, lex, books, names, comm, when) {
     function set(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
     set('dp-when', esc(when));
+    // Photos: the word study rotates by day; the commentary has its own photo for the portion, or a general one
+    var cImg = comm ? (comm.image || 'deeper-scrolls') : '';
+    var wImgs = ['deeper-scribe', 'deeper-scribe2', 'deeper-scrolls'].filter(function (n) { return n !== cImg; });
+    var dayNo = Math.round(new Date(date + 'T12:00:00').getTime() / 864e5);
+    photo('words-top', wImgs[dayNo % wImgs.length]);
+    if (comm) photo('commentary', cImg);
     box.innerHTML = picks.length ? cardsHtml(day, picks, lex, books, names) : '<p class="status">There is no word study for this day yet.</p>';
     var cs = document.querySelectorAll('.cm-only');
     cs.forEach(function (el) { el.hidden = !comm; });
     if (comm) {
       set('cm-eyebrow', 'Commentary · <em>' + esc(day.parsha.name) + '</em>');
-      set('cm-hero-title', esc(comm.title).replace(/^(.*?)(\S+\s+\S+)$/, '$1<em>$2</em>'));
+      var tw = esc(comm.title).split(' '), k = comm.em ? comm.em.split(' ').length : tw.length > 3 ? 2 : 1;   // the last word or two in italics, as on the About pages ('em' in the data overrides)
+      set('cm-hero-title', tw.slice(0, -k).join(' ') + ' <em>' + tw.slice(-k).join(' ') + '</em>');
       set('cm-hero-from', 'An excerpt from Lars Enarson’s commentary on <em>' + esc(day.parsha.name) + '</em>, from <em>Messiah in the Torah</em>, Vol. I.');
       var first = true;
       set('cm-body', comm.blocks.map(function (b) {

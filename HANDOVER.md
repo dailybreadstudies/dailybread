@@ -88,6 +88,14 @@ a Soul Winner”), Vayera (“The Binding of Isaac”, first part), Chayei Sarah
 Vayetze (“God’s Unshakable Promise to Jacob”), Vayishlach (“Jacob Wrestles with God”), Vayeshev (“Joseph Is Rejected
 by His Brothers”), Miketz (“Joseph Is Exalted”), taken from the textbook PDF with pdftotext -layout; check Hebrew words by hand when adding more.
 
+**Layout (Oct 2026):** deeper.html is styled like the About/Learn pages (its own inline styles, `body.dp-rich`): a photo
+section with the word study cards below, then (Classic, weeks with commentary) a photo section with the commentary title,
+the text with a drop cap, and a “Keep reading” section with the book and Torah Class buttons. Photos are set by
+assets/deeper.js: the word study rotates by day through deeper-scribe, deeper-scribe2 and deeper-scrolls; the commentary
+uses the portion’s `image` in data/commentary.json (Lech Lecha caravan, Vayera ram, Chayei Sarah mourning, Toldot Esau),
+else deeper-scrolls. Each photo is a 1920 px JPG (quality ~70–74) plus a 960 px `-sm` version for phones. To add a
+portion photo: save both sizes in assets/img/ and set `"image"` (and optionally `"em"`, the words of the title in italics).
+
 ## Settings menu (A/א) — four groups
 Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;
 the two are then labelled Gospels (Matthew–Acts) / Epistles (Romans–Revelation). The optional reading is always last in
