@@ -169,7 +169,7 @@
     picks.forEach(function (p) { books[p.ref.split(' ')[0]] = 1; });
     return Promise.all(Object.keys(books).map(function (b) { return getJSON('data/bsb/' + b + '.json').then(function (j) { books[b] = j; }); }))
       .then(function () {
-        // Rich layout (marketing-style page with photo sections, see deeper-test.html): the page carries its own headings
+        // Rich layout (marketing-style page with photo sections, deeper.html): the page carries its own headings
         if (RICH) return drawRich(day, picks, lex, books, names, comm, when);
         var html = '<p class="dp-eyebrow">' + esc(when) + '</p>' +
           '<h1 class="dp-title">Dig deeper</h1>' +
