@@ -1004,10 +1004,10 @@
       var when = date === todayISO() ? 'today’s readings' : 'the readings for ' + shortDate(date);
       box.innerHTML = '<p class="dd-title">' + (KIDS ? 'Great job!' : 'Well done!') + '</p>' +
         '<p class="dd-text">' + (KIDS ? 'You finished ' + when + ': ' : 'You have finished ' + when + ': ') + list + '.</p>' +
+        // Dig deeper: Word study now; a short Torah commentary later
         '<div class="dd-deeper" hidden><p class="dd-h">Dig deeper</p>' +
-        '<button type="button" class="dd-opt" data-deeper="words" aria-expanded="false"><b>Word study</b>' +
-        '<span>' + (KIDS ? 'Meet a Hebrew word and a Greek word from today’s reading' : 'One Hebrew and one Greek word from today’s readings') + '</span></button></div>' +
-        '<div class="dd-words" hidden></div>';
+        '<a class="dd-opt" href="deeper.html?d=' + date + '"><b>Word study</b>' +
+        '<span>' + (KIDS ? 'A Hebrew word and a Greek word from today’s reading' : 'One Hebrew and one Greek word from today’s readings') + '</span></a></div>';
       box.setAttribute('data-for', date);
       box.hidden = false;
       wordPicks().then(function (all) {
@@ -1015,64 +1015,6 @@
       });
     });
   }
-  function translit(t) { return String(t || '').replace(/\./g, '·').replace(/_/g, ' '); }
-  function shortDef(d) {
-    d = String(d || '').replace(/\s+/g, ' ').trim();
-    d = d.split(/;\s*\d+[a-z]?\)|\s\d\)\s/)[0];          // the first sense only
-    if (d.length > 200) d = d.slice(0, 200).replace(/[,;:]?\s+\S*$/, '') + '…';
-    return d;
-  }
-  function showWordStudy(btn) {
-    var box = btn.closest('.day-done'), out = box.querySelector('.dd-words'), date = box.getAttribute('data-for');
-    var open = btn.getAttribute('aria-expanded') !== 'true';
-    btn.setAttribute('aria-expanded', String(open));
-    out.hidden = !open;
-    if (!open || out.innerHTML) return;
-    out.innerHTML = '<p class="status">Loading…</p>';
-    Promise.all([wordPicks(), loadLex('he'), loadLex('grc')]).then(function (res) {
-      var picks = res[0][date] || [], lex = { he: res[1], grc: res[2] };
-      out.innerHTML = picks.map(function (p) {
-        var e = lex[p.lang][p.s] || [], ref = p.ref.split(' '), cv = ref[1].split(':');
-        var n = 0;
-        current.day.portions.forEach(function (x, i) { if (!n && x.ref.split(' ')[0] === ref[0]) n = i + 1; });
-        var label = n ? current.day.portions[n - 1].label : '';
-        var here = String(p.here || '').replace(/\//g, ' ').replace(/[<>\[\]]/g, '').replace(/\s+/g, ' ').trim();
-        return '<article class="ws">' +
-          '<p class="ws-lang">' + (p.lang === 'he' ? 'Hebrew' : 'Greek') + (label ? ' · from the ' + escapeAttr(label) + ' reading' : '') + '</p>' +
-          '<p class="ws-lemma ' + p.lang + '" lang="' + p.lang + '"' + (p.lang === 'he' ? ' dir="rtl"' : '') + '>' + escapeAttr(e[0] || '') + '</p>' +
-          '<p class="ws-tr">' + escapeAttr(translit(e[1])) + ' <span class="ws-gloss">' + escapeAttr(e[2] || '') + '</span></p>' +
-          (e[3] && p.lang === 'he' ? '<p class="ws-def">' + escapeAttr(shortDef(e[3])) + '</p>' : '') +   // the Greek lexicon entries are too technical here
-          '<p class="ws-where">In <button type="button" class="link-btn" data-jump="' + n + '|' + cv[0] + '|' + cv[1] + '">' +
-            escapeAttr(labelRef(ref[0], +cv[0]) + ':' + cv[1]) + '</button>, translated “' + escapeAttr(here) + '”. ' +
-            'Used ' + p.n + ' times in the Bible.</p>' +
-          '<a class="ws-more" href="https://www.stepbible.org/?q=strong=' + p.s + '" target="_blank" rel="noopener">See every use on STEPBible &rarr;</a>' +
-          '</article>';
-      }).join('') || '<p class="status">No word study for this day yet.</p>';
-    });
-  }
-  // Jump to the verse a word study word comes from, and flash it
-  function jumpToVerse(n, c, v) {
-    if (!n) return;
-    goTo(n, false);
-    var sec = document.getElementById('portion-' + n), ch = null;
-    if (!sec) return;
-    var first = parseRef(current.day.portions[n - 1].ref).c1, at = first, hit = null;
-    sec.querySelectorAll('.chapter-num, .verse-num').forEach(function (el) {
-      if (hit) return;
-      if (el.classList.contains('chapter-num')) { at = parseInt(el.textContent, 10) || at; return; }
-      if (at === c && +el.getAttribute('data-v') === v) hit = el;
-    });
-    if (!hit) return;
-    hit.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    var block = hit.closest('.scripture > *') || hit.parentNode;
-    block.classList.remove('ws-flash'); void block.offsetWidth; block.classList.add('ws-flash');
-  }
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('[data-deeper="words"]');
-    if (b) { showWordStudy(b); return; }
-    var j = e.target.closest && e.target.closest('[data-jump]');
-    if (j) { var p = j.getAttribute('data-jump').split('|'); jumpToVerse(+p[0], +p[1], +p[2]); }
-  });
 
   // ── Progress page (progress.html) ──
   function drawProgressPage() {

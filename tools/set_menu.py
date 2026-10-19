@@ -12,7 +12,7 @@ import re
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 MENU = [('./', 'Today', 'index.html'), ('progress.html', 'Progress', 'progress.html'), ('listen.html', 'Listen', 'listen.html'),
         ('learn.html', 'Learn', 'learn.html'), None, ('about.html', 'About', 'about.html'), ('kids/', 'Kids', None)]
-PAGES = ['index.html', 'progress.html', 'learn.html', 'listen.html', 'about.html', 'contact.html', 'give.html', 'maps-test.html']
+PAGES = ['index.html', 'progress.html', 'learn.html', 'listen.html', 'about.html', 'contact.html', 'give.html', 'maps-test.html', 'deeper.html']
 
 
 def nav(page):

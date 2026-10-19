@@ -3,9 +3,9 @@
 
     python3 tools/make_kids_pages.py
 
-kids/index.html and kids/progress.html are copies of index.html and progress.html with the Kids logo, menu,
+kids/index.html, kids/progress.html and kids/deeper.html are copies of index.html, progress.html and deeper.html with the Kids logo, menu,
 fonts (assets/kids.css) and storage keys, so any change to the Classic reader carries over. Run it again after
-editing index.html or progress.html. kids/about.html is written by hand.
+editing index.html, progress.html or deeper.html. kids/about.html is written by hand.
 """
 import os
 import re
@@ -76,7 +76,7 @@ def kidsify(html, page):
 
 def main():
     os.makedirs(KIDS, exist_ok=True)
-    for src, dst, page in (('index.html', 'index.html', 'today'), ('progress.html', 'progress.html', 'progress')):
+    for src, dst, page in (('index.html', 'index.html', 'today'), ('progress.html', 'progress.html', 'progress'), ('deeper.html', 'deeper.html', 'deeper')):
         html = open(os.path.join(ROOT, src), encoding='utf-8').read()
         out = kidsify(html, page)
         if out.startswith('<!--'):

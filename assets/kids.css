@@ -123,6 +123,10 @@ html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb1: #e3a2cd; --bb3: #F9CE7A; }
   html.kids:not([data-theme="light"]):not([data-theme="sepia"]) .bs-bk.ten .bs-band { stroke: #102221; } }
 html.kids[data-theme="dark"] .bs-bk.ten text { fill: #102221; }
 html.kids[data-theme="dark"] .bs-bk.ten .bs-band { stroke: #102221; }
-/* Day complete */
-.kids .dd-title { font-family: var(--kid-font); font-weight: 700; font-size: 1.7rem; }
-.kids .dd-h, .kids .dd-opt b, .kids .ws-lang { font-family: var(--kid-font); font-weight: 700; letter-spacing: 0.08em; }
+/* Day complete and Dig deeper: "Great job!" in teal (--done is black on Kids) */
+.kids .dd-title { font-family: var(--kid-font); font-weight: 700; font-size: 1.7rem; color: var(--kid-teal); }
+.kids .dd-h, .kids .dd-opt b, .kids .dp-h, .kids .dp-eyebrow, .kids .wc-lang, .kids .wc-reveal { font-family: var(--kid-font); font-weight: 700; letter-spacing: 0.08em; }
+.kids .dp-title { font-family: var(--kid-font); font-weight: 700; letter-spacing: -0.01em; }
+.kids .wc-gloss { font-family: var(--kid-font); font-weight: 700; color: var(--kid-teal); }
+.kids .wc-reveal { font-size: 1rem; letter-spacing: 0.02em; }
+.kids .wc-verse mark { background: var(--kid-gold); color: #1f1f1f; box-shadow: none; }

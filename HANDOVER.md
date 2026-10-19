@@ -73,11 +73,15 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
    to the next unfinished reading after ~1 s), plus the journal line after the last reading.
 
 ## Day complete → Dig deeper
-When every reading of a day is marked complete, the end of each reading shows “Well done!” (Kids: “Great job!”) and a
-**Dig deeper** option: a word study with one Hebrew word (Torah) and one Greek word (Apostles/Gospels), with its meaning,
-where it is in today’s text (tap to jump there) and how often it is used. Words are picked per day by
-`python3 tools/build_word_picks.py` → `data/word-picks.json`, `data/kids/word-picks.json`; choose a word by hand in
-`tools/word-picks-fixed.json`. Planned next option: a short section of Lars Enarson’s weekly Torah commentary.
+When every reading of a day is marked complete, “Well done!” (in the blue `--done` colour; Kids: “Great job!” in teal)
+appears right under the “All 4 readings done” line, and below a rule a **Dig deeper** link: *Word study* opens
+`deeper.html?d=DATE` (Kids: `kids/deeper.html`, made by `tools/make_kids_pages.py`; page script `assets/deeper.js`).
+There, one Hebrew word (Torah) and one Greek word (Apostles/Gospels) are shown as cards, one under the other: the word and
+its transliteration first, so the reader can guess, then “Reveal the meaning” shows the gloss, a short definition
+(Hebrew only), the verse with the word marked, how often it is used, a link to the reading and STEPBible. Words are picked
+per day by `python3 tools/build_word_picks.py` → `data/word-picks.json`, `data/kids/word-picks.json`; choose a word by
+hand in `tools/word-picks-fixed.json`. Planned next option on the same page: *Commentary*, a short section of Lars
+Enarson’s weekly Torah commentary.
 
 ## Settings menu (A/א) — four groups
 Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;
