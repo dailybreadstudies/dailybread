@@ -61,6 +61,26 @@
     return html;
   }
 
+  // Commentary: a section of Lars Enarson's Messiah in the Torah for the week's portion (data/commentary.json), Classic only
+  function lordify(t) { return t.replace(/\bLORD\b/g, '<span class="lord">Lord</span>'); }
+  function commentaryHtml(c, parsha) {
+    return '<section class="dp-comm" id="commentary">' +
+      '<h2 class="dp-h">Commentary</h2>' +
+      '<p class="cm-from">From Lars Enarson’s commentary on <em>' + esc(parsha) + '</em></p>' +
+      '<h3 class="cm-title">' + esc(c.title) + '</h3>' +
+      c.blocks.map(function (b) {
+        var t = lordify(esc(b.t));
+        return b.k === 'q' ? '<blockquote class="cm-q"><p>' + t + '</p></blockquote>' : '<p class="cm-p">' + t + '</p>';
+      }).join('') +
+      (c.excerpt ? '<p class="cm-p cm-more">…</p>' : '') +
+      '<aside class="cm-end"><p>This is an excerpt from Lars Enarson’s commentary on <em>' + esc(parsha) + '</em> in ' +
+      '<em>Messiah in the Torah</em>, Vol. I. The book goes through every Torah portion of the year, and in the Daily Bread Torah Class ' +
+      'Lars introduces each week’s portion in a short video lesson.</p>' +
+      '<p class="cm-links"><a href="learn.html#messiah-in-the-torah">Messiah in the Torah &rarr;</a>' +
+      '<a href="learn.html#torah-class">Try the Torah Class two weeks free &rarr;</a></p></aside>' +
+      '</section>';
+  }
+
   var date = new URLSearchParams(location.search).get('d') || today();
   var DATA = KIDS ? 'data/kids/' : 'data/';
   Promise.all([
@@ -68,9 +88,11 @@
     getJSON(DATA + 'word-picks.json'),
     getJSON('data/words/lex-he.json'),
     getJSON('data/words/lex-grc.json'),
-    getJSON('data/bsb/index.json')
+    getJSON('data/bsb/index.json'),
+    KIDS ? Promise.resolve({}) : getJSON('data/commentary.json').catch(function () { return {}; })
   ]).then(function (res) {
     var day = res[0], picks = res[1][date] || [], lex = { he: res[2], grc: res[3] };
+    var comm = day.parsha && (res[5].portions || {})[day.parsha.name];
     var names = {};
     res[4].forEach(function (b) { names[b.id] = b.name === 'Song' ? 'Song of Songs' : b.name === 'Psalm' ? 'Psalms' : b.name; });
     var d = new Date(date + 'T12:00:00');
@@ -108,8 +130,11 @@
               '<a href="https://www.stepbible.org/?q=strong=' + esc(p.s) + '" target="_blank" rel="noopener">Every use on STEPBible &rarr;</a></p>' +
             '</div></article>';
         }).join('');
+        if (comm) html += commentaryHtml(comm, day.parsha.name);
         html += '<p class="dp-back"><a href="./?d=' + date + '">&larr; Back to ' + (date === today() ? 'today’s readings' : 'the readings') + '</a></p>';
         box.innerHTML = html;
+        var at = location.hash && document.getElementById(location.hash.slice(1));
+        if (at) at.scrollIntoView();
       });
   }).catch(function (err) {
     box.innerHTML = '<p class="status">Sorry, this page could not be loaded. (' + esc(err.message) + ')</p>' +

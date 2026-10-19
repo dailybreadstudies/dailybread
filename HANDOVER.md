@@ -80,8 +80,12 @@ There, one Hebrew word (Torah) and one Greek word (Apostles/Gospels) are shown a
 (no transliteration), so the reader can practise reading it and guess, then “Reveal the meaning” shows the transliteration, the gloss, a short definition
 (Hebrew only), the verse with the word marked, how often it is used, a link to the reading and STEPBible. Words are picked
 per day by `python3 tools/build_word_picks.py` → `data/word-picks.json`, `data/kids/word-picks.json`; choose a word by
-hand in `tools/word-picks-fixed.json`. Planned next option on the same page: *Commentary*, a short section of Lars
-Enarson’s weekly Torah commentary.
+hand in `tools/word-picks-fixed.json`. **Commentary** (Classic only): in weeks listed in `data/commentary.json` (keyed by the parasha name in the day files),
+the page also shows one section of Lars Enarson’s *Messiah in the Torah*, Vol. I, ending with a short note pointing to
+the book and the Torah Class (learn.html). The Dig deeper box then shows a second option, “Commentary”
+(`deeper.html?d=DATE#commentary`). Weeks without an entry show only the word study. Now filled: Lech Lecha (“Abraham Was
+a Soul Winner”), Vayera (“The Binding of Isaac”, first part), Chayei Sarah (“Sarah’s Death”), Toldot (“The Birth Right”),
+taken from the textbook PDF with pdftotext -layout; check Hebrew words by hand when adding more.
 
 ## Settings menu (A/א) — four groups
 Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;

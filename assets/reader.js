@@ -992,6 +992,11 @@
   function wordPicks() {
     return picksP || (picksP = getJSON((KIDS ? 'data/kids/' : 'data/') + 'word-picks.json').catch(function () { picksP = null; return {}; }));
   }
+  var commP = null;
+  function commentary() {   // data/commentary.json: one section of Messiah in the Torah for some Torah portions (Classic only)
+    if (KIDS) return Promise.resolve({});
+    return commP || (commP = getJSON('data/commentary.json').then(function (j) { return j.portions || {}; }).catch(function () { commP = null; return {}; }));
+  }
   function drawDayDone(date) {
     var boxes = document.querySelectorAll('.day-done');
     var done = dayComplete(date);
@@ -1002,13 +1007,19 @@
       box.innerHTML = '<p class="dd-title">' + (KIDS ? 'Great job!' : 'Well done!') + '</p>' +
         '<p class="dd-text">' + (KIDS ? 'You finished all the readings for ' : 'You have finished all the readings for ') + when + '.</p>' +
         // Dig deeper: Word study now; a short Torah commentary later
-        '<div class="dd-deeper" hidden><p class="dd-h">Dig deeper</p>' +
+        '<div class="dd-deeper" hidden><p class="dd-h">Dig deeper</p><div class="dd-opts">' +
         '<a class="dd-opt" href="deeper.html?d=' + date + '"><b>Word study</b>' +
-        '<span>' + (KIDS ? 'A Hebrew word and a Greek word from today’s reading' : 'One Hebrew and one Greek word from today’s readings') + '</span></a></div>';
+        '<span>' + (KIDS ? 'A Hebrew word and a Greek word from today’s reading' : 'One Hebrew and one Greek word from today’s readings') + '</span></a>' +
+        '<a class="dd-opt dd-comm" href="deeper.html?d=' + date + '#commentary" hidden><b>Commentary</b>' +
+        '<span>' + (current.day.parsha ? 'A section of Lars Enarson’s commentary on ' + escapeAttr(current.day.parsha.name) : '') + '</span></a></div></div>';
       box.setAttribute('data-for', date);
       box.hidden = false;
-      wordPicks().then(function (all) {
-        if ((all[date] || []).length && box.getAttribute('data-for') === date) box.querySelector('.dd-deeper').hidden = false;
+      Promise.all([wordPicks(), commentary()]).then(function (res) {
+        if (box.getAttribute('data-for') !== date) return;
+        var words = (res[0][date] || []).length, comm = !KIDS && current.day.parsha && res[1][current.day.parsha.name];
+        if (comm) box.querySelector('.dd-comm').hidden = false;
+        if (!words) box.querySelector('.dd-opt').hidden = true;
+        if (words || comm) box.querySelector('.dd-deeper').hidden = false;
       });
     });
   }

@@ -259,10 +259,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .dd-text { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); margin: 0 auto; max-width: 30em; }
 .dd-deeper { margin: 1.6rem 0 0; padding: 1.4rem 0 0; border-top: 1px solid var(--rule); }
 .dd-h { font: 600 0.72rem/1.4 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.7rem; }
+.dd-opts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .dd-opt { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 22px; border: 1px solid var(--line-strong);
   border-radius: 14px; background: var(--surface); color: var(--ink); text-decoration: none; }
 .dd-opt b { font: 600 0.84rem var(--sans); letter-spacing: 0.06em; color: var(--accent); }
 .dd-opt span { font: 400 0.8rem/1.4 var(--sans); color: var(--muted); }
+.dd-opt[hidden] { display: none; }
 .dd-opt:hover { border-color: var(--accent-soft); background: var(--tint); }
 .dd-opt:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
 
@@ -294,6 +296,20 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .wc-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; }
 .wc-links a { font: 500 0.8rem var(--sans); color: var(--accent); text-decoration: none; }
 .wc-links a:hover { text-decoration: underline; }
+/* Dig deeper: Commentary (Classic) */
+.dp-comm { margin: 2.6rem 0 0; padding: 2rem 0 0; border-top: 1px solid var(--rule); }
+.cm-from { font: 400 0.9rem/1.5 var(--sans); color: var(--muted); margin: 0 0 0.3rem; }
+.cm-title { font-family: var(--display); font-weight: 400; font-size: 1.75rem; line-height: 1.25; color: var(--heading); margin: 0 0 1.2rem; }
+.cm-p { font-family: var(--serif); font-size: 1.08rem; line-height: 1.75; color: var(--ink); margin: 0 0 1rem; }
+.cm-q { margin: 0 0 1.1rem; padding: 0 0 0 16px; border-left: 3px solid var(--rule); }
+.cm-q p { font-family: var(--serif); font-style: italic; font-size: 1.02rem; line-height: 1.7; color: var(--ink-soft); margin: 0; }
+.cm-more { color: var(--muted); }
+.dp-comm .lord { font-size: 0.8em; letter-spacing: 0.05em; }
+.cm-end { margin: 1.8rem 0 0; padding: 1.1rem 1.2rem; border-radius: 12px; background: var(--tint); }
+.cm-end p { font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft); margin: 0 0 0.6rem; }
+.cm-links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0 !important; }
+.cm-links a { font: 500 0.82rem var(--sans); color: var(--accent); text-decoration: none; }
+.cm-links a:hover { text-decoration: underline; }
 .dp-back { text-align: center; margin: 1.8rem 0 0; }
 .dp-back a { font: 500 0.85rem var(--sans); color: var(--accent); text-decoration: none; }
 .dp-back a:hover { text-decoration: underline; }
