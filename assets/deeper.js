@@ -130,11 +130,12 @@
   }
   var RICH = document.body.classList.contains('dp-rich');
   var IMG = (document.body.getAttribute('data-edition') === 'kids' ? '../' : '') + 'assets/img/';
-  function photo(id, name) {
+  function photo(id, name, pos) {
     var bg = document.querySelector('#' + id + ' .ab-photo-bg');
     if (!bg || !name) return;
     var small = window.innerWidth * (window.devicePixelRatio || 1) <= 1100;
     bg.style.backgroundImage = 'url(' + IMG + name + (small ? '-sm' : '') + '.jpg)';
+    if (pos) bg.style.backgroundPosition = pos;   // 'pos' in commentary.json, e.g. '50% 20%' to keep a face in view
     bg.classList.add('has-photo');
   }
   function drawRich(day, picks, lex, books, names, comm, when) {
@@ -145,7 +146,7 @@
     var wImgs = ['deeper-scribe', 'deeper-scribe2', 'deeper-scrolls'].filter(function (n) { return n !== cImg; });
     var dayNo = Math.round(new Date(date + 'T12:00:00').getTime() / 864e5);
     photo('words-top', wImgs[dayNo % wImgs.length]);
-    if (comm) photo('commentary', cImg);
+    if (comm) photo('commentary', cImg, comm.image && comm.pos);
     box.innerHTML = picks.length ? cardsHtml(day, picks, lex, books, names) : '<p class="status">There is no word study for this day yet.</p>';
     var cs = document.querySelectorAll('.cm-only');
     cs.forEach(function (el) { el.hidden = !comm; });
