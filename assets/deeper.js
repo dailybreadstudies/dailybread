@@ -85,8 +85,8 @@
           '<h1 class="dp-title">Dig deeper</h1>' +
           '<h2 class="dp-h">Word study</h2>' +
           '<p class="dp-lead">' + (KIDS
-            ? 'Here are two words from today’s reading, one in Hebrew and one in Greek. Do you know what they mean? Have a guess, then tap to see!'
-            : 'Two words from today’s readings, in the languages they were written in. Do you know what they mean? Make a guess, then reveal the answer.') + '</p>';
+            ? 'Here are two words from today’s reading, one in Hebrew and one in Greek. Can you read them? Do you know what they mean? Have a guess, then tap to see!'
+            : 'Two words from today’s readings, in the languages they were written in. Can you read them, and do you know what they mean? Make a guess, then reveal the answer.') + '</p>';
         if (!picks.length) html += '<p class="status">There is no word study for this day yet.</p>';
         html += picks.map(function (p, i) {
           var e = lex[p.lang][p.s] || [], ref = p.ref.split(' '), cv = ref[1].split(':');
@@ -97,9 +97,9 @@
           return '<article class="wcard" data-lang="' + p.lang + '">' +
             '<p class="wc-lang">' + (p.lang === 'he' ? 'Hebrew' : 'Greek') + (label ? ' · from the ' + esc(label) + ' reading' : '') + '</p>' +
             '<p class="wc-lemma ' + p.lang + '" lang="' + p.lang + '"' + (p.lang === 'he' ? ' dir="rtl"' : '') + '>' + esc(e[0] || '') + '</p>' +
-            '<p class="wc-tr">' + esc(translit(e[1])) + '</p>' +
             '<button type="button" class="wc-reveal" aria-expanded="false" aria-controls="wc-a' + i + '">' + (KIDS ? 'Show me!' : 'Reveal the meaning') + '</button>' +
             '<div class="wc-answer" id="wc-a' + i + '" hidden>' +
+              '<p class="wc-tr">' + esc(translit(e[1])) + '</p>' +
               '<p class="wc-gloss">' + esc(e[2] || '') + '</p>' +
               (e[3] && p.lang === 'he' ? '<p class="wc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
               (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p><cite>' + esc(where) + '</cite></blockquote>' : '') +

@@ -918,7 +918,7 @@
         '</div>' +
         (n < total
           ? '<button class="nav-btn primary" data-go="' + (n + 1) + '">Next &rarr;</button>'
-          : '<button class="nav-btn primary" data-go="1">Return to Start &#8635;</button>') +
+          : '<a class="nav-btn primary" href="deeper.html' + (current && current.day ? '?d=' + current.day.date : '') + '">Dig deeper &rarr;</a>') +
       '</nav>' +
       '<p class="done-next"></p>' +
       '<div class="day-done" hidden></div>' +
@@ -998,12 +998,9 @@
     boxes.forEach(function (box) {
       if (!done) { box.hidden = true; box.innerHTML = ''; box.removeAttribute('data-for'); return; }
       if (box.getAttribute('data-for') === date) { box.hidden = false; return; }
-      var labels = [];
-      current.day.portions.forEach(function (p) { if (labels.indexOf(p.label) < 0) labels.push(p.label); });
-      var list = labels.length > 1 ? labels.slice(0, -1).join(', ') + ' and ' + labels[labels.length - 1] : labels[0];
-      var when = date === todayISO() ? 'today’s readings' : 'the readings for ' + shortDate(date);
+      var when = date === todayISO() ? 'today' : 'this day';
       box.innerHTML = '<p class="dd-title">' + (KIDS ? 'Great job!' : 'Well done!') + '</p>' +
-        '<p class="dd-text">' + (KIDS ? 'You finished ' + when + ': ' : 'You have finished ' + when + ': ') + list + '.</p>' +
+        '<p class="dd-text">' + (KIDS ? 'You finished all the readings for ' : 'You have finished all the readings for ') + when + '.</p>' +
         // Dig deeper: Word study now; a short Torah commentary later
         '<div class="dd-deeper" hidden><p class="dd-h">Dig deeper</p>' +
         '<a class="dd-opt" href="deeper.html?d=' + date + '"><b>Word study</b>' +

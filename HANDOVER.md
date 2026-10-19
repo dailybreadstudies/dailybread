@@ -74,10 +74,10 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 
 ## Day complete → Dig deeper
 When every reading of a day is marked complete, “Well done!” (in the blue `--done` colour; Kids: “Great job!” in teal)
-appears right under the “All 4 readings done” line, and below a rule a **Dig deeper** link: *Word study* opens
+appears right under the “All 4 readings done” line, and below a rule a **Dig deeper** link (the last reading’s “Return to Start” button is now “Dig deeper” too): *Word study* opens
 `deeper.html?d=DATE` (Kids: `kids/deeper.html`, made by `tools/make_kids_pages.py`; page script `assets/deeper.js`).
-There, one Hebrew word (Torah) and one Greek word (Apostles/Gospels) are shown as cards, one under the other: the word and
-its transliteration first, so the reader can guess, then “Reveal the meaning” shows the gloss, a short definition
+There, one Hebrew word (Torah) and one Greek word (Apostles/Gospels) are shown as cards, one under the other: only the word
+(no transliteration), so the reader can practise reading it and guess, then “Reveal the meaning” shows the transliteration, the gloss, a short definition
 (Hebrew only), the verse with the word marked, how often it is used, a link to the reading and STEPBible. Words are picked
 per day by `python3 tools/build_word_picks.py` → `data/word-picks.json`, `data/kids/word-picks.json`; choose a word by
 hand in `tools/word-picks-fixed.json`. Planned next option on the same page: *Commentary*, a short section of Lars

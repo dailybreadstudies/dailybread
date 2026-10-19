@@ -275,10 +275,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .wcard { border: 1px solid var(--rule); border-radius: 14px; padding: 20px 22px 18px; background: var(--surface); margin: 0 0 16px; text-align: center; }
 .wcard.is-open { border-color: var(--line-strong); }
 .wc-lang { font: 600 0.68rem/1.4 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-soft); margin: 0 0 0.6rem; }
-.wc-lemma { font-size: 2.6rem; line-height: 1.3; color: var(--heading); margin: 0; }
+.wc-lemma { font-size: 2.6rem; line-height: 1.3; color: var(--heading); margin: 0 0 1rem; }
 .wc-lemma.he { font-family: var(--hebrew); }
 .wc-lemma.grc { font-family: var(--greek); }
-.wc-tr { font: italic 400 1.1rem/1.4 var(--serif); color: var(--ink-soft); margin: 0.15rem 0 1rem; }
+.wc-tr { font: italic 400 1.1rem/1.4 var(--serif); color: var(--ink-soft); margin: 0 0 0.2rem; text-align: center; }
 .wc-reveal { font: 600 0.8rem var(--sans); letter-spacing: 0.06em; color: var(--accent); background: transparent; border: 1px solid var(--line-strong);
   border-radius: 999px; padding: 8px 18px; cursor: pointer; }
 .wc-reveal:hover { background: var(--tint); border-color: var(--accent-soft); }
@@ -517,6 +517,7 @@ html.orig-off .blessing .hebrew-blessing { display: none; }
 }
 .nav-btn:hover:not(:disabled) { background: var(--tint); border-color: var(--accent-soft); color: var(--accent-deep); }
 .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+a.nav-btn { display: inline-block; text-align: center; text-decoration: none; }
 .nav-btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .nav-btn.primary:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--on-accent); }
 .nav-indicator {
