@@ -113,9 +113,12 @@
   // Lower-case "law" becomes Torah when it means God's Law ("the law", "His law"),
   // but not for other laws ("the law of sin", "a law to themselves", "law of the Medes").
   var LAW_RE = /(?<![A-Za-z\-])((?:the|The|His|his|My|my|Your|your|our|Our|this|This|that|God[ʼ’']s|Moses[ʼ’']) )law(?![A-Za-z])(?! of (?:sin|the sin|the Spirit|faith|works|my mind|the Medes|the king|succession|the Jews|the Timnite|the house|the temple|the burnt|the grain|the guilt|the peace|the Nazirite|marriage|her husband|liberty|freedom|the land|the Persians))/g;
+  // God's Temple is capitalized ("the Temple courts", "His holy Temple", "the Temple of God"), but not pagan temples
+  // ("the temple of Baal", "an idolʼs temple", "temples of their idols"), nor the temple of the head (Judges 4–5).
+  var TEMPLE_RE = /(?<![A-Za-z\-ʼ’'])(?<!\bhis )(?<!up to its )(?<!whose )(?<!idol[ʼ’']s )temple(?![A-Za-z])(?!\s+of\s+(?:his gods?|their gods|their idols|the gods|Baal|Dagon|Rimmon|Babylon|the Ashtoreths|the great))/g;
   function messianic(text) {
     text = messianicWords(text);
-    return text.replace(LAW_RE, '$1Torah');
+    return text.replace(LAW_RE, '$1Torah').replace(TEMPLE_RE, 'Temple');
   }
   var hebrewNames = function (t) { return t; };
   /* Like wordReplacer, plus per-verse forms from "_byVerse" in hebrew-names.json:
