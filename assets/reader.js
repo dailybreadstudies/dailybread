@@ -1005,7 +1005,8 @@
       if (box.getAttribute('data-for') === date) { box.hidden = false; return; }
       var when = date === todayISO() ? 'today' : 'this day';
       box.innerHTML = '<p class="dd-title">' + (KIDS ? 'Great job!' : 'Well done!') + '</p>' +
-        '<p class="dd-text">' + (KIDS ? 'You finished all the readings for ' : 'You have finished all the readings for ') + when + '.</p>' +
+        '<p class="dd-text">' + (KIDS ? 'You finished all the readings for ' : 'You have finished all the readings for ') + when + '. ' +
+        '<a class="dd-progress" href="progress.html">Review your progress</a></p>' +
         // Dig deeper: Word study now; a short Torah commentary later
         '<div class="dd-deeper" hidden><p class="dd-h">Dig deeper</p><div class="dd-opts">' +
         '<a class="dd-opt" href="deeper.html?d=' + date + '"><b>Word study</b>' +
