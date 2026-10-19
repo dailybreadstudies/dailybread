@@ -75,7 +75,7 @@
       (c.excerpt ? '<p class="cm-p cm-more">…</p>' : '') +
       '<aside class="cm-end"><p>This is an excerpt from Lars Enarson’s commentary on <em>' + esc(parsha) + '</em> in ' +
       '<em>Messiah in the Torah</em>, Vol. I. The book goes through every Torah portion of the year, and in the Daily Bread Torah Class ' +
-      'Lars introduces each week’s portion in a short video lesson.</p>' +
+      'Lars gives a half-hour video overview of each week’s portion.</p>' +
       '<p class="cm-links"><a href="learn.html#messiah-in-the-torah">Messiah in the Torah &rarr;</a>' +
       '<a href="learn.html#torah-class">Try the Torah Class two weeks free &rarr;</a></p></aside>' +
       '</section>';
