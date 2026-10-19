@@ -94,7 +94,7 @@ Vayigash (“Joseph Makes Himself Known”), Vayechi (“Jacob Lives”), taken 
 section with the word study cards below, then (Classic, weeks with commentary) a photo section with the commentary title,
 the text with a drop cap, and a “Keep reading” section with the book and Torah Class buttons. Photos are set by
 assets/deeper.js: the word study rotates by day through deeper-scribe, deeper-scribe2 and deeper-scrolls; the commentary
-uses the portion’s `image` in data/commentary.json (Lech Lecha caravan, Vayera ram, Chayei Sarah mourning, Toldot Esau, Vayetze Bethel, Vayishlach wrestling, Vayeshev Joseph, Miketz chariot, Beresheet light, Noach ark); optional `"pos"` sets the background position (e.g. `"50% 22%"`,
+uses the portion’s `image` in data/commentary.json (Lech Lecha caravan, Vayera ram, Chayei Sarah mourning, Toldot Esau, Vayetze Bethel, Vayishlach wrestling, Vayeshev Joseph, Miketz chariot, Beresheet light, Noach ark, Vayigash embrace, Vayechi Goshen); optional `"pos"` sets the background position (e.g. `"50% 22%"`,
 else deeper-scrolls. Each photo is a 1920 px JPG (quality ~70–74) plus a 960 px `-sm` version for phones. To add a
 portion photo: save both sizes in assets/img/ and set `"image"` (and optionally `"em"`, the words of the title in italics).
 
