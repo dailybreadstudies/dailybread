@@ -81,6 +81,52 @@
       '</section>';
   }
 
+  function cardsHtml(day, picks, lex, books, names) {
+    return picks.map(function (p, i) {
+          var e = lex[p.lang][p.s] || [], ref = p.ref.split(' '), cv = ref[1].split(':');
+          var n = 0, label = '';
+          day.portions.forEach(function (x, k) { if (!n && x.ref.split(' ')[0] === ref[0]) { n = k + 1; label = x.label; } });
+          var vt = books[ref[0]] && books[ref[0]].chapters ? verseText(books[ref[0]], +cv[0], +cv[1], p.here) : '';
+          var where = (names[ref[0]] || ref[0]) + ' ' + cv[0] + ':' + cv[1];
+          return '<article class="wcard" data-lang="' + p.lang + '">' +
+            '<p class="wc-lang">' + (p.lang === 'he' ? 'Hebrew' : 'Greek') + (label ? ' · from the ' + esc(label) + ' reading' : '') + '</p>' +
+            '<p class="wc-lemma ' + p.lang + '" lang="' + p.lang + '"' + (p.lang === 'he' ? ' dir="rtl"' : '') + '>' + esc(e[0] || '') + '</p>' +
+            '<button type="button" class="wc-reveal" aria-expanded="false" aria-controls="wc-a' + i + '">' + (KIDS ? 'Show me!' : 'Reveal the meaning') + '</button>' +
+            '<div class="wc-answer" id="wc-a' + i + '" hidden>' +
+              '<p class="wc-tr">' + esc(translit(e[1])) + '</p>' +
+              '<p class="wc-gloss">' + esc(e[2] || '') + '</p>' +
+              (e[3] && p.lang === 'he' ? '<p class="wc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
+              (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p><cite>' + esc(where) + '</cite></blockquote>' : '') +
+              '<p class="wc-count">Here translated “' + esc(cleanHere(p.here)) + '”. Used ' + p.n + ' times in the Bible.</p>' +
+              '<p class="wc-links">' + (n ? '<a href="./?d=' + date + '#' + n + '">Read it in ' + esc(where) + '</a>' : '') +
+              '<a href="https://www.stepbible.org/?q=strong=' + esc(p.s) + '" target="_blank" rel="noopener">Every use on STEPBible &rarr;</a></p>' +
+            '</div></article>';
+        }).join('');
+  }
+  var RICH = document.body.classList.contains('dp-rich');
+  function drawRich(day, picks, lex, books, names, comm, when) {
+    function set(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
+    set('dp-when', esc(when));
+    box.innerHTML = picks.length ? cardsHtml(day, picks, lex, books, names) : '<p class="status">There is no word study for this day yet.</p>';
+    var cs = document.querySelectorAll('.cm-only');
+    cs.forEach(function (el) { el.hidden = !comm; });
+    if (comm) {
+      set('cm-eyebrow', 'Commentary · <em>' + esc(day.parsha.name) + '</em>');
+      set('cm-hero-title', esc(comm.title).replace(/^(.*?)(\S+\s+\S+)$/, '$1<em>$2</em>'));
+      set('cm-hero-from', 'An excerpt from Lars Enarson’s commentary on <em>' + esc(day.parsha.name) + '</em>, from <em>Messiah in the Torah</em>, Vol. I.');
+      set('cm-body', comm.blocks.map(function (b) {
+        var t = lordify(esc(b.t));
+        return b.k === 'q' ? '<blockquote class="cm-q"><p>' + t + '</p></blockquote>' : '<p class="cm-p">' + t + '</p>';
+      }).join('') + (comm.excerpt ? '<p class="cm-p cm-more">…</p>' : ''));
+      set('cm-portion', esc(day.parsha.name));
+    }
+    var back = document.getElementById('dp-back');
+    if (back) back.href = './?d=' + date;
+    var at = location.hash && document.getElementById(location.hash.slice(1));
+    if (at) at.scrollIntoView();
+    document.dispatchEvent(new Event('deeper-ready'));
+  }
+
   var date = new URLSearchParams(location.search).get('d') || today();
   var DATA = KIDS ? 'data/kids/' : 'data/';
   Promise.all([
@@ -103,6 +149,8 @@
     picks.forEach(function (p) { books[p.ref.split(' ')[0]] = 1; });
     return Promise.all(Object.keys(books).map(function (b) { return getJSON('data/bsb/' + b + '.json').then(function (j) { books[b] = j; }); }))
       .then(function () {
+        // Rich layout (marketing-style page with photo sections, see deeper-test.html): the page carries its own headings
+        if (RICH) return drawRich(day, picks, lex, books, names, comm, when);
         var html = '<p class="dp-eyebrow">' + esc(when) + '</p>' +
           '<h1 class="dp-title">Dig deeper</h1>' +
           '<h2 class="dp-h">Word study</h2>' +
@@ -110,26 +158,7 @@
             ? 'Here are two words from today’s reading, one in Hebrew and one in Greek. Can you read them? Do you know what they mean? Have a guess, then tap to see!'
             : 'Two words from today’s readings, in the languages they were written in. Can you read them, and do you know what they mean? Make a guess, then reveal the answer.') + '</p>';
         if (!picks.length) html += '<p class="status">There is no word study for this day yet.</p>';
-        html += picks.map(function (p, i) {
-          var e = lex[p.lang][p.s] || [], ref = p.ref.split(' '), cv = ref[1].split(':');
-          var n = 0, label = '';
-          day.portions.forEach(function (x, k) { if (!n && x.ref.split(' ')[0] === ref[0]) { n = k + 1; label = x.label; } });
-          var vt = books[ref[0]] && books[ref[0]].chapters ? verseText(books[ref[0]], +cv[0], +cv[1], p.here) : '';
-          var where = (names[ref[0]] || ref[0]) + ' ' + cv[0] + ':' + cv[1];
-          return '<article class="wcard" data-lang="' + p.lang + '">' +
-            '<p class="wc-lang">' + (p.lang === 'he' ? 'Hebrew' : 'Greek') + (label ? ' · from the ' + esc(label) + ' reading' : '') + '</p>' +
-            '<p class="wc-lemma ' + p.lang + '" lang="' + p.lang + '"' + (p.lang === 'he' ? ' dir="rtl"' : '') + '>' + esc(e[0] || '') + '</p>' +
-            '<button type="button" class="wc-reveal" aria-expanded="false" aria-controls="wc-a' + i + '">' + (KIDS ? 'Show me!' : 'Reveal the meaning') + '</button>' +
-            '<div class="wc-answer" id="wc-a' + i + '" hidden>' +
-              '<p class="wc-tr">' + esc(translit(e[1])) + '</p>' +
-              '<p class="wc-gloss">' + esc(e[2] || '') + '</p>' +
-              (e[3] && p.lang === 'he' ? '<p class="wc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
-              (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p><cite>' + esc(where) + '</cite></blockquote>' : '') +
-              '<p class="wc-count">Here translated “' + esc(cleanHere(p.here)) + '”. Used ' + p.n + ' times in the Bible.</p>' +
-              '<p class="wc-links">' + (n ? '<a href="./?d=' + date + '#' + n + '">Read it in ' + esc(where) + '</a>' : '') +
-              '<a href="https://www.stepbible.org/?q=strong=' + esc(p.s) + '" target="_blank" rel="noopener">Every use on STEPBible &rarr;</a></p>' +
-            '</div></article>';
-        }).join('');
+        html += cardsHtml(day, picks, lex, books, names);
         if (comm) html += commentaryHtml(comm, day.parsha.name);
         html += '<p class="dp-back"><a href="./?d=' + date + '">&larr; Back to ' + (date === today() ? 'today’s readings' : 'the readings') + '</a></p>';
         box.innerHTML = html;
