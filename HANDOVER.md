@@ -86,7 +86,9 @@ the book and the Torah Class (learn.html). The Dig deeper box then shows a secon
 (`deeper.html?d=DATE#commentary`). Weeks without an entry show only the word study. Now filled: Lech Lecha (“Abraham Was
 a Soul Winner”), Vayera (“The Binding of Isaac”, first part), Chayei Sarah (“Sarah’s Death”), Toldot (“The Birth Right”),
 Vayetze (“God’s Unshakable Promise to Jacob”), Vayishlach (“Jacob Wrestles with God”), Vayeshev (“Joseph Is Rejected
-by His Brothers”), Miketz (“Joseph Is Exalted”), taken from the textbook PDF with pdftotext -layout; check Hebrew words by hand when adding more.
+by His Brothers”), Miketz (“Joseph Is Exalted”),
+and for the rest of Genesis Beresheet (“The Messiah Is the Beginning”), Noach (“The Days of Noah and the Last Days”),
+Vayigash (“Joseph Makes Himself Known”), Vayechi (“Jacob Lives”), taken from the textbook PDF with pdftotext -layout; check Hebrew words by hand when adding more.
 
 **Layout (Oct 2026):** deeper.html is styled like the About/Learn pages (its own inline styles, `body.dp-rich`): a photo
 section with the word study cards below, then (Classic, weeks with commentary) a photo section with the commentary title,
