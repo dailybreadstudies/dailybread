@@ -141,9 +141,9 @@
   function drawRich(day, picks, lex, books, names, comm, when) {
     function set(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
     set('dp-when', esc(when));
-    // Photos: the word study rotates by day; the commentary has its own photo for the portion, or a general one
+    // Photos: the word study rotates by day (the archaeology still life every other day); the commentary has its own photo for the portion, or a general one
     var cImg = comm ? (comm.image || 'deeper-scrolls') : '';
-    var wImgs = ['deeper-scribe', 'deeper-scribe2', 'deeper-scrolls'].filter(function (n) { return n !== cImg; });
+    var wImgs = ['deeper-archaeology', 'deeper-scribe', 'deeper-archaeology', 'deeper-scribe2', 'deeper-archaeology', 'deeper-scrolls'].filter(function (n) { return n !== cImg; });
     var dayNo = Math.round(new Date(date + 'T12:00:00').getTime() / 864e5);
     photo('words-top', wImgs[dayNo % wImgs.length]);
     if (comm) photo('commentary', cImg, comm.image && comm.pos);
