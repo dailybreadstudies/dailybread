@@ -1044,3 +1044,54 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
 
 .pg-give { margin: 2.8rem 0 0; text-align: center; font: 400 0.9rem/1.7 var(--sans); color: var(--ink-soft); }
 .pg-give a { color: var(--accent); font-weight: 600; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+
+/* ── Account: optional sign-in to sync progress (assets/account.js) ── */
+.tb-acct, .tb-acct-m { background: none; border: none; cursor: pointer; font: 600 13px/1 var(--sans); letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent-soft); padding: 8px 0 6px; border-bottom: 1px solid transparent; }
+.tb-acct { margin-left: clamp(18px, 2.4vw, 32px); }
+.tb-acct:hover, .tb-acct-m:hover { color: var(--accent-deep); }
+.tb-acct:focus-visible, .tb-acct-m:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; border-radius: 2px; }
+.tb-acct.is-in, .tb-acct-m.is-in { padding: 0; border: none; }
+.acct-dot { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--accent); color: var(--on-accent); font: 600 13px/1 var(--sans); letter-spacing: 0; }
+.tb-acct.is-in:hover .acct-dot, .tb-acct-m.is-in:hover .acct-dot { background: var(--accent-deep); }
+.tb-nav .tb-acct-m { display: none; }
+@media (max-width: 700px) {
+  .tb-nav .tb-acct-m { display: inline-block; font-size: 12px; letter-spacing: 0.14em; padding: 4px 0 5px; }
+  .tb-nav .tb-acct-m.is-in { padding: 0; }
+  .tb-nav .acct-dot { width: 24px; height: 24px; font-size: 11px; }
+}
+.acct-panel { position: fixed; inset: 0; z-index: 400; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.acct-panel[hidden] { display: none; }
+.acct-back { position: absolute; inset: 0; background: rgba(20, 16, 12, 0.45); }
+.acct-card { position: relative; width: 100%; max-width: 430px; background: var(--surface); color: var(--ink); border-radius: 18px;
+  padding: 30px 28px 24px; box-shadow: 0 18px 60px rgba(0, 0, 0, 0.25); }
+.acct-x { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 26px; line-height: 1; color: var(--muted); cursor: pointer; padding: 6px; }
+.acct-x:hover { color: var(--accent-deep); }
+.acct-eyebrow { font: 600 0.7rem/1.4 var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); margin: 0 0 0.7rem; }
+.acct-h { font-family: var(--display); font-weight: 300; font-size: 1.75rem; line-height: 1.2; color: var(--heading); margin: 0 0 0.8rem; }
+.acct-h em { font-style: italic; color: var(--accent); }
+.acct-p { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); margin: 0 0 1.1rem; }
+.acct-card form { display: flex; flex-direction: column; gap: 10px; margin: 0 0 0.6rem; }
+.acct-input { font: 400 1rem var(--sans); padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--paper); color: var(--ink); }
+.acct-input:focus { outline: 2px solid var(--accent-soft); outline-offset: 1px; }
+.acct-code { font-size: 1.6rem; letter-spacing: 0.4em; text-align: center; }
+.acct-btn { font: 600 0.8rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; height: 46px; padding: 0 22px; border-radius: 23px;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); cursor: pointer; }
+.acct-btn:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+.acct-btn[disabled] { opacity: 0.6; cursor: default; }
+.acct-btn.ghost { background: transparent; color: var(--accent); border-color: var(--line-strong); }
+.acct-btn.ghost:hover { background: var(--tint); color: var(--accent-deep); }
+.acct-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 1.1rem; }
+.acct-email { font-family: var(--display); font-size: 1.35rem; color: var(--heading); margin: 0 0 0.3rem; word-break: break-all; }
+.acct-status { font: 400 0.9rem/1.5 var(--sans); color: var(--done); margin: 0 0 1.1rem; }
+.acct-status.is-error, .acct-msg { color: #a5432f; }
+.acct-msg { font: 400 0.9rem/1.5 var(--sans); margin: 0.2rem 0 0.6rem; }
+.acct-small { font: 400 0.8rem/1.6 var(--sans); color: var(--muted); margin: 0.4rem 0 0; }
+.acct-link { background: none; border: none; padding: 0; font: inherit; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.acct-link:hover { color: var(--accent-deep); }
+.sync-note { font: 400 0.85rem/1.6 var(--sans); color: var(--muted); text-align: center; margin: 2rem 0 0; }
+@media (max-width: 520px) {
+  .acct-panel { align-items: flex-end; padding: 0; }
+  .acct-card { max-width: none; border-radius: 18px 18px 0 0; padding: 28px 22px calc(22px + env(safe-area-inset-bottom)); }
+}

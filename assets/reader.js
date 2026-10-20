@@ -819,7 +819,17 @@
       localStorage.setItem(KEY + 'progress', JSON.stringify({ read: progress.read, since: progress.since,
         chapters: progress.chapters, archive: progress.archive }));
     } catch (e) { /* ignore */ }
+    try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ }   // assets/account.js syncs it
   }
+  // Signed in on another device: assets/account.js has written newer progress from the cloud; show it
+  window.addEventListener('dbs-progress-synced', function () {
+    try {
+      var p = JSON.parse(localStorage.getItem(KEY + 'progress') || 'null');
+      if (!p) return;
+      progress = { read: p.read || {}, since: p.since || null, done: null, chapters: p.chapters || {}, archive: p.archive || {} };
+    } catch (e) { return; }
+    if (PAGE === 'progress') drawProgressPage(); else drawProgress();
+  });
   // Which Daily Bread year a date belongs to: the loaded plan's dates are its year; otherwise a year runs
   // from 23 Tishrei (Simchat Torah outside Israel, when Beresheet begins) to the day before the next.
   function cycleOf(iso) {

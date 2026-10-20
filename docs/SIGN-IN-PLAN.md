@@ -1,6 +1,19 @@
 # Plan: sign-in, progress sync and the Ariel Media email list
 
-Agreed with John on 15 Oct 2026. **Not built yet** — start once dailybread.online is connected.
+Agreed with John on 15 Oct 2026. **Phase 1 built 20 Oct 2026** (sign-in by email code or link, progress sync,
+account panel, delete account) on **dailybread.study** (dailybread.online was lost to a domain investor).
+Phase 2 (email-list consent, privacy page, Shopify) and "Continue with Google" are still to do.
+
+## Status (20 Oct 2026)
+- Supabase project "dailybread" (West EU, Ireland, free) — see supabase/README.md and supabase/schema.sql (run).
+- Auth URL config: Site URL https://dailybread.study, redirects https://dailybread.study/** and https://www.dailybread.study/**.
+- Emails sent through Resend (domain dailybread.study verified, region eu-west-1) as hello@dailybread.study,
+  SMTP in Supabase; "Confirm signup" and "Magic link" templates show the six-digit code and a Sign in button; OTP length 6.
+- Site: assets/account.js (no library; fetch to Supabase Auth + REST). A SIGN IN item at the end of the top bar
+  (a circle with the initial when signed in) on every page with the top bar; on phones it joins the menu row.
+  Progress page shows a sync line. reader.js fires `dbs-progress-saved` and listens for `dbs-progress-synced`.
+- Keep-alive: .github/workflows/podcast.yml calls the `ping` function every two hours.
+
 
 ## Goal
 - Readers can sign in to keep their reading progress in sync across phone, tablet and computer.

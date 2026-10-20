@@ -1,5 +1,5 @@
 # Keeps data/podcast/moms.json up to date with the Daily Bread for Busy Moms feed, so each day on the Today page
-# can offer that day's episode. New episodes come out the evening before (Israel time), and on Friday mornings.
+# can offer that day's episode. It also pings the Supabase project behind sign-in, so the free project never pauses. New episodes come out the evening before (Israel time), and on Friday mornings.
 name: Podcast episodes
 
 on:
@@ -23,6 +23,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Keep the sign-in database awake (Supabase pauses free projects after a week without activity)
+        continue-on-error: true
+        run: |
+          curl -s -X POST "https://khmoofwmfyhpnxtbsswv.supabase.co/rest/v1/rpc/ping" \
+            -H "apikey: sb_publishable_AV8iVsoNv58rri6jxmU7Mw_NggP4XmG" -H "Content-Type: application/json" -d '{}' || true
       - name: Fetch the feed
         run: python3 tools/fetch_podcast.py
       - name: Commit if anything changed
