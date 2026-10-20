@@ -97,7 +97,7 @@ def main():
     if args.file:
         data = open(args.file, 'rb').read()
     else:
-        req = urllib.request.Request(FEED, headers={'User-Agent': 'DailyBreadOnline/1.0 (+https://dailybreadstudies.github.io/dailybread/)'})
+        req = urllib.request.Request(FEED, headers={'User-Agent': 'DailyBreadOnline/1.0 (+https://dailybread.study/)'})
         data = urllib.request.urlopen(req, timeout=60).read()
     show, fresh = parse(data)
     old = {}

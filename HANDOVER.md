@@ -149,3 +149,10 @@ in the day's order). Progress page: year bar, totals, by-section bars, catch-up 
 - History file: 222 rows = John's Word v1 (Sivan–Tishrei) + every Today in History / Calendar Note from the 5787 journal PDF (DB-5787-inside-v6), split into single events. Journal is the reference.
 - Connect dailybread.online (DNS at John's registrar).
 - Highlights/notes may come later.
+
+## Domain
+The site's address is **https://dailybread.study** (registered at Porkbun, Oct 2026; auto-renew on). DNS at Porkbun:
+four A records for the root (185.199.108.153, .109.153, .110.153, .111.153) and a CNAME `www` → dailybreadstudies.github.io.
+The `CNAME` file in the repo root tells GitHub Pages to serve the site there; the old dailybreadstudies.github.io/dailybread
+address redirects to it. In GitHub → Settings → Pages, "Enforce HTTPS" should be ticked. (dailybread.online was caught by a
+domain investor when it expired in Oct 2026 and is listed on GoDaddy.)
