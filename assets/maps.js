@@ -344,6 +344,15 @@
     return ctx;
   }
 
+  /* A sources paragraph shows three lines and fades behind "more" (reader.js opens it); no "more" if it is short */
+  function foldCheck(p) {
+    if (!p) return;
+    requestAnimationFrame(function () {
+      var short = p.scrollHeight <= p.clientHeight + 2, b = p.nextElementSibling;
+      p.classList.toggle('is-short', short);
+      if (b && b.classList.contains('src-more')) b.hidden = short;
+    });
+  }
   function fillAtlas(ctx, spec, hn) {
     ctx.spec = spec;
     var root = ctx.root;
@@ -418,7 +427,9 @@
       var names = spec.alternates.sites.map(function (a) { return esc(a.name); }).join(', ');
       notes += '<h3>Where was ' + esc(displayName(spec.alternates.for, hn)) + '?</h3><p>Other proposed sites: ' + names + '.</p>' + ALT_BTN;
     }
-    root.querySelector('.dbm-notes').innerHTML = notes + '<p class="dbm-src">' + (spec.sources ? '<b>Sources.</b> ' + spec.sources : SOURCES_NOTE) + '</p>';
+    root.querySelector('.dbm-notes').innerHTML = notes + '<p class="dbm-src src-fold">' + (spec.sources ? '<b>Sources.</b> ' + spec.sources : SOURCES_NOTE) + '</p>' +
+      '<button type="button" class="src-more" aria-expanded="false">more</button>';
+    foldCheck(root.querySelector('.dbm-src'));
   }
 
   function wireAtlas(ctx) {

@@ -179,7 +179,8 @@ body.dbm-locked { overflow: hidden; }
 .dbm-notes { margin-top: 1rem; }
 .dbm-notes h3 { font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-faint); margin: 1.2rem 0 0.4rem; }
 .dbm .dbm-notes p { font: 400 0.78rem/1.65 var(--sans); color: var(--ink-soft); margin: 0 0 0.6rem; text-indent: 0; }
-.dbm .dbm-notes p.dbm-src { font-size: 0.68rem; line-height: 1.6; color: var(--muted); margin-top: 1.2rem; }
+.dbm .dbm-notes p.dbm-src { font-size: 0.68rem; line-height: 1.6; color: var(--muted); margin-top: 1.2rem; margin-bottom: 0; }
+.dbm .dbm-notes .src-more { font-size: 0.68rem; }
 .dbm-src b { font-weight: 600; color: var(--ink-soft); }
 .dbm-notes a { color: var(--accent); }
 .dbm-link { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer;

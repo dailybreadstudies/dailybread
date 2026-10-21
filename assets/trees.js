@@ -275,8 +275,14 @@
     });
     html += '</div>';
     if (t.countNote) html += '<p class="dbt-note">' + nm(t.countNote) + '</p>';
-    if (t.sources) html += '<p class="dbt-sources"><b>Sources.</b> ' + t.sources + '</p>';
+    if (t.sources) html += '<p class="dbt-sources src-fold"><b>Sources.</b> ' + t.sources + '</p><button type="button" class="src-more" aria-expanded="false">more</button>';
     root.innerHTML = html;
+    var src = root.querySelector('.dbt-sources');                 // no "more" when the sources fit in three lines
+    if (src) requestAnimationFrame(function () {
+      var short = src.scrollHeight <= src.clientHeight + 2;
+      src.classList.toggle('is-short', short);
+      if (src.nextElementSibling) src.nextElementSibling.hidden = short;
+    });
     var tree = root.querySelector('.dbt-tree');
     if (window.ResizeObserver) { state.ro = new ResizeObserver(function () { draw(); }); state.ro.observe(tree); }
   }

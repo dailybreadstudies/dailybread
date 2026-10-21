@@ -154,7 +154,8 @@ body.dbm-margin .dbt-pin.dbt-n2 { left: -142px; }
 .dbt-link:hover, .dbt-vv:hover { color: var(--accent-deep); }
 
 .dbt-note { margin: 0.7rem 0 0; font: italic 400 0.7rem/1.55 var(--sans); color: var(--muted); }
-.dbt-sources { margin: 0.7rem 0 0; font: 400 0.66rem/1.55 var(--sans); color: var(--muted); }
+.dbt-sources { margin: 0.7rem 0 0; font: 400 0.66rem/1.6 var(--sans); color: var(--muted); }
+.dbt-sources + .src-more { font-size: 0.66rem; }
 .dbt-sources b { font-weight: 600; color: var(--ink-soft); }
 
 @media print { .dbt-pin, .dbt-panel, .dbt-sheet { display: none !important; } }

@@ -1812,6 +1812,16 @@
     if (e.key === 'Escape' && !panel.hidden) { openPanel(false); toggleBtn.focus(); }
   });
 
+  // Sources under maps and family trees: open and close the full paragraph (see .src-fold in reader.css)
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.src-more');
+    if (!b) return;
+    var p = b.previousElementSibling, open = !p.classList.contains('is-open');
+    p.classList.toggle('is-open', open);
+    b.setAttribute('aria-expanded', String(open));
+    b.textContent = open ? 'less' : 'more';
+  });
+
   // Footer credits: open and close the full paragraph
   document.addEventListener('click', function (e) {
     var b = e.target.closest('.credits-more');
