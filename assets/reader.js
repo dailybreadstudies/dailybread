@@ -2277,7 +2277,8 @@
     // A book id as the site's own links write it ("SNG", "1SA", "JUD"): exact, in capitals
     var id = String(text).trim();
     if (/^[1-3]?[A-Z]{2,3}$/.test(id) && bookIndex.some(function (b) { return b.id === id; })) return id;
-    var key = String(text).toLowerCase().replace(/[\s.]/g, '').replace(/^i{1,3}(?=[a-z])/, function (r) { return r.length; });
+    // Roman numerals only when they stand apart ("II Kings", "I. Cor"), so Isaiah stays Isaiah
+    var key = String(text).toLowerCase().trim().replace(/^(i{1,3})[\s.]+(?=[a-z])/, function (all, r) { return r.length; }).replace(/[\s.]/g, '');
     if (!key) return null;
     if (ALIASES[key]) return ALIASES[key];
     var other = [HEB_BOOKS, MES_BOOKS];
