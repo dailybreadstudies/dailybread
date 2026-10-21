@@ -7,7 +7,7 @@
  * or graphic on the site: DBLightbox.open({ src, kind, title, ref, alt, credit }).
  *
  * The reader calls DBIllus.decorate(root) after it draws a passage. Nothing in the reader depends on this file.
- * Index entries: id, title, ref, book, c, v, status ("ready" to show on the public site), src (full size),
+ * Index entries: id, title, ref, book, c, v, also [{c, v}] (more verses), status ("ready" to show on the public site), src (full size),
  * small (about 900 px wide, for the margin), width, height, alt, caption, credit.
  */
 (function () {
@@ -43,7 +43,14 @@
   var indexP = null;
   function index() {
     return indexP || (indexP = fetch(ROOT + 'data/illus/index.json').then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (j) { return (j.illustrations || []).filter(function (x) { return SHOW_ALL || x.status === 'ready'; }); })
+      .then(function (j) {
+        var out = [];                     // an illustration can sit at more than one verse: "also": [{c, v}]
+        (j.illustrations || []).filter(function (x) { return SHOW_ALL || x.status === 'ready'; }).forEach(function (x) {
+          byId[x.id] = x;
+          [{ c: x.c, v: x.v }].concat(x.also || []).forEach(function (a) { out.push({ x: x, c: a.c, v: a.v }); });
+        });
+        return out;
+      })
       .catch(function () { return []; }));
   }
   var byId = {};
@@ -52,7 +59,6 @@
   function decorate(root) {
     root = root || document;
     return index().then(function (list) {
-      list.forEach(function (x) { byId[x.id] = x; });
       if (!list.length) return;
       root.querySelectorAll('section.portion[data-book]').forEach(function (sec) {
         var book = sec.getAttribute('data-book'), scr = sec.querySelector('.scripture');
@@ -62,16 +68,18 @@
           if (e.classList.contains('chapter-num')) { c = parseInt(e.textContent, 10) || c; marks.push([c, 1, e]); }
           else marks.push([c, parseInt(e.getAttribute('data-v'), 10), e]);
         });
-        list.forEach(function (x) {
+        list.forEach(function (at) {
+          var x = at.x;
           if (x.book !== book) return;
-          var hit = marks.filter(function (m) { return m[0] === x.c && m[1] === x.v; })[0];
-          if (!hit || scr.querySelector('.dbi-pin[data-dbi-open="' + x.id + '"]')) return;
+          var hit = marks.filter(function (m) { return m[0] === at.c && m[1] === at.v; })[0];
+          if (!hit || scr.querySelector('.dbi-pin[data-dbi-at="' + x.id + '@' + at.c + ':' + at.v + '"]')) return;
           var target = hit[2];
           var block = target.closest('.scripture > *') || target.parentNode;
           block.classList.add('dbm-anchor');
           var pin = el('button', 'dbi-pin', ICON);
           pin.type = 'button';
           pin.setAttribute('data-dbi-open', x.id);
+          pin.setAttribute('data-dbi-at', x.id + '@' + at.c + ':' + at.v);
           pin.setAttribute('aria-pressed', state.open === x.id ? 'true' : 'false');
           pin.setAttribute('aria-label', 'Illustration: ' + x.title + ' (' + x.ref + ')');
           pin.title = 'Illustration: ' + x.title + ' (' + x.ref + ')';
@@ -84,12 +92,17 @@
   }
 
   // ── The illustration beside the text ──────────────────────
-  var state = { open: null, card: null };
+  var state = { open: null, card: null, pin: null };
   function readerEl() { return document.getElementById('reader') || document.querySelector('main'); }
-  function pinFor(id) { return document.querySelector('.dbi-pin[data-dbi-open="' + id + '"]'); }
+  function pinFor(id) {
+    if (state.pin && document.contains(state.pin) && state.pin.getAttribute('data-dbi-open') === id) return state.pin;
+    return document.querySelector('.dbi-pin[data-dbi-open="' + id + '"]');
+  }
 
   function open(id) {
+    var keep = state.pin;
     if (state.open) close();
+    state.pin = keep;
     var x = byId[id];
     if (!x) return;
     state.open = id;
@@ -106,11 +119,11 @@
   }
   function close() {
     if (state.card) state.card.remove();
-    state.open = null; state.card = null;
+    state.open = null; state.card = null; state.pin = null;
     setPins();
   }
   function setPins() {
-    document.querySelectorAll('.dbi-pin').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-dbi-open') === state.open)); });
+    document.querySelectorAll('.dbi-pin').forEach(function (b) { b.setAttribute('aria-pressed', String(b === state.pin && !!state.open)); });
   }
   /* Wide screens: beside the verse in the free space right of the text, scrolling with it. Narrow: below the verse. */
   function place() {
@@ -164,7 +177,13 @@
     var t = e.target;
     if (lb && (t.closest('[data-dblx-close]') || t === lb || t.classList.contains('dblx-stage'))) { lbClose(); return; }
     var pin = t.closest('.dbi-pin');
-    if (pin) { e.preventDefault(); var id = pin.getAttribute('data-dbi-open'); if (state.open === id) close(); else open(id); return; }
+    if (pin) {
+      e.preventDefault();
+      var id = pin.getAttribute('data-dbi-open'), same = state.open === id && state.pin === pin;
+      if (state.open) close();
+      if (!same) { state.pin = pin; open(id); }
+      return;
+    }
     if (t.closest('[data-dbi-close]')) { close(); return; }
     if (t.closest('[data-dbi-zoom]') && state.open) {
       var x = byId[state.open];

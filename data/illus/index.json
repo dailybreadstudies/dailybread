@@ -4,13 +4,38 @@
    "id": "gen-6-ark",
    "title": "Noah's Ark",
    "ref": "Genesis 6:14–16",
-   "book": "GEN", "c": 6, "v": 14,
+   "book": "GEN",
+   "c": 6,
+   "v": 14,
    "status": "ready",
    "src": "data/illus/img/gen-6-ark.jpg",
    "small": "data/illus/img/gen-6-ark-900.jpg",
-   "width": 2446, "height": 2572,
+   "width": 2446,
+   "height": 2572,
    "alt": "Cutaway drawing of Noah's ark with three decks, a door in the side and a ramp, with side, front, top and cross-section views and the dimensions 300 by 50 by 30 cubits",
    "caption": "The ark as Genesis 6:14–16 describes it: 300 cubits long, 50 wide and 30 high (about 137 × 23 × 14 m), with lower, middle and upper decks, a door in its side and an opening for light a cubit below the roof. The proportions are the text's; the shape and the details are one reconstruction.",
+   "credit": ""
+  },
+  {
+   "id": "jos-6-jericho",
+   "title": "Jericho",
+   "ref": "Joshua 2:15; 6",
+   "book": "JOS",
+   "c": 6,
+   "v": 1,
+   "also": [
+    {
+     "c": 2,
+     "v": 15
+    }
+   ],
+   "status": "ready",
+   "src": "data/illus/img/jos-6-jericho.jpg",
+   "small": "data/illus/img/jos-6-jericho-900.jpg",
+   "width": 2446,
+   "height": 2572,
+   "alt": "Artist's impression of walled Jericho: a ditch, an outer and an inner wall with houses between them, a gate with two towers, a citadel, with a cross-section through the walls and a detail of the main gate",
+   "caption": "An artist's impression of Jericho (Tell es-Sultan), by the spring that still waters the oasis and one of the oldest walled towns known. Its Bronze Age defences were a stone retaining wall at the foot of the mound with a mudbrick wall on it, and a second wall higher up; on the north side excavators found houses built against the lower wall, which recalls Rahab's house “built into the wall” (2:15). The last walled city ended in fallen mudbrick and a fire that left storage jars still full of grain (compare 6:20, 24). Its date is debated: Garstang, and later Bryant Wood, put it about 1400 BC; Kathleen Kenyon about 1550 BC. The drawing simplifies the city's plan.",
    "credit": ""
   }
  ]
