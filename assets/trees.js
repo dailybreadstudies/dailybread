@@ -13,6 +13,19 @@
 (function () {
   'use strict';
 
+  /* The map, archaeology and family-tree buttons at one verse sit side by side in the margin, always in the
+     same order (map nearest the text, then find, then tree), whichever script added its button first. */
+  window.DBPinLayout = window.DBPinLayout || function (target) {
+    var RANK = { 'dbm-pin': 0, 'dbf-pin': 1, 'dbt-pin': 2 }, pins = [], p = target.previousElementSibling;
+    function rank(e) { var m = /(^| )(dbm-pin|dbf-pin|dbt-pin)( |$)/.exec(e.className); return m ? RANK[m[2]] : -1; }
+    while (p && rank(p) >= 0) { pins.push(p); p = p.previousElementSibling; }
+    pins.sort(function (a, b) { return rank(a) - rank(b); });
+    pins.forEach(function (e, i) {
+      target.parentNode.insertBefore(e, i === 0 ? target : pins[i - 1]);   // DOM order: farthest first, map just before the verse
+      e.style.left = (-54 - 44 * i) + 'px';                                // used only where the buttons sit in the margin
+    });
+  };
+
   var reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' +
     '<circle cx="6" cy="5" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="18" cy="19.5" r="2.2"/><circle cx="18" cy="4.5" r="2.2"/>' +
@@ -116,11 +129,8 @@
             pin.setAttribute('aria-pressed', state.open === t.id ? 'true' : 'false');
             pin.setAttribute('aria-label', 'Family tree: ' + t.title + ' (' + t.ref + ')');
             pin.title = 'Family tree: ' + t.title + ' (' + t.ref + ')';
-            // other buttons already at this verse: sit beside them
-            var n = 0, prev = target.previousElementSibling;
-            while (prev && /(^| )(dbm-pin|dbf-pin|dbt-pin)( |$)/.test(prev.className)) { n++; prev = prev.previousElementSibling; }
-            if (n) pin.classList.add('dbt-n' + Math.min(n, 2));
             target.parentNode.insertBefore(pin, target);
+            window.DBPinLayout(target);                  // beside any map or find button at this verse
             Promise.all([loadTree(t.id), hebrewNames()]).then(function (r) { linkNames(scr, a, r[0], r[1]); }).catch(function () { /* names stay plain */ });
           });
         });
