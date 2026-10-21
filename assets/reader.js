@@ -1578,6 +1578,7 @@
     if (window.DBMaps) { try { window.DBMaps.decorate(root); } catch (e) { /* maps are optional */ } }
     if (window.DBFinds) { try { window.DBFinds.decorate(root); } catch (e) { /* finds are optional */ } }
     if (window.DBTrees) { try { window.DBTrees.decorate(root); } catch (e) { /* trees are optional */ } }
+    if (window.DBIllus) { try { window.DBIllus.decorate(root); } catch (e) { /* illustrations are optional */ } }
   }
 
   // ── Navigation ───────────────────────────────────────────────

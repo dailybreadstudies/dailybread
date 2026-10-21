@@ -1,0 +1,17 @@
+{
+ "illustrations": [
+  {
+   "id": "gen-6-ark",
+   "title": "Noah's Ark",
+   "ref": "Genesis 6:14–16",
+   "book": "GEN", "c": 6, "v": 14,
+   "status": "ready",
+   "src": "data/illus/img/gen-6-ark.jpg",
+   "small": "data/illus/img/gen-6-ark-900.jpg",
+   "width": 2446, "height": 2572,
+   "alt": "Cutaway drawing of Noah's ark with three decks, a door in the side and a ramp, with side, front, top and cross-section views and the dimensions 300 by 50 by 30 cubits",
+   "caption": "The ark as Genesis 6:14–16 describes it: 300 cubits long, 50 wide and 30 high (about 137 × 23 × 14 m), with lower, middle and upper decks, a door in its side and an opening for light a cubit below the roof. The proportions are the text's; the shape and the details are one reconstruction.",
+   "credit": ""
+  }
+ ]
+}

@@ -16,8 +16,8 @@
   /* The map, archaeology and family-tree buttons at one verse sit side by side in the margin, always in the
      same order (map nearest the text, then find, then tree), whichever script added its button first. */
   window.DBPinLayout = window.DBPinLayout || function (target) {
-    var RANK = { 'dbm-pin': 0, 'dbf-pin': 1, 'dbt-pin': 2 }, pins = [], p = target.previousElementSibling;
-    function rank(e) { var m = /(^| )(dbm-pin|dbf-pin|dbt-pin)( |$)/.exec(e.className); return m ? RANK[m[2]] : -1; }
+    var RANK = { 'dbm-pin': 0, 'dbf-pin': 1, 'dbt-pin': 2, 'dbi-pin': 3 }, pins = [], p = target.previousElementSibling;
+    function rank(e) { var m = /(^| )(dbm-pin|dbf-pin|dbt-pin|dbi-pin)( |$)/.exec(e.className); return m ? RANK[m[2]] : -1; }
     while (p && rank(p) >= 0) { pins.push(p); p = p.previousElementSibling; }
     pins.sort(function (a, b) { return rank(a) - rank(b); });
     pins.forEach(function (e, i) {

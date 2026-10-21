@@ -210,6 +210,15 @@ python3 tools/build_bsb.py /tmp/bsb data/bsb
 
 Scripture quotations are from the Berean Standard Bible (BSB), which has been dedicated to the public domain.
 
+## Illustrations and the full-size viewer
+
+`assets/illus.js` adds an illustration button (an opened-up box) beside a verse listed in `data/illus/index.json`
+(id, title, ref, book, c, v, status, src, small, width, height, alt, caption, credit; images in `data/illus/img/`, a full
+size and a ~900 px margin size). On wide screens the illustration sits in the free space right of the text, beside its
+verse; on phones, below the verse. Tapping the picture opens the standard full-size viewer: a white sheet almost the
+size of the screen with the label in its top-left margin (`DBLightbox.open({ src, title, ref, alt, credit })`, for any
+full-size photo or graphic). First illustration: Noah's ark at Genesis 6:14.
+
 ## Updating scripts and styles
 
 After changing anything in `assets/`, run `python3 tools/stamp_assets.py`. It adds `?v=<hash>` to the
