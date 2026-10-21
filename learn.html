@@ -154,10 +154,11 @@
     .ln-book img { display: block; width: 100%; height: auto; }
     /* Study tools: the Joshua 8 map (the battle of Ai) behind the section, on the right, fading out at an angle toward the left */
     #tools { position: relative; overflow: hidden; }
-    #tools::before { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 78%; z-index: 0; pointer-events: none;
-      background: url('assets/img/map-ai.jpg') 85% 45% / cover no-repeat; opacity: 0.55;
-      -webkit-mask-image: linear-gradient(250deg, #000 0%, rgba(0,0,0,0.85) 30%, transparent 75%);
-              mask-image: linear-gradient(250deg, #000 0%, rgba(0,0,0,0.85) 30%, transparent 75%); }
+    #tools::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: 0; pointer-events: none;
+      background: url('assets/img/map-ai.jpg') right -380px top 40% / auto 112% no-repeat; opacity: 0.62;
+      /* strong in the empty margin to the right of the content, faint under the tools, gone by the left column */
+      -webkit-mask-image: linear-gradient(to left, #000 0, #000 calc(50% - 560px), rgba(0,0,0,0.22) calc(50% - 400px), rgba(0,0,0,0.1) 50%, transparent calc(50% + 100px));
+              mask-image: linear-gradient(to left, #000 0, #000 calc(50% - 560px), rgba(0,0,0,0.22) calc(50% - 400px), rgba(0,0,0,0.1) 50%, transparent calc(50% + 100px)); }
     #tools > .ab-in { position: relative; z-index: 1; }
     .ln-map-cap { margin: 2.6rem 0 0; font: 400 0.85rem/1.6 var(--sans); color: var(--muted); }
     .ln-map-cap a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
