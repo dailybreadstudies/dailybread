@@ -1366,11 +1366,9 @@
     function width(words) { return MIN_W + (MAX_W - MIN_W) * Math.sqrt(words / maxWords); }
     var out = '', y = 46;
     SHELVES.forEach(function (sh, si) {
-      var g = GROUPS[sh[0]], n = 0;
-      sh[1].forEach(function (bd) { n += bd[1].length; });
+      var g = GROUPS[sh[0]];
       out += '<text class="bs-label" x="' + PAD + '" y="' + (y - 16) + '">' + g[0].toUpperCase() + '</text>' +
-        '<text class="bs-he" x="' + (PAD + g[0].length * 15.4 + 12) + '" y="' + (y - 15) + '">' + noNikud(g[1]) + '</text>' +
-        '<text class="bs-count" x="' + (W - PAD) + '" y="' + (y - 16) + '" text-anchor="end">' + n + (n === 1 ? ' volume' : ' volumes') + '</text>';
+        '<text class="bs-he" x="' + (PAD + g[0].length * 15.4 + 12) + '" y="' + (y - 15) + '">' + noNikud(g[1]) + '</text>';   // no count: the books are counted in different ways
       var base = y + BASE_H, x = PAD + 2, prevH = BASE_H, i = 0, spans = [];
       sh[1].forEach(function (bd, bi) {
         bd[1].forEach(function (key, k) {
