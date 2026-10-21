@@ -876,13 +876,13 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 @media (max-width: 700px) {   /* phones: logo centred, the menu centred on the row below */
-  :root { --topbar-h: 122px; }
-  .topbar { grid-template-columns: 1fr; justify-items: center; align-content: center; row-gap: 12px; }
+  :root { --topbar-h: 142px; }
+  .topbar { grid-template-columns: 1fr; justify-items: center; align-content: center; row-gap: 20px; }
   .tb-logo, .tb-nav { justify-self: center; }
   .tb-nav { gap: 26px; }
   .tb-nav a { font-size: 12px; letter-spacing: 0.14em; padding: 4px 0 5px; }
   .tb-end { display: none; }
-  .tb-nav { gap: 10px 22px; flex-wrap: wrap; justify-content: center; }
+  .tb-nav { gap: 14px 22px; flex-wrap: wrap; justify-content: center; }
   .tb-br { display: block; flex-basis: 100%; height: 0; }
   .tb-nav .tb-give-m { display: inline-block; font-size: 12px; letter-spacing: 0.14em; padding: 4px 0 5px; color: var(--heading); }
 }
