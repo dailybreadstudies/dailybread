@@ -1120,3 +1120,17 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
   .tb-nav .tb-give-m { padding: 6px 12px 5px; margin: 3px 0; }
   .tb-nav:has(.tb-br) { row-gap: 4px; }
 }
+
+/* Progress: to catch up, one row per day (date · readings · tick the whole day) */
+.pr-missed-days li { grid-template-columns: 7.5em 1fr auto; align-items: center; }
+.pr-missed-days li[hidden] { display: none; }
+.pr-m-reads { display: flex; flex-wrap: wrap; gap: 3px 16px; align-items: baseline; }
+.pr-m-one { white-space: nowrap; }
+.pr-m-sep { color: var(--faint-text); margin: 0 7px; }
+.pr-m-tick { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; color: var(--accent-soft);
+  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+.pr-m-tick:hover { background: var(--done-bg); border-color: var(--done-line); color: var(--done); }
+.pr-m-tick:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.pr-more { margin: 8px 0 0; font-family: var(--sans); font-size: 0.86rem; }
+.pr-from { margin-top: 10px; }
+@media (max-width: 520px) { .pr-missed-days li { grid-template-columns: 1fr auto; } .pr-missed-days .pr-m-date { grid-column: 1 / -1; } .pr-m-reads { grid-column: 1; } }

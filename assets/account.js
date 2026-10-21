@@ -85,8 +85,8 @@
   }
 
   // ── Progress: merge, pull, push ──
-  function emptyProgress() { return { read: {}, since: null, chapters: {}, archive: {} }; }
-  function norm(p) { p = p || {}; return { read: p.read || {}, since: p.since || null, chapters: p.chapters || {}, archive: p.archive || {} }; }
+  function emptyProgress() { return { read: {}, since: null, chapters: {}, archive: {}, from: null }; }
+  function norm(p) { p = p || {}; return { read: p.read || {}, since: p.since || null, chapters: p.chapters || {}, archive: p.archive || {}, from: p.from || null }; }
   function mergeRead(a, b) {
     var out = {};
     [a, b].forEach(function (src) {
@@ -111,7 +111,8 @@
       archive[y] = { read: read, chapters: mergeDates(x.chapters, z.chapters) };
     });
     var since = a.since && b.since ? (a.since > b.since ? a.since : b.since) : (a.since || b.since);
-    return { read: mergeRead(a.read, b.read), since: since, chapters: mergeDates(a.chapters, b.chapters), archive: archive };
+    var from = a.from && b.from ? (a.from < b.from ? a.from : b.from) : (a.from || b.from);
+    return { read: mergeRead(a.read, b.read), since: since, chapters: mergeDates(a.chapters, b.chapters), archive: archive, from: from };
   }
   function same(a, b) { return JSON.stringify(norm(a)) === JSON.stringify(norm(b)); }
 

@@ -822,16 +822,16 @@
   }
   // An optional reading counts (for catch-up and full days) only from the day the track was turned on
   function counts(iso, x) { return !x[2] || (settings.apostlesSince && iso >= settings.apostlesSince); }
-  var progress = { read: {}, since: null, done: null, chapters: {}, archive: {} };
+  var progress = { read: {}, since: null, done: null, chapters: {}, archive: {}, from: null };   // from: "Catch up from the beginning"
   try {
     var savedProg = JSON.parse(localStorage.getItem(KEY + 'progress') || 'null');
     if (savedProg) progress = { read: savedProg.read || {}, since: savedProg.since || null, done: savedProg.done || null,
-      chapters: savedProg.chapters || {}, archive: savedProg.archive || {} };
+      chapters: savedProg.chapters || {}, archive: savedProg.archive || {}, from: savedProg.from || null };
   } catch (e) { /* storage unavailable: progress lasts for this visit only */ }
   function saveProgress() {
     try {
       localStorage.setItem(KEY + 'progress', JSON.stringify({ read: progress.read, since: progress.since,
-        chapters: progress.chapters, archive: progress.archive }));
+        chapters: progress.chapters, archive: progress.archive, from: progress.from || null }));
     } catch (e) { /* ignore */ }
     try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ }   // assets/account.js syncs it
   }
@@ -840,7 +840,7 @@
     try {
       var p = JSON.parse(localStorage.getItem(KEY + 'progress') || 'null');
       if (!p) return;
-      progress = { read: p.read || {}, since: p.since || null, done: null, chapters: p.chapters || {}, archive: p.archive || {} };
+      progress = { read: p.read || {}, since: p.since || null, done: null, chapters: p.chapters || {}, archive: p.archive || {}, from: p.from || null };
     } catch (e) { return; }
     if (PAGE === 'progress') drawProgressPage(); else drawProgress();
   });
@@ -905,10 +905,13 @@
   }
   // Tracking starts on the first day with a reading marked (so a new visitor is never told they are behind),
   // or at "pick up from today", whichever is later.
+  // Catch-up counts from the first day marked, or from the start of the year after "Catch up from the beginning"
+  // (progress.from); "Pick up from today" (progress.since) moves it forward again.
   function trackFrom() {
     var marked = Object.keys(progress.read).sort();
-    if (!marked.length) return null;
-    return progress.since && progress.since > marked[0] ? progress.since : marked[0];
+    var start = progress.from && progress.from >= PLAN_START ? (marked[0] && marked[0] < progress.from ? marked[0] : progress.from) : marked[0];
+    if (!start) return null;
+    return progress.since && progress.since > start ? progress.since : start;
   }
   // Readings not yet marked on planned days from trackFrom() up to yesterday, oldest first.
   function missedReadings() {
@@ -924,6 +927,9 @@
     if (label === 'Haftarah') return 'Prophets';
     if (label === 'Gospels' || label === 'Epistles') return 'Apostles';
     return ['Torah', 'Prophets', 'Writings', 'Apostles'].indexOf(label) >= 0 ? label : 'Feast readings';
+  }
+  function longDate(iso) {
+    return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long' });
   }
   function shortDate(iso) {
     return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
@@ -1084,13 +1090,37 @@
 
     html += '<h2 class="pg-h">To catch up</h2>';
     if (missed.length) {
-      html += '<ul class="pr-missed">' + missed.map(function (m) {
-        return '<li><span class="pr-m-label">' + m.label + '</span><a class="link-btn" href="./?d=' + m.date + '#' + m.n + '">' +
-          refLabel(m.ref) + '</a><span class="pr-m-date">' + weekdayDate(m.date) + '</span></li>';
-      }).join('') + '</ul><p class="pr-skip"><button type="button" class="link-btn" id="skip-missed">Pick up from today</button>' +
+      // grouped by day, oldest first; a long list is cut short with "Show all"
+      var byDay = [], at = {};
+      missed.forEach(function (m) {
+        if (!(m.date in at)) { at[m.date] = byDay.length; byDay.push({ date: m.date, items: [] }); }
+        byDay[at[m.date]].items.push(m);
+      });
+      var CAP = 12, showAll = box.getAttribute('data-all') === '1';
+      html += '<ul class="pr-missed pr-missed-days">' + byDay.map(function (g, gi) {
+        return '<li' + (!showAll && gi >= CAP ? ' hidden' : '') + '><span class="pr-m-date">' + weekdayDate(g.date) + '</span>' +
+          '<span class="pr-m-reads">' + g.items.map(function (m, k) {
+            return '<span class="pr-m-one">' + '<a class="link-btn" href="./?d=' + m.date + '#' + m.n +
+              '" title="' + escapeAttr(m.label) + '">' + refLabel(m.ref) + '</a></span>';
+          }).join('') + '</span>' +
+          '<button type="button" class="pr-m-tick" data-mark-day="' + g.date + '" title="Mark all of ' + escapeAttr(weekdayDate(g.date)) + ' as read" aria-label="Mark all of ' +
+          escapeAttr(weekdayDate(g.date)) + ' as read">' + CHECK_SVG + '</button></li>';
+      }).join('') + '</ul>' +
+        (!showAll && byDay.length > CAP ? '<p class="pr-more"><button type="button" class="link-btn" id="missed-all">Show all ' + byDay.length + ' days</button></p>' : '') +
+        '<p class="pr-skip"><button type="button" class="link-btn" id="skip-missed">Pick up from today</button>' +
         ' <span>Older readings will no longer count as missed.</span></p>';
     } else {
       html += '<p class="pg-note">All caught up.</p>';
+    }
+    // Go back to the first day of the study year
+    if (from > PLAN_START && today > PLAN_START) {
+      var extra = 0;
+      planDays.forEach(function (d) {
+        if (d < PLAN_START || d >= from || d >= today || !plan[d]) return;
+        plan[d].forEach(function (x, i) { if (counts(d, x) && !isRead(d, i + 1)) extra++; });
+      });
+      html += '<p class="pr-skip pr-from"><button type="button" class="link-btn" id="catch-up-all">Catch up from the beginning</button>' +
+        ' <span>· Count every reading since the study year began on ' + longDate(PLAN_START) + (extra ? ' (' + extra + ' more to catch up)' : '') + '.</span></p>';
     }
 
     html += '<h2 class="pg-h">Day by day</h2><ol class="pr-days">' + days.slice().reverse().map(function (d) {
@@ -1470,6 +1500,27 @@
       }
       return;
     }
+    if (e.target.closest('#catch-up-all')) {
+      progress.from = PLAN_START; progress.since = null;
+      saveProgress();
+      drawProgressPage();
+      return;
+    }
+    if (e.target.closest('#missed-all')) {
+      var pp = document.getElementById('progress-page');
+      if (pp) { pp.setAttribute('data-all', '1'); drawProgressPage(); }
+      return;
+    }
+    var md = e.target.closest('[data-mark-day]');
+    if (md) {
+      var dd = md.getAttribute('data-mark-day');
+      (plan[dd] || []).forEach(function (x, i) {
+        if (counts(dd, x) && !isRead(dd, i + 1)) { progress.read[dd] = (progress.read[dd] || []).concat(i + 1).sort(function (a, b) { return a - b; }); }
+      });
+      saveProgress();
+      drawProgressPage();
+      return;
+    }
     if (e.target.closest('#skip-missed')) {
       progress.since = todayISO();
       saveProgress();
@@ -1478,7 +1529,7 @@
     }
     if (e.target.closest('#clear-progress')) {
       if (window.confirm('Clear your reading progress for ' + PLAN_YEAR + ' on this device? Past years are kept. This cannot be undone.')) {
-        progress.read = {}; progress.since = null; progress.chapters = {}; saveProgress(); drawProgressPage();
+        progress.read = {}; progress.since = null; progress.from = null; progress.chapters = {}; saveProgress(); drawProgressPage();
       }
       return;
     }
