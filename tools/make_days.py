@@ -97,6 +97,25 @@ def to_refs(text, names, chapters):
     return out
 
 
+# Festival "portions" in the plan are holiday readings, not a weekly Torah portion read in aliyot.
+FESTIVALS = {'Pesach', 'Shavuot', 'Rosh HaShanah', 'Yom Kippur', 'Sukkot', 'Vezot HaBracha'}
+
+
+def torah_reading_numbers(plan):
+    """date -> 1..7: which reading of the week's Torah portion (one aliyah a day; on Shabbat the rest)
+    the day's Torah reading is, counted in order through the days of the same weekly portion."""
+    out, prev, n = {}, None, 0
+    for day in plan:
+        name = (day.get('parasha') or [None])[0]
+        if name != prev:
+            prev, n = name, 0
+        if not name or name in FESTIVALS or not any(label == 'Torah' for label, _ in day['readings']):
+            continue
+        n += 1
+        out[day['date']] = n
+    return out
+
+
 def main():
     global DAYS
     plan = json.load(open(sys.argv[1], encoding='utf-8'))
@@ -104,6 +123,7 @@ def main():
         DAYS = os.path.join(ROOT, sys.argv[2])
     names, chapters = load_books()
     os.makedirs(DAYS, exist_ok=True)
+    readings = torah_reading_numbers(plan)
     for day in plan:
         iso = day['date']
         path = os.path.join(DAYS, iso + '.json')
@@ -122,6 +142,8 @@ def main():
             if label == 'Torah':                           # "Exodus 38:1–20; 30:11–16": the second part is the maftir
                 first = refs[0][1].split('; ')
                 add('Torah', first[0])
+                if readings.get(iso):                      # "Fourth reading from the Torah Portion"
+                    portions[-1]['reading'] = readings[iso]
                 if len(first) > 1:
                     add('Maftir', refs[0][0] + ' ' + '; '.join(first[1:]))
                 for b, r in refs[1:]:

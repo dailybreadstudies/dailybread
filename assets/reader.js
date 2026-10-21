@@ -748,6 +748,9 @@
       html += '<p class="division-label">' + p.label + (p.he ? ' <span class="he">' + noNikud(p.he) + '</span>' : '') + '</p>';
       html += '<h2 class="chapter-head">' + displayRef(r) + '</h2>';
       var sub = p.title || passage.titles.join(' &middot; ');
+      if (p.reading && READING_ORDINALS[p.reading]) {      // "Fourth reading from the Torah Portion · …"
+        sub = READING_ORDINALS[p.reading] + ' reading from the Torah Portion' + (sub ? ' &middot; ' + sub : '');
+      }
       if (sub) html += '<p class="chapter-sub">' + sub + '</p>';
       html += '<div class="scripture">' + passage.html + '</div>';
       if (!passage.originalOnly) {
@@ -791,6 +794,7 @@
   var PLAN_START = '2026-10-04', PLAN_END = '2027-10-24', PLAN_YEAR = 5787;   // the 5787 Daily Bread year
   var JOURNAL_URL = KIDS ? 'https://arielmedia.shop/products/dailybread2027boys' : 'https://arielmedia.shop/collections/dailybread';
   var plan = {};                                            // date -> [[label, ref], …] as shown (see trackPlan)
+  var READING_ORDINALS = ['', 'First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh'];
   var fullPlan = {};                                        // date -> [[label, ref, optional?], …] from data/days/index.json
 
   // ── Optional track: the Apostolic Scriptures twice a year ──
