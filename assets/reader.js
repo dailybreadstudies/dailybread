@@ -28,6 +28,20 @@
     window.addEventListener('resize', place);
     place();
   })();
+  // Phones: the floating buttons (Bible, calendar, settings) slip away while scrolling down to read, and come back
+  // as soon as the reader scrolls up, nears the top, or reaches the end of the page (CSS: html.tools-tucked, phones only)
+  (function () {
+    var root = document.documentElement, lastY = window.scrollY, queued = false;
+    function check() {
+      queued = false;
+      var y = window.scrollY, dy = y - lastY;
+      var nearEnd = y + window.innerHeight >= document.documentElement.scrollHeight - 60;
+      if (y < 80 || nearEnd || dy < -6) root.classList.remove('tools-tucked');
+      else if (dy > 6) root.classList.add('tools-tucked');
+      if (Math.abs(dy) > 6 || y < 80) lastY = y;
+    }
+    window.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(check); } }, { passive: true });
+  })();
   // Which edition: Classic (the site root) or Daily Bread for Kids (the pages in kids/, data in data/kids/)
   var KIDS = document.body.getAttribute('data-edition') === 'kids';
   var KEY = KIDS ? 'dbs-kids-' : 'dbs-';                   // each edition keeps its own settings and progress

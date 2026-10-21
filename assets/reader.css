@@ -815,6 +815,8 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
     border-radius: 14px 14px 0 0; padding: 14px 20px calc(16px + env(safe-area-inset-bottom)); max-height: 86vh; }
   .settings-panel:not([hidden]) { animation: sheetUp 0.22s ease-out; }
   body.panel-open .tools { display: none; }   /* sheets have their own close button */
+  .tools { transition: opacity 0.25s ease, transform 0.25s ease; }
+  html.tools-tucked .tools { opacity: 0; transform: translateY(24px); pointer-events: none; }   /* scrolling down: out of the way */
   body { padding-bottom: 5.5rem; }
 }
 @keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
