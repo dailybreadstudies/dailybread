@@ -525,6 +525,18 @@
 
   "_byVerseAbout": "Verses where an English name stands for a different Hebrew name than usual. Haran, Abram's brother, is הָרָן (he), not the city חָרָן (chet). A list gives the forms in order of appearance in the verse.",
   "_byVerse": {
+      "NUM 26:33": {
+          "Noah": "Noa"
+      },
+      "NUM 27:1": {
+          "Noah": "Noa"
+      },
+      "NUM 36:11": {
+          "Noah": "Noa"
+      },
+      "JOS 17:3": {
+          "Noah": "Noa"
+      },
       "GEN 11:26": {
           "Haran": "Haran"
       },
