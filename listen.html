@@ -17,7 +17,23 @@
     try { localStorage.setItem('dbs-visited', '1'); } catch (e) {}
   </script>
     <style>
-    body.listen { display: block; padding: calc(var(--topbar-h) + 3rem) 20px 4rem; line-height: 1.7; }
+    /* The page sits on a photograph that fades into a deep warm brown, so it uses the dark colours in every theme */
+    body.listen {
+      --paper: #17130f; --ink: #e8e0d5; --ink-soft: #c8bdb0; --muted: #a39788; --accent: #c9ab8c; --accent-deep: #e6d0b8;
+      --accent-soft: #b4977b; --accent-faint: #94806e; --accent-line: #5f4f42; --line-strong: #54463a; --tint: rgba(255, 240, 220, 0.06);
+      --rule: #3a3028; --pop: #2f2720; --pop-ink: #efe6da; --pop-edge: #4a3e34; --faint-text: #8a7e72; --surface: #211b16;
+      --surface-glass: rgba(33, 27, 22, 0.92); --on-accent: #1a140f; --heading: #f3ece2; --track: #4a4037; --shadow: rgba(0, 0, 0, 0.45);
+      --hero-h: min(56.25vw, 1000px);
+      color-scheme: dark; color: var(--ink); background: var(--paper);
+      display: block; position: relative; line-height: 1.7;
+      padding: calc(var(--topbar-h) + var(--hero-h) * 0.56) 20px 4rem; }
+    .ls-hero { position: absolute; top: var(--topbar-h); left: 0; right: 0; height: var(--hero-h); z-index: 0; pointer-events: none;
+      background: url("assets/img/listen-hero.jpg") center 30% / cover no-repeat; }
+    .ls-hero::after { content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(23, 19, 15, 0.15) 0%, rgba(23, 19, 15, 0) 22%, rgba(23, 19, 15, 0.35) 44%,
+        rgba(23, 19, 15, 0.82) 62%, #17130f 86%); }
+    .ls { position: relative; z-index: 1; }
+    .ls-eyebrow, .ls-h, .ls-lead { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55); }
     .ls { max-width: 40rem; margin: 0 auto; }
     .ls-eyebrow { font: 600 0.74rem var(--sans); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-soft); margin: 0 0 1rem; text-align: center; }
     .ls-h { font-family: var(--display); font-weight: 300; color: var(--heading); letter-spacing: -0.02em; text-align: center;
@@ -92,7 +108,10 @@
     .ls-note { font: 400 0.84rem/1.6 var(--sans); color: var(--muted); }
     .ls-small { margin-top: 2.8rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font: 400 0.78rem/1.8 var(--sans); color: var(--faint-text); }
     @media (max-width: 700px) {
-      body.listen { padding: calc(var(--topbar-h) + 2rem) 16px 3rem; }
+      body.listen { --hero-h: 64vh; padding: calc(var(--topbar-h) + var(--hero-h) * 0.56) 16px 3rem; }
+      .ls-hero { background-image: url("assets/img/listen-hero-1000.jpg"); background-position: 50% 0%; }
+      .ls-hero::after { background: linear-gradient(to bottom, rgba(23, 19, 15, 0.1) 0%, rgba(23, 19, 15, 0) 18%, rgba(23, 19, 15, 0.45) 40%,
+        rgba(23, 19, 15, 0.88) 58%, #17130f 80%); }
       .ls-now { padding: 20px 18px 18px; }
       .ls-sub-btn { width: 100%; padding: 0 20px; }
       .ls-comm { padding: 26px 20px 24px; }
@@ -111,6 +130,7 @@
   <div class="tb-end"><a class="tb-give" href="give.html">Give</a></div>
 </header>
 
+<div class="ls-hero" aria-hidden="true"></div>
 <main class="ls">
   <p class="ls-eyebrow">Listen</p>
   <h1 class="ls-h">Daily Bread for <em>Busy Moms</em></h1>
