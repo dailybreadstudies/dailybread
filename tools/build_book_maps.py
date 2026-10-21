@@ -62,15 +62,15 @@ REGIONS = [
     {'n': 'Wilderness of Judea', 'label': 'Wilderness\nof Judea', 'll': [35.33, 31.5], 'r': 3,
      'note': 'The dry hills dropping east from Jerusalem to the Dead Sea, where John the Baptist preached (Matthew 3:1).'},
     # tappable but not labelled
-    {'n': 'Sea of Galilee', 'll': [35.59, 32.82], 'hide': True, 'z': 10.4, 'aka': ['Lake of Gennesaret', 'Sea of Tiberias'],
+    {'n': 'Sea of Galilee', 'll': [35.59, 32.82], 'hide': True, 'z': 9.5, 'aka': ['Lake of Gennesaret', 'Sea of Tiberias'],
      'note': 'Also "the lake of Gennesaret" (Luke 5:1) and "the Sea of Tiberias" (John 6:1); Hebrew Kinneret. About 21 km long and 12 km wide, 210 m below sea level, '
              'ringed by fishing towns: Capernaum, Bethsaida, Magdala, Tiberias.'},
-    {'n': 'Jordan', 'll': [35.56, 32.15], 'hide': True, 'z': 8.6,
+    {'n': 'Jordan', 'll': [35.56, 32.15], 'hide': True, 'z': 8,
      'note': 'The river from the Sea of Galilee down to the Dead Sea, about 105 km as the crow flies. John baptized in it (Matthew 3:6), probably near Jericho, '
              'where tradition places Jesus\' baptism (Qasr al-Yahud and al-Maghtas).'},
-    {'n': 'Zebulun', 'll': [35.27, 32.75], 'hide': True, 'z': 9.2,
+    {'n': 'Zebulun', 'll': [35.27, 32.75], 'hide': True, 'z': 8.5,
      'note': 'The tribal land of Zebulun in Lower Galilee, around Nazareth. Matthew 4:15 quotes Isaiah 9:1: "Land of Zebulun and land of Naphtali… Galilee of the Gentiles."'},
-    {'n': 'Naphtali', 'll': [35.5, 33.02], 'hide': True, 'z': 9.2,
+    {'n': 'Naphtali', 'll': [35.5, 33.02], 'hide': True, 'z': 8.5,
      'note': 'The tribal land of Naphtali, west of the Sea of Galilee and north into Upper Galilee; Capernaum lay within it (Matthew 4:13).'},
     {'n': 'Egypt', 'll': [32.4, 30.85], 'hide': True, 'z': 7,
      'note': 'The Nile Delta lay about ten days\' walk from Bethlehem by the coast road. Large Jewish communities lived in Alexandria and Leontopolis, '

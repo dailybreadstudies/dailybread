@@ -963,7 +963,12 @@
     if (!ll) return;
     var near = (ctx.spec.named || []).some(function (x) { return x.name === name; });
     var region = (ctx.spec.regions || []).filter(function (x) { return x.n === name; })[0];
-    var zoom = region ? region.z || 8.4 : near ? 13.6 : ctx.spec.bookwide ? 10 : 11.5;
+    var want = region ? region.z || 8 : near ? 11 : ctx.spec.bookwide ? 9.5 : 10;
+    // stay close to the map's own scale, so the reader still sees where in the land the place is:
+    // at most two zoom steps closer than the map's opening view, and a little closer at least
+    var fit = ctx.map.cameraForBounds(ctx.spec.bounds, { padding: 28 });
+    var base = fit && typeof fit.zoom === 'number' ? fit.zoom : want - 2;
+    var zoom = Math.min(Math.max(want, base + 0.5), base + 2);
     ctx.map.flyTo({ center: ll, zoom: zoom, duration: reduceMotion ? 0 : 1400 });
   }
 
