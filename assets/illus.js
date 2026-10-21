@@ -4,7 +4,7 @@
  * shows the illustration in the free space to the right of the text on wide screens (the text column does
  * not move), or below the verse on phones. Tapping the picture opens it almost full screen: a white sheet
  * with the label in its top-left margin. That viewer (DBLightbox) is the standard for any full-size photo
- * or graphic on the site: DBLightbox.open({ src, title, ref, alt, credit }).
+ * or graphic on the site: DBLightbox.open({ src, kind, title, ref, alt, credit }).
  *
  * The reader calls DBIllus.decorate(root) after it draws a passage. Nothing in the reader depends on this file.
  * Index entries: id, title, ref, book, c, v, status ("ready" to show on the public site), src (full size),
@@ -143,10 +143,11 @@
     lastFocus = document.activeElement;
     lb = el('div', 'dblx');
     lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', o.title || 'Picture');
-    lb.innerHTML = '<div class="dblx-sheet"><div class="dblx-label"><b>' + esc(o.title || '') + '</b>' + (o.ref ? ' <span>' + esc(o.ref) + '</span>' : '') + '</div>' +
+    lb.innerHTML = '<div class="dblx-sheet"><div class="dblx-label">' + (o.kind ? esc(o.kind) + ' · ' : '') + esc(o.title || '') + (o.ref ? ' <em>' + esc(o.ref) + '</em>' : '') + '</div>' +
       '<button type="button" class="dblx-close" data-dblx-close aria-label="Close">' + CLOSE + '<span>Close</span></button>' +
       '<div class="dblx-stage"><img src="' + esc(o.src) + '" alt="' + esc(o.alt || o.title || '') + '"></div>' +
-      (o.credit ? '<div class="dblx-credit">' + esc(o.credit) + '</div>' : '') + '</div>';
+      '<div class="dblx-foot"><span class="dblx-credit">' + esc(o.credit || '') + '</span>' +
+        '<span class="dblx-site">Daily Bread Online<br>dailybread.study</span></div></div>';
     document.body.appendChild(lb);
     document.body.classList.add('dblx-locked');
     requestAnimationFrame(function () { if (lb) lb.classList.add('on'); });
@@ -167,7 +168,7 @@
     if (t.closest('[data-dbi-close]')) { close(); return; }
     if (t.closest('[data-dbi-zoom]') && state.open) {
       var x = byId[state.open];
-      lbOpen({ src: ROOT + x.src, title: x.title, ref: x.ref, alt: x.alt, credit: x.credit });
+      lbOpen({ src: ROOT + x.src, kind: 'Illustration', title: x.title, ref: x.ref, alt: x.alt, credit: x.credit });
     }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb) { e.preventDefault(); lbClose(); } });
