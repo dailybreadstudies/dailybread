@@ -69,6 +69,9 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
    date logic in `assets/history.js` (see README).
 6. "Take a moment to pray before reading the Scriptures." ⓘ + collapsible **Traditional Blessings** (remembered);
    last blessing indented "Jewish disciples pray:" ⓘ. Hebrew blessing lines show only when Original Languages is on.
+6b. The Torah reading's italic subtitle starts with "Fourth reading from the Torah Portion · …": `reading` (1–7) on the Torah
+   portion in each day file, set by `tools/make_days.py` (counted through the days of a weekly portion; not on Pesach, Shavuot,
+   Rosh HaShanah, Yom Kippur, Sukkot or Vezot HaBracha, whose readings are festival readings).
 7. Each reading ends with Previous · **Mark <Section> Complete** · Next (soft blue when complete; then auto-advances
    to the next unfinished reading after ~1 s), plus the journal line after the last reading.
 
