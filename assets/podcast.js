@@ -58,8 +58,9 @@
       '<button type="button" class="pod-btn" data-pod-toggle="' + date + '" aria-pressed="' + on + '" aria-label="' +
       (on ? 'Pause' : 'Play') + ' the Daily Bread for Busy Moms podcast for ' + esc(dayName(date)) + '">' + (on ? ICON_PAUSE : ICON_PLAY) + '</button>' +
       '<span class="dp-label pod-label" data-pod-toggle="' + date + '">Listen</span>' +
-      '<span class="pod-meta"><a href="' + base + 'listen.html" class="pod-show">Daily Bread for Busy Moms</a>' +
-      (meta ? '<span class="pod-len"> · ' + meta + '</span>' : '') + '</span></li>';
+      // the length first, then the show's name, on one line (the name is cut short with … on narrow screens)
+      '<span class="pod-meta">' + (meta ? '<span class="pod-len">' + meta + '</span><span class="pod-sep" aria-hidden="true">·</span>' : '') +
+      '<a href="' + base + 'listen.html" class="pod-show">Daily Bread for Busy Moms</a></span></li>';
   }
 
   function refreshRows() {

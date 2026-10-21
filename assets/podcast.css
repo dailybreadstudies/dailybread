@@ -14,7 +14,10 @@
 .dp-listen.is-open .pod-btn { background: var(--accent); border-color: var(--accent); color: var(--paper); }
 .pod-label { cursor: pointer; user-select: none; }
 .pod-label:hover { color: var(--accent-deep); }
-.pod-meta { font: 400 0.84rem/1.35 var(--sans); color: var(--muted); }
+.pod-meta { font: 400 0.84rem/1.35 var(--sans); color: var(--muted); display: flex; align-items: baseline; min-width: 0; white-space: nowrap; }
+.pod-len, .pod-sep { flex: none; }
+.pod-sep { padding: 0 0.4em; }
+.pod-meta a.pod-show { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .pod-meta a.pod-show { color: inherit; text-decoration: none; }
 .pod-meta a.pod-show:hover { color: var(--accent-deep); text-decoration: underline; text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
 .dp-listen.is-playing .pod-len { color: var(--accent); }
