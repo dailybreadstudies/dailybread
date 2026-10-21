@@ -152,7 +152,22 @@
     .ln-book img { transition: transform 0.3s ease; }
     .ln-book a:hover img { transform: translateY(-4px); }
     .ln-book img { display: block; width: 100%; height: auto; }
-    .ln-week[hidden] { display: none; }
+    /* Study tools: the Joshua 8 map (the conquest of Ai) faded in behind, fading out at an angle to the right */
+    #tools { position: relative; overflow: hidden; }
+    #tools::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 72%; z-index: 0; pointer-events: none;
+      background: url('assets/img/map-ai.jpg') 0 62% / 140% auto no-repeat; opacity: 0.4; filter: blur(2px);
+      -webkit-mask-image: linear-gradient(110deg, #000 0%, rgba(0,0,0,0.8) 30%, transparent 72%);
+              mask-image: linear-gradient(110deg, #000 0%, rgba(0,0,0,0.8) 30%, transparent 72%); }
+    #tools > .ab-in { position: relative; z-index: 1; }
+    .ln-map-cap { margin: 2.6rem 0 0; font: 400 0.85rem/1.6 var(--sans); color: var(--muted); }
+    .ln-map-cap a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="sepia"]) #tools::before { filter: blur(2px) invert(1) hue-rotate(180deg) sepia(0.35); opacity: 0.22; } }
+    :root[data-theme="dark"] #tools::before { filter: blur(2px) invert(1) hue-rotate(180deg) sepia(0.35); opacity: 0.22; }
+    @media (max-width: 860px) {
+      #tools::before { width: 100%; height: 520px; bottom: auto; background-image: url('assets/img/map-ai-sm.jpg'); background-position: 35% 40%; opacity: 0.4;
+        -webkit-mask-image: linear-gradient(160deg, #000 0%, rgba(0,0,0,0.7) 35%, transparent 80%);
+                mask-image: linear-gradient(160deg, #000 0%, rgba(0,0,0,0.7) 35%, transparent 80%); }
+    }
     /* This week's commentary: the painting beside a short excerpt */
     .ln-excerpt[hidden] { display: none; }
     .ln-excerpt { min-height: 0; }
@@ -215,6 +230,7 @@
       <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13l11-6.5z" fill="currentColor"/></svg></span><b>Listen along</b><span>The <a href="listen.html">Daily Bread for Busy Moms</a> podcast, day by day.</span></li>
       <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></svg></span><b>Your progress</b><span>Mark each reading and watch your Bible fill in, book by book.</span></li>
     </ul>
+    <p class="ln-map-cap rv d3">Behind this section: the conquest of Ai in Joshua 8, one of the Bible maps in the reader. <a href="./?r=JOS.8">Open it beside the text &rarr;</a></p>
   </div>
 </section>
 
@@ -228,7 +244,6 @@
         discipleship to Jesus.</p>
       <p class="ab-stat rv d2"><b>Every Torah portion</b><span>Plus the five annual feasts. The textbooks of the Daily Bread Torah Class.</span></p>
       <p class="ab-stat rv d3"><b>Two hardcover volumes</b><span>1,328 pages. Vol. I: Genesis 1 – Leviticus 15 · Vol. II: Leviticus 16 – Deuteronomy 34.</span></p>
-      <p class="ab-stat ln-week rv d3" id="ln-week" hidden></p>
       <div class="ab-btns rv d3" style="justify-content:flex-start">
         <a class="ab-btn primary" href="https://arielmedia.shop/products/torah-2vol-set-te" rel="noopener">Get the two-volume set</a>
       </div>
@@ -305,33 +320,6 @@
   })();
 </script>
 <script>
-  // This week's Torah portion, and which volume of Messiah in the Torah covers it (Vol. I = Genesis 1 – Leviticus 15)
-  (function () {
-    function iso(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
-    function getJSON(u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
-    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
-    function volume(ref) {
-      var m = /^(\w{3})\s+(\d+)/.exec(ref || '');
-      if (!m) return '';
-      if (m[1] === 'GEN' || m[1] === 'EXO' || (m[1] === 'LEV' && +m[2] <= 15)) return 'Volume I';
-      if (m[1] === 'LEV' || m[1] === 'NUM' || m[1] === 'DEU') return 'Volume II';
-      return '';
-    }
-    getJSON('data/days/index.json').then(function (idx) {
-      var today = iso(new Date()), days = (idx.days || []).slice().sort();
-      var day = days.filter(function (d) { return d <= today; }).pop() || days[0];
-      if (!day) return;
-      var torah = ((idx.plan || {})[day] || []).filter(function (x) { return x[0] === 'Torah'; })[0];
-      return getJSON('data/days/' + day + '.json').then(function (d) {
-        var vol = volume(torah && torah[1]);
-        if (!d || !d.parsha || !vol) return;
-        var el = document.getElementById('ln-week');
-        el.innerHTML = '<b>This week: <em>' + esc(d.parsha.name) + '</em></b><span>The commentary for this week’s portion is in ' + vol + '.</span>';
-        el.hidden = false;
-        el.classList.add('in');
-      });
-    }).catch(function () {});
-  })();
   // This week's commentary: title, painting and the opening of the excerpt shown on the Dig deeper page
   (function () {
     function iso(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
