@@ -638,7 +638,7 @@ html.font-sans .scripture { line-height: 1.8; }
   background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 1px; color: var(--ink); font-family: var(--sans); padding: 0; }
 .cal-day .cal-g { font-size: 14px; line-height: 1; }
-.cal-day .cal-h { font-family: var(--hebrew); font-size: 11px; line-height: 1; color: var(--muted); min-height: 11px; direction: rtl; }
+.cal-day .cal-h { display: none; }   /* Hebrew day letters hidden for now (too much for the small calendar; to show again: font-family var(--hebrew), 11px, muted, direction rtl). The Hebrew month names stay in the heading. */
 .cal-day.cal-sat:not(.is-selected) { background: var(--tint); }
 .cal-day:hover:not(:disabled) { border-color: var(--accent-soft); }
 .cal-day:disabled { cursor: default; color: var(--muted); opacity: 0.45; }
