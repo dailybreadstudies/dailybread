@@ -99,7 +99,7 @@ html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb1: #e3a2cd; --bb3: #F9CE7A; }
 @keyframes kid-pop { 0% { transform: scale(1); } 45% { transform: scale(1.18); } 100% { transform: scale(1); } }
 @media (prefers-reduced-motion: reduce) { .kid-ray { display: none; } .kid-pop { animation: none; } }
 
-@media (max-width: 700px) { html.kids { --topbar-h: 150px; } }   /* phones: room for the taller Kids logo above the two menu rows */
+@media (max-width: 700px) { html.kids { --topbar-h: 172px; } }   /* phones: room for the taller Kids logo above the two menu rows */
 @media (max-width: 640px) {
   .kids .tb-logo-img.kids-logo { height: 38px; }
   .kids .tb-nav a, .kids .tb-give-m { font-size: 12.5px; letter-spacing: 0.07em; }

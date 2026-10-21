@@ -1109,3 +1109,14 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
 .tb-end { margin-left: 20px; }
 @media (min-width: 701px) and (max-width: 1360px) { .tb-end .quick-go input { width: 84px; } }
 @media (min-width: 701px) and (max-width: 1180px) { .tb-end .quick-go { display: none; } }
+/* Phones: a slightly larger logo, and taller menu items (bigger tap targets) with a little more air between the rows */
+@media (max-width: 700px) {
+  :root { --topbar-h: 150px; }
+  .topbar { row-gap: 14px; }
+  .tb-logo-img { height: 17px; }
+  .tb-nav { align-items: center; }
+  .tb-nav a, .tb-nav .tb-acct-m { padding: 9px 0 8px; }
+  .tb-nav a[aria-current="page"] { border-bottom-width: 1px; }
+  .tb-nav .tb-give-m { padding: 6px 12px 5px; margin: 3px 0; }
+  .tb-nav:has(.tb-br) { row-gap: 4px; }
+}
