@@ -127,7 +127,7 @@ Names & Terms: Messianic Filter, Hebrew Names.
   spines fill from the bottom as read; a tap opens the book. On Kids the 10 books stand out.
 - Page order: stats → To catch up → Day by day → Your Bible (blurb, circle, sections) → By book (blurb, all 66 books
   folded behind "Show all 66 books") → Past years → privacy note + "Clear this year's progress".
-Stored only in the browser: `localStorage['dbs-progress'] = { read: { 'YYYY-MM-DD': [1,2,4] }, since }` (reading numbers
+Stored in the browser (and, when signed in, synced to Supabase by assets/account.js): `localStorage['dbs-progress'] = { read: { 'YYYY-MM-DD': [1,2,4] }, since }` (reading numbers
 in the day's order). Progress page: year bar, totals, by-section bars, catch-up list (links open the exact reading),
 "pick up from today", day-by-day dots, clear all. Calendar shows ✓ / faint ✓ / ring.
 

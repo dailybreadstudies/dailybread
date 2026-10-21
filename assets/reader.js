@@ -780,7 +780,7 @@
     });
   }
 
-  // ── Reading progress (kept on this device only) ─────────────
+  // ── Reading progress (kept in this browser; assets/account.js syncs it when signed in) ─
   // dbs-progress = { read: { "2026-10-12": [1, 2, 4], … }, since: "2026-10-20" | null,
   //                  chapters: { "GEN.1": "2026-10-15", … }   (chapters marked read in the Bible reader, with the date),
   //                  archive: { "5786": { read: { date: [[label, ref], …] }, chapters: {…} } } }
@@ -1448,11 +1448,15 @@
     if (hit) ringShow(hit);
   });
 
+  function signedIn() { try { return !!localStorage.getItem('dbs-auth'); } catch (e) { return false; } }   // assets/account.js
   function privacyNote() {
     return (totalRead() >= 20 ? '<p class="pg-give">If Daily Bread is helping you, you can help keep it free for others. ' +
       '<a href="' + ROOT_URL + 'give.html">Give</a></p>' : '') +
-      '<p class="pg-note pg-privacy">Your progress is kept in this browser, on this device only. Nothing is sent to us, ' +
-      'and clearing your browser data erases it.</p>';
+      '<p class="pg-note pg-privacy">' + (signedIn()
+        ? 'Your progress is kept in this browser and with your account, so it is the same on every device where you sign in, ' +
+          'and clearing your browser data does not lose it. We keep only your email address and your reading progress.'
+        : 'Your progress is kept in this browser, on this device. Nothing is sent to us unless you sign in, ' +
+          'and clearing your browser data erases it.') + '</p>';
   }
 
   // Daily Bread for Kids: a short burst of yellow rays around what was just marked complete
@@ -1528,7 +1532,8 @@
       return;
     }
     if (e.target.closest('#clear-progress')) {
-      if (window.confirm('Clear your reading progress for ' + PLAN_YEAR + ' on this device? Past years are kept. This cannot be undone.')) {
+      if (window.confirm('Clear your reading progress for ' + PLAN_YEAR + (signedIn() ? '? You are signed in, so it is cleared on all your devices.' : ' on this device?') +
+          ' Past years are kept. This cannot be undone.')) {
         progress.read = {}; progress.since = null; progress.from = null; progress.chapters = {}; saveProgress(); drawProgressPage();
       }
       return;
