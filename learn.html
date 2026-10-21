@@ -152,21 +152,21 @@
     .ln-book img { transition: transform 0.3s ease; }
     .ln-book a:hover img { transform: translateY(-4px); }
     .ln-book img { display: block; width: 100%; height: auto; }
-    /* Study tools: the Joshua 8 map (the conquest of Ai) faded in behind, fading out at an angle to the right */
+    /* Study tools: the Joshua 8 map (the battle of Ai) behind the section, on the right, fading out at an angle toward the left */
     #tools { position: relative; overflow: hidden; }
-    #tools::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 72%; z-index: 0; pointer-events: none;
-      background: url('assets/img/map-ai.jpg') 0 62% / 140% auto no-repeat; opacity: 0.4; filter: blur(2px);
-      -webkit-mask-image: linear-gradient(110deg, #000 0%, rgba(0,0,0,0.8) 30%, transparent 72%);
-              mask-image: linear-gradient(110deg, #000 0%, rgba(0,0,0,0.8) 30%, transparent 72%); }
+    #tools::before { content: ''; position: absolute; top: 0; bottom: 0; right: 0; width: 78%; z-index: 0; pointer-events: none;
+      background: url('assets/img/map-ai.jpg') 85% 45% / cover no-repeat; opacity: 0.55;
+      -webkit-mask-image: linear-gradient(250deg, #000 0%, rgba(0,0,0,0.85) 30%, transparent 75%);
+              mask-image: linear-gradient(250deg, #000 0%, rgba(0,0,0,0.85) 30%, transparent 75%); }
     #tools > .ab-in { position: relative; z-index: 1; }
     .ln-map-cap { margin: 2.6rem 0 0; font: 400 0.85rem/1.6 var(--sans); color: var(--muted); }
     .ln-map-cap a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
-    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="sepia"]) #tools::before { filter: blur(2px) invert(1) hue-rotate(180deg) sepia(0.35); opacity: 0.22; } }
-    :root[data-theme="dark"] #tools::before { filter: blur(2px) invert(1) hue-rotate(180deg) sepia(0.35); opacity: 0.22; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]):not([data-theme="sepia"]) #tools::before { filter: invert(1) hue-rotate(180deg) sepia(0.35); opacity: 0.2; } }
+    :root[data-theme="dark"] #tools::before { filter: invert(1) hue-rotate(180deg) sepia(0.35); opacity: 0.2; }
     @media (max-width: 860px) {
-      #tools::before { width: 100%; height: 520px; bottom: auto; background-image: url('assets/img/map-ai-sm.jpg'); background-position: 35% 40%; opacity: 0.4;
-        -webkit-mask-image: linear-gradient(160deg, #000 0%, rgba(0,0,0,0.7) 35%, transparent 80%);
-                mask-image: linear-gradient(160deg, #000 0%, rgba(0,0,0,0.7) 35%, transparent 80%); }
+      #tools::before { width: 100%; height: 480px; bottom: auto; background-image: url('assets/img/map-ai-sm.jpg'); background-position: 78% 45%; opacity: 0.45;
+        -webkit-mask-image: linear-gradient(200deg, #000 0%, rgba(0,0,0,0.7) 35%, transparent 80%);
+                mask-image: linear-gradient(200deg, #000 0%, rgba(0,0,0,0.7) 35%, transparent 80%); }
     }
     /* This week's commentary: the painting beside a short excerpt */
     .ln-excerpt[hidden] { display: none; }
@@ -230,7 +230,7 @@
       <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13l11-6.5z" fill="currentColor"/></svg></span><b>Listen along</b><span>The <a href="listen.html">Daily Bread for Busy Moms</a> podcast, day by day.</span></li>
       <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></svg></span><b>Your progress</b><span>Mark each reading and watch your Bible fill in, book by book.</span></li>
     </ul>
-    <p class="ln-map-cap rv d3">Behind this section: the conquest of Ai in Joshua 8, one of the Bible maps in the reader. <a href="./?r=JOS.8">Open it beside the text &rarr;</a></p>
+    <p class="ln-map-cap rv d3">Behind this section: the battle of Ai in Joshua 8, one of the Bible maps in the reader. <a href="./?r=JOS.8">Open it beside the text &rarr;</a></p>
   </div>
 </section>
 
