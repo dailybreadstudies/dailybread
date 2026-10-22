@@ -66,6 +66,7 @@ body.dbm-side { padding-left: calc(var(--dbm-panel-left, 32px) + var(--dbm-panel
 .dbm-panel:has(.dbm-big) { overflow: visible; z-index: 1000; }
 
 /* ── Split (very wide screens): map left of the text, full height; key and notes right of it ── */
+body.dbm-split { padding-left: calc(1rem + 2 * var(--dbm-shift, 0px)); }   /* centred text moved right by --dbm-shift */
 body.dbm-split .dbm-panel { display: flex; flex-direction: column; overflow: hidden; padding: 22px 0 22px; }
 body.dbm-split .dbm-panel > .dbm { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 body.dbm-split .dbm-panel .dbm-frame { flex: 1 1 auto; min-height: 0; width: 100%; aspect-ratio: auto; }

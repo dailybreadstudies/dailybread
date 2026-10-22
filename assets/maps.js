@@ -259,18 +259,25 @@
 
   /* Very wide screens: the map fills the space left of the text, top to bottom, and its key and notes the
      space right of it; the text column does not move. Returns the layout, or null when there is not room. */
-  var SPLIT = { edge: 16, gapL: 70, gapR: 70, minMap: 280, minInfo: 250, maxMap: 760, maxInfo: 520, airFrom: 432, airRate: 0.35, maxAir: 170 };
+  var SPLIT = { edge: 16, gapL: 70, gapR: 70, minMap: 280, minInfo: 250, maxMap: 760, maxInfo: 520, airFrom: 432, airRate: 0.35, maxAir: 170,
+                comfyMap: 420, comfyInfo: 300, maxShift: 90 };
   function splitLayout() {
     var r = readerEl();
     if (!r || window.innerWidth < 1100) return null;
     var rr = r.getBoundingClientRect();
-    var free = Math.min(rr.left, window.innerWidth - rr.right);
+    var shifted = parseFloat(document.body.style.getPropertyValue('--dbm-shift')) || 0;
+    var textL = rr.left - (document.body.classList.contains('dbm-split') ? shifted : 0), textR = textL + rr.width;   // where the text sits centred
+    var W = window.innerWidth, free = Math.min(textL, W - textR);
     // the wider the screen, the more air between the text and the two columns, so the text stands on its own
     var air = Math.max(0, Math.min(SPLIT.maxAir, (free - SPLIT.airFrom) * SPLIT.airRate));
-    var mapW = Math.min(SPLIT.maxMap, rr.left - SPLIT.edge - SPLIT.gapL - air);
-    var infoW = Math.min(SPLIT.maxInfo, window.innerWidth - rr.right - SPLIT.gapR - SPLIT.edge - air);
+    var mapW = Math.min(SPLIT.maxMap, textL - SPLIT.edge - SPLIT.gapL - air);
+    var infoW = Math.min(SPLIT.maxInfo, W - textR - SPLIT.gapR - SPLIT.edge - air);
+    // smaller wide screens: move the text a little to the right (at most 90 px), so the map is not too narrow
+    var shift = Math.max(0, Math.min(SPLIT.maxShift, SPLIT.comfyMap - mapW, infoW - SPLIT.comfyInfo));
+    mapW += shift; infoW -= shift; textL += shift; textR += shift;
     if (mapW < SPLIT.minMap || infoW < SPLIT.minInfo) return null;
-    return { mapLeft: Math.round(rr.left - SPLIT.gapL - air - mapW), mapW: Math.round(mapW), infoLeft: Math.round(rr.right + SPLIT.gapR + air), infoW: Math.round(infoW) };
+    return { shift: Math.round(shift), mapLeft: Math.round(textL - SPLIT.gapL - air - mapW), mapW: Math.round(mapW),
+             infoLeft: Math.round(textR + SPLIT.gapR + air), infoW: Math.round(infoW) };
   }
 
   function placeAtlas() {
@@ -287,6 +294,7 @@
       var bs = document.body.style;
       bs.setProperty('--dbm-panel-left', split.mapLeft + 'px'); bs.setProperty('--dbm-panel-w', split.mapW + 'px');
       bs.setProperty('--dbm-info-left', split.infoLeft + 'px'); bs.setProperty('--dbm-info-w', split.infoW + 'px');
+      bs.setProperty('--dbm-shift', split.shift + 'px');
       document.body.classList.remove('dbm-side');
       document.body.classList.add('dbm-split');
       if (ctx.root.parentNode !== sp) sp.appendChild(ctx.root);
