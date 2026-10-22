@@ -159,3 +159,9 @@ four A records for the root (185.199.108.153, .109.153, .110.153, .111.153) and 
 The `CNAME` file in the repo root tells GitHub Pages to serve the site there; the old dailybreadstudies.github.io/dailybread
 address redirects to it. In GitHub → Settings → Pages, "Enforce HTTPS" should be ticked. (dailybread.online was caught by a
 domain investor when it expired in Oct 2026 and is listed on GoDaddy.)
+
+## Ideas on hold
+- **Read aloud (AI voice), Oct 2026: on hold.** Options looked at: the browser's built-in speech (free, follows the Messianic
+  and Hebrew-names settings, needs a small pronunciation list for Sephardic names); ElevenLabs audio recorded once for the
+  whole BSB (about $215–430 one-time, files on Cloudflare R2, fixed wording); ElevenLabs on demand or Audio Native (not a
+  good fit). John wanted a male voice with the site's translation and terms; the Busy Moms podcast is a women's ministry.
