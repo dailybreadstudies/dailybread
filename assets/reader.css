@@ -1151,3 +1151,10 @@ body.dbm-margin .scripture :is(.dbm-pin, .dbf-pin, .dbt-pin, .dbi-pin) { left: -
 .pr-more { margin: 8px 0 0; font-family: var(--sans); font-size: 0.86rem; }
 .pr-from { margin-top: 10px; }
 @media (max-width: 520px) { .pr-missed-days li { grid-template-columns: 1fr auto; } .pr-missed-days .pr-m-date { grid-column: 1 / -1; } .pr-m-reads { grid-column: 1; } }
+/* Phones: the sheets (settings, Bible, calendar) always fit the visible screen, and their header with the close button
+   stays in view while the sheet scrolls (iPhone Safari counts its toolbars in vh, so use dvh where supported) */
+@media (max-width: 700px) {
+  .settings-panel, .bible-panel { max-height: 78vh; max-height: 78dvh; }
+  .settings-panel .sp-head, .settings-panel .cal-head { position: sticky; top: -14px; z-index: 2; background: var(--surface, var(--paper));
+    margin: -14px -20px 6px; padding: 14px 20px 8px; }
+}
