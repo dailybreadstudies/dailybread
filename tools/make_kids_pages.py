@@ -43,6 +43,10 @@ def nav(current):
 def kidsify(html, page):
     html = html.replace('<html lang="en">', '<html lang="en" class="kids">', 1)
     html = re.sub(r'(href|src)="assets/', r'\1="../assets/', html)
+    # Kids icons: teal DB monogram (kids/favicon.ico and kids/site.webmanifest sit beside the pages)
+    html = html.replace('../assets/img/icon.svg', '../assets/img/icon-kids.svg') \
+               .replace('../assets/img/apple-touch-icon.png', '../assets/img/apple-touch-icon-kids.png') \
+               .replace('<meta name="theme-color" content="#2498e1">', '<meta name="theme-color" content="#348F89">')
     html = re.sub(r'<title>[^<]*</title>', '<title>Daily Bread for Kids</title>', html, count=1)
     html = re.sub(r'<meta name="description" content="[^"]*">',
                   '<meta name="description" content="Daily Bible readings for children: the weekly Torah portion and the Gospels, '
