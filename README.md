@@ -214,7 +214,8 @@ Scripture quotations are from the Berean Standard Bible (BSB), which has been de
 
 When there is room on both sides of the text (about 1400 px and wider), a map opens in two columns and the text
 does not move: the title and the map fill the space left of the text from top to bottom, and the key, notes and
-sources fill the space right of it (`splitLayout()` in assets/maps.js; `body.dbm-split` in assets/maps.css). Narrower
+sources fill the space right of it (`splitLayout()` in assets/maps.js; `body.dbm-split` in assets/maps.css). Family trees
+use the same layout (`body.dbt-split`): the tree on the left, its title, introduction, notes and sources on the right. Narrower
 desktops keep the single left column, and phones the map below the verse. Opening an illustration closes a two-column
 map, and opening a map closes an illustration, since both use the right-hand space.
 

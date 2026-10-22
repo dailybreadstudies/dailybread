@@ -203,10 +203,25 @@
   function visible(e) { return !!(e && e.offsetParent !== null); }
   function scroller() { return document.querySelector('.dbt-panel, .dbt-sheet'); }
 
+  /* Very wide screens: the tree fills the space left of the text and its title, introduction, notes and sources
+     the space right of it, as the maps do (DBMaps.splitLayout); the text column stays put or moves only a little */
   function place() {
     var root = state.root;
     if (!root) return;
-    var w = sideSpace(), want = w ? 'side' : 'sheet';
+    var split = window.DBMaps && window.DBMaps.splitLayout ? window.DBMaps.splitLayout() : null;
+    var info = root.querySelector('.dbt-info'), end = root.querySelector('.dbt-info-end'), tr = root.querySelector('.dbt-tree');
+    var bs = document.body.style;
+    if (split) {
+      if (window.DBIllus) { try { window.DBIllus.close(); } catch (e) { /* ignore */ } }
+      bs.setProperty('--dbm-shift', split.shift + 'px');
+      bs.setProperty('--dbt-info-left', split.infoLeft + 'px'); bs.setProperty('--dbt-info-w', split.infoW + 'px');
+      document.body.classList.add('dbt-split');
+      if (info && end && end.parentNode !== info) info.appendChild(end);
+    } else {
+      document.body.classList.remove('dbt-split');
+      if (end && tr && end.previousElementSibling !== tr) tr.after(end);
+    }
+    var w = split ? split.mapW : sideSpace(), want = w ? 'side' : 'sheet';
     var box = scroller();
     if (!box || state.mode !== want) {
       if (box) box.remove();
@@ -216,11 +231,13 @@
       state.mode = want;
     }
     if (w) box.style.width = w + 'px';
+    box.style.left = split ? split.mapLeft + 'px' : '';
     draw();
   }
 
   function closeOthers() {
     if (window.DBFinds) { try { window.DBFinds.close(); } catch (e) { /* ignore */ } }
+    if (window.DBIllus) { try { window.DBIllus.close(); } catch (e) { /* ignore */ } }
     if (window.DBMaps && document.querySelector('.dbm')) { try { window.DBMaps.close(); } catch (e) { /* ignore */ } }
   }
 
@@ -254,8 +271,8 @@
 
   function fill(root, t) {
     var html = '<div class="dbt-head"><span>Family tree · ' + esc(t.ref) + '</span><button type="button" class="dbt-close" data-dbt-close>' + CLOSE + 'Close</button></div>';
-    html += '<h3 class="dbt-title">' + esc(t.title) + '</h3>';
-    html += (t.intro || []).map(function (p) { return '<p class="dbt-p">' + nm(p) + '</p>'; }).join('');
+    html += '<div class="dbt-info"><h3 class="dbt-title">' + esc(t.title) + '</h3>';
+    html += (t.intro || []).map(function (p) { return '<p class="dbt-p">' + nm(p) + '</p>'; }).join('') + '</div>';
     if (t.branches) {
       html += '<div class="dbt-bar">' + t.branches.map(function (b) {
         var inner = '<i class="dbt-sw dbt-c-' + esc(b.col || b.id) + '"></i>' + esc(nm(b.name)) + (b.count ? ' <b>' + b.count + '</b>' : '');
@@ -274,8 +291,10 @@
       p.kids.forEach(function (k) { walk(k); });
     });
     html += '</div>';
+    html += '<div class="dbt-info-end">';                      // below the tree; in the right-hand column on very wide screens
     if (t.countNote) html += '<p class="dbt-note">' + nm(t.countNote) + '</p>';
     if (t.sources) html += '<p class="dbt-sources src-fold"><b>Sources.</b> ' + t.sources + '</p><button type="button" class="src-more" aria-expanded="false">more</button>';
+    html += '</div>';
     root.innerHTML = html;
     var src = root.querySelector('.dbt-sources');                 // no "more" when the sources fit in three lines
     if (src) requestAnimationFrame(function () {
@@ -458,6 +477,7 @@
 
   function close() {
     if (state.ro) { state.ro.disconnect(); state.ro = null; }
+    document.body.classList.remove('dbt-split');
     if (state.root) state.root.remove();
     var b = scroller(); if (b) b.remove();
     state.open = null; state.root = null; state.mode = null; state.tree = null; state.sel = null;
