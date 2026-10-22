@@ -81,8 +81,18 @@
       letter-spacing: 0; text-transform: none; color: var(--accent); margin-bottom: 0.3rem; }
 
     /* Feature list */
-    .ab-feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 40px; margin: 2.8rem 0 0; padding: 0; list-style: none; }
-    .ab-feats li { border-top: 1px solid var(--line-strong); padding-top: 14px; }
+    .ab-feats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 52px 40px; margin: 3.4rem 0 0; padding: 0; list-style: none; }
+    .ab-feats li { position: relative; border-top: 1px solid var(--line-strong); padding-top: 34px; }
+    /* the site's tool icons, each a small bead sitting on its feature's rule */
+    .ab-feats .ab-ic { position: absolute; top: -21px; left: 0; display: flex; align-items: center; justify-content: center;
+      width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--paper); color: var(--accent);
+      box-shadow: 0 0 0 6px var(--paper); transition: color 0.2s, border-color 0.2s, background 0.2s; }
+    .ab-feats .ab-ic svg { width: 20px; height: 20px; flex: none; }
+    .ab-feats li:hover .ab-ic { color: var(--accent-deep); border-color: var(--accent-soft); background: var(--tint); }
+    .ab-ic-txt { display: inline-flex; align-items: baseline; gap: 1px; font: 500 0.92rem/1 var(--display, Georgia, serif); }
+    .ab-ic-txt i { font-style: normal; opacity: 0.45; margin: 0 1px; }
+    .ab-ic-txt .he { font-family: 'Noto Serif Hebrew', serif; font-size: 1rem; }
+    .ab-feats .ab-ic span { font-size: inherit; line-height: 1; color: inherit; }
     .ab-feats b { display: block; font: 600 0.8rem var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
     .ab-feats span { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); }
 
@@ -242,12 +252,15 @@
     <p class="ab-eyebrow rv">Daily Bread Online</p>
     <h2 class="ab-h rv d1">Go deeper. <em>Free.</em></h2>
     <ul class="ab-feats">
-      <li class="rv d1"><b>Every day’s readings</b><span>In a classic English translation style based on the solid scholarship of the Berean Standard Bible.</span></li>
-      <li class="rv d1"><b>Hebrew and Greek</b><span>The original text under each verse, or on its own.</span></li>
-      <li class="rv d2"><b>Word study</b><span>Tap any Hebrew or Greek word for its meaning and form.</span></li>
-      <li class="rv d2"><b>Maps</b><span>Interactive maps for key passages.</span></li>
-      <li class="rv d3"><b>Biblical calendar</b><span>Today’s Hebrew date, Feasts and Shabbat times where you are.</span></li>
-      <li class="rv d3"><b>Your progress</b><span>Kept in your browser. Sign in, and it stays in step on all your devices; we keep only your email address and your progress.</span></li>
+      <li class="rv d1"><span class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.2 5 7.6 4.5 4 4.5v13.5c3.6 0 6.2.5 8 2 1.8-1.5 4.4-2 8-2V4.5c-3.6 0-6.2.5-8 2z"/><path d="M12 6.5V20"/></svg></span><b>Every day’s readings</b><span>In a classic English translation style based on the solid scholarship of the Berean Standard Bible.</span></li>
+      <li class="rv d1"><span class="ab-ic" aria-hidden="true"><span class="ab-ic-txt"><span>A</span><i>/</i><span class="he">א</span></span></span><b>Hebrew and Greek</b><span>The original text under each verse, or on its own.</span></li>
+      <li class="rv d1"><span class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3 20.5 20.5"/><path d="M8 8l5 5M12.6 7.6c.3 1.4-.4 2.4-1.5 2.9M8.4 13.4c-.3-1.4.4-2.4 1.5-2.9" stroke-width="1.4"/></svg></span><b>Word study</b><span>Tap any Hebrew or Greek word for its meaning and form.</span></li>
+      <li class="rv d2"><span class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z"/><path d="M9 4v13.5M15 6.5V20"/></svg></span><b>Maps</b><span>Interactive maps for key passages; tap a place in the text to find it.</span></li>
+      <li class="rv d2"><span class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="18" cy="19.5" r="2.2"/><circle cx="18" cy="4.5" r="2.2"/><path d="M6 7.2v11.3c0 .6.4 1 1 1h8.8M6 12h9.8M6 5.6c0-.6.4-1.1 1-1.1h8.8"/></svg></span><b>Family trees</b><span>The Bible’s genealogies laid out as clear trees; tap a name in the text to find the person.</span></li>
+      <li class="rv d2"><span class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v3.2C7.2 7.4 5.5 10 5.5 13.2 5.5 17.5 8.4 21 12 21s6.5-3.5 6.5-7.8c0-3.2-1.7-5.8-4.5-7V3"/><path d="M6.2 11h11.6M6.6 16h10.8"/></svg></span><b>Archaeology</b><span>Finds that shed light on the text, with photos and short notes.</span></li>
+      <li class="rv d3"><span class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 20.5 7.5v9L12 21.2 3.5 16.5v-9Z"/><path d="M3.5 7.5 12 12.2v9M12 12.2 20.5 7.5"/><path d="M12 16.6 20.5 11.9" stroke-dasharray="2.2 1.9"/><path d="M5.6 12.9 9.9 15.3" stroke-width="1.3"/></svg></span><b>Illustrations</b><span>Drawings and reconstructions, from Noah’s ark to the walls of Jericho.</span></li>
+      <li class="rv d3"><span class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/></svg></span><b>Biblical calendar</b><span>Today’s Hebrew date, Feasts and Shabbat times where you are.</span></li>
+      <li class="rv d3"><span class="ab-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.3l2.6 2.6 5-5.3"/></svg></span><b>Your progress</b><span>Kept in your browser. Sign in, and it stays in step on all your devices; we keep only your email address and your progress.</span></li>
     </ul>
     <div class="ab-keep rv d2">
       <p><b>Help keep it free.</b> No subscriptions, no advertising, no tracking — made possible by those who give.</p>
