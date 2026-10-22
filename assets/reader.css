@@ -1164,7 +1164,7 @@ body.dbm-margin .scripture :is(.dbm-pin, .dbf-pin, .dbt-pin, .dbi-pin) { left: -
    right-aligned a little left of the pins, and under them when the verse has pins. */
 .msub { display: none; }
 html.msub-on .scripture .msub {
-  display: block; position: absolute; right: calc(100% + 68px); width: 8.5rem;
+  display: block; position: absolute; right: calc(100% + 30px); width: 8.5rem;
   margin-top: calc(var(--msub-i, 0) * 44px + 0.25rem); text-align: right; text-indent: 0;
   font-size: 0.9rem; font-style: italic; font-weight: 300; line-height: 1.4; color: var(--muted);
   white-space: normal; pointer-events: none;

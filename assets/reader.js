@@ -341,7 +341,7 @@
     // Drop trailing headings / stanza breaks that introduce verses outside the range
     while (out.length && HEADINGS[out[out.length - 1].k]) out.pop();
     // If the reading begins in the middle of a section, keep that section's title too
-    if (prevS1 && !(out.length && out[0].k === 's1')) out.unshift(prevS1);
+    if (prevS1 && !(out.length && out[0].k === 's1')) out.unshift(Object.assign({}, prevS1, { cont: true }));   // cont: not in the margin
     return out;
   }
 
@@ -380,7 +380,7 @@
         if (HEADINGS[bl.k]) {
           // Section titles go under the chapter heading, not inside the text.
           var t = bl.c.join('');
-          if (bl.k === 's1') pendSub = t;
+          if (bl.k === 's1' && !bl.cont) pendSub = t;
           if (bl.k === 's1' && titles.indexOf(t) < 0) titles.push(t);
           else if (bl.k === 'qa') html += '<p class="qa">' + t + '</p>';
           continue;
