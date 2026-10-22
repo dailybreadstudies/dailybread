@@ -243,7 +243,7 @@
     if (!r) return;
     var left = r.getBoundingClientRect().left;
     var panel = document.querySelector('.dbm-panel');
-    var free = panel && document.body.classList.contains('dbm-side') ? left - panel.getBoundingClientRect().right : left;
+    var free = panel && /(^| )dbm-(side|split)( |$)/.test(document.body.className) ? left - panel.getBoundingClientRect().right : left;
     document.body.classList.toggle('dbm-margin', free >= 64);
   }
   function pinFor(id) { return document.querySelector('.dbm-pin[data-dbm-open="' + id + '"]'); }
@@ -257,12 +257,39 @@
   }
   function visible(e) { return !!(e && e.offsetParent !== null); }
 
+  /* Very wide screens: the map fills the space left of the text, top to bottom, and its key and notes the
+     space right of it; the text column does not move. Returns the layout, or null when there is not room. */
+  var SPLIT = { edge: 20, gapL: 108, gapR: 48, minMap: 280, minInfo: 250, maxMap: 760, maxInfo: 440 };
+  function splitLayout() {
+    var r = readerEl();
+    if (!r || window.innerWidth < 1100) return null;
+    var rr = r.getBoundingClientRect();
+    var mapW = Math.min(SPLIT.maxMap, rr.left - SPLIT.edge - SPLIT.gapL);
+    var infoW = Math.min(SPLIT.maxInfo, window.innerWidth - rr.right - SPLIT.gapR - SPLIT.edge - 8);
+    if (mapW < SPLIT.minMap || infoW < SPLIT.minInfo) return null;
+    return { mapLeft: Math.round(rr.left - SPLIT.gapL - mapW), mapW: Math.round(mapW), infoLeft: Math.round(rr.right + SPLIT.gapR), infoW: Math.round(infoW) };
+  }
+
   function placeAtlas() {
     var ctx = state.ctx;
     if (!ctx) return;
-    var w = sideWidth();
+    var was = state.mode;
+    var split = splitLayout();
+    var w = split ? 0 : sideWidth();
     var pin = anchorFor(state.open);
-    if (w) {
+    if (split) {
+      if (window.DBIllus) { try { window.DBIllus.close(); } catch (e) { /* ignore */ } }   // the right column is the map's now
+      var sp = document.querySelector('.dbm-panel') || document.body.appendChild(el('aside', 'dbm-panel'));
+      sp.setAttribute('aria-label', 'Map');
+      var bs = document.body.style;
+      bs.setProperty('--dbm-panel-left', split.mapLeft + 'px'); bs.setProperty('--dbm-panel-w', split.mapW + 'px');
+      bs.setProperty('--dbm-info-left', split.infoLeft + 'px'); bs.setProperty('--dbm-info-w', split.infoW + 'px');
+      document.body.classList.remove('dbm-side');
+      document.body.classList.add('dbm-split');
+      if (ctx.root.parentNode !== sp) sp.appendChild(ctx.root);
+      state.mode = 'split';
+    } else if (w) {
+      document.body.classList.remove('dbm-split');
       var panel = document.querySelector('.dbm-panel') || document.body.appendChild(el('aside', 'dbm-panel'));
       panel.setAttribute('aria-label', 'Map');
       // keep map and text together as one centred pair on very wide screens
@@ -273,14 +300,14 @@
       if (ctx.root.parentNode !== panel) panel.appendChild(ctx.root);
       state.mode = 'side';
     } else {
-      document.body.classList.remove('dbm-side');
+      document.body.classList.remove('dbm-side', 'dbm-split');
       var block = pin && (pin.closest('.dbm-anchor') || pin.closest('.scripture > *') || pin.parentNode);
       if (block && ctx.root.previousSibling !== block) block.after(ctx.root);
       var p = document.querySelector('.dbm-panel'); if (p) p.remove();
       state.mode = 'inline';
     }
     updateMargin();
-    if (ctx.map) requestAnimationFrame(function () { ctx.map.resize(); });
+    if (ctx.map) requestAnimationFrame(function () { ctx.map.resize(); if (was && was !== state.mode && ctx.ready) fitDefault(ctx, 0); });
   }
 
   function open(id, then, from) {
@@ -309,7 +336,7 @@
       ctx.root.remove();
     }
     var p = document.querySelector('.dbm-panel'); if (p) p.remove();
-    document.body.classList.remove('dbm-side');
+    document.body.classList.remove('dbm-side', 'dbm-split');
     state.open = null; state.ctx = null; state.mode = null; state.anchor = null;
     setPins();
     updateMargin();
@@ -337,7 +364,7 @@
     root.innerHTML = '<div class="dbm-head"><span data-dbm-title>Map</span><button type="button" class="dbm-close" data-dbm-close>' +
       '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2 2 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Close map</button></div>' +
       '<div class="dbm-frame"><div class="dbm-map"></div><div class="dbm-msg">Loading the map…</div></div>' +
-      '<div class="dbm-keyunder"><div class="dbm-key" data-dbm-key></div></div><div class="dbm-notes"></div>';
+      '<div class="dbm-info"><div class="dbm-keyunder"><div class="dbm-key" data-dbm-key></div></div><div class="dbm-notes"></div></div>';
     var ctx = { id: id, root: root, frame: root.querySelector('.dbm-frame'), map: null, ready: false, queue: [], shown: null, marks: {}, big: false,
       citiesOn: !(window.matchMedia && matchMedia('(max-width: 760px)').matches) };   // phones start without the cities layer
     wireAtlas(ctx);

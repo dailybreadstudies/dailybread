@@ -65,6 +65,17 @@ body.dbm-side { padding-left: calc(var(--dbm-panel-left, 32px) + var(--dbm-panel
 }
 .dbm-panel:has(.dbm-big) { overflow: visible; z-index: 1000; }
 
+/* ── Split (very wide screens): map left of the text, full height; key and notes right of it ── */
+body.dbm-split .dbm-panel { display: flex; flex-direction: column; overflow: hidden; padding: 22px 0 22px; }
+body.dbm-split .dbm-panel > .dbm { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+body.dbm-split .dbm-panel .dbm-frame { flex: 1 1 auto; min-height: 0; width: 100%; aspect-ratio: auto; }
+body.dbm-split .dbm-info { position: fixed; top: var(--tb-off, 0px); left: var(--dbm-info-left); width: var(--dbm-info-w); z-index: 150;
+  height: calc(100vh - var(--tb-off, 0px)); height: calc(100dvh - var(--tb-off, 0px)); overflow-y: auto; overflow-x: hidden;
+  padding: 78px 10px 28px 0; scrollbar-width: thin; }                /* starts below the reader's tool buttons (top right) */
+body.dbm-split .dbm-info .dbm-keyunder { margin-top: 0; }
+body.dbm-split .dbm-info .dbm-key ul { grid-template-columns: 1fr; }
+body.dbm-split .dbm-big .dbm-info { display: none; }
+
 /* ── The map plate ── */
 .dbm { font-family: var(--sans); color: var(--ink); line-height: 1.5; text-align: left; text-indent: 0; }
 .scripture .dbm { margin: 1.4rem 0 2rem; font-size: 1rem; }

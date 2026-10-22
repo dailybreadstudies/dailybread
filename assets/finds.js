@@ -118,7 +118,7 @@
   function open(id) {
     if (state.open === id) return;
     if (state.open) close();
-    if (window.DBMaps && document.body.classList.contains('dbm-side')) { try { window.DBMaps.close(); } catch (e) { /* ignore */ } }
+    if (window.DBMaps && /(^| )dbm-(side|split)( |$)/.test(document.body.className)) { try { window.DBMaps.close(); } catch (e) { /* ignore */ } }
     state.open = id;
     setPins();
     var root = state.root = el('article', 'dbf', '<div class="dbf-head"><span>Archaeology</span><button type="button" class="dbf-close" data-dbf-close>' +

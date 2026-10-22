@@ -210,6 +210,14 @@ python3 tools/build_bsb.py /tmp/bsb data/bsb
 
 Scripture quotations are from the Berean Standard Bible (BSB), which has been dedicated to the public domain.
 
+## Map layout on very wide screens
+
+When there is room on both sides of the text (about 1400 px and wider), a map opens in two columns and the text
+does not move: the title and the map fill the space left of the text from top to bottom, and the key, notes and
+sources fill the space right of it (`splitLayout()` in assets/maps.js; `body.dbm-split` in assets/maps.css). Narrower
+desktops keep the single left column, and phones the map below the verse. Opening an illustration closes a two-column
+map, and opening a map closes an illustration, since both use the right-hand space.
+
 ## Illustrations and the full-size viewer
 
 `assets/illus.js` adds an illustration button (an opened-up box) beside a verse listed in `data/illus/index.json`

@@ -100,6 +100,8 @@
   }
 
   function open(id) {
+    // a map using the space right of the text (very wide screens) gives way to the illustration
+    if (window.DBMaps && document.body.classList.contains('dbm-split')) { try { window.DBMaps.close(); } catch (e) { /* ignore */ } }
     var keep = state.pin;
     if (state.open) close();
     state.pin = keep;
