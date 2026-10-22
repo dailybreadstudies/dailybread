@@ -259,13 +259,13 @@
 
   /* Very wide screens: the map fills the space left of the text, top to bottom, and its key and notes the
      space right of it; the text column does not move. Returns the layout, or null when there is not room. */
-  var SPLIT = { edge: 20, gapL: 64, gapR: 64, minMap: 280, minInfo: 250, maxMap: 760, maxInfo: 440 };
+  var SPLIT = { edge: 16, gapL: 70, gapR: 70, minMap: 280, minInfo: 250, maxMap: 760, maxInfo: 440 };
   function splitLayout() {
     var r = readerEl();
     if (!r || window.innerWidth < 1100) return null;
     var rr = r.getBoundingClientRect();
     var mapW = Math.min(SPLIT.maxMap, rr.left - SPLIT.edge - SPLIT.gapL);
-    var infoW = Math.min(SPLIT.maxInfo, window.innerWidth - rr.right - SPLIT.gapR - SPLIT.edge - 8);
+    var infoW = Math.min(SPLIT.maxInfo, window.innerWidth - rr.right - SPLIT.gapR - SPLIT.edge);
     if (mapW < SPLIT.minMap || infoW < SPLIT.minInfo) return null;
     return { mapLeft: Math.round(rr.left - SPLIT.gapL - mapW), mapW: Math.round(mapW), infoLeft: Math.round(rr.right + SPLIT.gapR), infoW: Math.round(infoW) };
   }
