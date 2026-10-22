@@ -55,6 +55,16 @@
     .ls-linkbtn { background: none; border: none; padding: 0; font: inherit; cursor: pointer; }
     .ls-sub-note a:hover, .ls-linkbtn:hover { color: var(--accent-deep); }
     .ls-comm { margin: 3.4rem 0 0; padding: 34px 34px 30px; border-radius: 16px; background: var(--tint); text-align: center; }
+    /* Community photo, fading gently into the top of the card */
+    .ls-comm { position: relative; overflow: hidden; }
+    .ls-comm > *:not(.ls-comm-photo) { position: relative; }
+    .ls-comm-photo { position: absolute; left: 0; right: 0; top: 0; height: 360px;
+      background: url("assets/img/moms-community.jpg") 58% 38% / cover no-repeat; opacity: 0.9;
+      --fade: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.92) 18%, rgba(0,0,0,.75) 34%, rgba(0,0,0,.52) 50%, rgba(0,0,0,.3) 65%, rgba(0,0,0,.13) 80%, rgba(0,0,0,.04) 92%, transparent 100%);
+      -webkit-mask-image: var(--fade); mask-image: var(--fade); }
+    .ls-comm.has-photo { padding-top: 220px; }
+    .ls-comm.has-photo .ls-comm-k, .ls-comm.has-photo .ls-comm-h { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6); }
+    @media (max-width: 700px) { .ls-comm-photo { height: 280px; } .ls-comm.has-photo { padding-top: 170px; } }
     .ls-comm-k { font: 600 0.7rem var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); margin: 0 0 0.6rem; }
     .ls-comm-h { font-family: var(--display); font-weight: 300; font-size: 1.7rem; line-height: 1.25; color: var(--heading); margin: 0 auto 0.9rem; max-width: 26rem; text-wrap: balance; }
     .ls-comm-p { font-size: 1.02rem; line-height: 1.75; color: var(--ink-soft); margin: 0 auto 1.6rem; max-width: 32rem; }
@@ -158,7 +168,8 @@
   <ul class="ls-list" id="ls-list"></ul>
   <p class="ls-more" id="ls-more" hidden><button type="button">Show more</button></p>
 
-  <section class="ls-comm" id="community">
+  <section class="ls-comm has-photo" id="community">
+    <div class="ls-comm-photo" aria-hidden="true"></div>
     <p class="ls-comm-k">The Daily Bread Moms community</p>
     <h2 class="ls-comm-h">Read the Bible together with moms around the world</h2>
     <p class="ls-comm-p">The podcast has its own home at dailybreadmoms.com, with Insights articles, answers to common
