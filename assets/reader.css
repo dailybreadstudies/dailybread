@@ -1053,6 +1053,10 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
 .src-more:hover { color: var(--accent-deep); }
 .src-more[hidden] { display: none; }
 
+/* Map, find, tree and illustration buttons beside a verse: in the margin they stack downwards, one under another,
+   so the margin left of the text stays as narrow as the one on the right */
+body.dbm-margin .scripture :is(.dbm-pin, .dbf-pin, .dbt-pin, .dbi-pin) { left: -54px; margin-top: calc(-1px + var(--pin-i, 0) * 44px); }
+
 /* Hebrew New Testament (Delitzsch) under the Apostles readings */
 .orig-only .vo-label { font: 600 0.68rem/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-faint);
   margin: 1.6rem 0 0.6rem; direction: ltr; text-align: left; }

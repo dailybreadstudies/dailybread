@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  /* The map, archaeology, family-tree and illustration buttons at one verse sit side by side in the margin,
+  /* The map, archaeology, family-tree and illustration buttons at one verse sit one under another in the margin,
      always in the same order, whichever script added its button first (same helper in maps, finds, trees). */
   window.DBPinLayout = window.DBPinLayout || function (target) {
     var RANK = { 'dbm-pin': 0, 'dbf-pin': 1, 'dbt-pin': 2, 'dbi-pin': 3 }, pins = [], p = target.previousElementSibling;
@@ -22,7 +22,7 @@
     pins.sort(function (a, b) { return rank(a) - rank(b); });
     pins.forEach(function (e, i) {
       target.parentNode.insertBefore(e, i === 0 ? target : pins[i - 1]);
-      e.style.left = (-54 - 44 * i) + 'px';
+      e.style.left = ''; e.style.setProperty('--pin-i', i);               // in the margin they stack downwards (reader.css)
     });
   };
 
