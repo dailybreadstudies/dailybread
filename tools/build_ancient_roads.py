@@ -22,6 +22,8 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 ROADS = [
     # name, label shown along the line ('' for none), waypoints (place names or [lon, lat])
     ("Way of the Sea (coastal highway)", "Way of the Sea", [
+        # from Egypt's border fortress at Sile (Tjaru, Tell Hebua; "the Way of Horus") past Pelusium and along north Sinai
+        [32.37, 30.97], [32.56, 31.03], [32.8, 31.0], [33.1, 31.02], [33.45, 31.06], [33.8, 31.12], [34.05, 31.2],
         [34.25, 31.29], [34.35, 31.38], "Gaza", [34.52, 31.58], [34.58, 31.66], [34.62, 31.71], "Ashdod", [34.70, 31.81],
         "Jabneel", [34.80, 31.93], [34.86, 32.00], [34.90, 32.06], "Aphek", [34.96, 32.18], [34.99, 32.26], "Socoh",
         [35.04, 32.40], [35.05, 32.45], [35.09, 32.49], [35.13, 32.53], "Megiddo", [35.25, 32.63], [35.33, 32.70],

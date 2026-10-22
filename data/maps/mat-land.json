@@ -202,10 +202,10 @@
   {
    "n": "Egypt",
    "ll": [
-    32.4,
-    30.85
+    31.2,
+    30.55
    ],
-   "hide": true,
+   "r": 1,
    "z": 7,
    "note": "The Nile Delta lay about ten days' walk from Bethlehem by the coast road. Large Jewish communities lived in Alexandria and Leontopolis, which made Egypt the natural refuge for Joseph, Mary and the child (Matthew 2:13–15)."
   }
@@ -904,6 +904,37 @@
      "m": "Gaza",
      "u": "aa8edd2/gaza",
      "note": "On the road to Egypt, where Philip met the Ethiopian official (Acts 8:26)."
+    },
+    {
+     "n": "Alexandria",
+     "ll": [
+      29.8965,
+      31.1825
+     ],
+     "c": 2,
+     "m": "Alexandria",
+     "u": "aee7248/alexandria",
+     "note": "Founded by Alexander the Great in 331 BC: the greatest city of the eastern Mediterranean and home of the largest Jewish community outside the Land, where the Torah was first translated into Greek (the Septuagint) and Philo wrote. Apollos came from here (Acts 18:24)."
+    },
+    {
+     "n": "Leontopolis",
+     "ll": [
+      31.3333,
+      30.2964
+     ],
+     "c": 1,
+     "m": "Tell el-Yahudiyeh",
+     "note": "A Jewish settlement in the Delta where the priest Onias IV built a temple about 160 BC; it stood until AD 73 (Josephus, War 7.420–436). One of the communities of Egypt where a family from Judea could find refuge (Matthew 2:13–15)."
+    },
+    {
+     "n": "Pelusium",
+     "ll": [
+      32.5653,
+      31.0423
+     ],
+     "c": 2,
+     "m": "Tell el-Farama",
+     "note": "The fortress city at the mouth of the eastern (Pelusiac) branch of the Nile, Egypt’s gateway on the coast road from Gaza."
     },
     {
      "n": "Damascus",

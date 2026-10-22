@@ -72,7 +72,7 @@ REGIONS = [
      'note': 'The tribal land of Zebulun in Lower Galilee, around Nazareth. Matthew 4:15 quotes Isaiah 9:1: "Land of Zebulun and land of Naphtali… Galilee of the Gentiles."'},
     {'n': 'Naphtali', 'll': [35.5, 33.02], 'hide': True, 'z': 8.5,
      'note': 'The tribal land of Naphtali, west of the Sea of Galilee and north into Upper Galilee; Capernaum lay within it (Matthew 4:13).'},
-    {'n': 'Egypt', 'll': [32.4, 30.85], 'hide': True, 'z': 7,
+    {'n': 'Egypt', 'll': [31.2, 30.55], 'r': 1, 'z': 7,
      'note': 'The Nile Delta lay about ten days\' walk from Bethlehem by the coast road. Large Jewish communities lived in Alexandria and Leontopolis, '
              'which made Egypt the natural refuge for Joseph, Mary and the child (Matthew 2:13–15).'},
 ]
@@ -191,6 +191,12 @@ PLACES = [
     dict(n='Lydda', ll=[34.9, 31.95], c=2, m='Lod', u='a2c5cc7/lod', g='other', note='Where Peter healed Aeneas (Acts 9:32–35).'),
     dict(n='Ptolemais', ll=[35.0692, 32.9214], c=2, m='Acre', u='abc2af0/ptolemais', g='other', note='Old Acco, a Gentile port city; Paul stayed a day here (Acts 21:7).'),
     dict(n='Gaza', ll=[34.4644, 31.504], c=2, m='Gaza', u='aa8edd2/gaza', g='other', note='On the road to Egypt, where Philip met the Ethiopian official (Acts 8:26).'),
+    dict(n='Alexandria', ll=[29.8965, 31.1825], c=2, m='Alexandria', u='aee7248/alexandria', g='other',
+         note='Founded by Alexander the Great in 331 BC: the greatest city of the eastern Mediterranean and home of the largest Jewish community outside the Land, where the Torah was first translated into Greek (the Septuagint) and Philo wrote. Apollos came from here (Acts 18:24).'),
+    dict(n='Leontopolis', ll=[31.3333, 30.2964], c=1, m='Tell el-Yahudiyeh', g='other',
+         note='A Jewish settlement in the Delta where the priest Onias IV built a temple about 160 BC; it stood until AD 73 (Josephus, War 7.420–436). One of the communities of Egypt where a family from Judea could find refuge (Matthew 2:13–15).'),
+    dict(n='Pelusium', ll=[32.5653, 31.0423], c=2, m='Tell el-Farama', g='other',
+         note='The fortress city at the mouth of the eastern (Pelusiac) branch of the Nile, Egypt’s gateway on the coast road from Gaza.'),
     dict(n='Damascus', ll=[36.30639, 33.51111], c=2, m='Damascus', u='a69c1d4/damascus', g='other',
          note='The great city of Syria, with many synagogues; Paul was on his way here when he met the risen Jesus (Acts 9).'),
 ]
