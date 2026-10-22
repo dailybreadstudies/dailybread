@@ -51,7 +51,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: KIDS, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc' };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: KIDS, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', marginTitles: false };
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -59,7 +59,44 @@
   function saveSettings() {
     try { localStorage.setItem(KEY + 'settings', JSON.stringify(settings)); } catch (e) { /* ignore */ }
   }
+  // ── Section titles in the left margin (desktop, menu switch "Margin Subtitles") ──
+  // Each BSB section title is also drawn beside its verse, right-aligned, left of the map/find/tree pins and
+  // below them when a verse has pins. Hidden while a map, find, tree or illustration is open.
+  function msubHtml(t) { return '<span class="msub" aria-hidden="true">' + t + '</span>'; }
+  var PIN_RE = /(^| )(dbm-pin|dbf-pin|dbt-pin|dbi-pin)( |$)/;
+  function layoutMsub() {
+    var r = document.getElementById('reader');
+    if (!r) return;
+    var open = document.querySelector(':is(.dbm-pin,.dbf-pin,.dbt-pin,.dbi-pin)[aria-pressed="true"], .dbm-panel, .dbf-panel, .dbt-panel, .dbt-sheet, .scripture .dbm') ||
+               /(^| )(dbm-side|dbm-split|dbt-split|dblx-locked)( |$)/.test(document.body.className);
+    var on = !!settings.marginTitles && !open && r.getBoundingClientRect().left >= 250;
+    document.documentElement.classList.toggle('msub-on', on);
+    if (!on) return;
+    r.querySelectorAll('.msub').forEach(function (m) {
+      var n = 0, e = m.previousElementSibling;
+      while (e && PIN_RE.test(e.className)) { n++; e = e.previousElementSibling; }
+      e = m.nextElementSibling;
+      while (e && PIN_RE.test(e.className)) { n++; e = e.nextElementSibling; }
+      m.style.setProperty('--msub-i', n);
+    });
+  }
+  var msubQueued = false;
+  function queueMsub() {
+    if (msubQueued) return;
+    msubQueued = true;
+    requestAnimationFrame(function () { msubQueued = false; layoutMsub(); });
+  }
+  if (window.MutationObserver) {
+    var msubObs = new MutationObserver(queueMsub);
+    document.addEventListener('DOMContentLoaded', function () {
+      msubObs.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-pressed', 'class'] });
+    });
+    if (document.body) msubObs.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-pressed', 'class'] });
+  }
+  window.addEventListener('resize', queueMsub);
+
   function applyLook() {
+    queueMsub();
     document.documentElement.style.fontSize = SIZES[settings.size] + '%';
     document.documentElement.classList.toggle('font-sans', settings.font === 'sans');
     document.documentElement.classList.toggle('justify', !!settings.justify);
@@ -326,6 +363,7 @@
     var html = '';
     var notes = [];
     var titles = [];
+    var pendSub = null;   // a section title waiting for its verse (shown in the margin, see .msub)
     var units = [];          // one entry per verse, for the original-language views
     var unit = null;
     var multiChapter = r.c2 > r.c1;
@@ -342,6 +380,7 @@
         if (HEADINGS[bl.k]) {
           // Section titles go under the chapter heading, not inside the text.
           var t = bl.c.join('');
+          if (bl.k === 's1') pendSub = t;
           if (bl.k === 's1' && titles.indexOf(t) < 0) titles.push(t);
           else if (bl.k === 'qa') html += '<p class="qa">' + t + '</p>';
           continue;
@@ -354,6 +393,7 @@
           if (typeof it === 'number') {
             unit = { c: c, v: it, html: '', poetic: poetic, newPara: k === 0 && !POETRY[bl.k] && bl.k !== 'd' };
             units.push(unit);
+            if (pendSub) { unit.sub = pendSub; inner += msubHtml(pendSub); pendSub = null; }
             if (it === 0) continue;
             if (inner && !/\s$/.test(inner)) inner += ' ';   // space between verses
             if (it === 1 && multiChapter) inner += '<span class="chapter-num">' + c + '</span>';
@@ -617,7 +657,8 @@
       return ' class="vp-orig ' + lang + (o.nt ? ' he-nt' : '') + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '');
     };
     var num = function (u) {
-      if (u.v === 0) return '';
+      if (u.v === 0) return u.sub ? msubHtml(u.sub) : '';
+      if (u.sub) return msubHtml(u.sub) + num(Object.assign({}, u, { sub: null }));
       if (u.v === 1 && multiChapter) return '<span class="chapter-num">' + u.c + '</span>';
       return '<sup class="verse-num" data-v="' + u.v + '">' + u.v + '</sup>';
     };
@@ -1799,7 +1840,7 @@
         else if (current && current.day) loadDay(current.day.date, true);
         return;
       }
-      if (key === 'justify' || key === 'verseNumbers') applyLook();   // display only
+      if (key === 'justify' || key === 'verseNumbers' || key === 'marginTitles') applyLook();   // display only
       else rerender();   // re-render with the new wording
     }
     saveSettings();
