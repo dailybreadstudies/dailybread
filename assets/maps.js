@@ -259,15 +259,18 @@
 
   /* Very wide screens: the map fills the space left of the text, top to bottom, and its key and notes the
      space right of it; the text column does not move. Returns the layout, or null when there is not room. */
-  var SPLIT = { edge: 16, gapL: 70, gapR: 70, minMap: 280, minInfo: 250, maxMap: 760, maxInfo: 440 };
+  var SPLIT = { edge: 16, gapL: 70, gapR: 70, minMap: 280, minInfo: 250, maxMap: 760, maxInfo: 520, airFrom: 432, airRate: 0.35, maxAir: 170 };
   function splitLayout() {
     var r = readerEl();
     if (!r || window.innerWidth < 1100) return null;
     var rr = r.getBoundingClientRect();
-    var mapW = Math.min(SPLIT.maxMap, rr.left - SPLIT.edge - SPLIT.gapL);
-    var infoW = Math.min(SPLIT.maxInfo, window.innerWidth - rr.right - SPLIT.gapR - SPLIT.edge);
+    var free = Math.min(rr.left, window.innerWidth - rr.right);
+    // the wider the screen, the more air between the text and the two columns, so the text stands on its own
+    var air = Math.max(0, Math.min(SPLIT.maxAir, (free - SPLIT.airFrom) * SPLIT.airRate));
+    var mapW = Math.min(SPLIT.maxMap, rr.left - SPLIT.edge - SPLIT.gapL - air);
+    var infoW = Math.min(SPLIT.maxInfo, window.innerWidth - rr.right - SPLIT.gapR - SPLIT.edge - air);
     if (mapW < SPLIT.minMap || infoW < SPLIT.minInfo) return null;
-    return { mapLeft: Math.round(rr.left - SPLIT.gapL - mapW), mapW: Math.round(mapW), infoLeft: Math.round(rr.right + SPLIT.gapR), infoW: Math.round(infoW) };
+    return { mapLeft: Math.round(rr.left - SPLIT.gapL - air - mapW), mapW: Math.round(mapW), infoLeft: Math.round(rr.right + SPLIT.gapR + air), infoW: Math.round(infoW) };
   }
 
   function placeAtlas() {
