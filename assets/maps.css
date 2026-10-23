@@ -15,7 +15,8 @@
   --dbm-enemy: #a23a2b;
   --dbm-other: #6d5a8c;
   --dbm-fire: #d9741c;
-  --dbm-road: #8a7660;
+  --dbm-road: #8a7660;          /* road names */
+  --dbm-road-line: #a8998a;     /* the road lines themselves */
   --dbm-region: #1e1e1e;
   --dbm-city: #17130f;          /* place names on the map */
   --dbm-badge-ink: #ffffff;
@@ -25,14 +26,14 @@
     --dbm-paper: #2a231c; --dbm-shade: #0c0907; --dbm-highlight: #5b4c3d;
     --dbm-water: #2f4a52; --dbm-water-line: #6b939c; --dbm-label: #e3d8ca;
     --dbm-israel: #7fb3d4; --dbm-ambush: #9cc77c; --dbm-enemy: #e8907c; --dbm-other: #b9a6dc;
-    --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e; --dbm-road: #a8977f; --dbm-region: #e8e0d5; --dbm-city: #f5eee4;
+    --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e; --dbm-road: #a8977f; --dbm-road-line: #8d8172; --dbm-region: #e8e0d5; --dbm-city: #f5eee4;
   }
 }
 :root[data-theme="dark"] {
   --dbm-paper: #2a231c; --dbm-shade: #0c0907; --dbm-highlight: #5b4c3d;
   --dbm-water: #2f4a52; --dbm-water-line: #6b939c; --dbm-label: #e3d8ca;
   --dbm-israel: #7fb3d4; --dbm-ambush: #9cc77c; --dbm-enemy: #e8907c; --dbm-other: #b9a6dc;
-  --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e; --dbm-road: #a8977f; --dbm-region: #e8e0d5; --dbm-city: #f5eee4;
+  --dbm-fire: #f2a04a; --dbm-badge-ink: #16120e; --dbm-road: #a8977f; --dbm-road-line: #8d8172; --dbm-region: #e8e0d5; --dbm-city: #f5eee4;
 }
 
 /* ── Map button beside the verse ── */

@@ -612,8 +612,8 @@
           { id: 'galilee', type: 'fill', source: 'galilee', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'deadsea', type: 'fill', source: 'deadsea', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'roads', type: 'line', source: 'roads', layout: { 'line-cap': 'round', 'line-join': 'round' },
-            paint: { 'line-color': css('--dbm-road'), 'line-opacity': 1, 'line-dasharray': [0.1, 2],
-              'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.9, 12, 3.1] } }
+            paint: { 'line-color': css('--dbm-road-line'), 'line-opacity': 0.8, 'line-dasharray': [0.1, 2.2],
+              'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.6, 12, 2.8] } }
         ]
       },
       bounds: spec.bounds,
@@ -661,13 +661,13 @@
         layout: { 'text-field': ['get', 'label'], 'text-font': ['literal', ['Noto Sans Italic']], 'symbol-placement': 'line', 'text-size': 11, 'text-offset': [0, -0.8] },
         paint: { 'text-color': css('--dbm-water-line'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
     });
-    map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 6, maxzoom: 11,
+    map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 5.5, maxzoom: 11,
       layout: { 'text-field': ['get', 'n'], 'text-transform': 'uppercase',
         // the main regions (rank 1: Judea, Samaria, Galilee…) in bold and a little larger; lesser ones stay light
         'text-font': ['case', ['<=', ['get', 'r'], 1], ['literal', ['Noto Sans Bold']], ['literal', ['Noto Sans Regular']]],
         'text-letter-spacing': ['case', ['<=', ['get', 'r'], 1], 0.5, 0.6],
         'text-size': ['interpolate', ['linear'], ['zoom'], 6, ['case', ['<=', ['get', 'r'], 1], 12, 10.5], 9, ['case', ['<=', ['get', 'r'], 1], 16.5, 14.5]], 'text-max-width': 30, 'text-line-height': 1.55,
-        'text-allow-overlap': false, 'text-padding': 6, 'symbol-sort-key': ['get', 'r'] },
+        'text-allow-overlap': true, 'text-ignore-placement': true, 'symbol-sort-key': ['get', 'r'] },
       paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2, 'text-opacity': 0.85 } });
     map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
       layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 12, 12],
@@ -685,7 +685,7 @@
     hillImage(map);
     map.addLayer({ id: 'places-dot', type: 'circle', source: 'places', filter: ['!=', ['get', 'k'], 'mount'],
       paint: {
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 2.4, 11, 4, 14, 5.5],
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 2.28, 11, 3.8, 14, 5.2],
         'circle-color': placeFill(),
         'circle-stroke-color': ['case', ['==', ['get', 'c'], 0], css('--dbm-city'), css('--dbm-paper')],
         'circle-stroke-width': ['case', ['==', ['get', 'c'], 0], 1.2, 1.1],
@@ -931,7 +931,7 @@
     map.setPaintProperty('region-label', 'text-color', css('--dbm-region'));
     map.setPaintProperty('region-label', 'text-halo-color', css('--dbm-paper'));
     ['wadi', 'wadi-seasonal'].forEach(function (id) { map.setPaintProperty(id, 'line-color', css('--dbm-water-line')); });
-    map.setPaintProperty('roads', 'line-color', css('--dbm-road'));
+    map.setPaintProperty('roads', 'line-color', css('--dbm-road-line'));
     ['roads-label', 'stream-label'].forEach(function (id) { map.setPaintProperty(id, 'text-halo-color', css('--dbm-paper')); });
     map.setPaintProperty('roads-label', 'text-color', css('--dbm-road'));
     map.setPaintProperty('stream-label', 'text-color', css('--dbm-water-line'));
