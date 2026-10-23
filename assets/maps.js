@@ -685,7 +685,7 @@
     hillImage(map);
     map.addLayer({ id: 'places-dot', type: 'circle', source: 'places', filter: ['!=', ['get', 'k'], 'mount'],
       paint: {
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 2.28, 11, 3.8, 14, 5.2],
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 2.17, 11, 3.61, 14, 4.94],
         'circle-color': placeFill(),
         'circle-stroke-color': ['case', ['==', ['get', 'c'], 0], css('--dbm-city'), css('--dbm-paper')],
         'circle-stroke-width': ['case', ['==', ['get', 'c'], 0], 1.2, 1.1],
