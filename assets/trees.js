@@ -192,11 +192,12 @@
   }
 
   // ── Where the tree opens ───────────────────────────────────
+  var INSET = 32;
   function readerEl() { return document.getElementById('reader') || document.querySelector('main'); }
   function sideSpace() {
     var r = readerEl();
     if (!r) return 0;
-    var free = r.getBoundingClientRect().left - 32 - 56;
+    var free = r.getBoundingClientRect().left - 48 - 56;   // 48: the panel's left edge (trees.css)
     return free >= 280 ? Math.min(free, 520) : 0;
   }
   function pinFor(id) { return document.querySelector('.dbt-pin[data-dbt-open="' + id + '"]'); }
@@ -230,8 +231,10 @@
       box.appendChild(root);
       state.mode = want;
     }
+    // The tree is bare text, not a framed map: keep it well clear of the window's left edge (INSET)
+    if (split) w -= INSET;
     if (w) box.style.width = w + 'px';
-    box.style.left = split ? split.mapLeft + 'px' : '';
+    box.style.left = split ? (split.mapLeft + INSET) + 'px' : '';
     draw();
   }
 

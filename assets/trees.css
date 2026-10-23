@@ -47,7 +47,7 @@ body.dbm-margin .dbt-pin.dbt-n2 { left: -142px; }
 
 /* Side panel (wide screens): the free space left of the text; the text column does not move */
 .dbt-panel {
-  position: fixed; left: 32px; top: var(--tb-off, 0px); z-index: 150;
+  position: fixed; left: 48px; top: var(--tb-off, 0px); z-index: 150;
   height: calc(100vh - var(--tb-off, 0px)); height: calc(100dvh - var(--tb-off, 0px));
   overflow-y: auto; overflow-x: hidden; padding: 22px 8px 40px 0; scrollbar-width: thin;
 }
