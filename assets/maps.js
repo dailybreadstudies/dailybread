@@ -109,7 +109,7 @@
     tabernacle: function (c) { return '<svg width="26" height="20" viewBox="0 0 26 20"><path d="M2 18V9l11-6 11 6v9Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.3"/><path d="M10 18v-6h6v6" fill="var(--dbm-paper)"/></svg>'; },
     tomb: function (c) { return '<svg width="20" height="22" viewBox="0 0 20 22"><path d="M1 21C1.5 11 5 5 10 4.5S18.5 11 19 21Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2" stroke-linejoin="round"/><path d="M5.5 21v-5a2.5 2.5 0 0 1 5 0v5Z" fill="var(--dbm-paper)"/><circle cx="14" cy="17.6" r="3" fill="none" stroke="var(--dbm-paper)" stroke-width="1.4"/></svg>'; },
     circuit: function (c) { return '<svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="' + c + '" stroke-width="2" stroke-dasharray="4 2.5"/><path d="M18.5 4.5l1.5 4-4.2.6" fill="none" stroke="' + c + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'; },
-    city: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="var(--paper)" stroke="var(--dbm-label)" stroke-width="1.8"/></svg>'; },
+    city: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.6" fill="var(--dbm-city)" stroke="var(--dbm-paper)" stroke-width="1.2"/></svg>'; },
     uncertain: function () { return '<svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="var(--dbm-label)" stroke-width="1.4" stroke-dasharray="2 1.5"/></svg>'; },
     boat: function (c) { return '<svg width="26" height="22" viewBox="0 0 26 22"><path d="M13 2.5v11" stroke="' + c + '" stroke-width="1.6"/><path d="M13.8 3.5l7 9.5h-7Z" fill="' + c + '" opacity="0.75"/><path d="M2 14.5h22l-3.8 5.2H5.8Z" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2" stroke-linejoin="round"/></svg>'; },
     loaves: function (c) { return '<svg width="26" height="20" viewBox="0 0 26 20"><ellipse cx="8.5" cy="12" rx="6.5" ry="5" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/><ellipse cx="17.5" cy="9" rx="6.5" ry="5" fill="' + c + '" stroke="var(--dbm-paper)" stroke-width="1.2"/><path d="M14.5 8.2q3-1.6 6 0M5.5 11.2q3-1.6 6 0" fill="none" stroke="var(--dbm-paper)" stroke-width="1.1" stroke-linecap="round"/></svg>'; },
@@ -593,27 +593,27 @@
           { id: 'hillshade', type: 'hillshade', source: 'hill', paint: { 'hillshade-exaggeration': 0.55,
               'hillshade-shadow-color': css('--dbm-shade'), 'hillshade-highlight-color': css('--dbm-highlight'), 'hillshade-accent-color': css('--dbm-shade') } },
           { id: 'sea-west', type: 'fill', source: 'seawest', paint: { 'fill-color': css('--dbm-water'), 'fill-antialias': false } },   // no antialiasing: the cut along 31°E is a zero-width sliver   // the coast west of 31°E (Egypt)
-          { id: 'sea-west-edge', type: 'line', source: 'seawestcoast', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1 } },
+          { id: 'sea-west-edge', type: 'line', source: 'seawestcoast', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1.2 } },
           { id: 'sea', type: 'fill', source: 'sea', paint: { 'fill-color': css('--dbm-water') } },
-          { id: 'sea-edge', type: 'line', source: water.seaCoast ? 'seacoast' : 'sea', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1 } },
+          { id: 'sea-edge', type: 'line', source: water.seaCoast ? 'seacoast' : 'sea', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1.2 } },
           { id: 'nrivers', type: 'line', source: 'nrivers', layout: { 'line-cap': 'round', 'line-join': 'round' },
-            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.95, 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.2, 7, 2] } },
+            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 1, 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.4, 7, 2.3] } },
           { id: 'wadi', type: 'line', source: 'ofm', 'source-layer': 'waterway', minzoom: 5,
             filter: ['all', ['in', ['get', 'class'], ['literal', ['river', 'stream']]], ['!=', ['get', 'intermittent'], 1]],
             layout: { 'line-cap': 'round', 'line-join': 'round' },
-            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.85,
-              'line-width': ['interpolate', ['linear'], ['zoom'], 7, ['match', ['get', 'class'], 'river', 1, 0.5], 12, ['match', ['get', 'class'], 'river', 2.2, 1.2]] } },
+            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 1,
+              'line-width': ['interpolate', ['linear'], ['zoom'], 7, ['match', ['get', 'class'], 'river', 1.3, 0.65], 12, ['match', ['get', 'class'], 'river', 2.6, 1.4]] } },
           { id: 'wadi-seasonal', type: 'line', source: 'ofm', 'source-layer': 'waterway', minzoom: 7,
             filter: ['all', ['in', ['get', 'class'], ['literal', ['river', 'stream']]], ['==', ['get', 'intermittent'], 1]],
             layout: { 'line-join': 'round' },
-            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.75, 'line-dasharray': [3, 2],
+            paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 0.9, 'line-dasharray': [3, 2],
               'line-width': ['interpolate', ['linear'], ['zoom'], 7, ['match', ['get', 'class'], 'river', 1, 0.5], 12, ['match', ['get', 'class'], 'river', 2, 1.1]] } },
           // the lakes are drawn over the river lines, so the Jordan's course through them does not show
           { id: 'galilee', type: 'fill', source: 'galilee', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'deadsea', type: 'fill', source: 'deadsea', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'roads', type: 'line', source: 'roads', layout: { 'line-cap': 'round', 'line-join': 'round' },
-            paint: { 'line-color': css('--dbm-road'), 'line-opacity': 0.8, 'line-dasharray': [0.1, 2.2],
-              'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.6, 12, 2.8] } }
+            paint: { 'line-color': css('--dbm-road'), 'line-opacity': 1, 'line-dasharray': [0.1, 2],
+              'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.9, 12, 3.1] } }
         ]
       },
       bounds: spec.bounds,
@@ -662,8 +662,11 @@
         paint: { 'text-color': css('--dbm-water-line'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
     });
     map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 6, maxzoom: 11,
-      layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Regular']], 'text-transform': 'uppercase',
-        'text-letter-spacing': 0.6, 'text-size': ['interpolate', ['linear'], ['zoom'], 6, 11, 9, 15], 'text-max-width': 30, 'text-line-height': 1.55,
+      layout: { 'text-field': ['get', 'n'], 'text-transform': 'uppercase',
+        // the main regions (rank 1: Judea, Samaria, Galilee…) in bold and a little larger; lesser ones stay light
+        'text-font': ['case', ['<=', ['get', 'r'], 1], ['literal', ['Noto Sans Bold']], ['literal', ['Noto Sans Regular']]],
+        'text-letter-spacing': ['case', ['<=', ['get', 'r'], 1], 0.5, 0.6],
+        'text-size': ['interpolate', ['linear'], ['zoom'], 6, ['case', ['<=', ['get', 'r'], 1], 12, 10.5], 9, ['case', ['<=', ['get', 'r'], 1], 16.5, 14.5]], 'text-max-width': 30, 'text-line-height': 1.55,
         'text-allow-overlap': false, 'text-padding': 6, 'symbol-sort-key': ['get', 'r'] },
       paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2, 'text-opacity': 0.85 } });
     map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
@@ -682,10 +685,10 @@
     hillImage(map);
     map.addLayer({ id: 'places-dot', type: 'circle', source: 'places', filter: ['!=', ['get', 'k'], 'mount'],
       paint: {
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 2.2, 11, 4, 14, 5.5],
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 7, 2.4, 11, 4, 14, 5.5],
         'circle-color': placeFill(),
-        'circle-stroke-color': css('--dbm-label'),
-        'circle-stroke-width': ['case', ['==', ['get', 'c'], 0], 1.1, 1.6],
+        'circle-stroke-color': ['case', ['==', ['get', 'c'], 0], css('--dbm-city'), css('--dbm-paper')],
+        'circle-stroke-width': ['case', ['==', ['get', 'c'], 0], 1.2, 1.1],
         'circle-stroke-opacity': ['case', ['==', ['get', 'c'], 0], 0.7, 1]
       } });
     map.addLayer({ id: 'places-mount', type: 'symbol', source: 'places', filter: ['==', ['get', 'k'], 'mount'],
@@ -695,7 +698,7 @@
       layout: {
         'text-field': ['coalesce', ['get', 'd'], ['get', 'n']],
         'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Bold']]],
-        'text-size': ['interpolate', ['linear'], ['zoom'], 8, 9.5, 13, 12],
+        'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10.5, 13, 13],
         'text-variable-anchor': ['top', 'right', 'left', 'bottom'], 'text-radial-offset': 0.6, 'text-justify': 'auto', 'text-optional': true,
         'symbol-sort-key': ['-', 2, ['get', 'c']]
       },
@@ -722,7 +725,7 @@
         'circle-stroke-color': css('--dbm-paper'), 'circle-stroke-width': 1.2, 'circle-opacity': ['case', ['==', ['get', 'c'], 0], 0.55, 1] } });
     map.addLayer({ id: 'gpoint-label', type: 'symbol', source: 'gplabels', minzoom: spec.world ? 2 : spec.groupLabelZoom || 8.3,
       layout: { 'text-field': ['get', 'd'], 'text-font': ['case', ['==', ['get', 'c'], 0], ['literal', ['Noto Sans Italic']], ['literal', ['Noto Sans Bold']]],
-        'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 10, 6, 11.5, 9, 14] : ['interpolate', ['linear'], ['zoom'], 7, 9.5, 13, 12],
+        'text-size': spec.world ? ['interpolate', ['linear'], ['zoom'], 3, 10, 6, 11.5, 9, 14] : ['interpolate', ['linear'], ['zoom'], 7, 10.5, 13, 13],
         'text-transform': spec.world ? 'uppercase' : 'none', 'text-letter-spacing': spec.world ? 0.12 : 0, 'text-variable-anchor': ['top', 'right', 'left', 'bottom'],
         'text-radial-offset': 0.6, 'text-justify': 'auto', 'text-optional': true },
       paint: { 'text-color': css('--dbm-city'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.5 } });
@@ -761,7 +764,7 @@
     if (map.hasImage('dbm-hill')) map.updateImage('dbm-hill', img);
     else map.addImage('dbm-hill', img, { pixelRatio: r });
   }
-  function placeFill() { return ['case', ['==', ['get', 'k'], 'mount'], css('--accent-soft'), ['==', ['get', 'c'], 0], 'rgba(0,0,0,0)', css('--paper')]; }
+  function placeFill() { return ['case', ['==', ['get', 'k'], 'mount'], css('--accent-soft'), ['==', ['get', 'c'], 0], 'rgba(0,0,0,0)', css('--dbm-city')]; }
   function placePopup(p, spec, gname) {
     var conf = ['Location uncertain', 'Possible location', 'Likely location'][p.c] || '';
     var bookName = spec.placesName || (spec.places === 'JOS' || /^josh-/.test(spec.id) ? 'Joshua' : spec.places);
@@ -936,7 +939,7 @@
     map.setPaintProperty('water-label', 'text-halo-color', css('--dbm-water'));
     map.setPaintProperty('moves-casing', 'line-color', css('--dbm-paper'));
     (ctx.spec.moves || []).forEach(function (m) { map.setPaintProperty('move-' + m.n, 'line-color', css(sideColor(m.side).slice(4, -1))); });
-    map.setPaintProperty('places-dot', 'circle-stroke-color', css('--dbm-label'));
+    map.setPaintProperty('places-dot', 'circle-stroke-color', ['case', ['==', ['get', 'c'], 0], css('--dbm-city'), css('--dbm-paper')]);
     map.setPaintProperty('gpoint', 'circle-stroke-color', css('--dbm-paper'));
     map.setPaintProperty('gpoint-label', 'text-halo-color', css('--dbm-paper'));
     map.setPaintProperty('garea-label', 'text-halo-color', css('--dbm-paper'));
