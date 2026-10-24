@@ -1,0 +1,62 @@
+{
+ "id": "mount-ebal",
+ "title": "The altar on Mount Ebal",
+ "subtitle": "The Mount Ebal site (el-Burnat)",
+ "kind": "Site",
+ "anchors": [
+  {
+   "book": "JOS",
+   "c": 8,
+   "v": 30
+  },
+  {
+   "book": "DEU",
+   "c": 27,
+   "v": 4
+  }
+ ],
+ "images": [
+  {
+   "file": "IHM_מזבח_הר_עיבל.jpeg",
+   "caption": "Aerial view of the stone structure on Mount Ebal and its ramp.",
+   "page": "https://commons.wikimedia.org/wiki/File:IHM_%D7%9E%D7%96%D7%91%D7%97_%D7%94%D7%A8_%D7%A2%D7%99%D7%91%D7%9C.jpeg",
+   "credit": "zstadler",
+   "licence": "CC BY-SA 4.0"
+  }
+ ],
+ "p": [
+  "On the north-eastern slope of Mount Ebal, above Shechem, Adam Zertal and his team excavated a large rectangular stone structure, about 7 by 9 metres, filled with layers of stones, ash and animal bones and approached by a ramp. The bones were mostly of young sheep, goats and cattle, many of them burnt, animals that fit the offerings of the Torah.",
+  "Zertal identified it as the altar Joshua built on Mount Ebal (Joshua 8:30–31), as Moses commanded in Deuteronomy 27:4–8. Some archaeologists have proposed other uses for it, so the identification is still discussed. It dates from the early Iron Age, the time of Israel’s first settlement in the hill country."
+ ],
+ "facts": [
+  [
+   "Found",
+   "1980, in a survey of Mount Ebal; excavated 1982–1989"
+  ],
+  [
+   "Excavator",
+   "Adam Zertal, University of Haifa"
+  ],
+  [
+   "Date",
+   "Early Iron Age, about 1200 BC"
+  ],
+  [
+   "Size",
+   "About 7 × 9 m"
+  ],
+  [
+   "Where",
+   "Mount Ebal, above Shechem (Nablus)"
+  ]
+ ],
+ "verse": "Joshua 8:30–31; Deuteronomy 27:4–8",
+ "links": [
+  [
+   "Mount Ebal site on Wikipedia",
+   "https://en.wikipedia.org/wiki/Mount_Ebal_site"
+  ]
+ ],
+ "status": "ready",
+ "photoChecked": true
+}

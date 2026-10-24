@@ -279,6 +279,25 @@
      "v": 1
     }
    ]
+  },
+  {
+   "id": "mount-ebal",
+   "title": "The altar on Mount Ebal",
+   "subtitle": "The Mount Ebal site (el-Burnat)",
+   "status": "ready",
+   "photoChecked": true,
+   "anchors": [
+    {
+     "book": "JOS",
+     "c": 8,
+     "v": 30
+    },
+    {
+     "book": "DEU",
+     "c": 27,
+     "v": 4
+    }
+   ]
   }
  ]
 }
