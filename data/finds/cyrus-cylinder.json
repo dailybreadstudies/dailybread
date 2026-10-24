@@ -17,9 +17,11 @@
  ],
  "images": [
   {
-   "file": "Cyrus_Cylinder.jpg",
-   "caption": "The Cyrus Cylinder in the British Museum.",
-   "page": "https://commons.wikimedia.org/wiki/File:Cyrus_Cylinder.jpg"
+   "file": "Cyrus_Cylinder_front.jpg",
+   "caption": "The front of the Cyrus Cylinder in the British Museum, London.",
+   "page": "https://commons.wikimedia.org/wiki/File:Cyrus_Cylinder_front.jpg",
+   "credit": "Prioryman",
+   "licence": "CC BY-SA 3.0"
   }
  ],
  "p": [
@@ -55,6 +57,6 @@
    "https://en.wikipedia.org/wiki/Cyrus_Cylinder"
   ]
  ],
- "status": "draft",
- "photoChecked": false
+ "status": "ready",
+ "photoChecked": true
 }

@@ -18,7 +18,7 @@
    "id": "merneptah",
    "title": "Israel named by Pharaoh",
    "subtitle": "The Merneptah Stele (Israel Stele)",
-   "status": "draft",
+   "status": "ready",
    "photoChecked": true,
    "anchors": [
     {
@@ -103,8 +103,8 @@
    "id": "cyrus-cylinder",
    "title": "Cyrus king of Persia",
    "subtitle": "The Cyrus Cylinder",
-   "status": "draft",
-   "photoChecked": false,
+   "status": "ready",
+   "photoChecked": true,
    "anchors": [
     {
      "book": "EZR",
@@ -122,7 +122,7 @@
    "id": "pilate-stone",
    "title": "Pontius Pilate, governor of Judea",
    "subtitle": "The Pilate Stone",
-   "status": "review",
+   "status": "ready",
    "photoChecked": true,
    "anchors": [
     {
