@@ -1121,7 +1121,8 @@
       var other = Object.keys(progress.chapters).length || Object.keys(progress.archive).length;
       box.innerHTML = html + '<div class="pg-empty"><p>Your progress will appear here.</p>' +
         '<p>At the end of each reading, tap <em>Mark Torah Complete</em>, <em>Mark ' + (KIDS ? 'Gospels' : 'Prophets') + ' Complete</em> and so on. ' +
-        'This page then shows what you have read, section by section, and anything left to catch up.</p>' +
+        'This page then shows what you have read, section by section, and anything left to catch up. ' +
+        '<a href="' + (KIDS ? '../' : '') + 'guide.html#progress">See how it works</a>.</p>' +
         '<p><a class="pg-btn" href="./">Go to today’s reading</a></p></div>' + (other ? bibleProgressHtml() : '') + privacyNote();
       return;
     }

@@ -1178,3 +1178,8 @@ html.msub-on .scripture .msub {
 .try-pulse { animation: try-pulse 1.3s ease-out 3; }
 @keyframes try-pulse { 0% { box-shadow: 0 0 0 0 rgba(122, 86, 52, 0.5); } 100% { box-shadow: 0 0 0 16px rgba(122, 86, 52, 0); } }
 @media (prefers-reduced-motion: reduce) { .try-pulse { animation-duration: 2s; animation-iteration-count: 1; } }
+
+/* Link to the Guide at the foot of the A/א menu */
+.sp-guide { margin: 14px 0 2px; padding-top: 12px; border-top: 1px solid var(--rule); font: 400 0.8rem var(--sans); text-align: center; }
+.sp-guide a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+.pg-empty p a:not(.pg-btn) { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
