@@ -947,10 +947,10 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
 
 /* ── Progress: the whole Bible (circle, sections, books) ──
    Section colours checked for colour-blind separation (Light/Sepia and Dark sets); every colour also has its name beside it. */
-:root { --bb0: #a8452e; --bb1: #0f8670; --bb2: #b48a12; --bb3: #5d5fb3; }
-:root[data-theme="dark"] { --bb0: #c74b52; --bb1: #169b81; --bb2: #b58f1f; --bb3: #7a7ed8; }
+:root { --bb0: #a8452e; --bb1: #2f7a62; --bb2: #b48a12; --bb3: #80507f; }   /* warm set: no second blue beside the brand blue */
+:root[data-theme="dark"] { --bb0: #c75a48; --bb1: #3c9a7c; --bb2: #c39a2b; --bb3: #a877a6; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]):not([data-theme="sepia"]) { --bb0: #c74b52; --bb1: #169b81; --bb2: #b58f1f; --bb3: #7a7ed8; }
+  :root:not([data-theme="light"]):not([data-theme="sepia"]) { --bb0: #c75a48; --bb1: #3c9a7c; --bb2: #c39a2b; --bb3: #a877a6; }
 }
 .bb-s0 { --bb: var(--bb0); } .bb-s1 { --bb: var(--bb1); } .bb-s2 { --bb: var(--bb2); } .bb-s3 { --bb: var(--bb3); }
 .bb-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 28px; align-items: center; }
