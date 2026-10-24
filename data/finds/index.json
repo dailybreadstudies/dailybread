@@ -2,7 +2,8 @@
  "finds": [
   {
    "id": "ketef-hinnom",
-   "title": "The Ketef Hinnom silver scrolls",
+   "title": "The Priestly Blessing in silver",
+   "subtitle": "The Ketef Hinnom silver scrolls",
    "status": "ready",
    "photoChecked": true,
    "anchors": [
@@ -15,7 +16,8 @@
   },
   {
    "id": "merneptah",
-   "title": "The Merneptah Stele",
+   "title": "Israel named by Pharaoh",
+   "subtitle": "The Merneptah Stele (Israel Stele)",
    "status": "draft",
    "photoChecked": false,
    "anchors": [
@@ -28,7 +30,8 @@
   },
   {
    "id": "mesha",
-   "title": "The Mesha Stele (Moabite Stone)",
+   "title": "Mesha king of Moab",
+   "subtitle": "The Mesha Stele (Moabite Stone)",
    "status": "draft",
    "photoChecked": false,
    "anchors": [
@@ -41,7 +44,8 @@
   },
   {
    "id": "tel-dan",
-   "title": "The Tel Dan Stele",
+   "title": "The House of David",
+   "subtitle": "The Tel Dan Stele",
    "status": "draft",
    "photoChecked": false,
    "anchors": [
@@ -59,7 +63,8 @@
   },
   {
    "id": "siloam",
-   "title": "Hezekiah’s Tunnel and the Siloam Inscription",
+   "title": "Hezekiah’s water tunnel",
+   "subtitle": "The Siloam Tunnel and Inscription",
    "status": "review",
    "photoChecked": false,
    "anchors": [
@@ -77,7 +82,8 @@
   },
   {
    "id": "isaiah-scroll",
-   "title": "The Great Isaiah Scroll",
+   "title": "The scroll of Isaiah",
+   "subtitle": "The Great Isaiah Scroll (1QIsaᵃ)",
    "status": "draft",
    "photoChecked": false,
    "anchors": [
@@ -95,7 +101,8 @@
   },
   {
    "id": "cyrus-cylinder",
-   "title": "The Cyrus Cylinder",
+   "title": "Cyrus king of Persia",
+   "subtitle": "The Cyrus Cylinder",
    "status": "draft",
    "photoChecked": false,
    "anchors": [
@@ -113,7 +120,8 @@
   },
   {
    "id": "pilate-stone",
-   "title": "The Pilate Stone",
+   "title": "Pontius Pilate, governor of Judea",
+   "subtitle": "The Pilate Stone",
    "status": "review",
    "photoChecked": false,
    "anchors": [
@@ -141,7 +149,8 @@
   },
   {
    "id": "caiaphas-ossuary",
-   "title": "The Caiaphas Ossuary",
+   "title": "Caiaphas the high priest",
+   "subtitle": "The Caiaphas Ossuary",
    "status": "draft",
    "photoChecked": false,
    "anchors": [
@@ -160,6 +169,7 @@
   {
    "id": "pool-of-siloam",
    "title": "The Pool of Siloam",
+   "subtitle": "Excavated pool at the foot of the City of David",
    "status": "draft",
    "photoChecked": false,
    "anchors": [

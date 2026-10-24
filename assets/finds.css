@@ -37,13 +37,23 @@ body.dbm-margin .dbf-pin.dbf-second { left: -98px; }
 .dbf-close:hover { border-color: var(--accent); color: var(--accent); }
 .dbf-msg { font-size: 0.75rem; color: var(--muted); }
 
-.dbf-fig { margin: 0; }
+.dbf-photos { margin: 0; }
+.dbf-fig { margin: 0; display: none; }
+.dbf-fig.dbf-on { display: block; }
 .dbf-frame {
-  width: 100%; max-width: 100%; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 4px;
-  background: var(--tint); border: 1px solid var(--accent-line);
+  position: relative; display: block; width: 100%; max-width: 100%; aspect-ratio: 1 / 1; padding: 0; overflow: hidden; border-radius: 4px;
+  background: var(--tint); border: 1px solid var(--accent-line); cursor: zoom-in;
 }
 .dbf-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.dbf-frame.dbf-noimg img { display: none; }
+.dbf-frame:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.dbf-hint { position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px 4px 8px;
+  border-radius: 12px; background: rgba(43, 35, 28, 0.78); color: #fff; font: 600 0.68rem/1 var(--sans); letter-spacing: 0.04em;
+  opacity: 0; transition: opacity 0.2s; }
+.dbf-hint svg { width: 10px; height: 10px; }
+.dbf-frame:hover .dbf-hint, .dbf-frame:focus-visible .dbf-hint { opacity: 1; }
+@media (hover: none) { .dbf-hint { opacity: 1; } }
+.dbf-frame.dbf-noimg { cursor: default; }
+.dbf-frame.dbf-noimg img, .dbf-frame.dbf-noimg .dbf-hint { display: none; }
 .dbf-frame.dbf-noimg::after { content: "The picture could not load."; display: grid; place-items: center; height: 100%; font-size: 0.72rem; color: var(--muted); }
 .dbf figcaption { margin-top: 0.45rem; font: 400 0.68rem/1.5 var(--sans); color: var(--muted); }
 .dbf figcaption a { color: var(--muted); text-underline-offset: 2px; }
@@ -54,9 +64,23 @@ body.dbm-margin .dbf-pin.dbf-second { left: -98px; }
 }
 .dbf-thumbs button[aria-pressed="true"], .dbf-thumbs button:hover { opacity: 1; border-color: var(--accent); }
 .dbf-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.dbf-photos + .dbf-info { margin-top: 1rem; }
 
-.dbf-title { font: 700 1.05rem/1.3 var(--display); color: var(--ink); margin: 1rem 0 0.15rem; text-wrap: balance; }
-.dbf-verse { font: italic 400 0.8rem/1.4 var(--serif); color: var(--accent); margin: 0 0 0.8rem; }
+/* Title: what the find shows for the Bible reader; subtitle: the object's scholarly name */
+.dbf-title { font: 700 1.25rem/1.25 var(--display); color: var(--ink); margin: 0 0 0.25rem; text-wrap: balance; }
+.dbf-sub { font: 600 0.8rem/1.4 var(--sans); color: var(--ink-soft); margin: 0 0 0.3rem; text-wrap: balance; }
+.dbf-verse { font: italic 400 0.8rem/1.4 var(--serif); color: var(--accent); margin: 0 0 0.9rem; }
+
+/* ── Very wide screens: the photos fill the space left of the text, top to bottom; the words the space right of it ── */
+body.dbf-split .dbf-panel { left: var(--dbf-photos-left); width: var(--dbf-photos-w); padding: 22px 6px 28px 0; }
+body.dbf-split .dbf-info { position: fixed; top: var(--tb-off, 0px); left: var(--dbf-info-left); width: var(--dbf-info-w); z-index: 150;
+  height: calc(100vh - var(--tb-off, 0px)); height: calc(100dvh - var(--tb-off, 0px)); overflow-y: auto; overflow-x: hidden;
+  padding: 78px 10px 28px 0; margin: 0; scrollbar-width: thin; }      /* starts below the reader's tool buttons (top right) */
+body.dbf-split .dbf-fig { display: block; margin: 0 0 1.4rem; }
+body.dbf-split .dbf-frame { aspect-ratio: auto; }
+body.dbf-split .dbf-frame img { height: auto; max-height: calc(100dvh - var(--tb-off, 0px) - 110px); object-fit: contain; margin: 0 auto; }
+body.dbf-split .dbf-thumbs { display: none; }
+
 .dbf-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 0.55rem 1rem; margin: 1rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--rule); font-size: 0.74rem; line-height: 1.45; }
 .dbf-facts > div { min-width: 0; }
 .dbf-facts dt { font-weight: 600; color: var(--accent-faint); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.58rem; }

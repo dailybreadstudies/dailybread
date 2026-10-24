@@ -1,6 +1,7 @@
 {
  "id": "mesha",
- "title": "The Mesha Stele (Moabite Stone)",
+ "title": "Mesha king of Moab",
+ "subtitle": "The Mesha Stele (Moabite Stone)",
  "kind": "Inscription",
  "anchors": [
   {
@@ -16,9 +17,9 @@
    "page": "https://commons.wikimedia.org/wiki/File:Mesha_stele_(Louvre,_AO_5066).jpg"
   },
   {
-   "file": "YHWH_on_Mesha_Stele.jpg",
+   "file": "Mesha_stele_(Louvre,_AO_5066)_-_details_with_the_word_JHWH.jpg",
    "caption": "Detail: the divine name YHWH in line 18.",
-   "page": "https://commons.wikimedia.org/wiki/File:YHWH_on_Mesha_Stele.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Mesha_stele_(Louvre,_AO_5066)_-_details_with_the_word_JHWH.jpg"
   }
  ],
  "p": [

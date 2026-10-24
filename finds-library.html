@@ -43,6 +43,7 @@
     .ph-yes { color: #3f7a2c; }
     .entry h2 { font: 700 1rem/1.3 var(--display); margin: 0; }
     .entry .id { font: 400 0.66rem/1 var(--sans); color: var(--muted); }
+    .entry p.sub { font: 600 0.74rem/1.35 var(--sans); color: var(--ink-soft); margin: -0.15rem 0 0.35rem; }
     .verses { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; font-size: 0.74rem; }
     .verses a { color: var(--accent); }
     .entry p { font-size: 0.76rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
@@ -107,7 +108,7 @@
       }).join('') + '</div>' : '') +
       '<div class="body"><div class="badges"><span class="badge st-' + f.status + '">' + (STATUS[f.status] || f.status) + '</span>' +
       '<span class="badge ' + (f.photoChecked ? 'ph-yes">Photo licence checked' : 'ph-no">Photo licence to check') + '</span></div>' +
-      '<h2>' + esc(f.title) + '</h2><span class="id">' + esc(f.id) + ' · ' + esc(f.kind || '') + '</span>' +
+      '<h2>' + esc(f.title) + '</h2>' + (f.subtitle ? '<p class="sub">' + esc(f.subtitle) + '</p>' : '') + '<span class="id">' + esc(f.id) + ' · ' + esc(f.kind || '') + '</span>' +
       '<div class="verses">' + verses + '</div>' +
       '<p>' + (f.p && f.p[0] || '') + '</p>' +
       '<div class="files">' + imgs.map(function (im) { return '<a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + esc(im.file) + '</a>'; }).join('<br>') + '</div>' +

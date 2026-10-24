@@ -150,6 +150,11 @@ below the verse. Loaded on `index.html`, which shows only finds marked ready wit
 `maps-test.html` shows every entry. Each image can carry `credit` and `licence`, shown in the caption.
 
 - `data/finds/index.json` lists each find and the verses it belongs to; `data/finds/<id>.json` holds the card.
+- Each card has a plain `title` that says what it shows for the Bible reader ("Mesha king of Moab") and a
+  `subtitle` with the object's scholarly name ("The Mesha Stele (Moabite Stone)"); `index.json` repeats both.
+- Very wide screens: the photos fill the space left of the text and the words the space right of it (same
+  `DBMaps.splitLayout` as maps and trees). Otherwise one column left of the text, or below the verse on phones.
+  Tapping a photo opens the full-size viewer (`DBLightbox` in `assets/illus.js`), with arrows when there are several.
 - Pictures are shown from Wikimedia Commons by file name, with a link to each file page (author and licence).
   Check each file's licence on Commons before going live: public domain, CC BY or CC BY-SA, credited.
 - Card text is our own wording, with a link to the Wikipedia article for more.

@@ -4,7 +4,8 @@
  * shows the illustration in the free space to the right of the text on wide screens (the text column does
  * not move), or below the verse on phones. Tapping the picture opens it almost full screen: a white sheet
  * with the label in its top-left margin. That viewer (DBLightbox) is the standard for any full-size photo
- * or graphic on the site: DBLightbox.open({ src, kind, title, ref, alt, credit }).
+ * or graphic on the site: DBLightbox.open({ src, kind, title, ref, alt, credit }), or for several pictures
+ * DBLightbox.open({ kind, title, ref, items: [{ src, alt, credit }], index }), with arrows to step through them.
  *
  * The reader calls DBIllus.decorate(root) after it draws a passage. Nothing in the reader depends on this file.
  * Index entries: id, title, ref, book, c, v, also [{c, v}] (more verses), status ("ready" to show on the public site), src (full size),
@@ -153,31 +154,49 @@
   }
 
   // ── Full-size viewer: a white sheet, almost full screen, with the label in its top-left margin ──
-  var lb = null, lastFocus = null;
+  var lb = null, lastFocus = null, lbItems = null, lbIndex = 0;
+  var PREV = '<svg viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 2 3.5 6l4 4"/></svg>';
+  var NEXT = '<svg viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 2l4 4-4 4"/></svg>';
   function lbOpen(o) {
     lbClose();
     lastFocus = document.activeElement;
-    lb = el('div', 'dblx');
+    lbItems = o.items && o.items.length ? o.items : [{ src: o.src, alt: o.alt || o.title, credit: o.credit }];
+    lbIndex = Math.max(0, Math.min(lbItems.length - 1, o.index || 0));
+    var many = lbItems.length > 1;
+    lb = el('div', 'dblx' + (many ? ' dblx-many' : ''));
     lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', o.title || 'Picture');
     lb.innerHTML = '<div class="dblx-sheet"><div class="dblx-label">' + (o.kind ? esc(o.kind) + ' · ' : '') + esc(o.title || '') + (o.ref ? ' <em>' + esc(o.ref) + '</em>' : '') + '</div>' +
       '<button type="button" class="dblx-close" data-dblx-close aria-label="Close">' + CLOSE + '<span>Close</span></button>' +
-      '<div class="dblx-stage"><img src="' + esc(o.src) + '" alt="' + esc(o.alt || o.title || '') + '"></div>' +
-      '<div class="dblx-foot"><span class="dblx-credit">' + esc(o.credit || '') + '</span>' +
+      '<div class="dblx-stage"><img alt="">' +
+        (many ? '<button type="button" class="dblx-nav dblx-prev" data-dblx-step="-1" aria-label="Previous picture">' + PREV + '</button>' +
+                '<button type="button" class="dblx-nav dblx-next" data-dblx-step="1" aria-label="Next picture">' + NEXT + '</button>' : '') + '</div>' +
+      '<div class="dblx-foot"><span class="dblx-credit"></span>' +
+        (many ? '<span class="dblx-count"></span>' : '') +
         '<span class="dblx-site">Daily Bread Online<br>dailybread.study</span></div></div>';
     document.body.appendChild(lb);
+    lbShow(lbIndex);
     document.body.classList.add('dblx-locked');
     requestAnimationFrame(function () { if (lb) lb.classList.add('on'); });
     lb.querySelector('.dblx-close').focus();
   }
+  function lbShow(i) {
+    if (!lb || !lbItems) return;
+    lbIndex = (i + lbItems.length) % lbItems.length;
+    var it = lbItems[lbIndex], img = lb.querySelector('.dblx-stage img');
+    img.src = it.src; img.alt = it.alt || '';
+    lb.querySelector('.dblx-credit').textContent = it.credit || '';
+    var c = lb.querySelector('.dblx-count'); if (c) c.textContent = (lbIndex + 1) + ' / ' + lbItems.length;
+  }
   function lbClose() {
     if (!lb) return;
-    lb.remove(); lb = null;
+    lb.remove(); lb = null; lbItems = null;
     document.body.classList.remove('dblx-locked');
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
   document.addEventListener('click', function (e) {
     var t = e.target;
+    if (lb && t.closest('[data-dblx-step]')) { lbShow(lbIndex + +t.closest('[data-dblx-step]').getAttribute('data-dblx-step')); return; }
     if (lb && (t.closest('[data-dblx-close]') || t === lb || t.classList.contains('dblx-stage'))) { lbClose(); return; }
     var pin = t.closest('.dbi-pin');
     if (pin) {
@@ -193,7 +212,11 @@
       lbOpen({ src: ROOT + x.src, kind: 'Illustration', title: x.title, ref: x.ref, alt: x.alt, credit: x.credit });
     }
   });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb) { e.preventDefault(); lbClose(); } });
+  document.addEventListener('keydown', function (e) {
+    if (!lb) return;
+    if (e.key === 'Escape') { e.preventDefault(); lbClose(); }
+    else if (lbItems && lbItems.length > 1 && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); lbShow(lbIndex + (e.key === 'ArrowLeft' ? -1 : 1)); }
+  });
   var rt = null;
   window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(place, 120); });
   function watch() {

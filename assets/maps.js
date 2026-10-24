@@ -266,7 +266,7 @@
     if (!r || window.innerWidth < 1100) return null;
     var rr = r.getBoundingClientRect();
     var shifted = parseFloat(document.body.style.getPropertyValue('--dbm-shift')) || 0;
-    var textL = rr.left - (/(^| )(dbm|dbt)-split( |$)/.test(document.body.className) ? shifted : 0), textR = textL + rr.width;   // where the text sits centred
+    var textL = rr.left - (/(^| )(dbm|dbt|dbf)-split( |$)/.test(document.body.className) ? shifted : 0), textR = textL + rr.width;   // where the text sits centred
     var W = window.innerWidth, free = Math.min(textL, W - textR);
     // the wider the screen, the more air between the text and the two columns, so the text stands on its own
     var air = Math.max(0, Math.min(SPLIT.maxAir, (free - SPLIT.airFrom) * SPLIT.airRate));
