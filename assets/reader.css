@@ -142,7 +142,7 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --track: #d9d2ca;         /* switch (off) */
   --shadow: rgba(55, 44, 35, 0.14);
   color-scheme: light;
-  --topbar-h: 72px;
+  --topbar-h: 79px;
   --serif: 'Source Serif 4', 'Merriweather', Georgia, serif;
   --display: 'Merriweather', Georgia, serif;
   --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
@@ -1079,8 +1079,8 @@ body:not(.dbm-margin) .scripture :is(.dbm-pin, .dbf-pin, .dbt-pin, .dbi-pin) { v
 .tb-acct:focus-visible, .tb-acct-m:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; border-radius: 2px; }
 .tb-acct.is-in, .tb-acct-m.is-in { padding: 0; border: none; }
 .acct-dot { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%;
-  background: var(--accent); color: var(--on-accent); font: 600 13px/1 var(--sans); letter-spacing: 0; }
-.tb-acct.is-in:hover .acct-dot, .tb-acct-m.is-in:hover .acct-dot { background: var(--accent-deep); }
+  background: var(--heading); color: var(--paper); font: 600 13px/1 var(--sans); letter-spacing: 0; }   /* charcoal, as the logo and GIVE */
+.tb-acct.is-in:hover .acct-dot, .tb-acct-m.is-in:hover .acct-dot { opacity: 0.82; }
 .tb-nav .tb-acct-m { display: none; }
 @media (max-width: 700px) {
   .tb-nav .tb-acct-m { display: inline-block; font-size: 12px; letter-spacing: 0.14em; padding: 4px 0 5px; }
