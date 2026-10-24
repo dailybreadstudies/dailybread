@@ -39,6 +39,8 @@
     .st-draft { color: var(--muted); }
     .st-review { color: #b07a12; }
     .st-ready { color: #3f7a2c; }
+    .st-live { color: #fff; background: #3f7a2c; border-color: #3f7a2c; }
+    .cr-no { color: #a23a2b; }
     .ph-no { color: #a23a2b; }
     .ph-yes { color: #3f7a2c; }
     .entry h2 { font: 700 1rem/1.3 var(--display); margin: 0; }
@@ -49,6 +51,8 @@
     .entry p { font-size: 0.76rem; line-height: 1.6; color: var(--ink-soft); margin: 0; }
     .files { font-size: 0.66rem; line-height: 1.5; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 0.55rem; margin-top: auto; word-break: break-word; }
     .files a { color: var(--muted); }
+    .files .need { color: #a23a2b; font-weight: 600; }
+    .files div + div { margin-top: 0.3rem; }
     .ideas { margin-top: 3rem; }
     .ideas h2 { font: 600 0.66rem/1.2 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.8rem; }
     .ideas ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: 0.6rem 1.4rem; }
@@ -62,7 +66,7 @@
 <main class="lib">
   <p><a class="back" href="./">← Daily Bread Online</a></p>
   <h1>Archaeology library</h1>
-  <p class="intro">Every archaeology card for the reader, with its verses and photos. A card appears on the public site only when it is <b>ready</b> and its <b>photo licence is checked</b>; until then it shows on the <a href="maps-test.html">test page</a> only. Tap a verse to see the card in place. To approve, change wording, or swap a photo, tell Claude which card and what to change (for a new photo, paste its Wikimedia Commons link).</p>
+  <p class="intro">Every archaeology card for the reader, with its verses and photos. A card is <b>live</b> on the public site when it is ready and its photo licence is checked; until then it shows on the <a href="maps-test.html">test page</a> only. Tap a verse to see the card in place (live cards open on the public site). To approve, change wording, or swap a photo, tell Claude which card and what to change (for a new photo, paste its Wikimedia Commons link).</p>
   <div class="counts" id="counts"></div>
   <div class="grid" id="grid"><p class="intro">Loading…</p></div>
   <section class="ideas" id="ideas"></section>
@@ -71,7 +75,11 @@
 (function () {
   'use strict';
   var COMMONS = 'https://commons.wikimedia.org/wiki/Special:FilePath/';
-  var STATUS = { draft: 'Draft', review: 'For review', ready: 'Ready' };
+  var STATUS = { draft: 'Draft', review: 'For review', ready: 'Ready', live: 'Live' };
+  /* Live = ready with its photo licence checked: shown on the public site */
+  function stage(f) { return f.status === 'ready' && f.photoChecked ? 'live' : f.status; }
+  function uncredited(f) { return (f.images || []).filter(function (im) { return !im.credit; }).length; }
+  var ORDER = { live: 0, ready: 1, review: 2, draft: 3 };
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
   function get(u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
   var filter = 'all', entries = [], books = {};
@@ -85,33 +93,39 @@
       }).join('') + '</ul>';
       return Promise.all(res[0].finds.map(function (f) { return get('data/finds/' + f.id + '.json'); }));
     })
-    .then(function (list) { entries = list; draw(); })
+    .then(function (list) { entries = list.sort(function (a, b) { return ORDER[stage(a)] - ORDER[stage(b)]; }); draw(); })
     .catch(function (e) { document.getElementById('grid').innerHTML = '<p class="intro">The library could not load. (' + esc(e.message) + ')</p>'; });
 
   function draw() {
-    var n = { all: entries.length, draft: 0, review: 0, ready: 0, photo: 0 };
-    entries.forEach(function (f) { n[f.status] = (n[f.status] || 0) + 1; if (!f.photoChecked) n.photo++; });
-    document.getElementById('counts').innerHTML = [['all', 'All ' + n.all], ['draft', 'Draft ' + n.draft], ['review', 'For review ' + n.review], ['ready', 'Ready ' + n.ready], ['photo', 'Photo to check ' + n.photo]]
+    var n = { all: entries.length, live: 0, ready: 0, review: 0, draft: 0, photo: 0, credit: 0 };
+    entries.forEach(function (f) { n[stage(f)]++; if (!f.photoChecked) n.photo++; if (uncredited(f)) n.credit++; });
+    document.getElementById('counts').innerHTML = [['all', 'All ' + n.all], ['live', 'Live ' + n.live], ['ready', 'Ready, licence to check ' + n.ready],
+        ['review', 'For review ' + n.review], ['draft', 'Draft ' + n.draft], ['photo', 'Photo licence to check ' + n.photo], ['credit', 'Photo credit missing ' + n.credit]]
+      .filter(function (x) { return x[0] === 'all' || n[x[0]]; })
       .map(function (x) { return '<button type="button" class="filter" data-f="' + x[0] + '" aria-pressed="' + (filter === x[0]) + '">' + x[1] + '</button>'; }).join('');
     document.getElementById('grid').innerHTML = entries.filter(function (f) {
-      return filter === 'all' || (filter === 'photo' ? !f.photoChecked : f.status === filter);
+      return filter === 'all' || (filter === 'photo' ? !f.photoChecked : filter === 'credit' ? uncredited(f) : stage(f) === filter);
     }).map(card).join('') || '<p class="intro">None.</p>';
   }
   function card(f) {
-    var imgs = (f.images || []).slice(0, 2);
+    var all = f.images || [], imgs = all.slice(0, 2), live = stage(f) === 'live';
     var verses = (f.anchors || []).map(function (a) {
-      return '<a href="maps-test.html?r=' + a.book + '.' + a.c + '.' + a.v + '">' + esc((books[a.book] || a.book) + ' ' + a.c + ':' + a.v) + '</a>';
+      return '<a href="' + (live ? './' : 'maps-test.html') + '?r=' + a.book + '.' + a.c + '.' + a.v + '">' + esc((books[a.book] || a.book) + ' ' + a.c + ':' + a.v) + '</a>';
     }).join('');
     return '<article class="entry">' +
       (imgs.length ? '<div class="pics" style="--n:' + imgs.length + '">' + imgs.map(function (im) {
         return '<a href="' + esc(im.page) + '" target="_blank" rel="noopener" title="' + esc(im.file) + '"><img loading="lazy" alt="" src="' + esc(COMMONS + encodeURIComponent(im.file) + '?width=500') + '"></a>';
       }).join('') + '</div>' : '') +
-      '<div class="body"><div class="badges"><span class="badge st-' + f.status + '">' + (STATUS[f.status] || f.status) + '</span>' +
-      '<span class="badge ' + (f.photoChecked ? 'ph-yes">Photo licence checked' : 'ph-no">Photo licence to check') + '</span></div>' +
+      '<div class="body"><div class="badges"><span class="badge st-' + stage(f) + '">' + (STATUS[stage(f)] || f.status) + '</span>' +
+      (live ? '' : '<span class="badge ' + (f.photoChecked ? 'ph-yes">Photo licence checked' : 'ph-no">Photo licence to check') + '</span>') +
+      (uncredited(f) ? '<span class="badge cr-no">Photo credit missing</span>' : '') + '</div>' +
       '<h2>' + esc(f.title) + '</h2>' + (f.subtitle ? '<p class="sub">' + esc(f.subtitle) + '</p>' : '') + '<span class="id">' + esc(f.id) + ' · ' + esc(f.kind || '') + '</span>' +
       '<div class="verses">' + verses + '</div>' +
       '<p>' + (f.p && f.p[0] || '') + '</p>' +
-      '<div class="files">' + imgs.map(function (im) { return '<a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + esc(im.file) + '</a>'; }).join('<br>') + '</div>' +
+      '<div class="files">' + all.map(function (im) {
+        return '<div><a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + esc(im.file) + '</a><br>' +
+          (im.credit ? 'Photo: <bdi>' + esc(im.credit) + '</bdi>' + (im.licence ? ' · ' + esc(im.licence) : '') : '<span class="need">Credit needed</span>') + '</div>';
+      }).join('') + '</div>' +
       '</div></article>';
   }
   document.addEventListener('click', function (e) {
