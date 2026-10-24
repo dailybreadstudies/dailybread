@@ -97,6 +97,9 @@ body.dbf-split .dbf figcaption { position: absolute; left: 28px; bottom: 24px; w
   font: 400 0.7rem/1.5 var(--sans); color: rgba(255, 255, 255, 0.8); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45); }
 body.dbf-split .dbf figcaption a { color: rgba(255, 255, 255, 0.8); text-decoration-color: rgba(255, 255, 255, 0.35); }
 body.dbf-split .dbf figcaption a:hover { color: #fff; }
+/* kept quiet so it doesn't distract: half strength, full when pointed at */
+body.dbf-split .dbf figcaption { opacity: 0.5; transition: opacity 0.2s; }
+body.dbf-split .dbf figcaption:hover, body.dbf-split .dbf figcaption:focus-within { opacity: 1; }
 body.dbf-split .dbf-thumbs { position: absolute; top: 20px; left: 24px; z-index: 3; margin: 0; }
 body.dbf-split .dbf-thumbs button { border-color: rgba(255, 255, 255, 0.5); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
 body.dbf-split .dbf-thumbs button[aria-pressed="true"], body.dbf-split .dbf-thumbs button:hover { border-color: #fff; }
