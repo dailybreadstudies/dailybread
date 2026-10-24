@@ -12,9 +12,18 @@
  ],
  "images": [
   {
-   "file": "Merneptah_Israel_Stele_Cairo.JPG",
-   "caption": "The Merneptah Stele in the Egyptian Museum, Cairo.",
-   "page": "https://commons.wikimedia.org/wiki/File:Merneptah_Israel_Stele_Cairo.JPG"
+   "file": "Kairo_Museum_Merenptah-Stele_02.jpg",
+   "caption": "The upper part of Merneptah’s victory stele, from his mortuary temple at Thebes, in the Egyptian Museum, Cairo.",
+   "page": "https://commons.wikimedia.org/wiki/File:Kairo_Museum_Merenptah-Stele_02.jpg",
+   "credit": "Olaf Tausch",
+   "licence": "CC BY 3.0"
+  },
+  {
+   "file": "Closeup_of_the_Merenptah_Stele,_mentioning_ysrỉꜣr_(\"Israel\").jpg",
+   "caption": "Detail: the name Israel (ysrỉꜣr) in line 27.",
+   "page": "https://commons.wikimedia.org/wiki/File:Closeup_of_the_Merenptah_Stele,_mentioning_ysr%E1%BB%89%EA%9C%A3r_(%22Israel%22).jpg",
+   "credit": "Darer101",
+   "licence": "CC BY-SA 4.0"
   }
  ],
  "p": [
@@ -51,5 +60,5 @@
   ]
  ],
  "status": "draft",
- "photoChecked": false
+ "photoChecked": true
 }
