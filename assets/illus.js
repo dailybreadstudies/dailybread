@@ -183,9 +183,23 @@
     if (!lb || !lbItems) return;
     lbIndex = (i + lbItems.length) % lbItems.length;
     var it = lbItems[lbIndex], img = lb.querySelector('.dblx-stage img');
+    img.style.width = img.style.height = '';
+    img.onload = lbFit;
     img.src = it.src; img.alt = it.alt || '';
+    if (img.complete) lbFit();
     lb.querySelector('.dblx-credit').textContent = it.credit || '';
     var c = lb.querySelector('.dblx-count'); if (c) c.textContent = (lbIndex + 1) + ' / ' + lbItems.length;
+  }
+  /* The picture is scaled to fill the stage's width or height (smaller pictures are enlarged too),
+     keeping the sheet's margins around it */
+  function lbFit() {
+    if (!lb) return;
+    var img = lb.querySelector('.dblx-stage img'), st = lb.querySelector('.dblx-stage');
+    if (!img || !img.naturalWidth) return;
+    var cs = getComputedStyle(st);
+    var w = st.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight), h = st.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+    var s = Math.min(w / img.naturalWidth, h / img.naturalHeight);
+    img.style.width = Math.floor(img.naturalWidth * s) + 'px'; img.style.height = Math.floor(img.naturalHeight * s) + 'px';
   }
   function lbClose() {
     if (!lb) return;
@@ -218,7 +232,7 @@
     else if (lbItems && lbItems.length > 1 && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { e.preventDefault(); lbShow(lbIndex + (e.key === 'ArrowLeft' ? -1 : 1)); }
   });
   var rt = null;
-  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(place, 120); });
+  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(function () { place(); lbFit(); }, 120); });
   function watch() {
     var portions = document.getElementById('portions');
     if (!portions) return;
