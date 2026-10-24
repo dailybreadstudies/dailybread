@@ -1,0 +1,57 @@
+{
+ "id": "gallio",
+ "title": "Gallio, proconsul of Achaia",
+ "subtitle": "The Gallio Inscription (Delphi)",
+ "kind": "Inscription",
+ "anchors": [
+  {
+   "book": "ACT",
+   "c": 18,
+   "v": 12
+  }
+ ],
+ "images": [
+  {
+   "file": "Delphes_Gallion.jpg",
+   "caption": "A fragment of the inscription bearing Gallio’s name, in the Delphi Archaeological Museum.",
+   "page": "https://commons.wikimedia.org/wiki/File:Delphes_Gallion.jpg",
+   "credit": "Gérard",
+   "licence": "CC BY-SA 4.0"
+  }
+ ],
+ "p": [
+  "Fragments of a letter from the emperor Claudius to the city of Delphi, carved in stone at the sanctuary of Apollo. In it Claudius names “Lucius Junius Gallio, my friend and proconsul”, the Gallio before whom Shaul (Paul) was brought in Corinth (Acts 18:12–17).",
+  "Claudius’s titles date the letter to AD 52, which places Gallio’s year as proconsul around AD 51–52. It is one of the firmest dates for Shaul’s journeys, setting his eighteen months in Corinth around AD 50–52."
+ ],
+ "facts": [
+  [
+   "Found",
+   "Fragments found at Delphi, Greece; published in 1905"
+  ],
+  [
+   "Date",
+   "AD 52"
+  ],
+  [
+   "Language",
+   "Greek"
+  ],
+  [
+   "Gallio",
+   "Brother of the philosopher Seneca"
+  ],
+  [
+   "Now",
+   "The Delphi Archaeological Museum"
+  ]
+ ],
+ "verse": "Acts 18:12–17",
+ "links": [
+  [
+   "Gallio Inscription on Wikipedia",
+   "https://en.wikipedia.org/wiki/Gallio_Inscription"
+  ]
+ ],
+ "status": "ready",
+ "photoChecked": true
+}

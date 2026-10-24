@@ -246,6 +246,20 @@
      "v": 14
     }
    ]
+  },
+  {
+   "id": "gallio",
+   "title": "Gallio, proconsul of Achaia",
+   "subtitle": "The Gallio Inscription (Delphi)",
+   "status": "ready",
+   "photoChecked": true,
+   "anchors": [
+    {
+     "book": "ACT",
+     "c": 18,
+     "v": 12
+    }
+   ]
   }
  ]
 }
