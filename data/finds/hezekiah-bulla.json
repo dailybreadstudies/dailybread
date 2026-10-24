@@ -1,0 +1,58 @@
+{
+ "id": "hezekiah-bulla",
+ "title": "The seal of King Hezekiah",
+ "subtitle": "The Hezekiah Bulla (Ophel)",
+ "kind": "Seal impression",
+ "anchors": [
+  {
+   "book": "2KI",
+   "c": 18,
+   "v": 1
+  },
+  {
+   "book": "2CH",
+   "c": 29,
+   "v": 1
+  }
+ ],
+ "images": [
+  {
+   "file": "LMLK,_Ezekiah_seals.jpg",
+   "caption": "Drawings of the two royal emblems used in Hezekiah’s time: the winged sun, which appears on his bulla, and the winged scarab.",
+   "page": "https://commons.wikimedia.org/wiki/File:LMLK,_Ezekiah_seals.jpg",
+   "credit": "Rubén Betanzo S.",
+   "licence": "CC BY-SA 3.0"
+  }
+ ],
+ "p": [
+  "A clay seal impression about a centimetre across, found in the Ophel excavations just south of the Temple Mount, in a refuse heap beside a royal building. It reads “Belonging to Hezekiah [son of] Ahaz, king of Judah”, around a winged sun flanked by two signs for life.",
+  "It is the first impression of the seal of an Israelite or Judean king found in a scientific excavation. Jar handles stamped <i>lmlk</i>, “belonging to the king”, with the same royal emblems, are widely linked to the years when Hezekiah stocked Judah’s cities for the Assyrian invasion (2 Chronicles 32:27–29)."
+ ],
+ "facts": [
+  [
+   "Found",
+   "2009, in the Ophel excavations, Jerusalem; identified in 2015"
+  ],
+  [
+   "Excavator",
+   "Eilat Mazar"
+  ],
+  [
+   "Date",
+   "Hezekiah’s reign, late 8th century BC"
+  ],
+  [
+   "Size",
+   "About 13 mm across"
+  ]
+ ],
+ "verse": "2 Kings 18:1; 2 Chronicles 29:1",
+ "links": [
+  [
+   "King Hezekiah bulla on Wikipedia",
+   "https://en.wikipedia.org/wiki/King_Hezekiah_bulla"
+  ]
+ ],
+ "status": "ready",
+ "photoChecked": true
+}

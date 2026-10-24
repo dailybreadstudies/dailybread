@@ -260,6 +260,25 @@
      "v": 12
     }
    ]
+  },
+  {
+   "id": "hezekiah-bulla",
+   "title": "The seal of King Hezekiah",
+   "subtitle": "The Hezekiah Bulla (Ophel)",
+   "status": "ready",
+   "photoChecked": true,
+   "anchors": [
+    {
+     "book": "2KI",
+     "c": 18,
+     "v": 1
+    },
+    {
+     "book": "2CH",
+     "c": 29,
+     "v": 1
+    }
+   ]
   }
  ]
 }
