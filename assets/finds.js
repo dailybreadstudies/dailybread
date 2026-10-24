@@ -7,6 +7,9 @@
  * Wide screens: one column left of the text. Phones: below the verse. Tapping a photo opens it in
  * the full-size viewer (DBLightbox, assets/illus.js).
  *
+ * On very wide screens the active photo fills the left margin from the window's edge, top to bottom, and
+ * fades out before the verse buttons; its caption and credit sit over it in small white text.
+ *
  * Each card has a plain title that says what it shows for the Bible reader ("Mesha king of Moab")
  * and the scholarly name of the object as its subtitle ("The Mesha Stele (Moabite Stone)").
  *
@@ -125,6 +128,9 @@
       bs.setProperty('--dbf-info-left', split.infoLeft + 'px'); bs.setProperty('--dbf-info-w', split.infoW + 'px');
       document.body.classList.add('dbf-split');
       if (root.parentNode !== sp) sp.appendChild(root);
+      // the photo runs from the window's left edge to just before the verse buttons, fading out on the way
+      var r = readerEl(), textL = r ? r.getBoundingClientRect().left : split.mapLeft + split.mapW + 70;
+      bs.setProperty('--dbf-photos-w', Math.max(split.mapW, Math.round(textL - 66)) + 'px');
       state.mode = 'split';
       return;
     }
@@ -196,9 +202,10 @@
     var imgs = f.images || [];
     var html = '';
     if (imgs.length) {
-      html += '<div class="dbf-photos">' + imgs.map(function (im, i) {
+      html += '<div class="dbf-photos" style="--n:' + (imgs.length > 1 ? imgs.length : 0) + '">' + imgs.map(function (im, i) {
         return '<figure class="dbf-fig" data-i="' + i + '"><button type="button" class="dbf-frame" data-dbf-zoom="' + i + '" aria-label="Enlarge: ' + esc(im.caption || f.title) + '">' +
-          '<img alt="' + esc(im.caption || '') + '" loading="' + (i ? 'lazy' : 'eager') + '" src="' + esc(imgURL(im.file, 1100)) + '">' +
+          '<img alt="' + esc(im.caption || '') + '" loading="' + (i ? 'lazy' : 'eager') + '" src="' + esc(imgURL(im.file, 1600)) + '"' +
+            (im.focus ? ' style="--dbf-focus:' + esc(im.focus) + '"' : '') + '>' +
           '<span class="dbf-hint">' + ENLARGE + 'Enlarge</span></button>' +
           '<figcaption>' + captionHTML(im) + '</figcaption></figure>';
       }).join('');

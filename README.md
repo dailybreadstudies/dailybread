@@ -155,6 +155,9 @@ below the verse. Loaded on `index.html`, which shows only finds marked ready wit
 - Very wide screens: the photos fill the space left of the text and the words the space right of it (same
   `DBMaps.splitLayout` as maps and trees). Otherwise one column left of the text, or below the verse on phones.
   Tapping a photo opens the full-size viewer (`DBLightbox` in `assets/illus.js`), with arrows when there are several.
+- In that wide layout the active photo fills the left margin from the window's edge, top to bottom, zooms in gently,
+  and fades out before the verse buttons; caption and credit sit over it in small white text. The photo is cropped to
+  the tall column: an image can carry `focus` (a CSS object-position such as `"30% 50%"`) to choose what stays in view.
 - Pictures are shown from Wikimedia Commons by file name, with a link to each file page (author and licence).
   Check each file's licence on Commons before going live: public domain, CC BY or CC BY-SA, credited.
 - Card text is our own wording, with a link to the Wikipedia article for more.

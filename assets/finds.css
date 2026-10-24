@@ -72,14 +72,37 @@ body.dbm-margin .dbf-pin.dbf-second { left: -98px; }
 .dbf-verse { font: italic 400 0.8rem/1.4 var(--serif); color: var(--accent); margin: 0 0 0.9rem; }
 
 /* ── Very wide screens: the photos fill the space left of the text, top to bottom; the words the space right of it ── */
-body.dbf-split .dbf-panel { left: var(--dbf-photos-left); width: var(--dbf-photos-w); padding: 22px 6px 28px 0; }
+/* The photo fills the left margin from the window's edge, top to bottom, zooming in gently as it opens, and fades
+   out before the verse buttons (the panel ends before them, so they stay clickable). Caption and credit sit over
+   it in small white text; with several photos, small pictures at the top switch between them. */
+body.dbf-split .dbf-panel { left: 0; width: var(--dbf-photos-w); padding: 0; overflow: hidden; background: transparent; }
+body.dbf-split .dbf-panel > .dbf { position: absolute; inset: 0; }
+/* the words: the space right of the text, top to bottom, starting below the reader's tool buttons (top right) */
 body.dbf-split .dbf-info { position: fixed; top: var(--tb-off, 0px); left: var(--dbf-info-left); width: var(--dbf-info-w); z-index: 150;
   height: calc(100vh - var(--tb-off, 0px)); height: calc(100dvh - var(--tb-off, 0px)); overflow-y: auto; overflow-x: hidden;
-  padding: 78px 10px 28px 0; margin: 0; scrollbar-width: thin; }      /* starts below the reader's tool buttons (top right) */
-body.dbf-split .dbf-fig { display: block; margin: 0 0 1.4rem; }
-body.dbf-split .dbf-frame { aspect-ratio: auto; }
-body.dbf-split .dbf-frame img { height: auto; max-height: calc(100dvh - var(--tb-off, 0px) - 110px); object-fit: contain; margin: 0 auto; }
-body.dbf-split .dbf-thumbs { display: none; }
+  padding: 78px 10px 28px 0; margin: 0; scrollbar-width: thin; }
+/* the fade sits on the photos only: a mask on the panel would also capture the words column (fixed, right of the text) */
+body.dbf-split .dbf-photos { position: absolute; inset: 0;
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 52%, rgba(0,0,0,0.55) 78%, transparent 100%);
+          mask-image: linear-gradient(to right, #000 0, #000 52%, rgba(0,0,0,0.55) 78%, transparent 100%); }
+body.dbf-split .dbf-fig { position: absolute; inset: 0; display: block; margin: 0; opacity: 0; visibility: hidden; transition: opacity 0.5s, visibility 0s 0.5s; }
+body.dbf-split .dbf-fig.dbf-on { opacity: 1; visibility: visible; transition: opacity 0.5s, visibility 0s; }
+body.dbf-split .dbf-frame { position: absolute; inset: 0; aspect-ratio: auto; border: 0; border-radius: 0; background: #2b231c; }
+body.dbf-split .dbf-frame img { width: 100%; height: 100%; object-fit: cover; object-position: var(--dbf-focus, 50% 40%); }
+body.dbf-split .dbf-on .dbf-frame img { animation: dbf-zoom 1.4s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@keyframes dbf-zoom { from { transform: scale(1.09); opacity: 0; } 30% { opacity: 1; } to { transform: scale(1); opacity: 1; } }
+body.dbf-split .dbf-frame::after { content: ""; position: absolute; inset: auto 0 0 0; height: 34%; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(20, 15, 10, 0), rgba(20, 15, 10, 0.62)); }
+body.dbf-split .dbf figcaption { position: absolute; left: 28px; bottom: 24px; width: min(26rem, 46%); margin: 0; z-index: 2;
+  font: 400 0.7rem/1.5 var(--sans); color: rgba(255, 255, 255, 0.8); text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45); }
+body.dbf-split .dbf figcaption a { color: rgba(255, 255, 255, 0.8); text-decoration-color: rgba(255, 255, 255, 0.35); }
+body.dbf-split .dbf figcaption a:hover { color: #fff; }
+body.dbf-split .dbf-thumbs { position: absolute; top: 20px; left: 24px; z-index: 3; margin: 0; }
+body.dbf-split .dbf-thumbs button { border-color: rgba(255, 255, 255, 0.5); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); }
+body.dbf-split .dbf-thumbs button[aria-pressed="true"], body.dbf-split .dbf-thumbs button:hover { border-color: #fff; }
+body.dbf-split .dbf-hint { top: 20px; bottom: auto; right: auto; left: calc(24px + var(--n, 0) * 3.85rem); }
+body.dbf-split .dbf-frame.dbf-noimg::after { content: "The picture could not load."; inset: 0; height: auto; display: grid; place-items: center; background: none; color: rgba(255,255,255,0.7); }
+@media (prefers-reduced-motion: reduce) { body.dbf-split .dbf-on .dbf-frame img { animation: none; } body.dbf-split .dbf-fig { transition: none; } }
 
 .dbf-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 0.55rem 1rem; margin: 1rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--rule); font-size: 0.74rem; line-height: 1.45; }
 .dbf-facts > div { min-width: 0; }
