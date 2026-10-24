@@ -190,7 +190,7 @@
   function captionHTML(im) {
     var lic = im.licence ? (licenceURL(im.licence) ? '<a href="' + esc(licenceURL(im.licence)) + '" target="_blank" rel="noopener license">' + esc(im.licence) + '</a>' : esc(im.licence)) : '';
     var who = im.credit ? 'Photo: <bdi>' + esc(im.credit) + '</bdi>, via Wikimedia Commons' : 'Photo: Wikimedia Commons';   // bdi: Hebrew user names keep the comma in place
-    return esc(im.caption || '') + ' <a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + who + '</a>' + (lic ? ' (' + lic + ')' : '');
+    return esc(im.caption || '') + ' <span class="dbf-credit"><a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + who + '</a>' + (lic ? ' (' + lic + ')' : '') + '</span>';
   }
   function credit(im) {
     return im.credit ? 'Photo: ' + im.credit + ', via Wikimedia Commons' + (im.licence ? ' (' + im.licence + ')' : '') : 'Photo: Wikimedia Commons';
