@@ -130,7 +130,7 @@
       if (root.parentNode !== sp) sp.appendChild(root);
       // the photo runs from the window's left edge to just before the verse buttons, fading out on the way
       var r = readerEl(), textL = r ? r.getBoundingClientRect().left : split.mapLeft + split.mapW + 70;
-      bs.setProperty('--dbf-photos-w', Math.max(split.mapW, Math.round(textL - 66)) + 'px');
+      bs.setProperty('--dbf-photos-w', Math.max(split.mapW, Math.round(textL - 96)) + 'px');
       state.mode = 'split';
       return;
     }

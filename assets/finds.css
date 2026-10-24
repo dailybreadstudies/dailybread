@@ -83,8 +83,8 @@ body.dbf-split .dbf-info { position: fixed; top: var(--tb-off, 0px); left: var(-
   padding: 78px 10px 28px 0; margin: 0; scrollbar-width: thin; }
 /* the fade sits on the photos only: a mask on the panel would also capture the words column (fixed, right of the text) */
 body.dbf-split .dbf-photos { position: absolute; inset: 0;
-  -webkit-mask-image: linear-gradient(to right, #000 0, #000 52%, rgba(0,0,0,0.55) 78%, transparent 100%);
-          mask-image: linear-gradient(to right, #000 0, #000 52%, rgba(0,0,0,0.55) 78%, transparent 100%); }
+  -webkit-mask-image: linear-gradient(to right, #000 0, #000 34%, rgba(0,0,0,0.78) 52%, rgba(0,0,0,0.45) 70%, rgba(0,0,0,0.16) 86%, transparent 100%);
+          mask-image: linear-gradient(to right, #000 0, #000 34%, rgba(0,0,0,0.78) 52%, rgba(0,0,0,0.45) 70%, rgba(0,0,0,0.16) 86%, transparent 100%); }
 body.dbf-split .dbf-fig { position: absolute; inset: 0; display: block; margin: 0; opacity: 0; visibility: hidden; transition: opacity 0.5s, visibility 0s 0.5s; }
 body.dbf-split .dbf-fig.dbf-on { opacity: 1; visibility: visible; transition: opacity 0.5s, visibility 0s; }
 body.dbf-split .dbf-frame { position: absolute; inset: 0; aspect-ratio: auto; border: 0; border-radius: 0; background: #2b231c; }
