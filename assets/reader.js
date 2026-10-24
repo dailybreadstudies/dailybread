@@ -2114,12 +2114,12 @@
       html = lastP >= 0 ? html.slice(0, lastP) + ' ' + shabbatSpan + html.slice(lastP)
         : '<p>' + shabbatSpan + '</p>';
       // Shabbat / Yom Tov: how the Haftarah and the Apostles reading connect (day file "about"), then any note
-      if (!KIDS && day.about && day.about.length) {
+      if (day.about && day.about.length) {
         html += day.about.map(function (para) { return '<p class="today-about">' + richText(para) + '</p>'; }).join('');
       }
       box.innerHTML = html;
       applyDivineName(box);
-      box.hidden = !items.length && !(!KIDS && day.about && day.about.length);
+      box.hidden = !items.length && !(day.about && day.about.length);
       drawShabbat(day.date);
     });
   }
