@@ -174,6 +174,18 @@
 
   var CLOSE = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2 2 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
   var ENLARGE = '<svg viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M7 1h4v4M11 1 7 5M5 11H1V7M1 11l4-4"/></svg>';
+  /* Creative Commons licences ask for a link to the licence: the short name in the caption links to it */
+  function licenceURL(l) {
+    var m = /^CC (BY(?:-SA|-ND|-NC|-NC-SA|-NC-ND)?) (\d\.\d)/i.exec(l || '');
+    if (m) return 'https://creativecommons.org/licenses/' + m[1].toLowerCase() + '/' + m[2] + '/';
+    if (/^CC0/i.test(l || '')) return 'https://creativecommons.org/publicdomain/zero/1.0/';
+    return '';
+  }
+  function captionHTML(im) {
+    var lic = im.licence ? (licenceURL(im.licence) ? '<a href="' + esc(licenceURL(im.licence)) + '" target="_blank" rel="noopener license">' + esc(im.licence) + '</a>' : esc(im.licence)) : '';
+    var who = im.credit ? 'Photo: ' + esc(im.credit) + ', via Wikimedia Commons' : 'Photo: Wikimedia Commons';
+    return esc(im.caption || '') + ' <a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + who + '</a>' + (lic ? ' (' + lic + ')' : '');
+  }
   function credit(im) {
     return im.credit ? 'Photo: ' + im.credit + ', via Wikimedia Commons' + (im.licence ? ' (' + im.licence + ')' : '') : 'Photo: Wikimedia Commons';
   }
@@ -188,7 +200,7 @@
         return '<figure class="dbf-fig" data-i="' + i + '"><button type="button" class="dbf-frame" data-dbf-zoom="' + i + '" aria-label="Enlarge: ' + esc(im.caption || f.title) + '">' +
           '<img alt="' + esc(im.caption || '') + '" loading="' + (i ? 'lazy' : 'eager') + '" src="' + esc(imgURL(im.file, 1100)) + '">' +
           '<span class="dbf-hint">' + ENLARGE + 'Enlarge</span></button>' +
-          '<figcaption>' + esc(im.caption || '') + ' <a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + esc(credit(im)) + '</a></figcaption></figure>';
+          '<figcaption>' + captionHTML(im) + '</figcaption></figure>';
       }).join('');
       if (imgs.length > 1) {
         html += '<div class="dbf-thumbs">' + imgs.map(function (im, i) {
