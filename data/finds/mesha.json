@@ -14,12 +14,16 @@
   {
    "file": "Mesha_stele_(Louvre,_AO_5066).jpg",
    "caption": "The Mesha Stele in the Louvre, pieced together after it was broken in 1869.",
-   "page": "https://commons.wikimedia.org/wiki/File:Mesha_stele_(Louvre,_AO_5066).jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Mesha_stele_(Louvre,_AO_5066).jpg",
+   "credit": "Tangopaso",
+   "licence": "Public domain"
   },
   {
    "file": "Mesha_stele_(Louvre,_AO_5066)_-_details_with_the_word_JHWH.jpg",
    "caption": "Detail: the divine name YHWH in line 18.",
-   "page": "https://commons.wikimedia.org/wiki/File:Mesha_stele_(Louvre,_AO_5066)_-_details_with_the_word_JHWH.jpg"
+   "page": "https://commons.wikimedia.org/wiki/File:Mesha_stele_(Louvre,_AO_5066)_-_details_with_the_word_JHWH.jpg",
+   "credit": "Tangopaso",
+   "licence": "Public domain"
   }
  ],
  "p": [
@@ -56,5 +60,5 @@
   ]
  ],
  "status": "draft",
- "photoChecked": false
+ "photoChecked": true
 }
