@@ -229,6 +229,10 @@
     root._images = imgs; root._find = f;
     root.querySelectorAll('.dbf-frame img').forEach(function (img) {
       img.onerror = function () { img.closest('.dbf-frame').classList.add('dbf-noimg'); };
+      // a photo too small to fill the margin sharply shows as a framed picture instead (wide screens)
+      var fig = img.closest('.dbf-fig');
+      function size() { if (img.naturalWidth) { fig.classList.toggle('dbf-small', img.naturalWidth < SMALL_PX); boxed(root); } }
+      if (img.complete) size(); else img.addEventListener('load', size);
     });
     if (imgs.length) show(root, 0);
     headTo(root, state.mode === 'split');
@@ -239,6 +243,13 @@
     if (!root._images[i]) return;
     root.querySelectorAll('.dbf-fig').forEach(function (fg) { fg.classList.toggle('dbf-on', +fg.getAttribute('data-i') === i); });
     root.querySelectorAll('[data-dbf-img]').forEach(function (b) { b.setAttribute('aria-pressed', String(+b.getAttribute('data-dbf-img') === i)); });
+    boxed(root);
+  }
+  /* Photos narrower than this (in pixels) are not stretched over the margin */
+  var SMALL_PX = 900;
+  function boxed(root) {
+    var ph = root.querySelector('.dbf-photos'), on = root.querySelector('.dbf-fig.dbf-on');
+    if (ph) ph.classList.toggle('dbf-boxed', !!(on && on.classList.contains('dbf-small')));
   }
 
   /* Full size, in the same viewer as the illustrations; with more than one photo, arrows step through them */

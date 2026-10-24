@@ -104,6 +104,16 @@ body.dbf-split .dbf-thumbs button { border-color: rgba(255, 255, 255, 0.5); box-
 body.dbf-split .dbf-thumbs button[aria-pressed="true"], body.dbf-split .dbf-thumbs button:hover { border-color: #fff; }
 body.dbf-split .dbf-hint { top: 20px; bottom: auto; right: auto; left: calc(24px + var(--n, 0) * 3.85rem); }
 body.dbf-split .dbf-frame.dbf-noimg::after { content: "The picture could not load."; inset: 0; height: auto; display: grid; place-items: center; background: none; color: rgba(255,255,255,0.7); }
+/* A photo too small to fill the margin sharply: a framed picture near the top, caption beneath, no fade */
+body.dbf-split .dbf-photos.dbf-boxed { -webkit-mask-image: none; mask-image: none; }
+body.dbf-split .dbf-fig.dbf-small { position: absolute; inset: 0; padding: 26px 32px; }
+body.dbf-split .dbf-small .dbf-frame { position: relative; inset: auto; width: min(100%, 440px); aspect-ratio: auto; border: 1px solid var(--accent-line); border-radius: 4px; background: var(--tint); }
+body.dbf-split .dbf-small .dbf-frame img { height: auto; object-fit: contain; }
+body.dbf-split .dbf-small .dbf-frame::after { display: none; }
+body.dbf-split .dbf-small figcaption { position: static; width: min(100%, 440px); margin-top: 0.55rem; color: var(--muted); text-shadow: none; }
+body.dbf-split .dbf-small figcaption a { color: var(--muted); text-decoration-color: currentColor; }
+body.dbf-split .dbf-photos.dbf-boxed .dbf-thumbs { position: absolute; top: auto; bottom: 22px; left: 32px; }
+body.dbf-split .dbf-photos.dbf-boxed .dbf-hint { top: auto; left: auto; }
 @media (prefers-reduced-motion: reduce) { body.dbf-split .dbf-on .dbf-frame img { animation: none; } body.dbf-split .dbf-fig { transition: none; } }
 
 .dbf-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: 0.55rem 1rem; margin: 1rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--rule); font-size: 0.74rem; line-height: 1.45; }
