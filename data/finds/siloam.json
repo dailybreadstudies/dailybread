@@ -18,8 +18,10 @@
  "images": [
   {
    "file": "IMJ_view_20130115_202733.jpg",
-   "caption": "The Siloam Inscription as displayed in the Israel Museum, Jerusalem. The original stone is in the Istanbul Archaeology Museums.",
-   "page": "https://commons.wikimedia.org/wiki/File:IMJ_view_20130115_202733.jpg"
+   "caption": "A copy of the Siloam Inscription on display in the Israel Museum, Jerusalem. The original stone is in the Istanbul Archaeology Museums.",
+   "page": "https://commons.wikimedia.org/wiki/File:IMJ_view_20130115_202733.jpg",
+   "credit": "יעל י",
+   "licence": "CC BY-SA 3.0"
   },
   {
    "file": "Hezekiahs_Tunnel.jpg",
