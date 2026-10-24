@@ -2095,12 +2095,13 @@
       var html = items.map(function (it, i) {
         var lead = i === 0 ? '<span class="lead">' + label + '</span> ' : '';
         if (it.own) return '<p class="own-note">' + lead + richText(i === 0 ? afterLead(it.own) : it.own) + '</p>';
-        // "Today the Torah portion Noach (Noah) פרשת נח is read in synagogues around the world."
+        // "Today the Torah portion Noach (Noah) is read in synagogues around the world."
         if (it.parasha) {
-          var pname = it.title.replace(/^Parashat\s+/, '');
-          var pmean = day.parsha && day.parsha.meaning && day.parsha.name === pname ? ' (' + escapeAttr(day.parsha.meaning) + ')' : '';
-          return '<p>' + lead + (lead ? 'the' : 'The') + ' Torah portion <span class="today-title">' + escapeAttr(pname) + '</span>' + pmean +
-            (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') + ' is read in synagogues around the world.</p>';
+          // Same form as the header: "Torah Portion: Lech Lecha (Go Forth)", name in italics
+          var pname = day.parsha && day.parsha.name ? day.parsha.name : it.title.replace(/^Parashat\s+/, '');
+          var pmean = day.parsha && day.parsha.meaning ? ' (' + escapeAttr(day.parsha.meaning) + ')' : '';
+          return '<p>' + lead + (lead ? 'the' : 'The') + ' Torah portion <em class="today-title">' + escapeAttr(pname) + '</em>' + pmean +
+            ' is read in synagogues around the world.</p>';
         }
         return '<p>' + lead +
           '<span class="today-title">' + escapeAttr(it.title) + '</span>' +
