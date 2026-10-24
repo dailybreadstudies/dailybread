@@ -162,8 +162,9 @@ def main():
             out['parsha'] = {'name': day['parasha'][0], 'meaning': day['parasha'][1]}
         if day.get('occasion'):
             out['occasion'] = day['occasion']
-        if old.get('intro'):
-            out['intro'] = old['intro']
+        for k in ('intro', 'about'):                       # hand-written text kept across rebuilds; 'about' = Haftarah/Apostles blurb
+            if old.get(k):
+                out[k] = old[k]
         for k in ('note', 'prompts'):                      # Kids journal: its own "Today in History" and journaling prompts
             if day.get(k):
                 out[k] = day[k]
