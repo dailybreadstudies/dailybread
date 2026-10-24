@@ -165,3 +165,9 @@ domain investor when it expired in Oct 2026 and is listed on GoDaddy.)
   and Hebrew-names settings, needs a small pronunciation list for Sephardic names); ElevenLabs audio recorded once for the
   whole BSB (about $215–430 one-time, files on Cloudflare R2, fixed wording); ElevenLabs on demand or Audio Native (not a
   good fit). John wanted a male voice with the site's translation and terms; the Busy Moms podcast is a women's ministry.
+
+## Guide (guide.html)
+- "How to use Daily Bread": one section per tool, each with a short silent clip of the real reader and a "Try it" link.
+  First three: Your progress, Original languages, Bible maps. Linked from Learn (study-tool names and "New here?").
+- Clips live in assets/guide/ (.mp4 + .webm + .jpg poster), recorded by tools/guide/record_clips.py (see its header).
+- "Try it" links use ?try=progress|orig|maps: reader.js makes that button pulse three times (.try-pulse in reader.css).

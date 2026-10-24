@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Hebrew:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/reader.css?v=2ba1416c">
+  <link rel="stylesheet" href="assets/reader.css?v=83b9bdb6">
   <script>
     try { var t = JSON.parse(localStorage.getItem('dbs-settings') || '{}').theme;
           if (t === 'light' || t === 'dark' || t === 'sepia') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
@@ -152,6 +152,10 @@
     .ln-ic svg { width: 25px; height: 25px; flex: none; }
     .ln-ic-pill { width: 64px; border-radius: 26px; gap: 4px; font-family: var(--display); font-size: 1.1rem; }
     .ln-ic-sep { color: var(--line-strong); }
+    .ln-guide { margin: 2.6rem 0 0; font-size: 1.05rem; color: var(--ink-soft); }
+    .ln-tools b a.ln-tl { color: inherit; text-decoration: none; }
+    .ln-tools b a.ln-tl:hover { text-decoration: underline; text-decoration-color: var(--accent-line); }
+    .ln-guide a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
     .ln-ic-he { font-family: var(--hebrew); }
     .ln-book { margin: 0 auto; max-width: 400px; }
     .ln-book img { transition: transform 0.3s ease; }
@@ -226,16 +230,17 @@
     <p class="ab-eyebrow rv">Daily Bread Online · Free</p>
     <h2 class="ab-h rv d1">Study tools, <em>built into the reader.</em></h2>
     <ul class="ln-tools">
-      <li class="rv d1"><span class="ln-ic ln-ic-pill" aria-hidden="true"><span>A</span><span class="ln-ic-sep">/</span><span class="ln-ic-he">א</span></span><b>Original languages</b><span>The Hebrew and Greek under each verse, or on its own.</span></li>
+      <li class="rv d1"><span class="ln-ic ln-ic-pill" aria-hidden="true"><span>A</span><span class="ln-ic-sep">/</span><span class="ln-ic-he">א</span></span><b><a class="ln-tl" href="guide.html#original-languages">Original languages</a></b><span>The Hebrew and Greek under each verse, or on its own.</span></li>
       <li class="rv d1"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></span><b>Word study</b><span>Tap any Hebrew or Greek word for its meaning and form.</span></li>
-      <li class="rv d1"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z"/><path d="M9 4v13.5M15 6.5V20"/></svg></span><b>Bible maps</b><span>Interactive maps beside the verses they bring to life.</span></li>
+      <li class="rv d1"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5L9 4Z"/><path d="M9 4v13.5M15 6.5V20"/></svg></span><b><a class="ln-tl" href="guide.html#maps">Bible maps</a></b><span>Interactive maps beside the verses they bring to life.</span></li>
       <li class="rv d2"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="18" cy="19.5" r="2.2"/><circle cx="18" cy="4.5" r="2.2"/><path d="M6 7.2v11.3c0 .6.4 1 1 1h8.8M6 12h9.8M6 5.6c0-.6.4-1.1 1-1.1h8.8"/></svg></span><b>Family trees</b><span>Tap a name in a genealogy and find it in the family tree.</span></li>
       <li class="rv d2"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v3.2C7.2 7.4 5.5 10 5.5 13.2 5.5 17.5 8.4 21 12 21s6.5-3.5 6.5-7.8c0-3.2-1.7-5.8-4.5-7V3"/><path d="M6.2 11h11.6M6.6 16h10.8"/></svg></span><b>Archaeology</b><span>A growing library of finds that shed light on the text, beside the verses.</span></li>
       <li class="rv d2"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="8.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r="0.9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r="0.9" fill="currentColor" stroke="none"/></svg></span><b>Biblical calendar</b><span>Hebrew dates, the Feasts, Shabbat times and Today in History.</span></li>
       <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.2 5 7.6 4.5 4 4.5v13.5c3.6 0 6.2.5 8 2 1.8-1.5 4.4-2 8-2V4.5c-3.6 0-6.2.5-8 2z"/><path d="M12 6.5V20"/></svg></span><b>The whole Bible</b><span>Open any book and chapter, or any day of the plan.</span></li>
       <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13l11-6.5z" fill="currentColor"/></svg></span><b>Listen along</b><span>The <a href="listen.html">Daily Bread for Busy Moms</a> podcast, day by day.</span></li>
-      <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></svg></span><b>Your progress</b><span>Mark each reading and watch your Bible fill in, book by book.</span></li>
+      <li class="rv d3"><span class="ln-ic" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.3l2.7 2.7L16.2 9.5"/></svg></span><b><a class="ln-tl" href="guide.html#progress">Your progress</a></b><span>Mark each reading and watch your Bible fill in, book by book.</span></li>
     </ul>
+    <p class="ln-guide rv d3">New here? <a href="guide.html">See how the tools work</a> in a short guide with clips of the reader.</p>
     <p class="ln-map-cap rv d3">Behind this section: the battle of Ai in Joshua 8, one of the Bible maps in the reader. <a href="./?r=JOS.8">Open it beside the text &rarr;</a></p>
   </div>
 </section>

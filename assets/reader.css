@@ -1173,3 +1173,8 @@ html.msub-on .scripture .msub {
 }
 @media (max-width: 999px) { .sp-msub-row { display: none; } }
 @media print { .msub { display: none !important; } }
+
+/* Guide "Try it" links: the button to use pulses three times (reader.js, ?try=) */
+.try-pulse { animation: try-pulse 1.3s ease-out 3; }
+@keyframes try-pulse { 0% { box-shadow: 0 0 0 0 rgba(122, 86, 52, 0.5); } 100% { box-shadow: 0 0 0 16px rgba(122, 86, 52, 0); } }
+@media (prefers-reduced-motion: reduce) { .try-pulse { animation-duration: 2s; animation-iteration-count: 1; } }

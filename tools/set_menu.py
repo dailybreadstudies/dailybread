@@ -12,7 +12,7 @@ import re
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 MENU = [('./', 'Today', 'index.html'), ('progress.html', 'Progress', 'progress.html'), ('listen.html', 'Listen', 'listen.html'),
         ('learn.html', 'Learn', 'learn.html'), None, ('about.html', 'About', 'about.html'), ('kids/', 'Kids', None)]
-PAGES = ['index.html', 'progress.html', 'learn.html', 'listen.html', 'about.html', 'contact.html', 'give.html', 'maps-test.html', 'deeper.html']
+PAGES = ['index.html', 'progress.html', 'learn.html', 'listen.html', 'about.html', 'contact.html', 'give.html', 'maps-test.html', 'deeper.html', 'guide.html']
 
 
 def nav(page):
@@ -22,7 +22,7 @@ def nav(page):
             out.append('<span class="tb-br" aria-hidden="true"></span>')
             continue
         href, text, file = item
-        cur = file == page or (page == 'maps-test.html' and file == 'index.html')
+        cur = file == page or (page == 'maps-test.html' and file == 'index.html') or (page == 'guide.html' and file == 'learn.html')
         out.append('<a href="%s"%s>%s</a>' % (href, ' aria-current="page"' if cur else '', text))
     give = ' aria-current="page"' if page == 'give.html' else ''
     return '<nav class="tb-nav" aria-label="Main">' + ''.join(out) + '<a class="tb-give-m" href="give.html"%s>Give</a></nav>' % give

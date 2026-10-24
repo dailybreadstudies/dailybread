@@ -2782,3 +2782,20 @@
     locateMe(false).then(function (l) { if (l && current && current.day) drawShabbat(current.day.date); });
   }
 })();
+
+/* "Try it" links from the Guide (guide.html): ?try=progress | orig | maps makes the button to use pulse a few times */
+(function () {
+  var t = new URLSearchParams(location.search).get('try');
+  var SEL = { progress: '.dp-check', orig: '#settings-btn', maps: '.dbm-pin' }[t];
+  if (!SEL) return;
+  var tries = 0;
+  (function look() {
+    var el = Array.prototype.filter.call(document.querySelectorAll(SEL), function (e) { return e.offsetParent !== null; })[0];
+    if (!el) { if (++tries < 40) setTimeout(look, 250); return; }
+    if (t === 'maps') el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    setTimeout(function () {
+      el.classList.add('try-pulse');
+      el.addEventListener('animationend', function () { el.classList.remove('try-pulse'); }, { once: true });
+    }, t === 'maps' ? 700 : 400);
+  })();
+})();
