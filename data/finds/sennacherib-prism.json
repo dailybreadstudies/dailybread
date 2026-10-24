@@ -1,0 +1,67 @@
+{
+ "id": "sennacherib-prism",
+ "title": "Sennacherib against Judah",
+ "subtitle": "The Sennacherib Prism (Taylor Prism)",
+ "kind": "Inscription",
+ "anchors": [
+  {
+   "book": "2KI",
+   "c": 18,
+   "v": 13
+  },
+  {
+   "book": "2CH",
+   "c": 32,
+   "v": 1
+  },
+  {
+   "book": "ISA",
+   "c": 36,
+   "v": 1
+  }
+ ],
+ "images": [
+  {
+   "file": "Taylor_Prism-1.jpg",
+   "caption": "The Taylor Prism, one of the clay prisms recording Sennacherib’s campaigns, in the British Museum.",
+   "page": "https://commons.wikimedia.org/wiki/File:Taylor_Prism-1.jpg",
+   "credit": "David Castor",
+   "licence": "Public domain"
+  }
+ ],
+ "p": [
+  "A six-sided clay prism inscribed with the annals of Sennacherib king of Assyria. His third campaign, in 701 BC, took him to Judah. He says he captured forty-six of Hezekiah’s walled cities and shut Hezekiah up in Jerusalem “like a bird in a cage”, and that Hezekiah sent him tribute, including thirty talents of gold, the same amount of gold given in 2 Kings 18:14.",
+  "The account is told from Assyria’s perspective. Sennacherib boasts of the siege but does not claim to have taken Jerusalem, which fits the Bible’s account that the city was spared and the king went home to Nineveh (2 Kings 19:35–36)."
+ ],
+ "facts": [
+  [
+   "Found",
+   "Acquired in 1830 near Nineveh (Mosul, Iraq) by Colonel Robert Taylor"
+  ],
+  [
+   "Date",
+   "About 691 BC"
+  ],
+  [
+   "Language",
+   "Akkadian (Assyrian cuneiform)"
+  ],
+  [
+   "Material",
+   "Baked clay, six sides, about 38 cm tall"
+  ],
+  [
+   "Now",
+   "The British Museum, London; similar prisms are in Chicago and the Israel Museum"
+  ]
+ ],
+ "verse": "2 Kings 18:13–16; Isaiah 36:1",
+ "links": [
+  [
+   "Sennacherib’s Annals on Wikipedia",
+   "https://en.wikipedia.org/wiki/Sennacherib%27s_Annals"
+  ]
+ ],
+ "status": "ready",
+ "photoChecked": true
+}

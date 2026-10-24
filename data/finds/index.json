@@ -203,6 +203,30 @@
      "v": 2
     }
    ]
+  },
+  {
+   "id": "sennacherib-prism",
+   "title": "Sennacherib against Judah",
+   "subtitle": "The Sennacherib Prism (Taylor Prism)",
+   "status": "ready",
+   "photoChecked": true,
+   "anchors": [
+    {
+     "book": "2KI",
+     "c": 18,
+     "v": 13
+    },
+    {
+     "book": "2CH",
+     "c": 32,
+     "v": 1
+    },
+    {
+     "book": "ISA",
+     "c": 36,
+     "v": 1
+    }
+   ]
   }
  ]
 }
