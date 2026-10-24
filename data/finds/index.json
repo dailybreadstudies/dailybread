@@ -46,8 +46,8 @@
    "id": "tel-dan",
    "title": "The House of David",
    "subtitle": "The Tel Dan Stele",
-   "status": "draft",
-   "photoChecked": false,
+   "status": "ready",
+   "photoChecked": true,
    "anchors": [
     {
      "book": "2KI",
