@@ -1,0 +1,67 @@
+{
+ "id": "lachish-reliefs",
+ "title": "Sennacherib at Lachish",
+ "subtitle": "The Lachish Reliefs",
+ "kind": "Relief",
+ "anchors": [
+  {
+   "book": "2KI",
+   "c": 18,
+   "v": 14
+  },
+  {
+   "book": "2CH",
+   "c": 32,
+   "v": 9
+  },
+  {
+   "book": "ISA",
+   "c": 36,
+   "v": 2
+  }
+ ],
+ "images": [
+  {
+   "file": "Capture_of_Lachish_-_Sennacherib.jpg",
+   "caption": "King Sennacherib on his throne receives the prisoners and spoil of Lachish. His face was deliberately cut away, probably when Nineveh fell in 612 BC.",
+   "page": "https://commons.wikimedia.org/wiki/File:Capture_of_Lachish_-_Sennacherib.jpg",
+   "credit": "Zunkir",
+   "licence": "CC BY-SA 4.0"
+  }
+ ],
+ "p": [
+  "Carved stone panels from Sennacherib’s palace at Nineveh show his army storming Lachish, the second city of Judah, in 701 BC: siege ramps and battering rams against the walls, archers and slingers, and families of Judah led away into exile. In the last scene the king sits on his throne before the city and receives the captives.",
+  "Second Kings 18:14 and 17 place Sennacherib at Lachish when Hezekiah sent him tribute and when his officers set out to threaten Jerusalem. Excavations at Tel Lachish have uncovered the Assyrian siege ramp the reliefs show, so the Bible, the palace walls and the ground itself tell of the same campaign."
+ ],
+ "facts": [
+  [
+   "Found",
+   "1849–1850, in Sennacherib’s South-West Palace at Nineveh (Mosul, Iraq)"
+  ],
+  [
+   "Excavator",
+   "Austen Henry Layard"
+  ],
+  [
+   "Date",
+   "About 700–690 BC; the siege was in 701 BC"
+  ],
+  [
+   "Material",
+   "Carved gypsum wall panels, about 2.7 m high"
+  ],
+  [
+   "Now",
+   "The British Museum, London"
+  ]
+ ],
+ "verse": "2 Kings 18:13–17; Isaiah 36:2",
+ "links": [
+  [
+   "Lachish reliefs on Wikipedia",
+   "https://en.wikipedia.org/wiki/Lachish_reliefs"
+  ]
+ ],
+ "status": "ready",
+ "photoChecked": true
+}

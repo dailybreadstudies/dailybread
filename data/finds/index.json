@@ -179,6 +179,30 @@
      "v": 7
     }
    ]
+  },
+  {
+   "id": "lachish-reliefs",
+   "title": "Sennacherib at Lachish",
+   "subtitle": "The Lachish Reliefs",
+   "status": "ready",
+   "photoChecked": true,
+   "anchors": [
+    {
+     "book": "2KI",
+     "c": 18,
+     "v": 14
+    },
+    {
+     "book": "2CH",
+     "c": 32,
+     "v": 9
+    },
+    {
+     "book": "ISA",
+     "c": 36,
+     "v": 2
+    }
+   ]
   }
  ]
 }
