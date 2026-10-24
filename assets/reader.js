@@ -2107,7 +2107,11 @@
           (it.he ? ' <span class="he today-he">' + escapeAttr(it.he) + '</span>' : '') +
           (it.memo ? ' — ' + escapeAttr(it.memo.replace(/\s+$/, '')) + (/[.!?][\s"”’')\]]*$/.test(it.memo.trim()) ? '' : '.') : '') + '</p>';
       }).join('');
-      html += '<p class="shabbat-line" id="shabbat-line" hidden></p>';
+      // Shabbat/havdalah times run on in the same paragraph as the last Today line (no line break)
+      var shabbatSpan = '<span class="shabbat-line" id="shabbat-line" hidden></span>';
+      var lastP = html.lastIndexOf('</p>');
+      html = lastP >= 0 ? html.slice(0, lastP) + ' ' + shabbatSpan + html.slice(lastP)
+        : '<p>' + shabbatSpan + '</p>';
       box.innerHTML = html;
       applyDivineName(box);
       box.hidden = !items.length;
