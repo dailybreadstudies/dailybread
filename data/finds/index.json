@@ -227,6 +227,25 @@
      "v": 1
     }
    ]
+  },
+  {
+   "id": "temple-warning",
+   "title": "The Temple’s notice to the nations",
+   "subtitle": "The Temple Warning Inscription",
+   "status": "ready",
+   "photoChecked": true,
+   "anchors": [
+    {
+     "book": "ACT",
+     "c": 21,
+     "v": 28
+    },
+    {
+     "book": "EPH",
+     "c": 2,
+     "v": 14
+    }
+   ]
   }
  ]
 }
