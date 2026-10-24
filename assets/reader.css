@@ -35,9 +35,10 @@
     --surface: #211b16;
     --surface-glass: rgba(33, 27, 22, 0.92);
     --on-accent: #1a140f;
-  --done: #9fbad0;
-  --done-bg: #1e2a34;
-  --done-line: #3b5266;
+  --done: #6dbbec;
+  --done-fill: #2498e1;
+  --done-bg: #14283a;
+  --done-line: #2c5878;
     --verse: #d6cdc1;
     --heading: #efe7dc;
     --track: #4a4037;
@@ -65,9 +66,10 @@
   --surface: #211b16;
   --surface-glass: rgba(33, 27, 22, 0.92);
   --on-accent: #1a140f;
-  --done: #9fbad0;
-  --done-bg: #1e2a34;
-  --done-line: #3b5266;
+  --done: #6dbbec;
+  --done-fill: #2498e1;
+  --done-bg: #14283a;
+  --done-line: #2c5878;
   --verse: #d6cdc1;
   --heading: #efe7dc;
   --track: #4a4037;
@@ -95,9 +97,10 @@
   --surface: #f8f0dd;
   --surface-glass: rgba(248, 240, 221, 0.94);
   --on-accent: #fbf5e8;
-  --done: #4f6f86;
-  --done-bg: #e3e6dc;
-  --done-line: #b9c6c9;
+  --done: #1b6aa0;
+  --done-fill: #2498e1;
+  --done-bg: #e2ebe6;
+  --done-line: #a8c8dc;
   --verse: #3b2f22;
   --heading: #2e2419;
   --track: #d6c6a8;
@@ -130,9 +133,10 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --surface: #ffffff;       /* menu, buttons */
   --surface-glass: rgba(255, 255, 255, 0.92);
   --on-accent: #ffffff;
-  --done: #4f7491;
-  --done-bg: #eaf1f7;
-  --done-line: #bcd0e0;     /* text on brown buttons */
+  --done: #1b72ad;          /* brand blue, deep enough for text */
+  --done-fill: #2498e1;     /* brand blue #2498e1: filled checks and marks */
+  --done-bg: #e8f3fb;
+  --done-line: #a9d2ef;     /* text on brown buttons */
   --verse: #222222;         /* verse numbers */
   --heading: #1f1f1f;
   --track: #d9d2ca;         /* switch (off) */
@@ -209,11 +213,11 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   transition: background 0.2s, border-color 0.2s, color 0.2s; }
 .dp-check:hover { border-color: var(--done); color: var(--done-line); }
 .dp-check:focus-visible { outline: 2px solid var(--done-line); outline-offset: 2px; }
-.dp-item.is-read .dp-check { background: var(--done); border-color: var(--done); color: var(--paper); }
+.dp-item.is-read .dp-check { background: var(--done-fill); border-color: var(--done-fill); color: var(--paper); }
 .dp-item.is-read .dp-ref { color: var(--muted); }
 .dp-item.is-current .dp-ref { color: var(--heading); font-weight: 600; }
 .dp-item.is-current .dp-check { border-color: var(--accent-soft); }
-.dp-item.is-read.is-current .dp-check { border-color: var(--done); }
+.dp-item.is-read.is-current .dp-check { border-color: var(--done-fill); }
 @media (max-width: 700px) {
   .dp-label { letter-spacing: 0.1em; font-size: 0.68rem; }
   .dp-ref { font-size: 1rem; }
@@ -351,7 +355,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .pr-day:hover { background: var(--tint); }
 .pr-dots { display: inline-flex; gap: 4px; }
 .pr-dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid var(--line-strong); }
-.pr-dot.on { background: var(--accent); border-color: var(--accent); }
+.pr-dot.on { background: var(--done-fill); border-color: var(--done-fill); }
 .pr-dot.miss { border-color: var(--accent-faint); border-style: dashed; }
 
 /* ── Calendar intro ── */
@@ -1176,10 +1180,13 @@ html.msub-on .scripture .msub {
 
 /* Guide "Try it" links: the button to use pulses three times (reader.js, ?try=) */
 .try-pulse { animation: try-pulse 1.3s ease-out 3; }
-@keyframes try-pulse { 0% { box-shadow: 0 0 0 0 rgba(122, 86, 52, 0.5); } 100% { box-shadow: 0 0 0 16px rgba(122, 86, 52, 0); } }
+@keyframes try-pulse { 0% { box-shadow: 0 0 0 0 rgba(36, 152, 225, 0.55); } 100% { box-shadow: 0 0 0 16px rgba(36, 152, 225, 0); } }
 @media (prefers-reduced-motion: reduce) { .try-pulse { animation-duration: 2s; animation-iteration-count: 1; } }
 
 /* Link to the Guide at the foot of the A/א menu */
 .sp-guide { margin: 14px 0 2px; padding-top: 12px; border-top: 1px solid var(--rule); font: 400 0.8rem var(--sans); text-align: center; }
 .sp-guide a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
 .pg-empty p a:not(.pg-btn) { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+
+/* Brand blue for what is done: the readings-complete count on Progress */
+.pg-stats > div:first-child b { color: var(--done); }
