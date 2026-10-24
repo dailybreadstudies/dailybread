@@ -789,8 +789,8 @@
       html += '<p class="division-label">' + p.label + (p.he ? ' <span class="he">' + noNikud(p.he) + '</span>' : '') + '</p>';
       html += '<h2 class="chapter-head">' + displayRef(r) + '</h2>';
       var sub = p.title || passage.titles.join(' &middot; ');
-      if (p.reading && READING_ORDINALS[p.reading]) {      // "Fourth reading from the Torah Portion · …"
-        sub = READING_ORDINALS[p.reading] + ' reading from the Torah Portion' + (sub ? ' &middot; ' + sub : '');
+      if (p.reading && READING_ORDINALS[p.reading]) {      // "… · Fourth reading from the Torah Portion" (the section titles first)
+        sub = (sub ? sub + ' &middot; ' : '') + READING_ORDINALS[p.reading] + ' reading from the Torah Portion';
       }
       if (sub) html += '<p class="chapter-sub">' + sub + '</p>';
       html += '<div class="scripture">' + passage.html + '</div>';
