@@ -78,7 +78,7 @@
   var STATUS = { draft: 'Draft', review: 'For review', ready: 'Ready', live: 'Live' };
   /* Live = ready with its photo licence checked: shown on the public site */
   function stage(f) { return f.status === 'ready' && f.photoChecked ? 'live' : f.status; }
-  function uncredited(f) { return (f.images || []).filter(function (im) { return !im.credit; }).length; }
+  function uncredited(f) { return (f.images || []).filter(function (im) { return !im.credit && !/public domain/i.test(im.licence || ''); }).length; }   // public-domain photos may have no named author
   var ORDER = { live: 0, ready: 1, review: 2, draft: 3 };
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
   function get(u) { return fetch(u).then(function (r) { if (!r.ok) throw new Error(u); return r.json(); }); }
@@ -124,7 +124,7 @@
       '<p>' + (f.p && f.p[0] || '') + '</p>' +
       '<div class="files">' + all.map(function (im) {
         return '<div><a href="' + esc(im.page) + '" target="_blank" rel="noopener">' + esc(im.file) + '</a><br>' +
-          (im.credit ? 'Photo: <bdi>' + esc(im.credit) + '</bdi>' + (im.licence ? ' · ' + esc(im.licence) : '') : '<span class="need">Credit needed</span>') + '</div>';
+          (im.credit ? 'Photo: <bdi>' + esc(im.credit) + '</bdi>' + (im.licence ? ' · ' + esc(im.licence) : '') : /public domain/i.test(im.licence || '') ? 'Public domain' : '<span class="need">Credit needed</span>') + '</div>';
       }).join('') + '</div>' +
       '</div></article>';
   }
