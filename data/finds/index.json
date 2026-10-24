@@ -151,8 +151,8 @@
    "id": "caiaphas-ossuary",
    "title": "Caiaphas the high priest",
    "subtitle": "The Caiaphas Ossuary",
-   "status": "draft",
-   "photoChecked": false,
+   "status": "ready",
+   "photoChecked": true,
    "anchors": [
     {
      "book": "MAT",
@@ -170,8 +170,8 @@
    "id": "pool-of-siloam",
    "title": "The Pool of Siloam",
    "subtitle": "Excavated pool at the foot of the City of David",
-   "status": "draft",
-   "photoChecked": false,
+   "status": "ready",
+   "photoChecked": true,
    "anchors": [
     {
      "book": "JHN",

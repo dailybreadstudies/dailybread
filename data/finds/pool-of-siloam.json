@@ -12,9 +12,9 @@
  ],
  "images": [
   {
-   "file": "City_of_David_-_Pool_of_Siloam_IMG_5919.JPG",
-   "caption": "The excavated steps of the Second Temple period pool.",
-   "page": "https://commons.wikimedia.org/wiki/File:City_of_David_-_Pool_of_Siloam_IMG_5919.JPG"
+   "file": "At_the_Pool_of_Siloam_(6403665141).jpg",
+   "caption": "The excavated steps of the Second Temple–period Pool of Siloam in the City of David.",
+   "page": "https://commons.wikimedia.org/wiki/File:At_the_Pool_of_Siloam_(6403665141).jpg"
   }
  ],
  "p": [
@@ -46,6 +46,6 @@
    "https://en.wikipedia.org/wiki/Pool_of_Siloam"
   ]
  ],
- "status": "draft",
- "photoChecked": false
+ "status": "ready",
+ "photoChecked": true
 }
