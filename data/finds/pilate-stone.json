@@ -27,9 +27,11 @@
  ],
  "images": [
   {
-   "file": "Pilate_Inscription.JPG",
-   "caption": "The limestone block with Pilate’s name in Latin.",
-   "page": "https://commons.wikimedia.org/wiki/File:Pilate_Inscription.JPG"
+   "file": "Dedicatory_inscription_found_reused_in_the_staircase_of_the_theatre_of_Caesarea,_the_first_and_only_mention_of_Pontius_Pilates'_name_ever_unearthed,_26-36_AD,_Israel_Museum,_Jerusalem_(15655925251).jpg",
+   "caption": "The Pilate Stone in the Israel Museum, Jerusalem. It was found reused in a staircase of the Roman theatre at Caesarea.",
+   "page": "https://commons.wikimedia.org/wiki/File:Dedicatory_inscription_found_reused_in_the_staircase_of_the_theatre_of_Caesarea,_the_first_and_only_mention_of_Pontius_Pilates%27_name_ever_unearthed,_26-36_AD,_Israel_Museum,_Jerusalem_(15655925251).jpg",
+   "credit": "Carole Raddato",
+   "licence": "CC BY-SA 2.0"
   }
  ],
  "p": [
@@ -62,5 +64,5 @@
   ]
  ],
  "status": "review",
- "photoChecked": false
+ "photoChecked": true
 }
