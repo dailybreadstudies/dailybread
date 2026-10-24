@@ -65,8 +65,8 @@
    "id": "siloam",
    "title": "Hezekiah’s water tunnel",
    "subtitle": "The Siloam Tunnel and Inscription",
-   "status": "review",
-   "photoChecked": false,
+   "status": "ready",
+   "photoChecked": true,
    "anchors": [
     {
      "book": "2KI",
