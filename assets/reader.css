@@ -218,6 +218,17 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .dp-item.is-current .dp-ref { color: var(--heading); font-weight: 600; }
 .dp-item.is-current .dp-check { border-color: var(--accent-soft); }
 .dp-item.is-read.is-current .dp-check { border-color: var(--done-fill); }
+/* Copy the day's readings: a small quiet button at the right of the last reading */
+.dp-copy { grid-column: 3; justify-self: end; align-self: center; display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; padding: 0; border: 1px solid transparent; border-radius: 50%; background: none; color: var(--accent-faint);
+  cursor: pointer; transition: color 0.2s, border-color 0.2s, background 0.2s; }
+.dp-copy:hover { color: var(--accent-deep); border-color: var(--line-strong); background: var(--tint); }
+.dp-copy:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.dp-copied { position: absolute; z-index: 300; width: 230px; text-align: center; padding: 7px 12px; border-radius: 16px;
+  background: var(--heading); color: var(--paper); font: 500 0.78rem/1.2 var(--sans); box-shadow: 0 6px 18px var(--shadow);
+  opacity: 0; transform: translateY(4px); pointer-events: none; transition: opacity 0.2s, transform 0.2s; }
+.dp-copied.on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .dp-copied { transition: none; } }
 @media (max-width: 700px) {
   .dp-label { letter-spacing: 0.1em; font-size: 0.68rem; }
   .dp-ref { font-size: 1rem; }

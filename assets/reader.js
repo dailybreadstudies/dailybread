@@ -760,7 +760,10 @@
           '<button type="button" class="dp-check" data-read="' + (i + 1) + '" aria-pressed="false" aria-label="Mark ' + p.label + ' complete">' +
           '<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>' +
           '<a class="dp-row" href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' +
-          '<span class="dp-label">' + p.label + '</span><span class="dp-ref">' + displayRef(r) + '</span></a></li>';
+          '<span class="dp-label">' + p.label + '</span><span class="dp-ref"' + (i === refs.length - 1 ? ' style="grid-row:' + (i + 1) + ';grid-column:3;padding-right:34px"' : '') + '>' + displayRef(r) + '</span></a>' +
+          (i === refs.length - 1 ? '<button type="button" class="dp-copy" style="grid-row:' + (i + 1) + '" title="Copy the day’s readings" aria-label="Copy all of today’s Scripture readings">' +
+            '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
+            '<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></svg></button>' : '') + '</li>';
       }).join('') + '</ol>';
     document.getElementById('day-header').innerHTML = header;
     addListen(day.date);
@@ -1862,6 +1865,32 @@
     p.classList.toggle('is-open', open);
     b.setAttribute('aria-expanded', String(open));
     b.textContent = open ? 'less' : 'more';
+  });
+
+  // Copy the day's readings ("Genesis 18:1-14; Joshua 21; Psalm 20; Matthew 16") from the button beside the last one
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.dp-copy');
+    if (!b) return;
+    var text = Array.prototype.map.call(document.querySelectorAll('#day-header .dp-item .dp-ref'), function (x) {
+      return x.textContent.replace(/[\u2013\u2014]/g, '-').replace(/\s+/g, ' ').trim();
+    }).join('; ');
+    function done() {
+      var t = document.querySelector('.dp-copied') || document.body.appendChild(Object.assign(document.createElement('div'), { className: 'dp-copied', role: 'status' }));
+      t.textContent = 'All Scripture readings copied';
+      var r = b.getBoundingClientRect();
+      t.style.top = (r.top + window.scrollY - 40) + 'px';
+      t.style.left = Math.max(12, Math.min(r.right + window.scrollX - 230, document.documentElement.clientWidth - 242)) + 'px';
+      t.classList.add('on');
+      clearTimeout(done.timer);
+      done.timer = setTimeout(function () { t.classList.remove('on'); }, 2200);
+    }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (err) { /* nothing more to try */ }
+      ta.remove(); done();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
   });
 
   // Footer credits: open and close the full paragraph

@@ -668,7 +668,12 @@
         'text-letter-spacing': ['case', ['<=', ['get', 'r'], 1], 0.5, 0.6],
         'text-size': ['interpolate', ['linear'], ['zoom'], 6, ['case', ['<=', ['get', 'r'], 1], 12, 10.5], 9, ['case', ['<=', ['get', 'r'], 1], 16.5, 14.5]], 'text-max-width': 30, 'text-line-height': 1.55,
         'text-allow-overlap': true, 'text-ignore-placement': true, 'symbol-sort-key': ['get', 'r'] },
-      paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2, 'text-opacity': 0.85 } });
+      // zoomed out, only the main (bold) regions show; the lesser ones fade in as you zoom in (rank 2 from 7.4, rank 3 from 8)
+      paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2,
+        'text-opacity': ['interpolate', ['linear'], ['zoom'],
+          7.4, ['case', ['<=', ['get', 'r'], 1], 0.85, 0],
+          8, ['case', ['<=', ['get', 'r'], 2], 0.85, 0],
+          8.6, 0.85] } });
     map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
       layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 12, 12],
         'text-letter-spacing': 0.04, 'text-optional': true },
