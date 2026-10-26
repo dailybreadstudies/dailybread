@@ -766,7 +766,11 @@
             '<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></svg></button>' : '') + '</li>';
       }).join('') + '</ol>';
     document.getElementById('day-header').innerHTML = header;
-    addListen(day.date);
+    var dayAudio = { title: 'Today’s readings', items: [] };
+    refs.forEach(function (r, i) {
+      dayAudio.items = dayAudio.items.concat(audioItems(r, books[r.book], i + 1, day.portions[i].label + ' · ' + displayRef(r)));
+    });
+    addListen(day.date, dayAudio);
     document.title = (KIDS ? 'Daily Bread for Kids · ' : 'Daily Bread Online · ') + dateText;
 
     // Portions
@@ -790,7 +794,7 @@
           document.getElementById('blessings-template').innerHTML + '</details>';
       }
       html += '<p class="division-label">' + p.label + (p.he ? ' <span class="he">' + noNikud(p.he) + '</span>' : '') + '</p>';
-      html += '<h2 class="chapter-head">' + displayRef(r) + audioButton(day.date, n, r, books[r.book]) + '</h2>';
+      html += '<h2 class="chapter-head">' + displayRef(r) + '</h2>';
       var sub = p.title || passage.titles.join(' &middot; ');
       if (p.reading && READING_ORDINALS[p.reading]) {      // "… · Fourth reading from the Torah Portion" (the section titles first)
         sub = (sub ? sub + ' &middot; ' : '') + READING_ORDINALS[p.reading] + ' reading from the Torah Portion';
@@ -819,7 +823,8 @@
   // One mp3 per chapter (BSB_01_Gen_006.mp3). A reading that starts or ends inside a chapter starts and stops at an
   // estimate of where that verse falls, from the share of the chapter's text before it (assets/podcast.js leaves a
   // few seconds' margin). The audio is the stock BSB, so it does not follow the site's emendations or the
-  // Messianic filter. Classic only (podcast.js, which plays it, is not loaded on Kids).
+  // Messianic filter. On Today the LISTEN row plays the whole day (podcast.js); in the Bible reader a button beside the
+  // chapter heading plays the chapter. Classic only (podcast.js, which plays it, is not loaded on Kids).
   var AUDIO_BOOKS = ['GEN','EXO','LEV','NUM','DEU','JOS','JDG','RUT','1SA','2SA','1KI','2KI','1CH','2CH','EZR','NEH',
     'EST','JOB','PSA','PRO','ECC','SNG','ISA','JER','LAM','EZK','DAN','HOS','JOL','AMO','OBA','JON','MIC','NAM','HAB',
     'ZEP','HAG','ZEC','MAL','MAT','MRK','LUK','JHN','ACT','ROM','1CO','2CO','GAL','EPH','PHP','COL','1TH','2TH','1TI',
@@ -847,8 +852,9 @@
     });
     return { at: at, total: n };
   }
-  function audioItems(r, bookData) {
-    var items = [];
+  // n = which of the day's readings (for the readings list), title = what the player shows
+  function audioItems(r, bookData, n, title) {
+    var items = [], multi = (r.parts || [r]).some(function (p) { return p.c2 > p.c1; });
     (r.parts || [r]).forEach(function (p) {
       for (var c = p.c1; c <= p.c2; c++) {
         var u = audioUrl(p.book, c);
@@ -858,16 +864,18 @@
           if (c === p.c1 && p.v1 > 1 && m.at[p.v1] !== undefined) fs = m.at[p.v1] / m.total;
           if (c === p.c2 && p.v2 && m.at[p.v2 + 1] !== undefined) fe = m.at[p.v2 + 1] / m.total;
         }
-        items.push({ u: u, fs: fs, fe: fe, label: (/^Psalm/.test(bookName(p.book)) ? 'Psalm' : 'Chapter') + ' ' + c });
+        items.push({ u: u, fs: fs, fe: fe, n: n || 0, title: title || displayRef(r),
+          sub: multi ? (/^Psalm/.test(bookName(p.book)) ? 'Psalm' : 'Chapter') + ' ' + c : '' });
       }
     });
     return items;
   }
-  function audioButton(date, n, r, bookData) {
+  // The Bible reader: a play button beside the chapter heading
+  function audioButton(key, r, bookData) {
     if (!window.DBPodcast || !DBPodcast.toggleQueue) return '';
     var items = audioItems(r, bookData);
     if (!items.length) return '';
-    var key = date + '#' + n, name = displayRef(r);
+    var name = displayRef(r);
     audioSpecs[key] = { title: name, items: items };
     return ' <button type="button" class="pod-btn ba-btn" data-audio-key="' + key + '" data-audio-name="' + escapeAttr(name) +
       '" aria-pressed="false" aria-label="Listen to ' + escapeAttr(name) + '">' +
@@ -883,13 +891,13 @@
 
   // The Daily Bread for Busy Moms podcast follows the plan: when the day has an episode, a LISTEN row closes the
   // readings list (assets/podcast.js plays it in a player docked at the bottom, so you can read along)
-  function addListen(date) {
+  function addListen(date, dayAudio) {
     if (KIDS || !window.DBPodcast) return;
     window.DBPodcast.ready.then(function () {
       if (!current || current.day.date !== date) return;
       var ol = document.querySelector('#day-header .day-plan');
       if (!ol || ol.querySelector('.dp-listen')) return;
-      var item = window.DBPodcast.listenItem(date);
+      var item = window.DBPodcast.listenItem(date, dayAudio && dayAudio.items.length ? dayAudio : null);
       if (item) { ol.insertAdjacentHTML('beforeend', item); window.DBPodcast.refresh(); }
     });
   }
@@ -2655,7 +2663,7 @@
       '<p class="division-label">' + g[0] + ' <span class="he">' + noNikud(g[1]) + '</span></p>' +
       '<h2 class="chapter-head chapter-nav">' +
         '<button type="button" class="day-step" data-chapter="-1"' + (prev ? '' : ' disabled') + ' aria-label="Previous chapter">&lsaquo;</button>' +
-        '<span>' + ref + '</span>' +
+        '<span>' + ref + audioButton('bible:' + data.id + '.' + c, r, data) + '</span>' +
         '<button type="button" class="day-step" data-chapter="1"' + (next ? '' : ' disabled') + ' aria-label="Next chapter">&rsaquo;</button></h2>';
     if (passage.titles.length) html += '<p class="chapter-sub">' + passage.titles.join(' &middot; ') + '</p>';
     html += '<div class="scripture">' + passage.html + '</div>' +
@@ -2673,6 +2681,7 @@
     applyDivineName(document.getElementById('portions'));
     decorateMaps();
     drawChapterDone();
+    if (window.DBPodcast && DBPodcast.refresh) DBPodcast.refresh();
     if (v) {
       var mark = document.querySelector('.bible-view .verse-num[data-v="' + v + '"]');
       if (mark) {

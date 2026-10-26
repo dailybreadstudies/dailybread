@@ -30,14 +30,18 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
   every Classic page by `python3 tools/set_menu.py` (edit MENU there). On phones it takes two rows (TODAY PROGRESS LISTEN LEARN /
   ABOUT KIDS GIVE, top bar 122px); passage search is hidden from 701–880px. Passage search ("Go to … Gen 1", `#quick-go`) sits at the right end of the top bar on desktop only (scrolls away with it; hidden on phones). The Bible / calendar / A/א buttons stay pinned.
 
-## Listen to a reading (BSB audio)
-- Each reading on Today has a small ▶ after its heading (`audioButton` in assets/reader.js). It plays the public-domain
-  BSB audio read by Bob Souer (CC0) straight from OpenBible.com (`https://openbible.com/audio/souer/BSB_01_Gen_019.mp3`:
-  book number, OpenBible book code — TIT is `Tts` — and 3-digit chapter), in the same docked player as the podcast
-  (`DBPodcast.toggleQueue` in assets/podcast.js). A reading over several chapters plays the chapter files in turn.
-- Readings that start or stop inside a chapter start/stop at an **estimate**: the share of the chapter's read-aloud text
-  before that verse × the file's length, starting `LEAD` (5 s) early and stopping `TAIL` (2 s) late with a short fade
-  (constants in podcast.js). Section headings and cross-references are not counted (`SILENT` in reader.js).
+## Listen to the readings (BSB audio)
+- Today: the LISTEN row closing the readings list has a dropdown (chevron after the name) to choose **Daily Bread for Busy
+  Moms** or **Berean Standard Bible by Bob Souer**; the choice is remembered (`src` in `localStorage['dbs-podcast']`).
+  With the BSB, play runs all the day's readings in turn in the docked player ("Torah · Genesis 18:15–33"), and the reading
+  being read is marked in the list. On a day without a podcast episode the row offers the BSB alone (no dropdown).
+- Bible reader (`?r=GEN.1`): a ▶ after the chapter heading plays that chapter.
+- Audio: public-domain BSB read by Bob Souer (CC0), straight from OpenBible.com
+  (`https://openbible.com/audio/souer/BSB_01_Gen_019.mp3`: book number, OpenBible code — TIT is `Tts` — 3-digit chapter).
+  Code: `audioItems` in assets/reader.js builds the list; `DBPodcast.toggleQueue` / `listenItem(date, spec)` in podcast.js play it.
+- Readings that start or stop inside a chapter start/stop at an **estimate**: share of the chapter's read-aloud text before
+  that verse × the file's length, starting `LEAD` (5 s) early, stopping `TAIL` (2 s) late with a short fade (podcast.js).
+  Section headings and cross-references are not counted (`SILENT` in reader.js).
 - The audio is the stock BSB: it does not follow the emendations (e.g. Gehenna) or the Messianic filter.
   Classic only for now (Kids pages don't load podcast.js).
 

@@ -4,7 +4,9 @@
  * tools/fetch_podcast.py, run every two hours on GitHub) files each episode under the day it is for.
  *
  *   DBPodcast.ready                      → Promise of the episode data (null if it cannot be loaded)
- *   DBPodcast.listenItem(date)           → '<li>' for the Today readings list, or '' when that day has no episode
+ *   DBPodcast.listenItem(date, spec)     → '<li>' for the Today readings list ('' when there is nothing to play). spec =
+ *                                          the day's readings as Bible audio; the row's dropdown chooses between the
+ *                                          podcast and the Bible (remembered in 'dbs-podcast' as src)
  *   DBPodcast.play(date) / toggle(date)  → play that day's episode in the docked player
  *   DBPodcast.fmtLen(seconds)            → "12 min"
  *   DBPodcast.toggleQueue(key, spec)     → play / pause a Bible reading: spec = { title, items: [{ u, fs, fe, label }] },
@@ -19,8 +21,9 @@
   var STORE = 'dbs-podcast';
   var SPEEDS = [1, 1.25, 1.5, 1.75, 2, 0.75];
   var data = null, audio = null, dock = null, current = null, lastSave = 0, scrubbing = false;
-  var saved = { pos: {}, rate: 1 };
-  try { var s = JSON.parse(localStorage.getItem(STORE) || '{}'); if (s && typeof s === 'object') { saved.pos = s.pos || {}; saved.rate = s.rate || 1; } } catch (e) {}
+  var saved = { pos: {}, rate: 1, src: 'moms' };
+  try { var s = JSON.parse(localStorage.getItem(STORE) || '{}'); if (s && typeof s === 'object') { saved.pos = s.pos || {}; saved.rate = s.rate || 1; saved.src = s.src || 'moms'; } } catch (e) {}
+  var daySpecs = {};                                         // date -> the day's readings as Bible audio
   function save() { try { localStorage.setItem(STORE, JSON.stringify(saved)); } catch (e) {} }
 
   var kids = !!document.querySelector('body[data-edition="kids"]');   // the Moms podcast is not offered on Daily Bread for Kids
@@ -56,32 +59,64 @@
   var BIBLE_SHOW = 'Berean Standard Bible · Bob Souer', BIBLE_LINK = 'https://openbible.com/audio/souer/';
   var LEAD = 5, TAIL = 2, FADE = 0.8;
 
-  // The row under the day's readings: same columns as the readings (circle · LABEL · text)
-  function listenItem(date) {
-    var ep = episode(date);
-    if (!ep) return '';
-    var left = saved.pos[ep.u] && ep.d ? Math.max(0, ep.d - saved.pos[ep.u]) : 0;
-    var meta = left > 30 ? fmtLen(left) + ' left' : fmtLen(ep.d);
-    var on = isPlaying(date);
-    return '<li class="dp-listen' + (on ? ' is-playing' : '') + '" data-pod="' + date + '">' +
+  // The row under the day's readings: same columns as the readings (circle · LABEL · text). A dropdown at the end
+  // chooses what to listen to: the Busy Moms podcast (when the day has an episode) or the readings themselves (BSB).
+  var ICON_DOWN = '<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg>';
+  var SOURCES = { moms: 'Daily Bread for Busy Moms', bsb: 'Berean Standard Bible by Bob Souer' };
+  function sourceFor(date) {
+    var ep = episode(date), spec = daySpecs[date];
+    if (saved.src === 'bsb' && spec) return 'bsb';
+    return ep ? 'moms' : spec ? 'bsb' : null;
+  }
+  function rowPlaying(date) { return sourceFor(date) === 'bsb' ? queuePlaying('day:' + date) : isPlaying(date); }
+  function rowOpen(date) { return sourceFor(date) === 'bsb' ? !!(current && current.key === 'day:' + date) : !!(current && current.date === date); }
+  function listenItem(date, spec) {
+    if (spec) daySpecs[date] = spec;
+    var src = sourceFor(date);
+    if (!src) return '';
+    var ep = episode(date), on = rowPlaying(date), meta = '', name;
+    if (src === 'moms') {
+      var left = saved.pos[ep.u] && ep.d ? Math.max(0, ep.d - saved.pos[ep.u]) : 0;
+      meta = left > 30 ? fmtLen(left) + ' left' : fmtLen(ep.d);
+      name = '<a href="' + base + 'listen.html" class="pod-show">' + SOURCES.moms + '</a>';
+    } else {
+      var n = {};
+      daySpecs[date].items.forEach(function (it) { n[it.n] = 1; });
+      var count = Object.keys(n).length;
+      meta = count + ' reading' + (count === 1 ? '' : 's');
+      name = '<span class="pod-show">' + SOURCES.bsb + '</span>';
+    }
+    var pick = ep && daySpecs[date] ? '<span class="pod-src" title="Choose what to listen to">' + ICON_DOWN +
+      '<select data-pod-src="' + date + '" aria-label="Listen to">' +
+      ['moms', 'bsb'].map(function (k) { return '<option value="' + k + '"' + (k === src ? ' selected' : '') + '>' + SOURCES[k] + '</option>'; }).join('') +
+      '</select></span>' : '';
+    return '<li class="dp-listen' + (on ? ' is-playing' : '') + (rowOpen(date) ? ' is-open' : '') + '" data-pod="' + date + '">' +
       '<button type="button" class="pod-btn" data-pod-toggle="' + date + '" aria-pressed="' + on + '" aria-label="' +
-      (on ? 'Pause' : 'Play') + ' the Daily Bread for Busy Moms podcast for ' + esc(dayName(date)) + '">' + (on ? ICON_PAUSE : ICON_PLAY) + '</button>' +
+      (on ? 'Pause ' : 'Play ') + esc(rowName(date, src)) + '">' + (on ? ICON_PAUSE : ICON_PLAY) + '</button>' +
       '<span class="dp-label pod-label" data-pod-toggle="' + date + '">Listen</span>' +
-      // the length first, then the show's name, on one line (the name is cut short with … on narrow screens)
+      // the length first, then what is playing, on one line (the name is cut short with … on narrow screens)
       '<span class="pod-meta">' + (meta ? '<span class="pod-len">' + meta + '</span><span class="pod-sep" aria-hidden="true">·</span>' : '') +
-      '<a href="' + base + 'listen.html" class="pod-show">Daily Bread for Busy Moms</a></span></li>';
+      name + pick + '</span></li>';
+  }
+  function rowName(date, src) {
+    return src === 'bsb' ? 'the day’s readings, read by Bob Souer' : 'the Daily Bread for Busy Moms podcast for ' + dayName(date);
   }
 
   function refreshRows() {
     document.querySelectorAll('[data-pod]').forEach(function (el) {
-      var date = el.getAttribute('data-pod'), on = isPlaying(date);
+      var date = el.getAttribute('data-pod'), on = rowPlaying(date), src = sourceFor(date);
       el.classList.toggle('is-playing', on);
-      el.classList.toggle('is-open', !!(current && current.date === date));
+      el.classList.toggle('is-open', rowOpen(date));
       el.querySelectorAll('.pod-btn').forEach(function (b) {
         b.innerHTML = on ? ICON_PAUSE : ICON_PLAY;
         b.setAttribute('aria-pressed', String(on));
-        b.setAttribute('aria-label', (on ? 'Pause' : 'Play') + ' the Daily Bread for Busy Moms podcast for ' + dayName(date));
+        b.setAttribute('aria-label', (on ? 'Pause ' : 'Play ') + rowName(date, src));
       });
+    });
+    // While the day's readings play, the one being read is marked in the readings list
+    var now = isQueue() && /^day:/.test(current.key) ? current.queue[current.i].n : 0;
+    document.querySelectorAll('.day-plan .dp-item').forEach(function (li) {
+      li.classList.toggle('is-listening', !!now && +li.getAttribute('data-n') === now);
     });
     document.querySelectorAll('[data-audio-key]').forEach(function (b) {
       var key = b.getAttribute('data-audio-key'), on = queuePlaying(key);
@@ -247,9 +282,10 @@
     audio.volume = 1;
     audio.src = it.u;
     var ep = dock.querySelector('.pd-ep');
-    ep.textContent = current.title + (current.queue.length > 1 ? ' · ' + it.label : '');
-    ep.title = current.title;
+    ep.textContent = (it.title || current.title) + (it.sub ? ' · ' + it.sub : '');
+    ep.title = ep.textContent;
     tick();
+    refreshRows();
   }
   function openQueue(key, spec) {
     buildDock();
@@ -323,7 +359,19 @@
     var el = e.target.closest && e.target.closest('[data-pod-toggle]');
     if (!el) return;
     e.preventDefault();
-    toggle(el.getAttribute('data-pod-toggle'));
+    var date = el.getAttribute('data-pod-toggle');
+    if (sourceFor(date) === 'bsb') toggleQueue('day:' + date, daySpecs[date]);
+    else toggle(date);
+  });
+  // The dropdown in the LISTEN row: remembered for every day
+  document.addEventListener('change', function (e) {
+    var sel = e.target.closest && e.target.closest('[data-pod-src]');
+    if (!sel) return;
+    saved.src = sel.value; save();
+    var date = sel.getAttribute('data-pod-src'), li = sel.closest('[data-pod]');
+    if (li) li.outerHTML = listenItem(date);
+    var btn = document.querySelector('[data-pod="' + date + '"] .pod-btn');
+    if (btn) btn.focus();
   });
   document.addEventListener('keydown', function (e) {        // Esc closes a paused player
     if (e.key === 'Escape' && dock && !dock.hidden && audio.paused) close();

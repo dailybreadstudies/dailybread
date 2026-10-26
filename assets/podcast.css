@@ -74,8 +74,18 @@ html.pod-docked body { padding-bottom: 10rem; }
 }
 @media print { .pod-dock { display: none; } }
 
-/* Listen to a reading: a small play button after each reading's heading on Today (assets/reader.js) */
-.chapter-head .ba-btn { width: 24px; height: 24px; margin-left: 0.45em; vertical-align: 0.18em; border-width: 1.5px; }
-.chapter-head .ba-btn svg { width: 11px; height: 11px; }
-.chapter-head .ba-btn.is-open { background: var(--accent); border-color: var(--accent); color: var(--paper); }
-@media (max-width: 700px) { .chapter-head .ba-btn { width: 22px; height: 22px; vertical-align: 0.12em; } }
+/* LISTEN row: the dropdown after the name chooses the podcast or the day's readings (BSB, Bob Souer) */
+.pod-src { position: relative; flex: none; display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; margin-left: 0.2em; align-self: center; border-radius: 50%; color: var(--muted); cursor: pointer; }
+.pod-src:hover, .pod-src:focus-within { color: var(--accent); background: var(--tint); }
+.pod-src select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; font-size: 16px; }
+.pod-meta span.pod-show { overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+/* the reading being read aloud */
+.dp-item.is-listening .dp-label { color: var(--accent); }
+.dp-item.is-listening .dp-ref { color: var(--accent-deep); }
+
+/* Bible reader: a small play button after the chapter heading (assets/reader.js) */
+.chapter-nav .ba-btn { width: 24px; height: 24px; margin-left: 0.45em; vertical-align: 0.18em; border-width: 1.5px; }
+.chapter-nav .ba-btn svg { width: 11px; height: 11px; }
+.chapter-nav .ba-btn.is-open { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+@media (max-width: 700px) { .chapter-nav .ba-btn { width: 22px; height: 22px; vertical-align: 0.12em; } }
