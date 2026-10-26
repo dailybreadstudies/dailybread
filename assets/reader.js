@@ -1181,8 +1181,7 @@
         }).join('') + '</span></a></li>';
     }).join('') + '</ol>';
     html += bibleProgressHtml();
-    box.innerHTML = html + privacyNote() +
-      '<p class="pg-clear"><button type="button" class="link-btn quiet" id="clear-progress">Clear this year’s progress</button></p>';
+    box.innerHTML = html + privacyNote(true);
   }
   // ── How much of the Bible has been read ─────────────────────
   // Every reading marked complete counts its verses (each passage once, however often it is read).
@@ -1495,15 +1494,24 @@
     if (hit) ringShow(hit);
   });
 
+  document.addEventListener('dbs-account-changed', function () { if (PAGE === 'progress') drawProgressPage(); });
   function signedIn() { try { return !!localStorage.getItem('dbs-auth'); } catch (e) { return false; } }   // assets/account.js
-  function privacyNote() {
+  // Account, privacy and "Clear" in one note at the foot of the Progress page (the account itself: assets/account.js)
+  function accountNote() {
+    var email = '';
+    try { email = (JSON.parse(localStorage.getItem('dbs-auth') || 'null') || {}).email || ''; } catch (e) { /* ignore */ }
+    return signedIn()
+      ? 'Signed in' + (email ? ' as ' + escapeAttr(email) : '') + '. Your progress is kept with your account, so it is the same on every device ' +
+        'where you sign in and is not lost if you clear your browser data. We keep only your email address and your reading progress. ' +
+        '<button type="button" class="link-btn" data-acct="open">Account</button>'
+      : 'Your progress is saved in this browser, on this device: nothing is sent to us, and clearing your browser data erases it. ' +
+        '<button type="button" class="link-btn" data-acct="open">Sign in</button> to keep it in step on all your devices.';
+  }
+  function privacyNote(withClear) {
     return (totalRead() >= 20 ? '<p class="pg-give">If Daily Bread is helping you, you can help keep it free for others. ' +
       '<a href="' + ROOT_URL + 'give.html">Give</a></p>' : '') +
-      '<p class="pg-note pg-privacy">' + (signedIn()
-        ? 'Your progress is kept in this browser and with your account, so it is the same on every device where you sign in, ' +
-          'and clearing your browser data does not lose it. We keep only your email address and your reading progress.'
-        : 'Your progress is kept in this browser, on this device. Nothing is sent to us unless you sign in, ' +
-          'and clearing your browser data erases it.') + '</p>';
+      '<p class="pg-note pg-privacy">' + accountNote() + (withClear
+        ? ' · <button type="button" class="link-btn quiet" id="clear-progress">Clear this year’s progress</button>' : '') + '</p>';
   }
 
   // Daily Bread for Kids: a short burst of yellow rays around what was just marked complete

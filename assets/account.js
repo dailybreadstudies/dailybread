@@ -266,7 +266,10 @@
     el.innerHTML = s ? 'Signed in as ' + esc(s.email) + ' · your progress is kept in step on all your devices. <button type="button" class="link-btn" data-acct="open">Account</button>'
       : 'Your progress is saved on this device. <button type="button" class="link-btn" data-acct="open">Sign in</button> to keep it in step on all your devices.';
   }
-  function drawAll() { drawButtons(); drawPanel(); drawSyncNote(); }
+  function drawAll() {
+    drawButtons(); drawPanel(); drawSyncNote();
+    try { document.dispatchEvent(new Event('dbs-account-changed')); } catch (e) { /* old browsers */ }   // the note on the Progress page
+  }
   function openPanel() {
     if (!panel) {
       panel = document.createElement('div');
