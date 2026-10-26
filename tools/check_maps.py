@@ -152,7 +152,7 @@ for entry in index.get('maps', []):
         text = ' '.join(chapter_text(a['book'], c)[0] for c in range(1, len(data['chapters']) + 1)) if data else text
         if entry.get('aliases', {}) != m.get('aliases', {}):
             bad(mid, 'index.json aliases differ from the map file')
-    targets = {p.get('n') for g in m.get('groups', []) for p in g.get('places', [])} | {r.get('n') for r in m.get('regions', [])}
+    targets = {p.get('n') for g in m.get('groups', []) for p in g.get('places', [])} | {r.get('n') for r in m.get('regions', [])} | {p.get('name') for p in m.get('named', [])}
     for al_from, al_to in m.get('aliases', {}).items():
         if al_from not in m.get('links', []):
             bad(mid, 'alias %r is not in links' % al_from)
@@ -169,6 +169,7 @@ for entry in index.get('maps', []):
     for name in m.get('links', []):
         if text and not re.search(r'(?<![A-Za-z])' + re.escape(name) + r'(?![A-Za-z])', text):
             bad(mid, 'link %r does not occur in the chapter text' % name)
+        name = m.get('aliases', {}).get(name, name)
         if name not in named and m.get('places'):
             layer = os.path.join(MAPS, 'places', m['places'] + '.json')
             if os.path.exists(layer) and not any(f['properties']['n'] == name for f in json.load(open(layer, encoding='utf-8'))['features']):

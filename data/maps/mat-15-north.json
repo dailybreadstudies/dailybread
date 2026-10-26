@@ -49,6 +49,9 @@
   "Caesarea Philippi",
   "Capernaum"
  ],
+ "aliases": {
+  "Magadan": "Magdala"
+ },
  "named": [
   {
    "name": "Tyre",
@@ -73,14 +76,14 @@
    "ob": "a98e4d7/sidon"
   },
   {
-   "name": "Magadan",
+   "name": "Magdala",
    "ll": [
     35.5166,
     32.8247
    ],
    "label": "left",
-   "site": "Magdala (Migdal), on the west shore",
-   "note": "Probably Magdala, home of Mary Magdalene (\"Dalmanutha\" in Mark 8:10). A first-century synagogue was excavated here in 2009, with the carved \"Magdala stone\" showing the Temple menorah."
+   "site": "Migdal, on the west shore",
+   "note": "Matthew 15:39 reads \"the region of Magadan\"; many manuscripts read Magdala. Probably Magdala, home of Mary Magdalene (\"Dalmanutha\" in Mark 8:10). A first-century synagogue was excavated here in 2009, with the carved \"Magdala stone\" showing the Temple menorah."
   },
   {
    "name": "Caesarea Philippi",
@@ -230,7 +233,7 @@
    "side": "israel",
    "vv": "15:39",
    "at": 0.5,
-   "text": "By boat to the region of Magadan",
+   "text": "By boat to the region of Magadan (Magdala)",
    "coords": [
     [
      35.665,

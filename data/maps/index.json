@@ -1014,6 +1014,7 @@
     "Galilean": "Galilee",
     "Samaritans": "Samaria",
     "Nazarene": "Nazareth",
+    "Magadan": "Magdala",
     "Gadarenes": "Gadara"
    }
   },
@@ -1077,7 +1078,10 @@
       27
      ]
     }
-   ]
+   ],
+   "aliases": {
+    "Magadan": "Magdala"
+   }
   }
  ]
 }

@@ -285,6 +285,7 @@
   "Galilean": "Galilee",
   "Samaritans": "Samaria",
   "Nazarene": "Nazareth",
+  "Magadan": "Magdala",
   "Gadarenes": "Gadara"
  },
  "groups": [
@@ -389,14 +390,14 @@
      "f": "14:34"
     },
     {
-     "n": "Magadan",
+     "n": "Magdala",
      "ll": [
       35.5166,
       32.8247
      ],
      "c": 1,
-     "m": "Migdal (Magdala)?",
-     "note": "Jesus went \"to the region of Magadan\" (Matthew 15:39); some manuscripts read Magdala. Magdala (Migdal Nunya, Greek Tarichaea), the fish-salting town of Mary Magdalene, is the usual identification; a synagogue of Jesus' time was found there in 2009.",
+     "m": "Migdal",
+     "note": "Jesus went \"to the region of Magadan\" (Matthew 15:39); many manuscripts read Magdala. Magdala (Migdal Nunya, Greek Tarichaea) was the fish-salting town of Mary Magdalene; a synagogue of Jesus' time was found there in 2009.",
      "f": "15:39"
     },
     {

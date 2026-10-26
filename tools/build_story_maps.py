@@ -287,11 +287,12 @@ MAPS_OUT.append({
     'places': 'MAT', 'placesLabel': 'Places named in Matthew', 'placesName': 'Matthew',
     'bounds': [[35.0, 32.62], [36.02, 33.62]],
     'links': ['Tyre', 'Sidon', 'Magadan', 'Caesarea Philippi', 'Capernaum'],
+    'aliases': {'Magadan': 'Magdala'},
     'named': [
         named('Tyre', P['Tyre'], 'left', 'Sur, Lebanon', 'The great Phoenician port. "The district of Tyre and Sidon" was Gentile territory; there a Canaanite woman asks for "the crumbs" and is praised for her faith (15:21–28).', 'a160272/tyre'),
         named('Sidon', P['Sidon'], 'left', 'Saida, Lebanon', 'Mark 7:31 says Jesus went back "through Sidon" to the Sea of Galilee and the Decapolis.', 'a98e4d7/sidon'),
-        named('Magadan', P['Magadan'], 'left', 'Magdala (Migdal), on the west shore',
-              'Probably Magdala, home of Mary Magdalene ("Dalmanutha" in Mark 8:10). A first-century synagogue was excavated here in 2009, with the carved "Magdala stone" showing the Temple menorah.'),
+        named('Magdala', P['Magadan'], 'left', 'Migdal, on the west shore',
+              'Matthew 15:39 reads "the region of Magadan"; many manuscripts read Magdala. Probably Magdala, home of Mary Magdalene ("Dalmanutha" in Mark 8:10). A first-century synagogue was excavated here in 2009, with the carved "Magdala stone" showing the Temple menorah.'),
         named('Caesarea Philippi', P['Caesarea Philippi'], 'right', 'Banias, at the foot of Mount Hermon',
               'At one of the springs of the Jordan, by a cave sacred to the god Pan; Herod the Great built a temple to Augustus here, and his son Philip refounded the town. Here Peter confesses, "You are the Christ, the Son of the living God" (16:16).', 'ab7bf48/caesarea-philippi'),
         named('Mount Hermon', P['Hermon'], 'right', '"a high mountain" (17:1)',
@@ -306,7 +307,7 @@ MAPS_OUT.append({
            [P['Gennesaret'], [35.49, 32.94], [35.42, 33.04], [35.33, 33.13], [35.25, 33.22]], at=0.5),
         mv(2, 'israel', '15:29', 'Back by way of Sidon and the Decapolis (Mark 7:31) to a mountain by the Sea of Galilee',
            [[35.22, 33.25], [35.27, 33.42], [35.36, 33.53], [35.52, 33.42], [35.64, 33.25], [35.7, 33.05], [35.69, 32.9], EAST], at=0.35),
-        mv(3, 'israel', '15:39', 'By boat to the region of Magadan', [EAST, [35.62, 32.83], [35.57, 32.828], [35.525, 32.826]], at=0.5, dash=BOAT),
+        mv(3, 'israel', '15:39', 'By boat to the region of Magadan (Magdala)', [EAST, [35.62, 32.83], [35.57, 32.828], [35.525, 32.826]], at=0.5, dash=BOAT),
         mv(4, 'israel', '16:4–5', 'Leaving the Pharisees, they cross to the other side', [[35.52, 32.826], [35.57, 32.856], [35.605, 32.872], [35.62, 32.884]], at=0.5, dash=BOAT),
         mv(5, 'israel', '16:13', 'North to the region of Caesarea Philippi', [[35.63, 32.91], [35.64, 33.0], [35.62, 33.1], [35.65, 33.19], [35.685, 33.24]], at=0.5),
         mv(6, 'israel', '17:1', '"After six days": up a high mountain with Peter, James and John', [[35.7, 33.25], [35.76, 33.3], [35.81, 33.36], [35.845, 33.405]], at=0.5, dash=[2, 1.4]),
@@ -340,6 +341,8 @@ def main():
              'links': m['links'], 'range': m['range']}
         if m.get('also'):
             e['also'] = m['also']
+        if m.get('aliases'):
+            e['aliases'] = m['aliases']
         idx['maps'].append(e)
     order = ['GEN', 'EXO', 'JOS', 'JDG', 'MAT']
     idx['maps'].sort(key=lambda e: (order.index(e['book']) if e['book'] in order else 99, e['c'], e['v']))

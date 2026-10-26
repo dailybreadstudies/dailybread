@@ -99,9 +99,9 @@ PLACES = [
          note='"House of fishing," home of Peter, Andrew and Philip (John 1:44), rebuilt by Philip as Julias. Its site is debated: et-Tell or el-Araj, on the shore below.'),
     dict(n='Gennesaret', ll=[35.53, 32.862], c=2, m='the plain of Ginosar',
          note='"The land of Gennesaret" (Matthew 14:34): the fertile plain on the north-west shore, praised by Josephus for its fruit.'),
-    dict(n='Magadan', ll=[35.5166, 32.8247], c=1, m='Migdal (Magdala)?',
-         note='Jesus went "to the region of Magadan" (Matthew 15:39); some manuscripts read Magdala. Magdala (Migdal Nunya, Greek Tarichaea), the fish-salting town of Mary Magdalene, '
-              'is the usual identification; a synagogue of Jesus\' time was found there in 2009.'),
+    dict(n='Magdala', ll=[35.5166, 32.8247], c=1, m='Migdal', aka=['Magadan'],
+         note='Jesus went "to the region of Magadan" (Matthew 15:39); many manuscripts read Magdala. Magdala (Migdal Nunya, Greek Tarichaea) was the fish-salting town of Mary Magdalene; '
+              'a synagogue of Jesus\' time was found there in 2009.'),
     dict(n='Gadara', ll=[35.67935, 32.656], c=2, m='Umm Qais', u='afed46a/gadara', aka=['Gadarenes'],
          note='A city of the Decapolis on the heights south-east of the lake. "The region of the Gadarenes" (Matthew 8:28) was Gadara\'s territory, which reached the shore; '
               'Mark and Luke say Gerasenes, and tradition places the event at Kursi on the east shore.'),
@@ -164,8 +164,6 @@ PLACES = [
     dict(n='Machaerus', ll=[35.6264, 31.5603], c=2, m='Mukawir, Jordan', g='herod',
          note='Herod\'s fortress in Perea, held by Antipas. Josephus says John the Baptist was imprisoned and executed here (Antiquities 18.119; compare Matthew 14:3–12).'),
     # other sites of the period
-    dict(n='Magdala', ll=[35.5166, 32.8247], c=2, m='Migdal', g='other', skip_if='Magadan',
-         note='The fish-salting town of Mary Magdalene. A synagogue of Jesus\' time was found here in 2009.'),
     dict(n='Mount Tabor', ll=[35.3906, 32.6869], c=1, m='Har Tavor', g='other',
          note='Traditional Mount of the Transfiguration ("a high mountain," Matthew 17:1) since the 4th century. Mount Hermon, nearer Caesarea Philippi, is the other main proposal.'),
     dict(n='Mount Hermon', ll=[35.857, 33.416], c=2, m='', g='other',
