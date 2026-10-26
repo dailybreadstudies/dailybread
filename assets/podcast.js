@@ -48,6 +48,8 @@
   var ICON_PLAY = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
   var ICON_PAUSE = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>';
   var ICON_BACK = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3"/><path d="M4.5 3.5v3.7h3.7"/><text x="12" y="15.2" text-anchor="middle" font-size="7" font-family="Inter, Arial, sans-serif" font-weight="600" fill="currentColor" stroke="none">15</text></svg>';
+  var ICON_PREV = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 5.5h2v13H6zM19 5.5v13L9.5 12z" fill="currentColor"/></svg>';
+  var ICON_NEXT = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M16 5.5h2v13h-2zM5 5.5v13L14.5 12z" fill="currentColor"/></svg>';
   var ICON_CLOSE = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 
   function isPlaying(date) { return !!(current && current.date === date && audio && !audio.paused); }
@@ -138,11 +140,14 @@
     dock.setAttribute('aria-label', 'Audio player');
     dock.hidden = true;
     dock.innerHTML =
+      '<button type="button" class="pd-icon pd-skip pd-prev" aria-label="Previous reading" hidden>' + ICON_PREV + '</button>' +
       '<button type="button" class="pd-play" aria-label="Play">' + ICON_PLAY + '</button>' +
+      '<button type="button" class="pd-icon pd-skip pd-next" aria-label="Next reading" hidden>' + ICON_NEXT + '</button>' +
       '<div class="pd-main">' +
         '<div class="pd-title"><span class="pd-ep"></span><a class="pd-show" href="' + base + 'listen.html#subscribe">Daily Bread for Busy Moms</a></div>' +
         '<div class="pd-bar"><span class="pd-time">0:00</span>' +
-          '<input class="pd-seek" type="range" min="0" max="100" step="1" value="0" aria-label="Position">' +
+          '<span class="pd-track"><input class="pd-seek" type="range" min="0" max="100" step="1" value="0" aria-label="Position">' +
+          '<span class="pd-marks" aria-hidden="true"></span></span>' +
           '<span class="pd-dur">0:00</span></div>' +
       '</div>' +
       '<button type="button" class="pd-icon pd-back" aria-label="Back 15 seconds">' + ICON_BACK + '</button>' +
@@ -152,7 +157,9 @@
     var seek = dock.querySelector('.pd-seek');
 
     dock.querySelector('.pd-play').addEventListener('click', function () { if (audio.paused) start(); else audio.pause(); });
-    dock.querySelector('.pd-back').addEventListener('click', function () { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+    dock.querySelector('.pd-back').addEventListener('click', function () { back(15); });
+    dock.querySelector('.pd-prev').addEventListener('click', prevReading);
+    dock.querySelector('.pd-next').addEventListener('click', nextReading);
     dock.querySelector('.pd-rate').addEventListener('click', function () {
       var i = SPEEDS.indexOf(saved.rate);
       saved.rate = SPEEDS[(i + 1) % SPEEDS.length];
@@ -161,12 +168,14 @@
     dock.querySelector('.pd-close').addEventListener('click', close);
     seek.addEventListener('input', function () {
       scrubbing = true;
-      if (audio.duration) dock.querySelector('.pd-time').textContent = clock(seek.value / 1000 * audio.duration);
+      var whole = timed() ? current.total : audio.duration;
+      if (whole) dock.querySelector('.pd-time').textContent = clock(seek.value / 1000 * whole);
       paintSeek();
     });
     seek.addEventListener('change', function () {
-      if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration;
       scrubbing = false;
+      if (timed()) seekAll(seek.value / 1000 * current.total);
+      else if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration;
     });
 
     audio.addEventListener('play', sync);
@@ -174,7 +183,11 @@
     audio.addEventListener('loadedmetadata', function () {
       if (isQueue()) {
         var it = current.queue[current.i];
-        if (it.fs > 0 && audio.duration) audio.currentTime = Math.max(0, it.fs * audio.duration - LEAD);
+        if (audio.duration) {
+          var at = current.pending != null ? current.pending : bounds(it, audio.duration).s;
+          if (at > 0) audio.currentTime = at;
+        }
+        current.pending = null;
         audio.playbackRate = saved.rate;
         tick();
         return;
@@ -206,6 +219,15 @@
   }
   function tick() {
     if (!dock || scrubbing) return;
+    if (timed()) {
+      var T = nowAll(), seekQ = dock.querySelector('.pd-seek');
+      dock.querySelector('.pd-time').textContent = clock(T);
+      dock.querySelector('.pd-dur').textContent = clock(current.total);
+      seekQ.max = 1000;
+      seekQ.value = Math.round(T / current.total * 1000);
+      paintSeek();
+      return;
+    }
     var d = audio.duration || (current && current.ep && current.ep.d) || 0;
     dock.querySelector('.pd-time').textContent = clock(audio.currentTime);
     dock.querySelector('.pd-dur').textContent = clock(d);
@@ -244,6 +266,9 @@
       remember(true);
       current = { date: date, ep: ep };
       audio.src = ep.u;
+      dock.querySelector('.pd-prev').hidden = dock.querySelector('.pd-next').hidden = true;
+      dock.classList.remove('pd-multi');
+      dock.querySelector('.pd-marks').innerHTML = '';
       dock.querySelector('.pd-ep').textContent = dayName(date);
       var show = dock.querySelector('.pd-show');
       show.textContent = 'Daily Bread for Busy Moms';
@@ -272,18 +297,118 @@
   function mediaHandlers() {
     navigator.mediaSession.setActionHandler('play', start);
     navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
-    navigator.mediaSession.setActionHandler('seekbackward', function () { audio.currentTime = Math.max(0, audio.currentTime - 15); });
-    navigator.mediaSession.setActionHandler('seekforward', function () { audio.currentTime = Math.min(audio.duration || 1e9, audio.currentTime + 30); });
+    navigator.mediaSession.setActionHandler('seekbackward', function () { back(15); });
+    navigator.mediaSession.setActionHandler('seekforward', function () {
+      if (timed()) seekAll(nowAll() + 30); else audio.currentTime = Math.min(audio.duration || 1e9, audio.currentTime + 30);
+    });
+    var many = isQueue() && readingStarts().length > 1;
+    try {
+      navigator.mediaSession.setActionHandler('previoustrack', many ? prevReading : null);
+      navigator.mediaSession.setActionHandler('nexttrack', many ? nextReading : null);
+    } catch (e) {}
+  }
+  function back(sec) {
+    if (timed()) seekAll(nowAll() - sec);
+    else audio.currentTime = Math.max(0, audio.currentTime - sec);
   }
 
-  // ── A Bible reading: its chapter files in turn ──
+  // ── Bible readings: their chapter files, played as one timeline ──
+  // Each item is one chapter file from s to e seconds (a reading that starts or ends inside a chapter uses only part of
+  // it). Once every file's length is known (read from its header), the seek bar, times, back 15 s and the
+  // previous/next reading buttons run across all the items as one track; until then, across the file playing.
+  function bounds(it, D) {
+    return { s: it.fs > 0 ? Math.max(0, it.fs * D - LEAD) : 0, e: it.fe < 1 ? Math.min(D, it.fe * D + TAIL) : D };
+  }
+  function timed() { return !!(isQueue() && current.total); }
+  function nowAll() {
+    var it = current.queue[current.i];
+    return Math.max(0, Math.min(current.total, it.off + Math.max(0, (audio.currentTime || 0) - it.s)));
+  }
+  function seekAll(T) {
+    if (!timed()) return;
+    T = Math.max(0, Math.min(current.total - 0.5, T));
+    var i = 0;
+    while (i < current.queue.length - 1 && T >= current.queue[i].off + current.queue[i].len) i++;
+    var it = current.queue[i], at = it.s + (T - it.off), playing = !audio.paused || current.done;
+    current.done = false;
+    if (i === current.i && audio.readyState >= 1) audio.currentTime = at;
+    else { current.i = i; current.pending = at; loadItem(); if (playing) start(); }
+    tick();
+  }
+  function readingStarts() {                                 // index of the first item of each reading
+    var out = [];
+    current.queue.forEach(function (it, i) { if (!i || it.n !== current.queue[i - 1].n) out.push(i); });
+    return out;
+  }
+  function goItem(i) {
+    if (timed()) { seekAll(current.queue[i].off + 0.01); return; }
+    var playing = !audio.paused || current.done;
+    current.done = false; current.i = i; current.pending = null; loadItem();
+    if (playing) start();
+  }
+  function prevReading() {
+    if (!isQueue()) return;
+    var starts = readingStarts(), k = 0;
+    starts.forEach(function (st, j) { if (st <= current.i) k = j; });
+    var first = current.queue[starts[k]];
+    var into = timed() ? nowAll() - first.off : (current.i === starts[k] ? audio.currentTime - (first.s || 0) : 99);
+    goItem(into > 3 || k === 0 ? starts[k] : starts[k - 1]);     // a tap goes to the start of this reading, two to the one before
+  }
+  function nextReading() {
+    if (!isQueue()) return;
+    var starts = readingStarts().filter(function (st) { return st > current.i; });
+    if (starts.length) goItem(starts[0]);
+  }
+  // Read each file's length so the readings can play as one track
+  function measure(q) {
+    var urls = {};
+    q.queue.forEach(function (it) { urls[it.u] = 1; });
+    Promise.all(Object.keys(urls).map(function (u) {
+      return new Promise(function (done) {
+        var a = new Audio(), t = setTimeout(function () { finish(null); }, 20000);
+        function finish(d) { clearTimeout(t); a.removeAttribute('src'); try { a.load(); } catch (e) {} done([u, d]); }
+        a.preload = 'metadata';
+        a.addEventListener('loadedmetadata', function () { finish(isFinite(a.duration) ? a.duration : null); });
+        a.addEventListener('error', function () { finish(null); });
+        a.src = u;
+      });
+    })).then(function (list) {
+      if (current !== q) return;
+      var len = {}, off = 0, ok = true;
+      list.forEach(function (x) { if (!x[1]) ok = false; len[x[0]] = x[1]; });
+      if (!ok) return;                                        // stay with one file at a time
+      q.queue.forEach(function (it) {
+        var b = bounds(it, len[it.u]);
+        it.s = b.s; it.e = b.e; it.len = Math.max(0, b.e - b.s); it.off = off; off += it.len;
+      });
+      q.total = off;
+      drawMarks();
+      tick();
+    });
+  }
+  function drawMarks() {                                      // a small tick where each reading begins
+    var box = dock.querySelector('.pd-marks');
+    box.innerHTML = '';
+    if (!timed()) return;
+    readingStarts().slice(1).forEach(function (i) {
+      var m = document.createElement('span');
+      m.style.left = 'calc(6px + ' + (current.queue[i].off / current.total) + ' * (100% - 12px))';
+      box.appendChild(m);
+    });
+  }
   function loadItem() {
     var it = current.queue[current.i];
     audio.volume = 1;
-    audio.src = it.u;
+    if (audio.getAttribute('src') !== it.u) audio.src = it.u;
+    else if (audio.readyState >= 1) { audio.currentTime = current.pending != null ? current.pending : bounds(it, audio.duration).s; current.pending = null; }
     var ep = dock.querySelector('.pd-ep');
     ep.textContent = (it.title || current.title) + (it.sub ? ' · ' + it.sub : '');
     ep.title = ep.textContent;
+    var starts = readingStarts(), many = starts.length > 1;
+    dock.querySelector('.pd-prev').hidden = !many;
+    dock.querySelector('.pd-next').hidden = !many;
+    dock.querySelector('.pd-next').disabled = !starts.some(function (st) { return st > current.i; });
+    dock.classList.toggle('pd-multi', many);
     tick();
     refreshRows();
   }
@@ -291,8 +416,12 @@
     buildDock();
     if (!current || current.key !== key) {
       remember(true);
-      current = { key: key, queue: spec.items, i: 0, title: spec.title, done: false };
+      current = { key: key, queue: spec.items.map(function (it) { return Object.assign({}, it); }), i: 0, title: spec.title,
+        done: false, pending: null, total: 0 };
+      audio.removeAttribute('src');
       loadItem();
+      drawMarks();
+      measure(current);
       var show = dock.querySelector('.pd-show');
       show.textContent = BIBLE_SHOW;
       show.href = BIBLE_LINK;
@@ -315,15 +444,15 @@
   function checkStop() {                                    // a reading that ends inside the chapter
     var it = current.queue[current.i];
     if (it.fe >= 1 || !audio.duration || scrubbing) return;
-    var stop = it.fe * audio.duration + TAIL, left = stop - audio.currentTime;
+    var stop = bounds(it, audio.duration).e, left = stop - audio.currentTime;
     if (left <= 0) nextItem();
     else audio.volume = left < FADE ? Math.max(0, left / FADE) : 1;
   }
   function nextItem() {
-    if (current.i < current.queue.length - 1) { current.i++; loadItem(); start(); return; }
+    if (current.i < current.queue.length - 1) { current.i++; current.pending = null; loadItem(); start(); return; }
     audio.pause();
     audio.volume = 1;
-    current.done = true;                                    // play again starts the reading over
+    current.done = true;                                    // play again starts the readings over
     sync();
   }
   function toggleQueue(key, spec) {
@@ -332,7 +461,7 @@
   }
 
   function start() {
-    if (isQueue() && current.done) { current.done = false; current.i = 0; loadItem(); }
+    if (isQueue() && current.done) { current.done = false; current.i = 0; current.pending = null; loadItem(); }
     audio.playbackRate = saved.rate;
     var p = audio.play();
     if (p && p.catch) p.catch(function () { sync(); });

@@ -26,7 +26,7 @@
 /* The docked player: stays at the bottom of the screen while an episode is open, so you can read along */
 .pod-dock { position: fixed; z-index: 230; left: 50%; transform: translateX(-50%);
   bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: min(36rem, calc(100vw - 24px));
-  display: grid; grid-template-columns: auto 1fr auto auto auto; align-items: center; column-gap: 6px;
+  display: grid; grid-auto-flow: column; grid-template-columns: auto; grid-auto-columns: auto; align-items: center; column-gap: 6px;
   padding: 8px 8px 8px 10px; border-radius: 16px; border: 1px solid var(--line-strong);
   background: var(--surface-glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
   box-shadow: 0 10px 30px var(--shadow); font-family: var(--sans); color: var(--ink);
@@ -38,9 +38,18 @@
   display: inline-flex; align-items: center; justify-content: center; cursor: pointer; margin-right: 4px; }
 .pd-play svg { width: 16px; height: 16px; }
 .pd-play:hover { background: var(--accent-deep); }
-.pd-main { min-width: 0; }
+.pd-main { min-width: 0; width: 100%; }
+.pod-dock { grid-template-columns: auto minmax(0, 1fr); }
+.pod-dock.pd-multi { grid-template-columns: auto auto auto minmax(0, 1fr); }
+.pd-icon[hidden] { display: none; }
+.pd-skip { min-width: 30px; padding: 0 2px; color: var(--heading); }
+.pd-skip:disabled { opacity: 0.35; cursor: default; background: none; }
+.pd-track { position: relative; flex: 1; min-width: 0; display: flex; align-items: center; }
+.pd-marks { position: absolute; inset: 0; pointer-events: none; }
+.pd-marks span { position: absolute; top: 50%; width: 2px; height: 8px; margin: -4px 0 0 -1px; border-radius: 1px; background: var(--paper);
+  box-shadow: 0 0 0 0.5px var(--line-strong); }
 .pd-title { display: flex; align-items: baseline; gap: 8px; min-width: 0; font-size: 0.82rem; line-height: 1.3; }
-.pd-ep { font-weight: 600; color: var(--heading); white-space: nowrap; }
+.pd-ep { font-weight: 600; color: var(--heading); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 0 1 auto; }
 .pd-show { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; text-decoration: none; }
 .pd-show:hover, .pd-show.pd-invite { color: var(--accent); }
 .pd-show:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -71,6 +80,17 @@ html.pod-docked body { padding-bottom: 10rem; }
   .pd-show { display: none; }
   .pd-show.pd-invite { display: inline; }
   .pd-icon { min-width: 32px; padding: 0 4px; }
+  .pd-skip { min-width: 26px; padding: 0; }
+  /* several readings: title and timeline on top, the buttons below */
+  .pod-dock.pd-multi { grid-auto-flow: row; grid-template-columns: auto auto auto 1fr auto auto auto; row-gap: 4px; padding: 9px 8px 5px 10px; }
+  .pd-multi .pd-main { grid-row: 1; grid-column: 1 / -1; padding: 0 2px; }
+  .pd-multi .pd-prev { grid-row: 2; grid-column: 1; }
+  .pd-multi .pd-play { grid-row: 2; grid-column: 2; width: 38px; height: 38px; margin: 0 4px; }
+  .pd-multi .pd-next { grid-row: 2; grid-column: 3; }
+  .pd-multi .pd-back { grid-row: 2; grid-column: 5; }
+  .pd-multi .pd-rate { grid-row: 2; grid-column: 6; }
+  .pd-multi .pd-close { grid-row: 2; grid-column: 7; }
+  .pd-multi .pd-skip { min-width: 34px; }
 }
 @media print { .pod-dock { display: none; } }
 
