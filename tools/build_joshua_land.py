@@ -250,7 +250,7 @@ def build():
                 'Joshua is set at the end of the Late Bronze Age. Canaan was a patchwork of small city-states, each ruled by its own king, such as the 31 kings listed in Joshua 12, '
                 'and Egypt held the land loosely through garrisons like Beth-shean. In the Amarna letters (about 1350 BC) the kings of Jerusalem, Shechem, Hazor, Lachish and Gezer write to Pharaoh, '
                 'complaining of one another and of raiders called Habiru.',
-                'The date of the conquest is debated: 1 Kings 6:1 points to the 15th century BC, while many scholars prefer the 13th. By about 1208 BC the Merneptah Stele names "Israel" as a people in Canaan.']},
+                'The date of the conquest is debated: 1 Kings 6:1 points to the 15th century BC, while other scholars prefer the 13th. By about 1208 BC the Merneptah Stele names "Israel" as a people in Canaan.']},
             {'h': 'How to use this map', 'p': [
                 'This map opens from any place named in Joshua, in chapters that have no map of their own. The red dots are places named in Joshua; the black dots are other places of the time, for context. '
                 'The tribe names show roughly where each tribe\'s inheritance lay; the maps of Joshua 13–19 draw the allotments.']},
