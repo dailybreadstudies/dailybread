@@ -1044,18 +1044,16 @@
    ]
   },
   {
-   "id": "mat-15-north",
-   "title": "The Northern Journeys",
-   "ref": "Matthew 15:21–17:27",
+   "id": "mat-15-tyre",
+   "title": "Tyre, Sidon and the Decapolis",
+   "ref": "Matthew 15:21–16:12",
    "book": "MAT",
    "c": 15,
    "v": 21,
    "links": [
     "Tyre",
     "Sidon",
-    "Magadan",
-    "Caesarea Philippi",
-    "Capernaum"
+    "Magadan"
    ],
    "range": [
     21,
@@ -1067,9 +1065,30 @@
      "v": 1,
      "range": [
       1,
-      28
+      12
      ]
-    },
+    }
+   ],
+   "aliases": {
+    "Magadan": "Magdala"
+   }
+  },
+  {
+   "id": "mat-16-caesarea",
+   "title": "Caesarea Philippi and the High Mountain",
+   "ref": "Matthew 16:13–17:27",
+   "book": "MAT",
+   "c": 16,
+   "v": 13,
+   "links": [
+    "Caesarea Philippi",
+    "Capernaum"
+   ],
+   "range": [
+    13,
+    28
+   ],
+   "also": [
     {
      "c": 17,
      "v": 1,
@@ -1078,10 +1097,7 @@
       27
      ]
     }
-   ],
-   "aliases": {
-    "Magadan": "Magdala"
-   }
+   ]
   }
  ]
 }

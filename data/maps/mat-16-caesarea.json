@@ -1,0 +1,228 @@
+{
+ "id": "mat-16-caesarea",
+ "title": "Caesarea Philippi and the High Mountain",
+ "ref": "Matthew 16:13–17:27",
+ "anchor": {
+  "book": "MAT",
+  "c": 16,
+  "v": 13
+ },
+ "range": [
+  13,
+  28
+ ],
+ "also": [
+  {
+   "c": 17,
+   "v": 1,
+   "range": [
+    1,
+    27
+   ]
+  }
+ ],
+ "places": "MAT",
+ "placesLabel": "Places named in Matthew",
+ "placesName": "Matthew",
+ "bounds": [
+  [
+   35.3,
+   32.78
+  ],
+  [
+   36.05,
+   33.48
+  ]
+ ],
+ "links": [
+  "Caesarea Philippi",
+  "Capernaum"
+ ],
+ "named": [
+  {
+   "name": "Caesarea Philippi",
+   "ll": [
+    35.69333,
+    33.24611
+   ],
+   "label": "right",
+   "site": "Banias, at the foot of Mount Hermon",
+   "note": "At one of the springs of the Jordan, by a cave sacred to the god Pan; Herod the Great built a temple to Augustus here, and his son Philip refounded the town. Here Peter confesses, \"You are the Christ, the Son of the living God\" (16:16).",
+   "ob": "ab7bf48/caesarea-philippi"
+  },
+  {
+   "name": "Mount Hermon",
+   "ll": [
+    35.857,
+    33.416
+   ],
+   "label": "right",
+   "site": "\"a high mountain\" (17:1)",
+   "note": "Matthew does not name the mountain of the Transfiguration. Hermon (2,814 m), above Caesarea Philippi \"after six days,\" fits \"a high mountain\"; Mount Tabor has been the traditional site since the fourth century. Some suggest Mount Meron."
+  },
+  {
+   "name": "Capernaum",
+   "ll": [
+    35.575,
+    32.88111
+   ],
+   "label": "right",
+   "site": "Tell Hum",
+   "note": "Back in Capernaum, the collectors of the Temple tax come to Peter, and the coin is found in the fish's mouth (17:24–27).",
+   "ob": "af2161c/capernaum"
+  }
+ ],
+ "alternates": {
+  "for": "Mount Hermon",
+  "bounds": [
+   [
+    35.25,
+    32.62
+   ],
+   [
+    36.0,
+    33.5
+   ]
+  ],
+  "sites": [
+   {
+    "name": "Mount Tabor",
+    "ll": [
+     35.3906,
+     32.687
+    ]
+   },
+   {
+    "name": "Mount Meron",
+    "ll": [
+     35.41,
+     32.998
+    ]
+   }
+  ]
+ },
+ "moves": [
+  {
+   "n": 1,
+   "side": "israel",
+   "vv": "16:13",
+   "at": 0.22,
+   "text": "North to the region of Caesarea Philippi",
+   "coords": [
+    [
+     35.63,
+     32.91
+    ],
+    [
+     35.64,
+     33.0
+    ],
+    [
+     35.62,
+     33.1
+    ],
+    [
+     35.65,
+     33.19
+    ],
+    [
+     35.685,
+     33.24
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "vv": "17:1",
+   "at": 0.5,
+   "text": "\"After six days\": up a high mountain with Peter, James and John",
+   "coords": [
+    [
+     35.7,
+     33.25
+    ],
+    [
+     35.76,
+     33.3
+    ],
+    [
+     35.81,
+     33.36
+    ],
+    [
+     35.845,
+     33.405
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 3,
+   "side": "israel",
+   "vv": "17:22–24",
+   "at": 0.72,
+   "text": "Through Galilee and back to Capernaum",
+   "coords": [
+    [
+     35.675,
+     33.235
+    ],
+    [
+     35.6,
+     33.13
+    ],
+    [
+     35.57,
+     33.0
+    ],
+    [
+     35.565,
+     32.9
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "keys",
+   "at": [
+    35.705,
+    33.255
+   ],
+   "key": "Peter's confession: \"the keys of the kingdom of heaven\"",
+   "vv": "16:16–19",
+   "moves": [
+    1
+   ],
+   "offset": [
+    10,
+    -8
+   ]
+  },
+  {
+   "type": "sun",
+   "at": [
+    35.86,
+    33.42
+   ],
+   "key": "Transfigured: \"His face shone like the sun\"",
+   "vv": "17:2",
+   "moves": [
+    2
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "At the gates of Hades",
+   "p": [
+    "Caesarea Philippi was a pagan shrine-town at the foot of Hermon. The cave at Banias was thought to lead down to the underworld. Against that backdrop Jesus says, \"on this rock I will build My church, and the gates of Hades will not prevail against it\" (16:18)."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}

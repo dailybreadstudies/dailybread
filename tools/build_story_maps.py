@@ -278,30 +278,23 @@ MAPS_OUT.append({
     'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
 })
 
-# ─────────────────────────── 4. The northern journeys (Matthew 15–17) ───────────────────────────
+# ─────────────────────────── 4. Tyre, Sidon and the Decapolis (Matthew 15:21–16:12) ───────────────────────────
 EAST = [35.665, 32.815]
 MAPS_OUT.append({
-    'id': 'mat-15-north', 'title': 'The Northern Journeys', 'ref': 'Matthew 15:21–17:27',
+    'id': 'mat-15-tyre', 'title': 'Tyre, Sidon and the Decapolis', 'ref': 'Matthew 15:21–16:12',
     'anchor': {'book': 'MAT', 'c': 15, 'v': 21}, 'range': [21, 39],
-    'also': [{'c': 16, 'v': 1, 'range': [1, 28]}, {'c': 17, 'v': 1, 'range': [1, 27]}],
+    'also': [{'c': 16, 'v': 1, 'range': [1, 12]}],
     'places': 'MAT', 'placesLabel': 'Places named in Matthew', 'placesName': 'Matthew',
     'bounds': [[35.0, 32.62], [36.02, 33.62]],
-    'links': ['Tyre', 'Sidon', 'Magadan', 'Caesarea Philippi', 'Capernaum'],
+    'links': ['Tyre', 'Sidon', 'Magadan'],
     'aliases': {'Magadan': 'Magdala'},
     'named': [
         named('Tyre', P['Tyre'], 'left', 'Sur, Lebanon', 'The great Phoenician port. "The district of Tyre and Sidon" was Gentile territory; there a Canaanite woman asks for "the crumbs" and is praised for her faith (15:21–28).', 'a160272/tyre'),
         named('Sidon', P['Sidon'], 'left', 'Saida, Lebanon', 'Mark 7:31 says Jesus went back "through Sidon" to the Sea of Galilee and the Decapolis.', 'a98e4d7/sidon'),
         named('Magdala', P['Magadan'], 'left', 'Migdal, on the west shore',
               'Matthew 15:39 reads "the region of Magadan"; many manuscripts read Magdala. Probably Magdala, home of Mary Magdalene ("Dalmanutha" in Mark 8:10). A first-century synagogue was excavated here in 2009, with the carved "Magdala stone" showing the Temple menorah.'),
-        named('Caesarea Philippi', P['Caesarea Philippi'], 'right', 'Banias, at the foot of Mount Hermon',
-              'At one of the springs of the Jordan, by a cave sacred to the god Pan; Herod the Great built a temple to Augustus here, and his son Philip refounded the town. Here Peter confesses, "You are the Christ, the Son of the living God" (16:16).', 'ab7bf48/caesarea-philippi'),
-        named('Mount Hermon', P['Hermon'], 'right', '"a high mountain" (17:1)',
-              'Matthew does not name the mountain of the Transfiguration. Hermon (2,814 m), above Caesarea Philippi "after six days," fits "a high mountain"; Mount Tabor has been the traditional site since the fourth century. Some suggest Mount Meron.'),
-        named('Capernaum', P['Capernaum'], 'right', 'Tell Hum', 'Back in Capernaum, the collectors of the Temple tax come to Peter, and the coin is found in the fish\'s mouth (17:24–27).', 'af2161c/capernaum'),
         named('Decapolis', [35.75, 32.72], 'right', 'the Ten Cities, mostly east of the lake', 'A league of Greek cities (Hippos, Gadara, Scythopolis and others). Mark 7:31 places the return from Tyre "in the region of the Decapolis."'),
     ],
-    'alternates': {'for': 'Mount Hermon', 'bounds': [[35.25, 32.62], [36.0, 33.5]],
-                   'sites': [{'name': 'Mount Tabor', 'll': [35.3906, 32.687]}, {'name': 'Mount Meron', 'll': [35.41, 32.998]}]},
     'moves': [
         mv(1, 'israel', '15:21', 'Jesus withdraws to the district of Tyre and Sidon',
            [P['Gennesaret'], [35.49, 32.94], [35.42, 33.04], [35.33, 33.13], [35.25, 33.22]], at=0.5),
@@ -309,25 +302,50 @@ MAPS_OUT.append({
            [[35.22, 33.25], [35.27, 33.42], [35.36, 33.53], [35.52, 33.42], [35.64, 33.25], [35.7, 33.05], [35.69, 32.9], EAST], at=0.35),
         mv(3, 'israel', '15:39', 'By boat to the region of Magadan (Magdala)', [EAST, [35.62, 32.83], [35.57, 32.828], [35.525, 32.826]], at=0.5, dash=BOAT),
         mv(4, 'israel', '16:4–5', 'Leaving the Pharisees, they cross to the other side', [[35.52, 32.826], [35.57, 32.856], [35.605, 32.872], [35.62, 32.884]], at=0.5, dash=BOAT),
-        mv(5, 'israel', '16:13', 'North to the region of Caesarea Philippi', [[35.63, 32.91], [35.64, 33.0], [35.62, 33.1], [35.65, 33.19], [35.685, 33.24]], at=0.5),
-        mv(6, 'israel', '17:1', '"After six days": up a high mountain with Peter, James and John', [[35.7, 33.25], [35.76, 33.3], [35.81, 33.36], [35.845, 33.405]], at=0.5, dash=[2, 1.4]),
-        mv(7, 'israel', '17:22–24', 'Through Galilee and back to Capernaum', [[35.69, 33.23], [35.63, 33.12], [35.6, 33.0], [35.58, 32.9]], at=0.5),
     ],
     'symbols': [
         sym('loaves', [EAST[0] + 0.012, EAST[1] - 0.012], 'Seven loaves and a few fish: the 4,000 fed', '15:32–38', moves=[2], label='4,000 fed'),
-        sym('keys', [35.705, 33.255], 'Peter\'s confession: "the keys of the kingdom of heaven"', '16:16–19', moves=[5], offset=[10, -8]),
-        sym('sun', [35.86, 33.42], 'Transfigured: "His face shone like the sun"', '17:2', moves=[6]),
     ],
     'notes': [
         {'h': 'Into Gentile country', 'p': [
-            'These chapters take Jesus beyond Jewish Galilee: to the Phoenician coast, the Greek cities of the Decapolis, and the pagan shrine-town of Caesarea Philippi. '
+            'These chapters take Jesus beyond Jewish Galilee: to the Phoenician coast and the Greek cities of the Decapolis. '
             'The second feeding, of the 4,000 with seven loaves, probably took place on the eastern, Gentile shore, a sign alongside the first among the villages of Israel.']},
-        {'h': 'At the gates of Hades', 'p': [
-            'The cave at Banias was thought to lead down to the underworld. Against that backdrop Jesus says, "on this rock I will build My church, and the gates of Hades will not prevail against it" (16:18).']},
     ],
     'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
 })
 
+# ─────────────────────────── 5. Caesarea Philippi and the high mountain (Matthew 16:13–17:27) ───────────────────────────
+MAPS_OUT.append({
+    'id': 'mat-16-caesarea', 'title': 'Caesarea Philippi and the High Mountain', 'ref': 'Matthew 16:13–17:27',
+    'anchor': {'book': 'MAT', 'c': 16, 'v': 13}, 'range': [13, 28],
+    'also': [{'c': 17, 'v': 1, 'range': [1, 27]}],
+    'places': 'MAT', 'placesLabel': 'Places named in Matthew', 'placesName': 'Matthew',
+    'bounds': [[35.3, 32.78], [36.05, 33.48]],
+    'links': ['Caesarea Philippi', 'Capernaum'],
+    'named': [
+        named('Caesarea Philippi', P['Caesarea Philippi'], 'right', 'Banias, at the foot of Mount Hermon',
+              'At one of the springs of the Jordan, by a cave sacred to the god Pan; Herod the Great built a temple to Augustus here, and his son Philip refounded the town. Here Peter confesses, "You are the Christ, the Son of the living God" (16:16).', 'ab7bf48/caesarea-philippi'),
+        named('Mount Hermon', P['Hermon'], 'right', '"a high mountain" (17:1)',
+              'Matthew does not name the mountain of the Transfiguration. Hermon (2,814 m), above Caesarea Philippi "after six days," fits "a high mountain"; Mount Tabor has been the traditional site since the fourth century. Some suggest Mount Meron.'),
+        named('Capernaum', P['Capernaum'], 'right', 'Tell Hum', 'Back in Capernaum, the collectors of the Temple tax come to Peter, and the coin is found in the fish\'s mouth (17:24–27).', 'af2161c/capernaum'),
+    ],
+    'alternates': {'for': 'Mount Hermon', 'bounds': [[35.25, 32.62], [36.0, 33.5]],
+                   'sites': [{'name': 'Mount Tabor', 'll': [35.3906, 32.687]}, {'name': 'Mount Meron', 'll': [35.41, 32.998]}]},
+    'moves': [
+        mv(1, 'israel', '16:13', 'North to the region of Caesarea Philippi', [[35.63, 32.91], [35.64, 33.0], [35.62, 33.1], [35.65, 33.19], [35.685, 33.24]], at=0.22),
+        mv(2, 'israel', '17:1', '"After six days": up a high mountain with Peter, James and John', [[35.7, 33.25], [35.76, 33.3], [35.81, 33.36], [35.845, 33.405]], at=0.5, dash=[2, 1.4]),
+        mv(3, 'israel', '17:22–24', 'Through Galilee and back to Capernaum', [[35.675, 33.235], [35.6, 33.13], [35.57, 33.0], [35.565, 32.9]], at=0.72),
+    ],
+    'symbols': [
+        sym('keys', [35.705, 33.255], 'Peter\'s confession: "the keys of the kingdom of heaven"', '16:16–19', moves=[1], offset=[10, -8]),
+        sym('sun', [35.86, 33.42], 'Transfigured: "His face shone like the sun"', '17:2', moves=[2]),
+    ],
+    'notes': [
+        {'h': 'At the gates of Hades', 'p': [
+            'Caesarea Philippi was a pagan shrine-town at the foot of Hermon. The cave at Banias was thought to lead down to the underworld. Against that backdrop Jesus says, "on this rock I will build My church, and the gates of Hades will not prevail against it" (16:18).']},
+    ],
+    'sources': 'Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL.',
+})
 
 def main():
     idx_path = os.path.join(MAPS, 'index.json')
