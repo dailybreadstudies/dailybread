@@ -19,7 +19,7 @@
 (function () {
   'use strict';
   var STORE = 'dbs-podcast';
-  var SPEEDS = [1, 1.25, 1.5, 1.75, 2, 0.75];
+  var SPEEDS = [1, 1.15, 1.25, 1.5, 1.75, 2, 0.75, 0.85];
   var data = null, audio = null, dock = null, current = null, lastSave = 0, scrubbing = false;
   var saved = { pos: {}, rate: 1, src: 'moms' };
   try { var s = JSON.parse(localStorage.getItem(STORE) || '{}'); if (s && typeof s === 'object') { saved.pos = s.pos || {}; saved.rate = s.rate || 1; saved.src = s.src || 'moms'; } } catch (e) {}

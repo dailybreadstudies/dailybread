@@ -58,7 +58,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - `.github/workflows/podcast.yml` runs `tools/fetch_podcast.py` every two hours and commits `data/podcast/moms.json`
   (date → title, mp3, length). Run it by hand from the Actions tab ("Podcast episodes" → Run workflow).
 - `assets/podcast.js/.css`: a LISTEN row closes the readings list on Today when the day has an episode; playing docks a
-  player at the bottom (pause, back 15 s, speed, remembers where you stopped, lock-screen controls). Not shown on Kids.
+  player at the bottom (pause, back 15 s, speed 0.75–2× incl. 0.85 and 1.15, remembers where you stopped, lock-screen controls). Not shown on Kids.
   A Kids podcast can reuse it with its own feed file.
 
 ## Code
