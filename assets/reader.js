@@ -790,7 +790,7 @@
           document.getElementById('blessings-template').innerHTML + '</details>';
       }
       html += '<p class="division-label">' + p.label + (p.he ? ' <span class="he">' + noNikud(p.he) + '</span>' : '') + '</p>';
-      html += '<h2 class="chapter-head">' + displayRef(r) + '</h2>';
+      html += '<h2 class="chapter-head">' + displayRef(r) + audioButton(day.date, n, r, books[r.book]) + '</h2>';
       var sub = p.title || passage.titles.join(' &middot; ');
       if (p.reading && READING_ORDINALS[p.reading]) {      // "… · Fourth reading from the Torah Portion" (the section titles first)
         sub = (sub ? sub + ' &middot; ' : '') + READING_ORDINALS[p.reading] + ' reading from the Torah Portion';
@@ -812,7 +812,74 @@
     decorateMaps();
     fillToday(day);
     drawProgress();
+    if (window.DBPodcast && DBPodcast.refresh) DBPodcast.refresh();
   }
+
+  // ── Listen to a reading: the public-domain BSB audio (Bob Souer, CC0) played from OpenBible.com ──
+  // One mp3 per chapter (BSB_01_Gen_006.mp3). A reading that starts or ends inside a chapter starts and stops at an
+  // estimate of where that verse falls, from the share of the chapter's text before it (assets/podcast.js leaves a
+  // few seconds' margin). The audio is the stock BSB, so it does not follow the site's emendations or the
+  // Messianic filter. Classic only (podcast.js, which plays it, is not loaded on Kids).
+  var AUDIO_BOOKS = ['GEN','EXO','LEV','NUM','DEU','JOS','JDG','RUT','1SA','2SA','1KI','2KI','1CH','2CH','EZR','NEH',
+    'EST','JOB','PSA','PRO','ECC','SNG','ISA','JER','LAM','EZK','DAN','HOS','JOL','AMO','OBA','JON','MIC','NAM','HAB',
+    'ZEP','HAG','ZEC','MAL','MAT','MRK','LUK','JHN','ACT','ROM','1CO','2CO','GAL','EPH','PHP','COL','1TH','2TH','1TI',
+    '2TI','TIT','PHM','HEB','JAS','1PE','2PE','1JN','2JN','3JN','JUD','REV'];
+  var AUDIO_BASE = 'https://openbible.com/audio/souer/';
+  var audioSpecs = {};
+  function audioUrl(book, c) {
+    var i = AUDIO_BOOKS.indexOf(book);
+    if (i < 0) return null;
+    var ab = book === 'TIT' ? 'Tts' : book.charAt(0) + book.slice(1).toLowerCase();
+    return AUDIO_BASE + 'BSB_' + (i < 9 ? '0' : '') + (i + 1) + '_' + ab + '_' + ('00' + c).slice(-3) + '.mp3';
+  }
+  // Characters of read-aloud text before each verse of a chapter (headings and cross-references are not read)
+  var SILENT = { s1: 1, s2: 1, r: 1, ms: 1, mr: 1, qa: 1 };
+  function verseMarks(bookData, c) {
+    var ch = bookData && bookData.chapters && bookData.chapters[c - 1];
+    var at = {}, n = 0;
+    if (!ch) return null;
+    ch.b.forEach(function (blk) {
+      if (SILENT[blk.k]) return;
+      (blk.c || []).forEach(function (x) {
+        if (typeof x === 'number') { if (x > 0 && at[x] === undefined) at[x] = n; }
+        else if (typeof x === 'string') n += x.replace(/<[^>]+>/g, '').length;
+      });
+    });
+    return { at: at, total: n };
+  }
+  function audioItems(r, bookData) {
+    var items = [];
+    (r.parts || [r]).forEach(function (p) {
+      for (var c = p.c1; c <= p.c2; c++) {
+        var u = audioUrl(p.book, c);
+        if (!u) return;
+        var m = verseMarks(bookData, c), fs = 0, fe = 1;
+        if (m && m.total) {
+          if (c === p.c1 && p.v1 > 1 && m.at[p.v1] !== undefined) fs = m.at[p.v1] / m.total;
+          if (c === p.c2 && p.v2 && m.at[p.v2 + 1] !== undefined) fe = m.at[p.v2 + 1] / m.total;
+        }
+        items.push({ u: u, fs: fs, fe: fe, label: (/^Psalm/.test(bookName(p.book)) ? 'Psalm' : 'Chapter') + ' ' + c });
+      }
+    });
+    return items;
+  }
+  function audioButton(date, n, r, bookData) {
+    if (!window.DBPodcast || !DBPodcast.toggleQueue) return '';
+    var items = audioItems(r, bookData);
+    if (!items.length) return '';
+    var key = date + '#' + n, name = displayRef(r);
+    audioSpecs[key] = { title: name, items: items };
+    return ' <button type="button" class="pod-btn ba-btn" data-audio-key="' + key + '" data-audio-name="' + escapeAttr(name) +
+      '" aria-pressed="false" aria-label="Listen to ' + escapeAttr(name) + '">' +
+      '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></button>';
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-audio-key]');
+    if (!b || !window.DBPodcast) return;
+    e.preventDefault();
+    var key = b.getAttribute('data-audio-key');
+    if (audioSpecs[key]) DBPodcast.toggleQueue(key, audioSpecs[key]);
+  });
 
   // The Daily Bread for Busy Moms podcast follows the plan: when the day has an episode, a LISTEN row closes the
   // readings list (assets/podcast.js plays it in a player docked at the bottom, so you can read along)

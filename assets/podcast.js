@@ -7,6 +7,8 @@
  *   DBPodcast.listenItem(date)           → '<li>' for the Today readings list, or '' when that day has no episode
  *   DBPodcast.play(date) / toggle(date)  → play that day's episode in the docked player
  *   DBPodcast.fmtLen(seconds)            → "12 min"
+ *   DBPodcast.toggleQueue(key, spec)     → play / pause a Bible reading: spec = { title, items: [{ u, fs, fe, label }] },
+ *                                          one mp3 per chapter, fs / fe = where in the file to start / stop (0–1)
  *
  * One <audio> element is shared by the whole page. It docks at the bottom of the screen while an episode is open, so
  * you can listen and read along. Where you stopped is remembered per episode, and the speed for all of them
@@ -46,6 +48,13 @@
   var ICON_CLOSE = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 
   function isPlaying(date) { return !!(current && current.date === date && audio && !audio.paused); }
+  function isQueue() { return !!(current && current.queue); }
+  function queuePlaying(key) { return !!(current && current.key === key && audio && !audio.paused); }
+
+  // Bible readings (assets/reader.js): the BSB audio read by Bob Souer, public domain (CC0), from OpenBible.com.
+  // Start and stop points inside a chapter are estimates, so start a few seconds early and stop a moment late.
+  var BIBLE_SHOW = 'Berean Standard Bible · Bob Souer', BIBLE_LINK = 'https://openbible.com/audio/souer/';
+  var LEAD = 5, TAIL = 2, FADE = 0.8;
 
   // The row under the day's readings: same columns as the readings (circle · LABEL · text)
   function listenItem(date) {
@@ -74,6 +83,14 @@
         b.setAttribute('aria-label', (on ? 'Pause' : 'Play') + ' the Daily Bread for Busy Moms podcast for ' + dayName(date));
       });
     });
+    document.querySelectorAll('[data-audio-key]').forEach(function (b) {
+      var key = b.getAttribute('data-audio-key'), on = queuePlaying(key);
+      b.classList.toggle('is-playing', on);
+      b.classList.toggle('is-open', !!(current && current.key === key));
+      b.innerHTML = on ? ICON_PAUSE : ICON_PLAY;
+      b.setAttribute('aria-pressed', String(on));
+      b.setAttribute('aria-label', (on ? 'Pause ' : 'Listen to ') + (b.getAttribute('data-audio-name') || 'this reading'));
+    });
   }
 
   function buildDock() {
@@ -83,7 +100,7 @@
     dock = document.createElement('div');
     dock.className = 'pod-dock';
     dock.setAttribute('role', 'region');
-    dock.setAttribute('aria-label', 'Podcast player');
+    dock.setAttribute('aria-label', 'Audio player');
     dock.hidden = true;
     dock.innerHTML =
       '<button type="button" class="pd-play" aria-label="Play">' + ICON_PLAY + '</button>' +
@@ -120,13 +137,21 @@
     audio.addEventListener('play', sync);
     audio.addEventListener('pause', function () { remember(true); sync(); });
     audio.addEventListener('loadedmetadata', function () {
+      if (isQueue()) {
+        var it = current.queue[current.i];
+        if (it.fs > 0 && audio.duration) audio.currentTime = Math.max(0, it.fs * audio.duration - LEAD);
+        audio.playbackRate = saved.rate;
+        tick();
+        return;
+      }
       var at = current && saved.pos[current.ep.u];
       if (at && audio.duration && at < audio.duration - 20) audio.currentTime = at;
       audio.playbackRate = saved.rate;
       tick();
     });
-    audio.addEventListener('timeupdate', function () { tick(); remember(false); });
+    audio.addEventListener('timeupdate', function () { tick(); if (isQueue()) checkStop(); else remember(false); });
     audio.addEventListener('ended', function () {
+      if (isQueue()) { nextItem(); return; }
       if (current) { delete saved.pos[current.ep.u]; save(); }
       var show = dock.querySelector('.pd-show');            // at the end: an invitation to subscribe
       show.textContent = 'Subscribe free for tomorrow’s episode';
@@ -135,7 +160,7 @@
     });
     audio.addEventListener('error', function () {
       if (!current) return;
-      dock.querySelector('.pd-ep').textContent = 'This episode could not be loaded.';
+      dock.querySelector('.pd-ep').textContent = isQueue() ? 'This reading could not be loaded.' : 'This episode could not be loaded.';
       sync();
     });
   }
@@ -146,7 +171,7 @@
   }
   function tick() {
     if (!dock || scrubbing) return;
-    var d = audio.duration || (current && current.ep.d) || 0;
+    var d = audio.duration || (current && current.ep && current.ep.d) || 0;
     dock.querySelector('.pd-time').textContent = clock(audio.currentTime);
     dock.querySelector('.pd-dur').textContent = clock(d);
     var seek = dock.querySelector('.pd-seek');
@@ -155,7 +180,7 @@
     paintSeek();
   }
   function remember(now) {
-    if (!current || !audio.currentTime) return;
+    if (!current || isQueue() || !audio.currentTime) return;
     var t = Date.now();
     if (!now && t - lastSave < 5000) return;
     lastSave = t;
@@ -180,13 +205,15 @@
     var ep = episode(date);
     if (!ep) return false;
     buildDock();
-    if (!current || current.ep.u !== ep.u) {
+    if (!current || !current.ep || current.ep.u !== ep.u) {
       remember(true);
       current = { date: date, ep: ep };
       audio.src = ep.u;
       dock.querySelector('.pd-ep').textContent = dayName(date);
       var show = dock.querySelector('.pd-show');
       show.textContent = 'Daily Bread for Busy Moms';
+      show.href = base + 'listen.html#subscribe';
+      show.removeAttribute('target');
       show.classList.remove('pd-invite');
       dock.querySelector('.pd-ep').title = ep.t;
       tick();
@@ -196,10 +223,7 @@
             title: ep.t, artist: 'Daily Bread for Busy Moms', album: 'Daily Bread',
             artwork: data.show && data.show.image ? [{ src: data.show.image, sizes: '512x512' }] : []
           });
-          navigator.mediaSession.setActionHandler('play', start);
-          navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
-          navigator.mediaSession.setActionHandler('seekbackward', function () { audio.currentTime = Math.max(0, audio.currentTime - 15); });
-          navigator.mediaSession.setActionHandler('seekforward', function () { audio.currentTime = Math.min(audio.duration || 1e9, audio.currentTime + 30); });
+          mediaHandlers();
         } catch (e) {}
       }
     }
@@ -210,7 +234,69 @@
     }
     return true;
   }
+  function mediaHandlers() {
+    navigator.mediaSession.setActionHandler('play', start);
+    navigator.mediaSession.setActionHandler('pause', function () { audio.pause(); });
+    navigator.mediaSession.setActionHandler('seekbackward', function () { audio.currentTime = Math.max(0, audio.currentTime - 15); });
+    navigator.mediaSession.setActionHandler('seekforward', function () { audio.currentTime = Math.min(audio.duration || 1e9, audio.currentTime + 30); });
+  }
+
+  // ── A Bible reading: its chapter files in turn ──
+  function loadItem() {
+    var it = current.queue[current.i];
+    audio.volume = 1;
+    audio.src = it.u;
+    var ep = dock.querySelector('.pd-ep');
+    ep.textContent = current.title + (current.queue.length > 1 ? ' · ' + it.label : '');
+    ep.title = current.title;
+    tick();
+  }
+  function openQueue(key, spec) {
+    buildDock();
+    if (!current || current.key !== key) {
+      remember(true);
+      current = { key: key, queue: spec.items, i: 0, title: spec.title, done: false };
+      loadItem();
+      var show = dock.querySelector('.pd-show');
+      show.textContent = BIBLE_SHOW;
+      show.href = BIBLE_LINK;
+      show.target = '_blank';
+      show.rel = 'noopener';
+      show.classList.remove('pd-invite');
+      if ('mediaSession' in navigator) {
+        try {
+          navigator.mediaSession.metadata = new MediaMetadata({ title: spec.title, artist: 'Berean Standard Bible', album: 'Daily Bread' });
+          mediaHandlers();
+        } catch (e) {}
+      }
+    }
+    showRate();
+    if (dock.hidden) {
+      dock.hidden = false;
+      document.documentElement.classList.add('pod-docked');
+    }
+  }
+  function checkStop() {                                    // a reading that ends inside the chapter
+    var it = current.queue[current.i];
+    if (it.fe >= 1 || !audio.duration || scrubbing) return;
+    var stop = it.fe * audio.duration + TAIL, left = stop - audio.currentTime;
+    if (left <= 0) nextItem();
+    else audio.volume = left < FADE ? Math.max(0, left / FADE) : 1;
+  }
+  function nextItem() {
+    if (current.i < current.queue.length - 1) { current.i++; loadItem(); start(); return; }
+    audio.pause();
+    audio.volume = 1;
+    current.done = true;                                    // play again starts the reading over
+    sync();
+  }
+  function toggleQueue(key, spec) {
+    if (queuePlaying(key)) audio.pause();
+    else { openQueue(key, spec); start(); }
+  }
+
   function start() {
+    if (isQueue() && current.done) { current.done = false; current.i = 0; loadItem(); }
     audio.playbackRate = saved.rate;
     var p = audio.play();
     if (p && p.catch) p.catch(function () { sync(); });
@@ -244,7 +330,7 @@
   });
 
   window.DBPodcast = {
-    ready: ready, episode: episode, listenItem: listenItem, play: play, toggle: toggle, close: close,
+    ready: ready, episode: episode, listenItem: listenItem, play: play, toggle: toggle, close: close, toggleQueue: toggleQueue,
     refresh: refreshRows, fmtLen: fmtLen, dayName: dayName, data: function () { return data; }
   };
 })();

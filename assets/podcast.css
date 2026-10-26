@@ -73,3 +73,9 @@ html.pod-docked body { padding-bottom: 10rem; }
   .pd-icon { min-width: 32px; padding: 0 4px; }
 }
 @media print { .pod-dock { display: none; } }
+
+/* Listen to a reading: a small play button after each reading's heading on Today (assets/reader.js) */
+.chapter-head .ba-btn { width: 24px; height: 24px; margin-left: 0.45em; vertical-align: 0.18em; border-width: 1.5px; }
+.chapter-head .ba-btn svg { width: 11px; height: 11px; }
+.chapter-head .ba-btn.is-open { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+@media (max-width: 700px) { .chapter-head .ba-btn { width: 22px; height: 22px; vertical-align: 0.12em; } }
