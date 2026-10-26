@@ -82,10 +82,7 @@
       meta = left > 30 ? fmtLen(left) + ' left' : fmtLen(ep.d);
       name = '<a href="' + base + 'listen.html" class="pod-show">' + SOURCES.moms + '</a>';
     } else {
-      var n = {};
-      daySpecs[date].items.forEach(function (it) { n[it.n] = 1; });
-      var count = Object.keys(n).length;
-      meta = count + ' reading' + (count === 1 ? '' : 's');
+      meta = bsbMeta(date);
       name = '<span class="pod-show">' + SOURCES.bsb + '</span>';
     }
     var pick = ep && daySpecs[date] ? '<span class="pod-src" title="Choose what to listen to">' + ICON_DOWN +
@@ -100,6 +97,19 @@
       '<span class="pod-meta">' + (meta ? '<span class="pod-len">' + meta + '</span><span class="pod-sep" aria-hidden="true">·</span>' : '') +
       name + pick + '</span></li>';
   }
+  // "4 readings", or where you stopped: "Apostles · 6 min left"
+  function bsbMeta(date) {
+    var spec = daySpecs[date], n = {};
+    if (!spec) return '';
+    var was = saved.pos['q:day:' + date], it = was && spec.items[was.i];
+    if (it) {
+      var left = was.L && was.T != null ? fmtLen(was.L - was.T) + ' left' : 'Resume';
+      return String(it.title || '').split(' · ')[0] + ' · ' + left;
+    }
+    spec.items.forEach(function (x) { n[x.n] = 1; });
+    var count = Object.keys(n).length;
+    return count + ' reading' + (count === 1 ? '' : 's');
+  }
   function rowName(date, src) {
     return src === 'bsb' ? 'the day’s readings, read by Bob Souer' : 'the Daily Bread for Busy Moms podcast for ' + dayName(date);
   }
@@ -107,6 +117,8 @@
   function refreshRows() {
     document.querySelectorAll('[data-pod]').forEach(function (el) {
       var date = el.getAttribute('data-pod'), on = rowPlaying(date), src = sourceFor(date);
+      var len = el.querySelector('.pod-len');
+      if (len && src === 'bsb') len.textContent = bsbMeta(date);
       el.classList.toggle('is-playing', on);
       el.classList.toggle('is-open', rowOpen(date));
       el.querySelectorAll('.pod-btn').forEach(function (b) {
@@ -237,11 +249,15 @@
     paintSeek();
   }
   function remember(now) {
-    if (!current || isQueue() || !audio.currentTime) return;
+    if (!current || !audio.currentTime) return;
     var t = Date.now();
     if (!now && t - lastSave < 5000) return;
     lastSave = t;
-    saved.pos[current.ep.u] = Math.floor(audio.currentTime);
+    if (isQueue()) {                                          // Bible readings: which file, where in it, and where in the whole
+      if (current.done || current.pending != null) return;
+      saved.pos['q:' + current.key] = { i: current.i, t: Math.floor(audio.currentTime),
+        T: timed() ? Math.floor(nowAll()) : null, L: current.total ? Math.round(current.total) : null };
+    } else saved.pos[current.ep.u] = Math.floor(audio.currentTime);
     var keys = Object.keys(saved.pos);                      // keep the list short
     if (keys.length > 40) delete saved.pos[keys[0]];
     save();
@@ -418,6 +434,8 @@
       remember(true);
       current = { key: key, queue: spec.items.map(function (it) { return Object.assign({}, it); }), i: 0, title: spec.title,
         done: false, pending: null, total: 0 };
+      var was = saved.pos['q:' + key];                        // pick up where you stopped
+      if (was && was.i < current.queue.length && current.queue[was.i].u) { current.i = was.i; current.pending = was.t || null; }
       audio.removeAttribute('src');
       loadItem();
       drawMarks();
@@ -453,6 +471,7 @@
     audio.pause();
     audio.volume = 1;
     current.done = true;                                    // play again starts the readings over
+    delete saved.pos['q:' + current.key]; save();
     sync();
   }
   function toggleQueue(key, spec) {

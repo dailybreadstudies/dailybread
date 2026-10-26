@@ -40,6 +40,9 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
   previous/next reading (⏮ once = start of this reading, twice = the one before), and a small break in the bar marks where
   each reading begins. Until the lengths are in (or if one fails) it falls back to one file at a time. On phones the
   multi-reading player has two rows (title + bar, then buttons).
+- Where you stopped is remembered per day (and per Bible chapter) in `localStorage['dbs-podcast'].pos['q:day:DATE']`
+  ({ i: file, t: seconds in it, T/L: place and length of the whole }); play resumes there, and the LISTEN row then reads
+  "Apostles · 6 min left". Listening to the end clears it.
 - Bible reader (`?r=GEN.1`): a ▶ after the chapter heading plays that chapter.
 - Audio: public-domain BSB read by Bob Souer (CC0), straight from OpenBible.com
   (`https://openbible.com/audio/souer/BSB_01_Gen_019.mp3`: book number, OpenBible code — TIT is `Tts` — 3-digit chapter).
