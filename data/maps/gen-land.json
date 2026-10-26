@@ -1,0 +1,900 @@
+{
+ "id": "gen-land",
+ "title": "Canaan in the Time of the Patriarchs",
+ "ref": "Genesis",
+ "anchor": {
+  "book": "GEN",
+  "c": 12,
+  "v": 1
+ },
+ "bookwide": true,
+ "placesName": "Genesis",
+ "siteLabel": "Site",
+ "regions": [
+  {
+   "n": "Canaan",
+   "ll": [
+    35.12,
+    32.05
+   ],
+   "r": 1,
+   "note": "The land promised to Abraham and his offspring (12:5–7; 17:8), from Sidon to Gaza and toward Sodom (10:19). In the Middle Bronze Age it was a land of walled city-states, with Egypt as the great power to the south."
+  },
+  {
+   "n": "Negev",
+   "ll": [
+    34.85,
+    30.95
+   ],
+   "r": 1,
+   "note": "The dry south, where Abraham and Isaac moved between wells and grazing (12:9; 13:1; 20:1; 24:62)."
+  },
+  {
+   "n": "Gilead",
+   "ll": [
+    35.78,
+    32.32
+   ],
+   "r": 1,
+   "note": "The wooded hills east of the Jordan: Laban caught up with Jacob here (31:21–25), and the Ishmaelite caravan came from Gilead with balm (37:25)."
+  },
+  {
+   "n": "Edom",
+   "ll": [
+    35.5,
+    30.45
+   ],
+   "r": 1,
+   "note": "Seir, the hill country south-east of the Dead Sea, where Esau settled: \"Esau (that is, Edom) settled in the hill country of Seir\" (36:8). The Horites lived there first (36:20)."
+  },
+  {
+   "n": "Moab",
+   "ll": [
+    35.78,
+    31.38
+   ],
+   "r": 2,
+   "note": "The plateau east of the Dead Sea, named for Moab, son of Lot's elder daughter (19:37)."
+  },
+  {
+   "n": "Ammon",
+   "ll": [
+    35.98,
+    31.95
+   ],
+   "r": 2,
+   "note": "The land of the Ammonites, descended from Ben-ammi, son of Lot's younger daughter (19:38)."
+  },
+  {
+   "n": "Bashan",
+   "ll": [
+    36.05,
+    32.95
+   ],
+   "r": 2,
+   "note": "The fertile plateau east of the Sea of Galilee; Ashteroth-karnaim was its city (14:5)."
+  },
+  {
+   "n": "Land of the Philistines",
+   "label": "Land of the\nPhilistines",
+   "ll": [
+    34.5,
+    31.3
+   ],
+   "r": 2,
+   "note": "The coast around Gerar where Abimelech ruled (21:32, 34; 26:1). The name is the one Israel later used for this coast."
+  },
+  {
+   "n": "Wilderness of Paran",
+   "label": "Wilderness\nof Paran",
+   "ll": [
+    34.75,
+    30.45
+   ],
+   "r": 2,
+   "note": "The desert south of Beersheba where Ishmael grew up with Hagar (21:21)."
+  },
+  {
+   "n": "Plain of the Jordan",
+   "label": "Plain of\nthe Jordan",
+   "ll": [
+    35.6,
+    31.88
+   ],
+   "r": 3,
+   "note": "The well-watered \"circle of the Jordan\" that Lot chose (13:10–12)."
+  },
+  {
+   "n": "Valley of Siddim",
+   "ll": [
+    35.48,
+    31.2
+   ],
+   "r": 3,
+   "hide": true,
+   "z": 9,
+   "note": "\"The Valley of Siddim (that is, the Salt Sea),\" full of tar pits, where the five kings fought the four (14:3, 10)."
+  },
+  {
+   "n": "Salt Sea",
+   "ll": [
+    35.49,
+    31.5
+   ],
+   "r": 2,
+   "hide": true,
+   "z": 8.5,
+   "note": "The Dead Sea (14:3), 430 m below sea level, the lowest place on earth."
+  },
+  {
+   "n": "Jordan",
+   "ll": [
+    35.56,
+    32.15
+   ],
+   "hide": true,
+   "z": 8,
+   "note": "The river of the land (13:10–11; 32:10; 50:10–11). Jacob crossed it \"with only my staff\" (32:10)."
+  },
+  {
+   "n": "Jabbok",
+   "ll": [
+    35.6,
+    32.17
+   ],
+   "hide": true,
+   "z": 9.5,
+   "note": "The river (Zarqa) where Jacob wrestled at the ford (32:22)."
+  }
+ ],
+ "links": [
+  "Shechem",
+  "Bethel",
+  "Luz",
+  "Ai",
+  "Hebron",
+  "Kiriath-arba",
+  "Mamre",
+  "Machpelah",
+  "Beersheba",
+  "Gerar",
+  "Esek",
+  "Rehoboth",
+  "Beer-lahai-roi",
+  "Kadesh",
+  "En-mishpat",
+  "Bered",
+  "Salem",
+  "Moriah",
+  "Bethlehem",
+  "Ephrath",
+  "Eder",
+  "Dothan",
+  "Timnah",
+  "Enaim",
+  "Chezib",
+  "Gaza",
+  "Sidon",
+  "Damascus",
+  "Succoth",
+  "Penuel",
+  "Peniel",
+  "Mahanaim",
+  "Mizpah",
+  "Galeed",
+  "Abel-mizraim",
+  "Atad",
+  "Sodom",
+  "Gomorrah",
+  "Zoar",
+  "Ashteroth-karnaim",
+  "Shaveh-kiriathaim",
+  "Hazazon-tamar",
+  "Bozrah",
+  "Canaan",
+  "Negev",
+  "Gilead",
+  "Edom",
+  "Seir",
+  "Mount Seir",
+  "Moab",
+  "Ammonites",
+  "Wilderness of Paran",
+  "Valley of Siddim",
+  "Salt Sea",
+  "Jordan",
+  "Jabbok"
+ ],
+ "aliases": {
+  "Luz": "Bethel",
+  "Kiriath-arba": "Hebron",
+  "En-mishpat": "Kadesh",
+  "Ephrath": "Bethlehem",
+  "Eder": "Migdal-eder",
+  "Peniel": "Penuel",
+  "Galeed": "Mizpah",
+  "Atad": "Abel-mizraim",
+  "Seir": "Edom",
+  "Mount Seir": "Edom",
+  "Ammonites": "Ammon"
+ },
+ "groupsLabel": "Places",
+ "except": {
+  "Moab": [
+   "19:37"
+  ],
+  "Seir": [
+   "36:20-21"
+  ],
+  "Edom": [
+   "25:30",
+   "36:1",
+   "36:8",
+   "36:19",
+   "36:43"
+  ],
+  "Rehoboth": [
+   "10:11",
+   "36:37"
+  ],
+  "Canaan": [
+   "9:18-27",
+   "10:6",
+   "10:15"
+  ],
+  "Sidon": [
+   "10:15"
+  ]
+ },
+ "groups": [
+  {
+   "id": "book",
+   "name": "Named in Genesis",
+   "color": "#a0443a",
+   "places": [
+    {
+     "n": "Shechem",
+     "ll": [
+      35.28194,
+      32.21361
+     ],
+     "c": 2,
+     "m": "Tell Balatah, Nablus",
+     "u": "adf74d4/shechem",
+     "note": "In the pass between Ebal and Gerizim. Abram's first altar in Canaan (12:6–7); Jacob bought land here (33:18–20); Simeon and Levi's revenge (34). Its Middle Bronze Age walls and gate still stand.",
+     "f": "12:6"
+    },
+    {
+     "n": "Bethel",
+     "ll": [
+      35.24139,
+      31.92278
+     ],
+     "c": 2,
+     "m": "Beitin",
+     "u": "a64f355/bethel-1",
+     "note": "Abram's altar \"with Bethel to the west and Ai to the east\" (12:8). Here Jacob dreamed of the ladder and renamed Luz \"Bethel\", house of God (28:19; 35:6–15).",
+     "f": "12:8"
+    },
+    {
+     "n": "Ai",
+     "ll": [
+      35.26111,
+      31.91694
+     ],
+     "c": 2,
+     "m": "et-Tell",
+     "u": "a7e13e1/ai-1",
+     "note": "East of Bethel (12:8; 13:3).",
+     "f": "12:8"
+    },
+    {
+     "n": "Hebron",
+     "ll": [
+      35.10222,
+      31.52509
+     ],
+     "c": 2,
+     "m": "Tel Rumeida",
+     "u": "a85151a/hebron",
+     "note": "Also Kiriath-arba (23:2). Abraham, Isaac and Jacob lived here, and Sarah died here. A Middle Bronze Age city wall has been excavated on the tell.",
+     "f": "13:18"
+    },
+    {
+     "n": "Mamre",
+     "ll": [
+      35.10534,
+      31.55654
+     ],
+     "c": 2,
+     "m": "Ramat el-Khalil",
+     "u": "aeb9e97/mamre",
+     "note": "\"The Oaks of Mamre at Hebron,\" where Abram settled (13:18) and received the three visitors (18:1). Herod later enclosed the traditional site.",
+     "f": "13:18"
+    },
+    {
+     "n": "Machpelah",
+     "ll": [
+      35.11076,
+      31.52467
+     ],
+     "c": 1,
+     "m": "Cave of the Patriarchs, Hebron",
+     "u": "ae00861/machpelah",
+     "note": "The cave Abraham bought from Ephron the Hittite (23), where Sarah, Abraham, Isaac, Rebekah, Leah and Jacob were buried (49:29–33; 50:13). Herod built the great enclosure that still stands over it.",
+     "f": "23:9"
+    },
+    {
+     "n": "Beersheba",
+     "ll": [
+      34.84083,
+      31.24472
+     ],
+     "c": 2,
+     "m": "Tel Beer Sheva",
+     "note": "\"Well of the oath\" or \"of seven\": Abraham's covenant with Abimelech (21:31), Isaac's well (26:33), and Jacob's last stop before Egypt (46:1). The southern limit of the land, \"from Dan to Beersheba\".",
+     "f": "21:14"
+    },
+    {
+     "n": "Gerar",
+     "ll": [
+      34.6065,
+      31.3821
+     ],
+     "c": 2,
+     "m": "Tel Haror",
+     "u": "a3f5814/gerar",
+     "note": "Where Abraham and later Isaac lived among the Philistines of Abimelech (20; 26). Tel Haror was a large fortified city in the Middle Bronze Age.",
+     "f": "10:19"
+    },
+    {
+     "n": "Esek",
+     "ll": [
+      34.6062,
+      31.4245
+     ],
+     "c": 0,
+     "m": "near Gerar",
+     "note": "\"Contention\": the first of Isaac's disputed wells (26:20).",
+     "f": "26:20"
+    },
+    {
+     "n": "Rehoboth",
+     "ll": [
+      34.56583,
+      31.03111
+     ],
+     "c": 1,
+     "m": "Ruheibeh",
+     "note": "\"Room\": Isaac's third well, not disputed. \"Now the LORD has made room for us\" (26:22).",
+     "f": "10:11"
+    },
+    {
+     "n": "Beer-lahai-roi",
+     "ll": [
+      34.33333,
+      30.6875
+     ],
+     "c": 0,
+     "m": "Ain Muweileh?",
+     "note": "\"The well of the Living One who sees me,\" where the angel found Hagar (16:13–14). Isaac later lived nearby (24:62; 25:11).",
+     "f": "16:14"
+    },
+    {
+     "n": "Kadesh",
+     "ll": [
+      34.42222,
+      30.64833
+     ],
+     "c": 2,
+     "m": "Ain el-Qudeirat",
+     "u": "ac2cef0/kadesh-barnea",
+     "note": "Kadesh, also En-mishpat (14:7): the great oasis of the south, near Beer-lahai-roi (16:14) and on the road toward Shur (20:1).",
+     "f": "14:7"
+    },
+    {
+     "n": "Bered",
+     "ll": [
+      34.652,
+      31.097
+     ],
+     "c": 0,
+     "m": "Haluza?",
+     "u": "aa3ff18/bered",
+     "note": "Beer-lahai-roi lies \"between Kadesh and Bered\" (16:14). The site is not known.",
+     "f": "16:14"
+    },
+    {
+     "n": "Salem",
+     "ll": [
+      35.2342,
+      31.7767
+     ],
+     "c": 2,
+     "m": "Jerusalem",
+     "u": "a15257a/jerusalem",
+     "note": "Melchizedek's city (14:18); Psalm 76:2 identifies Salem with Jerusalem (Zion).",
+     "f": "14:18"
+    },
+    {
+     "n": "Moriah",
+     "ll": [
+      35.2355,
+      31.7778
+     ],
+     "c": 1,
+     "m": "the Temple Mount, Jerusalem",
+     "k": "mount",
+     "note": "Abraham was sent to \"the land of Moriah\" to offer Isaac (22:2). 2 Chronicles 3:1 places Mount Moriah where Solomon built the Temple.",
+     "f": "22:2"
+    },
+    {
+     "n": "Bethlehem",
+     "ll": [
+      35.20764,
+      31.70431
+     ],
+     "c": 2,
+     "m": "Bethlehem",
+     "u": "a112427/bethlehem-1",
+     "note": "Also Ephrath. Rachel died giving birth to Benjamin \"on the way to Ephrath (that is, Bethlehem)\" (35:19; 48:7).",
+     "f": "35:16"
+    },
+    {
+     "n": "Migdal-eder",
+     "ll": [
+      35.23011,
+      31.70731
+     ],
+     "c": 0,
+     "m": "near Bethlehem?",
+     "u": "ab80fa1/eder-1",
+     "note": "\"The tower of the flock,\" where Jacob camped after Rachel's death (35:21). Micah 4:8 links it to the coming king.",
+     "f": "35:21"
+    },
+    {
+     "n": "Dothan",
+     "ll": [
+      35.23986,
+      32.41353
+     ],
+     "c": 2,
+     "m": "Tel Dotan",
+     "u": "ab635e4/dothan",
+     "note": "Where Joseph found his brothers with the flocks and was sold to the Ishmaelite caravan, on the road down to Egypt (37:17–28).",
+     "f": "37:17"
+    },
+    {
+     "n": "Adullam",
+     "ll": [
+      35.00167,
+      31.65167
+     ],
+     "c": 2,
+     "m": "Khirbet esh-Sheikh Madhkur",
+     "u": "af82614/adullam",
+     "note": "Judah stayed with Hirah the Adullamite (38:1); later David's cave refuge (1 Samuel 22:1)."
+    },
+    {
+     "n": "Timnah",
+     "ll": [
+      35.13384,
+      31.40945
+     ],
+     "c": 0,
+     "m": "in the hill country of Judah",
+     "note": "Judah went up to his sheepshearers at Timnah (38:12–13).",
+     "f": "38:12"
+    },
+    {
+     "n": "Enaim",
+     "ll": [
+      35.01237,
+      31.68768
+     ],
+     "c": 1,
+     "m": "near Adullam",
+     "note": "Where Tamar sat by the road to Timnah (38:14, 21).",
+     "f": "38:14"
+    },
+    {
+     "n": "Chezib",
+     "ll": [
+      34.95302,
+      31.64207
+     ],
+     "c": 1,
+     "m": "Achzib of Judah",
+     "note": "Where Shelah, Judah's third son, was born (38:5).",
+     "f": "38:5"
+    },
+    {
+     "n": "Gaza",
+     "ll": [
+      34.4644,
+      31.504
+     ],
+     "c": 2,
+     "m": "Tell Harube",
+     "u": "aa8edd2/gaza",
+     "note": "The south-west corner of Canaan's border (10:19).",
+     "f": "10:19"
+    },
+    {
+     "n": "Sidon",
+     "ll": [
+      35.37194,
+      33.56099
+     ],
+     "c": 2,
+     "m": "Saida, Lebanon",
+     "u": "a98e4d7/sidon",
+     "note": "Canaan's firstborn (10:15) and the northern limit of his land (10:19); Zebulun's border reaches toward it (49:13).",
+     "f": "10:15"
+    },
+    {
+     "n": "Dan",
+     "ll": [
+      35.652,
+      33.249
+     ],
+     "c": 2,
+     "m": "Tel Dan",
+     "u": "a513646/dan",
+     "note": "Abram pursued the four kings \"as far as Dan\" (14:14), the city then called Laish. Its mudbrick Middle Bronze Age gate, with its arch, still stands.",
+     "f": "14:14"
+    },
+    {
+     "n": "Damascus",
+     "ll": [
+      36.30639,
+      33.51111
+     ],
+     "c": 2,
+     "m": "Damascus",
+     "u": "a69c1d4/damascus",
+     "note": "Home of Eliezer, Abram's steward (15:2); Abram's pursuit ended past it at Hobah (14:15).",
+     "f": "14:15"
+    },
+    {
+     "n": "Succoth",
+     "ll": [
+      35.62118,
+      32.1966
+     ],
+     "c": 2,
+     "m": "Tell Deir Alla",
+     "u": "a0905b5/succoth-1",
+     "note": "\"Booths\": Jacob built shelters for his livestock here after meeting Esau (33:17).",
+     "f": "33:17"
+    },
+    {
+     "n": "Penuel",
+     "ll": [
+      35.69211,
+      32.18702
+     ],
+     "c": 2,
+     "m": "Tell edh-Dhahab esh-Sherqiyeh",
+     "u": "a8a9ff9/penuel",
+     "note": "Also Peniel, \"the face of God\", where Jacob wrestled through the night by the Jabbok and was named Israel (32:24–31).",
+     "f": "32:30"
+    },
+    {
+     "n": "Mahanaim",
+     "ll": [
+      35.68667,
+      32.18575
+     ],
+     "c": 2,
+     "m": "Tell edh-Dhahab el-Gharbi",
+     "u": "ae5bfe9/mahanaim",
+     "note": "\"Two camps\": angels of God met Jacob on his way home (32:1–2).",
+     "f": "32:2"
+    },
+    {
+     "n": "Mizpah",
+     "ll": [
+      35.77702,
+      32.11851
+     ],
+     "c": 1,
+     "m": "in Gilead",
+     "note": "The heap of witness Jacob and Laban raised, \"The LORD watch between you and me\" (31:45–49); also Galeed.",
+     "f": "31:47"
+    },
+    {
+     "n": "Abel-mizraim",
+     "ll": [
+      35.53045,
+      31.91489
+     ],
+     "c": 1,
+     "m": "near the mouth of the Jordan?",
+     "u": "a70ac98/abel-mizraim",
+     "note": "\"The mourning of Egypt,\" at the threshing floor of Atad, where Joseph and the Egyptians mourned Jacob for seven days (50:10–11).",
+     "f": "50:10"
+    },
+    {
+     "n": "Sodom",
+     "ll": [
+      35.535,
+      31.252
+     ],
+     "c": 0,
+     "m": "Bab edh-Dhra? (site disputed)",
+     "u": "a0aa664/sodom",
+     "note": "The city of the plain where Lot settled, destroyed in Genesis 19. Bab edh-Dhra by the south of the Dead Sea and Tall el-Hammam north of it are the main proposals.",
+     "f": "10:19"
+    },
+    {
+     "n": "Gomorrah",
+     "ll": [
+      35.565,
+      31.135
+     ],
+     "c": 0,
+     "m": "Numeira? (site disputed)",
+     "u": "aa572e2/gomorrah",
+     "note": "Destroyed with Sodom (19:24–28). Numeira, south of Bab edh-Dhra, is one proposal.",
+     "f": "10:19"
+    },
+    {
+     "n": "Zoar",
+     "ll": [
+      35.48766,
+      31.0369
+     ],
+     "c": 1,
+     "m": "es-Safi?",
+     "u": "aacfcda/zoar",
+     "note": "Once Bela (14:2); the small town Lot fled to (19:20–23).",
+     "f": "13:10"
+    },
+    {
+     "n": "Ashteroth-karnaim",
+     "ll": [
+      36.01583,
+      32.80417
+     ],
+     "c": 1,
+     "m": "Tell Ashtara and Sheikh Sa'd",
+     "note": "Where the four kings defeated the Rephaites (14:5).",
+     "f": "14:5"
+    },
+    {
+     "n": "Ham",
+     "ll": [
+      35.81238,
+      32.51421
+     ],
+     "c": 1,
+     "m": "Tell Ham",
+     "u": "a7a5f29/ham-1",
+     "note": "Home of the Zuzites, defeated by the four kings (14:5).",
+     "f": "5:32"
+    },
+    {
+     "n": "Shaveh-kiriathaim",
+     "ll": [
+      35.68611,
+      31.54056
+     ],
+     "c": 0,
+     "m": "near Khirbet el-Qureiyat?",
+     "note": "Where the Emites were defeated (14:5).",
+     "f": "14:5"
+    },
+    {
+     "n": "Hazazon-tamar",
+     "ll": [
+      35.39,
+      31.46
+     ],
+     "c": 1,
+     "m": "En-gedi (2 Chronicles 20:2)?",
+     "note": "Home of the Amorites defeated by the four kings (14:7).",
+     "f": "14:7"
+    },
+    {
+     "n": "Bozrah",
+     "ll": [
+      35.60392,
+      30.74584
+     ],
+     "c": 2,
+     "m": "Buseira",
+     "u": "a871210/bozrah-1",
+     "note": "A city of the early kings of Edom (36:33).",
+     "f": "36:33"
+    }
+   ],
+   "firstNamed": true
+  },
+  {
+   "id": "other",
+   "name": "Other cities of the time (Middle Bronze Age)",
+   "color": "var(--dbm-city)",
+   "places": [
+    {
+     "n": "Hazor",
+     "ll": [
+      35.5681,
+      33.0172
+     ],
+     "c": 2,
+     "m": "Tel Hazor",
+     "note": "The greatest city of Canaan in the Middle Bronze Age, about 80 hectares; it appears in the Mari letters of the 18th century BC."
+    },
+    {
+     "n": "Megiddo",
+     "ll": [
+      35.1844,
+      32.5853
+     ],
+     "c": 2,
+     "m": "Tel Megiddo",
+     "note": "The fortress guarding the pass of the Way of the Sea into the Jezreel Valley."
+    },
+    {
+     "n": "Jericho",
+     "ll": [
+      35.4436,
+      31.8711
+     ],
+     "c": 2,
+     "m": "Tell es-Sultan",
+     "note": "The oasis city by its spring; walled long before Abraham."
+    },
+    {
+     "n": "Gezer",
+     "ll": [
+      34.9206,
+      31.8592
+     ],
+     "c": 2,
+     "m": "Tel Gezer",
+     "note": "A Middle Bronze Age city with massive gates and a row of standing stones."
+    },
+    {
+     "n": "Lachish",
+     "ll": [
+      34.8486,
+      31.5647
+     ],
+     "c": 2,
+     "m": "Tel Lachish",
+     "note": "A great city of the Shephelah."
+    },
+    {
+     "n": "Ashkelon",
+     "ll": [
+      34.5506,
+      31.6644
+     ],
+     "c": 2,
+     "m": "Tel Ashkelon",
+     "note": "A port city whose Middle Bronze Age arched mudbrick gate is one of the oldest of its kind."
+    },
+    {
+     "n": "Joppa",
+     "ll": [
+      34.75304,
+      32.05448
+     ],
+     "c": 2,
+     "m": "Jaffa",
+     "note": "The port of the central coast."
+    },
+    {
+     "n": "Shiloh",
+     "ll": [
+      35.2895,
+      32.0557
+     ],
+     "c": 2,
+     "m": "Khirbet Seilun",
+     "note": "A walled site of the Middle Bronze Age, later home of the Tabernacle. (In 49:10 \"Shiloh\" is read by most as a title, not this town.)"
+    },
+    {
+     "n": "Acco",
+     "ll": [
+      35.0692,
+      32.9214
+     ],
+     "c": 2,
+     "m": "Tel Akko",
+     "note": "The northern port, with a Middle Bronze Age rampart."
+    },
+    {
+     "n": "Tyre",
+     "ll": [
+      35.19611,
+      33.27083
+     ],
+     "c": 2,
+     "m": "Sur, Lebanon",
+     "note": "The island port of the Phoenician coast."
+    },
+    {
+     "n": "Beth-shean",
+     "ll": [
+      35.5025,
+      32.5045
+     ],
+     "c": 2,
+     "m": "Tel Beth-shean",
+     "note": "Guarding the junction of the Jezreel and Jordan valleys."
+    },
+    {
+     "n": "Arad",
+     "ll": [
+      35.1267,
+      31.2803
+     ],
+     "c": 2,
+     "m": "Tel Arad",
+     "note": "A great walled town of the Early Bronze Age, already in ruins in Abraham's day."
+    },
+    {
+     "n": "Tall el-Hammam",
+     "ll": [
+      35.6733,
+      31.8403
+     ],
+     "c": 1,
+     "m": "Tall el-Hammam",
+     "note": "A large Middle Bronze Age city on the plain north-east of the Dead Sea; its excavators identify it with Sodom."
+    }
+   ]
+  }
+ ],
+ "bounds": [
+  [
+   34.0,
+   30.35
+  ],
+  [
+   36.55,
+   33.6
+  ]
+ ],
+ "groupLabelZoom": 7.2,
+ "alternates": {
+  "for": "Sodom",
+  "bounds": [
+   [
+    35.3,
+    31.0
+   ],
+   [
+    35.85,
+    31.95
+   ]
+  ],
+  "sites": [
+   {
+    "name": "Tall el-Hammam",
+    "ll": [
+     35.6733,
+     31.8403
+    ]
+   }
+  ]
+ },
+ "notes": [
+  {
+   "h": "The land in the patriarchs' day",
+   "p": [
+    "Most scholars place Abraham, Isaac and Jacob in the Middle Bronze Age (about 2000–1550 BC), though the Bible gives no outside date. Canaan was then a land of walled city-states such as Hazor, Shechem, Megiddo and Gezer, with great earth ramparts and gates, while herdsmen like the patriarchs moved between the towns, from Shechem through Bethel and Hebron to Beersheba and the Negev. Egypt was the power to the south, and in famine people went down to it for grain."
+   ]
+  },
+  {
+   "h": "How to use this map",
+   "p": [
+    "This map opens from any place in Canaan named in Genesis, in chapters that have no map of their own. The red dots are places named in Genesis; the black dots are other cities of the time, for context. Places farther away (Ur, Haran, Babel, Egypt) are on the map of the world of Genesis."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map engine: MapLibre GL."
+}

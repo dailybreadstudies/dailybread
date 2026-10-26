@@ -1,0 +1,563 @@
+{
+ "id": "gen-world",
+ "title": "The World of Genesis",
+ "ref": "Genesis",
+ "anchor": {
+  "book": "GEN",
+  "c": 1,
+  "v": 1
+ },
+ "bookwide": true,
+ "placesName": "Genesis",
+ "siteLabel": "Site",
+ "regions": [
+  {
+   "n": "Shinar",
+   "ll": [
+    45.0,
+    32.1
+   ],
+   "r": 1,
+   "note": "Babylonia, southern Mesopotamia: the plain where Babel was built (10:10; 11:2; 14:1)."
+  },
+  {
+   "n": "Assyria",
+   "ll": [
+    43.3,
+    35.9
+   ],
+   "r": 1,
+   "note": "Northern Mesopotamia on the Tigris (2:14; 10:11)."
+  },
+  {
+   "n": "Elam",
+   "ll": [
+    48.2,
+    32.7
+   ],
+   "r": 1,
+   "note": "South-west Iran, the kingdom of Chedorlaomer (14:1, 9)."
+  },
+  {
+   "n": "Paddan-aram",
+   "ll": [
+    39.6,
+    36.3
+   ],
+   "r": 1,
+   "note": "\"The field of Aram\" around Haran in upper Mesopotamia, home of Rebekah and of Laban (25:20; 28:2; 24:10)."
+  },
+  {
+   "n": "Canaan",
+   "ll": [
+    35.15,
+    31.9
+   ],
+   "r": 1,
+   "note": "The land promised to Abraham. See the map of Canaan in the time of the patriarchs."
+  },
+  {
+   "n": "Egypt",
+   "ll": [
+    31.0,
+    28.6
+   ],
+   "r": 1,
+   "z": 6,
+   "note": "Abram went down in famine (12:10); Joseph was sold there and rose to rule it (37–41); Jacob's family settled in Goshen (46–47). In the Middle Kingdom and Hyksos periods Semites from Canaan lived in the eastern Delta in large numbers."
+  },
+  {
+   "n": "Goshen",
+   "ll": [
+    31.75,
+    30.65
+   ],
+   "r": 2,
+   "z": 8,
+   "note": "The pasture land of the eastern Delta given to Jacob's family (45:10; 47:6). Excavations at Tell el-Dab'a (Avaris) found a large Canaanite population there."
+  },
+  {
+   "n": "Ararat",
+   "ll": [
+    44.3,
+    39.4
+   ],
+   "r": 1,
+   "note": "Urartu, the highlands of eastern Turkey and Armenia, where the ark came to rest \"on the mountains of Ararat\" (8:4)."
+  },
+  {
+   "n": "Aram",
+   "ll": [
+    37.4,
+    34.6
+   ],
+   "r": 2,
+   "note": "Syria, the land of the Arameans."
+  },
+  {
+   "n": "Hittites",
+   "label": "Land of Hatti",
+   "ll": [
+    34.9,
+    39.3
+   ],
+   "r": 2,
+   "note": "Central Anatolia, the kingdom of the Hittites. The \"sons of Heth\" at Hebron (23) were a smaller people of Canaan."
+  },
+  {
+   "n": "Midian",
+   "ll": [
+    35.4,
+    28.2
+   ],
+   "r": 2,
+   "note": "North-west Arabia, home of the Midianites descended from Abraham and Keturah (25:2–4), who bought Joseph (37:28, 36)."
+  },
+  {
+   "n": "Arabia",
+   "ll": [
+    41.5,
+    28.5
+   ],
+   "r": 2,
+   "note": "The great desert peninsula; Ishmael's sons lived from Havilah to Shur (25:18)."
+  },
+  {
+   "n": "Euphrates",
+   "ll": [
+    41.2,
+    34.6
+   ],
+   "hide": true,
+   "z": 6,
+   "note": "The great river, the eastern limit of the land promised to Abraham (15:18); one of the four rivers of Eden (2:14)."
+  },
+  {
+   "n": "Tigris",
+   "ll": [
+    44.4,
+    34.2
+   ],
+   "hide": true,
+   "z": 6,
+   "note": "The second great river of Mesopotamia, \"the Tigris, which runs east of Assyria\" (2:14)."
+  }
+ ],
+ "links": [
+  "Ur",
+  "Haran",
+  "Babel",
+  "Babylon",
+  "Erech",
+  "Accad",
+  "Nineveh",
+  "Calah",
+  "Hobah",
+  "Rameses",
+  "Shur",
+  "Shinar",
+  "Assyria",
+  "Elam",
+  "Paddan-aram",
+  "Aram-naharaim",
+  "Egypt",
+  "Goshen",
+  "mountains of Ararat",
+  "Euphrates"
+ ],
+ "aliases": {
+  "Babylon": "Babel",
+  "Aram-naharaim": "Paddan-aram",
+  "mountains of Ararat": "Ararat"
+ },
+ "groupsLabel": "Places",
+ "except": {
+  "Haran": [
+   "11:26-31"
+  ],
+  "Elam": [
+   "10:22"
+  ]
+ },
+ "groups": [
+  {
+   "id": "book",
+   "name": "Named in Genesis",
+   "color": "#a0443a",
+   "places": [
+    {
+     "n": "Ur",
+     "ll": [
+      46.10444,
+      30.96222
+     ],
+     "c": 2,
+     "m": "Tell el-Muqayyar, southern Iraq",
+     "note": "Ur of the Chaldeans, Abram's home (11:28–31): a great Sumerian city of the moon-god Nanna, with its ziggurat and royal tombs (excavated by Leonard Woolley, 1922–34).",
+     "f": "11:28"
+    },
+    {
+     "n": "Haran",
+     "ll": [
+      39.03278,
+      36.86444
+     ],
+     "c": 2,
+     "m": "Harran, south-east Turkey",
+     "u": "a6d9af3/haran",
+     "note": "Where Terah settled and died (11:31–32), and the home of Rebekah's family and of Laban (24; 29–31). A city of the moon-god Sin on the road from Mesopotamia to Syria.",
+     "f": "11:26"
+    },
+    {
+     "n": "Babel",
+     "ll": [
+      44.42222,
+      32.54333
+     ],
+     "c": 2,
+     "m": "Babylon, Iraq",
+     "note": "Nimrod's first city (10:10) and the tower of Genesis 11. Babylon rose under Hammurabi in the 18th century BC.",
+     "f": "10:10"
+    },
+    {
+     "n": "Erech",
+     "ll": [
+      45.63611,
+      31.32222
+     ],
+     "c": 2,
+     "m": "Uruk (Warka), Iraq",
+     "u": "a5db1a6/erech",
+     "note": "One of the world's first true cities, home of the Gilgamesh legend (10:10).",
+     "f": "10:10"
+    },
+    {
+     "n": "Accad",
+     "ll": [
+      44.39194,
+      33.02556
+     ],
+     "c": 0,
+     "m": "unknown, near Babylon?",
+     "u": "a8b7a6b/accad",
+     "note": "Akkad, capital of Sargon's empire about 2300 BC; its site has not been found (10:10).",
+     "f": "10:10"
+    },
+    {
+     "n": "Nineveh",
+     "ll": [
+      43.1528,
+      36.3594
+     ],
+     "c": 2,
+     "m": "Mosul, Iraq",
+     "u": "a70fd5d/nineveh",
+     "note": "Built by Nimrod (10:11); later the capital of Assyria.",
+     "f": "10:11"
+    },
+    {
+     "n": "Calah",
+     "ll": [
+      43.32889,
+      36.09806
+     ],
+     "c": 2,
+     "m": "Nimrud, Iraq",
+     "u": "ae1f807/calah",
+     "note": "Another of Nimrod's Assyrian cities (10:11–12).",
+     "f": "10:11"
+    },
+    {
+     "n": "Hobah",
+     "ll": [
+      37.06667,
+      34.25
+     ],
+     "c": 0,
+     "m": "north of Damascus",
+     "u": "a6779cd/hobah",
+     "note": "Where Abram's pursuit of the four kings ended (14:15).",
+     "f": "14:15"
+    },
+    {
+     "n": "On",
+     "ll": [
+      31.3075,
+      30.12944
+     ],
+     "c": 2,
+     "m": "Heliopolis (Ain Shams), Cairo",
+     "u": "acd9137/heliopolis",
+     "note": "Joseph married Asenath, daughter of Potiphera, priest of On (41:45, 50; 46:20): the city of the sun-god Ra.",
+     "f": "3:14"
+    },
+    {
+     "n": "Rameses",
+     "ll": [
+      31.83422,
+      30.79937
+     ],
+     "c": 2,
+     "m": "Qantir, the eastern Delta",
+     "u": "a079b21/rameses",
+     "note": "\"The land of Rameses,\" the best of Egypt, given to Jacob's family (47:11). The name is the one the region bore later; under the Hyksos the city here was Avaris.",
+     "f": "47:11"
+    },
+    {
+     "n": "Shur",
+     "ll": [
+      32.95667,
+      30.49333
+     ],
+     "c": 1,
+     "m": "the desert east of Egypt",
+     "u": "acdbce0/shur",
+     "note": "The \"wilderness of Shur\", on the way to Egypt (16:7; 20:1; 25:18).",
+     "f": "16:7"
+    }
+   ],
+   "firstNamed": true
+  },
+  {
+   "id": "other",
+   "name": "Other cities of the age",
+   "color": "var(--dbm-city)",
+   "places": [
+    {
+     "n": "Mari",
+     "ll": [
+      40.8886,
+      34.5497
+     ],
+     "c": 2,
+     "m": "Tell Hariri, Syria",
+     "note": "A great Euphrates city whose archive of 20,000 tablets (18th century BC) mentions Hazor, Laish and names like those of the patriarchs."
+    },
+    {
+     "n": "Ebla",
+     "ll": [
+      36.798,
+      35.798
+     ],
+     "c": 2,
+     "m": "Tell Mardikh, Syria",
+     "note": "A Syrian kingdom of the third millennium BC with a royal archive of some 17,000 tablets."
+    },
+    {
+     "n": "Ugarit",
+     "ll": [
+      35.7856,
+      35.6019
+     ],
+     "c": 2,
+     "m": "Ras Shamra, Syria",
+     "note": "A port whose later tablets (14th–13th centuries BC) are the main source for Canaanite religion and language."
+    },
+    {
+     "n": "Byblos",
+     "ll": [
+      35.6481,
+      34.1208
+     ],
+     "c": 2,
+     "m": "Jbeil, Lebanon",
+     "note": "The old port of the cedar trade with Egypt."
+    },
+    {
+     "n": "Carchemish",
+     "ll": [
+      38.0153,
+      36.8297
+     ],
+     "c": 2,
+     "m": "Karkamış, on the Euphrates",
+     "note": "The great crossing of the Euphrates on the road from Mesopotamia to Syria."
+    },
+    {
+     "n": "Aleppo",
+     "ll": [
+      37.1625,
+      36.1997
+     ],
+     "c": 2,
+     "m": "Aleppo, Syria",
+     "note": "Capital of the kingdom of Yamhad in the 18th century BC."
+    },
+    {
+     "n": "Ashur",
+     "ll": [
+      43.2625,
+      35.4567
+     ],
+     "c": 2,
+     "m": "Qal'at Sherqat, Iraq",
+     "note": "The old capital of Assyria, whose merchants traded tin and cloth as far as Anatolia in the patriarchs' age."
+    },
+    {
+     "n": "Susa",
+     "ll": [
+      48.2575,
+      32.1894
+     ],
+     "c": 2,
+     "m": "Shush, Iran",
+     "note": "Capital of Elam, the land of Chedorlaomer (14:1)."
+    },
+    {
+     "n": "Nippur",
+     "ll": [
+      45.2308,
+      32.1261
+     ],
+     "c": 2,
+     "m": "Nippur, Iraq",
+     "note": "The religious centre of Sumer. Some identify it with Calneh (10:10)."
+    },
+    {
+     "n": "Hattusa",
+     "ll": [
+      34.615,
+      40.0197
+     ],
+     "c": 2,
+     "m": "Boğazkale, Turkey",
+     "note": "Capital of the Hittite kingdom from the 17th century BC."
+    },
+    {
+     "n": "Kanesh",
+     "ll": [
+      35.6339,
+      38.8506
+     ],
+     "c": 2,
+     "m": "Kültepe, Turkey",
+     "note": "An Assyrian trading colony whose 23,000 letters (20th–18th centuries BC) show caravans like those of Genesis."
+    },
+    {
+     "n": "Memphis",
+     "ll": [
+      31.2547,
+      29.8447
+     ],
+     "c": 2,
+     "m": "Mit Rahina, Egypt",
+     "note": "The old capital of Egypt at the head of the Delta."
+    },
+    {
+     "n": "Giza",
+     "ll": [
+      31.1342,
+      29.9792
+     ],
+     "c": 2,
+     "m": "the pyramids of Giza",
+     "k": "mount",
+     "note": "The great pyramids were already some 500 years old in Abraham's day."
+    },
+    {
+     "n": "Beni Hasan",
+     "ll": [
+      30.8833,
+      27.9333
+     ],
+     "c": 2,
+     "m": "Beni Hasan, Egypt",
+     "note": "The tomb of Khnumhotep II (about 1890 BC) shows a party of 37 \"Asiatics\" with donkeys and coloured cloaks arriving in Egypt."
+    }
+   ]
+  }
+ ],
+ "world": true,
+ "bounds": [
+  [
+   25.5,
+   24.5
+  ],
+  [
+   50.5,
+   41.0
+  ]
+ ],
+ "regionZoom": 4.6,
+ "waterNames": [
+  {
+   "n": "The Great Sea",
+   "s": "(Mediterranean)",
+   "ll": [
+    28.5,
+    34.0
+   ]
+  },
+  {
+   "n": "Red Sea",
+   "s": "",
+   "ll": [
+    35.6,
+    26.0
+   ]
+  },
+  {
+   "n": "Persian Gulf",
+   "s": "",
+   "ll": [
+    50.2,
+    27.8
+   ]
+  },
+  {
+   "n": "Euphrates",
+   "s": "",
+   "ll": [
+    40.6,
+    35.0
+   ]
+  },
+  {
+   "n": "Tigris",
+   "s": "",
+   "ll": [
+    43.9,
+    34.6
+   ]
+  },
+  {
+   "n": "Nile",
+   "s": "",
+   "ll": [
+    31.3,
+    27.6
+   ]
+  },
+  {
+   "n": "Black Sea",
+   "s": "",
+   "ll": [
+    35.0,
+    42.6
+   ]
+  },
+  {
+   "n": "Caspian Sea",
+   "s": "",
+   "ll": [
+    50.5,
+    41.0
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "The world of Genesis",
+   "p": [
+    "Genesis moves across the whole Fertile Crescent: from Ur and Babel in Mesopotamia, up the Euphrates to Haran, down into Canaan, and on to Egypt. In the patriarchs' age these were linked by trade routes, caravans and letters; Mari, Ebla and Kanesh have left tens of thousands of tablets from these centuries."
+   ]
+  },
+  {
+   "h": "How to use this map",
+   "p": [
+    "This map opens from places outside Canaan named in Genesis. Red dots are places named in Genesis; black dots are other great cities of the age. The land of Canaan itself is on its own map, Canaan in the time of the patriarchs."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications. Seas, lakes and rivers: Natural Earth (public domain). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Map engine: MapLibre GL."
+}

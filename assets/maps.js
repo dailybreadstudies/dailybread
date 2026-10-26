@@ -153,8 +153,9 @@
           else marks.push([c, parseInt(e.getAttribute('data-v'), 10), e]);
         });
         here.forEach(function (m) {
-          if (m.bookwide && m.links && m.links.length && !sec.hasAttribute('data-dbm-book')) {
-            sec.setAttribute('data-dbm-book', m.id);
+          var done = (sec.getAttribute('data-dbm-book') || '').split(' ');    // a book can have more than one general map
+          if (m.bookwide && m.links && m.links.length && done.indexOf(m.id) < 0) {
+            sec.setAttribute('data-dbm-book', done.concat(m.id).join(' ').trim());
             bookLinks.push(m);
           }
           var hit = marks.filter(function (x) { return x[0] === m.c && x[1] === m.v; })[0];
@@ -202,20 +203,29 @@
     var texts = [], node;
     // chapter changes are marked by .chapter-num spans; track them while walking
     var all = document.createTreeWalker(scr, NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT);
-    var inCh = new Set(), v = 0;
+    var inCh = new Map(), v = 0;
     var lo = m.range ? m.range[0] : 0, hi = m.range ? m.range[1] : 999;
     while ((node = all.nextNode())) {
       if (node.nodeType === 1 && node.classList.contains('chapter-num')) { c = parseInt(node.textContent, 10) || c; v = 1; }
       else if (node.nodeType === 1 && node.classList.contains('verse-num')) v = parseInt(node.getAttribute('data-v'), 10) || v;
-      else if (node.nodeType === 3 && (m.bookwide || (c === m.c && v >= lo && v <= hi))) inCh.add(node);
+      else if (node.nodeType === 3 && (m.bookwide || (c === m.c && v >= lo && v <= hi))) inCh.set(node, [c, v]);
     }
     while ((node = walker.nextNode())) if (inCh.has(node)) texts.push(node);
+    // verses where a name means something else ("except": {"Haran": ["11:26-31"]}: there Haran is Abram's brother)
+    var ex = m.except || {};
+    function skip(name, cv) {
+      return (ex[name] || []).some(function (r) {
+        var x = /^(\d+):(\d+)(?:-(\d+))?$/.exec(r);
+        return x && +x[1] === cv[0] && cv[1] >= +x[2] && cv[1] <= +(x[3] || x[2]);
+      });
+    }
     texts.forEach(function (t) {
       re.lastIndex = 0;
       if (!re.test(t.nodeValue)) return;
       re.lastIndex = 0;
-      var frag = document.createDocumentFragment(), last = 0, mt, s = t.nodeValue;
+      var frag = document.createDocumentFragment(), last = 0, mt, s = t.nodeValue, cv = inCh.get(t);
       while ((mt = re.exec(s))) {
+        if (cv && skip(forms[mt[1]], cv)) continue;
         frag.appendChild(document.createTextNode(s.slice(last, mt.index)));
         var span = el('span', 'dbm-place', esc(mt[1]));
         span.setAttribute('data-dbm-place', forms[mt[1]]);
@@ -661,7 +671,8 @@
         layout: { 'text-field': ['get', 'label'], 'text-font': ['literal', ['Noto Sans Italic']], 'symbol-placement': 'line', 'text-size': 11, 'text-offset': [0, -0.8] },
         paint: { 'text-color': css('--dbm-water-line'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.4 } });
     });
-    map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: 5.5, maxzoom: 11,
+    var rz = spec.regionZoom || 7.4;           // from this zoom the second-rank regions fade in (wide maps set their own)
+    map.addLayer({ id: 'region-label', type: 'symbol', source: 'regions', minzoom: spec.world ? 2 : 5.5, maxzoom: 11,
       layout: { 'text-field': ['get', 'n'], 'text-transform': 'uppercase',
         // the main regions (rank 1: Judea, Samaria, Galilee…) in bold and a little larger; lesser ones stay light
         'text-font': ['case', ['<=', ['get', 'r'], 1], ['literal', ['Noto Sans Bold']], ['literal', ['Noto Sans Regular']]],
@@ -671,9 +682,9 @@
       // zoomed out, only the main (bold) regions show; the lesser ones fade in as you zoom in (rank 2 from 7.4, rank 3 from 8)
       paint: { 'text-color': css('--dbm-region'), 'text-halo-color': css('--dbm-paper'), 'text-halo-width': 1.2,
         'text-opacity': ['interpolate', ['linear'], ['zoom'],
-          7.4, ['case', ['<=', ['get', 'r'], 1], 0.85, 0],
-          8, ['case', ['<=', ['get', 'r'], 2], 0.85, 0],
-          8.6, 0.85] } });
+          rz, ['case', ['<=', ['get', 'r'], 1], 0.85, 0],
+          rz + 0.6, ['case', ['<=', ['get', 'r'], 2], 0.85, 0],
+          rz + 1.2, 0.85] } });
     map.addLayer({ id: 'stream-label', type: 'symbol', source: 'streamnames', minzoom: 7.5,
       layout: { 'text-field': ['get', 'n'], 'text-font': ['literal', ['Noto Sans Italic']], 'text-size': ['interpolate', ['linear'], ['zoom'], 8, 10, 12, 12],
         'text-letter-spacing': 0.04, 'text-optional': true },

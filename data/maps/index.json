@@ -1,6 +1,50 @@
 {
  "maps": [
   {
+   "id": "gen-world",
+   "title": "The World of Genesis",
+   "ref": "Genesis",
+   "book": "GEN",
+   "c": 1,
+   "v": 1,
+   "bookwide": true,
+   "links": [
+    "Ur",
+    "Haran",
+    "Babel",
+    "Babylon",
+    "Erech",
+    "Accad",
+    "Nineveh",
+    "Calah",
+    "Hobah",
+    "Rameses",
+    "Shur",
+    "Shinar",
+    "Assyria",
+    "Elam",
+    "Paddan-aram",
+    "Aram-naharaim",
+    "Egypt",
+    "Goshen",
+    "mountains of Ararat",
+    "Euphrates"
+   ],
+   "aliases": {
+    "Babylon": "Babel",
+    "Aram-naharaim": "Paddan-aram",
+    "mountains of Ararat": "Ararat"
+   },
+   "except": {
+    "Haran": [
+     "11:26-31"
+    ],
+    "Elam": [
+     "10:22"
+    ]
+   }
+  },
+  {
    "id": "gen-10-nations",
    "title": "The Table of Nations",
    "ref": "Genesis 10",
@@ -46,6 +90,113 @@
      ]
     }
    ]
+  },
+  {
+   "id": "gen-land",
+   "title": "Canaan in the Time of the Patriarchs",
+   "ref": "Genesis",
+   "book": "GEN",
+   "c": 12,
+   "v": 1,
+   "bookwide": true,
+   "links": [
+    "Shechem",
+    "Bethel",
+    "Luz",
+    "Ai",
+    "Hebron",
+    "Kiriath-arba",
+    "Mamre",
+    "Machpelah",
+    "Beersheba",
+    "Gerar",
+    "Esek",
+    "Rehoboth",
+    "Beer-lahai-roi",
+    "Kadesh",
+    "En-mishpat",
+    "Bered",
+    "Salem",
+    "Moriah",
+    "Bethlehem",
+    "Ephrath",
+    "Eder",
+    "Dothan",
+    "Timnah",
+    "Enaim",
+    "Chezib",
+    "Gaza",
+    "Sidon",
+    "Damascus",
+    "Succoth",
+    "Penuel",
+    "Peniel",
+    "Mahanaim",
+    "Mizpah",
+    "Galeed",
+    "Abel-mizraim",
+    "Atad",
+    "Sodom",
+    "Gomorrah",
+    "Zoar",
+    "Ashteroth-karnaim",
+    "Shaveh-kiriathaim",
+    "Hazazon-tamar",
+    "Bozrah",
+    "Canaan",
+    "Negev",
+    "Gilead",
+    "Edom",
+    "Seir",
+    "Mount Seir",
+    "Moab",
+    "Ammonites",
+    "Wilderness of Paran",
+    "Valley of Siddim",
+    "Salt Sea",
+    "Jordan",
+    "Jabbok"
+   ],
+   "aliases": {
+    "Luz": "Bethel",
+    "Kiriath-arba": "Hebron",
+    "En-mishpat": "Kadesh",
+    "Ephrath": "Bethlehem",
+    "Eder": "Migdal-eder",
+    "Peniel": "Penuel",
+    "Galeed": "Mizpah",
+    "Atad": "Abel-mizraim",
+    "Seir": "Edom",
+    "Mount Seir": "Edom",
+    "Ammonites": "Ammon"
+   },
+   "except": {
+    "Moab": [
+     "19:37"
+    ],
+    "Seir": [
+     "36:20-21"
+    ],
+    "Edom": [
+     "25:30",
+     "36:1",
+     "36:8",
+     "36:19",
+     "36:43"
+    ],
+    "Rehoboth": [
+     "10:11",
+     "36:37"
+    ],
+    "Canaan": [
+     "9:18-27",
+     "10:6",
+     "10:15"
+    ],
+    "Sidon": [
+     "10:15"
+    ]
+   }
   },
   {
    "id": "gen-13-lot",
