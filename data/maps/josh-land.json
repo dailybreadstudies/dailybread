@@ -1,0 +1,4424 @@
+{
+ "id": "josh-land",
+ "title": "The Land in the Days of Joshua",
+ "ref": "Joshua",
+ "anchor": {
+  "book": "JOS",
+  "c": 1,
+  "v": 1
+ },
+ "bookwide": true,
+ "placesName": "Joshua",
+ "siteLabel": "Site",
+ "groupsLabel": "Places",
+ "bounds": [
+  [
+   34.25,
+   30.5
+  ],
+  [
+   36.6,
+   33.7
+  ]
+ ],
+ "groupLabelZoom": 8.2,
+ "waterNames": [
+  {
+   "n": "The Great Sea",
+   "s": "(Mediterranean)",
+   "ll": [
+    34.25,
+    32.45
+   ]
+  },
+  {
+   "n": "Sea of Chinnereth",
+   "s": "(Galilee)",
+   "ll": [
+    35.59,
+    32.83
+   ]
+  },
+  {
+   "n": "Salt Sea",
+   "s": "(Dead Sea)",
+   "ll": [
+    35.49,
+    31.5
+   ]
+  },
+  {
+   "n": "Jordan",
+   "s": "",
+   "ll": [
+    35.555,
+    32.2
+   ]
+  }
+ ],
+ "regions": [
+  {
+   "n": "Asher",
+   "ll": [
+    35.2,
+    32.98
+   ],
+   "r": 1,
+   "note": "The coast and hills from Carmel north toward Sidon (19:24–31)."
+  },
+  {
+   "n": "Naphtali",
+   "ll": [
+    35.5,
+    33.17
+   ],
+   "r": 1,
+   "note": "Upper Galilee, west of the Sea of Chinnereth and the upper Jordan (19:32–39)."
+  },
+  {
+   "n": "Zebulun",
+   "ll": [
+    35.27,
+    32.78
+   ],
+   "r": 1,
+   "note": "Lower Galilee, north of the Jezreel Valley (19:10–16)."
+  },
+  {
+   "n": "Issachar",
+   "ll": [
+    35.45,
+    32.6
+   ],
+   "r": 1,
+   "note": "The eastern Jezreel Valley and the hills toward the Jordan (19:17–23)."
+  },
+  {
+   "n": "Manasseh",
+   "ll": [
+    35.15,
+    32.4
+   ],
+   "r": 1,
+   "note": "The half-tribe west of the Jordan: the hill country around Shechem north to the Jezreel Valley (17:7–11)."
+  },
+  {
+   "n": "Ephraim",
+   "ll": [
+    35.2,
+    32.1
+   ],
+   "r": 1,
+   "note": "The central hill country from Bethel to Shechem, with Shiloh and Timnath-serah (16:5–10)."
+  },
+  {
+   "n": "Benjamin",
+   "ll": [
+    35.31,
+    31.84
+   ],
+   "r": 1,
+   "note": "The small territory between Judah and Ephraim, from Jericho to Jerusalem, with Gibeon, Ramah and Bethel (18:11–28)."
+  },
+  {
+   "n": "Tribe of Dan",
+   "label": "Dan",
+   "ll": [
+    34.85,
+    31.93
+   ],
+   "r": 1,
+   "note": "First allotted the Shephelah and coast west of Benjamin, with Zorah, Eshtaol and Aijalon (19:40–46); later the tribe moved north to Leshem (19:47)."
+  },
+  {
+   "n": "Judah",
+   "ll": [
+    35.13,
+    31.42
+   ],
+   "r": 1,
+   "note": "The largest tribe: the hill country around Hebron, the Shephelah, the Negev and the wilderness by the Salt Sea (15)."
+  },
+  {
+   "n": "Simeon",
+   "ll": [
+    34.78,
+    31.17
+   ],
+   "r": 1,
+   "note": "Towns within Judah's inheritance in the Negev, around Beersheba (19:1–9)."
+  },
+  {
+   "n": "Reuben",
+   "ll": [
+    35.8,
+    31.62
+   ],
+   "r": 1,
+   "note": "The plateau east of the Salt Sea, from the Arnon north to Heshbon (13:15–23)."
+  },
+  {
+   "n": "Gad",
+   "ll": [
+    35.7,
+    32.0
+   ],
+   "r": 1,
+   "note": "Gilead east of the Jordan, from Heshbon north toward the Sea of Chinnereth (13:24–28)."
+  },
+  {
+   "n": "East Manasseh",
+   "label": "Manasseh",
+   "ll": [
+    35.95,
+    32.62
+   ],
+   "r": 1,
+   "note": "The half-tribe east of the Jordan: Bashan and half of Gilead, given by Moses (13:29–31)."
+  },
+  {
+   "n": "Negev",
+   "ll": [
+    34.95,
+    30.85
+   ],
+   "r": 2,
+   "note": "The dry south, from Beersheba toward Kadesh-barnea (10:40; 15:21)."
+  },
+  {
+   "n": "Lebanon",
+   "ll": [
+    35.65,
+    33.6
+   ],
+   "r": 2,
+   "note": "The mountains and land north of Israel, part of the land promised (1:4; 13:5–6) but not taken."
+  },
+  {
+   "n": "Bashan",
+   "ll": [
+    36.25,
+    32.95
+   ],
+   "r": 2,
+   "note": "The fertile plateau of Og, east of the Sea of Chinnereth, given to the half-tribe of Manasseh (12:4–5; 13:30)."
+  },
+  {
+   "n": "Gilead",
+   "ll": [
+    35.85,
+    32.3
+   ],
+   "r": 2,
+   "note": "The wooded hill country east of the Jordan, divided between Gad and the half-tribe of Manasseh (13:25, 31)."
+  },
+  {
+   "n": "Edom",
+   "ll": [
+    35.55,
+    30.55
+   ],
+   "r": 2,
+   "note": "Seir, the hill country south-east of the Salt Sea given to Esau (24:4). Judah's southern border ran along Edom (15:1, 21)."
+  },
+  {
+   "n": "Moab",
+   "ll": [
+    35.85,
+    31.25
+   ],
+   "r": 2,
+   "note": "The plateau east of the Salt Sea, south of the Arnon. Balak king of Moab hired Balaam (24:9)."
+  },
+  {
+   "n": "Ammon",
+   "ll": [
+    36.12,
+    31.95
+   ],
+   "r": 2,
+   "note": "The land of the Ammonites, beyond Gad's eastern border (13:10, 25)."
+  },
+  {
+   "n": "Land of the Philistines",
+   "label": "Land of the\nPhilistines",
+   "ll": [
+    34.48,
+    31.45
+   ],
+   "r": 2,
+   "note": "The coast of the five Philistine cities, Gaza, Ashdod, Ashkelon, Gath and Ekron, one of the lands \"still to be possessed\" (13:2–3)."
+  },
+  {
+   "n": "Arabah",
+   "ll": [
+    35.38,
+    30.85
+   ],
+   "r": 3,
+   "note": "The rift valley of the Jordan and the Salt Sea and south toward the Red Sea (11:2, 16; 12:1–3)."
+  },
+  {
+   "n": "Shephelah",
+   "label": "Shephelah",
+   "ll": [
+    34.86,
+    31.68
+   ],
+   "r": 3,
+   "note": "The \"foothills\" (lowland) between the hill country of Judah and the coast (10:40; 15:33)."
+  },
+  {
+   "n": "Geshur",
+   "ll": [
+    35.72,
+    32.9
+   ],
+   "r": 3,
+   "note": "A small Aramean kingdom east of the Sea of Chinnereth that Israel did not drive out (13:13)."
+  },
+  {
+   "n": "Maacah",
+   "ll": [
+    35.7,
+    33.2
+   ],
+   "r": 3,
+   "note": "A small Aramean kingdom below Mount Hermon, not driven out (13:13)."
+  },
+  {
+   "n": "Galilee",
+   "ll": [
+    35.38,
+    33.0
+   ],
+   "r": 3,
+   "hide": true,
+   "z": 8.5,
+   "note": "The hill country of Naphtali, where Kedesh was set apart as a city of refuge (20:7)."
+  },
+  {
+   "n": "Valley of Jezreel",
+   "ll": [
+    35.3,
+    32.6
+   ],
+   "r": 3,
+   "hide": true,
+   "z": 9,
+   "note": "The broad valley between Galilee and the hill country of Manasseh, where the Canaanites had iron chariots (17:16)."
+  },
+  {
+   "n": "Valley of Aijalon",
+   "ll": [
+    34.96,
+    31.87
+   ],
+   "r": 3,
+   "hide": true,
+   "z": 9.5,
+   "note": "\"O moon, over the Valley of Aijalon\" (10:12)."
+  },
+  {
+   "n": "Jordan",
+   "ll": [
+    35.56,
+    32.15
+   ],
+   "hide": true,
+   "z": 8,
+   "note": "Israel crossed it on dry ground opposite Jericho while it overflowed its banks at harvest (3–4). It was the eastern border of the land west of the river."
+  },
+  {
+   "n": "Salt Sea",
+   "ll": [
+    35.49,
+    31.5
+   ],
+   "hide": true,
+   "z": 8.5,
+   "note": "The Dead Sea, also \"the Sea of the Arabah\" (3:16), 430 m below sea level."
+  },
+  {
+   "n": "Sea of Chinnereth",
+   "ll": [
+    35.59,
+    32.82
+   ],
+   "hide": true,
+   "z": 9.5,
+   "note": "The Sea of Galilee (12:3; 13:27)."
+  },
+  {
+   "n": "Arnon",
+   "ll": [
+    35.65,
+    31.46
+   ],
+   "hide": true,
+   "z": 9,
+   "note": "The deep gorge into the Salt Sea, the southern border of the land east of the Jordan (12:1–2; 13:9)."
+  },
+  {
+   "n": "Jabbok",
+   "ll": [
+    35.65,
+    32.17
+   ],
+   "hide": true,
+   "z": 9.5,
+   "note": "The river (Zarqa) bounding Sihon's kingdom (12:2)."
+  }
+ ],
+ "links": [
+  "Abdon",
+  "Achshaph",
+  "Achzib",
+  "Adadah",
+  "Adam",
+  "Adamah",
+  "Adami-nekeb",
+  "Adithaim",
+  "Adullam",
+  "Adummim",
+  "Ai",
+  "Aijalon",
+  "Akrabbim",
+  "Allammelech",
+  "Amad",
+  "Amam",
+  "Anab",
+  "Anaharath",
+  "Anathoth",
+  "Anim",
+  "Aphek",
+  "Aphekah",
+  "Arab",
+  "Arad",
+  "Aroer",
+  "Ashan",
+  "Ashdod",
+  "Ashkelon",
+  "Ashnah",
+  "Ashtaroth",
+  "Ataroth",
+  "Ataroth-addar",
+  "Azekah",
+  "Azmon",
+  "Aznoth-tabor",
+  "Baal-gad",
+  "Baalath",
+  "Beeroth",
+  "Beersheba",
+  "Bene-berak",
+  "Beten",
+  "Beth-anath",
+  "Beth-anoth",
+  "Beth-arabah",
+  "Beth-aven",
+  "Beth-baal-meon",
+  "Beth-dagon",
+  "Beth-emek",
+  "Beth-haram",
+  "Beth-hoglah",
+  "Beth-jeshimoth",
+  "Beth-nimrah",
+  "Beth-pazzez",
+  "Beth-pelet",
+  "Beth-peor",
+  "Beth-shean",
+  "Beth-shemesh",
+  "Beth-tappuah",
+  "Beth-zur",
+  "Bethel",
+  "Luz",
+  "Bethlehem",
+  "Betonim",
+  "Bezer",
+  "Bozkath",
+  "Cabul",
+  "Carmel",
+  "Chephar-ammoni",
+  "Chephirah",
+  "Chesalon",
+  "Chesulloth",
+  "Chinnereth",
+  "Chitlish",
+  "City of Salt",
+  "Dabbesheth",
+  "Daberath",
+  "Dan",
+  "Dannah",
+  "Debir",
+  "Kiriath-sepher",
+  "Dibon",
+  "Dilan",
+  "Dor",
+  "Naphoth-dor",
+  "Dumah",
+  "Ebez",
+  "Edrei",
+  "Eglon",
+  "Ekron",
+  "Eltekeh",
+  "Eltekon",
+  "Eltolad",
+  "Emek-keziz",
+  "En-gannim",
+  "En-gedi",
+  "En-haddah",
+  "En-hazor",
+  "En-rogel",
+  "En-shemesh",
+  "Endor",
+  "Eshan",
+  "Eshtaol",
+  "Eshtemoa",
+  "Eth-kazin",
+  "Ether",
+  "Ezem",
+  "Gaash",
+  "Gath",
+  "Gath-hepher",
+  "Gath-rimmon",
+  "Gaza",
+  "Geba",
+  "Gebalites",
+  "Geder",
+  "Gederah",
+  "Gedor",
+  "Geliloth",
+  "Gezer",
+  "Gibbethon",
+  "Gibeah",
+  "Gibeath-haaraloth",
+  "Gibeon",
+  "Gilgal",
+  "Giloh",
+  "Golan",
+  "Goshen",
+  "Hadashah",
+  "Halhul",
+  "Hali",
+  "Hammath",
+  "Hammon",
+  "Hannathon",
+  "Hapharaim",
+  "Hazar-gaddah",
+  "Hazar-shual",
+  "Hazor",
+  "Hazor-hadattah",
+  "Hebron",
+  "Kiriath-arba",
+  "Heleph",
+  "Helkath",
+  "Hepher",
+  "Heshbon",
+  "Heshmon",
+  "Hezron",
+  "Holon",
+  "Horem",
+  "Hormah",
+  "Hosah",
+  "Hukkok",
+  "Humtah",
+  "Ibleam",
+  "Idalah",
+  "Iim",
+  "Iphtah",
+  "Iron",
+  "Irpeel",
+  "Ithlah",
+  "Ithnan",
+  "Jabneel",
+  "Jagur",
+  "Jahaz",
+  "Janim",
+  "Janoah",
+  "Japhia",
+  "Jarmuth",
+  "Jattir",
+  "Jazer",
+  "Jehud",
+  "Jericho",
+  "Jerusalem",
+  "Jebus",
+  "Jezreel",
+  "Jokdeam",
+  "Jokneam",
+  "Joktheel",
+  "Joppa",
+  "Juttah",
+  "Kabzeel",
+  "Kadesh-barnea",
+  "Kain",
+  "Kanah",
+  "Karka",
+  "Kartan",
+  "Kedemoth",
+  "Kedesh",
+  "Keilah",
+  "Kerioth-hezron",
+  "Kinah",
+  "Kiriath-jearim",
+  "Kiriath-baal",
+  "Baalah",
+  "Kiriathaim",
+  "Kishion",
+  "Lachish",
+  "Lahmas",
+  "Lakkum",
+  "Lebo-hamath",
+  "Libnah",
+  "Lower Beth-horon",
+  "Beth-horon",
+  "Maarath",
+  "Madmannah",
+  "Beth-marcaboth",
+  "Madon",
+  "Mahanaim",
+  "Makkedah",
+  "Maon",
+  "Maralah",
+  "Mareshah",
+  "Me-jarkon",
+  "Mearah",
+  "Medeba",
+  "Megiddo",
+  "Mephaath",
+  "Merom",
+  "Michmethath",
+  "Middin",
+  "Migdal-el",
+  "Migdal-gad",
+  "Mishal",
+  "Misrephoth-maim",
+  "Mizpah",
+  "Mizpeh",
+  "Moladah",
+  "Mount Baalah",
+  "Mount Ebal",
+  "Mount Ephron",
+  "Mount Gerizim",
+  "Mount Halak",
+  "Mount Hermon",
+  "Hermon",
+  "Mount Jearim",
+  "Mount Seir",
+  "Tabor",
+  "Mozah",
+  "Naamah",
+  "Nahalal",
+  "Neah",
+  "Neiel",
+  "Nephtoah",
+  "Nezib",
+  "Nibshan",
+  "Ophni",
+  "Ophrah",
+  "Parah",
+  "Peor",
+  "Pisgah",
+  "Rabbah",
+  "Rakkath",
+  "Rakkon",
+  "Ramah",
+  "Ramath-mizpeh",
+  "Ramoth",
+  "Rehob",
+  "Rekem",
+  "Rimmon",
+  "Salecah",
+  "Sansannah",
+  "Sarid",
+  "Secacah",
+  "Shaalabbin",
+  "Shaaraim",
+  "Shahazumah",
+  "Shamir",
+  "Sharuhen",
+  "Shechem",
+  "Shihor-libnath",
+  "Shikkeron",
+  "Shiloh",
+  "Shimron",
+  "Shion",
+  "Shittim",
+  "Shunem",
+  "Sibmah",
+  "Sidon",
+  "Socoh",
+  "Succoth",
+  "Taanach",
+  "Taanath-shiloh",
+  "Tappuah",
+  "Taralah",
+  "Telem",
+  "Timnah",
+  "Timnath-serah",
+  "Tirzah",
+  "Tyre",
+  "Upper Beth-horon",
+  "Valley of Achor",
+  "Zaanannim",
+  "Zanoah",
+  "Zaphon",
+  "Zarethan",
+  "Zelah",
+  "Zemaraim",
+  "Zenan",
+  "Zereth-shahar",
+  "Ziddim",
+  "Ziklag",
+  "Zior",
+  "Ziph",
+  "Zorah",
+  "Negev",
+  "Lebanon",
+  "Bashan",
+  "Gilead",
+  "Edom",
+  "Seir",
+  "Moab",
+  "Ammonites",
+  "Philistines",
+  "Arabah",
+  "Geshur",
+  "Geshurites",
+  "Maacathites",
+  "Galilee",
+  "Valley of Jezreel",
+  "Valley of Aijalon",
+  "Jordan",
+  "Salt Sea",
+  "Sea of Chinnereth",
+  "Arnon",
+  "Jabbok"
+ ],
+ "aliases": {
+  "Luz": "Bethel",
+  "Kiriath-sepher": "Debir",
+  "Naphoth-dor": "Dor",
+  "Gebalites": "Gebal",
+  "Kiriath-arba": "Hebron",
+  "Jebus": "Jerusalem",
+  "Kiriath-baal": "Kiriath-jearim",
+  "Baalah": "Kiriath-jearim",
+  "Beth-horon": "Lower Beth-horon",
+  "Beth-marcaboth": "Madmannah",
+  "Hermon": "Mount Hermon",
+  "Tabor": "Mount Tabor",
+  "Seir": "Edom",
+  "Ammonites": "Ammon",
+  "Philistines": "Land of the Philistines",
+  "Geshurites": "Geshur",
+  "Maacathites": "Maacah"
+ },
+ "except": {
+  "Shechem": [
+   "17:2"
+  ],
+  "Gilead": [
+   "17:3"
+  ],
+  "Hepher": [
+   "17:2-3"
+  ],
+  "Tirzah": [
+   "17:3"
+  ],
+  "Japhia": [
+   "10:3"
+  ],
+  "Debir": [
+   "10:3"
+  ],
+  "Rekem": [
+   "13:21"
+  ],
+  "Dan": [
+   "19:40",
+   "19:48",
+   "21:5",
+   "21:23"
+  ],
+  "Carmel": [
+   "12:22",
+   "19:26"
+  ],
+  "Gilgal": [
+   "12:23"
+  ],
+  "Baalah": [
+   "15:29"
+  ],
+  "Mount Seir": [
+   "24:4"
+  ],
+  "Rimmon": [
+   "15:32"
+  ],
+  "Jezreel": [
+   "15:56"
+  ]
+ },
+ "groups": [
+  {
+   "id": "book",
+   "name": "Named in Joshua",
+   "color": "#a0443a",
+   "places": [
+    {
+     "n": "Abdon",
+     "ll": [
+      35.16192,
+      33.04769
+     ],
+     "c": 2,
+     "m": "Tel Avdon",
+     "u": "a72a1ff/abdon",
+     "f": "21:30"
+    },
+    {
+     "n": "Achshaph",
+     "ll": [
+      35.09027,
+      32.75885
+     ],
+     "c": 1,
+     "m": "Tel Regev",
+     "u": "a8ce5c4/achshaph",
+     "f": "11:1"
+    },
+    {
+     "n": "Achzib",
+     "ll": [
+      35.10265,
+      33.04828
+     ],
+     "c": 2,
+     "m": "Tel Achziv",
+     "u": "ad0d82f/achzib-2",
+     "f": "19:29"
+    },
+    {
+     "n": "Achzib",
+     "ll": [
+      34.95302,
+      31.64207
+     ],
+     "c": 1,
+     "m": "Tel el Beida",
+     "u": "a2270e4/achzib-1",
+     "f": "15:44"
+    },
+    {
+     "n": "Adadah",
+     "ll": [
+      34.97907,
+      31.15214
+     ],
+     "c": 1,
+     "m": "Khirbet Aro’er",
+     "u": "abf4481/adadah",
+     "f": "15:22"
+    },
+    {
+     "n": "Adam",
+     "ll": [
+      35.54679,
+      32.10393
+     ],
+     "c": 2,
+     "m": "Tell ed Damiyeh",
+     "u": "adc31c7/adam",
+     "f": "3:16",
+     "note": "\"The city of Adam, near Zarethan\": the waters of the Jordan stood up in a heap here while Israel crossed opposite Jericho (3:16)."
+    },
+    {
+     "n": "Adamah",
+     "ll": [
+      35.45972,
+      32.79972
+     ],
+     "c": 0,
+     "m": "Qarn Hattin",
+     "u": "afe1143/adamah",
+     "f": "19:36"
+    },
+    {
+     "n": "Adami-nekeb",
+     "ll": [
+      35.45917,
+      32.74917
+     ],
+     "c": 1,
+     "m": "Tel Adami",
+     "u": "a2c780b/adami-nekeb",
+     "f": "19:33"
+    },
+    {
+     "n": "Adithaim",
+     "ll": [
+      34.95176,
+      31.96332
+     ],
+     "c": 0,
+     "m": "Al Haditha",
+     "u": "a845493/adithaim",
+     "f": "15:36"
+    },
+    {
+     "n": "Adullam",
+     "ll": [
+      35.00167,
+      31.65167
+     ],
+     "c": 2,
+     "m": "Khirbet esh Sheikh Madhkur",
+     "u": "af82614/adullam",
+     "f": "12:15"
+    },
+    {
+     "n": "Adummim",
+     "ll": [
+      35.36151,
+      31.8175
+     ],
+     "c": 1,
+     "m": "Ma'ale Adummim",
+     "u": "acf8790/adummim",
+     "f": "15:7",
+     "note": "The \"Ascent of Adummim,\" the red road climbing from the Jordan Valley toward Jerusalem, on Judah's border (15:7)."
+    },
+    {
+     "n": "Ai",
+     "ll": [
+      35.26111,
+      31.91694
+     ],
+     "c": 2,
+     "m": "Et Tell",
+     "u": "a7e13e1/ai-1",
+     "f": "7:2",
+     "note": "\"The ruin,\" east of Bethel. Defeated at first because of Achan's sin, then taken by ambush (7–8). Et-Tell is the usual identification; Khirbet el-Maqatir nearby is another proposal."
+    },
+    {
+     "n": "Aijalon",
+     "ll": [
+      35.02361,
+      31.84111
+     ],
+     "c": 2,
+     "m": "Yalo",
+     "u": "a1c600b/aijalon-1",
+     "f": "19:42",
+     "note": "\"O moon, over the Valley of Aijalon\" (10:12). The valley opens west of the Beth-horon pass."
+    },
+    {
+     "n": "Akrabbim",
+     "ll": [
+      35.13126,
+      30.9066
+     ],
+     "c": 1,
+     "m": "Ma'ale Akrabbim",
+     "u": "a39267b/akrabbim",
+     "f": "15:3",
+     "note": "The \"Ascent of Scorpions\" on Judah's southern border (15:3)."
+    },
+    {
+     "n": "Allammelech",
+     "ll": [
+      35.15567,
+      32.77177
+     ],
+     "c": 0,
+     "m": "Tel Alil",
+     "u": "a84cafa/allammelech",
+     "f": "19:26"
+    },
+    {
+     "n": "Amad",
+     "ll": [
+      35.02333,
+      32.6725
+     ],
+     "c": 0,
+     "m": "within 10 km of Mount Carmel",
+     "u": "a2f1fa1/amad",
+     "f": "19:26"
+    },
+    {
+     "n": "Amam",
+     "ll": [
+      34.90684,
+      31.2185
+     ],
+     "c": 0,
+     "m": "Be’er Nevatim",
+     "u": "a3e2b20/amam",
+     "f": "15:26"
+    },
+    {
+     "n": "Anab",
+     "ll": [
+      34.9549,
+      31.4121
+     ],
+     "c": 1,
+     "m": "Khirbet Anab es Seghireh",
+     "u": "a234727/anab",
+     "f": "11:21"
+    },
+    {
+     "n": "Anaharath",
+     "ll": [
+      35.46614,
+      32.65345
+     ],
+     "c": 1,
+     "m": "Tell Rekhesh",
+     "u": "ac07206/anaharath",
+     "f": "19:19"
+    },
+    {
+     "n": "Anathoth",
+     "ll": [
+      35.25758,
+      31.80752
+     ],
+     "c": 2,
+     "m": "Ras el Kharruba",
+     "u": "ab34789/anathoth",
+     "f": "21:18"
+    },
+    {
+     "n": "Anim",
+     "ll": [
+      35.06352,
+      31.3536
+     ],
+     "c": 1,
+     "m": "Horbat Anim",
+     "u": "ac22b90/anim",
+     "f": "15:50"
+    },
+    {
+     "n": "Aphek",
+     "ll": [
+      34.93042,
+      32.105
+     ],
+     "c": 2,
+     "m": "Tell Ras el Ain",
+     "u": "a7b2e63/aphek-2",
+     "f": "12:18"
+    },
+    {
+     "n": "Aphek",
+     "ll": [
+      35.1119,
+      32.8461
+     ],
+     "c": 2,
+     "m": "Tel Afek",
+     "u": "ac4f712/aphek-1",
+     "f": "19:30"
+    },
+    {
+     "n": "Aphek",
+     "ll": [
+      35.88611,
+      34.06917
+     ],
+     "c": 1,
+     "m": "Afqa",
+     "u": "a4cf129/aphek-4",
+     "f": "13:4"
+    },
+    {
+     "n": "Aphekah",
+     "ll": [
+      34.9975,
+      31.4555
+     ],
+     "c": 0,
+     "m": "Khirbet al Hadab",
+     "u": "ae46bcd/aphekah",
+     "f": "15:53"
+    },
+    {
+     "n": "Arab",
+     "ll": [
+      35.02957,
+      31.43188
+     ],
+     "c": 1,
+     "m": "Khirbet er Rabiyeh",
+     "u": "adbc03e/arab",
+     "f": "15:52"
+    },
+    {
+     "n": "Arad",
+     "ll": [
+      35.125,
+      31.28083
+     ],
+     "c": 1,
+     "m": "Tel Arad",
+     "u": "abc358b/arad-1",
+     "f": "12:14",
+     "note": "Its king is among the 31 kings defeated (12:14)."
+    },
+    {
+     "n": "Aroer",
+     "ll": [
+      35.81939,
+      31.4708
+     ],
+     "c": 2,
+     "m": "Arair",
+     "u": "ae46f2e/aroer-1",
+     "f": "12:2"
+    },
+    {
+     "n": "Aroer",
+     "ll": [
+      35.87132,
+      31.97016
+     ],
+     "c": 0,
+     "m": "Khirbet Udena",
+     "u": "af74969/aroer-2",
+     "f": "13:25"
+    },
+    {
+     "n": "Ashan",
+     "ll": [
+      34.7974,
+      31.28137
+     ],
+     "c": 1,
+     "m": "Khirbet Asan",
+     "u": "ab5175f/ashan",
+     "f": "15:42"
+    },
+    {
+     "n": "Ashdod",
+     "ll": [
+      34.6578,
+      31.7572
+     ],
+     "c": 2,
+     "m": "Tel Ashdod",
+     "u": "a30c937/ashdod",
+     "f": "11:22",
+     "note": "One of the five cities of the Philistines; some Anakim remained here, at Gaza and Gath (11:22; 13:3)."
+    },
+    {
+     "n": "Ashkelon",
+     "ll": [
+      34.54583,
+      31.66389
+     ],
+     "c": 2,
+     "m": "Tel Ashkelon",
+     "u": "ac87d4c/ashkelon",
+     "f": "13:3",
+     "note": "One of the five cities of the Philistines (13:3)."
+    },
+    {
+     "n": "Ashnah",
+     "ll": [
+      34.97611,
+      31.55861
+     ],
+     "c": 1,
+     "m": "Idhna",
+     "u": "a9a57b7/ashnah-2",
+     "f": "15:43"
+    },
+    {
+     "n": "Ashnah",
+     "ll": [
+      35.0063,
+      31.78471
+     ],
+     "c": 0,
+     "m": "Islin",
+     "u": "a1e3eff/ashnah-1",
+     "f": "15:33"
+    },
+    {
+     "n": "Ashtaroth",
+     "ll": [
+      36.01583,
+      32.80417
+     ],
+     "c": 2,
+     "m": "Tell Ashtara",
+     "u": "a6fea11/ashtaroth",
+     "f": "9:10",
+     "note": "With Edrei, a royal city of Og king of Bashan (12:4; 13:12)."
+    },
+    {
+     "n": "Ataroth",
+     "ll": [
+      35.2285,
+      31.8805
+     ],
+     "c": 0,
+     "m": "Kafr Aqab",
+     "u": "a919ab0/ataroth-2",
+     "f": "16:2"
+    },
+    {
+     "n": "Ataroth-addar",
+     "ll": [
+      35.21752,
+      31.87993
+     ],
+     "c": 0,
+     "m": "Khirbet Atara",
+     "u": "a2bf0f8/ataroth-addar",
+     "f": "16:5"
+    },
+    {
+     "n": "Azekah",
+     "ll": [
+      34.9357,
+      31.70023
+     ],
+     "c": 2,
+     "m": "Tel Azekah",
+     "u": "af2ca0c/azekah",
+     "f": "10:10",
+     "note": "On the road down from Beth-horon. The LORD threw down hailstones on the fleeing Amorites \"as far as Azekah\" (10:10–11)."
+    },
+    {
+     "n": "Azmon",
+     "ll": [
+      34.33333,
+      30.6875
+     ],
+     "c": 0,
+     "m": "Ain Muweileh",
+     "u": "a8f6a28/azmon",
+     "f": "15:4"
+    },
+    {
+     "n": "Aznoth-tabor",
+     "ll": [
+      35.38444,
+      32.72722
+     ],
+     "c": 0,
+     "m": "Tel Govel",
+     "u": "a9fd165/aznoth-tabor",
+     "f": "19:34"
+    },
+    {
+     "n": "Baal-gad",
+     "ll": [
+      35.85,
+      33.4
+     ],
+     "c": 0,
+     "m": "below Mount Hermon",
+     "u": "ae12e43/baal-gad",
+     "f": "11:17",
+     "note": "In the Valley of Lebanon below Mount Hermon: the northern limit of Joshua's conquests (11:17; 12:7)."
+    },
+    {
+     "n": "Baalath",
+     "ll": [
+      34.78225,
+      31.83851
+     ],
+     "c": 1,
+     "m": "Al Maghar",
+     "u": "abc1b7c/baalath-1",
+     "k": "mount",
+     "f": "19:44"
+    },
+    {
+     "n": "Beeroth",
+     "ll": [
+      35.1872,
+      31.82383
+     ],
+     "c": 0,
+     "m": "Khirbet el Burj",
+     "u": "a046454/beeroth",
+     "f": "9:17"
+    },
+    {
+     "n": "Beersheba",
+     "ll": [
+      34.84083,
+      31.24472
+     ],
+     "c": 2,
+     "m": "Tel Beer Sheva",
+     "u": "ad2f6c2/beersheba-1",
+     "f": "15:28",
+     "note": "The southern end of the land; one of the towns of Simeon within Judah (19:2)."
+    },
+    {
+     "n": "Bene-berak",
+     "ll": [
+      34.82767,
+      32.03668
+     ],
+     "c": 2,
+     "m": "Al Khayriyya",
+     "u": "ae83378/bene-berak",
+     "f": "19:45"
+    },
+    {
+     "n": "Beten",
+     "ll": [
+      35.10658,
+      32.76408
+     ],
+     "c": 1,
+     "m": "Khirbet Ibtin",
+     "u": "aafc721/beten",
+     "f": "19:25"
+    },
+    {
+     "n": "Beth-anath",
+     "ll": [
+      35.43306,
+      33.20028
+     ],
+     "c": 0,
+     "m": "Safad el Battikh",
+     "u": "ae6cef8/beth-anath",
+     "f": "19:38"
+    },
+    {
+     "n": "Beth-anoth",
+     "ll": [
+      35.12622,
+      31.56209
+     ],
+     "c": 1,
+     "m": "Khirbet Beit Anun",
+     "u": "aa2fea1/beth-anoth",
+     "f": "15:59"
+    },
+    {
+     "n": "Beth-arabah",
+     "ll": [
+      35.50172,
+      31.84578
+     ],
+     "c": 1,
+     "m": "Ain el Gharabeh",
+     "u": "a3f8916/beth-arabah",
+     "f": "15:6"
+    },
+    {
+     "n": "Beth-aven",
+     "ll": [
+      35.26807,
+      31.86921
+     ],
+     "c": 0,
+     "m": "Tell Maryam",
+     "u": "a03cb21/beth-aven-1",
+     "f": "7:2"
+    },
+    {
+     "n": "Beth-baal-meon",
+     "ll": [
+      35.73532,
+      31.6795
+     ],
+     "c": 2,
+     "m": "Ma‘in",
+     "u": "a76f7b7/baal-meon",
+     "f": "13:17"
+    },
+    {
+     "n": "Beth-dagon",
+     "ll": [
+      34.80862,
+      31.98358
+     ],
+     "c": 0,
+     "m": "Khirbet Dajun",
+     "u": "a561af4/beth-dagon-1",
+     "f": "15:41"
+    },
+    {
+     "n": "Beth-dagon",
+     "ll": [
+      35.09063,
+      32.72258
+     ],
+     "c": 0,
+     "m": "Khirbet Jelameh",
+     "u": "a0cc925/beth-dagon-2",
+     "f": "19:27"
+    },
+    {
+     "n": "Beth-emek",
+     "ll": [
+      35.15194,
+      32.96583
+     ],
+     "c": 1,
+     "m": "Tel Emek",
+     "u": "a587ea0/beth-emek",
+     "f": "19:27"
+    },
+    {
+     "n": "Beth-haram",
+     "ll": [
+      35.67188,
+      31.81926
+     ],
+     "c": 1,
+     "m": "Tall Iktanu",
+     "u": "a4590cd/beth-haram",
+     "f": "13:27"
+    },
+    {
+     "n": "Beth-hoglah",
+     "ll": [
+      35.50116,
+      31.82038
+     ],
+     "c": 1,
+     "m": "Deir Hajla",
+     "u": "aabd0ba/beth-hoglah",
+     "f": "15:6"
+    },
+    {
+     "n": "Beth-jeshimoth",
+     "ll": [
+      35.62125,
+      31.78255
+     ],
+     "c": 2,
+     "m": "Tell Azeimeh",
+     "u": "a30f37b/beth-jeshimoth",
+     "f": "12:3"
+    },
+    {
+     "n": "Beth-nimrah",
+     "ll": [
+      35.63872,
+      31.90911
+     ],
+     "c": 1,
+     "m": "Tall Bleibel",
+     "u": "af66b89/beth-nimrah",
+     "f": "13:27"
+    },
+    {
+     "n": "Beth-pazzez",
+     "ll": [
+      35.4863,
+      32.6804
+     ],
+     "c": 0,
+     "m": "Hadita",
+     "u": "ac814fb/beth-pazzez",
+     "f": "19:21"
+    },
+    {
+     "n": "Beth-pelet",
+     "ll": [
+      34.9078,
+      31.30992
+     ],
+     "c": 0,
+     "m": "Tell es Saqati",
+     "u": "ac4b767/beth-pelet",
+     "f": "15:27"
+    },
+    {
+     "n": "Beth-peor",
+     "ll": [
+      35.7385,
+      31.77702
+     ],
+     "c": 0,
+     "m": "Khirbet Ayun Musa",
+     "u": "af3ce34/beth-peor",
+     "f": "13:20"
+    },
+    {
+     "n": "Beth-shean",
+     "ll": [
+      35.50306,
+      32.50361
+     ],
+     "c": 2,
+     "m": "Tel Bet Shean",
+     "u": "a2a8df0/beth-shan",
+     "f": "17:11",
+     "note": "At the junction of the Jezreel and Jordan valleys. In Joshua's age an Egyptian garrison town; its Canaanites had iron chariots (17:11, 16)."
+    },
+    {
+     "n": "Beth-shemesh",
+     "ll": [
+      34.97474,
+      31.75062
+     ],
+     "c": 2,
+     "m": "Tel Bet Shemesh",
+     "u": "a3b5b53/beth-shemesh-1",
+     "f": "15:10",
+     "note": "On Judah's northern border (15:10), a Levitical city (21:16)."
+    },
+    {
+     "n": "Beth-shemesh",
+     "ll": [
+      35.33275,
+      33.04128
+     ],
+     "c": 1,
+     "m": "Tel Rosh",
+     "u": "a85cbab/beth-shemesh-3",
+     "f": "19:38"
+    },
+    {
+     "n": "Beth-shemesh",
+     "ll": [
+      35.52524,
+      32.68776
+     ],
+     "c": 0,
+     "m": "Sheikh esh Shamsawi",
+     "u": "a3bb26d/beth-shemesh-2",
+     "f": "19:22"
+    },
+    {
+     "n": "Beth-tappuah",
+     "ll": [
+      35.04622,
+      31.53856
+     ],
+     "c": 2,
+     "m": "Taffuh",
+     "u": "adac973/beth-tappuah",
+     "f": "15:53"
+    },
+    {
+     "n": "Beth-zur",
+     "ll": [
+      35.09416,
+      31.58938
+     ],
+     "c": 2,
+     "m": "Khirbet et Tubeiqa",
+     "u": "addba2a/beth-zur",
+     "f": "15:58"
+    },
+    {
+     "n": "Bethel",
+     "ll": [
+      35.24139,
+      31.92278
+     ],
+     "c": 2,
+     "m": "Beitin",
+     "u": "a64f355/bethel-1",
+     "f": "7:2",
+     "note": "Next to Ai (7:2; 8:9), formerly Luz (18:13). Its king is among the defeated (12:16); on the border of Benjamin and Ephraim."
+    },
+    {
+     "n": "Bethlehem",
+     "ll": [
+      35.18556,
+      32.73481
+     ],
+     "c": 2,
+     "m": "Beit Lahm",
+     "u": "a308715/bethlehem-2",
+     "f": "19:15"
+    },
+    {
+     "n": "Betonim",
+     "ll": [
+      35.71074,
+      32.01057
+     ],
+     "c": 2,
+     "m": "Khirbet Batneh",
+     "u": "a079478/betonim",
+     "f": "13:26"
+    },
+    {
+     "n": "Bezer",
+     "ll": [
+      35.90168,
+      31.78603
+     ],
+     "c": 1,
+     "m": "Umm el Amad",
+     "u": "a0cd098/bezer",
+     "f": "20:8",
+     "note": "In the wilderness on the plateau, the city of refuge of Reuben (20:8)."
+    },
+    {
+     "n": "Bozkath",
+     "ll": [
+      34.91318,
+      31.53687
+     ],
+     "c": 0,
+     "m": "Ed Dawaimeh",
+     "u": "a58252b/bozkath",
+     "f": "15:39"
+    },
+    {
+     "n": "Cabul",
+     "ll": [
+      35.21139,
+      32.86833
+     ],
+     "c": 2,
+     "m": "Kabul",
+     "u": "a978a24/cabul-1",
+     "f": "19:27"
+    },
+    {
+     "n": "Carmel",
+     "ll": [
+      35.13295,
+      31.42288
+     ],
+     "c": 2,
+     "m": "Khirbet el Kirmil",
+     "u": "a053f15/carmel-1",
+     "f": "15:55"
+    },
+    {
+     "n": "Chephar-ammoni",
+     "ll": [
+      35.24758,
+      31.96609
+     ],
+     "c": 0,
+     "m": "Khirbet Kafr Ana",
+     "u": "a2cb16b/chephar-ammoni",
+     "f": "18:24"
+    },
+    {
+     "n": "Chephirah",
+     "ll": [
+      35.10677,
+      31.8309
+     ],
+     "c": 2,
+     "m": "Khirbet el Kefireh",
+     "u": "a2e5054/chephirah",
+     "f": "9:17"
+    },
+    {
+     "n": "Chesalon",
+     "ll": [
+      35.05111,
+      31.78111
+     ],
+     "c": 2,
+     "m": "Kesla",
+     "u": "a42c452/chesalon",
+     "f": "15:10"
+    },
+    {
+     "n": "Chesulloth",
+     "ll": [
+      35.32419,
+      32.68337
+     ],
+     "c": 2,
+     "m": "Iksal",
+     "u": "ac3d92d/chesulloth",
+     "f": "19:18"
+    },
+    {
+     "n": "Chinnereth",
+     "ll": [
+      35.53833,
+      32.86944
+     ],
+     "c": 2,
+     "m": "Tel Kinrot",
+     "u": "a2bb265/chinnereth",
+     "f": "11:2"
+    },
+    {
+     "n": "Chitlish",
+     "ll": [
+      34.78959,
+      31.52994
+     ],
+     "c": 0,
+     "m": "Khirbet Umm al Baqar",
+     "u": "a0ff819/chitlish",
+     "f": "15:40"
+    },
+    {
+     "n": "City of Salt",
+     "ll": [
+      35.45861,
+      31.74083
+     ],
+     "c": 1,
+     "m": "Qumran",
+     "u": "acc1702/city-of-salt",
+     "f": "15:62"
+    },
+    {
+     "n": "Dabbesheth",
+     "ll": [
+      35.155,
+      32.67028
+     ],
+     "c": 1,
+     "m": "Tel Shem",
+     "u": "a411151/dabbesheth",
+     "f": "19:11"
+    },
+    {
+     "n": "Daberath",
+     "ll": [
+      35.37753,
+      32.69728
+     ],
+     "c": 2,
+     "m": "Horvat Devora",
+     "u": "a6a5e97/daberath",
+     "f": "19:12"
+    },
+    {
+     "n": "Dan",
+     "ll": [
+      35.652,
+      33.249
+     ],
+     "c": 2,
+     "m": "Tel Dan",
+     "u": "a513646/dan",
+     "f": "19:47",
+     "note": "Leshem, taken by the tribe of Dan when its land in the south proved too small, and renamed Dan (19:47)."
+    },
+    {
+     "n": "Dannah",
+     "ll": [
+      34.995,
+      31.3698
+     ],
+     "c": 0,
+     "m": "Khirbet Zanuta",
+     "u": "a65c305/dannah",
+     "f": "15:49"
+    },
+    {
+     "n": "Debir",
+     "ll": [
+      35.01485,
+      31.43209
+     ],
+     "c": 2,
+     "m": "Khirbet Rabud",
+     "u": "ad2048e/debir-1",
+     "f": "10:38",
+     "note": "Also Kiriath-sepher, \"town of the scroll.\" Othniel took it and won Caleb's daughter Achsah (15:15–17)."
+    },
+    {
+     "n": "Debir",
+     "ll": [
+      35.35943,
+      31.81639
+     ],
+     "c": 0,
+     "m": "Khan el Hatrur",
+     "u": "ad334c4/debir-2",
+     "f": "15:7"
+    },
+    {
+     "n": "Dibon",
+     "ll": [
+      35.77657,
+      31.50224
+     ],
+     "c": 2,
+     "m": "Tall Dhiban",
+     "u": "a0d784a/dibon-1",
+     "f": "13:9"
+    },
+    {
+     "n": "Dilan",
+     "ll": [
+      34.7583,
+      31.50259
+     ],
+     "c": 0,
+     "m": "Tel Nagila",
+     "u": "aecc492/dilean",
+     "f": "15:38"
+    },
+    {
+     "n": "Dor",
+     "ll": [
+      34.91636,
+      32.61743
+     ],
+     "c": 2,
+     "m": "Tel Dor",
+     "u": "a70c56b/dor",
+     "f": "12:23"
+    },
+    {
+     "n": "Dumah",
+     "ll": [
+      34.9861,
+      31.4306
+     ],
+     "c": 2,
+     "m": "Deir ed Domeh",
+     "u": "a75d2ab/dumah-1",
+     "f": "15:52"
+    },
+    {
+     "n": "Ebez",
+     "ll": [
+      35.50583,
+      32.65806
+     ],
+     "c": 0,
+     "m": "Ain el Habus",
+     "u": "acd9b19/ebez",
+     "f": "19:20"
+    },
+    {
+     "n": "Edrei",
+     "ll": [
+      36.10611,
+      32.62528
+     ],
+     "c": 2,
+     "m": "Daraa",
+     "u": "aaa6f7a/edrei-1",
+     "f": "12:4",
+     "note": "With Ashtaroth, a royal city of Og king of Bashan (12:4)."
+    },
+    {
+     "n": "Edrei",
+     "ll": [
+      35.52833,
+      33.07583
+     ],
+     "c": 0,
+     "m": "Har Zevi",
+     "u": "a85eb38/edrei-2",
+     "f": "19:37"
+    },
+    {
+     "n": "Eglon",
+     "ll": [
+      34.92806,
+      31.49181
+     ],
+     "c": 1,
+     "m": "Tell Eton",
+     "u": "a244d8f/eglon",
+     "f": "10:3",
+     "note": "Its king Debir joined the five kings against Gibeon (10:3); taken in the southern campaign (10:34–35)."
+    },
+    {
+     "n": "Ekron",
+     "ll": [
+      34.85194,
+      31.7775
+     ],
+     "c": 2,
+     "m": "Tel Miqne",
+     "u": "a3fc47a/ekron",
+     "f": "13:3",
+     "note": "One of the five cities of the Philistines (13:3), on Judah's northern border (15:11)."
+    },
+    {
+     "n": "Eltekeh",
+     "ll": [
+      34.76778,
+      31.8925
+     ],
+     "c": 1,
+     "m": "Tel Shalaf",
+     "u": "a3c4559/eltekeh",
+     "f": "19:44"
+    },
+    {
+     "n": "Eltekon",
+     "ll": [
+      35.10148,
+      31.69031
+     ],
+     "c": 0,
+     "m": "Khirbet ed Deir",
+     "u": "a26cd81/eltekon",
+     "f": "15:59"
+    },
+    {
+     "n": "Eltolad",
+     "ll": [
+      34.84083,
+      31.24472
+     ],
+     "c": 0,
+     "m": "within 10 km of Beersheba 1",
+     "u": "a5709da/eltolad",
+     "f": "15:30"
+    },
+    {
+     "n": "Emek-keziz",
+     "ll": [
+      35.44456,
+      31.87172
+     ],
+     "c": 0,
+     "m": "within 5 km of Jericho 1",
+     "u": "a774e50/emek-keziz",
+     "f": "18:21"
+    },
+    {
+     "n": "En-gannim",
+     "ll": [
+      34.96378,
+      31.74761
+     ],
+     "c": 0,
+     "m": "Khirbet Umm Jina",
+     "u": "abe5f95/en-gannim-1",
+     "f": "15:34"
+    },
+    {
+     "n": "En-gannim",
+     "ll": [
+      35.49544,
+      32.71355
+     ],
+     "c": 0,
+     "m": "Khirbet Beit Jann",
+     "u": "a8eae19/en-gannim-2",
+     "f": "19:21"
+    },
+    {
+     "n": "En-gedi",
+     "ll": [
+      35.38333,
+      31.45
+     ],
+     "c": 2,
+     "m": "Ein Gedi",
+     "u": "a51df0e/engedi",
+     "f": "15:62"
+    },
+    {
+     "n": "En-haddah",
+     "ll": [
+      35.4863,
+      32.6804
+     ],
+     "c": 1,
+     "m": "Hadita",
+     "u": "a009e7d/en-haddah",
+     "f": "19:21"
+    },
+    {
+     "n": "En-hazor",
+     "ll": [
+      35.44,
+      33.12889
+     ],
+     "c": 0,
+     "m": "Aynata",
+     "u": "a156070/en-hazor",
+     "f": "19:37"
+    },
+    {
+     "n": "En-rogel",
+     "ll": [
+      35.23599,
+      31.7672
+     ],
+     "c": 2,
+     "m": "Bir Ayyub, Jerusalem",
+     "u": "af9cfc9/en-rogel",
+     "f": "15:7"
+    },
+    {
+     "n": "En-shemesh",
+     "ll": [
+      35.27013,
+      31.77406
+     ],
+     "c": 1,
+     "m": "Ein Haud",
+     "u": "a34e870/en-shemesh",
+     "f": "15:7"
+    },
+    {
+     "n": "Endor",
+     "ll": [
+      35.39022,
+      32.64361
+     ],
+     "c": 1,
+     "m": "Khirbet es Safsafa",
+     "u": "aca444b/en-dor",
+     "f": "17:11"
+    },
+    {
+     "n": "Eshan",
+     "ll": [
+      35.03355,
+      31.55659
+     ],
+     "c": 0,
+     "m": "Khirbet et Taiyiba",
+     "u": "acd9498/eshan",
+     "f": "15:52"
+    },
+    {
+     "n": "Eshtaol",
+     "ll": [
+      34.98597,
+      31.79773
+     ],
+     "c": 0,
+     "m": "Khirbet Deir Shubeib",
+     "u": "a355b6e/eshtaol",
+     "f": "15:33"
+    },
+    {
+     "n": "Eshtemoa",
+     "ll": [
+      35.06708,
+      31.40079
+     ],
+     "c": 2,
+     "m": "As Samu",
+     "u": "ad68510/eshtemoa",
+     "f": "15:50"
+    },
+    {
+     "n": "Eth-kazin",
+     "ll": [
+      35.33921,
+      32.74647
+     ],
+     "c": 0,
+     "m": "Kefr Kenna",
+     "u": "a2ca712/eth-kazin",
+     "f": "19:13"
+    },
+    {
+     "n": "Ether",
+     "ll": [
+      34.8783,
+      31.61593
+     ],
+     "c": 2,
+     "m": "Khirbet el Ater",
+     "u": "a82f7b4/ether-1",
+     "f": "15:42"
+    },
+    {
+     "n": "Ezem",
+     "ll": [
+      34.7974,
+      31.28137
+     ],
+     "c": 0,
+     "m": "Khirbet Asan",
+     "u": "a573b95/ezem",
+     "f": "15:29"
+    },
+    {
+     "n": "Gaash",
+     "ll": [
+      35.10729,
+      32.00806
+     ],
+     "c": 1,
+     "m": "within 10 km of Timnath-heres",
+     "u": "ab05a42/gaash",
+     "k": "mount",
+     "f": "24:30"
+    },
+    {
+     "n": "Gath",
+     "ll": [
+      34.84694,
+      31.69972
+     ],
+     "c": 2,
+     "m": "Tell es Safi",
+     "u": "a18873f/gath-1",
+     "f": "11:22",
+     "note": "One of the five cities of the Philistines, where Anakim remained (11:22), later the home of Goliath."
+    },
+    {
+     "n": "Gath-hepher",
+     "ll": [
+      35.31972,
+      32.73806
+     ],
+     "c": 2,
+     "m": "Tel Gat Hefer",
+     "u": "ac51cec/gath-hepher",
+     "f": "19:13"
+    },
+    {
+     "n": "Gath-rimmon",
+     "ll": [
+      34.8075,
+      32.0917
+     ],
+     "c": 1,
+     "m": "Tel Gerisa",
+     "u": "a046c70/gath-rimmon-1",
+     "f": "19:45"
+    },
+    {
+     "n": "Gaza",
+     "ll": [
+      34.4644,
+      31.504
+     ],
+     "c": 2,
+     "m": "Tell Harube",
+     "u": "aa8edd2/gaza",
+     "f": "10:41",
+     "note": "The south-west limit of Joshua's campaign (10:41); one of the five Philistine cities left unconquered (13:3)."
+    },
+    {
+     "n": "Geba",
+     "ll": [
+      35.26111,
+      31.8575
+     ],
+     "c": 2,
+     "m": "Jaba",
+     "u": "a264254/geba-1",
+     "f": "21:17"
+    },
+    {
+     "n": "Gebal",
+     "ll": [
+      35.64583,
+      34.11917
+     ],
+     "c": 2,
+     "m": "Byblos",
+     "u": "a9a2541/gebal-1",
+     "f": "13:5"
+    },
+    {
+     "n": "Geder",
+     "ll": [
+      35.09215,
+      31.63263
+     ],
+     "c": 0,
+     "m": "Khirbet Jedur",
+     "u": "a55d681/geder",
+     "f": "12:13"
+    },
+    {
+     "n": "Gederah",
+     "ll": [
+      34.99612,
+      31.6889
+     ],
+     "c": 0,
+     "m": "Khirbet Judraya",
+     "u": "a12012d/gederah-1",
+     "f": "15:36"
+    },
+    {
+     "n": "Gedor",
+     "ll": [
+      35.09215,
+      31.63263
+     ],
+     "c": 2,
+     "m": "Khirbet Jedur",
+     "u": "af054ba/gedor-1",
+     "f": "15:58"
+    },
+    {
+     "n": "Geliloth",
+     "ll": [
+      35.32262,
+      31.79052
+     ],
+     "c": 0,
+     "m": "Araq ed Deir",
+     "u": "a0c9a06/geliloth",
+     "f": "18:17"
+    },
+    {
+     "n": "Gezer",
+     "ll": [
+      34.91917,
+      31.85917
+     ],
+     "c": 2,
+     "m": "Tel Gezer",
+     "u": "aed6538/gezer",
+     "f": "10:33",
+     "note": "Its king Horam came to help Lachish and was defeated (10:33), but the Canaanites of Gezer were not driven out (16:10)."
+    },
+    {
+     "n": "Gibbethon",
+     "ll": [
+      34.86556,
+      31.85639
+     ],
+     "c": 2,
+     "m": "Tell Melat",
+     "u": "a6f048c/gibbethon",
+     "f": "19:44"
+    },
+    {
+     "n": "Gibeah",
+     "ll": [
+      35.24395,
+      31.98545
+     ],
+     "c": 0,
+     "m": "Burj el Bardawil",
+     "u": "a3bba31/gibeah-3",
+     "f": "24:33"
+    },
+    {
+     "n": "Gibeah",
+     "ll": [
+      35.05353,
+      31.45015
+     ],
+     "c": 0,
+     "m": "in the region south of Hebron",
+     "u": "a2f0f05/gibeah-2",
+     "f": "15:57"
+    },
+    {
+     "n": "Gibeath-haaraloth",
+     "ll": [
+      35.45997,
+      31.88188
+     ],
+     "c": 1,
+     "m": "within 5 km of Gilgal 1",
+     "u": "a97126d/gibeath-haaraloth",
+     "k": "mount",
+     "f": "5:3"
+    },
+    {
+     "n": "Gibeon",
+     "ll": [
+      35.18335,
+      31.84745
+     ],
+     "c": 2,
+     "m": "El Jib",
+     "u": "aede336/gibeon",
+     "f": "9:3",
+     "note": "The great Hivite city whose people tricked Israel into a treaty (9). When five Amorite kings attacked it, Joshua marched all night from Gilgal; \"Sun, stand still over Gibeon\" (10:12)."
+    },
+    {
+     "n": "Gilgal",
+     "ll": [
+      35.45997,
+      31.88188
+     ],
+     "c": 1,
+     "m": "Khirbet el Mefjir",
+     "u": "ab94aea/gilgal-1",
+     "f": "4:19",
+     "note": "Israel's first camp west of the Jordan, where the twelve stones were set up, the men circumcised and the Passover kept (4:19–5:12). The base of the campaigns until the land was divided at Shiloh."
+    },
+    {
+     "n": "Giloh",
+     "ll": [
+      35.01485,
+      31.43209
+     ],
+     "c": 0,
+     "m": "within 6 km of Khirbet Rabud",
+     "u": "a6df20a/giloh",
+     "f": "15:51"
+    },
+    {
+     "n": "Golan",
+     "ll": [
+      35.93472,
+      32.78111
+     ],
+     "c": 2,
+     "m": "Saham al Jawlan",
+     "u": "abb5c1e/golan",
+     "f": "20:8",
+     "note": "In Bashan, the northern city of refuge east of the Jordan (20:8)."
+    },
+    {
+     "n": "Goshen",
+     "ll": [
+      34.9723,
+      31.40762
+     ],
+     "c": 0,
+     "m": "Dahriya",
+     "u": "a81a10a/goshen-3",
+     "f": "15:51"
+    },
+    {
+     "n": "Hadashah",
+     "ll": [
+      34.84573,
+      31.62689
+     ],
+     "c": 1,
+     "m": "in the region between Lachish and Gath",
+     "u": "a785680/hadashah",
+     "f": "15:37"
+    },
+    {
+     "n": "Halhul",
+     "ll": [
+      35.10725,
+      31.57741
+     ],
+     "c": 2,
+     "u": "afca9ce/halhul",
+     "f": "15:58"
+    },
+    {
+     "n": "Hali",
+     "ll": [
+      35.15567,
+      32.77177
+     ],
+     "c": 0,
+     "m": "Tel Alil",
+     "u": "a79d6a5/hali",
+     "f": "19:25"
+    },
+    {
+     "n": "Hammath",
+     "ll": [
+      35.55055,
+      32.76637
+     ],
+     "c": 1,
+     "m": "Hamat Tiberias",
+     "u": "a2d6bfc/hammath-1",
+     "f": "19:35"
+    },
+    {
+     "n": "Hammon",
+     "ll": [
+      35.15202,
+      33.12811
+     ],
+     "c": 1,
+     "m": "Umm el Awamid",
+     "u": "a9d4f8e/hammon-1",
+     "f": "19:28"
+    },
+    {
+     "n": "Hannathon",
+     "ll": [
+      35.25694,
+      32.78556
+     ],
+     "c": 2,
+     "m": "Tel Hanaton",
+     "u": "a412c43/hannathon",
+     "f": "19:14"
+    },
+    {
+     "n": "Hapharaim",
+     "ll": [
+      35.44661,
+      32.60385
+     ],
+     "c": 1,
+     "m": "Et Taiyibeh",
+     "u": "a6309c7/hapharaim",
+     "f": "19:19"
+    },
+    {
+     "n": "Hazar-gaddah",
+     "ll": [
+      34.84083,
+      31.24472
+     ],
+     "c": 0,
+     "m": "within 50 km of Beersheba 1",
+     "u": "a7672d8/hazar-gaddah",
+     "f": "15:27"
+    },
+    {
+     "n": "Hazar-shual",
+     "ll": [
+      34.84083,
+      31.24472
+     ],
+     "c": 0,
+     "m": "within 10 km of Beersheba 1",
+     "u": "a89005a/hazar-shual",
+     "f": "15:28"
+    },
+    {
+     "n": "Hazor",
+     "ll": [
+      35.56917,
+      33.01833
+     ],
+     "c": 2,
+     "m": "Tel Hazor",
+     "u": "a6f33c5/hazor-1",
+     "f": "11:1",
+     "note": "\"The head of all those kingdoms\" (11:10). Jabin of Hazor led the northern alliance; Joshua burned the city. The huge mound has a destruction layer with signs of a great fire in the Late Bronze Age."
+    },
+    {
+     "n": "Hazor",
+     "ll": [
+      34.64522,
+      30.72278
+     ],
+     "c": 0,
+     "m": "El Jebariyeh",
+     "u": "ae5657c/hazor-2",
+     "f": "15:23"
+    },
+    {
+     "n": "Hazor-hadattah",
+     "ll": [
+      35.23361,
+      31.37333
+     ],
+     "c": 0,
+     "m": "Har Hezron",
+     "u": "acce8c8/hazor-hadattah",
+     "f": "15:25"
+    },
+    {
+     "n": "Hebron",
+     "ll": [
+      35.10222,
+      31.52509
+     ],
+     "c": 2,
+     "m": "Tel Rumeida",
+     "u": "a85151a/hebron",
+     "f": "10:3",
+     "note": "Also Kiriath-arba, the city of the Anakim. Caleb asked for this hill country at 85 and took it (14:6–15; 15:13–14). A city of refuge (20:7)."
+    },
+    {
+     "n": "Heleph",
+     "ll": [
+      35.41385,
+      32.72474
+     ],
+     "c": 1,
+     "m": "Khirbet Irbadeh",
+     "u": "a8687ff/heleph",
+     "f": "19:33"
+    },
+    {
+     "n": "Helkath",
+     "ll": [
+      35.10972,
+      32.68528
+     ],
+     "c": 0,
+     "m": "Tel Qashish",
+     "u": "a1d1918/helkath",
+     "f": "19:25"
+    },
+    {
+     "n": "Hepher",
+     "ll": [
+      35.21767,
+      32.44285
+     ],
+     "c": 0,
+     "m": "Tell el Muhaffar",
+     "u": "a2ebe1c/hepher",
+     "f": "12:17"
+    },
+    {
+     "n": "Heshbon",
+     "ll": [
+      35.80906,
+      31.80081
+     ],
+     "c": 2,
+     "m": "Tell Hesban",
+     "u": "abf2fc1/heshbon",
+     "f": "9:10",
+     "note": "The capital of Sihon king of the Amorites, defeated by Moses (12:2; 13:10)."
+    },
+    {
+     "n": "Heshmon",
+     "ll": [
+      34.9078,
+      31.30992
+     ],
+     "c": 0,
+     "m": "within 30 km of Beth-pelet",
+     "u": "ad2d29f/heshmon",
+     "f": "15:27"
+    },
+    {
+     "n": "Hezron",
+     "ll": [
+      34.42222,
+      30.64833
+     ],
+     "c": 0,
+     "m": "within 10 km of Kadesh-barnea",
+     "u": "ad5c4a1/hezron",
+     "f": "15:3"
+    },
+    {
+     "n": "Holon",
+     "ll": [
+      35.0305,
+      31.66215
+     ],
+     "c": 1,
+     "m": "Khirbet Alin",
+     "u": "a8819e0/holon-1",
+     "f": "15:51"
+    },
+    {
+     "n": "Horem",
+     "ll": [
+      35.46444,
+      33.22167
+     ],
+     "c": 0,
+     "m": "within 50 km of Migdal-el",
+     "u": "a9cdd53/horem",
+     "f": "19:38"
+    },
+    {
+     "n": "Hormah",
+     "ll": [
+      34.95828,
+      31.21229
+     ],
+     "c": 1,
+     "m": "Tel Masos",
+     "u": "ada25df/hormah",
+     "f": "12:14",
+     "note": "Its king is among the 31 kings defeated (12:14); a town of Simeon (19:4)."
+    },
+    {
+     "n": "Hosah",
+     "ll": [
+      35.21519,
+      33.23674
+     ],
+     "c": 0,
+     "m": "Tell Rachidiyeh",
+     "u": "a2feddf/hosah",
+     "f": "19:29"
+    },
+    {
+     "n": "Hukkok",
+     "ll": [
+      35.26345,
+      32.86428
+     ],
+     "c": 0,
+     "m": "Khirbet el Jemeijimeh",
+     "u": "a901903/hukkok",
+     "f": "19:34"
+    },
+    {
+     "n": "Humtah",
+     "ll": [
+      35.10222,
+      31.52509
+     ],
+     "c": 1,
+     "m": "within 14 km of Hebron",
+     "u": "a5a846f/humtah",
+     "f": "15:54"
+    },
+    {
+     "n": "Ibleam",
+     "ll": [
+      35.292,
+      32.4462
+     ],
+     "c": 2,
+     "m": "Khirbet Belameh",
+     "u": "a878d66/ibleam",
+     "f": "17:11"
+    },
+    {
+     "n": "Idalah",
+     "ll": [
+      35.18343,
+      32.72579
+     ],
+     "c": 1,
+     "m": "Khirbet el Huwarah",
+     "u": "ae8fac6/idalah",
+     "f": "19:15"
+    },
+    {
+     "n": "Iim",
+     "ll": [
+      34.92061,
+      31.36475
+     ],
+     "c": 0,
+     "m": "Deir al Ghawi",
+     "u": "ad161d1/iim",
+     "f": "15:29"
+    },
+    {
+     "n": "Iphtah",
+     "ll": [
+      35.01244,
+      31.57459
+     ],
+     "c": 0,
+     "m": "Tarqumiyeh",
+     "u": "a67bd13/iphtah",
+     "f": "15:43"
+    },
+    {
+     "n": "Iron",
+     "ll": [
+      35.41667,
+      33.08333
+     ],
+     "c": 2,
+     "m": "Yarun",
+     "u": "a78b87e/yiron",
+     "f": "19:38"
+    },
+    {
+     "n": "Irpeel",
+     "ll": [
+      35.19222,
+      31.87056
+     ],
+     "c": 0,
+     "m": "Rafat",
+     "u": "a21b934/irpeel",
+     "f": "18:27"
+    },
+    {
+     "n": "Ithlah",
+     "ll": [
+      35.02361,
+      31.84111
+     ],
+     "c": 0,
+     "m": "within 10 km of Aijalon 1",
+     "u": "abf8060/ithlah",
+     "f": "19:42"
+    },
+    {
+     "n": "Ithnan",
+     "ll": [
+      34.73251,
+      30.61274
+     ],
+     "c": 0,
+     "m": "Mesudat Har Hemet",
+     "u": "ac333a2/ithnan",
+     "f": "15:23"
+    },
+    {
+     "n": "Jabneel",
+     "ll": [
+      34.7463,
+      31.866
+     ],
+     "c": 2,
+     "m": "Yibna",
+     "u": "a7adb01/jabneel-1",
+     "f": "15:11"
+    },
+    {
+     "n": "Jabneel",
+     "ll": [
+      35.5125,
+      32.71333
+     ],
+     "c": 1,
+     "m": "Tel Yin’am",
+     "u": "abff89f/jabneel-2",
+     "f": "19:33"
+    },
+    {
+     "n": "Jagur",
+     "ll": [
+      34.9867,
+      31.2328
+     ],
+     "c": 1,
+     "m": "Tel Ira",
+     "u": "a907232/jagur",
+     "f": "15:21"
+    },
+    {
+     "n": "Jahaz",
+     "ll": [
+      35.90793,
+      31.58835
+     ],
+     "c": 1,
+     "m": "Khirbet el Medeiyineh",
+     "u": "ad9b1cd/jahaz",
+     "f": "13:18"
+    },
+    {
+     "n": "Janim",
+     "ll": [
+      35.16416,
+      31.51591
+     ],
+     "c": 0,
+     "m": "Bani Nai’im",
+     "u": "a175f4b/janim",
+     "f": "15:53"
+    },
+    {
+     "n": "Janoah",
+     "ll": [
+      35.36133,
+      32.15798
+     ],
+     "c": 1,
+     "m": "Khirbet Yanun",
+     "u": "a0bcd48/janoah-1",
+     "f": "16:6"
+    },
+    {
+     "n": "Japhia",
+     "ll": [
+      35.27535,
+      32.68702
+     ],
+     "c": 2,
+     "m": "Yafa",
+     "u": "ab15bb3/japhia",
+     "f": "19:12"
+    },
+    {
+     "n": "Jarmuth",
+     "ll": [
+      34.975,
+      31.7083
+     ],
+     "c": 2,
+     "m": "Tel Yarmuth",
+     "u": "a539e01/jarmuth-1",
+     "f": "10:3",
+     "note": "Its king Piram joined the five kings against Gibeon (10:3)."
+    },
+    {
+     "n": "Jattir",
+     "ll": [
+      35.01611,
+      31.3525
+     ],
+     "c": 2,
+     "m": "Khirbet Attir",
+     "u": "ad6eb0b/jattir",
+     "f": "15:48"
+    },
+    {
+     "n": "Jazer",
+     "ll": [
+      35.83008,
+      31.94447
+     ],
+     "c": 0,
+     "m": "Khirbet Sara",
+     "u": "a095b6e/jazer",
+     "f": "13:25"
+    },
+    {
+     "n": "Jehud",
+     "ll": [
+      34.89028,
+      32.03083
+     ],
+     "c": 1,
+     "m": "Yehud",
+     "u": "aa0ef78/jehud",
+     "f": "19:45"
+    },
+    {
+     "n": "Jericho",
+     "ll": [
+      35.44456,
+      31.87172
+     ],
+     "c": 2,
+     "m": "Tell es Sultan",
+     "u": "a231f80/jericho-1",
+     "f": "2:1",
+     "note": "The oasis city by its spring, 250 m below sea level, the first city taken west of the Jordan (2; 6). Excavations at Tell es-Sultan have found a long history of walls and destruction; how they fit Joshua 6 is debated, mainly over the date of the conquest."
+    },
+    {
+     "n": "Jerusalem",
+     "ll": [
+      35.23417,
+      31.77667
+     ],
+     "c": 2,
+     "m": "Jerusalem (the City of David)",
+     "u": "a15257a/jerusalem",
+     "f": "10:1",
+     "note": "Jebus, the city of Adoni-zedek, who led the five kings against Gibeon (10:1–5). Its king was defeated, but Judah could not drive out the Jebusites (15:63)."
+    },
+    {
+     "n": "Jezreel",
+     "ll": [
+      35.32795,
+      32.55785
+     ],
+     "c": 2,
+     "m": "Tel Yizre’el",
+     "u": "ae0bf4a/jezreel-2",
+     "f": "19:18"
+    },
+    {
+     "n": "Jezreel",
+     "ll": [
+      35.09,
+      31.44778
+     ],
+     "c": 0,
+     "m": "within 7 km of Juttah",
+     "u": "ad94cc9/jezreel-1",
+     "f": "15:56"
+    },
+    {
+     "n": "Jokdeam",
+     "ll": [
+      35.11849,
+      31.46197
+     ],
+     "c": 0,
+     "m": "Khirbet er Raqqa",
+     "u": "a56cad5/jokdeam",
+     "f": "15:56"
+    },
+    {
+     "n": "Jokneam",
+     "ll": [
+      35.10827,
+      32.6641
+     ],
+     "c": 2,
+     "m": "Tel Yokneam",
+     "u": "a5c92e1/jokneam",
+     "f": "12:22"
+    },
+    {
+     "n": "Joktheel",
+     "ll": [
+      34.84917,
+      31.56528
+     ],
+     "c": 0,
+     "m": "within 25 km of Lachish",
+     "u": "a45dd20/joktheel-1",
+     "f": "15:38"
+    },
+    {
+     "n": "Joppa",
+     "ll": [
+      34.75304,
+      32.05448
+     ],
+     "c": 2,
+     "m": "Jaffa",
+     "u": "ae023a9/joppa",
+     "f": "19:46",
+     "note": "The port at the edge of Dan's territory (19:46)."
+    },
+    {
+     "n": "Juttah",
+     "ll": [
+      35.09,
+      31.44778
+     ],
+     "c": 2,
+     "m": "Yatta",
+     "u": "acc7184/juttah",
+     "f": "15:55"
+    },
+    {
+     "n": "Kabzeel",
+     "ll": [
+      34.93235,
+      31.28619
+     ],
+     "c": 0,
+     "m": "Khirbet Hora",
+     "u": "a2715db/kabzeel",
+     "f": "15:21"
+    },
+    {
+     "n": "Kadesh-barnea",
+     "ll": [
+      34.42222,
+      30.64833
+     ],
+     "c": 2,
+     "m": "Ain el Qudeirat",
+     "u": "ac2cef0/kadesh-barnea",
+     "f": "10:41",
+     "note": "The oasis from which Moses sent the twelve spies; Caleb recalls it at 85 (14:6–7). The southern limit of Joshua's campaigns (10:41)."
+    },
+    {
+     "n": "Kain",
+     "ll": [
+      35.15154,
+      31.49627
+     ],
+     "c": 1,
+     "m": "Khirbet Bani Dar",
+     "u": "a765bd8/kain",
+     "f": "15:57"
+    },
+    {
+     "n": "Kanah",
+     "ll": [
+      35.29917,
+      33.20917
+     ],
+     "c": 2,
+     "m": "Qana",
+     "u": "ac3233c/kanah-2",
+     "f": "19:28"
+    },
+    {
+     "n": "Karka",
+     "ll": [
+      34.36667,
+      30.66667
+     ],
+     "c": 0,
+     "m": "Ain Qoseimeh",
+     "u": "a438f5e/karka",
+     "f": "15:3"
+    },
+    {
+     "n": "Kartan",
+     "ll": [
+      35.4625,
+      33.11194
+     ],
+     "c": 1,
+     "m": "Khirbet el Qureiyeh",
+     "u": "a4959d5/kartan",
+     "f": "21:32"
+    },
+    {
+     "n": "Kedemoth",
+     "ll": [
+      35.88026,
+      31.53184
+     ],
+     "c": 0,
+     "m": "Aleiyan",
+     "u": "a416b43/kedemoth",
+     "f": "13:18"
+    },
+    {
+     "n": "Kedesh",
+     "ll": [
+      35.52952,
+      33.11164
+     ],
+     "c": 2,
+     "m": "Tel Kedesh",
+     "u": "a321cb8/kedesh-1",
+     "f": "12:22",
+     "note": "Kedesh in Galilee, in the hill country of Naphtali, a city of refuge (20:7)."
+    },
+    {
+     "n": "Keilah",
+     "ll": [
+      35.0036,
+      31.6137
+     ],
+     "c": 2,
+     "m": "Khirbet Qila",
+     "u": "ad9df93/keilah",
+     "f": "15:44"
+    },
+    {
+     "n": "Kerioth-hezron",
+     "ll": [
+      35.12438,
+      31.34495
+     ],
+     "c": 1,
+     "m": "Khirbet el Qaryatein",
+     "u": "af66926/kerioth-hezron",
+     "f": "15:25"
+    },
+    {
+     "n": "Kinah",
+     "ll": [
+      35.16567,
+      31.20919
+     ],
+     "c": 0,
+     "m": "Horbat Uza",
+     "u": "ae8f9cf/kinah",
+     "f": "15:22"
+    },
+    {
+     "n": "Kiriath-jearim",
+     "ll": [
+      35.10378,
+      31.80896
+     ],
+     "c": 2,
+     "m": "Deir el Azar",
+     "u": "a9bba61/kiriath-jearim",
+     "f": "9:17",
+     "note": "One of the four Gibeonite cities (9:17), on the border of Judah and Benjamin (15:9)."
+    },
+    {
+     "n": "Kiriathaim",
+     "ll": [
+      35.74386,
+      31.74913
+     ],
+     "c": 0,
+     "m": "Khirbet al Mukhayyat",
+     "u": "ad54201/kiriathaim-1",
+     "f": "13:19"
+    },
+    {
+     "n": "Kishion",
+     "ll": [
+      35.39306,
+      32.66139
+     ],
+     "c": 1,
+     "m": "Tell Qisyon",
+     "u": "a20364a/kishion",
+     "f": "19:20"
+    },
+    {
+     "n": "Lachish",
+     "ll": [
+      34.84917,
+      31.56528
+     ],
+     "c": 2,
+     "m": "Tell ed Duweir",
+     "u": "a3cc590/lachish",
+     "f": "10:3",
+     "note": "A great city of the Shephelah, taken in two days in the southern campaign (10:31–32). In the Amarna letters its king wrote to Pharaoh."
+    },
+    {
+     "n": "Lahmas",
+     "ll": [
+      34.896,
+      31.57183
+     ],
+     "c": 0,
+     "m": "Horbat Lehem",
+     "u": "a62aa3a/lahmam",
+     "f": "15:40"
+    },
+    {
+     "n": "Lakkum",
+     "ll": [
+      35.55186,
+      32.69827
+     ],
+     "c": 1,
+     "m": "Horbat Kush",
+     "u": "abe5dde/lakkum",
+     "f": "19:33"
+    },
+    {
+     "n": "Lebo-hamath",
+     "ll": [
+      36.34956,
+      34.19491
+     ],
+     "c": 2,
+     "m": "Labweh",
+     "u": "a5eb047/lebo-hamath",
+     "f": "13:5"
+    },
+    {
+     "n": "Libnah",
+     "ll": [
+      34.87347,
+      31.6299
+     ],
+     "c": 1,
+     "m": "Tell Bornat",
+     "u": "a97b595/libnah-1",
+     "f": "10:29",
+     "note": "Taken in the southern campaign (10:29–30); later a Levitical city (21:13)."
+    },
+    {
+     "n": "Lower Beth-horon",
+     "ll": [
+      35.08361,
+      31.895
+     ],
+     "c": 2,
+     "m": "Beit Ur al Tahta",
+     "u": "a094036/lower-beth-horon",
+     "f": "16:3",
+     "note": "The pass of Beth-horon, the road down from the hill country to the Valley of Aijalon, where the Amorites fled from Gibeon (10:10–11)."
+    },
+    {
+     "n": "Maarath",
+     "ll": [
+      35.11352,
+      31.62071
+     ],
+     "c": 0,
+     "m": "Khirbet Qufin",
+     "u": "ae60c0c/maarath",
+     "f": "15:59"
+    },
+    {
+     "n": "Madmannah",
+     "ll": [
+      34.92858,
+      31.35027
+     ],
+     "c": 1,
+     "m": "Khirbet Tatrit",
+     "u": "a8661e2/madmannah",
+     "f": "15:31"
+    },
+    {
+     "n": "Madon",
+     "ll": [
+      35.43235,
+      33.07678
+     ],
+     "c": 0,
+     "m": "near Meron?",
+     "u": "a6c2936/madon",
+     "f": "11:1",
+     "note": "Jobab king of Madon joined Jabin's northern alliance (11:1)."
+    },
+    {
+     "n": "Mahanaim",
+     "ll": [
+      35.68667,
+      32.18575
+     ],
+     "c": 2,
+     "m": "Tell edh Dhahab el Gharbi",
+     "u": "ae5bfe9/mahanaim",
+     "f": "13:26",
+     "note": "On the border of Gad and the half-tribe of Manasseh (13:26, 30); a Levitical city (21:38)."
+    },
+    {
+     "n": "Makkedah",
+     "ll": [
+      34.96656,
+      31.53472
+     ],
+     "c": 1,
+     "m": "Khirbet el Qom",
+     "u": "abf8e4e/makkedah",
+     "f": "10:10",
+     "note": "The five Amorite kings hid in the cave here and were brought out and killed (10:16–27)."
+    },
+    {
+     "n": "Maon",
+     "ll": [
+      35.13384,
+      31.40945
+     ],
+     "c": 2,
+     "m": "Tel Main",
+     "u": "a6845b1/maon",
+     "f": "15:55"
+    },
+    {
+     "n": "Maralah",
+     "ll": [
+      35.16869,
+      32.65426
+     ],
+     "c": 0,
+     "m": "Tell Thorah",
+     "u": "ad04336/mareal",
+     "f": "19:11"
+    },
+    {
+     "n": "Mareshah",
+     "ll": [
+      34.89824,
+      31.59296
+     ],
+     "c": 2,
+     "m": "Tel Maresha",
+     "u": "a5cda86/mareshah",
+     "f": "15:44"
+    },
+    {
+     "n": "Me-jarkon",
+     "ll": [
+      34.77583,
+      32.10389
+     ],
+     "c": 1,
+     "m": "Yarkon River",
+     "u": "a7d1972/me-jarkon",
+     "f": "19:46"
+    },
+    {
+     "n": "Mearah",
+     "ll": [
+      35.58361,
+      33.54
+     ],
+     "c": 0,
+     "m": "Jezzine",
+     "u": "a8c3105/mearah",
+     "f": "13:4"
+    },
+    {
+     "n": "Medeba",
+     "ll": [
+      35.79548,
+      31.71611
+     ],
+     "c": 2,
+     "m": "Madaba",
+     "u": "af4f21c/medeba",
+     "f": "13:9"
+    },
+    {
+     "n": "Megiddo",
+     "ll": [
+      35.18444,
+      32.58528
+     ],
+     "c": 2,
+     "m": "Tel Megiddo",
+     "u": "a8554e3/megiddo",
+     "f": "12:21",
+     "note": "Guarding the pass into the Jezreel Valley; its king was defeated (12:21), but the Canaanites stayed there (17:11–12)."
+    },
+    {
+     "n": "Mephaath",
+     "ll": [
+      35.91972,
+      31.49972
+     ],
+     "c": 1,
+     "m": "Umm ar Rasas",
+     "u": "a97cb23/mephaath",
+     "f": "13:18"
+    },
+    {
+     "n": "Merom",
+     "ll": [
+      35.43778,
+      32.97889
+     ],
+     "c": 1,
+     "m": "the waters of Merom: Ein Meron?",
+     "u": "a6ee047/waters-of-merom",
+     "f": "11:5",
+     "note": "By \"the waters of Merom\" the northern kings camped together, and there Joshua fell on them suddenly (11:5–7)."
+    },
+    {
+     "n": "Michmethath",
+     "ll": [
+      35.2672,
+      32.17719
+     ],
+     "c": 0,
+     "m": "Khirbet en Nabi",
+     "u": "a2f0a70/michmethath",
+     "k": "mount",
+     "f": "16:6"
+    },
+    {
+     "n": "Middin",
+     "ll": [
+      35.40589,
+      31.74153
+     ],
+     "c": 1,
+     "m": "Khirbet Abu Tabaq",
+     "u": "aec139c/middin",
+     "f": "15:61"
+    },
+    {
+     "n": "Migdal-el",
+     "ll": [
+      35.46444,
+      33.22167
+     ],
+     "c": 0,
+     "m": "Majdel Selem",
+     "u": "a5f0bc3/migdal-el",
+     "f": "19:38"
+    },
+    {
+     "n": "Migdal-gad",
+     "ll": [
+      34.90191,
+      31.53721
+     ],
+     "c": 1,
+     "m": "Khirbet el Mejdeleh",
+     "u": "a571ca0/migdal-gad",
+     "f": "15:37"
+    },
+    {
+     "n": "Mishal",
+     "ll": [
+      35.15133,
+      32.87276
+     ],
+     "c": 1,
+     "m": "Tell Keisan",
+     "u": "a93f8b6/mishal",
+     "f": "19:26"
+    },
+    {
+     "n": "Misrephoth-maim",
+     "ll": [
+      35.245,
+      33.3384
+     ],
+     "c": 0,
+     "m": "Litani River",
+     "u": "a5bf0bd/misrephoth-maim",
+     "k": "mount",
+     "f": "11:8"
+    },
+    {
+     "n": "Mizpah",
+     "ll": [
+      35.85,
+      33.4
+     ],
+     "c": 1,
+     "m": "within 30 km of Mount Hermon",
+     "u": "aad0fa0/mizpah-2",
+     "f": "11:3"
+    },
+    {
+     "n": "Mizpeh",
+     "ll": [
+      34.7583,
+      31.50259
+     ],
+     "c": 0,
+     "m": "Tel Nagila",
+     "u": "a67990c/mizpeh-2",
+     "f": "15:38"
+    },
+    {
+     "n": "Moladah",
+     "ll": [
+      34.92141,
+      31.2573
+     ],
+     "c": 1,
+     "m": "Khirbet el Waten",
+     "u": "a03a5d0/moladah",
+     "f": "15:26"
+    },
+    {
+     "n": "Mount Baalah",
+     "ll": [
+      34.78583,
+      31.84139
+     ],
+     "c": 0,
+     "m": "Mughar",
+     "u": "ac2b4ef/mount-baalah",
+     "k": "mount",
+     "f": "15:11"
+    },
+    {
+     "n": "Mount Carmel",
+     "ll": [
+      35.02333,
+      32.6725
+     ],
+     "c": 2,
+     "u": "a3e21c6/mount-carmel",
+     "k": "mount",
+     "f": "12:22",
+     "note": "The ridge on Asher's south-western border (19:26); \"Jokneam in Carmel\" lay at its foot (12:22). (The Carmel of 15:55 is a town in Judah.)"
+    },
+    {
+     "n": "Mount Ebal",
+     "ll": [
+      35.2733,
+      32.234
+     ],
+     "c": 2,
+     "m": "Jebel Eslamiyeh",
+     "u": "aa5cc66/mount-ebal",
+     "k": "mount",
+     "f": "8:30",
+     "note": "Joshua built an altar on Mount Ebal, wrote a copy of the Law on stones, and read the blessings and curses to all Israel (8:30–35). An early Iron Age stone structure on the mountain has been interpreted as this altar."
+    },
+    {
+     "n": "Mount Ephron",
+     "ll": [
+      35.14417,
+      31.79694
+     ],
+     "c": 0,
+     "m": "Al Qastal",
+     "u": "a75aff4/mount-ephron",
+     "k": "mount",
+     "f": "15:9"
+    },
+    {
+     "n": "Mount Gerizim",
+     "ll": [
+      35.27278,
+      32.19944
+     ],
+     "c": 2,
+     "m": "Jebel et-Tor",
+     "u": "a30e967/mount-gerizim",
+     "k": "mount",
+     "f": "8:33",
+     "note": "The mount of blessing, facing Ebal across the valley of Shechem (8:33)."
+    },
+    {
+     "n": "Mount Halak",
+     "ll": [
+      34.8287,
+      30.9144
+     ],
+     "c": 1,
+     "m": "Jebel Halaq",
+     "u": "a11fadd/mount-halak",
+     "k": "mount",
+     "f": "11:17"
+    },
+    {
+     "n": "Mount Hermon",
+     "ll": [
+      35.85,
+      33.4
+     ],
+     "c": 2,
+     "m": "Jebel esh-Sheikh",
+     "u": "a341fe8/mount-hermon",
+     "k": "mount",
+     "f": "11:3",
+     "note": "The northern limit of the conquest, \"from Baal-gad in the Valley of Lebanon below Mount Hermon\" (11:17); about 2,800 m."
+    },
+    {
+     "n": "Mount Jearim",
+     "ll": [
+      35.05111,
+      31.78111
+     ],
+     "c": 2,
+     "m": "within 1 km of Chesalon",
+     "u": "a3587ba/mount-jearim",
+     "k": "mount",
+     "f": "15:10"
+    },
+    {
+     "n": "Mount Seir",
+     "ll": [
+      35.0653,
+      31.7966
+     ],
+     "c": 1,
+     "m": "Shoresh",
+     "u": "a36c283/mount-seir-2",
+     "k": "mount",
+     "f": "15:10"
+    },
+    {
+     "n": "Mount Tabor",
+     "ll": [
+      35.39292,
+      32.68625
+     ],
+     "c": 2,
+     "m": "Jebel et Tur",
+     "u": "acd63ee/mount-tabor",
+     "k": "mount",
+     "f": "19:22"
+    },
+    {
+     "n": "Mozah",
+     "ll": [
+      35.16419,
+      31.79289
+     ],
+     "c": 1,
+     "m": "Qalunya",
+     "u": "af35635/mozah",
+     "f": "18:26"
+    },
+    {
+     "n": "Naamah",
+     "ll": [
+      34.84917,
+      31.56528
+     ],
+     "c": 0,
+     "m": "within 30 km of Lachish",
+     "u": "ae7bd8b/naamah-1",
+     "f": "15:41"
+    },
+    {
+     "n": "Nahalal",
+     "ll": [
+      35.19695,
+      32.67914
+     ],
+     "c": 0,
+     "m": "Horbat Sefan",
+     "u": "ac69561/nahalal",
+     "f": "19:15"
+    },
+    {
+     "n": "Neah",
+     "ll": [
+      35.42346,
+      32.8042
+     ],
+     "c": 0,
+     "m": "Nimrin",
+     "u": "a2a77d2/neah",
+     "f": "19:13"
+    },
+    {
+     "n": "Neiel",
+     "ll": [
+      35.2219,
+      32.8926
+     ],
+     "c": 1,
+     "m": "Khirbet Yanin",
+     "u": "ab571de/neiel",
+     "f": "19:27"
+    },
+    {
+     "n": "Nephtoah",
+     "ll": [
+      35.19661,
+      31.79439
+     ],
+     "c": 1,
+     "m": "Lifta",
+     "u": "ac1fef1/nephtoah",
+     "f": "15:9"
+    },
+    {
+     "n": "Nezib",
+     "ll": [
+      35.00979,
+      31.58586
+     ],
+     "c": 2,
+     "m": "Khirbet Beit Nesib esh Sharqiyyeh",
+     "u": "aafe3bd/nezib",
+     "f": "15:43"
+    },
+    {
+     "n": "Nibshan",
+     "ll": [
+      35.38143,
+      31.69945
+     ],
+     "c": 1,
+     "m": "Khirbet el Maqari",
+     "u": "ad96dd4/nibshan",
+     "f": "15:62"
+    },
+    {
+     "n": "Ophni",
+     "ll": [
+      35.21556,
+      31.96194
+     ],
+     "c": 1,
+     "m": "Jifna",
+     "u": "a1f2174/ophni",
+     "f": "18:24"
+    },
+    {
+     "n": "Ophrah",
+     "ll": [
+      35.30028,
+      31.95444
+     ],
+     "c": 2,
+     "m": "Taybeh",
+     "u": "a53b82d/ophrah-1",
+     "f": "18:23"
+    },
+    {
+     "n": "Parah",
+     "ll": [
+      35.31048,
+      31.8348
+     ],
+     "c": 1,
+     "m": "Khirbet Ein Fara",
+     "u": "a2ec6b7/parah",
+     "f": "18:23"
+    },
+    {
+     "n": "Peor",
+     "ll": [
+      35.7385,
+      31.77702
+     ],
+     "c": 2,
+     "m": "within 1 km of Beth-peor",
+     "u": "a9ef72b/peor",
+     "k": "mount",
+     "f": "22:17"
+    },
+    {
+     "n": "Pisgah",
+     "ll": [
+      35.72556,
+      31.76778
+     ],
+     "c": 1,
+     "m": "Rujm Siyaghah",
+     "u": "afd9259/pisgah",
+     "k": "mount",
+     "f": "12:3",
+     "note": "The slopes of Pisgah, from which Moses saw the land (12:3; 13:20; Deuteronomy 34:1)."
+    },
+    {
+     "n": "Rabbah",
+     "ll": [
+      35.9343,
+      31.9547
+     ],
+     "c": 2,
+     "m": "Amman",
+     "u": "ae067b5/rabbah-1",
+     "f": "13:25"
+    },
+    {
+     "n": "Rabbah",
+     "ll": [
+      34.98761,
+      31.82704
+     ],
+     "c": 0,
+     "m": "Khirbet Hamideh",
+     "u": "a28d652/rabbah-2",
+     "f": "15:60"
+    },
+    {
+     "n": "Rakkath",
+     "ll": [
+      35.52583,
+      32.80639
+     ],
+     "c": 1,
+     "m": "Tel Raqqat",
+     "u": "a204528/rakkath",
+     "f": "19:35"
+    },
+    {
+     "n": "Rakkon",
+     "ll": [
+      34.78726,
+      32.13083
+     ],
+     "c": 1,
+     "m": "Tell er Reqqeit",
+     "u": "aa3e5ae/rakkon",
+     "f": "19:46"
+    },
+    {
+     "n": "Ramah",
+     "ll": [
+      35.23161,
+      31.85434
+     ],
+     "c": 2,
+     "m": "Al Ram",
+     "u": "a6d57ed/ramah-1",
+     "f": "18:25"
+    },
+    {
+     "n": "Ramah",
+     "ll": [
+      35.3106,
+      33.1108
+     ],
+     "c": 0,
+     "m": "Ramyah",
+     "u": "a664d03/ramah-2",
+     "f": "19:29"
+    },
+    {
+     "n": "Ramah",
+     "ll": [
+      35.40113,
+      32.92615
+     ],
+     "c": 0,
+     "m": "Khirbet Zeitun er Rameh",
+     "u": "a010244/ramah-3",
+     "f": "19:36"
+    },
+    {
+     "n": "Ramath-mizpeh",
+     "ll": [
+      35.77702,
+      32.11851
+     ],
+     "c": 0,
+     "m": "Jel‘ad",
+     "u": "a63c954/ramath-mizpeh",
+     "f": "13:26"
+    },
+    {
+     "n": "Ramoth",
+     "ll": [
+      36.01499,
+      32.49985
+     ],
+     "c": 1,
+     "m": "Tell er-Rumeith",
+     "u": "a95147f/ramoth-3",
+     "f": "20:8",
+     "note": "Ramoth in Gilead, the city of refuge of Gad (20:8)."
+    },
+    {
+     "n": "Rehob",
+     "ll": [
+      35.16944,
+      32.90139
+     ],
+     "c": 1,
+     "m": "Tell Bir el Gharbi",
+     "u": "ab71288/rehob-3",
+     "f": "19:30"
+    },
+    {
+     "n": "Rehob",
+     "ll": [
+      35.29083,
+      33.11444
+     ],
+     "c": 0,
+     "m": "Tell el Balat",
+     "u": "aaf5fef/rehob-2",
+     "f": "19:28"
+    },
+    {
+     "n": "Rekem",
+     "ll": [
+      35.19222,
+      31.87056
+     ],
+     "c": 0,
+     "m": "within 5 km of Irpeel",
+     "u": "a1b5486/rekem",
+     "f": "18:27"
+    },
+    {
+     "n": "Rimmon",
+     "ll": [
+      35.31056,
+      32.78806
+     ],
+     "c": 2,
+     "m": "Rumana",
+     "u": "a813f22/rimmon-3",
+     "f": "19:13"
+    },
+    {
+     "n": "Rimmon",
+     "ll": [
+      34.86564,
+      31.38333
+     ],
+     "c": 0,
+     "m": "Tel Halif",
+     "u": "a8da370/rimmon-2",
+     "f": "15:32"
+    },
+    {
+     "n": "Salecah",
+     "ll": [
+      36.7105,
+      32.4939
+     ],
+     "c": 2,
+     "m": "Salkhad",
+     "u": "ac3bc41/salecah",
+     "f": "12:5"
+    },
+    {
+     "n": "Sansannah",
+     "ll": [
+      34.9014,
+      31.3445
+     ],
+     "c": 2,
+     "m": "Khirbet esh Shamsaniyat",
+     "u": "aeedde4/sansannah",
+     "f": "15:31"
+    },
+    {
+     "n": "Sarid",
+     "ll": [
+      35.2342,
+      32.66036
+     ],
+     "c": 2,
+     "m": "Tel Shadud",
+     "u": "ab5b542/sarid",
+     "f": "19:10"
+    },
+    {
+     "n": "Secacah",
+     "ll": [
+      35.39159,
+      31.71684
+     ],
+     "c": 1,
+     "m": "Khirbet es Samrah",
+     "u": "af74b9f/secacah",
+     "f": "15:61"
+    },
+    {
+     "n": "Shaalabbin",
+     "ll": [
+      34.98714,
+      31.86981
+     ],
+     "c": 2,
+     "m": "Salbit",
+     "u": "ae89331/shaalbim",
+     "f": "19:42"
+    },
+    {
+     "n": "Shaaraim",
+     "ll": [
+      35.02757,
+      31.7355
+     ],
+     "c": 0,
+     "m": "Khirbet es Sira",
+     "u": "a28da66/shaaraim-1",
+     "f": "15:36"
+    },
+    {
+     "n": "Shahazumah",
+     "ll": [
+      35.3666,
+      32.54175
+     ],
+     "c": 0,
+     "m": "El Karm",
+     "u": "a5b01f4/shahazumah",
+     "f": "19:22"
+    },
+    {
+     "n": "Shamir",
+     "ll": [
+      34.9318,
+      31.4184
+     ],
+     "c": 0,
+     "m": "Khirbet Sumara",
+     "u": "a846a2a/shamir-1",
+     "f": "15:48"
+    },
+    {
+     "n": "Sharuhen",
+     "ll": [
+      34.4041,
+      31.467
+     ],
+     "c": 1,
+     "m": "Tall al Ajjul",
+     "u": "a887d36/sharuhen",
+     "f": "19:6"
+    },
+    {
+     "n": "Shechem",
+     "ll": [
+      35.28194,
+      32.21361
+     ],
+     "c": 2,
+     "m": "Tell Balatah",
+     "u": "adf74d4/shechem",
+     "f": "17:7",
+     "note": "In the pass between Ebal and Gerizim, a city of refuge (20:7). Here Joshua gathered all the tribes to renew the covenant: \"As for me and my house, we will serve the LORD\" (24:1, 15); Joseph's bones were buried here (24:32)."
+    },
+    {
+     "n": "Shihor-libnath",
+     "ll": [
+      35.03333,
+      32.81667
+     ],
+     "c": 0,
+     "m": "mouth of the Kishon River",
+     "u": "ac6b338/shihor-libnath",
+     "f": "19:26"
+    },
+    {
+     "n": "Shikkeron",
+     "ll": [
+      34.812,
+      31.82148
+     ],
+     "c": 1,
+     "m": "Tell el Ful",
+     "u": "afd2396/shikkeron",
+     "f": "15:11"
+    },
+    {
+     "n": "Shiloh",
+     "ll": [
+      35.28954,
+      32.0557
+     ],
+     "c": 2,
+     "m": "Khirbet Seilun",
+     "u": "aa4680a/shiloh",
+     "f": "18:1",
+     "note": "The Tabernacle was set up here, and the rest of the land was divided by lot before the LORD (18:1–10). The centre of Israel's worship until the days of Eli and Samuel."
+    },
+    {
+     "n": "Shimron",
+     "ll": [
+      35.21333,
+      32.70389
+     ],
+     "c": 2,
+     "m": "Tel Shimron",
+     "u": "a072bae/shimron",
+     "f": "11:1"
+    },
+    {
+     "n": "Shion",
+     "ll": [
+      35.50694,
+      32.65417
+     ],
+     "c": 0,
+     "m": "Sirin",
+     "u": "a03f6cf/shion",
+     "f": "19:19"
+    },
+    {
+     "n": "Shittim",
+     "ll": [
+      35.67368,
+      31.84018
+     ],
+     "c": 1,
+     "m": "Tall el-Hammam?",
+     "u": "af64fb3/shittim",
+     "f": "2:1",
+     "note": "Abel-shittim, Israel's last camp east of the Jordan; from here Joshua sent the two spies to Jericho (2:1; 3:1). Often identified with Tall el-Hammam."
+    },
+    {
+     "n": "Shunem",
+     "ll": [
+      35.33431,
+      32.60563
+     ],
+     "c": 2,
+     "m": "Sulam",
+     "u": "ac86af5/shunem",
+     "f": "19:18"
+    },
+    {
+     "n": "Sibmah",
+     "ll": [
+      35.76131,
+      31.78236
+     ],
+     "c": 1,
+     "m": "Qarn al Qubish",
+     "u": "aa10f27/sibmah",
+     "f": "13:19"
+    },
+    {
+     "n": "Sidon",
+     "ll": [
+      35.37194,
+      33.56099
+     ],
+     "c": 2,
+     "m": "Saida, Lebanon",
+     "u": "a98e4d7/sidon",
+     "f": "11:8",
+     "note": "\"Greater Sidon\" was the limit of the pursuit after the battle at the waters of Merom (11:8)."
+    },
+    {
+     "n": "Socoh",
+     "ll": [
+      34.9749,
+      31.6822
+     ],
+     "c": 2,
+     "m": "Tel Socho",
+     "u": "a39a6b9/socoh-1",
+     "f": "15:35"
+    },
+    {
+     "n": "Socoh",
+     "ll": [
+      35.00614,
+      31.40087
+     ],
+     "c": 2,
+     "m": "Khirbet Shuweikah",
+     "u": "ac9c090/socoh-2",
+     "f": "15:48"
+    },
+    {
+     "n": "Succoth",
+     "ll": [
+      35.62118,
+      32.1966
+     ],
+     "c": 2,
+     "m": "Tell Deir Alla",
+     "u": "a0905b5/succoth-1",
+     "f": "13:27",
+     "note": "In the Jordan Valley, given to Gad (13:27)."
+    },
+    {
+     "n": "Taanach",
+     "ll": [
+      35.21912,
+      32.52153
+     ],
+     "c": 2,
+     "m": "Tell Ta’anakh",
+     "u": "a6f05f6/taanach",
+     "f": "12:21"
+    },
+    {
+     "n": "Taanath-shiloh",
+     "ll": [
+      35.37093,
+      32.17635
+     ],
+     "c": 1,
+     "m": "Khirbet Tana el Fauqa",
+     "u": "a5d37f9/taanath-shiloh",
+     "f": "16:6"
+    },
+    {
+     "n": "Tappuah",
+     "ll": [
+      35.23007,
+      32.10415
+     ],
+     "c": 2,
+     "m": "Tell Abu Zarad",
+     "u": "a03be2e/tappuah-1",
+     "f": "12:17"
+    },
+    {
+     "n": "Tappuah",
+     "ll": [
+      34.996,
+      31.69553
+     ],
+     "c": 0,
+     "m": "Bayt Nattif",
+     "u": "a2e9e40/tappuah-2",
+     "f": "15:34"
+    },
+    {
+     "n": "Taralah",
+     "ll": [
+      35.236,
+      31.84746
+     ],
+     "c": 0,
+     "m": "Khirbet Erha",
+     "u": "acfcf28/taralah",
+     "f": "18:27"
+    },
+    {
+     "n": "Telem",
+     "ll": [
+      34.91217,
+      31.14205
+     ],
+     "c": 0,
+     "m": "Khirbet Abu Tulul",
+     "u": "a6ef6a9/telem",
+     "f": "15:24"
+    },
+    {
+     "n": "Timnah",
+     "ll": [
+      34.9103,
+      31.78483
+     ],
+     "c": 2,
+     "m": "Tel Batash",
+     "u": "a21f909/timnah-1",
+     "f": "15:10"
+    },
+    {
+     "n": "Timnah",
+     "ll": [
+      35.13384,
+      31.40945
+     ],
+     "c": 0,
+     "m": "within 15 km of Maon",
+     "u": "ae3f164/timnah-2",
+     "f": "15:57"
+    },
+    {
+     "n": "Timnath-serah",
+     "ll": [
+      35.10729,
+      32.00806
+     ],
+     "c": 2,
+     "m": "Khirbet Tibnah",
+     "u": "a6e6528/timnath-heres",
+     "f": "19:50",
+     "note": "Joshua's own inheritance in the hill country of Ephraim, where he was buried (19:50; 24:30)."
+    },
+    {
+     "n": "Tirzah",
+     "ll": [
+      35.3378,
+      32.2874
+     ],
+     "c": 2,
+     "m": "Tell el Farah",
+     "u": "a80d317/tirzah",
+     "f": "12:24"
+    },
+    {
+     "n": "Tyre",
+     "ll": [
+      35.19611,
+      33.27083
+     ],
+     "c": 2,
+     "m": "Sur, Lebanon",
+     "u": "a160272/tyre",
+     "f": "19:29",
+     "note": "\"The fortified city of Tyre\" on Asher's border (19:29)."
+    },
+    {
+     "n": "Upper Beth-horon",
+     "ll": [
+      35.11417,
+      31.88583
+     ],
+     "c": 2,
+     "m": "Beit Ur al Fauqa",
+     "u": "ab682e6/upper-beth-horon",
+     "f": "16:5",
+     "note": "The upper town of the Beth-horon pass, on the border of Ephraim (16:5)."
+    },
+    {
+     "n": "Valley of Achor",
+     "ll": [
+      35.38333,
+      31.71667
+     ],
+     "c": 1,
+     "m": "el-Buqei'a",
+     "u": "a31492f/valley-of-achor",
+     "f": "7:24",
+     "note": "\"The Valley of Trouble,\" where Achan was stoned and a heap of stones raised (7:24–26). Hosea 2:15 promises it will become \"a door of hope.\""
+    },
+    {
+     "n": "Zaanannim",
+     "ll": [
+      35.41064,
+      32.72113
+     ],
+     "c": 0,
+     "m": "Hanot Taggarim",
+     "u": "a0c4f5e/zaanannim",
+     "f": "19:33"
+    },
+    {
+     "n": "Zanoah",
+     "ll": [
+      35.00129,
+      31.71944
+     ],
+     "c": 2,
+     "m": "Khirbet Zanu",
+     "u": "a28f432/zanoah-1",
+     "f": "15:34"
+    },
+    {
+     "n": "Zanoah",
+     "ll": [
+      35.05353,
+      31.45015
+     ],
+     "c": 0,
+     "m": "Khirbet Beit Amra",
+     "u": "afe28fe/zanoah-2",
+     "f": "15:56"
+    },
+    {
+     "n": "Zaphon",
+     "ll": [
+      35.57724,
+      32.26769
+     ],
+     "c": 1,
+     "m": "Tell es Sa’idiyeh",
+     "u": "ab49753/zaphon-1",
+     "f": "13:27"
+    },
+    {
+     "n": "Zarethan",
+     "ll": [
+      35.57724,
+      32.26769
+     ],
+     "c": 1,
+     "m": "Tell es Sa’idiyeh",
+     "u": "afa84ca/zarethan",
+     "f": "3:16"
+    },
+    {
+     "n": "Zelah",
+     "ll": [
+      35.20964,
+      31.80253
+     ],
+     "c": 0,
+     "m": "Khirbet Salah",
+     "u": "a597dd0/zela",
+     "f": "18:28"
+    },
+    {
+     "n": "Zemaraim",
+     "ll": [
+      35.2117,
+      31.90879
+     ],
+     "c": 0,
+     "m": "Ras et Tahuneh",
+     "u": "a811a10/zemaraim",
+     "f": "18:22"
+    },
+    {
+     "n": "Zenan",
+     "ll": [
+      34.84917,
+      31.56528
+     ],
+     "c": 0,
+     "m": "within 12 km of Lachish",
+     "u": "a5e1150/zenan",
+     "f": "15:37"
+    },
+    {
+     "n": "Zereth-shahar",
+     "ll": [
+      35.55931,
+      31.597
+     ],
+     "c": 1,
+     "m": "Callirrhoe",
+     "u": "a31a510/zereth-shahar",
+     "f": "13:19"
+    },
+    {
+     "n": "Ziddim",
+     "ll": [
+      35.45382,
+      32.80758
+     ],
+     "c": 0,
+     "m": "Hattin",
+     "u": "a8248e0/ziddim",
+     "f": "19:35"
+    },
+    {
+     "n": "Ziklag",
+     "ll": [
+      34.6816,
+      31.3912
+     ],
+     "c": 2,
+     "m": "Tell esh Sharia",
+     "u": "a0ed7ff/ziklag",
+     "f": "15:31",
+     "note": "A town of Simeon in the Negev (19:5), later David's base."
+    },
+    {
+     "n": "Zior",
+     "ll": [
+      35.10222,
+      31.52509
+     ],
+     "c": 1,
+     "m": "within 10 km of Hebron",
+     "u": "ac2907d/zior",
+     "f": "15:54"
+    },
+    {
+     "n": "Ziph",
+     "ll": [
+      35.13514,
+      31.47475
+     ],
+     "c": 2,
+     "m": "Tell Zif",
+     "u": "a9b852f/ziph-1",
+     "f": "15:55"
+    },
+    {
+     "n": "Ziph",
+     "ll": [
+      34.98188,
+      30.99677
+     ],
+     "c": 1,
+     "m": "Khirbet ez Zeifeh",
+     "u": "aab3ff0/ziph-2",
+     "f": "15:24"
+    },
+    {
+     "n": "Zorah",
+     "ll": [
+      34.98529,
+      31.77399
+     ],
+     "c": 2,
+     "m": "Tel Tzora",
+     "u": "a08174b/zorah",
+     "f": "15:33"
+    }
+   ],
+   "firstNamed": true
+  },
+  {
+   "id": "other",
+   "name": "Other places of the time",
+   "color": "var(--dbm-city)",
+   "places": [
+    {
+     "n": "Mount Nebo",
+     "ll": [
+      35.7253,
+      31.7678
+     ],
+     "c": 2,
+     "m": "Jebel Siyagha",
+     "k": "mount",
+     "note": "Where Moses saw the land and died before Joshua led Israel across (Deuteronomy 34:1–9; Joshua 1:1–2)."
+    },
+    {
+     "n": "Pella",
+     "ll": [
+      35.6156,
+      32.4497
+     ],
+     "c": 2,
+     "m": "Tabaqat Fahl",
+     "note": "A Canaanite city east of the Jordan, Pihilu in the Amarna letters of the 14th century BC."
+    },
+    {
+     "n": "Damascus",
+     "ll": [
+      36.30639,
+      33.51111
+     ],
+     "c": 2,
+     "m": "Damascus",
+     "note": "The great city of Syria (Upi in Egyptian texts) beyond Mount Hermon, not part of the land allotted."
+    },
+    {
+     "n": "Kumidi",
+     "ll": [
+      35.8222,
+      33.6219
+     ],
+     "c": 2,
+     "m": "Kamid el-Loz, Lebanon",
+     "note": "An Egyptian administrative centre in the Valley of Lebanon, known from the Amarna letters."
+    },
+    {
+     "n": "Bethlehem",
+     "ll": [
+      35.20764,
+      31.70431
+     ],
+     "c": 2,
+     "m": "Bethlehem",
+     "note": "Bethlehem of Judah is not in the Hebrew list of Judah's towns; the Greek Septuagint includes it with Tekoa (15:59). The Bethlehem of Joshua 19:15 is in Zebulun."
+    }
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "The land in Joshua's day",
+   "p": [
+    "Joshua is set at the end of the Late Bronze Age. Canaan was a patchwork of small city-states, each ruled by its own king, such as the 31 kings listed in Joshua 12, and Egypt held the land loosely through garrisons like Beth-shean. In the Amarna letters (about 1350 BC) the kings of Jerusalem, Shechem, Hazor, Lachish and Gezer write to Pharaoh, complaining of one another and of raiders called Habiru.",
+    "The date of the conquest is debated: 1 Kings 6:1 points to the 15th century BC, while many scholars prefer the 13th. By about 1208 BC the Merneptah Stele names \"Israel\" as a people in Canaan."
+   ]
+  },
+  {
+   "h": "How to use this map",
+   "p": [
+    "This map opens from any place named in Joshua, in chapters that have no map of their own. The red dots are places named in Joshua; the black dots are other places of the time, for context. The tribe names show roughly where each tribe's inheritance lay; the maps of Joshua 13–19 draw the allotments."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map engine: MapLibre GL."
+}

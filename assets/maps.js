@@ -225,7 +225,7 @@
       re.lastIndex = 0;
       var frag = document.createDocumentFragment(), last = 0, mt, s = t.nodeValue, cv = inCh.get(t);
       while ((mt = re.exec(s))) {
-        if (cv && skip(forms[mt[1]], cv)) continue;
+        if (cv && (skip(mt[1], cv) || skip(forms[mt[1]], cv))) continue;   // keyed by the form in the text or by the place
         frag.appendChild(document.createTextNode(s.slice(last, mt.index)));
         var span = el('span', 'dbm-place', esc(mt[1]));
         span.setAttribute('data-dbm-place', forms[mt[1]]);
