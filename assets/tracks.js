@@ -189,7 +189,12 @@
     function flush() { if (para.length) out += '<p>' + para.join(' ') + '</p>'; para = []; words = 0; }
     u.blocks.forEach(function (b) {
       if (b.h) { flush(); out += '<p class="s2">' + esc(b.h) + '</p>'; return; }
-      if (b.p) { flush(); out += '<p>' + b.p + '</p>'; return; }
+      if (b.p) {
+        flush();
+        out += '<p>' + b.p.replace(/<sup class="fn" data-fn="(\d+)">\d+<\/sup>/g,
+          '<button type="button" class="fn-ref st-fn" data-stfn="$1" aria-expanded="false" aria-label="Note $1">$1</button>') + '</p>';
+        return;
+      }
       if (u.poetry) {        // the Odes: each verse on its own lines, as the hymn is set out
         flush();
         out += '<p class="st-poem"><span class="verse-num">' + esc(b.v) + '</span>' + esc(b.x).replace(/\n+/g, '<br>') + '</p>';
@@ -350,6 +355,58 @@
       el.innerHTML = 'Next time: ' + esc(name) + '. <button type="button" class="link-btn" data-ahead="' + n + '">Read it now &rarr;</button>';
     });
   }
+  // ── A note in a bubble over the text, as for the Bible's translation notes (hover with a mouse, tap to keep it open) ──
+  var pop = null, popFor = null, pinned = false, hideTimer = null;
+  function popEl() {
+    if (!pop) {
+      pop = document.createElement('div');
+      pop.id = 'st-pop'; pop.className = 'fn-pop'; pop.setAttribute('role', 'dialog'); pop.hidden = true;
+      document.getElementById('reader').appendChild(pop);
+    }
+    return pop;
+  }
+  function showPop(btn) {
+    var li = btn.closest('.portion') && btn.closest('.portion').querySelector('.st-notes li[data-fn="' + btn.getAttribute('data-stfn') + '"]');
+    if (!li) return;
+    var p = popEl();
+    clearTimeout(hideTimer);
+    if (popFor && popFor !== btn) popFor.setAttribute('aria-expanded', 'false');
+    popFor = btn; btn.setAttribute('aria-expanded', 'true');
+    p.innerHTML = '<sup class="fn-pop-label">' + btn.textContent + '</sup>' + li.lastElementChild.innerHTML;
+    p.hidden = false;
+    var reader = document.getElementById('reader').getBoundingClientRect(), b = btn.getBoundingClientRect(), w = p.offsetWidth;
+    var left = Math.max(12, Math.min(b.left + b.width / 2 - reader.left - w / 2, reader.width - w - 12));
+    var above = b.top > p.offsetHeight + 24;
+    p.style.left = left + 'px';
+    p.style.top = (above ? b.top - reader.top - p.offsetHeight - 10 : b.bottom - reader.top + 10) + 'px';
+    p.classList.toggle('above', above); p.classList.toggle('below', !above);
+    p.style.setProperty('--arrow-x', (b.left + b.width / 2 - reader.left - left) + 'px');
+  }
+  function closePop() {
+    pinned = false;
+    if (popFor) popFor.setAttribute('aria-expanded', 'false');
+    popFor = null;
+    if (pop) pop.hidden = true;
+  }
+  function togglePop(btn) {
+    if (popFor === btn && pinned) { closePop(); return; }
+    showPop(btn); pinned = true;
+  }
+  if (PAGE === 'study') {
+    if (window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.addEventListener('mouseover', function (e) {
+        var fn = e.target.closest && e.target.closest('.st-fn');
+        if (fn && !pinned) showPop(fn);
+        if (e.target.closest && e.target.closest('#st-pop')) clearTimeout(hideTimer);
+      });
+      document.addEventListener('mouseout', function (e) {
+        var fn = e.target.closest && e.target.closest('.st-fn, #st-pop');
+        if (fn && !pinned) hideTimer = setTimeout(closePop, 200);
+      });
+    }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePop(); });
+    window.addEventListener('resize', function () { if (popFor) showPop(popFor); });
+  }
   function headerHtml() {
     var d = new Date();
     return '<p class="st-date">' + d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }) + '</p>' +
@@ -359,6 +416,7 @@
       }).join('') + '</nav>';
   }
   function show(n, scroll) {
+    closePop();
     var total = IX.tracks.length;
     n = Math.min(Math.max(n || 1, 1), total);
     document.querySelectorAll('#portions .portion').forEach(function (s) { s.classList.toggle('active', s.id === 'portion-' + n); });
@@ -411,15 +469,9 @@
   }
   if (PAGE === 'study') {
     document.addEventListener('click', function (e) {
-      var fn = e.target.closest && e.target.closest('.st-text sup.fn');
-      if (fn) {         // a note marker: show its note below the chapter
-        var li = fn.closest('.portion').querySelector('.st-notes li[data-fn="' + fn.getAttribute('data-fn') + '"]');
-        if (li) {
-          li.scrollIntoView({ block: 'center', behavior: 'smooth' });
-          li.classList.remove('flash'); void li.offsetWidth; li.classList.add('flash');
-        }
-        return;
-      }
+      var fn = e.target.closest && e.target.closest('.st-fn');
+      if (fn) { togglePop(fn); return; }
+      if (!(e.target.closest && e.target.closest('#st-pop'))) closePop();
       var t = e.target.closest && e.target.closest('[data-go], [data-mark], [data-ahead], [data-st], [data-about], .st-tabs a');
       if (!t || !IX) return;
       if (t.hasAttribute('data-go')) { show(+t.getAttribute('data-go')); return; }

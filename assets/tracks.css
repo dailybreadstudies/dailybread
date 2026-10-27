@@ -138,8 +138,6 @@ body.banner-on .portion.active .st-info:hover, body.banner-on .portion.active .s
 body.banner-on :is(.st-date, .st-title, .st-tabs, .division-label, .chapter-head, .chapter-sub, .st-where) { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45); }
 
 /* Translator's notes (1 Enoch): small raised markers in the text, the notes after the chapter */
-.st-text sup.fn { font: 600 0.62em var(--sans); color: var(--accent); cursor: pointer; padding: 0 1px; vertical-align: super; line-height: 0; }
-.st-text sup.fn:hover { color: var(--accent-deep); text-decoration: underline; }
 .st-notes { margin: 2.2rem 0 0; padding: 1.2rem 0 0; border-top: 1px solid var(--rule); font-family: var(--sans); }
 .st-notes-h { margin: 0 0 0.7rem; font: 600 0.66rem/1.2 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .st-notes ol { list-style: none; margin: 0; padding: 0; }
