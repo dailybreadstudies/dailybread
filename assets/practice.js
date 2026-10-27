@@ -6,7 +6,8 @@
  *   r  English → Hebrew/Greek   (recall: see the meaning, call up the word) — unlocked once the f card is known
  * Spaced repetition (Leitner boxes 1–6): "Got it" moves a card up a box and shows it again after 1, 3, 7, 14, 30, 60 days;
  * "Again" sends it back to box 1 and repeats it later in the same session.
- * Today's two word cards (deeper.js) report "Not yet" / "I knew it" through DBPractice.grade().
+ * The page's two words (the word study itself, built by deeper.js) are the first cards, with their verse on the back;
+ * then the same box offers the reviews that are due.
  * The deck stays in this browser for now (not part of the account sync).
  *
  * Stored: { v: 1, words: { 'H2232': { d: '2026-10-04', lang: 'he', ref: 'GEN 1:11', here: '…', n: 56 } },
@@ -22,8 +23,12 @@
   var T = KIDS
     ? { again: 'Try again', got: 'I knew it!', flip: 'Tap to turn over', done: 'Great job!', start: 'Let’s practise' }
     : { again: 'Again', got: 'Got it', flip: 'Tap or press Space to turn over', done: 'Well done.', start: 'Start practice' };
+  var TODAY = KIDS
+    ? { again: 'Not yet', got: 'I knew it!', flip: 'Have a guess, then tap to turn the card!' }
+    : { again: 'Not yet', got: 'I knew it', flip: 'Can you read it? Make a guess, then tap to turn the card' };
 
   var deck, lex = { he: {}, grc: {} }, names = {}, allPicks = {}, box = null;
+  var todayIds = [], todayInfo = {};          // the page's day: its two words, with their label and verse (from deeper.js)
   var session = null;
 
   function pad(n) { return (n < 10 ? '0' : '') + n; }
@@ -152,6 +157,7 @@
         (due ? '<button type="button" class="ab-btn primary" data-fc="start">' + T.start + ' · ' + due + '</button>'
              : '<p class="fc-caught">' + (words ? 'All caught up.' + (nx.date ? ' Next: ' + plural(nx.n, 'card', 'cards') + ' ' + whenText(nx.date) + '.' : '') : 'Your deck is empty.') + '</p>' +
                (all ? '<button type="button" class="ab-btn" data-fc="extra">Practise anyway</button>' : '')) +
+      (todayIds.length ? '<button type="button" class="fc-link" data-fc="today">See this day’s two words again</button>' : '') +
       '</div>' +
       (waiting > 0 ? '<p class="fc-wait">' + plural(waiting, 'more new word is', 'more new words are') + ' waiting. New words come in ' + NEW_PER_DAY + ' a day, so the reviews stay light.</p>' : '') +
       (more ? '<p class="fc-more"><button type="button" class="fc-link" data-fc="addall">Add the ' + plural(more, 'word', 'words') + ' from earlier days of the plan</button></p>' : '');
@@ -164,10 +170,16 @@
     var where = (names[ref[0]] || ref[0] || '') + (cv[0] ? ' ' + cv[0] + ':' + cv[1] : '');
     var word = '<p class="fc-word ' + w.lang + '" lang="' + w.lang + '"' + (w.lang === 'he' ? ' dir="rtl"' : '') + '>' + esc(e[0] || '') + '</p>';
     var mean = '<p class="fc-gloss">' + esc(e[2] || '') + '</p>';
-    var label = '<p class="fc-label">' + (rev ? 'English → ' + langName(w.lang) : langName(w.lang) + ' → English') + '</p>';
+    var td = !rev && todayInfo[s[0]];
+    var label = '<p class="fc-label">' + (td ? td.label : rev ? 'English → ' + langName(w.lang) : langName(w.lang) + ' → English') + '</p>';
     if (!back) {
       return label + (rev ? mean + '<p class="fc-hint">The ' + langName(w.lang) + ' word, translated “' + esc(cleanHere(w.here)) + '” in ' + esc(where) + '</p>' : word) +
-        '<p class="fc-tap">' + T.flip + '</p>';
+        '<p class="fc-tap">' + (td ? TODAY.flip : T.flip) + '</p>';
+    }
+    if (td) {
+      return label + word + '<p class="fc-tr">' + esc(translit(e[1])) + '</p>' + mean +
+        (e[3] && w.lang === 'he' && shortDef(e[3]) ? '<p class="fc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
+        '<div class="fc-more-back">' + td.back + '</div>';
     }
     return label + (rev ? word + '<p class="fc-tr">' + esc(translit(e[1])) + '</p>' + mean
                         : word + '<p class="fc-tr">' + esc(translit(e[1])) + '</p>' + mean) +
@@ -180,18 +192,20 @@
     var s = session, id = s.queue[0];
     if (!id) return drawEnd();
     var pct = Math.round(100 * s.done / (s.done + s.queue.length));
+    var L = s.today ? TODAY : T;
     box.innerHTML =
-      '<div class="fc-top"><span class="fc-count">' + (s.done + 1) + ' / ' + (s.done + s.queue.length) + '</span>' +
+      '<div class="fc-top"><span class="fc-count">' + (s.today ? (KIDS ? 'Today’s words' : 'This day’s words') + ' · ' : 'Review · ') + (s.done + 1) + ' / ' + (s.done + s.queue.length) + '</span>' +
         '<button type="button" class="fc-link" data-fc="stop">Stop</button></div>' +
       '<div class="fc-bar" aria-hidden="true"><i style="width:' + pct + '%"></i></div>' +
       '<div class="fc-card" role="button" tabindex="0" aria-live="polite" data-fc="flip" data-lang="' + deck.words[id.split('|')[0]].lang + '">' + faceHtml(id, false) + '</div>' +
       '<div class="fc-grade" hidden>' +
-        '<button type="button" class="ab-btn fc-again" data-fc="again">' + T.again + '</button>' +
-        '<button type="button" class="ab-btn primary fc-got" data-fc="got">' + T.got + '</button>' +
+        '<button type="button" class="ab-btn fc-again" data-fc="again">' + L.again + '</button>' +
+        '<button type="button" class="ab-btn primary fc-got" data-fc="got">' + L.got + '</button>' +
       '</div>';
     s.flipped = false;
     var card = box.querySelector('.fc-card');
     if (s.focus) card.focus({ preventScroll: true });
+    if (s.scroll) box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
   function flip() {
@@ -234,9 +248,19 @@
     drawCard();
     box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
+  // The page's two words, first: the word study itself. Graded like any new card (extra = seen again, schedule unchanged)
+  function startToday(ids, extra) {
+    session = { queue: ids.slice(), done: 0, right: 0, lapsed: {}, extra: !!extra, focus: false, today: true };
+    drawCard();
+  }
 
   function drawEnd() {
     var s = session, n = s.done, nx = nextDue(deck.dir || 'both');
+    if (s.today) {
+      var due = dueCards(deck.dir || 'both').length;
+      return drawPanel('<b>' + (KIDS ? 'Great job!' : 'Well done.') + '</b> ' + (KIDS ? 'Your two words are in your flashcards now.' : 'Both words are in your flashcards now. They come back tomorrow, and later from English too.') +
+        (due ? ' You also have ' + plural(due, 'card', 'cards') + ' to review from earlier days.' : ''));
+    }
     var msg = '<b>' + T.done + '</b> ' + plural(n, 'card', 'cards') + (n ? ', ' + s.right + ' right the first time' : '') + '.' +
       (s.extra ? ' (Extra practice: your schedule is unchanged.)' : '') +
       (nx.date && !dueCards(deck.dir || 'both').length ? ' Next review ' + whenText(nx.date) + '.' : '');
@@ -257,6 +281,7 @@
     else if (a === 'got') answer(true);
     else if (a === 'again') answer(false);
     else if (a === 'stop') drawPanel();
+    else if (a === 'today') { startToday(todayIds, true); session.scroll = true; drawCard(); }
     else if (a === 'addall') {
       var n = 0;
       earlierWords().forEach(function (o) { if (addWord(o.p, o.d)) n++; });
@@ -277,24 +302,21 @@
   });
 
   window.DBPractice = {
-    // opts: { picks: word-picks.json (all days), date: the page's day, lex: {he, grc}, names: {GEN: 'Genesis'} }
+    // opts: { box: element id, picks: word-picks.json (all days), date: the page's day, lex: {he, grc}, names: {GEN: 'Genesis'},
+    //         today: [{ s: 'H2232', label: 'Hebrew · from the Torah reading', back: '<blockquote>…verse…</blockquote>…' }] }
     init: function (opts) {
-      box = document.getElementById('fc');
+      box = document.getElementById(opts.box || 'fc');
       deck = load();
       lex = opts.lex; names = opts.names || {}; allPicks = opts.picks || {};
       var added = false;
-      if (opts.date <= today()) (allPicks[opts.date] || []).forEach(function (p) { if (addWord(p, opts.date)) added = true; });
+      (allPicks[opts.date] || []).forEach(function (p) { if (addWord(p, opts.date)) added = true; });
       if (added) save();
-      if (box) drawPanel();
-    },
-    // From today's word cards: "I knew it" / "Not yet" on the first, recognising, way
-    grade: function (strong, ok) {
-      if (!deck) return;
-      var id = strong + '|f', c = deck.cards[id];
-      if (!c || c.last === today()) return;     // graded already today
-      grade(id, ok);
-      if (box && !session) drawPanel();
-    },
-    gradedToday: function (strong) { var c = deck && deck.cards[strong + '|f']; return !!(c && c.last === today()); }
+      todayIds = []; todayInfo = {};
+      (opts.today || []).forEach(function (t) { if (deck.words[t.s]) { todayIds.push(t.s + '|f'); todayInfo[t.s] = t; } });
+      if (!box) return;
+      // the day's words not yet answered today come first; otherwise the deck's home (reviews, options)
+      var t = today(), pend = todayIds.filter(function (id) { var c = deck.cards[id]; return !c || c.last !== t; });
+      if (pend.length) startToday(pend, false); else drawPanel();
+    }
   };
 })();

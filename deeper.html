@@ -170,18 +170,9 @@
       font-size: 5.3em; line-height: 0.78; margin: 0.08em 0.07em 0 -0.04em; }
     .dp-more .ab-two { align-items: center; }
     .dp-back { text-align: center; padding: 0 0 70px; margin: 0; }
-    /* Today's cards: "Did you know it?" */
-    .wc-grade { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin: 0.4rem 0 1.2rem; font: 500 0.85rem var(--sans); color: var(--muted); }
-    .wc-grade > span { width: 100%; text-align: center; }
-    .wc-grade button { font: 600 0.78rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase; height: 40px; padding: 0 20px; border-radius: 20px;
-      border: 1px solid var(--line-strong); background: transparent; color: var(--ink); cursor: pointer; }
-    .wc-grade button[data-ok="1"] { background: var(--done); border-color: var(--done); color: #fff; }
-    .wc-grade button:hover { border-color: var(--accent-soft); }
-    .wc-grade.is-done { font-size: 0.9rem; }
-    .wc-grade a { color: var(--accent); }
     /* Flashcards */
-    #practice { padding-top: 70px; }
-    #fc { margin-top: 1.4rem; }
+    .fc-more-back { width: 100%; text-align: left; margin: 1rem 0 0; padding: 1rem 0 0; border-top: 1px solid var(--rule); }
+    .fc-more-back .wc-links { justify-content: center; }
     .fc-msg { text-align: center; font-size: 1rem; color: var(--ink); margin: 0 0 1.2rem; }
     .fc-msg b { color: var(--done); }
     .fc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 0 1.4rem; }
@@ -223,7 +214,8 @@
     .fc-grade[hidden] { display: none; }
     .fc-grade .ab-btn { flex: 1; justify-content: center; }
     .fc-grade .fc-got { background: var(--done); border-color: var(--done); color: #fff; }
-    .kids .wc-grade button[data-ok="1"], .kids .fc-grade .fc-got { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    .kids .fc-gloss { font-family: var(--kid-font); font-weight: 700; color: var(--kid-teal); }
+    .kids .fc-grade .fc-got { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
     @media (prefers-reduced-motion: reduce) { .fc-card { transition: none; } }
     @media (max-width: 860px) {
       .dp-hero .ab-photo-bg::after { background: rgba(17,17,17,0.66); }
@@ -247,11 +239,10 @@
     <p class="ab-eyebrow rv">Dig deeper · <span id="dp-when"></span></p>
     <h1 class="ab-h rv d1">Two words. <em>Can you read them?</em></h1>
     <p class="ab-p rv d2">One word in Hebrew and one in Greek, from today’s readings, in the languages they were first written in.
-      Make a guess, then reveal the meaning and the verse where you read it today. Every word goes into your own flashcards,
-      to practise both ways.</p>
+      Make a guess, turn the card for the meaning and the verse, and say whether you knew it. The words stay in your flashcards
+      and come back over the next days: first to English, then from English back to the original.</p>
     <div class="ab-btns rv d3" style="justify-content:flex-start">
       <a class="ab-btn primary" href="#words">Word study</a>
-      <a class="ab-btn" href="#practice">Flashcards</a>
       <a class="ab-btn cm-only" href="#commentary">Commentary</a>
     </div>
   </div>
@@ -261,18 +252,6 @@
   <div class="ab-in dp-col">
     <p class="ab-eyebrow rv">Word study</p>
     <div id="deeper" class="rv d1"><p class="status">Loading…</p></div>
-  </div>
-</section>
-
-<!-- 1b · Flashcards: the reader's own deck, both ways, spaced repetition (assets/practice.js) -->
-<section class="ab-sec dp-sec" id="practice">
-  <div class="ab-in dp-col">
-    <p class="ab-eyebrow rv">Flashcards</p>
-    <h2 class="ab-h rv d1">Both ways, <em>a little every day.</em></h2>
-    <p class="ab-p rv d2">Every word you study here goes into your own deck. First you see the Hebrew or Greek and recall the meaning;
-      once you know it, the card also comes back from English, to recall the word itself. Each card returns just before you would
-      forget it: the next day, then after 3, 7, 14 and 30 days.</p>
-    <div id="fc" class="rv d2"><p class="status">Loading…</p></div>
   </div>
 </section>
 
@@ -318,8 +297,8 @@
 </footer>
 
 <script src="assets/account.js?v=3d893693"></script>
-<script src="assets/practice.js?v=26fdbf03"></script>
-<script src="assets/deeper.js?v=718ec94e"></script>
+<script src="assets/practice.js?v=251d3101"></script>
+<script src="assets/deeper.js?v=ed19edca"></script>
 <script>
   (function () {
     function reveal() {

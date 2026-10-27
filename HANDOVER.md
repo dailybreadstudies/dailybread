@@ -102,8 +102,8 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 When every reading of a day is marked complete, “Well done!” (in the blue `--done` colour; Kids: “Great job!” in teal)
 appears right under the “All 4 readings done” line, and below a rule a **Dig deeper** link (the last reading’s “Return to Start” button is now “Dig deeper” too): *Word study* opens
 `deeper.html?d=DATE` (Kids: `kids/deeper.html`, made by `tools/make_kids_pages.py`; page script `assets/deeper.js`).
-There, one Hebrew word (Torah) and one Greek word (Apostles/Gospels) are shown as cards, one under the other: only the word
-(no transliteration), so the reader can practise reading it and guess, then “Reveal the meaning” shows the transliteration, the gloss, a short definition
+There, one Hebrew word (Torah) and one Greek word (Apostles/Gospels) are shown as flashcards (see below): only the word
+(no transliteration), so the reader can practise reading it and guess, then turning the card shows the transliteration, the gloss, a short definition
 (Hebrew only), the verse with the word marked, how often it is used, a link to the reading and STEPBible. Words are picked
 per day by `python3 tools/build_word_picks.py` → `data/word-picks.json`, `data/kids/word-picks.json`; choose a word by
 hand in `tools/word-picks-fixed.json`. **Commentary** (Classic only): in weeks listed in `data/commentary.json` (keyed by the parasha name in the day files),
@@ -116,13 +116,15 @@ by His Brothers”), Miketz (“Joseph Is Exalted”),
 and for the rest of Genesis Beresheet (“The Messiah Is the Beginning”), Noach (“The Days of Noah and the Last Days”),
 Vayigash (“Joseph Makes Himself Known”), Vayechi (“Jacob Lives”), taken from the textbook PDF with pdftotext -layout; check Hebrew words by hand when adding more.
 
-**Flashcards (Oct 2026):** after “Reveal the meaning”, each word card asks “Did you know it?” (Not yet / I knew it), and a
-**Flashcards** section (`#practice`, hero button) drills the reader's own deck, `assets/practice.js`. Every word met on Dig
-deeper is added (localStorage `dbs-words`, Kids `dbs-kids-words`; not in the account sync yet), plus an “Add the words from
-earlier days of the plan” link. Each word is two cards: Hebrew/Greek → English, and English → Hebrew/Greek, which opens once
-the first way is known. Leitner boxes: Got it → next review after 1, 3, 7, 14, 30, 60 days; Again → back to box 1 and repeated
-later in the session. Up to 10 new words a day (Kids 5). Direction choice: Both ways / To English / From English. Keys: Space
-turns the card, 1/← Again, 2/→ Got it. “Practise anyway” runs extra practice without changing the schedule.
+**Word study = flashcards (Oct 2026):** the word study is one flashcard box (`#deeper`, driven by `assets/practice.js`;
+deeper.js only builds each word's back: the verse in English and Hebrew/Greek, count, links). The day's two words come first:
+front = the word ("Can you read it?"), tap/Space turns it, then *Not yet* / *I knew it*. When both are answered, the same box
+shows the reader's deck: stats, direction (Both ways / To English / From English), the reviews due, “Practise anyway”, “See this
+day’s two words again” and “Add the words from earlier days of the plan”. Deck in localStorage `dbs-words` (Kids
+`dbs-kids-words`; not in the account sync yet). Each word is two cards: Hebrew/Greek → English, and English → Hebrew/Greek,
+which opens once the first way is known. Leitner boxes: Got it → next review after 1, 3, 7, 14, 30, 60 days; Again → box 1,
+repeated later in the session. Up to 10 new words a day (Kids 5). Keys: Space turns, 1/← Again, 2/→ Got it.
+“Practise anyway” and “See … again” leave the schedule unchanged.
 
 **Layout (Oct 2026):** deeper.html is styled like the About/Learn pages (its own inline styles, `body.dp-rich`): a photo
 section with the word study cards below, then (Classic, weeks with commentary) a photo section with the commentary title,

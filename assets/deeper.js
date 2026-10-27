@@ -120,8 +120,6 @@
               '<p class="wc-tr">' + esc(translit(e[1])) + '</p>' +
               '<p class="wc-gloss">' + esc(e[2] || '') + '</p>' +
               (e[3] && p.lang === 'he' ? '<p class="wc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
-              (window.DBPractice ? '<div class="wc-grade" data-s="' + esc(p.s) + '"><span>' + (KIDS ? 'Did you get it?' : 'Did you know it?') + '</span>' +
-                '<button type="button" data-ok="0">Not yet</button><button type="button" data-ok="1">' + (KIDS ? 'I got it!' : 'I knew it') + '</button></div>' : '') +
               (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p>' +
                 (ot ? '<p class="wc-orig ' + ot.lang + '" lang="' + ot.lang + '"' + (ot.lang === 'he' ? ' dir="rtl"' : '') + '>' + ot.html + '</p>' : '') +
                 '<cite>' + esc(where) + '</cite></blockquote>' : '') +
@@ -130,6 +128,30 @@
               '<a href="https://www.stepbible.org/?q=strong=' + esc(p.s) + '" target="_blank" rel="noopener">Every use on STEPBible &rarr;</a></p>' +
             '</div></article>';
         }).join('');
+  }
+  // The day's words as flashcards (assets/practice.js): the front is the word, the back adds the verse it was read in today
+  function todayCards(day, picks, books, names) {
+    return picks.map(function (p) {
+      var ref = p.ref.split(' '), cv = ref[1].split(':'), n = 0, label = '';
+      day.portions.forEach(function (x, k) { if (!n && x.ref.split(' ')[0] === ref[0]) { n = k + 1; label = x.label; } });
+      var vt = books[ref[0]] && books[ref[0]].chapters ? verseText(books[ref[0]], +cv[0], +cv[1], p.here) : '';
+      var ot = origVerse(ORIG[ref[0]], ref[1], p.i);
+      var where = (names[ref[0]] || ref[0]) + ' ' + cv[0] + ':' + cv[1];
+      return { s: p.s, label: (p.lang === 'he' ? 'Hebrew' : 'Greek') + (label ? ' · from the ' + esc(label) + ' reading' : ''),
+        back: (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p>' +
+            (ot ? '<p class="wc-orig ' + ot.lang + '" lang="' + ot.lang + '"' + (ot.lang === 'he' ? ' dir="rtl"' : '') + '>' + ot.html + '</p>' : '') +
+            '<cite>' + esc(where) + '</cite></blockquote>' : '') +
+          '<p class="wc-count">Here translated “' + esc(cleanHere(p.here)) + '”. Used ' + p.n + ' times in the Bible.</p>' +
+          '<p class="wc-links">' + (n ? '<a href="./?d=' + date + '#' + n + '">Read it in ' + esc(where) + '</a>' : '') +
+          '<a href="https://www.stepbible.org/?q=strong=' + esc(p.s) + '" target="_blank" rel="noopener">Every use on STEPBible &rarr;</a></p>' };
+    });
+  }
+  function wordStudy(day, picks, allPicks, lex, books, names) {
+    if (window.DBPractice) {
+      DBPractice.init({ box: 'deeper', picks: allPicks, date: date, lex: lex, names: names, today: todayCards(day, picks, books, names) });
+      return '';
+    }
+    return picks.length ? cardsHtml(day, picks, lex, books, names) : '<p class="status">There is no word study for this day yet.</p>';
   }
   var RICH = document.body.classList.contains('dp-rich');
   var IMG = (document.body.getAttribute('data-edition') === 'kids' ? '../' : '') + 'assets/img/';
@@ -141,7 +163,7 @@
     if (pos) bg.style.backgroundPosition = pos;   // 'pos' in commentary.json, e.g. '50% 20%' to keep a face in view
     bg.classList.add('has-photo');
   }
-  function drawRich(day, picks, lex, books, names, comm, when) {
+  function drawRich(day, picks, allPicks, lex, books, names, comm, when) {
     function set(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
     set('dp-when', esc(when));
     // Photos: the word study rotates by day (the archaeology still life every other day); the commentary has its own photo for the portion, or a general one
@@ -150,7 +172,8 @@
     var dayNo = Math.round(new Date(date + 'T12:00:00').getTime() / 864e5);
     photo('words-top', wImgs[dayNo % wImgs.length]);
     if (comm) photo('commentary', cImg, comm.image && comm.pos);
-    box.innerHTML = picks.length ? cardsHtml(day, picks, lex, books, names) : '<p class="status">There is no word study for this day yet.</p>';
+    var ws = wordStudy(day, picks, allPicks, lex, books, names);
+    if (ws) box.innerHTML = ws;
     var cs = document.querySelectorAll('.cm-only');
     cs.forEach(function (el) { el.hidden = !comm; });
     if (comm) {
@@ -194,7 +217,7 @@
     var when = d.toLocaleDateString('en-GB', { weekday: 'long' }) + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] +
       (day.hebrewDate ? ' · ' + day.hebrewDate.replace(/\s+\d{4}$/, '') : '');
     document.title = 'Dig deeper · ' + (KIDS ? 'Daily Bread for Kids' : 'Daily Bread Online');
-    if (window.DBPractice) DBPractice.init({ picks: res[1], date: date, lex: lex, names: names });
+    var allPicks = res[1];
     var books = {};
     picks.forEach(function (p) { books[p.ref.split(' ')[0]] = 1; });
     return Promise.all(Object.keys(books).map(function (b) {
@@ -203,7 +226,7 @@
     }))
       .then(function () {
         // Rich layout (marketing-style page with photo sections, deeper.html): the page carries its own headings
-        if (RICH) return drawRich(day, picks, lex, books, names, comm, when);
+        if (RICH) return drawRich(day, picks, allPicks, lex, books, names, comm, when);
         var html = '<p class="dp-eyebrow">' + esc(when) + '</p>' +
           '<h1 class="dp-title">Dig deeper</h1>' +
           '<h2 class="dp-h">Word study</h2>' +
@@ -222,27 +245,6 @@
     box.innerHTML = '<p class="status">Sorry, this page could not be loaded. (' + esc(err.message) + ')</p>' +
       '<p class="dp-back"><a href="./">&larr; Back to today’s readings</a></p>';
   });
-
-  // "Did you know it?" on today's cards: the first grade for the word in the reader's flashcard deck (assets/practice.js)
-  document.addEventListener('click', function (e) {
-    var g = e.target.closest && e.target.closest('.wc-grade button');
-    if (!g) return;
-    var row = g.closest('.wc-grade'), ok = g.getAttribute('data-ok') === '1';
-    DBPractice.grade(row.getAttribute('data-s'), ok);
-    row.innerHTML = '<span>' + (ok ? (KIDS ? 'Great! ' : 'Good. ') : '') + 'It’s in your deck: ' +
-      '<a href="#practice">practise it' + (ok ? ' the other way' : '') + ' below</a>.</span>';
-    row.classList.add('is-done');
-  });
-  function markGraded() {
-    if (!window.DBPractice) return;
-    document.querySelectorAll('.wc-grade').forEach(function (row) {
-      if (DBPractice.gradedToday(row.getAttribute('data-s'))) {
-        row.innerHTML = '<span>It’s in your deck: <a href="#practice">practise below</a>.</span>';
-        row.classList.add('is-done');
-      }
-    });
-  }
-  document.addEventListener('deeper-ready', markGraded);
 
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('.wc-reveal');
