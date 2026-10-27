@@ -406,7 +406,7 @@
   }
 
   // ═══════════════ progress.html ═══════════════
-  // Your books on two shelves, drawn exactly like the Bible's "On the shelf" (assets/reader.js, shelvesHtml): each spine
+  // Your books on four shelves, one per track, drawn exactly like the Bible's "On the shelf" (assets/reader.js, shelvesHtml): each spine
   // as thick as its text is long, on the same scale as the books of the Bible, filling from the bottom as it is read.
   // The Mishnah stands as its six orders; Pirkei Avot, read first, stands on its own.
   var bibleMaxP = null;
@@ -434,17 +434,15 @@
     var mish = ix.books.mishnah, orders = [], at = 1;
     var bySeder = {};
     mish.tractates.forEach(function (t) { if (!bySeder[t[2]]) { bySeder[t[2]] = [at, at]; orders.push(t[2]); } bySeder[t[2]][1] = at + t[3] - 1; at += t[3]; });
+    var ET = 'early-christian';
     return [
-      { label: 'Jewish writings', lean: 'Tahorot', groups: [
-        ['Second Temple', [vol('enoch', '1 Enoch', 0, 0, 'second-temple'), vol('2maccabees', '2 Maccabees', 0, 0, 'second-temple')], 0],
-        ['Rabbinics', [vol('avot', 'Pirkei Avot', 0, 0, 'rabbinics')].concat(orders.map(function (o) {
-          return vol('mishnah', o, bySeder[o][0], bySeder[o][1], 'rabbinics');
-        })), 2]] },
-      { label: 'Christian writings', lean: 'School of Prayer', groups: [
-        ['Early Christian', [vol('1clement', '1 Clement', 0, 0, 'early-christian'), vol('odes', 'Odes of Solomon', 0, 0, 'early-christian'),
-          vol('hermas', 'Hermas', 0, 0, 'early-christian'), vol('polycarp', 'Polycarp', 0, 0, 'early-christian'),
-          vol('didache', 'Didache', 0, 0, 'early-christian')], 3],
-        ['Devotional', [vol('murray', 'School of Prayer', 0, 0, 'devotional')], 1]] }
+      { label: 'Devotional', lean: '', groups: [['', [vol('murray', 'School of Prayer', 0, 0, 'devotional')], 1]] },
+      { label: 'Second Temple Literature', lean: '2 Maccabees', groups: [['', [vol('enoch', '1 Enoch', 0, 0, 'second-temple'),
+        vol('2maccabees', '2 Maccabees', 0, 0, 'second-temple')], 0]] },
+      { label: 'Rabbinics', lean: 'Tahorot', groups: [['', [vol('avot', 'Pirkei Avot', 0, 0, 'rabbinics')], 2],
+        ['The Mishnah', orders.map(function (o) { return vol('mishnah', o, bySeder[o][0], bySeder[o][1], 'rabbinics'); }), 2]] },
+      { label: 'Early Christian Writings', lean: 'Didache', groups: [['', [vol('1clement', '1 Clement', 0, 0, ET), vol('odes', 'Odes of Solomon', 0, 0, ET),
+        vol('hermas', 'Hermas', 0, 0, ET), vol('polycarp', 'Polycarp', 0, 0, ET), vol('didache', 'Didache', 0, 0, ET)], 3]] }
     ];
   }
   function shelfHtml(ix, done, maxWords) {
@@ -484,12 +482,13 @@
       });
       out += '<rect class="bs-board" x="0" y="' + base + '" width="' + W + '" height="3" rx="1.5"/>';
       spans.forEach(function (sp) {
+        if (!sp.name) return;
         var half = sp.name.length * 3.6, cx = Math.max((sp.x0 + sp.x1) / 2, PAD + half);   // keep a wide label inside the picture
         out += '<text class="bs-bundle" x="' + cx.toFixed(1) + '" y="' + (base + 17) + '" text-anchor="middle">' + sp.name + '</text>';
       });
       y = base + SHELF_GAP;
     });
-    return '<div class="bs-box"><svg class="bs-shelves" viewBox="0 0 ' + W + ' ' + (y - SHELF_GAP + 26) + '" role="group" aria-label="Your study books on two shelves">' + out + '</svg></div>';
+    return '<div class="bs-box"><svg class="bs-shelves" viewBox="0 0 ' + W + ' ' + (y - SHELF_GAP + 26) + '" role="group" aria-label="Your study books on four shelves">' + out + '</svg></div>';
   }
 
   function progressSection() {
