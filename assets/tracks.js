@@ -286,7 +286,8 @@
     rabbinics: 'study-rabbinics' };
   // Where a picture's subject should land: f = its point in the picture, t = where it goes in the banner (shares of
   // width/height), zoom = how much larger than "cover"; ratio = the picture's width / height. Others: centred.
-  var BANNER_FOCUS = { rabbinics: { ratio: 2544 / 1904, fx: 0.54, fy: 0.24, tx: 0.72, ty: 0.17, zoom: 1.3 } };
+  var BANNER_FOCUS = { rabbinics: { ratio: 2544 / 1904, fx: 0.54, fy: 0.24, tx: 0.72, ty: 0.17, zoom: 1.3 },
+    'early-christian': { ratio: 2544 / 1904, fx: 0.5, fy: 0.3, tx: 0.74, ty: 0.3, zoom: 1.2 } };   // the reader's face clear of the headings
   function frame(img, f) {
     if (!f) { img.style.backgroundSize = ''; img.style.backgroundPosition = ''; return; }
     var w = img.offsetWidth, h = img.offsetHeight;
