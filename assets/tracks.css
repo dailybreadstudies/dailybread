@@ -107,3 +107,16 @@
 /* The Odes: verse by verse, line by line */
 .st-text .st-poem { margin: 0 0 0.85rem; padding-left: 1.6em; text-indent: -1.6em; }
 .st-text .st-poem .verse-num { display: inline-block; min-width: 1.3em; text-indent: 0; }
+
+/* A painted banner behind the top of each track (tracks.js, placeBanner): full width from under the top bar down to just
+   above the text, washed with the page colour so the heading stays easy to read, and fading into the page at the bottom */
+.st-banner { position: absolute; top: var(--topbar-h); left: 0; right: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.st-banner[hidden] { display: none; }
+.st-banner-img { position: absolute; inset: 0; background: center 40% / cover no-repeat; opacity: 0; transition: opacity 0.5s ease; }
+.st-banner-img.on { opacity: 1; }
+.st-banner::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 42%, transparent) 0%,
+    color-mix(in srgb, var(--paper) 62%, transparent) 45%, color-mix(in srgb, var(--paper) 82%, transparent) 75%, var(--paper) 100%); }
+body.has-banner .reader { z-index: 1; }
+body.has-banner .st-tabs { border-bottom-color: color-mix(in srgb, var(--rule) 60%, transparent); }
+@media (prefers-reduced-motion: reduce) { .st-banner-img { transition: none; } }

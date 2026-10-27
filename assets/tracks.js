@@ -272,7 +272,39 @@
   }
   // Wide screens: the About card starts level with the first line of the text, not the title
   var WIDE = window.matchMedia ? window.matchMedia('(min-width: 1240px)') : { matches: false };
+  // A painted banner behind the top of each track, full width, fading into the page just above the text
+  var BANNERS = { devotional: 'study-devotional', 'second-temple': 'study-second-temple', 'early-christian': 'study-early-christian' };
+  function banner() {
+    var b = document.getElementById('st-banner');
+    if (!b) {
+      b = document.createElement('div');
+      b.id = 'st-banner'; b.className = 'st-banner'; b.setAttribute('aria-hidden', 'true');
+      b.innerHTML = '<div class="st-banner-img"></div>';
+      document.body.insertBefore(b, document.body.firstChild);
+      document.body.classList.add('has-banner');
+    }
+    return b;
+  }
+  function placeBanner() {
+    if (!IX) return;
+    var sec = document.querySelector('#portions .portion.active');
+    var n = sec ? +sec.id.replace('portion-', '') : 0, track = n && IX.tracks[n - 1], name = track && BANNERS[track.id];
+    var b = banner(), img = b.querySelector('.st-banner-img');
+    if (!name) { b.hidden = true; return; }
+    b.hidden = false;
+    var url = 'assets/img/' + name + (window.innerWidth <= 900 ? '-sm' : '') + '.jpg';
+    if (img.getAttribute('data-src') !== url) {
+      img.setAttribute('data-src', url);
+      img.classList.remove('on');
+      var pic = new Image();
+      pic.onload = function () { if (img.getAttribute('data-src') === url) { img.style.backgroundImage = 'url(' + url + ')'; img.classList.add('on'); } };
+      pic.src = url;
+    }
+    var text = sec.querySelector('.st-text');
+    if (text) b.style.height = Math.max(0, Math.round(text.getBoundingClientRect().top + window.scrollY - b.getBoundingClientRect().top - window.scrollY - 8)) + 'px';
+  }
   function placeAbout() {
+    placeBanner();
     document.querySelectorAll('#portions .portion.active').forEach(function (sec) {
       var card = sec.querySelector('.st-about');
       if (!card) return;
