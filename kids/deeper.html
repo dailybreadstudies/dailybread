@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Hebrew:wght@400;500&family=Baloo+2:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/reader.css?v=48459ed5">
-  <link rel="stylesheet" href="../assets/kids.css?v=07197191">
+  <link rel="stylesheet" href="../assets/kids.css">
   <script>
     try { var t = JSON.parse(localStorage.getItem('dbs-kids-settings') || '{}').theme;
           if (t === 'light' || t === 'dark' || t === 'sepia') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
@@ -172,10 +172,66 @@
       font-size: 5.3em; line-height: 0.78; margin: 0.08em 0.07em 0 -0.04em; }
     .dp-more .ab-two { align-items: center; }
     .dp-back { text-align: center; padding: 0 0 70px; margin: 0; }
+    /* Today's cards: "Did you know it?" */
+    .wc-grade { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin: 0.4rem 0 1.2rem; font: 500 0.85rem var(--sans); color: var(--muted); }
+    .wc-grade > span { width: 100%; text-align: center; }
+    .wc-grade button { font: 600 0.78rem var(--sans); letter-spacing: 0.08em; text-transform: uppercase; height: 40px; padding: 0 20px; border-radius: 20px;
+      border: 1px solid var(--line-strong); background: transparent; color: var(--ink); cursor: pointer; }
+    .wc-grade button[data-ok="1"] { background: var(--done); border-color: var(--done); color: #fff; }
+    .wc-grade button:hover { border-color: var(--accent-soft); }
+    .wc-grade.is-done { font-size: 0.9rem; }
+    .wc-grade a { color: var(--accent); }
+    /* Flashcards */
+    #practice { padding-top: 70px; }
+    #fc { margin-top: 1.4rem; }
+    .fc-msg { text-align: center; font-size: 1rem; color: var(--ink); margin: 0 0 1.2rem; }
+    .fc-msg b { color: var(--done); }
+    .fc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0 0 1.4rem; }
+    .fc-stats div { background: var(--tint); border-radius: 14px; padding: 14px 8px 12px; text-align: center; }
+    .fc-stats b { display: block; font: 400 2rem/1.1 var(--display); color: var(--heading); }
+    .fc-stats span { font: 600 0.66rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .fc-dir { display: flex; border: 1px solid var(--line-strong); border-radius: 23px; padding: 3px; gap: 3px; max-width: 30rem; margin: 0 auto; }
+    .fc-dir button { flex: 1; height: 38px; border: 0; border-radius: 20px; background: transparent; color: var(--ink-soft); cursor: pointer;
+      font: 600 0.74rem var(--sans); letter-spacing: 0.06em; text-transform: uppercase; }
+    .fc-dir button[aria-checked="true"] { background: var(--accent); color: var(--on-accent); }
+    .fc-dirnote { text-align: center; font-size: 0.92rem; line-height: 1.55; color: var(--muted); margin: 0.8rem auto 1.4rem; max-width: 30rem; }
+    .fc-go { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .fc-caught { margin: 0; font-size: 1.02rem; color: var(--ink-soft); text-align: center; }
+    .fc-more { text-align: center; margin: 1.2rem 0 0; }
+    .fc-wait { text-align: center; font-size: 0.88rem; color: var(--muted); margin: 1rem auto 0; max-width: 28rem; }
+    .fc-link { background: none; border: 0; padding: 4px; color: var(--accent); font: 500 0.88rem var(--sans); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .fc-top { display: flex; justify-content: space-between; align-items: center; margin: 0 0 6px; }
+    .fc-count { font: 600 0.72rem var(--sans); letter-spacing: 0.14em; color: var(--muted); }
+    .fc-bar { height: 4px; border-radius: 2px; background: var(--tint); margin: 0 0 16px; overflow: hidden; }
+    .fc-bar i { display: block; height: 100%; background: var(--done); transition: width 0.3s ease; }
+    .fc-card { background: var(--paper); border: 1px solid var(--rule); border-radius: 18px; min-height: 300px; padding: 30px 26px 24px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform 0.16s ease-in; }
+    .fc-card.is-back { cursor: default; }
+    .fc-card.turning { transform: rotateY(90deg); }
+    .fc-card:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
+    .fc-label { font: 600 0.68rem var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); margin: 0 0 1rem; }
+    .fc-word { font-size: clamp(3rem, 9vw, 4.4rem); line-height: 1.25; color: var(--heading); margin: 0 0 0.4rem; }
+    .fc-word.he { font-family: var(--hebrew); }
+    .fc-word.grc { font-family: var(--greek); }
+    .fc-tr { font: italic 400 1.15rem/1.4 var(--serif); color: var(--ink-soft); margin: 0 0 0.5rem; }
+    .fc-gloss { font-family: var(--display); font-size: clamp(1.7rem, 4.5vw, 2.2rem); line-height: 1.25; color: var(--done); margin: 0 0 0.5rem; }
+    .fc-hint { font-size: 0.92rem; color: var(--muted); margin: 0.3rem 0 0; max-width: 26rem; }
+    .fc-def { font-size: 0.9rem; line-height: 1.55; color: var(--muted); margin: 0.2rem 0 0.6rem; max-width: 30rem; }
+    .fc-src { font: 500 0.78rem/1.6 var(--sans); color: var(--muted); margin: 0.6rem 0 0; }
+    .fc-src a { color: var(--accent); }
+    .fc-tap { font: 500 0.78rem var(--sans); letter-spacing: 0.04em; color: var(--muted); margin: 1.8rem 0 0; }
+    .fc-grade { display: flex; gap: 12px; margin: 16px 0 0; }
+    .fc-grade[hidden] { display: none; }
+    .fc-grade .ab-btn { flex: 1; justify-content: center; }
+    .fc-grade .fc-got { background: var(--done); border-color: var(--done); color: #fff; }
+    .kids .wc-grade button[data-ok="1"], .kids .fc-grade .fc-got { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+    @media (prefers-reduced-motion: reduce) { .fc-card { transition: none; } }
     @media (max-width: 860px) {
       .dp-hero .ab-photo-bg::after { background: rgba(17,17,17,0.66); }
     }
-    @media (max-width: 520px) { #deeper .wcard { padding: 26px 18px 22px; } .cm-hero { min-height: 72vh; } }
+    @media (max-width: 520px) { .fc-card { min-height: 260px; padding: 24px 16px 20px; } .fc-dir button { font-size: 0.66rem; letter-spacing: 0.03em; } .fc-grade .ab-btn { width: auto; }
+      #deeper .wcard { padding: 26px 18px 22px; } .cm-hero { min-height: 72vh; } }
   </style>
   <script>
     /* Kids pages live in kids/: shared data files are one folder up */
@@ -198,9 +254,11 @@
     <p class="ab-eyebrow rv">Dig deeper · <span id="dp-when"></span></p>
     <h1 class="ab-h rv d1">Two words. <em>Can you read them?</em></h1>
     <p class="ab-p rv d2">One word in Hebrew and one in Greek, from today’s readings, in the languages they were first written in.
-      Make a guess, then reveal the meaning and the verse where you read it today.</p>
+      Make a guess, then reveal the meaning and the verse where you read it today. Every word goes into your own flashcards,
+      to practise both ways.</p>
     <div class="ab-btns rv d3" style="justify-content:flex-start">
       <a class="ab-btn primary" href="#words">Word study</a>
+      <a class="ab-btn" href="#practice">Flashcards</a>
       <a class="ab-btn cm-only" href="#commentary">Commentary</a>
     </div>
   </div>
@@ -210,6 +268,18 @@
   <div class="ab-in dp-col">
     <p class="ab-eyebrow rv">Word study</p>
     <div id="deeper" class="rv d1"><p class="status">Loading…</p></div>
+  </div>
+</section>
+
+<!-- 1b · Flashcards: the reader's own deck, both ways, spaced repetition (assets/practice.js) -->
+<section class="ab-sec dp-sec" id="practice">
+  <div class="ab-in dp-col">
+    <p class="ab-eyebrow rv">Flashcards</p>
+    <h2 class="ab-h rv d1">Both ways, <em>a little every day.</em></h2>
+    <p class="ab-p rv d2">Every word you study here goes into your own deck. First you see the Hebrew or Greek and recall the meaning;
+      once you know it, the card also comes back from English, to recall the word itself. Each card returns just before you would
+      forget it: the next day, then after 3, 7, 14 and 30 days.</p>
+    <div id="fc" class="rv d2"><p class="status">Loading…</p></div>
   </div>
 </section>
 
@@ -255,7 +325,8 @@
 </footer>
 
 <script src="../assets/account.js?v=3d893693"></script>
-<script src="../assets/deeper.js?v=577f0a4e"></script>
+<script src="../assets/practice.js?v=26fdbf03"></script>
+<script src="../assets/deeper.js?v=718ec94e"></script>
 <script>
   (function () {
     function reveal() {

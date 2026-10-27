@@ -116,6 +116,14 @@ by His Brothers”), Miketz (“Joseph Is Exalted”),
 and for the rest of Genesis Beresheet (“The Messiah Is the Beginning”), Noach (“The Days of Noah and the Last Days”),
 Vayigash (“Joseph Makes Himself Known”), Vayechi (“Jacob Lives”), taken from the textbook PDF with pdftotext -layout; check Hebrew words by hand when adding more.
 
+**Flashcards (Oct 2026):** after “Reveal the meaning”, each word card asks “Did you know it?” (Not yet / I knew it), and a
+**Flashcards** section (`#practice`, hero button) drills the reader's own deck, `assets/practice.js`. Every word met on Dig
+deeper is added (localStorage `dbs-words`, Kids `dbs-kids-words`; not in the account sync yet), plus an “Add the words from
+earlier days of the plan” link. Each word is two cards: Hebrew/Greek → English, and English → Hebrew/Greek, which opens once
+the first way is known. Leitner boxes: Got it → next review after 1, 3, 7, 14, 30, 60 days; Again → back to box 1 and repeated
+later in the session. Up to 10 new words a day (Kids 5). Direction choice: Both ways / To English / From English. Keys: Space
+turns the card, 1/← Again, 2/→ Got it. “Practise anyway” runs extra practice without changing the schedule.
+
 **Layout (Oct 2026):** deeper.html is styled like the About/Learn pages (its own inline styles, `body.dp-rich`): a photo
 section with the word study cards below, then (Classic, weeks with commentary) a photo section with the commentary title,
 the text with a drop cap, and a “Keep reading” section with the book and Torah Class buttons. Photos are set by

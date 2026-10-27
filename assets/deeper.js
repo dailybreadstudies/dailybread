@@ -4,7 +4,8 @@
  * reading and one Greek word from the Apostles (Kids: Gospels) reading, picked for each day by
  * tools/build_word_picks.py (data/word-picks.json, data/kids/word-picks.json). Each card shows the word first;
  * the reader can guess, then reveal its meaning and the verse where it is used today.
- * Later: a short commentary on the week's Torah portion as a second way to dig deeper.
+ * After the reveal, "Did you know it?" grades the word into the reader's flashcard deck; the Practise section below
+ * (assets/practice.js) drills the deck both ways with spaced repetition.
  */
 (function () {
   'use strict';
@@ -119,6 +120,8 @@
               '<p class="wc-tr">' + esc(translit(e[1])) + '</p>' +
               '<p class="wc-gloss">' + esc(e[2] || '') + '</p>' +
               (e[3] && p.lang === 'he' ? '<p class="wc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
+              (window.DBPractice ? '<div class="wc-grade" data-s="' + esc(p.s) + '"><span>' + (KIDS ? 'Did you get it?' : 'Did you know it?') + '</span>' +
+                '<button type="button" data-ok="0">Not yet</button><button type="button" data-ok="1">' + (KIDS ? 'I got it!' : 'I knew it') + '</button></div>' : '') +
               (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p>' +
                 (ot ? '<p class="wc-orig ' + ot.lang + '" lang="' + ot.lang + '"' + (ot.lang === 'he' ? ' dir="rtl"' : '') + '>' + ot.html + '</p>' : '') +
                 '<cite>' + esc(where) + '</cite></blockquote>' : '') +
@@ -191,6 +194,7 @@
     var when = d.toLocaleDateString('en-GB', { weekday: 'long' }) + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()] +
       (day.hebrewDate ? ' · ' + day.hebrewDate.replace(/\s+\d{4}$/, '') : '');
     document.title = 'Dig deeper · ' + (KIDS ? 'Daily Bread for Kids' : 'Daily Bread Online');
+    if (window.DBPractice) DBPractice.init({ picks: res[1], date: date, lex: lex, names: names });
     var books = {};
     picks.forEach(function (p) { books[p.ref.split(' ')[0]] = 1; });
     return Promise.all(Object.keys(books).map(function (b) {
@@ -218,6 +222,27 @@
     box.innerHTML = '<p class="status">Sorry, this page could not be loaded. (' + esc(err.message) + ')</p>' +
       '<p class="dp-back"><a href="./">&larr; Back to today’s readings</a></p>';
   });
+
+  // "Did you know it?" on today's cards: the first grade for the word in the reader's flashcard deck (assets/practice.js)
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest && e.target.closest('.wc-grade button');
+    if (!g) return;
+    var row = g.closest('.wc-grade'), ok = g.getAttribute('data-ok') === '1';
+    DBPractice.grade(row.getAttribute('data-s'), ok);
+    row.innerHTML = '<span>' + (ok ? (KIDS ? 'Great! ' : 'Good. ') : '') + 'It’s in your deck: ' +
+      '<a href="#practice">practise it' + (ok ? ' the other way' : '') + ' below</a>.</span>';
+    row.classList.add('is-done');
+  });
+  function markGraded() {
+    if (!window.DBPractice) return;
+    document.querySelectorAll('.wc-grade').forEach(function (row) {
+      if (DBPractice.gradedToday(row.getAttribute('data-s'))) {
+        row.innerHTML = '<span>It’s in your deck: <a href="#practice">practise below</a>.</span>';
+        row.classList.add('is-done');
+      }
+    });
+  }
+  document.addEventListener('deeper-ready', markGraded);
 
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('.wc-reveal');
