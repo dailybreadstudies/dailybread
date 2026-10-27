@@ -273,7 +273,9 @@
   // Wide screens: the About card starts level with the first line of the text, not the title
   var WIDE = window.matchMedia ? window.matchMedia('(min-width: 1240px)') : { matches: false };
   // A painted banner behind the top of each track, full width, fading into the page just above the text
-  var BANNERS = { devotional: 'study-devotional', 'second-temple': 'study-second-temple', 'early-christian': 'study-early-christian' };
+  var BANNERS = { devotional: 'study-devotional', 'second-temple': 'study-second-temple', 'early-christian': 'study-early-christian',
+    rabbinics: 'study-rabbinics' };
+  var BANNER_POS = { rabbinics: '55% 22%' };   // where the picture's subject sits (default: centre, a little above)
   function banner() {
     var b = document.getElementById('st-banner');
     if (!b) {
@@ -296,6 +298,7 @@
     var url = 'assets/img/' + name + (window.innerWidth <= 900 ? '-sm' : '') + '.jpg';
     if (img.getAttribute('data-src') !== url) {
       img.setAttribute('data-src', url);
+      img.style.backgroundPosition = BANNER_POS[track.id] || '';
       img.classList.remove('on');
       var pic = new Image();
       pic.onload = function () { if (img.getAttribute('data-src') === url) { img.style.backgroundImage = 'url(' + url + ')'; img.classList.add('on'); } };

@@ -143,7 +143,7 @@ Rabbinics (Vilna text). Dig deeper gets a "Your study" section and hero button; 
 Progress gets "Your study" (book bars per track, recently read). Never counted in the plan's catch-up. Data in `data/tracks/`,
 built by `tools/build_tracks.py` (README). Odes of Solomon: The Nuhra Version (2021), public domain, set out line by line (Syriac where Coptic/Greek also survive).
 Each track has a painted banner (`BANNERS` in tracks.js → assets/img/study-<track>.jpg + -sm), full width under the top bar,
-full strength with a dark wash and light headings (title set lower), fading into the page above the tools and text. Rabbinics has none yet (image to come from John).
+full strength with a dark wash and light headings (title set lower), fading into the page above the tools and text.
 Each book has an About card (`data/tracks/about.json`, written by hand, 100–170 words with a translation note), styled like an
 illustration card: right margin from 1240px, after the text below that; X closes it, the (i) after "1 Enoch · 5 of 108" opens it
 (remembered in `dbs-tracks-prefs.aboutClosed`). 1 Maccabees (KJV) sits between 1 Enoch and 2 Maccabees and was marked read
