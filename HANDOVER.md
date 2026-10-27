@@ -48,7 +48,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
   (`https://openbible.com/audio/souer/BSB_01_Gen_019.mp3`: book number, OpenBible code — TIT is `Tts` — 3-digit chapter).
   Code: `audioItems` in assets/reader.js builds the list; `DBPodcast.toggleQueue` / `listenItem(date, spec)` in podcast.js play it.
 - Readings that start or stop inside a chapter start/stop at an **estimate**: share of the chapter's read-aloud text before
-  that verse × the file's length, starting `LEAD` (5 s) early, stopping `TAIL` (2 s) late with a short fade (podcast.js).
+  that verse × the file's length, starting `LEAD` (5 s) early, stopping `TAIL` (2 s) late; the last `FADE` (1 s, real time at any speed) fades out smoothly (a 30 ms timer near the end, eased curve) so listeners hear the cut is approximate. No fade-in at starts. iPhone/iPad ignore `audio.volume`, so there it simply stops.
   Section headings and cross-references are not counted (`SILENT` in reader.js).
 - The audio is the stock BSB: it does not follow the emendations (e.g. Gehenna) or the Messianic filter.
   Classic only for now (Kids pages don't load podcast.js).

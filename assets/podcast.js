@@ -59,7 +59,7 @@
   // Bible readings (assets/reader.js): the BSB audio read by Bob Souer, public domain (CC0), from OpenBible.com.
   // Start and stop points inside a chapter are estimates, so start a few seconds early and stop a moment late.
   var BIBLE_SHOW = 'Berean Standard Bible · Bob Souer', BIBLE_LINK = 'https://openbible.com/audio/souer/';
-  var LEAD = 5, TAIL = 2, FADE = 0.8;
+  var LEAD = 5, TAIL = 2, FADE = 1;    // FADE: seconds of fade-out where a reading ends inside a chapter
 
   // The row under the day's readings: same columns as the readings (circle · LABEL · text). A dropdown at the end
   // chooses what to listen to: the Busy Moms podcast (when the day has an episode) or the readings themselves (BSB).
@@ -191,7 +191,8 @@
     });
 
     audio.addEventListener('play', sync);
-    audio.addEventListener('pause', function () { remember(true); sync(); });
+    audio.addEventListener('pause', function () { stopFade(); remember(true); sync(); });
+    audio.addEventListener('seeked', function () { if (isQueue()) checkStop(); });
     audio.addEventListener('loadedmetadata', function () {
       if (isQueue()) {
         var it = current.queue[current.i];
@@ -414,6 +415,7 @@
   }
   function loadItem() {
     var it = current.queue[current.i];
+    stopFade();
     audio.volume = 1;
     if (audio.getAttribute('src') !== it.u) audio.src = it.u;
     else if (audio.readyState >= 1) { audio.currentTime = current.pending != null ? current.pending : bounds(it, audio.duration).s; current.pending = null; }
@@ -459,14 +461,24 @@
       document.documentElement.classList.add('pod-docked');
     }
   }
-  function checkStop() {                                    // a reading that ends inside the chapter
+  // A reading that ends inside a chapter stops at an estimate, so its last second fades out to show the cut is
+  // approximate. timeupdate comes only about four times a second, so near the end a short timer runs the fade smoothly.
+  var fadeTimer = null;
+  function stopFade() { if (fadeTimer) { clearInterval(fadeTimer); fadeTimer = null; } }
+  function checkStop() {
+    if (!isQueue()) { stopFade(); return; }
     var it = current.queue[current.i];
-    if (it.fe >= 1 || !audio.duration || scrubbing) return;
-    var stop = bounds(it, audio.duration).e, left = stop - audio.currentTime;
-    if (left <= 0) nextItem();
-    else audio.volume = left < FADE ? Math.max(0, left / FADE) : 1;
+    if (it.fe >= 1 || !audio.duration || scrubbing) { stopFade(); audio.volume = 1; return; }
+    var rate = audio.playbackRate || 1;
+    var left = (bounds(it, audio.duration).e - audio.currentTime) / rate;   // real seconds to the stop
+    if (left <= 0) { stopFade(); audio.volume = 1; nextItem(); return; }
+    var v = left < FADE ? left / FADE : 1;
+    audio.volume = Math.max(0, Math.min(1, v * v));                       // eased, so the fall sounds even
+    if (left < FADE + 0.6 && !audio.paused) { if (!fadeTimer) fadeTimer = setInterval(checkStop, 30); }
+    else stopFade();
   }
   function nextItem() {
+    stopFade();
     if (current.i < current.queue.length - 1) { current.i++; current.pending = null; loadItem(); start(); return; }
     audio.pause();
     audio.volume = 1;
@@ -492,6 +504,8 @@
   }
   function close() {
     if (!dock) return;
+    stopFade();
+    audio.volume = 1;
     remember(true);
     audio.pause();
     audio.removeAttribute('src');
