@@ -140,8 +140,9 @@
       if (book === 'murray') { head = u.s || u.t; sub = (u.s ? u.t + ' · ' : '') + 'Andrew Murray'; }
       else if (book === 'hermas') { head = u.t.replace(' · Chapter ', ', chapter '); sub = (u.s ? u.s + ' · ' : '') + 'The Shepherd of Hermas'; }
       else if (book === 'enoch') { head = '1 Enoch ' + i; sub = u.s; }
+      else if (book === 'odes') { head = 'Ode ' + i; sub = u.s || ''; }
       else { head = f.title + ' ' + u.t.replace(/^Chapter /, ''); sub = u.s || ''; }
-      return { head: head, sub: sub, blocks: u.b, by: f.by, note: i === 1 ? f.note : null };
+      return { head: head, sub: sub, blocks: u.b, by: f.by, note: i === 1 ? f.note : null, poetry: !!f.poetry };
     });
   }
 
@@ -188,6 +189,11 @@
     u.blocks.forEach(function (b) {
       if (b.h) { flush(); out += '<p class="s2">' + esc(b.h) + '</p>'; return; }
       if (b.p) { flush(); out += '<p>' + b.p + '</p>'; return; }
+      if (u.poetry) {        // the Odes: each verse on its own lines, as the hymn is set out
+        flush();
+        out += '<p class="st-poem"><span class="verse-num">' + esc(b.v) + '</span>' + esc(b.x).replace(/\n+/g, '<br>') + '</p>';
+        return;
+      }
       if (u.mishnah) {
         flush();
         out += '<p class="st-m"><span class="verse-num">' + b.v + '</span>' + esc(b.x) + '</p>';

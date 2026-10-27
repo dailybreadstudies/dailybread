@@ -13,6 +13,7 @@ Sources (clone them anywhere, then pass the folders below):
            1 and 2 Maccabees, King James Version (Cambridge Paragraph Bible text, eBible.org), public domain.
   --murray github.com/jdegreef/ochorus               backend/library/fixtures/content/books/school-of-prayer.en.json
            Andrew Murray, With Christ in the School of Prayer (1885), public domain.
+  --odes   pdftotext -layout of The Odes of Solomon: The Nuhra Version (2021) PDF (nuhra.net), public domain translation.
   --mishnah a folder of <Tractate>.en.json / <Tractate>.he.json, taken from the Sefaria export
            (github.com/Sefaria/Sefaria-Export-Archive, commit 3f10136, json/Mishnah/Seder */*/):
            English "Mishnah Yomit by Dr. Joshua Kulp" (CC BY), Hebrew "Mishnah, ed. Romm, Vilna 1913" (public domain).
@@ -359,6 +360,77 @@ def unit_words(u):
     return sum(words(b.get('x') or b.get('p')) for b in u['b'])
 
 
+# ── The Odes of Solomon: The Nuhra Version (2021), Samuel Zinner (Syriac) and Mark M. Mattison (Coptic, Greek) ──
+# The translation is committed to the public domain by its translators; their annotations are copyrighted and are not used.
+# Input: `pdftotext -layout` of the PDF from nuhra.net. Where the PDF prints the Syriac beside the Coptic or Greek
+# (Odes 5, 6, 11, 22, 25) the Syriac, in the left column, is taken; Ode 1 survives only in Coptic and Ode 2 is the
+# translators' reconstruction from the Greek of Ode 11.
+def build_odes(path):
+    lines = open(path, encoding='utf-8').read().split('\n')
+    start = next(i for i, l in enumerate(lines) if 'BOOK I:' in l)
+    end = next(i for i, l in enumerate(lines) if 'ANNOTATIONS' in l)
+    units, cur, parallel, src, book, title_wait = [], None, False, '', '', False
+    for raw in lines[start:end]:
+        l = raw.replace('\f', '').rstrip()
+        t = l.strip()
+        if not t or 'is committed to the public domain' in t or re.fullmatch(r'[ivx\d]+', t):
+            continue
+        m = re.match(r'^BOOK (I+): (.*)$', t)
+        if m:
+            book = 'Book %s: %s' % (m.group(1), m.group(2).title().replace(' And ', ' and ')); continue
+        if t.startswith('From the') or t.startswith('A hypothetical reconstruction') or t.startswith('(From Ode'):
+            if t.startswith('From the'):
+                parallel = bool(re.search(r'From the Syriac\s{3,}From the (Coptic|Greek)', t))
+                src = '' if t.startswith('From the Syriac') else ('From the Coptic' if 'Coptic' in t else 'From the Greek')
+            elif t.startswith('A hypothetical'):
+                src = 'Reconstructed from the Greek of Ode 11'
+            continue
+        m = re.match(r'^ODE (\d+)$', t)
+        if m:
+            cur = {'t': 'Ode ' + m.group(1), 's': [], 'b': [], 'src': src, 'book': book}
+            units.append(cur); title_wait = True; book = ''
+            continue
+        if cur is None:
+            continue
+        left = l
+        if parallel:
+            ind = len(l) - len(l.lstrip())
+            if ind >= 55:                      # right column only (or a centred title)
+                if title_wait and not cur['b']:
+                    cur['s'].append(t)
+                continue
+            g = next((x for x in re.finditer(r' {3,}(?=\S)', l) if x.end() >= 45), None)
+            if g:
+                left = l[:g.start()]
+        left = left.strip()
+        vm = re.match(r'^(\d+[a-z]?)\s+(.*)$', left)          # "5a", "5b": the translators' split verses
+        if vm:
+            title_wait = False
+            v = vm.group(1)
+            cur['b'].append({'v': int(v) if v.isdigit() else v, 'x': vm.group(2).strip()})
+        elif title_wait and not cur['b']:
+            cur['s'].append(left)
+        elif cur['b']:
+            cur['b'][-1]['x'] += '\n' + left
+    out = []
+    for u in units:
+        sub = ' '.join(u['s']).strip()
+        bits = [x for x in [sub, u['src']] if x]
+        unit = {'t': u['t'], 'b': u['b']}
+        if bits:
+            unit['s'] = ' · '.join(bits)
+        if u['book']:
+            unit['b'] = [{'h': u['book']}] + unit['b']
+        out.append(unit)
+    return {'id': 'odes', 'title': 'The Odes of Solomon', 'unit': 'Ode', 'poetry': True,
+            'by': 'The Nuhra Version (2021), translated by Samuel Zinner (Syriac) and Mark M. Mattison (Coptic, Greek)',
+            'note': 'In the translators’ signs, square brackets mark missing text, angle brackets a conjectural emendation, '
+                    'and parentheses an explanatory gloss. Where an Ode also survives in Coptic or Greek, the Syriac is given here.',
+            'credit': 'Samuel Zinner and Mark M. Mattison, The Odes of Solomon: The Nuhra Version (2021), nuhra.net, public domain '
+                      '(translation only; the annotations are not reproduced).',
+            'units': out}
+
+
 def mishnah_text(t):
     t = re.sub(r'<br\s*/?>', ' ', t)
     t = re.sub(r'<[^>]+>', '', t)
@@ -396,6 +468,7 @@ def main():
     ap.add_argument('--ebible', required=True)
     ap.add_argument('--murray', required=True)
     ap.add_argument('--mishnah', required=True)
+    ap.add_argument('--odes', required=True, help='pdftotext -layout of The Odes of Solomon: The Nuhra Version (2021)')
     a = ap.parse_args()
 
     books = build_book(a)
@@ -403,6 +476,7 @@ def main():
     books['1maccabees'] = build_macc(a, 1)
     books['2maccabees'] = build_macc(a, 2)
     books['murray'] = build_murray(a)
+    books['odes'] = build_odes(a.odes)
     for k, b in books.items():
         write(b['id'] + '.json', b)
 
@@ -431,8 +505,7 @@ def main():
                         'tractates': [[t[0], t[1], t[2], t[3]] for t in tractates if t[1] != 'Pirkei Avot'],
                         'uw': [sum(c) for t in tractates if t[1] != 'Pirkei Avot' for c in t[5]]},
             '1clement': meta(books['1clement']),
-            'odes': {'title': 'The Odes of Solomon', 'by': 'Translated by J. Rendel Harris', 'unit': 'Ode', 'units': 42,
-                     'file': 'odes.json', 'pending': True, 'words': 11000},   # about the length of Harris's English
+            'odes': meta(books['odes']),
             'hermas': meta(books['hermas']),
             'polycarp': meta(books['polycarp']),
             'didache': meta(books['didache']),

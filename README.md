@@ -215,12 +215,13 @@ Devotional (Murray, *With Christ in the School of Prayer*), Second Temple Litera
 Rabbinics (Pirkei Avot one mishnah at a time, then the whole Mishnah chapter by chapter), Early Christian Writings
 (1 Clement, Odes of Solomon, Shepherd of Hermas, Polycarp, Didache). `study.html` is the reading page; Dig deeper, the
 Dig deeper box on Today and Progress get a "Your study" part. Marks: `localStorage['dbs-tracks']`, synced as `tracks` in
-the account's progress row by `assets/account.js`. The Odes of Solomon are marked `pending` in `data/tracks/index.json`
-(no public-domain English text yet): the track passes over them until `data/tracks/odes.json` is added and `pending` removed.
+the account's progress row by `assets/account.js`. The Odes of Solomon are The Nuhra Version (2021), Zinner and Mattison,
+public domain (translation only; the annotations are copyrighted and left out), parsed from `pdftotext -layout` of their PDF.
+A book marked `pending` in `data/tracks/index.json` is passed over by its track until it is added.
 
 ```
 python3 tools/build_tracks.py --book ~/src/The-Book --sm ~/src/bible_databases_deuterocanonical \
-  --ebible ~/src/ebible --murray ~/src/ochorus --mishnah ~/src/mishnah     # sources: see the script's header
+  --ebible ~/src/ebible --murray ~/src/ochorus --mishnah ~/src/mishnah --odes ~/src/odes-nuhra-2021.txt   # sources: see the script's header
 ```
 
 ## Rebuilding the BSB data

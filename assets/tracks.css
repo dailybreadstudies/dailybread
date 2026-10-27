@@ -103,3 +103,7 @@
     width: min(460px, calc((100vw - 32rem) / 2 - 56px)); }
 }
 .st-shelf-blurb { margin-top: 0; }
+
+/* The Odes: verse by verse, line by line */
+.st-text .st-poem { margin: 0 0 0.85rem; padding-left: 1.6em; text-indent: -1.6em; }
+.st-text .st-poem .verse-num { display: inline-block; min-width: 1.3em; text-indent: 0; }
