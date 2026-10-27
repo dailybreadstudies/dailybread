@@ -1,0 +1,82 @@
+/* Private study tracks (assets/tracks.js): study.html, the "Your study" section on Dig deeper and Progress */
+
+/* ── study.html: header ── */
+.st-date { text-align: center; font: 600 0.76rem/1.6 var(--sans); text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin: 0 0 0.3rem; }
+.st-title { text-align: center; font-family: var(--display); font-size: 1.9rem; font-weight: 300; line-height: 1.25; color: var(--heading);
+  letter-spacing: -0.015em; margin: 0 0 1.1rem; }
+.st-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 18px; margin: 0 0 2.4rem; padding: 0 0 1.4rem;
+  border-bottom: 1px solid var(--rule); }
+.st-tabs a { font: 600 0.68rem/1.8 var(--sans); letter-spacing: 0.13em; text-transform: uppercase; color: var(--accent-soft);
+  text-decoration: none; border-bottom: 2px solid transparent; }
+.st-tabs a:hover { color: var(--accent-deep); }
+.st-tabs a[aria-current="true"] { color: var(--accent); border-bottom-color: var(--accent-line); }
+
+/* ── A reading ── */
+.st-where { text-align: center; font: 400 0.74rem/1.6 var(--sans); letter-spacing: 0.02em; color: var(--accent-faint); margin: -1.4rem 0 1.4rem; }
+.st-tools { display: flex; justify-content: center; gap: 8px; margin: 0 0 1.8rem; }
+.st-toggle { display: inline-flex; align-items: center; gap: 7px; padding: 5px 13px 5px 10px; border: 1px solid var(--line-strong); border-radius: 15px;
+  background: none; color: var(--muted); font: 500 0.72rem/1.2 var(--sans); letter-spacing: 0.04em; cursor: pointer; }
+.st-toggle::before { content: ''; width: 22px; height: 12px; border-radius: 6px; background: var(--line-strong); flex: none;
+  box-shadow: inset 2px 0 0 0 var(--line-strong); transition: background 0.2s; }
+.st-toggle[aria-pressed="true"] { color: var(--accent); border-color: var(--accent-soft); }
+.st-toggle[aria-pressed="true"]::before { background: var(--done); }
+.st-toggle { position: relative; }
+.st-toggle::after { content: ''; position: absolute; left: 12px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%;
+  background: var(--paper); transition: transform 0.2s; }
+.st-toggle[aria-pressed="true"]::after { transform: translateX(10px); }
+.st-toggle:hover { border-color: var(--accent-soft); }
+.st-toggle:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.st-note { font: 400 0.84rem/1.6 var(--sans); color: var(--muted); background: var(--tint); border-radius: 10px; padding: 12px 16px; margin: 0 0 1.8rem; }
+.st-text .st-m { margin-bottom: 0.9rem; }
+.st-text .st-m .verse-num { font-weight: 600; }
+.st-text .st-he { font-family: var(--hebrew); font-size: 1.22rem; line-height: 1.85; text-align: right; color: var(--ink-soft); margin: -0.3rem 0 1.3rem; }
+.st-text .s2:first-child { margin-top: 0; }
+.st-by { margin: 2rem 0 0; text-align: center; font: italic 400 0.84rem/1.5 var(--serif); color: var(--muted); }
+.st-private { text-align: center; font-size: 1.02rem; line-height: 1.7; color: var(--ink-soft); max-width: 26rem; margin: 2rem auto; }
+.st-private a { color: var(--accent); }
+
+/* ── Dig deeper: "Your study" ── */
+.st-sec { min-height: 0; }
+.st-sec .st-h { font-size: clamp(1.8rem, 4vw, 2.8rem); max-width: 18em; }
+.st-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 1.6rem 0 0; }
+.st-card { display: flex; flex-direction: column; gap: 4px; padding: 18px 20px 16px; border: 1px solid var(--line-strong); border-radius: 16px;
+  background: var(--paper); color: var(--ink); text-decoration: none; transition: border-color 0.15s, background 0.15s; }
+.st-card:hover { border-color: var(--accent-soft); background: var(--tint); }
+.st-card:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.st-card-k { font: 600 0.68rem/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.st-card-n { font-family: var(--display); font-size: 1.15rem; line-height: 1.35; color: var(--heading); }
+.st-card-s { display: inline-flex; align-items: center; gap: 4px; font: 500 0.74rem/1.4 var(--sans); color: var(--muted); }
+.st-card.is-today .st-card-s { color: var(--done); }
+.st-card-s svg { width: 13px; height: 13px; }
+.st-more { margin: 1.4rem 0 0; font: 500 0.86rem var(--sans); }
+.st-more a { color: var(--accent); text-underline-offset: 3px; text-decoration-color: var(--accent-line); }
+
+/* ── Progress: "Your study" ── */
+.st-progress[hidden] { display: none; }
+.st-progress .pg-blurb a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 2px; }
+.st-pt { margin: 0 0 1.4rem; font-family: var(--sans); }
+.st-pt-h { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 0.45rem; padding: 0 0 0.35rem; border-bottom: 1px solid var(--rule); }
+.st-pt-h span:first-child { font: 600 0.8rem var(--sans); color: var(--heading); }
+.st-pt-n { font: 400 0.76rem var(--sans); color: var(--muted); }
+.st-pb { display: grid; grid-template-columns: minmax(0, 11rem) 1fr 3.4rem; align-items: center; gap: 10px; padding: 3px 0; font-size: 0.82rem; }
+.st-pb-name { color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st-pb-lane { height: 6px; border-radius: 3px; background: var(--tint); overflow: hidden; }
+.st-pb-lane span { display: block; height: 100%; border-radius: 3px; background: var(--done); }
+.st-pb-n { text-align: right; color: var(--muted); font-size: 0.74rem; font-variant-numeric: tabular-nums; }
+.st-pb.is-current .st-pb-name { color: var(--heading); font-weight: 600; }
+.st-pb.is-done .st-pb-n { color: var(--done); }
+.st-pb.is-pending { opacity: 0.55; }
+.st-log-h { font: 600 0.7rem var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 1.8rem 0 0.6rem; }
+.st-log { list-style: none; margin: 0; padding: 0; font-family: var(--sans); font-size: 0.84rem; }
+.st-log li { display: grid; grid-template-columns: 4.2rem 1fr auto; gap: 10px; padding: 5px 0; border-bottom: 1px solid var(--rule); }
+.st-log-d { color: var(--muted); font-variant-numeric: tabular-nums; }
+.st-log a { color: var(--ink); text-decoration: none; }
+.st-log a:hover { color: var(--accent-deep); text-decoration: underline; text-decoration-color: var(--accent-line); }
+.st-log-t { color: var(--accent-faint); font-size: 0.74rem; text-align: right; }
+
+@media (max-width: 600px) {
+  .st-cards { grid-template-columns: 1fr; }
+  .st-pb { grid-template-columns: minmax(0, 8.5rem) 1fr 3rem; }
+  .st-log li { grid-template-columns: 3.8rem 1fr; }
+  .st-log-t { display: none; }
+}

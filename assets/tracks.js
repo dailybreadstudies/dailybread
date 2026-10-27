@@ -1,0 +1,478 @@
+/* Daily Bread Online — private study tracks
+ *
+ * Extra reading beyond the Daily Bread plan, shown only to the accounts in READERS (the site owner's): Devotional,
+ * Second Temple Literature, Rabbinics and Early Christian Writings. Each track works through its books in order,
+ * one unit at a time (a chapter, a lesson, or for Pirkei Avot one mishnah). A track remembers only where you are,
+ * never a date to keep up with, so it can never put you behind, and it never touches the plan's progress.
+ *
+ *   study.html          the reading pages (#1–#4), like Today's readings, with "Mark … Complete" at the bottom
+ *   deeper.html         a "Your study" section with the four tracks
+ *   index.html          a "Your study" option in the Dig deeper box once the day's readings are done
+ *   progress.html       a "Your study" section: where each track stands, book by book, and the last chapters read
+ *
+ * Texts: data/tracks/ (built by tools/build_tracks.py). Marks: localStorage['dbs-tracks'] = { done: { "enoch:5": "2026-10-27" } }
+ * (book id and unit number), synced with the account's progress by assets/account.js. Load after account.js.
+ */
+(function () {
+  'use strict';
+  if (document.body.getAttribute('data-edition') === 'kids') return;
+
+  // SHA-256 of the account email in lower case: the address itself is not written in the page
+  var READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];
+  var TKEY = 'dbs-tracks', PREFS = 'dbs-tracks-prefs';
+  var DATA = 'data/tracks/';
+  var PAGE = document.body.getAttribute('data-page') || 'today';
+  var CHECK_SVG = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+  function load(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
+  function store(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function todayISO() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function shortDate(iso) { return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); }
+  function getJSON(url) { return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + ' ' + r.status); return r.json(); }); }
+
+  // ── Who may see the tracks ──
+  function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+  function allowed() {
+    var a = load('dbs-auth'), e = a && a.email;
+    if (!e || !window.crypto || !crypto.subtle || !window.TextEncoder) return Promise.resolve(false);
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(e).trim().toLowerCase()))
+      .then(function (b) { return READERS.indexOf(hex(b)) >= 0; }).catch(function () { return false; });
+  }
+
+  // ── Marks ──
+  function marks() { var s = load(TKEY); return s && s.done ? s.done : {}; }
+  function setMark(key, on) {
+    var s = load(TKEY) || {};
+    s.done = s.done || {};
+    if (on) s.done[key] = todayISO(); else delete s.done[key];
+    store(TKEY, s);
+    try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ }   // account.js syncs it
+  }
+  function prefs() { return load(PREFS) || {}; }
+  function setPref(k, v) { var p = prefs(); p[k] = v; store(PREFS, p); }
+  function siteSettings() { return load('dbs-settings') || {}; }
+
+  // ── Texts ──
+  var idxP = null, files = {};
+  function index() { return idxP || (idxP = getJSON(DATA + 'index.json').catch(function (e) { idxP = null; throw e; })); }
+  function file(path) { return files[path] || (files[path] = getJSON(DATA + path).catch(function (e) { delete files[path]; throw e; })); }
+  function mkey(book, i) { return book + ':' + i; }
+
+  // Where a track stands: the first unit not marked, book by book (books not yet available are passed over)
+  function position(ix, track, done) {
+    for (var b = 0; b < track.books.length; b++) {
+      var id = track.books[b], m = ix.books[id];
+      if (m.pending) continue;
+      for (var i = 1; i <= m.units; i++) if (!done[mkey(id, i)]) return { book: id, i: i };
+    }
+    return null;
+  }
+  // The unit of this track marked today, if any (the latest one): the track then stays on it for the day
+  function doneToday(ix, track, done) {
+    var today = todayISO(), best = null;
+    track.books.forEach(function (id, bi) {
+      var m = ix.books[id];
+      for (var i = 1; i <= m.units; i++) if (done[mkey(id, i)] === today) best = { book: id, i: i, bi: bi };
+    });
+    return best;
+  }
+  function after(ix, track, at) {        // the unit after this one in the track
+    var bi = track.books.indexOf(at.book), m = ix.books[at.book];
+    if (at.i < m.units) return { book: at.book, i: at.i + 1 };
+    for (var b = bi + 1; b < track.books.length; b++) if (!ix.books[track.books[b]].pending) return { book: track.books[b], i: 1 };
+    return null;
+  }
+  function trackUnits(ix, track) { return track.books.reduce(function (n, id) { return n + (ix.books[id].pending ? 0 : ix.books[id].units); }, 0); }
+
+  var MURRAY_ORD = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth', 'Eleventh',
+    'Twelfth', 'Thirteenth', 'Fourteenth', 'Fifteenth', 'Sixteenth', 'Seventeenth', 'Eighteenth', 'Nineteenth', 'Twentieth',
+    'Twenty-first', 'Twenty-second', 'Twenty-third', 'Twenty-fourth', 'Twenty-fifth', 'Twenty-sixth', 'Twenty-seventh',
+    'Twenty-eighth', 'Twenty-ninth', 'Thirtieth', 'Thirty-first'];
+  function avotAt(m, i) { var c = 0; while (c < m.per.length && i > m.per[c]) { i -= m.per[c]; c++; } return { c: c, m: i - 1 }; }
+  function mishnahAt(m, i) {
+    for (var t = 0; t < m.tractates.length; t++) { var n = m.tractates[t][3]; if (i <= n) return { t: m.tractates[t], c: i - 1 }; i -= n; }
+    return null;
+  }
+  // A short name for a unit, without loading its text where possible ("1 Enoch 5", "Pirkei Avot 2:4", "Berakhot 3")
+  function unitName(ix, book, i) {
+    var m = ix.books[book];
+    if (m.kind === 'avot') { var a = avotAt(m, i); return Promise.resolve('Pirkei Avot ' + (a.c + 1) + ':' + (a.m + 1)); }
+    if (m.kind === 'mishnah') { var x = mishnahAt(m, i); return Promise.resolve('Mishnah ' + x.t[1] + ' ' + (x.c + 1)); }
+    if (book === 'murray') return Promise.resolve(i === 1 ? 'Murray, Preface' : i <= 32 ? 'Murray, ' + MURRAY_ORD[i - 2] + ' Lesson' : 'Murray, Note on George Müller');
+    if (book === 'hermas') return file(m.file).then(function (b) { return 'Hermas, ' + b.units[i - 1].t.replace(' · Chapter ', ', chapter '); });
+    if (m.pending) return Promise.resolve(m.title + ' ' + i);
+    return Promise.resolve(m.title + ' ' + i);
+  }
+  // A unit ready to show: { head, sub, blocks, by, hebrew }
+  function getUnit(ix, book, i) {
+    var m = ix.books[book];
+    if (m.kind === 'avot') {
+      return file(m.file).then(function (f) {
+        var a = avotAt(m, i), b = f.chapters[a.c][a.m];
+        return { head: 'Pirkei Avot ' + (a.c + 1) + ':' + (a.m + 1), sub: 'Ethics of the Fathers',
+          blocks: [b], by: m.by, mishnah: true };
+      });
+    }
+    if (m.kind === 'mishnah') {
+      var x = mishnahAt(m, i);
+      return file('mishnah/' + x.t[0] + '.json').then(function (f) {
+        return { head: x.t[1] + ' ' + (x.c + 1), sub: 'Mishnah, Seder ' + x.t[2] + ' · chapter ' + (x.c + 1) + ' of ' + x.t[3],
+          blocks: f.chapters[x.c], by: m.by, mishnah: true, he: f.heTitle };
+      });
+    }
+    return file(m.file).then(function (f) {
+      var u = f.units[i - 1], head, sub;
+      if (book === 'murray') { head = u.s || u.t; sub = (u.s ? u.t + ' · ' : '') + 'Andrew Murray'; }
+      else if (book === 'hermas') { head = u.t.replace(' · Chapter ', ', chapter '); sub = (u.s ? u.s + ' · ' : '') + 'The Shepherd of Hermas'; }
+      else if (book === 'enoch') { head = '1 Enoch ' + i; sub = u.s; }
+      else { head = f.title + ' ' + u.t.replace(/^Chapter /, ''); sub = u.s || ''; }
+      return { head: head, sub: sub, blocks: u.b, by: f.by, note: i === 1 ? f.note : null };
+    });
+  }
+
+  // ── Messianic filter (the same word list as the Bible text in assets/reader.js, plus a few for older English) ──
+  function wordReplacer(map) {
+    var keys = Object.keys(map).sort(function (a, b) { return b.length - a.length; });
+    var re = new RegExp('(?<![A-Za-z\\-])(' + keys.map(function (k) { return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') +
+      ')(?![A-Za-z]|-[a-z])([’ʼ](?=\\s))?', 'g');
+    return function (text) {
+      return text.replace(re, function (m, name, apos) {
+        var to = map[name];
+        return to + (apos ? (/s$/.test(name) && !/s$/.test(to) ? apos + 's' : apos) : '');
+      });
+    };
+  }
+  var messianicWords = wordReplacer({
+    'Jesus': 'Yeshua', 'Christ': 'Messiah', 'Christs': 'Messiahs', 'Christ-monger': 'Messiah-monger', 'Christ-mongers': 'Messiah-mongers',
+    'Law': 'Torah', 'Old Testament': 'Tanakh',
+    'church': 'assembly', 'churches': 'assemblies', 'Church': 'Assembly', 'Churches': 'Assemblies',
+    'baptize': 'immerse', 'baptizes': 'immerses', 'baptized': 'immersed', 'baptizing': 'immersing',
+    'Baptize': 'Immerse', 'Baptizes': 'Immerses', 'Baptized': 'Immersed', 'Baptizing': 'Immersing',
+    'baptise': 'immerse', 'baptised': 'immersed', 'baptising': 'immersing',
+    'baptism': 'immersion', 'baptisms': 'immersions', 'Baptism': 'Immersion', 'Baptisms': 'Immersions',
+    'baptizer': 'immerser', 'Baptizer': 'Immerser', 'Baptist': 'Immerser',
+    'gospel': 'good news', 'Gospel': 'Good news', 'gospels': 'good news',
+    'Judas': 'Judah', 'James': 'Jacob', 'Mary': 'Miriam',
+    'saints': 'holy ones', 'Saints': 'Holy ones', 'saint': 'holy one', 'Saint': 'Holy one',
+    'Hades': 'Sheol'
+  });
+  var LAW_RE = /(?<![A-Za-z\-])((?:the|The|His|his|My|my|Your|your|Thy|thy|our|Our|this|This|that|God[ʼ’']s|Moses[ʼ’']) )law(?![A-Za-z])(?! of (?:sin|the sin|the Spirit|faith|works|my mind|the Medes|the king|liberty|freedom|nature|love|the land|the Persians|this world|this city|the city|the country|the Lord's|truth))/g;
+  function messianic(text) {
+    return messianicWords(text).replace(LAW_RE, '$1Torah').replace(/\bYeshua Messiah\b/g, 'Yeshua the Messiah');
+  }
+  function filterNode(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), n, list = [];
+    while ((n = w.nextNode())) list.push(n);
+    list.forEach(function (t) { var v = messianic(t.nodeValue); if (v !== t.nodeValue) t.nodeValue = v; });
+  }
+
+  // ── Rendering a unit ──
+  function blocksHtml(u, hebrew) {
+    var out = '', para = [], words = 0;
+    function flush() { if (para.length) out += '<p>' + para.join(' ') + '</p>'; para = []; words = 0; }
+    u.blocks.forEach(function (b) {
+      if (b.h) { flush(); out += '<p class="s2">' + esc(b.h) + '</p>'; return; }
+      if (b.p) { flush(); out += '<p>' + b.p + '</p>'; return; }
+      if (u.mishnah) {
+        flush();
+        out += '<p class="st-m"><span class="verse-num">' + b.v + '</span>' + esc(b.x) + '</p>';
+        if (hebrew && b.he) out += '<p class="st-he" lang="he" dir="rtl">' + esc(b.he) + '</p>';
+        return;
+      }
+      // verses run on in paragraphs, as in the Bible text; a new paragraph every so often
+      if (words > 150 && /[.!?]["”’)]?$/.test(para[para.length - 1] || '')) flush();
+      para.push('<span class="verse-num">' + b.v + '</span>' + esc(b.x).replace(/\n+/g, ' '));
+      words += String(b.x).split(/\s+/).length;
+    });
+    flush();
+    return out;
+  }
+
+  // ═══════════════ study.html ═══════════════
+  var view = {};          // track n → { book, i } being shown
+  var IX = null;
+  function sectionHtml(ix, track, n, total, at, u) {
+    var done = marks(), on = !!done[mkey(at.book, at.i)], m = ix.books[at.book];
+    var filterOn = track.filter && !!siteSettings().messianic, hebrew = !!prefs().hebrew;
+    var unitWord = m.unit;
+    var html = '<p class="division-label">' + esc(track.title) + '</p>' +
+      '<h2 class="chapter-head">' + esc(u.head) + '</h2>' +
+      (u.sub ? '<p class="chapter-sub">' + esc(u.sub) + '</p>' : '') +
+      '<p class="st-where">' + esc(m.title) + ' &middot; ' + at.i + ' of ' + m.units + '</p>';
+    var tools = [];
+    if (track.filter) tools.push('<button type="button" class="st-toggle" data-st="filter" aria-pressed="' + filterOn + '">Messianic Filter</button>');
+    if (track.hebrew) tools.push('<button type="button" class="st-toggle" data-st="hebrew" aria-pressed="' + hebrew + '">Hebrew</button>');
+    if (tools.length) html += '<div class="st-tools">' + tools.join('') + '</div>';
+    if (u.note) html += '<p class="st-note">' + esc(u.note) + '</p>';
+    html += '<div class="scripture st-text' + (filterOn ? ' st-filter' : '') + '">' + blocksHtml(u, hebrew) + '</div>' +
+      '<p class="st-by">' + esc(u.by) + '</p>';
+    html += '<div class="done-row"><nav class="nav-bar">' +
+      '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
+      '<div class="nav-center"><button type="button" class="done-btn" data-mark="' + n + '" aria-pressed="' + on + '">' + CHECK_SVG +
+      '<span class="done-label">' + (on ? unitWord + ' Complete' : 'Mark ' + unitWord + ' Complete') + '</span></button>' +
+      '<span class="nav-indicator">' + n + ' of ' + total + '</span></div>' +
+      (n < total ? '<button class="nav-btn primary" data-go="' + (n + 1) + '">Next &rarr;</button>'
+                 : '<a class="nav-btn primary" href="progress.html#study">Progress &rarr;</a>') +
+      '</nav><p class="done-next"></p></div>';
+    return html;
+  }
+  function drawSection(n) {
+    var ix = IX, track = ix.tracks[n - 1], sec = document.getElementById('portion-' + n), at = view[n];
+    if (!sec) return Promise.resolve();
+    if (!at) {
+      sec.innerHTML = '<p class="division-label">' + esc(track.title) + '</p><h2 class="chapter-head">All done</h2>' +
+        '<p class="chapter-sub">Every book in this track is marked complete.</p>';
+      return Promise.resolve();
+    }
+    return getUnit(ix, at.book, at.i).then(function (u) {
+      sec.innerHTML = sectionHtml(ix, track, n, ix.tracks.length, at, u);
+      if (track.filter && siteSettings().messianic) sec.querySelectorAll('.st-text, .chapter-head, .chapter-sub').forEach(filterNode);
+      drawDoneNext(n);
+    }).catch(function () {
+      sec.innerHTML = '<p class="status">Could not load this reading. Please check your connection and try again.</p>';
+    });
+  }
+  function drawDoneNext(n) {
+    var sec = document.getElementById('portion-' + n), at = view[n];
+    if (!sec || !at) return;
+    var el = sec.querySelector('.done-next'), track = IX.tracks[n - 1];
+    if (!marks()[mkey(at.book, at.i)]) { el.innerHTML = ''; return; }
+    var nx = after(IX, track, at);
+    if (!nx) { el.innerHTML = 'That was the last one in this track. Well done!'; return; }
+    unitName(IX, nx.book, nx.i).then(function (name) {
+      el.innerHTML = 'Next time: ' + esc(name) + '. <button type="button" class="link-btn" data-ahead="' + n + '">Read it now &rarr;</button>';
+    });
+  }
+  function headerHtml() {
+    var d = new Date();
+    return '<p class="st-date">' + d.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }) + '</p>' +
+      '<h1 class="st-title">Your study</h1>' +
+      '<nav class="st-tabs" aria-label="Study tracks">' + IX.tracks.map(function (t, i) {
+        return '<a href="#' + (i + 1) + '" data-tab="' + (i + 1) + '">' + esc(t.short || t.title) + '</a>';
+      }).join('') + '</nav>';
+  }
+  function show(n, scroll) {
+    var total = IX.tracks.length;
+    n = Math.min(Math.max(n || 1, 1), total);
+    document.querySelectorAll('#portions .portion').forEach(function (s) { s.classList.toggle('active', s.id === 'portion-' + n); });
+    document.querySelectorAll('.st-tabs a').forEach(function (a) {
+      if (+a.getAttribute('data-tab') === n) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    });
+    if (location.hash !== '#' + n) { try { history.replaceState(null, '', location.pathname + '#' + n); } catch (e) { location.hash = '#' + n; } }
+    if (scroll !== false) window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+  function studyPage() {
+    var main = document.getElementById('portions');
+    allowed().then(function (ok) {
+      if (!ok) {
+        document.getElementById('st-header').innerHTML = '<h1 class="st-title">Your study</h1>';
+        main.innerHTML = '<p class="st-private">This page is part of a personal study plan and opens only for the account it belongs to. ' +
+          (load('dbs-auth') ? '' : '<button type="button" class="link-btn" data-acct="open">Sign in</button> if it is yours, or ') +
+          '<a href="./">go to today’s readings</a>.</p>';
+        return;
+      }
+      return index().then(function (ix) {
+        IX = ix;
+        var done = marks(), q = new URLSearchParams(location.search);
+        ix.tracks.forEach(function (t, k) { view[k + 1] = doneToday(ix, t, done) || position(ix, t, done); });
+        // A link from the Progress page: ?t=<track>&b=<book>&u=<n>
+        var want = 0;
+        if (q.get('t')) {
+          ix.tracks.forEach(function (t, k) {
+            if (t.id !== q.get('t')) return;
+            want = k + 1;
+            var b = q.get('b'), u = +q.get('u');
+            if (b && t.books.indexOf(b) >= 0 && u >= 1 && u <= ix.books[b].units) view[want] = { book: b, i: u };
+          });
+        }
+        document.getElementById('st-header').innerHTML = headerHtml();
+        main.innerHTML = ix.tracks.map(function (t, k) {
+          return '<section class="portion" id="portion-' + (k + 1) + '" aria-label="' + esc(t.title) + '"><p class="status">Loading…</p></section>';
+        }).join('');
+        var first = want || +(location.hash.match(/^#(\d)$/) || [])[1] || firstOpen();
+        show(first, false);
+        return Promise.all(ix.tracks.map(function (t, k) { return drawSection(k + 1); }));
+      });
+    }).catch(function () { main.innerHTML = '<p class="status">Could not load the study tracks. Please check your connection and try again.</p>'; });
+  }
+  function firstOpen() {       // the first track not yet read today
+    var done = marks();
+    for (var k = 0; k < IX.tracks.length; k++) if (!doneToday(IX, IX.tracks[k], done)) return k + 1;
+    return 1;
+  }
+  if (PAGE === 'study') {
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest && e.target.closest('[data-go], [data-mark], [data-ahead], [data-st], .st-tabs a');
+      if (!t || !IX) return;
+      if (t.hasAttribute('data-go')) { show(+t.getAttribute('data-go')); return; }
+      if (t.matches('.st-tabs a')) { e.preventDefault(); show(+t.getAttribute('data-tab'), false); return; }
+      if (t.hasAttribute('data-ahead')) {
+        var k = +t.getAttribute('data-ahead'), nx = after(IX, IX.tracks[k - 1], view[k]);
+        if (nx) { view[k] = nx; drawSection(k).then(function () { window.scrollTo({ top: 0, behavior: 'auto' }); }); }
+        return;
+      }
+      if (t.hasAttribute('data-st')) {
+        var what = t.getAttribute('data-st'), on = t.getAttribute('aria-pressed') !== 'true';
+        if (what === 'filter') { var s = siteSettings(); s.messianic = on; store('dbs-settings', s); }
+        else setPref('hebrew', on);
+        IX.tracks.forEach(function (tr, j) { if ((what === 'filter' && tr.filter) || (what === 'hebrew' && tr.hebrew)) drawSection(j + 1); });
+        return;
+      }
+      if (t.hasAttribute('data-mark')) {
+        var n = +t.getAttribute('data-mark'), at = view[n], key = mkey(at.book, at.i), now = !marks()[key];
+        setMark(key, now);
+        t.setAttribute('aria-pressed', String(now));
+        t.querySelector('.done-label').textContent = (now ? '' : 'Mark ') + IX.books[at.book].unit + ' Complete';
+        drawDoneNext(n);
+        if (now) {     // like Today: on to the next track not yet read today
+          var done = marks(), next = 0;
+          for (var j = n + 1; j <= IX.tracks.length && !next; j++) if (!doneToday(IX, IX.tracks[j - 1], done)) next = j;
+          if (next) setTimeout(function () { if (marks()[key] && document.getElementById('portion-' + n).classList.contains('active')) show(next); }, 1100);
+        }
+      }
+    });
+    window.addEventListener('hashchange', function () { var m = location.hash.match(/^#(\d)$/); if (m && IX) show(+m[1], false); });
+    // Signed in or synced on another device: draw again
+    var redraw = function () { if (!IX) studyPage(); else IX.tracks.forEach(function (t, k) { drawSection(k + 1); }); };
+    document.addEventListener('dbs-account-changed', function () { if (!IX) studyPage(); });
+    window.addEventListener('dbs-tracks-synced', redraw);
+    studyPage();
+  }
+
+  // ═══════════════ Cards: deeper.html and the Dig deeper box on Today ═══════════════
+  function cardsData() {
+    return index().then(function (ix) {
+      var done = marks();
+      return Promise.all(ix.tracks.map(function (t) {
+        var today = doneToday(ix, t, done), at = position(ix, t, done);
+        var shown = today || at;
+        return (shown ? unitName(ix, shown.book, shown.i) : Promise.resolve('All done')).then(function (name) {
+          return { track: t, name: name, today: !!today };
+        });
+      }));
+    });
+  }
+  function deeperSection() {
+    if (document.getElementById('study')) return;
+    var hero = document.getElementById('words-top');
+    if (!hero) return;
+    cardsData().then(function (cards) {
+      if (document.getElementById('study')) return;
+      var sec = document.createElement('section');
+      sec.className = 'ab-sec dp-sec st-sec';
+      sec.id = 'study';
+      sec.innerHTML = '<div class="ab-in dp-col"><p class="ab-eyebrow">Your study</p>' +
+        '<h2 class="ab-h st-h">Keep reading, <em>one chapter at a time.</em></h2>' +
+        '<div class="st-cards">' + cards.map(function (c, k) {
+          return '<a class="st-card' + (c.today ? ' is-today' : '') + '" href="study.html#' + (k + 1) + '">' +
+            '<span class="st-card-k">' + esc(c.track.title) + '</span>' +
+            '<span class="st-card-n">' + esc(c.name) + '</span>' +
+            '<span class="st-card-s">' + (c.today ? CHECK_SVG + ' Read today' : 'Next to read') + '</span></a>';
+        }).join('') + '</div>' +
+        '<p class="st-more"><a href="progress.html#study">Your study progress</a></p></div>';
+      hero.parentNode.insertBefore(sec, hero.nextSibling);
+      var btns = hero.querySelector('.ab-btns');
+      if (btns && !btns.querySelector('.st-btn')) {
+        var b = document.createElement('a');
+        b.className = 'ab-btn st-btn'; b.href = '#study'; b.textContent = 'Your study';
+        btns.appendChild(b);
+      }
+      if (location.hash === '#study') sec.scrollIntoView();
+    }).catch(function () { /* the word study page works without it */ });
+  }
+  function todayBox() {
+    document.querySelectorAll('.day-done .dd-opts').forEach(function (opts) {
+      if (opts.querySelector('.dd-study')) return;
+      var a = document.createElement('a');
+      a.className = 'dd-opt dd-study'; a.href = 'study.html';
+      a.innerHTML = '<b>Your study</b><span>Devotional, Second Temple, Rabbinics, Early Christian</span>';
+      opts.appendChild(a);
+      var box = opts.closest('.dd-deeper');
+      if (box) box.hidden = false;
+    });
+  }
+
+  // ═══════════════ progress.html ═══════════════
+  function progressSection() {
+    var host = document.getElementById('study-progress');
+    if (!host) {
+      var page = document.getElementById('progress-page');
+      if (!page) return;
+      host = document.createElement('section');
+      host.id = 'study-progress';
+      host.className = 'st-progress';
+      page.parentNode.insertBefore(host, page.nextSibling);
+    }
+    index().then(function (ix) {
+      var done = marks(), rows = '';
+      ix.tracks.forEach(function (t) {
+        var all = trackUnits(ix, t), got = 0, at = position(ix, t, done);
+        t.books.forEach(function (id) { for (var i = 1; i <= ix.books[id].units; i++) if (done[mkey(id, i)]) got++; });
+        rows += '<div class="st-pt"><p class="st-pt-h"><span>' + esc(t.title) + '</span><span class="st-pt-n">' + got + ' of ' + all + '</span></p>' +
+          t.books.map(function (id) {
+            var m = ix.books[id], n = 0;
+            for (var i = 1; i <= m.units; i++) if (done[mkey(id, i)]) n++;
+            var cur = at && at.book === id, fin = !m.pending && n === m.units;
+            return '<div class="st-pb' + (cur ? ' is-current' : '') + (fin ? ' is-done' : '') + (m.pending ? ' is-pending' : '') + '">' +
+              '<span class="st-pb-name">' + esc(m.title) + '</span>' +
+              '<span class="st-pb-lane"><span style="width:' + (m.units ? (100 * n / m.units).toFixed(2) : 0) + '%"></span></span>' +
+              '<span class="st-pb-n">' + (m.pending ? 'coming' : fin ? 'done' : n + '/' + m.units) + '</span></div>';
+          }).join('') + '</div>';
+      });
+      // The last chapters marked, newest first
+      var list = Object.keys(done).map(function (k) { var p = k.split(':'); return { book: p[0], i: +p[1], date: done[k] }; })
+        .filter(function (x) { return ix.books[x.book]; })
+        .sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.i - a.i; }).slice(0, 12);
+      var days = {};
+      Object.keys(done).forEach(function (k) { days[done[k]] = 1; });
+      return Promise.all(list.map(function (x) { return unitName(ix, x.book, x.i); })).then(function (names) {
+        var trackOf = function (book) { var tr = null; ix.tracks.forEach(function (t) { if (t.books.indexOf(book) >= 0) tr = t; }); return tr; };
+        var log = list.length ? '<ol class="st-log">' + list.map(function (x, k) {
+          var t = trackOf(x.book);
+          return '<li><span class="st-log-d">' + shortDate(x.date) + '</span><a href="study.html?t=' + t.id + '&b=' + x.book + '&u=' + x.i + '">' +
+            esc(names[k]) + '</a><span class="st-log-t">' + esc(t.title) + '</span></li>';
+        }).join('') + '</ol>' : '<p class="pg-blurb">Nothing marked yet. Open <a href="study.html">Your study</a> and mark a chapter complete when you finish it.</p>';
+        host.innerHTML = '<h2 class="pg-h" id="study">Your study <span>only on your account</span></h2>' +
+          '<p class="pg-blurb">Your own reading beyond the plan, one chapter at a time and never behind. ' +
+          (Object.keys(days).length ? Object.keys(done).length + (Object.keys(done).length === 1 ? ' chapter' : ' chapters') + ' read on ' +
+            Object.keys(days).length + (Object.keys(days).length === 1 ? ' day.' : ' days.') : '') +
+          ' <a href="study.html">Open Your study &rarr;</a></p>' + rows +
+          (list.length ? '<h3 class="st-log-h">Recently read</h3>' : '') + log;
+        host.hidden = false;
+        if (location.hash === '#study') { var h = document.getElementById('study'); if (h) h.scrollIntoView(); }
+      });
+    }).catch(function () { host.hidden = true; });
+  }
+
+  // ── Start: only for the readers listed above ──
+  function start() {
+    allowed().then(function (ok) {
+      document.documentElement.classList.toggle('has-study', ok);
+      if (!ok) {
+        var p = document.getElementById('study-progress'); if (p) p.hidden = true;
+        var s = document.getElementById('study'); if (s && PAGE === 'deeper') s.remove();
+        return;
+      }
+      if (PAGE === 'deeper') deeperSection();
+      if (PAGE === 'progress') progressSection();
+      if (PAGE === 'today') {
+        todayBox();
+        var portions = document.getElementById('portions');
+        if (portions && window.MutationObserver) new MutationObserver(todayBox).observe(portions, { childList: true, subtree: true });
+      }
+    });
+  }
+  if (PAGE !== 'study') {
+    start();
+    document.addEventListener('dbs-account-changed', function () {
+      var was = document.documentElement.classList.contains('has-study');
+      allowed().then(function (ok) { if (ok !== was) start(); });
+    });
+    window.addEventListener('dbs-tracks-synced', function () {
+      if (PAGE === 'progress' && document.documentElement.classList.contains('has-study')) progressSection();
+    });
+  }
+  window.DBTracks = { messianic: messianic };
+})();

@@ -19,6 +19,7 @@
   var EDITION = KIDS ? 'kids' : 'classic';
   var PKEY = KIDS ? 'dbs-kids-progress' : 'dbs-progress';
   var SKEY = KIDS ? 'dbs-kids-sync' : 'dbs-sync';               // { seen: cloud updated_at, dirty: true|false }
+  var TKEY = 'dbs-tracks';   // Classic only: the private study tracks (assets/tracks.js), synced inside the same row as "tracks"
 
   function store(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } }
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
@@ -86,7 +87,20 @@
 
   // ── Progress: merge, pull, push ──
   function emptyProgress() { return { read: {}, since: null, chapters: {}, archive: {}, from: null }; }
-  function norm(p) { p = p || {}; return { read: p.read || {}, since: p.since || null, chapters: p.chapters || {}, archive: p.archive || {}, from: p.from || null }; }
+  function norm(p) {
+    p = p || {};
+    var n = { read: p.read || {}, since: p.since || null, chapters: p.chapters || {}, archive: p.archive || {}, from: p.from || null };
+    if (!KIDS) n.tracks = { done: (p.tracks && p.tracks.done) || {} };
+    return n;
+  }
+  // This device's progress as stored in the cloud: the reading plan, plus (Classic) the study tracks kept under their own key
+  function localAll() {
+    var p = load(PKEY);
+    if (KIDS) return p;
+    p = norm(p);
+    p.tracks = { done: ((load(TKEY) || {}).done) || {} };
+    return p;
+  }
   function mergeRead(a, b) {
     var out = {};
     [a, b].forEach(function (src) {
@@ -112,7 +126,9 @@
     });
     var since = a.since && b.since ? (a.since > b.since ? a.since : b.since) : (a.since || b.since);
     var from = a.from && b.from ? (a.from < b.from ? a.from : b.from) : (a.from || b.from);
-    return { read: mergeRead(a.read, b.read), since: since, chapters: mergeDates(a.chapters, b.chapters), archive: archive, from: from };
+    var out = { read: mergeRead(a.read, b.read), since: since, chapters: mergeDates(a.chapters, b.chapters), archive: archive, from: from };
+    if (!KIDS) out.tracks = { done: mergeDates(a.tracks.done, b.tracks.done) };
+    return out;
   }
   function same(a, b) { return JSON.stringify(norm(a)) === JSON.stringify(norm(b)); }
 
@@ -120,6 +136,13 @@
   function setStatus(s, err) { state.status = s; state.error = err || ''; if (s === 'synced') state.at = new Date(); drawAll(); }
 
   function writeLocal(p) {
+    if (!KIDS && p) {
+      var t = load(TKEY) || {}, before = JSON.stringify(t.done || {});
+      t.done = (p.tracks && p.tracks.done) || {};
+      store(TKEY, t);
+      p = Object.assign({}, p); delete p.tracks;
+      if (JSON.stringify(t.done) !== before) { try { window.dispatchEvent(new Event('dbs-tracks-synced')); } catch (e) { /* ignore */ } }
+    }
     store(PKEY, p);
     try { window.dispatchEvent(new Event('dbs-progress-synced')); } catch (e) { /* ignore */ }
   }
@@ -138,7 +161,7 @@
       if (!s.id) return session().then(function (s2) { if (s2 && s2.id) return sync(firstTime); });
       setStatus('syncing');
       return api('/rest/v1/progress?select=data,updated_at&edition=eq.' + EDITION, {}, s.access_token).then(function (rows) {
-        var cloud = rows && rows[0], local = load(PKEY), meta = load(SKEY) || {};
+        var cloud = rows && rows[0], local = localAll(), meta = load(SKEY) || {};
         var mergeIt = firstTime || s.fresh || meta.dirty || !meta.seen;
         if (s.fresh) { s.fresh = false; store(AUTH_KEY, s); }
         if (!cloud) return push(s, local || emptyProgress());
@@ -166,7 +189,7 @@
       session().then(function (s) {
         if (!s || !s.id) return;
         setStatus('syncing');
-        return push(s, load(PKEY) || emptyProgress()).then(function () { setStatus('synced'); });
+        return push(s, localAll() || emptyProgress()).then(function () { setStatus('synced'); });
       }).catch(function () { sync(false); });
     }, 1500);
   });

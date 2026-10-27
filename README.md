@@ -207,6 +207,22 @@ python3 tools/build_hebnt.py /tmp/hd/base.osis data/orig-hent
 
 Word study is not available on the Hebrew New Testament (no tagged data); the Greek line keeps it.
 
+## Your study (private study tracks)
+
+Extra reading for the site owner's own account only (`READERS` in `assets/tracks.js` holds the SHA-256 of the account
+email, so the address is not in the code). Four tracks, each a chapter at a time with no dates, so they never fall behind:
+Devotional (Murray, *With Christ in the School of Prayer*), Second Temple Literature (1 Enoch, then 2 Maccabees, KJV),
+Rabbinics (Pirkei Avot one mishnah at a time, then the whole Mishnah chapter by chapter), Early Christian Writings
+(1 Clement, Odes of Solomon, Shepherd of Hermas, Polycarp, Didache). `study.html` is the reading page; Dig deeper, the
+Dig deeper box on Today and Progress get a "Your study" part. Marks: `localStorage['dbs-tracks']`, synced as `tracks` in
+the account's progress row by `assets/account.js`. The Odes of Solomon are marked `pending` in `data/tracks/index.json`
+(no public-domain English text yet): the track passes over them until `data/tracks/odes.json` is added and `pending` removed.
+
+```
+python3 tools/build_tracks.py --book ~/src/The-Book --sm ~/src/bible_databases_deuterocanonical \
+  --ebible ~/src/ebible --murray ~/src/ochorus --mishnah ~/src/mishnah     # sources: see the script's header
+```
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).

@@ -134,6 +134,15 @@ uses the portion’s `image` in data/commentary.json (Lech Lecha caravan, Vayera
 else deeper-scrolls. Each photo is a 1920 px JPG (quality ~70–74) plus a 960 px `-sm` version for phones. To add a
 portion photo: save both sizes in assets/img/ and set `"image"` (and optionally `"em"`, the words of the title in italics).
 
+## Your study (private study tracks, Oct 2026)
+Only for John's own account (its email is stored only as a SHA-256 hash in `assets/tracks.js`). `study.html` shows four
+tracks like Today's readings (#1–#4, tabs at the top, no checklist; "Mark Chapter/Lesson/Mishnah Complete" at the bottom,
+then on to the next track). A track stays on the unit marked today until tomorrow ("Next time: … Read it now →" reads ahead).
+Messianic Filter switch on Devotional and Early Christian (the same `messianic` setting as the Bible text); Hebrew switch on
+Rabbinics (Vilna text). Dig deeper gets a "Your study" section and hero button; the Dig deeper box on Today gets "Your study";
+Progress gets "Your study" (book bars per track, recently read). Never counted in the plan's catch-up. Data in `data/tracks/`,
+built by `tools/build_tracks.py` (README). Odes of Solomon still to come (pending in index.json, skipped until added).
+
 ## Settings menu (A/א) — four groups
 Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;
 the two are then labelled Gospels (Matthew–Acts) / Epistles (Romans–Revelation). The optional reading is always last in
