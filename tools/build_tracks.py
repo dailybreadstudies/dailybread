@@ -351,6 +351,14 @@ def build_murray(a):
             'units': units}
 
 
+def words(t):
+    return len(re.sub(r'<[^>]+>', ' ', t or '').split())
+
+
+def unit_words(u):
+    return sum(words(b.get('x') or b.get('p')) for b in u['b'])
+
+
 def mishnah_text(t):
     t = re.sub(r'<br\s*/?>', ' ', t)
     t = re.sub(r'<[^>]+>', '', t)
@@ -376,7 +384,8 @@ def build_mishnah(a):
                 chapters.append(blocks)
             s = slug(n)
             write('mishnah/%s.json' % s, {'title': n, 'heTitle': heb.get('heTitle', ''), 'seder': seder, 'chapters': chapters})
-            tractates.append([s, n, seder, len(chapters), [len(c) for c in chapters]])
+            tractates.append([s, n, seder, len(chapters), [len(c) for c in chapters],
+                              [[words(b['x']) for b in c] for c in chapters]])
     return tractates
 
 
@@ -401,7 +410,8 @@ def main():
     mishnah_chapters = sum(t[3] for t in tractates if t[1] != 'Pirkei Avot')
 
     def meta(b):
-        m = {'title': b['title'], 'by': b['by'], 'unit': b['unit'], 'units': len(b['units']), 'file': b['id'] + '.json'}
+        m = {'title': b['title'], 'by': b['by'], 'unit': b['unit'], 'units': len(b['units']), 'file': b['id'] + '.json',
+             'uw': [unit_words(u) for u in b['units']]}   # words in each unit: spine thickness and share read on the Progress shelf
         if b.get('author'):
             m['author'] = b['author']
         return m
@@ -412,13 +422,15 @@ def main():
             'enoch': meta(books['enoch']),
             '2maccabees': meta(books['2maccabees']),
             'avot': {'title': 'Pirkei Avot', 'by': 'Translated by Dr. Joshua Kulp (Mishnah Yomit)', 'unit': 'Mishnah',
-                     'units': sum(avot[4]), 'kind': 'avot', 'file': 'mishnah/%s.json' % avot[0], 'per': avot[4]},
+                     'units': sum(avot[4]), 'kind': 'avot', 'file': 'mishnah/%s.json' % avot[0], 'per': avot[4],
+                     'uw': [w for c in avot[5] for w in c]},
             'mishnah': {'title': 'The Mishnah', 'by': 'Translated by Dr. Joshua Kulp (Mishnah Yomit)', 'unit': 'Chapter',
                         'units': mishnah_chapters, 'kind': 'mishnah',
-                        'tractates': [[t[0], t[1], t[2], t[3]] for t in tractates if t[1] != 'Pirkei Avot']},
+                        'tractates': [[t[0], t[1], t[2], t[3]] for t in tractates if t[1] != 'Pirkei Avot'],
+                        'uw': [sum(c) for t in tractates if t[1] != 'Pirkei Avot' for c in t[5]]},
             '1clement': meta(books['1clement']),
             'odes': {'title': 'The Odes of Solomon', 'by': 'Translated by J. Rendel Harris', 'unit': 'Ode', 'units': 42,
-                     'file': 'odes.json', 'pending': True},
+                     'file': 'odes.json', 'pending': True, 'words': 11000},   # about the length of Harris's English
             'hermas': meta(books['hermas']),
             'polycarp': meta(books['polycarp']),
             'didache': meta(books['didache']),

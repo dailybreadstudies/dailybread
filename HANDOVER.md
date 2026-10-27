@@ -142,6 +142,9 @@ Messianic Filter switch on Devotional and Early Christian (the same `messianic` 
 Rabbinics (Vilna text). Dig deeper gets a "Your study" section and hero button; the Dig deeper box on Today gets "Your study";
 Progress gets "Your study" (book bars per track, recently read). Never counted in the plan's catch-up. Data in `data/tracks/`,
 built by `tools/build_tracks.py` (README). Odes of Solomon still to come (pending in index.json, skipped until added).
+Each book has an About card (`data/tracks/about.json`, written by hand, 100–170 words with a translation note): right margin
+from 1200px, after the text below that. Progress has "On your shelf": two shelves drawn like the Bible's, spines on the same
+words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its six orders.
 
 ## Settings menu (A/א) — four groups
 Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;

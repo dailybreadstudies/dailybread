@@ -80,3 +80,18 @@
   .st-log li { grid-template-columns: 3.8rem 1fr; }
   .st-log-t { display: none; }
 }
+
+/* ── About the book: a card in the right margin, like an illustration's (narrower screens: after the text) ── */
+.st-about { margin: 2.4rem 0 0; padding: 18px 20px 16px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface, var(--paper));
+  font-family: var(--sans); text-align: left; }
+.st-about-h { margin: 0 0 0.6rem; font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.st-about-h em { font-style: normal; font-weight: 400; letter-spacing: 0.04em; text-transform: none; color: var(--muted); margin-left: 0.3rem; font-size: 0.74rem; }
+.st-about-p { margin: 0 0 0.7rem; font-size: 0.82rem; line-height: 1.6; color: var(--ink-soft, var(--ink)); }
+.st-about-tr { margin: 0; font-size: 0.74rem; line-height: 1.55; color: var(--muted); }
+.st-about-tr b { font-weight: 600; color: var(--ink-soft, var(--ink)); }
+@media (min-width: 1200px) {
+  body[data-page="study"] .portion { position: relative; }
+  body[data-page="study"] .st-about { position: absolute; top: 3.6rem; left: calc(100% + 44px); margin: 0;
+    width: min(320px, calc((100vw - 32rem) / 2 - 76px)); }
+}
+.st-shelf-blurb { margin-top: 0; }

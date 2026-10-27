@@ -193,7 +193,17 @@
   // ═══════════════ study.html ═══════════════
   var view = {};          // track n → { book, i } being shown
   var IX = null;
-  function sectionHtml(ix, track, n, total, at, u) {
+  // About the book: in the right margin on wide screens, after the text on narrower ones (data/tracks/about.json)
+  var aboutP = null;
+  function abouts() { return aboutP || (aboutP = file('about.json').catch(function () { aboutP = null; return {}; })); }
+  function aboutHtml(ix, book, a) {
+    if (!a || !a.about) return '';
+    return '<aside class="st-about" aria-label="About ' + esc(ix.books[book].title) + '">' +
+      '<p class="st-about-h">About <em>' + esc(ix.books[book].title) + '</em></p>' +
+      '<p class="st-about-p">' + esc(a.about) + '</p>' +
+      (a.translation ? '<p class="st-about-tr"><b>Translation.</b> ' + esc(a.translation) + '</p>' : '') + '</aside>';
+  }
+  function sectionHtml(ix, track, n, total, at, u, about) {
     var done = marks(), on = !!done[mkey(at.book, at.i)], m = ix.books[at.book];
     var filterOn = track.filter && !!siteSettings().messianic, hebrew = !!prefs().hebrew;
     var unitWord = m.unit;
@@ -207,7 +217,7 @@
     if (tools.length) html += '<div class="st-tools">' + tools.join('') + '</div>';
     if (u.note) html += '<p class="st-note">' + esc(u.note) + '</p>';
     html += '<div class="scripture st-text' + (filterOn ? ' st-filter' : '') + '">' + blocksHtml(u, hebrew) + '</div>' +
-      '<p class="st-by">' + esc(u.by) + '</p>';
+      '<p class="st-by">' + esc(u.by) + '</p>' + aboutHtml(ix, at.book, about);
     html += '<div class="done-row"><nav class="nav-bar">' +
       '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
       '<div class="nav-center"><button type="button" class="done-btn" data-mark="' + n + '" aria-pressed="' + on + '">' + CHECK_SVG +
@@ -226,8 +236,9 @@
         '<p class="chapter-sub">Every book in this track is marked complete.</p>';
       return Promise.resolve();
     }
-    return getUnit(ix, at.book, at.i).then(function (u) {
-      sec.innerHTML = sectionHtml(ix, track, n, ix.tracks.length, at, u);
+    return Promise.all([getUnit(ix, at.book, at.i), abouts()]).then(function (r) {
+      var u = r[0];
+      sec.innerHTML = sectionHtml(ix, track, n, ix.tracks.length, at, u, r[1][at.book]);
       if (track.filter && siteSettings().messianic) sec.querySelectorAll('.st-text, .chapter-head, .chapter-sub').forEach(filterNode);
       drawDoneNext(n);
     }).catch(function () {
@@ -395,6 +406,92 @@
   }
 
   // ═══════════════ progress.html ═══════════════
+  // Your books on two shelves, drawn exactly like the Bible's "On the shelf" (assets/reader.js, shelvesHtml): each spine
+  // as thick as its text is long, on the same scale as the books of the Bible, filling from the bottom as it is read.
+  // The Mishnah stands as its six orders; Pirkei Avot, read first, stands on its own.
+  var bibleMaxP = null;
+  function bibleMax() {      // words in the longest volume on the Bible shelf (Kings 1 & 2, Samuel 1 & 2 … are one volume)
+    return bibleMaxP || (bibleMaxP = getJSON('data/bible-size.json').then(function (bs) {
+      var w = {};
+      Object.keys(bs).forEach(function (id) { w[id] = bs[id].reduce(function (a, c) { return a + c[1]; }, 0); });
+      [['1SA', '2SA'], ['1KI', '2KI'], ['1CH', '2CH']].forEach(function (p) { w[p[0]] += w[p[1]] || 0; delete w[p[1]]; });
+      return Math.max.apply(null, Object.keys(w).map(function (k) { return w[k]; }));
+    }).catch(function () { bibleMaxP = null; return 44205; }));
+  }
+  function shelfVolumes(ix, done) {
+    function vol(book, name, from, to, track) {
+      var m = ix.books[book], words = 0, read = 0, next = 0;
+      to = to || m.units; from = from || 1;
+      for (var i = from; i <= to; i++) {
+        var w = m.uw ? m.uw[i - 1] : 0;
+        words += w;
+        if (done[mkey(book, i)]) read += w; else if (!next) next = i;
+      }
+      if (!m.uw) words = m.words || 10000;
+      return { key: name, book: book, name: name, words: words, read: read, track: track, pending: !!m.pending,
+        href: 'study.html?t=' + track + '&b=' + book + '&u=' + (next || from) };
+    }
+    var mish = ix.books.mishnah, orders = [], at = 1;
+    var bySeder = {};
+    mish.tractates.forEach(function (t) { if (!bySeder[t[2]]) { bySeder[t[2]] = [at, at]; orders.push(t[2]); } bySeder[t[2]][1] = at + t[3] - 1; at += t[3]; });
+    return [
+      { label: 'Jewish writings', lean: 'Tahorot', groups: [
+        ['Second Temple', [vol('enoch', '1 Enoch', 0, 0, 'second-temple'), vol('2maccabees', '2 Maccabees', 0, 0, 'second-temple')], 0],
+        ['Rabbinics', [vol('avot', 'Pirkei Avot', 0, 0, 'rabbinics')].concat(orders.map(function (o) {
+          return vol('mishnah', o, bySeder[o][0], bySeder[o][1], 'rabbinics');
+        })), 2]] },
+      { label: 'Christian writings', lean: 'School of Prayer', groups: [
+        ['Early Christian', [vol('1clement', '1 Clement', 0, 0, 'early-christian'), vol('odes', 'Odes of Solomon', 0, 0, 'early-christian'),
+          vol('hermas', 'Hermas', 0, 0, 'early-christian'), vol('polycarp', 'Polycarp', 0, 0, 'early-christian'),
+          vol('didache', 'Didache', 0, 0, 'early-christian')], 3],
+        ['Devotional', [vol('murray', 'School of Prayer', 0, 0, 'devotional')], 1]] }
+    ];
+  }
+  function shelfHtml(ix, done, maxWords) {
+    var shelves = shelfVolumes(ix, done);
+    var W = 740, PAD = 4, GAP = 2, BUNDLE_GAP = 13, BASE_H = 128, SHELF_GAP = 96, LEAN = 11, MIN_W = 13, MAX_W = 38;
+    var HEIGHTS = [0, -10, -4, -16, -7, 0, -12, -3, -9, -14, -5], rad = LEAN * Math.PI / 180;
+    function width(words) { return MIN_W + (MAX_W - MIN_W) * Math.sqrt(words / maxWords); }
+    var out = '', y = 46;
+    shelves.forEach(function (sh, si) {
+      out += '<text class="bs-label" x="' + PAD + '" y="' + (y - 16) + '">' + sh.label.toUpperCase() + '</text>';
+      var base = y + BASE_H, x = PAD + 2, prevH = BASE_H, i = 0, spans = [];
+      sh.groups.forEach(function (bd, bi) {
+        bd[1].forEach(function (v, k) {
+          var leans = v.name === sh.lean, w = width(v.words), h = BASE_H + HEIGHTS[(i + si * 3) % HEIGHTS.length] - 4, px = x;
+          if (k === 0 && bi > 0) x += BUNDLE_GAP;
+          if (k === 0) spans.push({ name: bd[0], x0: x });
+          var share = v.words ? v.read / v.words : 0, fin = share >= 0.995;
+          var tf;
+          if (leans) { px = x + Math.min(prevH, h * Math.cos(rad)) * Math.tan(rad); tf = 'translate(' + px.toFixed(2) + ' ' + base + ') rotate(' + (-LEAN) + ')'; }
+          else tf = 'translate(' + x.toFixed(2) + ' ' + base + ')';
+          var line = v.name.toUpperCase();
+          var fs = Math.min(9.5, w - 5.5, (h - 30) / (line.length * 0.78));
+          var pct = share > 0 && share < 0.01 ? '<1%' : Math.round(100 * share) + '%';
+          var tip = v.name + (v.book === 'mishnah' ? ' (Mishnah)' : '') + ' · ' + (v.pending ? 'coming' : v.read ? pct + ' read' : 'not started');
+          out += '<g transform="' + tf + '"><a class="bs-bk' + (fin ? ' done' : '') + (v.pending ? ' dim' : '') + '" href="' + v.href + '" style="--c:var(--bb' + bd[2] + ')"' +
+            ' aria-label="' + esc(tip) + '"><title>' + esc(tip) + '</title><g class="bs-lift">' +
+            '<rect class="bs-body" x="0" y="' + (-h) + '" width="' + w.toFixed(2) + '" height="' + h + '" rx="1.5"/>' +
+            (share > 0 ? '<rect class="bs-fill" x="0.6" y="' + (-h * share + 0.6).toFixed(2) + '" width="' + (w - 1.2).toFixed(2) + '" height="' + Math.max(0, h * share - 1.2).toFixed(2) + '"/>' : '') +
+            '<line class="bs-band" x1="2.5" x2="' + (w - 2.5).toFixed(2) + '" y1="' + (-h + 9) + '" y2="' + (-h + 9) + '"/>' +
+            '<line class="bs-band" x1="2.5" x2="' + (w - 2.5).toFixed(2) + '" y1="-9" y2="-9"/>' +
+            '<text transform="translate(' + (w / 2 + fs * 0.36).toFixed(2) + ' ' + (-h + 15) + ') rotate(-90)" text-anchor="end" style="font-size:' + fs.toFixed(1) + 'px">' + esc(line) + '</text>' +
+            '</g></a></g>';
+          spans[spans.length - 1].x1 = leans ? px + w + 10 : x + w;
+          x = leans ? px + w * Math.cos(rad) + GAP + 1 : x + w + GAP;
+          prevH = h; i++;
+        });
+      });
+      out += '<rect class="bs-board" x="0" y="' + base + '" width="' + W + '" height="3" rx="1.5"/>';
+      spans.forEach(function (sp) {
+        var half = sp.name.length * 3.6, cx = Math.max((sp.x0 + sp.x1) / 2, PAD + half);   // keep a wide label inside the picture
+        out += '<text class="bs-bundle" x="' + cx.toFixed(1) + '" y="' + (base + 17) + '" text-anchor="middle">' + sp.name + '</text>';
+      });
+      y = base + SHELF_GAP;
+    });
+    return '<div class="bs-box"><svg class="bs-shelves" viewBox="0 0 ' + W + ' ' + (y - SHELF_GAP + 26) + '" role="group" aria-label="Your study books on two shelves">' + out + '</svg></div>';
+  }
+
   function progressSection() {
     var host = document.getElementById('study-progress');
     if (!host) {
@@ -406,7 +503,7 @@
       page.parentNode.insertBefore(host, page.nextSibling);
     }
     index().then(function (ix) {
-      var done = marks(), rows = '';
+      var done = marks(), rows = '', shelfP = bibleMax();
       ix.tracks.forEach(function (t) {
         var all = trackUnits(ix, t), got = 0, at = position(ix, t, done);
         t.books.forEach(function (id) { for (var i = 1; i <= ix.books[id].units; i++) if (done[mkey(id, i)]) got++; });
@@ -427,7 +524,8 @@
         .sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.i - a.i; }).slice(0, 12);
       var days = {};
       Object.keys(done).forEach(function (k) { days[done[k]] = 1; });
-      return Promise.all(list.map(function (x) { return unitName(ix, x.book, x.i); })).then(function (names) {
+      return Promise.all([shelfP].concat(list.map(function (x) { return unitName(ix, x.book, x.i); }))).then(function (res) {
+        var maxWords = res[0], names = res.slice(1);
         var trackOf = function (book) { var tr = null; ix.tracks.forEach(function (t) { if (t.books.indexOf(book) >= 0) tr = t; }); return tr; };
         var log = list.length ? '<ol class="st-log">' + list.map(function (x, k) {
           var t = trackOf(x.book);
@@ -438,7 +536,10 @@
           '<p class="pg-blurb">Your own reading beyond the plan, one chapter at a time and never behind. ' +
           (Object.keys(days).length ? Object.keys(done).length + (Object.keys(done).length === 1 ? ' chapter' : ' chapters') + ' read on ' +
             Object.keys(days).length + (Object.keys(days).length === 1 ? ' day.' : ' days.') : '') +
-          ' <a href="study.html">Open Your study &rarr;</a></p>' + rows +
+          ' <a href="study.html">Open Your study &rarr;</a></p>' +
+          '<h3 class="st-log-h">On your shelf</h3><p class="pg-blurb st-shelf-blurb">Your books, as thick as they are long on the same scale as the Bible above. ' +
+          'The Mishnah stands as its six orders. Each spine fills from the bottom as you read; tap a book to open it.</p>' +
+          shelfHtml(ix, done, maxWords) + '<h3 class="st-log-h">Book by book</h3>' + rows +
           (list.length ? '<h3 class="st-log-h">Recently read</h3>' : '') + log;
         host.hidden = false;
         if (location.hash === '#study') { var h = document.getElementById('study'); if (h) h.scrollIntoView(); }
