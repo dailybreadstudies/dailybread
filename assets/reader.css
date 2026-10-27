@@ -564,7 +564,7 @@ a.nav-btn { display: inline-block; text-align: center; text-decoration: none; }
 .nav-indicator .division-name { display: block; font-size: 0.66rem; letter-spacing: 0.18em; color: var(--accent-faint); margin-top: 0.15em; font-weight: 400; }
 
 .reader-footer { margin-top: 2rem; padding-top: 1.2rem; border-top: 1px solid var(--rule);
-  font: 400 0.74rem/1.7 var(--sans); color: var(--faint-text); text-align: center; }
+  font: 400 0.74rem/1.7 var(--sans); color: var(--faint-text); text-align: left; }
 .reader-footer p { margin: 0 0 0.55rem; }
 .status { text-align: center; color: var(--muted); font-style: italic; padding: 3rem 0; }
 
@@ -1053,7 +1053,7 @@ html.no-verses .scripture .verse-num { font-size: 0; margin: 0; }
 .part-ref { margin: 1.6rem 0 0.8rem; text-align: center; font: 600 0.74rem var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-soft); }
 
 /* Credits: one paragraph, three lines showing, the rest faded behind "more" (all of it is in the page) */
-.reader-footer .credits { position: relative; max-width: 30rem; max-height: calc(3 * 1.7em); overflow: hidden; margin: 0 auto; }
+.reader-footer .credits { position: relative; max-height: calc(3 * 1.7em); overflow: hidden; margin: 0; }
 .reader-footer .credits::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.7em;
   background: linear-gradient(to bottom, transparent, var(--paper)); pointer-events: none; }
 .reader-footer.is-open .credits { max-height: none; }
