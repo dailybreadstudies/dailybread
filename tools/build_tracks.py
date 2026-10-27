@@ -6,13 +6,14 @@ Each book becomes one JSON file of reading units (a chapter, a lesson, or for Pi
 
 Sources (clone them anywhere, then pass the folders below):
   --book   github.com/TheoryofShadows/The-Book       docs/data/works/*.json
-           1 Enoch (R. H. Charles, 1917); 1 Clement, Polycarp, Didache, Hermas (Roberts & Donaldson,
+           (1 Enoch is now Palmer's, below; the Charles text from here is no longer used); 1 Clement, Polycarp, Didache, Hermas (Roberts & Donaldson,
            Ante-Nicene Fathers, 1885; 1 Clement 58–63 from Lightfoot & Harmer, 1891). Texts public domain;
            their parse is CC BY 4.0 ("The Book — Chronological Biblical Library").
   --ebible github.com/BibleNLP/ebible                metadata/vref.txt + corpus/eng-engkjvcpb.txt
            1 and 2 Maccabees, King James Version (Cambridge Paragraph Bible text, eBible.org), public domain.
   --murray github.com/jdegreef/ochorus               backend/library/fixtures/content/books/school-of-prayer.en.json
            Andrew Murray, With Christ in the School of Prayer (1885), public domain.
+  --enoch  pdftohtml -xml -i of David Robert Palmer, The Book of Enoch the Prophet (2026), public domain, with his notes.
   --odes   pdftotext -layout of The Odes of Solomon: The Nuhra Version (2021) PDF (nuhra.net), public domain translation.
   --mishnah a folder of <Tractate>.en.json / <Tractate>.he.json, taken from the Sefaria export
            (github.com/Sefaria/Sefaria-Export-Archive, commit 3f10136, json/Mishnah/Seder */*/):
@@ -431,6 +432,119 @@ def build_odes(path):
             'units': out}
 
 
+# ── 1 Enoch: The Book of Enoch the Prophet, David Robert Palmer (2026 update), dedicated to the public domain ──
+# Chapters 1–39 are Palmer's own translation (1–32 from the Greek); the rest is mostly Richard Laurence's (1883), as
+# Palmer edits it. Input: `pdftohtml -xml -i` of his PDF. Body text is 19 pt, verse numbers 12 pt, footnote markers
+# 10 pt (Bookman), headings 27 pt (Garamond); each page's notes sit below a rule line and are 15 pt.
+def build_enoch_palmer(path):
+    x = open(path, encoding='utf-8').read()
+    fonts = {i: (int(sz), fam.split('+')[-1]) for i, sz, fam in re.findall(r'<fontspec id="(\d+)" size="(\d+)" family="([^"]+)"', x)}
+    units, cur, section = [], None, None
+    para, markers, notes = [], [], []      # markers: (unit, its number) in reading order; notes: their texts in the same order
+
+    def flush():
+        nonlocal para
+        if cur is not None and para:
+            h = re.sub(r'\s+', ' ', ''.join(para)).strip()
+            h = re.sub(r'\s+(<sup class="fn")', r'\1', h)
+            if re.sub(r'<[^>]+>', '', h).strip():
+                cur['b'].append({'p': h})
+        para = []
+
+    for page in re.split(r'<page number="', x)[1:]:
+        items = []
+        for m in re.finditer(r'<text top="(\d+)" left="(\d+)" width="(\d+)" height="\d+" font="(\d+)">(.*?)</text>', page):
+            top, left, width, f, raw = int(m.group(1)), int(m.group(2)), int(m.group(3)), m.group(4), m.group(5)
+            size, fam = fonts[f]
+            raw = re.sub(r'</?a[^>]*>', '', raw).replace('<b>', '').replace('</b>', '')
+            items.append((top, left, size, fam, raw))
+        rule = min([t for t, l, sz, fam, r in items if fam.startswith('GentiumAlt') and sz == 16 and not r.strip() and t > 120] or [10000])
+        body = sorted([it for it in items if it[0] < rule and not (it[2] in (14, 16) or it[2] < 10 and it[3].startswith('Gentium'))],
+                      key=lambda it: (it[0] // 6, it[1]))
+        foot = sorted([it for it in items if it[0] > rule and it[2] in (9, 10, 15) or (it[0] > rule and it[3].startswith('Ezra'))],
+                      key=lambda it: (it[0] // 6, it[1]))
+        if not body:
+            continue
+        margin = min(it[1] for it in body if it[2] == 19 and it[4].strip()) if any(it[2] == 19 and it[4].strip() for it in body) else 0
+        line_top = None
+        for top, left, size, fam, raw in body:
+            text = html.unescape(raw)
+            if size >= 27:
+                t = re.sub(r'<[^>]+>', '', text).strip()
+                if t.startswith('§'):
+                    flush(); section = re.sub(r'^§\s*\d+\.\s*', '', t)
+                    continue
+                m = re.match(r'^Chapter (\d+[A-Z]?)', t)
+                if m:
+                    flush()
+                    cur = {'t': 'Chapter ' + m.group(1), 'b': [], 'notes': []}
+                    if section:
+                        cur['b'].append({'h': section}); section = None
+                    units.append(cur)
+                continue
+            if cur is None:
+                continue
+            new_line = line_top is None or abs(top - line_top) > 6
+            if new_line:
+                line_top = top
+            if size == 12 or size == 13:                      # verse number: starts a paragraph when indented
+                if left >= margin + 15:
+                    flush()
+                para.append(' <span class="verse-num">' + text.strip() + '</span>')
+                continue
+            if size == 10:                                    # footnote marker
+                n = re.sub(r'\D', '', text)
+                if n:
+                    para.append('<sup class="fn" data-fn="' + n + '">' + n + '</sup>')
+                    markers.append((cur, n))
+                continue
+            if size == 19:
+                if new_line and left >= margin + 15 and text.strip():
+                    flush()
+                t = html.escape(re.sub(r'<[^>]+>', '', text), quote=False)
+                if '<i>' in raw:
+                    t = '<i>' + t.strip() + '</i>'
+                t = t.replace('¹', '<span class="verse-num">1</span>', 1) if t.lstrip().startswith('¹') else t
+                para.append(' ' + t if new_line else t)
+        flush()
+        # notes at the foot of the page; a note without a marker continues the last one
+        fmargin = min([it[1] for it in foot] or [0])
+        for top, left, size, fam, raw in foot:
+            text = html.unescape(raw)
+            if size == 10 and fam.startswith('Bookman') and left <= fmargin + 6 and re.sub(r'\D', '', text):
+                notes.append('')                      # a new note starts at the margin with its number
+                continue
+            if not notes:
+                continue
+            if size in (9, 10) and re.sub(r'\D', '', text):   # a verse number inside a note (an alternative reading)
+                notes[-1] += ' <sup>' + re.sub(r'\D', '', text) + '</sup>'
+                continue
+            t = html.escape(re.sub(r'<[^>]+>', '', text), quote=False)
+            if '<i>' in raw:
+                t = '<i>' + t.strip() + '</i>'
+            notes[-1] += ' ' + t
+    if len(markers) != len(notes):
+        print('enoch: %d note markers, %d notes' % (len(markers), len(notes)))
+    for (u, n), body in zip(markers, notes):
+        body = re.sub(r'\s+', ' ', body).strip()
+        body = re.sub(r'\s+([,.;:)])', r'\1', body).replace('<sup>', ' <sup>').replace('  <sup>', ' <sup>')
+        u['notes'].append([int(n), body])
+    for u in units:
+        # a verse number printed full size ("1 And it will come …") at the start of a paragraph
+        for b in u['b']:
+            if 'p' in b:
+                b['p'] = re.sub(r'^(\d{1,3}) (?=[A-Z“"‘])', r'<span class="verse-num">\1</span>', b['p'])
+        if not u['notes']:
+            del u['notes']
+    return {'id': 'enoch', 'title': '1 Enoch', 'unit': 'Chapter',
+            'by': 'Translated by David Robert Palmer (2026); from chapter 40 mostly Richard Laurence (1883), as edited by Palmer',
+            'note': 'Palmer gives priority to the Greek where it survives; chapters 1–32 are his own translation of the Greek and '
+                    'chapters 1–39 are newly translated. From chapter 40 the text is mostly Richard Laurence’s, which Palmer is '
+                    'revising, and in the last chapters it follows Laurence’s numbering. His notes are given after each chapter.',
+            'credit': 'David Robert Palmer, The Book of Enoch the Prophet (2026 update), dedicated to the public domain.',
+            'units': units}
+
+
 def mishnah_text(t):
     t = re.sub(r'<br\s*/?>', ' ', t)
     t = re.sub(r'<[^>]+>', '', t)
@@ -468,6 +582,7 @@ def main():
     ap.add_argument('--ebible', required=True)
     ap.add_argument('--murray', required=True)
     ap.add_argument('--mishnah', required=True)
+    ap.add_argument('--enoch', required=True, help='pdftohtml -xml -i of David Robert Palmer, The Book of Enoch the Prophet')
     ap.add_argument('--odes', required=True, help='pdftotext -layout of The Odes of Solomon: The Nuhra Version (2021)')
     a = ap.parse_args()
 
@@ -477,6 +592,7 @@ def main():
     books['2maccabees'] = build_macc(a, 2)
     books['murray'] = build_murray(a)
     books['odes'] = build_odes(a.odes)
+    books['enoch'] = build_enoch_palmer(a.enoch)
     for k, b in books.items():
         write(b['id'] + '.json', b)
 
@@ -519,7 +635,7 @@ def main():
         ],
         'credits': [
             'Andrew Murray, With Christ in the School of Prayer (1885), public domain.',
-            'R. H. Charles, The Book of Enoch (1917); Roberts and Donaldson, Ante-Nicene Fathers (1885); Lightfoot and Harmer (1891): public domain, text prepared by The Book — Chronological Biblical Library (CC BY 4.0).',
+            '1 Enoch: David Robert Palmer (2026, from ch. 40 mostly Laurence 1883), public domain. Roberts and Donaldson, Ante-Nicene Fathers (1885); Lightfoot and Harmer (1891): public domain, text prepared by The Book — Chronological Biblical Library (CC BY 4.0).',
             '1 and 2 Maccabees: King James Version with Apocrypha (eBible.org), public domain.',
             'Mishnah: Mishnah Yomit by Dr. Joshua Kulp (CC BY), via Sefaria; Hebrew: Romm, Vilna 1913, public domain.',
         ],

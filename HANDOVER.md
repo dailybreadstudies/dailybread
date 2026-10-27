@@ -141,7 +141,8 @@ then on to the next track). A track stays on the unit marked today until tomorro
 Messianic Filter switch on Devotional and Early Christian (the same `messianic` setting as the Bible text); Hebrew switch on
 Rabbinics (Vilna text). Dig deeper gets a "Your study" section and hero button; the Dig deeper box on Today gets "Your study";
 Progress gets "Your study" (book bars per track, recently read). Never counted in the plan's catch-up. Data in `data/tracks/`,
-built by `tools/build_tracks.py` (README). Odes of Solomon: The Nuhra Version (2021), public domain, set out line by line (Syriac where Coptic/Greek also survive).
+built by `tools/build_tracks.py` (README). 1 Enoch: David Robert Palmer (2026, public domain; from ch. 40 mostly Laurence), 106 chapters in his numbering (48A, two 104s),
+with his notes after each chapter (markers in the text jump to them). Odes of Solomon: The Nuhra Version (2021), public domain, set out line by line (Syriac where Coptic/Greek also survive).
 Each track has a painted banner (`BANNERS` in tracks.js → assets/img/study-<track>.jpg + -sm), full width under the top bar,
 full strength with a dark wash and light headings (title set lower), fading into the page above the tools and text.
 Each book has an About card (`data/tracks/about.json`, written by hand, 100–170 words with a translation note), styled like an

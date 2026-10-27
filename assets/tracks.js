@@ -114,6 +114,7 @@
     if (m.kind === 'avot') { var a = avotAt(m, i); return Promise.resolve('Pirkei Avot ' + (a.c + 1) + ':' + (a.m + 1)); }
     if (m.kind === 'mishnah') { var x = mishnahAt(m, i); return Promise.resolve('Mishnah ' + x.t[1] + ' ' + (x.c + 1)); }
     if (book === 'murray') return Promise.resolve(i === 1 ? 'Murray, Preface' : i <= 32 ? 'Murray, ' + MURRAY_ORD[i - 2] + ' Lesson' : 'Murray, Note on George Müller');
+    if (book === 'enoch') return file(m.file).then(function (b) { return '1 Enoch ' + b.units[i - 1].t.replace(/^Chapter /, ''); });
     if (book === 'hermas') return file(m.file).then(function (b) { return 'Hermas, ' + b.units[i - 1].t.replace(' · Chapter ', ', chapter '); });
     if (m.pending) return Promise.resolve(m.title + ' ' + i);
     return Promise.resolve(m.title + ' ' + i);
@@ -139,10 +140,10 @@
       var u = f.units[i - 1], head, sub;
       if (book === 'murray') { head = u.s || u.t; sub = (u.s ? u.t + ' · ' : '') + 'Andrew Murray'; }
       else if (book === 'hermas') { head = u.t.replace(' · Chapter ', ', chapter '); sub = (u.s ? u.s + ' · ' : '') + 'The Shepherd of Hermas'; }
-      else if (book === 'enoch') { head = '1 Enoch ' + i; sub = u.s; }
+      else if (book === 'enoch') { head = '1 Enoch ' + u.t.replace(/^Chapter /, ''); sub = u.s || ''; }
       else if (book === 'odes') { head = 'Ode ' + i; sub = u.s || ''; }
       else { head = f.title + ' ' + u.t.replace(/^Chapter /, ''); sub = u.s || ''; }
-      return { head: head, sub: sub, blocks: u.b, by: f.by, note: i === 1 ? f.note : null, poetry: !!f.poetry };
+      return { head: head, sub: sub, blocks: u.b, by: f.by, note: i === 1 ? f.note : null, poetry: !!f.poetry, notes: u.notes || null };
     });
   }
 
@@ -241,6 +242,9 @@
     if (tools.length) html += '<div class="st-tools">' + tools.join('') + '</div>';
     if (u.note) html += '<p class="st-note">' + esc(u.note) + '</p>';
     html += '<div class="scripture st-text' + (filterOn ? ' st-filter' : '') + '">' + blocksHtml(u, hebrew) + '</div>' +
+      (u.notes ? '<div class="st-notes"><p class="st-notes-h">Notes</p><ol>' + u.notes.map(function (x) {
+        return '<li data-fn="' + x[0] + '"><span class="st-fn-n">' + x[0] + '</span><span>' + x[1] + '</span></li>';
+      }).join('') + '</ol></div>' : '') +
       '<p class="st-by">' + esc(u.by) + '</p>' + aboutHtml(ix, at.book, about);
     html += '<div class="done-row"><nav class="nav-bar">' +
       '<button class="nav-btn" data-go="' + (n - 1) + '"' + (n === 1 ? ' disabled' : '') + '>&larr; Previous</button>' +
@@ -407,6 +411,15 @@
   }
   if (PAGE === 'study') {
     document.addEventListener('click', function (e) {
+      var fn = e.target.closest && e.target.closest('.st-text sup.fn');
+      if (fn) {         // a note marker: show its note below the chapter
+        var li = fn.closest('.portion').querySelector('.st-notes li[data-fn="' + fn.getAttribute('data-fn') + '"]');
+        if (li) {
+          li.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          li.classList.remove('flash'); void li.offsetWidth; li.classList.add('flash');
+        }
+        return;
+      }
       var t = e.target.closest && e.target.closest('[data-go], [data-mark], [data-ahead], [data-st], [data-about], .st-tabs a');
       if (!t || !IX) return;
       if (t.hasAttribute('data-go')) { show(+t.getAttribute('data-go')); return; }
