@@ -275,7 +275,18 @@
   // A painted banner behind the top of each track, full width, fading into the page just above the text
   var BANNERS = { devotional: 'study-devotional', 'second-temple': 'study-second-temple', 'early-christian': 'study-early-christian',
     rabbinics: 'study-rabbinics' };
-  var BANNER_POS = { rabbinics: '55% 22%' };   // where the picture's subject sits (default: centre, a little above)
+  // Where a picture's subject should land: f = its point in the picture, t = where it goes in the banner (shares of
+  // width/height), zoom = how much larger than "cover"; ratio = the picture's width / height. Others: centred.
+  var BANNER_FOCUS = { rabbinics: { ratio: 2544 / 1904, fx: 0.54, fy: 0.24, tx: 0.72, ty: 0.17, zoom: 1.3 } };
+  function frame(img, f) {
+    if (!f) { img.style.backgroundSize = ''; img.style.backgroundPosition = ''; return; }
+    var w = img.offsetWidth, h = img.offsetHeight;
+    if (!w || !h) return;
+    var W = Math.max(w, h * f.ratio) * f.zoom, H = W / f.ratio;
+    var x = Math.min(0, Math.max(w - W, f.tx * w - f.fx * W)), y = Math.min(0, Math.max(h - H, f.ty * h - f.fy * H));
+    img.style.backgroundSize = Math.round(W) + 'px ' + Math.round(H) + 'px';
+    img.style.backgroundPosition = Math.round(x) + 'px ' + Math.round(y) + 'px';
+  }
   function banner() {
     var b = document.getElementById('st-banner');
     if (!b) {
@@ -298,7 +309,6 @@
     var url = 'assets/img/' + name + (window.innerWidth <= 900 ? '-sm' : '') + '.jpg';
     if (img.getAttribute('data-src') !== url) {
       img.setAttribute('data-src', url);
-      img.style.backgroundPosition = BANNER_POS[track.id] || '';
       img.classList.remove('on');
       var pic = new Image();
       pic.onload = function () { if (img.getAttribute('data-src') === url) { img.style.backgroundImage = 'url(' + url + ')'; img.classList.add('on'); } };
@@ -307,6 +317,7 @@
     // the picture runs down to where the reading's tools (or text) begin; its last stretch fades into the page (CSS mask)
     var where = sec.querySelector('.st-where'), next = where && where.nextElementSibling;
     if (next) b.style.height = Math.max(0, Math.round(next.getBoundingClientRect().top - b.getBoundingClientRect().top - 6)) + 'px';
+    frame(img, BANNER_FOCUS[track.id]);
   }
   function placeAbout() {
     placeBanner();
