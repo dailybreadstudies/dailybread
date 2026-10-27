@@ -1134,12 +1134,12 @@
         } else if (date < today && planDays.indexOf(today) >= 0) {
           msg = 'All caught up. <button type="button" class="link-btn" data-day="' + today + '">Go to today &rarr;</button>';
         } else {
-          msg = 'All ' + total + ' readings done for today.';
+          msg = '';      // the day is complete: the "Well done" box below says so
         }
       }
       next.innerHTML = msg;
     });
-    drawDayDone(date);
+    drawDayDone(date, total);
   }
 
   // ── Day complete: a short "well done" and a way to dig deeper ──
@@ -1154,16 +1154,17 @@
     if (KIDS) return Promise.resolve({});
     return commP || (commP = getJSON('data/commentary.json').then(function (j) { return j.portions || {}; }).catch(function () { commP = null; return {}; }));
   }
-  function drawDayDone(date) {
+  function drawDayDone(date, total) {
     var boxes = document.querySelectorAll('.day-done');
     var done = dayComplete(date);
     boxes.forEach(function (box) {
       if (!done) { box.hidden = true; box.innerHTML = ''; box.removeAttribute('data-for'); return; }
       if (box.getAttribute('data-for') === date) { box.hidden = false; return; }
       var when = date === todayISO() ? 'today' : 'this day';
+      // One title and one quiet line (the line above it, "All 4 read…", is left empty when the day is complete)
       box.innerHTML = '<p class="dd-title">' + (KIDS ? 'Great job!' : 'Well done!') + '</p>' +
-        '<p class="dd-text">' + (KIDS ? 'You finished all the readings for ' : 'You have finished all the readings for ') + when + '. ' +
-        '<a class="dd-progress" href="progress.html">Review your progress</a></p>' +
+        '<p class="dd-text">All ' + (total || current.day.portions.length) + ' readings complete ' + (when === 'today' ? 'today' : 'for ' + shortDate(date)) +
+        ' &middot; <a class="dd-progress" href="progress.html">Review your progress</a></p>' +
         // Dig deeper: Word study now; a short Torah commentary later
         '<div class="dd-deeper" hidden><p class="dd-h">Dig deeper</p><div class="dd-opts">' +
         '<a class="dd-opt" href="deeper.html?d=' + date + '"><b>Word study</b>' +
