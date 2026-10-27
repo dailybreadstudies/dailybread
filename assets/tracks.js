@@ -265,10 +265,28 @@
       sec.innerHTML = sectionHtml(ix, track, n, ix.tracks.length, at, u, r[1][at.book]);
       if (track.filter && siteSettings().messianic) sec.querySelectorAll('.st-text, .chapter-head, .chapter-sub').forEach(filterNode);
       drawDoneNext(n);
+      placeAbout();
     }).catch(function () {
       sec.innerHTML = '<p class="status">Could not load this reading. Please check your connection and try again.</p>';
     });
   }
+  // Wide screens: the About card starts level with the first line of the text, not the title
+  var WIDE = window.matchMedia ? window.matchMedia('(min-width: 1240px)') : { matches: false };
+  function placeAbout() {
+    document.querySelectorAll('#portions .portion.active').forEach(function (sec) {
+      var card = sec.querySelector('.st-about');
+      if (!card) return;
+      if (!WIDE.matches) { card.style.top = ''; return; }
+      var first = sec.querySelector('.st-text > p:not(.s2)') || sec.querySelector('.st-text');
+      if (!first) return;
+      var top = first.getBoundingClientRect().top - sec.getBoundingClientRect().top;
+      var lh = parseFloat(getComputedStyle(first).lineHeight) || 0, fs = parseFloat(getComputedStyle(first).fontSize) || 0;
+      card.style.top = Math.round(top + Math.max(0, (lh - fs) / 2)) + 'px';   // the cap height of the first line, not its leading
+    });
+  }
+  window.addEventListener('resize', placeAbout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeAbout);   // web fonts change line heights
+  if (WIDE.addEventListener) WIDE.addEventListener('change', placeAbout);
   function drawDoneNext(n) {
     var sec = document.getElementById('portion-' + n), at = view[n];
     if (!sec || !at) return;
@@ -297,6 +315,7 @@
     });
     if (location.hash !== '#' + n) { try { history.replaceState(null, '', location.pathname + '#' + n); } catch (e) { location.hash = '#' + n; } }
     if (scroll !== false) window.scrollTo({ top: 0, behavior: 'auto' });
+    placeAbout();
   }
   function studyPage() {
     var main = document.getElementById('portions');
@@ -353,6 +372,7 @@
         var closed = t.getAttribute('data-about') === 'close' ? true : !prefs().aboutClosed;
         setPref('aboutClosed', closed);
         document.querySelectorAll('.st-about').forEach(function (c) { c.hidden = closed; });
+        placeAbout();
         document.querySelectorAll('.st-info').forEach(function (b) { b.setAttribute('aria-pressed', String(!closed)); });
         if (!closed) { var card = t.closest('.portion') && t.closest('.portion').querySelector('.st-about'); if (card && card.getBoundingClientRect().top > innerHeight) card.scrollIntoView({ block: 'nearest' }); }
         return;
