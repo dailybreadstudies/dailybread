@@ -230,10 +230,10 @@
     if (!s || !s.flipped) return;
     var id = s.queue.shift();
     if (ok) {
-      if (!s.extra) grade(id, true, !!s.lapsed[id]);          // extra practice leaves the schedule alone
+      if (!s.extra && !(s.seen && s.seen[id])) grade(id, true, !!s.lapsed[id]);          // extra practice leaves the schedule alone
       s.done++; s.right += s.lapsed[id] ? 0 : 1;
     } else {
-      if (!s.lapsed[id]) { if (!s.extra) grade(id, false); s.lapsed[id] = 1; }
+      if (!s.lapsed[id]) { if (!s.extra && !(s.seen && s.seen[id])) grade(id, false); s.lapsed[id] = 1; }
       s.queue.splice(Math.min(3, s.queue.length), 0, id);   // again in a few cards
     }
     drawCard();
@@ -250,7 +250,9 @@
   }
   // The page's two words, first: the word study itself. Graded like any new card (extra = seen again, schedule unchanged)
   function startToday(ids, extra) {
-    session = { queue: ids.slice(), done: 0, right: 0, lapsed: {}, extra: !!extra, focus: false, today: true };
+    var t = today(), seen = {};
+    ids.forEach(function (id) { var c = deck.cards[id]; if (c && c.last === t) seen[id] = 1; });
+    session = { queue: ids.slice(), done: 0, right: 0, lapsed: {}, extra: !!extra, focus: false, today: true, seen: seen };
     drawCard();
   }
 
@@ -315,8 +317,8 @@
       (opts.today || []).forEach(function (t) { if (deck.words[t.s]) { todayIds.push(t.s + '|f'); todayInfo[t.s] = t; } });
       if (!box) return;
       // the day's words not yet answered today come first; otherwise the deck's home (reviews, options)
-      var t = today(), pend = todayIds.filter(function (id) { var c = deck.cards[id]; return !c || c.last !== t; });
-      if (pend.length) startToday(pend, false); else drawPanel();
+      // always open on the day's words; a word already answered today is shown again without changing its schedule
+      if (todayIds.length) startToday(todayIds, false); else drawPanel();
     }
   };
 })();

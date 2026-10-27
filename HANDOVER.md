@@ -118,7 +118,7 @@ Vayigash (“Joseph Makes Himself Known”), Vayechi (“Jacob Lives”), taken 
 
 **Word study = flashcards (Oct 2026):** the word study is one flashcard box (`#deeper`, driven by `assets/practice.js`;
 deeper.js only builds each word's back: the verse in English and Hebrew/Greek, count, links). The day's two words come first:
-front = the word ("Can you read it?"), tap/Space turns it, then *Not yet* / *I knew it*. When both are answered, the same box
+front = the word ("Can you read it?"), tap/Space turns it, then *Not yet* / *I knew it*. The page always opens on these two cards (a word already answered today is shown again without changing its schedule). When both are answered, the same box
 shows the reader's deck: stats, direction (Both ways / To English / From English), the reviews due, “Practise anyway”, “See this
 day’s two words again” and “Add the words from earlier days of the plan”. Deck in localStorage `dbs-words` (Kids
 `dbs-kids-words`; not in the account sync yet). Each word is two cards: Hebrew/Greek → English, and English → Hebrew/Greek,
