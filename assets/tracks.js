@@ -1,6 +1,6 @@
 /* Daily Bread Online — private study tracks
  *
- * Extra reading beyond the Daily Bread plan, shown only to the accounts in READERS (the site owner's): Devotional,
+ * Extra reading beyond the Daily Bread plan, shown only to the accounts in READERS (John and Sofia): Devotional,
  * Second Temple Literature, Rabbinics and Early Christian Writings. Each track works through its books in order,
  * one unit at a time (a chapter, a lesson, or for Pirkei Avot one mishnah). A track remembers only where you are,
  * never a date to keep up with, so it can never put you behind, and it never touches the plan's progress.
@@ -18,7 +18,9 @@
   if (document.body.getAttribute('data-edition') === 'kids') return;
 
   // SHA-256 of the account email in lower case: the address itself is not written in the page
-  var READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];
+  var JOHN = '301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80';
+  var READERS = [JOHN, '1b4429e97297a7aa7497ff8617fe03191fb9af2fe95b4180cdaa9371bf23609f'];   // John, Sofia
+  var reader = null;     // the signed-in reader's hash, once allowed() has checked it
   var TKEY = 'dbs-tracks', PREFS = 'dbs-tracks-prefs';
   var DATA = 'data/tracks/';
   var PAGE = document.body.getAttribute('data-page') || 'today';
@@ -38,7 +40,7 @@
     var a = load('dbs-auth'), e = a && a.email;
     if (!e || !window.crypto || !crypto.subtle || !window.TextEncoder) return Promise.resolve(false);
     return crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(e).trim().toLowerCase()))
-      .then(function (b) { return READERS.indexOf(hex(b)) >= 0; }).catch(function () { return false; });
+      .then(function (b) { var h = hex(b), ok = READERS.indexOf(h) >= 0; reader = ok ? h : null; return ok; }).catch(function () { return false; });
   }
 
   // ── Marks ──
@@ -51,15 +53,18 @@
     try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ }   // account.js syncs it
   }
   function prefs() { return load(PREFS) || {}; }
-  // Books already read before the tracks began: marked "before" once (not a date, so not in the day log)
-  var PRE_READ = { '1maccabees': 16 };
+  // Books a reader had already read before the tracks began: marked "before" once (not a date, so not in the day log)
+  var PRE_READ = {};
+  PRE_READ[JOHN] = { '1maccabees': 16 };
   function seedPreRead() {
+    var mine = PRE_READ[reader] || {};
     var p = prefs(), seeded = p.seeded || {}, s = load(TKEY) || {}, changed = false;
     s.done = s.done || {};
-    Object.keys(PRE_READ).forEach(function (b) {
-      if (seeded[b]) return;
-      for (var i = 1; i <= PRE_READ[b]; i++) if (!s.done[b + ':' + i]) { s.done[b + ':' + i] = 'before'; changed = true; }
-      seeded[b] = 1;
+    Object.keys(mine).forEach(function (b) {
+      var key = reader.slice(0, 8) + ':' + b;
+      if (seeded[key]) return;
+      for (var i = 1; i <= mine[b]; i++) if (!s.done[b + ':' + i]) { s.done[b + ':' + i] = 'before'; changed = true; }
+      seeded[key] = 1;
     });
     p.seeded = seeded; store(PREFS, p);
     if (changed) { store(TKEY, s); try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ } }

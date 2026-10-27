@@ -135,7 +135,7 @@ else deeper-scrolls. Each photo is a 1920 px JPG (quality ~70–74) plus a 960 p
 portion photo: save both sizes in assets/img/ and set `"image"` (and optionally `"em"`, the words of the title in italics).
 
 ## Your study (private study tracks, Oct 2026)
-Only for John's own account (its email is stored only as a SHA-256 hash in `assets/tracks.js`). `study.html` shows four
+Only for John's and Sofia's accounts (emails stored only as SHA-256 hashes, `READERS` in `assets/tracks.js`; each has her/his own progress; 1 Maccabees pre-read is John's only). `study.html` shows four
 tracks like Today's readings (#1–#4, tabs at the top, no checklist; "Mark Chapter/Lesson/Mishnah Complete" at the bottom,
 then on to the next track). A track stays on the unit marked today until tomorrow ("Next time: … Read it now →" reads ahead).
 Messianic Filter switch on Devotional and Early Christian (the same `messianic` setting as the Bible text); Hebrew switch on
