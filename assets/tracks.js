@@ -51,6 +51,19 @@
     try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ }   // account.js syncs it
   }
   function prefs() { return load(PREFS) || {}; }
+  // Books already read before the tracks began: marked "before" once (not a date, so not in the day log)
+  var PRE_READ = { '1maccabees': 16 };
+  function seedPreRead() {
+    var p = prefs(), seeded = p.seeded || {}, s = load(TKEY) || {}, changed = false;
+    s.done = s.done || {};
+    Object.keys(PRE_READ).forEach(function (b) {
+      if (seeded[b]) return;
+      for (var i = 1; i <= PRE_READ[b]; i++) if (!s.done[b + ':' + i]) { s.done[b + ':' + i] = 'before'; changed = true; }
+      seeded[b] = 1;
+    });
+    p.seeded = seeded; store(PREFS, p);
+    if (changed) { store(TKEY, s); try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ } }
+  }
   function setPref(k, v) { var p = prefs(); p[k] = v; store(PREFS, p); }
   function siteSettings() { return load('dbs-settings') || {}; }
 
@@ -196,10 +209,13 @@
   // About the book: in the right margin on wide screens, after the text on narrower ones (data/tracks/about.json)
   var aboutP = null;
   function abouts() { return aboutP || (aboutP = file('about.json').catch(function () { aboutP = null; return {}; })); }
+  var CLOSE = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 2l8 8M10 2 2 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  var INFO = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r="0.6" fill="currentColor"/></svg>';
   function aboutHtml(ix, book, a) {
     if (!a || !a.about) return '';
-    return '<aside class="st-about" aria-label="About ' + esc(ix.books[book].title) + '">' +
-      '<p class="st-about-h">About <em>' + esc(ix.books[book].title) + '</em></p>' +
+    return '<aside class="st-about" aria-label="About ' + esc(ix.books[book].title) + '"' + (prefs().aboutClosed ? ' hidden' : '') + '>' +
+      '<div class="st-about-head"><span>About · ' + esc(ix.books[book].title) + '</span>' +
+      '<button type="button" class="st-about-x" data-about="close" aria-label="Close About">' + CLOSE + '</button></div>' +
       '<p class="st-about-p">' + esc(a.about) + '</p>' +
       (a.translation ? '<p class="st-about-tr"><b>Translation.</b> ' + esc(a.translation) + '</p>' : '') + '</aside>';
   }
@@ -210,7 +226,9 @@
     var html = '<p class="division-label">' + esc(track.title) + '</p>' +
       '<h2 class="chapter-head">' + esc(u.head) + '</h2>' +
       (u.sub ? '<p class="chapter-sub">' + esc(u.sub) + '</p>' : '') +
-      '<p class="st-where">' + esc(m.title) + ' &middot; ' + at.i + ' of ' + m.units + '</p>';
+      '<p class="st-where">' + esc(m.title) + ' &middot; ' + at.i + ' of ' + m.units +
+      (about ? ' <button type="button" class="info-btn st-info" data-about="toggle" aria-pressed="' + !prefs().aboutClosed +
+        '" aria-label="About ' + esc(m.title) + '" title="About ' + esc(m.title) + '">' + INFO + '</button>' : '') + '</p>';
     var tools = [];
     if (track.filter) tools.push('<button type="button" class="st-toggle" data-st="filter" aria-pressed="' + filterOn + '">Messianic Filter</button>');
     if (track.hebrew) tools.push('<button type="button" class="st-toggle" data-st="hebrew" aria-pressed="' + hebrew + '">Hebrew</button>');
@@ -277,6 +295,7 @@
   function studyPage() {
     var main = document.getElementById('portions');
     allowed().then(function (ok) {
+      if (ok) seedPreRead();
       if (!ok) {
         document.getElementById('st-header').innerHTML = '<h1 class="st-title">Your study</h1>';
         main.innerHTML = '<p class="st-private">This page is part of a personal study plan and opens only for the account it belongs to. ' +
@@ -315,13 +334,21 @@
   }
   if (PAGE === 'study') {
     document.addEventListener('click', function (e) {
-      var t = e.target.closest && e.target.closest('[data-go], [data-mark], [data-ahead], [data-st], .st-tabs a');
+      var t = e.target.closest && e.target.closest('[data-go], [data-mark], [data-ahead], [data-st], [data-about], .st-tabs a');
       if (!t || !IX) return;
       if (t.hasAttribute('data-go')) { show(+t.getAttribute('data-go')); return; }
       if (t.matches('.st-tabs a')) { e.preventDefault(); show(+t.getAttribute('data-tab'), false); return; }
       if (t.hasAttribute('data-ahead')) {
         var k = +t.getAttribute('data-ahead'), nx = after(IX, IX.tracks[k - 1], view[k]);
         if (nx) { view[k] = nx; drawSection(k).then(function () { window.scrollTo({ top: 0, behavior: 'auto' }); }); }
+        return;
+      }
+      if (t.hasAttribute('data-about')) {
+        var closed = t.getAttribute('data-about') === 'close' ? true : !prefs().aboutClosed;
+        setPref('aboutClosed', closed);
+        document.querySelectorAll('.st-about').forEach(function (c) { c.hidden = closed; });
+        document.querySelectorAll('.st-info').forEach(function (b) { b.setAttribute('aria-pressed', String(!closed)); });
+        if (!closed) { var card = t.closest('.portion') && t.closest('.portion').querySelector('.st-about'); if (card && card.getBoundingClientRect().top > innerHeight) card.scrollIntoView({ block: 'nearest' }); }
         return;
       }
       if (t.hasAttribute('data-st')) {
@@ -438,7 +465,7 @@
     return [
       { label: 'Devotional', lean: '', groups: [['', [vol('murray', 'School of Prayer', 0, 0, 'devotional')], 1]] },
       { label: 'Second Temple Literature', lean: '2 Maccabees', groups: [['', [vol('enoch', '1 Enoch', 0, 0, 'second-temple'),
-        vol('2maccabees', '2 Maccabees', 0, 0, 'second-temple')], 0]] },
+        vol('1maccabees', '1 Maccabees', 0, 0, 'second-temple'), vol('2maccabees', '2 Maccabees', 0, 0, 'second-temple')], 0]] },
       { label: 'Rabbinics', lean: 'Tahorot', groups: [['', [vol('avot', 'Pirkei Avot', 0, 0, 'rabbinics')], 2],
         ['The Mishnah', orders.map(function (o) { return vol('mishnah', o, bySeder[o][0], bySeder[o][1], 'rabbinics'); }), 2]] },
       { label: 'Early Christian Writings', lean: 'Didache', groups: [['', [vol('1clement', '1 Clement', 0, 0, ET), vol('odes', 'Odes of Solomon', 0, 0, ET),
@@ -519,10 +546,10 @@
       });
       // The last chapters marked, newest first
       var list = Object.keys(done).map(function (k) { var p = k.split(':'); return { book: p[0], i: +p[1], date: done[k] }; })
-        .filter(function (x) { return ix.books[x.book]; })
+        .filter(function (x) { return ix.books[x.book] && /^\d{4}-/.test(x.date); })
         .sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : b.i - a.i; }).slice(0, 12);
-      var days = {};
-      Object.keys(done).forEach(function (k) { days[done[k]] = 1; });
+      var days = {}, dated = 0;
+      Object.keys(done).forEach(function (k) { if (/^\d{4}-/.test(done[k])) { days[done[k]] = 1; dated++; } });
       return Promise.all([shelfP].concat(list.map(function (x) { return unitName(ix, x.book, x.i); }))).then(function (res) {
         var maxWords = res[0], names = res.slice(1);
         var trackOf = function (book) { var tr = null; ix.tracks.forEach(function (t) { if (t.books.indexOf(book) >= 0) tr = t; }); return tr; };
@@ -533,7 +560,7 @@
         }).join('') + '</ol>' : '<p class="pg-blurb">Nothing marked yet. Open <a href="study.html">Your study</a> and mark a chapter complete when you finish it.</p>';
         host.innerHTML = '<h2 class="pg-h" id="study">Your study <span>only on your account</span></h2>' +
           '<p class="pg-blurb">Your own reading beyond the plan, one chapter at a time and never behind. ' +
-          (Object.keys(days).length ? Object.keys(done).length + (Object.keys(done).length === 1 ? ' chapter' : ' chapters') + ' read on ' +
+          (dated ? dated + (dated === 1 ? ' chapter' : ' chapters') + ' read on ' +
             Object.keys(days).length + (Object.keys(days).length === 1 ? ' day.' : ' days.') : '') +
           ' <a href="study.html">Open Your study &rarr;</a></p>' +
           '<h3 class="st-log-h">On your shelf</h3><p class="pg-blurb st-shelf-blurb">Your books, as thick as they are long on the same scale as the Bible above. ' +
@@ -555,6 +582,7 @@
         var s = document.getElementById('study'); if (s && PAGE === 'deeper') s.remove();
         return;
       }
+      seedPreRead();
       if (PAGE === 'deeper') deeperSection();
       if (PAGE === 'progress') progressSection();
       if (PAGE === 'today') {

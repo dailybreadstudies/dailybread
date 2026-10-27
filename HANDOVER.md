@@ -142,8 +142,10 @@ Messianic Filter switch on Devotional and Early Christian (the same `messianic` 
 Rabbinics (Vilna text). Dig deeper gets a "Your study" section and hero button; the Dig deeper box on Today gets "Your study";
 Progress gets "Your study" (book bars per track, recently read). Never counted in the plan's catch-up. Data in `data/tracks/`,
 built by `tools/build_tracks.py` (README). Odes of Solomon still to come (pending in index.json, skipped until added).
-Each book has an About card (`data/tracks/about.json`, written by hand, 100–170 words with a translation note): right margin
-from 1200px, after the text below that. Progress has "On your shelf": four shelves (one per track) drawn like the Bible's, spines on the same
+Each book has an About card (`data/tracks/about.json`, written by hand, 100–170 words with a translation note), styled like an
+illustration card: right margin from 1240px, after the text below that; X closes it, the (i) after "1 Enoch · 5 of 108" opens it
+(remembered in `dbs-tracks-prefs.aboutClosed`). 1 Maccabees (KJV) sits between 1 Enoch and 2 Maccabees and was marked read
+before the tracks began (`PRE_READ` in tracks.js marks its chapters "before", not a date, so they stay out of the day log). Progress has "On your shelf": four shelves (one per track) drawn like the Bible's, spines on the same
 words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its six orders.
 
 ## Settings menu (A/א) — four groups

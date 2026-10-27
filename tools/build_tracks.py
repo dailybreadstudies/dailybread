@@ -10,7 +10,7 @@ Sources (clone them anywhere, then pass the folders below):
            Ante-Nicene Fathers, 1885; 1 Clement 58–63 from Lightfoot & Harmer, 1891). Texts public domain;
            their parse is CC BY 4.0 ("The Book — Chronological Biblical Library").
   --ebible github.com/BibleNLP/ebible                metadata/vref.txt + corpus/eng-engkjvcpb.txt
-           2 Maccabees, King James Version (Cambridge Paragraph Bible text, eBible.org), public domain.
+           1 and 2 Maccabees, King James Version (Cambridge Paragraph Bible text, eBible.org), public domain.
   --murray github.com/jdegreef/ochorus               backend/library/fixtures/content/books/school-of-prayer.en.json
            Andrew Murray, With Christ in the School of Prayer (1885), public domain.
   --mishnah a folder of <Tractate>.en.json / <Tractate>.he.json, taken from the Sefaria export
@@ -301,16 +301,16 @@ def build_anf(a):
     return out
 
 
-def build_2macc(a):
+def build_macc(a, n):
     vref = open(os.path.join(a.ebible, 'metadata', 'vref.txt'), encoding='utf-8').read().split('\n')
     text = open(os.path.join(a.ebible, 'corpus', 'eng-engkjvcpb.txt'), encoding='utf-8').read().split('\n')
     chs = {}
     for r, t in zip(vref, text):
-        if r.startswith('2MA ') and t.strip():
+        if r.startswith('%dMA ' % n) and t.strip():
             c, v = r[4:].split(':')
             chs.setdefault(int(c), []).append({'v': int(v), 'x': clean(t)})
     units = [{'t': 'Chapter %d' % c, 'b': chs[c]} for c in sorted(chs)]
-    return {'id': '2maccabees', 'title': '2 Maccabees', 'unit': 'Chapter', 'by': 'King James Version (1611), Apocrypha',
+    return {'id': '%dmaccabees' % n, 'title': '%d Maccabees' % n, 'unit': 'Chapter', 'by': 'King James Version (1611), Apocrypha',
             'credit': 'King James Version with Apocrypha, from the Cambridge Paragraph Bible text (eBible.org), public domain.',
             'units': units}
 
@@ -400,7 +400,8 @@ def main():
 
     books = build_book(a)
     books.update(build_anf(a))
-    books['2maccabees'] = build_2macc(a)
+    books['1maccabees'] = build_macc(a, 1)
+    books['2maccabees'] = build_macc(a, 2)
     books['murray'] = build_murray(a)
     for k, b in books.items():
         write(b['id'] + '.json', b)
@@ -420,6 +421,7 @@ def main():
         'books': {
             'murray': meta(books['murray']),
             'enoch': meta(books['enoch']),
+            '1maccabees': meta(books['1maccabees']),
             '2maccabees': meta(books['2maccabees']),
             'avot': {'title': 'Pirkei Avot', 'by': 'Translated by Dr. Joshua Kulp (Mishnah Yomit)', 'unit': 'Mishnah',
                      'units': sum(avot[4]), 'kind': 'avot', 'file': 'mishnah/%s.json' % avot[0], 'per': avot[4],
@@ -437,7 +439,7 @@ def main():
         },
         'tracks': [
             {'id': 'devotional', 'title': 'Devotional', 'short': 'Devotional', 'books': ['murray'], 'filter': True},
-            {'id': 'second-temple', 'title': 'Second Temple Literature', 'short': 'Second Temple', 'books': ['enoch', '2maccabees']},
+            {'id': 'second-temple', 'title': 'Second Temple Literature', 'short': 'Second Temple', 'books': ['enoch', '1maccabees', '2maccabees']},
             {'id': 'rabbinics', 'title': 'Rabbinics', 'short': 'Rabbinics', 'books': ['avot', 'mishnah'], 'hebrew': True},
             {'id': 'early-christian', 'title': 'Early Christian Writings', 'short': 'Early Christian',
              'books': ['1clement', 'odes', 'hermas', 'polycarp', 'didache'], 'filter': True},
@@ -445,7 +447,7 @@ def main():
         'credits': [
             'Andrew Murray, With Christ in the School of Prayer (1885), public domain.',
             'R. H. Charles, The Book of Enoch (1917); Roberts and Donaldson, Ante-Nicene Fathers (1885); Lightfoot and Harmer (1891): public domain, text prepared by The Book — Chronological Biblical Library (CC BY 4.0).',
-            '2 Maccabees: King James Version with Apocrypha (eBible.org), public domain.',
+            '1 and 2 Maccabees: King James Version with Apocrypha (eBible.org), public domain.',
             'Mishnah: Mishnah Yomit by Dr. Joshua Kulp (CC BY), via Sefaria; Hebrew: Romm, Vilna 1913, public domain.',
         ],
     }
