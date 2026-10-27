@@ -290,6 +290,7 @@
     var sec = document.querySelector('#portions .portion.active');
     var n = sec ? +sec.id.replace('portion-', '') : 0, track = n && IX.tracks[n - 1], name = track && BANNERS[track.id];
     var b = banner(), img = b.querySelector('.st-banner-img');
+    document.body.classList.toggle('banner-on', !!name);
     if (!name) { b.hidden = true; return; }
     b.hidden = false;
     var url = 'assets/img/' + name + (window.innerWidth <= 900 ? '-sm' : '') + '.jpg';
@@ -300,8 +301,9 @@
       pic.onload = function () { if (img.getAttribute('data-src') === url) { img.style.backgroundImage = 'url(' + url + ')'; img.classList.add('on'); } };
       pic.src = url;
     }
-    var text = sec.querySelector('.st-text');
-    if (text) b.style.height = Math.max(0, Math.round(text.getBoundingClientRect().top + window.scrollY - b.getBoundingClientRect().top - window.scrollY - 8)) + 'px';
+    // the picture runs down to where the reading's tools (or text) begin; its last stretch fades into the page (CSS mask)
+    var where = sec.querySelector('.st-where'), next = where && where.nextElementSibling;
+    if (next) b.style.height = Math.max(0, Math.round(next.getBoundingClientRect().top - b.getBoundingClientRect().top - 6)) + 'px';
   }
   function placeAbout() {
     placeBanner();
