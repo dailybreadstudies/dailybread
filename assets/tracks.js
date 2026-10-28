@@ -55,7 +55,7 @@
   function prefs() { return load(PREFS) || {}; }
   // Books a reader had already read before the tracks began: marked "before" once (not a date, so not in the day log)
   var PRE_READ = {};
-  PRE_READ[JOHN] = { '1maccabees': 16 };
+  PRE_READ[JOHN] = { '1maccabees': 16, didache: 16 };
   function seedPreRead() {
     var mine = PRE_READ[reader] || {};
     var p = prefs(), seeded = p.seeded || {}, s = load(TKEY) || {}, changed = false;
