@@ -310,7 +310,14 @@
       box = document.getElementById(opts.box || 'fc');
       deck = load();
       lex = opts.lex; names = opts.names || {}; allPicks = opts.picks || {};
-      var added = false;
+      // The deck holds only words that are in the word picks now: a word taken out of the picks (e.g. by the
+      // all-ages check in tools/build_word_picks.py) leaves every reader's deck too
+      var picked = {}, added = false;
+      Object.keys(allPicks).forEach(function (d) { (allPicks[d] || []).forEach(function (p) { picked[p.s] = 1; }); });
+      Object.keys(deck.words).forEach(function (s) {
+        if (picked[s]) return;
+        delete deck.words[s]; delete deck.cards[s + '|f']; delete deck.cards[s + '|r']; added = true;
+      });
       (allPicks[opts.date] || []).forEach(function (p) { if (addWord(p, opts.date)) added = true; });
       if (added) save();
       todayIds = []; todayInfo = {};

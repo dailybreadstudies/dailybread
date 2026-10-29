@@ -1,0 +1,4 @@
+{
+  "note": "Strong's numbers never used in the Dig deeper word study (Classic and Kids), on top of the automatic checks in build_word_picks.py. Add a number here and run: python3 tools/build_word_picks.py",
+  "strongs": ["H7901", "H3045I", "H6172", "H2181", "H5003", "H2100", "H1540I", "G4202", "G4203", "G4205", "G3431", "G3432"]
+}
