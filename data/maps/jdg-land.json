@@ -1,0 +1,1659 @@
+{
+ "id": "jdg-land",
+ "title": "The Land in the Days of the Judges",
+ "ref": "Judges",
+ "anchor": {
+  "book": "JDG",
+  "c": 1,
+  "v": 1
+ },
+ "bookwide": true,
+ "placesName": "Judges",
+ "siteLabel": "Site",
+ "groupsLabel": "Places",
+ "bounds": [
+  [
+   34.25,
+   30.5
+  ],
+  [
+   36.7,
+   33.7
+  ]
+ ],
+ "groupLabelZoom": 8.2,
+ "waterNames": [
+  {
+   "n": "The Great Sea",
+   "s": "(Mediterranean)",
+   "ll": [
+    34.25,
+    32.45
+   ]
+  },
+  {
+   "n": "Sea of Chinnereth",
+   "s": "(Galilee)",
+   "ll": [
+    35.59,
+    32.83
+   ]
+  },
+  {
+   "n": "Salt Sea",
+   "s": "(Dead Sea)",
+   "ll": [
+    35.49,
+    31.5
+   ]
+  },
+  {
+   "n": "Jordan",
+   "s": "",
+   "ll": [
+    35.555,
+    32.2
+   ]
+  }
+ ],
+ "regions": [
+  {
+   "n": "Asher",
+   "ll": [
+    35.2,
+    32.98
+   ],
+   "r": 1,
+   "note": "The coast and hills from Carmel north toward Sidon. Asher lived among the Canaanites (1:31–32) and stayed by the coast in Deborah's war (5:17)."
+  },
+  {
+   "n": "Naphtali",
+   "ll": [
+    35.5,
+    33.17
+   ],
+   "r": 1,
+   "note": "Upper Galilee. Barak came from Kedesh in Naphtali; the tribe \"risked their lives on the heights of the field\" (4:6; 5:18)."
+  },
+  {
+   "n": "Zebulun",
+   "ll": [
+    35.27,
+    32.78
+   ],
+   "r": 1,
+   "note": "Lower Galilee, north of the Jezreel Valley; with Naphtali it fought Sisera (4:10; 5:18). Elon the judge was buried in Aijalon in Zebulun (12:12)."
+  },
+  {
+   "n": "Issachar",
+   "ll": [
+    35.45,
+    32.6
+   ],
+   "r": 1,
+   "note": "The eastern Jezreel Valley; its leaders were with Deborah (5:15). Tola the judge was of Issachar (10:1)."
+  },
+  {
+   "n": "Manasseh",
+   "ll": [
+    35.15,
+    32.4
+   ],
+   "r": 1,
+   "note": "The hill country north of Shechem to the Jezreel Valley. Gideon was of the clan of Abiezer in Manasseh (6:15)."
+  },
+  {
+   "n": "Ephraim",
+   "ll": [
+    35.2,
+    32.1
+   ],
+   "r": 1,
+   "note": "The central hill country, with Shiloh, Shechem and Timnath-heres. Twice it quarrelled with a judge from across the Jordan (8:1–3; 12:1–6)."
+  },
+  {
+   "n": "Benjamin",
+   "ll": [
+    35.31,
+    31.84
+   ],
+   "r": 1,
+   "note": "The small tribe between Judah and Ephraim; Ehud was a Benjamite (3:15). After the outrage at Gibeah it was almost wiped out (20–21)."
+  },
+  {
+   "n": "Tribe of Dan",
+   "label": "Dan",
+   "ll": [
+    34.85,
+    31.93
+   ],
+   "r": 1,
+   "note": "Allotted the Shephelah west of Benjamin, but the Amorites pressed it into the hill country (1:34). Samson was a Danite of Zorah; the tribe later moved north and took Laish (18)."
+  },
+  {
+   "n": "Judah",
+   "ll": [
+    35.13,
+    31.42
+   ],
+   "r": 1,
+   "note": "The first to go up against the Canaanites (1:1–20). Othniel, the first judge, was of Judah (3:9)."
+  },
+  {
+   "n": "Simeon",
+   "ll": [
+    34.78,
+    31.17
+   ],
+   "r": 1,
+   "note": "Towns within Judah's inheritance in the Negev; it fought alongside Judah (1:3, 17)."
+  },
+  {
+   "n": "Reuben",
+   "ll": [
+    35.8,
+    31.62
+   ],
+   "r": 1,
+   "note": "The plateau east of the Salt Sea. In Deborah's war it stayed \"among the sheepfolds\" (5:15–16)."
+  },
+  {
+   "n": "Gad",
+   "ll": [
+    35.7,
+    32.0
+   ],
+   "r": 1,
+   "note": "Gilead east of the Jordan, the land of Jephthah's war with the Ammonites (10–12)."
+  },
+  {
+   "n": "East Manasseh",
+   "label": "Manasseh",
+   "ll": [
+    35.95,
+    32.62
+   ],
+   "r": 1,
+   "note": "The half-tribe east of the Jordan, in northern Gilead and Bashan, with Jair's towns (10:3–4)."
+  },
+  {
+   "n": "Negev",
+   "ll": [
+    34.95,
+    30.85
+   ],
+   "r": 2,
+   "note": "The dry south, where Achsah was given land and asked for springs of water (1:15), and the Kenites settled near Arad (1:16)."
+  },
+  {
+   "n": "Lebanon",
+   "ll": [
+    35.65,
+    33.6
+   ],
+   "r": 2,
+   "note": "The mountains where the Hivites lived, left to test Israel (3:3); Jotham's \"cedars of Lebanon\" (9:15)."
+  },
+  {
+   "n": "Gilead",
+   "ll": [
+    35.85,
+    32.3
+   ],
+   "r": 2,
+   "note": "The hill country east of the Jordan, home of Jair and Jephthah, oppressed by the Ammonites for eighteen years (10:3–12:7)."
+  },
+  {
+   "n": "Havvoth-jair",
+   "ll": [
+    35.95,
+    32.5
+   ],
+   "r": 3,
+   "note": "\"The towns of Jair,\" thirty towns in Gilead held by the thirty sons of the judge Jair (10:3–4)."
+  },
+  {
+   "n": "Edom",
+   "ll": [
+    35.55,
+    30.55
+   ],
+   "r": 2,
+   "note": "Seir, south-east of the Salt Sea. The LORD marched \"from Seir… from the land of Edom\" (5:4); Edom refused Israel passage (11:17)."
+  },
+  {
+   "n": "Moab",
+   "ll": [
+    35.85,
+    31.25
+   ],
+   "r": 2,
+   "note": "The plateau east of the Salt Sea. Eglon king of Moab ruled Israel eighteen years, until Ehud killed him and Israel held the fords of the Jordan (3:12–30)."
+  },
+  {
+   "n": "Ammon",
+   "ll": [
+    36.12,
+    31.95
+   ],
+   "r": 2,
+   "note": "The land of the Ammonites around Rabbah, east of Gilead. They oppressed Gilead until Jephthah defeated them (10:6–11:33)."
+  },
+  {
+   "n": "Land of the Philistines",
+   "label": "Land of the\nPhilistines",
+   "ll": [
+    34.48,
+    31.45
+   ],
+   "r": 2,
+   "note": "The coast of the five Philistine cities, Gaza, Ashdod, Ashkelon, Gath and Ekron (3:3). The Philistines ruled Israel forty years in Samson's day (13:1)."
+  },
+  {
+   "n": "Arabah",
+   "ll": [
+    35.38,
+    30.85
+   ],
+   "r": 3,
+   "note": "The rift valley of the Jordan and the Salt Sea and south toward the Red Sea."
+  },
+  {
+   "n": "Shephelah",
+   "ll": [
+    34.86,
+    31.68
+   ],
+   "r": 3,
+   "note": "The \"foothills\" between the hill country of Judah and the coast, where Samson's stories take place."
+  },
+  {
+   "n": "Valley of Jezreel",
+   "ll": [
+    35.3,
+    32.6
+   ],
+   "r": 3,
+   "hide": true,
+   "z": 9,
+   "note": "The broad valley between Galilee and the hill country of Manasseh, where the Midianites and Amalekites camped \"as thick as locusts\" (6:33; 7:12)."
+  },
+  {
+   "n": "Valley of Sorek",
+   "ll": [
+    34.93,
+    31.77
+   ],
+   "r": 3,
+   "hide": true,
+   "z": 9.5,
+   "note": "The valley running down past Beth-shemesh and Timnah to the coast, where Delilah lived (16:4)."
+  },
+  {
+   "n": "Kishon",
+   "ll": [
+    35.13,
+    32.68
+   ],
+   "hide": true,
+   "z": 9.5,
+   "note": "The stream of the Jezreel Valley. \"The torrent Kishon swept them away\" (5:21): rain turned the valley to mud and stopped Sisera's chariots (4:7, 13; 5:20–21)."
+  },
+  {
+   "n": "Jordan",
+   "ll": [
+    35.56,
+    32.15
+   ],
+   "hide": true,
+   "z": 8,
+   "note": "Its fords were held against Moab (3:28) and against the Midianites (7:24), and the Gileadites held them against Ephraim with \"Shibboleth\" (12:5–6)."
+  },
+  {
+   "n": "Arnon",
+   "ll": [
+    35.65,
+    31.46
+   ],
+   "hide": true,
+   "z": 9,
+   "note": "The deep gorge into the Salt Sea, the southern border of Israel's land east of the Jordan \"from the Arnon to the Jabbok\" (11:13, 22)."
+  },
+  {
+   "n": "Jabbok",
+   "ll": [
+    35.65,
+    32.17
+   ],
+   "hide": true,
+   "z": 9.5,
+   "note": "The river (Zarqa), the northern limit of the land the Ammonite king claimed (11:13, 22)."
+  }
+ ],
+ "links": [
+  "Abel-keramim",
+  "Abel-meholah",
+  "Acco",
+  "Achzib",
+  "Ahlab",
+  "Aijalon",
+  "Arad",
+  "Aroer",
+  "Arumah",
+  "Ashkelon",
+  "Baal-tamar",
+  "Beer",
+  "Beersheba",
+  "Beth-anath",
+  "Beth-barah",
+  "Beth-rehob",
+  "Beth-shean",
+  "Beth-shemesh",
+  "Beth-shittah",
+  "Bethel",
+  "Luz",
+  "Bethlehem",
+  "Bezek",
+  "Bochim",
+  "Dan",
+  "Laish",
+  "Debir",
+  "Kiriath-sepher",
+  "Dor",
+  "Ekron",
+  "Eshtaol",
+  "Etam",
+  "Gaash",
+  "Gaza",
+  "Gezer",
+  "Gibeah",
+  "Gilgal",
+  "Harod",
+  "Harosheth-hagoyim",
+  "Hazor",
+  "Hebron",
+  "Kiriath-arba",
+  "Heshbon",
+  "Hormah",
+  "Zephath",
+  "Ibleam",
+  "Jabesh-gilead",
+  "Jahaz",
+  "City of Palms",
+  "Jerusalem",
+  "Jebus",
+  "Jogbehah",
+  "Kadesh",
+  "Kamon",
+  "Karkor",
+  "Kedesh",
+  "Kiriath-jearim",
+  "Kitron",
+  "Lebo-hamath",
+  "Lebonah",
+  "Lehi",
+  "Ramath-lehi",
+  "En-hakkore",
+  "Mahaneh-dan",
+  "Megiddo",
+  "Meroz",
+  "Minnith",
+  "Mizpah",
+  "Mizpah of Gilead",
+  "Moreh",
+  "Mount Baal-hermon",
+  "Mount Gerizim",
+  "Mount Heres",
+  "Sinai",
+  "Mount Tabor",
+  "Tabor",
+  "Nahalol",
+  "Ophrah",
+  "Penuel",
+  "Pirathon",
+  "Ramah",
+  "Rehob",
+  "Rimmon",
+  "Shaalbim",
+  "Shechem",
+  "Shiloh",
+  "Sidon",
+  "Succoth",
+  "Taanach",
+  "Tabbath",
+  "Thebez",
+  "Timnah",
+  "Timnath-heres",
+  "Tob",
+  "Zaanannim",
+  "Zaphon",
+  "Zorah",
+  "Negev",
+  "Lebanon",
+  "Gilead",
+  "Havvoth-jair",
+  "Edom",
+  "Seir",
+  "Moab",
+  "Valley of Jezreel",
+  "Valley of Sorek",
+  "Kishon",
+  "Jordan",
+  "Arnon",
+  "Jabbok"
+ ],
+ "aliases": {
+  "Luz": "Bethel",
+  "Laish": "Dan",
+  "Kiriath-sepher": "Debir",
+  "Kiriath-arba": "Hebron",
+  "Zephath": "Hormah",
+  "City of Palms": "Jericho",
+  "Jebus": "Jerusalem",
+  "Kadesh": "Kadesh-barnea",
+  "Ramath-lehi": "Lehi",
+  "En-hakkore": "Lehi",
+  "Sinai": "Mount Sinai",
+  "Tabor": "Mount Tabor",
+  "Seir": "Edom"
+ },
+ "except": {
+  "Dan": [
+   "5:17",
+   "18:29-30"
+  ],
+  "Gilead": [
+   "7:3",
+   "11:1-2"
+  ],
+  "Shechem": [
+   "9:28"
+  ],
+  "Luz": [
+   "1:26"
+  ],
+  "Aijalon": [
+   "12:12"
+  ],
+  "Mizpah": [
+   "10:17",
+   "11:11",
+   "11:34"
+  ]
+ },
+ "groups": [
+  {
+   "id": "book",
+   "name": "Named in Judges",
+   "color": "#a0443a",
+   "places": [
+    {
+     "n": "Abel-keramim",
+     "ll": [
+      36.00486,
+      31.87561
+     ],
+     "c": 0,
+     "m": "Sahab",
+     "u": "a957c5b/abel-keramim",
+     "f": "11:33",
+     "note": "\"Meadow of vineyards,\" the limit of Jephthah's victory over the Ammonites (11:33)."
+    },
+    {
+     "n": "Abel-meholah",
+     "ll": [
+      35.56089,
+      32.3743
+     ],
+     "c": 1,
+     "m": "Tell Abu Sus",
+     "u": "a5a1bdd/abel-meholah",
+     "f": "7:22",
+     "note": "The fleeing Midianites ran toward Zererah, \"as far as the border of Abel-meholah near Tabbath\" (7:22). Later the home of Elisha (1 Kings 19:16)."
+    },
+    {
+     "n": "Acco",
+     "ll": [
+      35.08833,
+      32.92111
+     ],
+     "c": 2,
+     "m": "Tel Akko",
+     "u": "a5f4dfc/acco",
+     "f": "1:31",
+     "note": "Asher did not drive out its people (1:31). The harbour city on the bay north of Carmel."
+    },
+    {
+     "n": "Achzib",
+     "ll": [
+      35.10265,
+      33.04828
+     ],
+     "c": 2,
+     "m": "Tel Achziv",
+     "u": "ad0d82f/achzib-2",
+     "f": "1:31"
+    },
+    {
+     "n": "Ahlab",
+     "ll": [
+      35.24337,
+      33.3178
+     ],
+     "c": 1,
+     "m": "Khirbet al Mahalib",
+     "u": "a36348c/ahlab",
+     "f": "1:31"
+    },
+    {
+     "n": "Aijalon",
+     "ll": [
+      35.02361,
+      31.84111
+     ],
+     "c": 2,
+     "m": "Yalo",
+     "u": "a1c600b/aijalon-1",
+     "f": "1:35",
+     "note": "Aijalon in the valley below the Beth-horon pass; the Amorites held on here until the house of Joseph pressed them into forced labour (1:34–35)."
+    },
+    {
+     "n": "Aijalon",
+     "ll": [
+      35.30902,
+      32.81409
+     ],
+     "c": 0,
+     "m": "Tel el Butmeh",
+     "u": "a2e7975/aijalon-2",
+     "f": "12:12",
+     "note": "Aijalon in the land of Zebulun, where Elon the judge was buried (12:12); not the Aijalon of Dan (1:35)."
+    },
+    {
+     "n": "Arad",
+     "ll": [
+      35.125,
+      31.28083
+     ],
+     "c": 0,
+     "m": "Tel Arad",
+     "u": "a4cea2a/arad-2",
+     "f": "1:16",
+     "note": "The Kenites, Moses' in-laws, went up from the City of Palms to the wilderness of Judah near Arad (1:16)."
+    },
+    {
+     "n": "Aroer",
+     "ll": [
+      35.81939,
+      31.4708
+     ],
+     "c": 2,
+     "m": "Arair",
+     "u": "ae46f2e/aroer-1",
+     "f": "11:26",
+     "note": "Aroer on the edge of the Arnon gorge, on Israel's southern border east of the Jordan (11:26). The Aroer of 11:33 may be this one or another near Rabbah of the Ammonites."
+    },
+    {
+     "n": "Arumah",
+     "ll": [
+      35.32158,
+      32.14756
+     ],
+     "c": 1,
+     "m": "Khirbet Urmah",
+     "u": "af536fb/arumah",
+     "f": "9:31",
+     "note": "Abimelech stayed at Arumah while Zebul drove Gaal out of Shechem (9:41)."
+    },
+    {
+     "n": "Ashkelon",
+     "ll": [
+      34.54583,
+      31.66389
+     ],
+     "c": 2,
+     "m": "Tel Ashkelon",
+     "u": "ac87d4c/ashkelon",
+     "f": "1:18",
+     "note": "Taken by Judah (1:18), later Philistine again. Samson killed thirty men of Ashkelon to pay his wedding riddle (14:19)."
+    },
+    {
+     "n": "Baal-tamar",
+     "ll": [
+      35.24128,
+      31.8315
+     ],
+     "c": 0,
+     "m": "Ras et Tawil",
+     "u": "a66136c/baal-tamar",
+     "f": "20:33",
+     "note": "Israel drew up at Baal-tamar while the ambush rushed out west of Gibeah (20:33)."
+    },
+    {
+     "n": "Beer",
+     "ll": [
+      35.50415,
+      32.60823
+     ],
+     "c": 1,
+     "m": "El Bira",
+     "u": "a520374/beer-2",
+     "f": "9:21",
+     "note": "Jotham fled to Beer and lived there, away from his brother Abimelech (9:21)."
+    },
+    {
+     "n": "Beersheba",
+     "ll": [
+      34.84083,
+      31.24472
+     ],
+     "c": 2,
+     "m": "Tel Beer Sheva",
+     "u": "ad2f6c2/beersheba-1",
+     "f": "20:1",
+     "note": "The southern end of the land, \"from Dan to Beersheba\" (20:1)."
+    },
+    {
+     "n": "Beth-anath",
+     "ll": [
+      35.43306,
+      33.20028
+     ],
+     "c": 0,
+     "m": "Safad el Battikh",
+     "u": "ae6cef8/beth-anath",
+     "f": "1:33",
+     "note": "Naphtali lived among the Canaanites of Beth-shemesh and Beth-anath (1:33)."
+    },
+    {
+     "n": "Beth-barah",
+     "ll": [
+      35.52,
+      32.1
+     ],
+     "c": 0,
+     "m": "Wadi al Fara",
+     "u": "a0d1977/beth-barah",
+     "f": "7:24",
+     "note": "The men of Ephraim seized the waters of the Jordan as far as Beth-barah to cut off the Midianites (7:24)."
+    },
+    {
+     "n": "Beth-rehob",
+     "ll": [
+      36.14528,
+      34.00889
+     ],
+     "c": 0,
+     "m": "in the Beqaa Valley",
+     "u": "ad44b24/beth-rehob",
+     "f": "18:28",
+     "note": "Laish lay in the valley near Beth-rehob (18:28)."
+    },
+    {
+     "n": "Beth-shean",
+     "ll": [
+      35.50306,
+      32.50361
+     ],
+     "c": 2,
+     "m": "Tel Bet Shean",
+     "u": "a2a8df0/beth-shan",
+     "f": "1:27",
+     "note": "At the junction of the Jezreel and Jordan valleys. Manasseh did not drive out its people (1:27). An Egyptian garrison stood here into the 12th century BC."
+    },
+    {
+     "n": "Beth-shemesh",
+     "ll": [
+      35.33275,
+      33.04128
+     ],
+     "c": 1,
+     "m": "Tel Rosh",
+     "u": "a85cbab/beth-shemesh-3",
+     "f": "1:33"
+    },
+    {
+     "n": "Beth-shittah",
+     "ll": [
+      35.4072,
+      32.53918
+     ],
+     "c": 0,
+     "m": "Tel Salwim",
+     "u": "a83d789/beth-shittah",
+     "f": "7:22",
+     "note": "The Midianite army fled toward Beth-shittah and Zererah (7:22)."
+    },
+    {
+     "n": "Bethel",
+     "ll": [
+      35.24139,
+      31.92278
+     ],
+     "c": 2,
+     "m": "Beitin",
+     "u": "a64f355/bethel-1",
+     "f": "1:22",
+     "note": "Formerly Luz. The house of Joseph took it through a man who showed them the way in (1:22–26). Deborah judged between Ramah and Bethel (4:5); the tribes inquired of the LORD here, where the ark was in those days (20:18, 26–27)."
+    },
+    {
+     "n": "Bethlehem",
+     "ll": [
+      35.20764,
+      31.70431
+     ],
+     "c": 2,
+     "m": "Bethlehem",
+     "u": "a112427/bethlehem-1",
+     "f": "17:7",
+     "note": "Bethlehem in Judah: home of the young Levite who became Micah's priest (17:7–9) and of the concubine of the Levite of Ephraim (19:1–2). Ibzan the judge was from a Bethlehem (12:8–10), perhaps the one in Zebulun."
+    },
+    {
+     "n": "Bezek",
+     "ll": [
+      35.3888,
+      32.3721
+     ],
+     "c": 1,
+     "m": "Khirbet Ibziq?",
+     "f": "1:4",
+     "note": "Judah and Simeon defeated Adoni-bezek here and cut off his thumbs and big toes, as he had done to seventy kings (1:4–7). Khirbet Ibziq in the north is the usual identification; some look for a Bezek nearer Judah."
+    },
+    {
+     "n": "Bochim",
+     "ll": [
+      35.2335,
+      31.918
+     ],
+     "c": 0,
+     "m": "near Bethel?",
+     "f": "2:1",
+     "note": "\"The weepers.\" The angel of the LORD came up from Gilgal and rebuked Israel, and the people wept and sacrificed (2:1–5). Its site is unknown; perhaps near Bethel."
+    },
+    {
+     "n": "Dan",
+     "ll": [
+      35.652,
+      33.249
+     ],
+     "c": 2,
+     "m": "Tel Dan",
+     "u": "a513646/dan",
+     "f": "18:29",
+     "note": "Formerly Laish, a quiet and secure town far from Sidon. The Danites took it, renamed it Dan, and set up Micah's idol with a priest descended from Moses (18:7–31). The northern end of the land, \"from Dan to Beersheba\" (20:1)."
+    },
+    {
+     "n": "Debir",
+     "ll": [
+      35.01485,
+      31.43209
+     ],
+     "c": 2,
+     "m": "Khirbet Rabud",
+     "u": "ad2048e/debir-1",
+     "f": "1:11",
+     "note": "Formerly Kiriath-sepher. Othniel took it and won Caleb's daughter Achsah, who asked her father for the springs of water (1:11–15). Othniel became the first judge (3:9–11)."
+    },
+    {
+     "n": "Dor",
+     "ll": [
+      34.91636,
+      32.61743
+     ],
+     "c": 2,
+     "m": "Tel Dor",
+     "u": "a70c56b/dor",
+     "f": "1:27"
+    },
+    {
+     "n": "Ekron",
+     "ll": [
+      34.85194,
+      31.7775
+     ],
+     "c": 2,
+     "m": "Tel Miqne",
+     "u": "a3fc47a/ekron",
+     "f": "1:18",
+     "note": "The northernmost of the five Philistine cities, taken by Judah (1:18). Excavated at Tel Miqne."
+    },
+    {
+     "n": "Eshtaol",
+     "ll": [
+      34.98597,
+      31.79773
+     ],
+     "c": 0,
+     "m": "Khirbet Deir Shubeib",
+     "u": "a355b6e/eshtaol",
+     "f": "13:25",
+     "note": "With Zorah, the home of Samson and the Danites (13:25; 16:31; 18:2, 11)."
+    },
+    {
+     "n": "Etam",
+     "ll": [
+      35.02579,
+      31.76372
+     ],
+     "c": 0,
+     "m": "Arak Ismain",
+     "u": "ae05348/etam-1",
+     "f": "15:8",
+     "note": "Samson stayed in a cave at the rock of Etam, and the men of Judah handed him over there to the Philistines (15:8–13)."
+    },
+    {
+     "n": "Gaash",
+     "ll": [
+      35.10729,
+      32.00806
+     ],
+     "c": 1,
+     "m": "within 10 km of Timnath-heres",
+     "u": "ab05a42/gaash",
+     "k": "mount",
+     "f": "2:9",
+     "note": "Joshua was buried at Timnath-heres, north of Mount Gaash (2:9)."
+    },
+    {
+     "n": "Gaza",
+     "ll": [
+      34.4644,
+      31.504
+     ],
+     "c": 2,
+     "m": "Tell Harube",
+     "u": "aa8edd2/gaza",
+     "f": "1:18",
+     "note": "The southernmost Philistine city. Samson carried off its gates (16:1–3), and was later blinded and set to grind grain in its prison (16:21) before pulling down the temple of Dagon (16:23–30)."
+    },
+    {
+     "n": "Gezer",
+     "ll": [
+      34.91917,
+      31.85917
+     ],
+     "c": 2,
+     "m": "Tel Gezer",
+     "u": "aed6538/gezer",
+     "f": "1:29",
+     "note": "Ephraim did not drive out the Canaanites who lived in Gezer (1:29); Pharaoh later gave it to Solomon (1 Kings 9:16)."
+    },
+    {
+     "n": "Gibeah",
+     "ll": [
+      35.23072,
+      31.82311
+     ],
+     "c": 2,
+     "m": "Tel el Ful",
+     "u": "ac24f5f/gibeah-1",
+     "f": "19:12",
+     "note": "Gibeah of Benjamin, where the Levite's concubine was abused and killed (19), which led to the war against Benjamin (20). Later Saul's home (1 Samuel 10:26)."
+    },
+    {
+     "n": "Gilgal",
+     "ll": [
+      35.45997,
+      31.88188
+     ],
+     "c": 1,
+     "m": "Khirbet el Mefjir",
+     "u": "ab94aea/gilgal-1",
+     "f": "2:1",
+     "note": "The angel of the LORD came up from Gilgal to Bochim (2:1). Ehud turned back \"at the idols near Gilgal\" to kill Eglon (3:19)."
+    },
+    {
+     "n": "Harod",
+     "ll": [
+      35.3925,
+      32.5508
+     ],
+     "c": 1,
+     "m": "the spring of Harod: Ein Harod",
+     "f": "7:1",
+     "note": "Gideon camped at the spring of Harod, and here the LORD reduced his army to 300 men by how they drank (7:1–7). Its name may mean \"trembling\" (compare 7:3)."
+    },
+    {
+     "n": "Harosheth-hagoyim",
+     "ll": [
+      35.105,
+      32.712
+     ],
+     "c": 0,
+     "m": "in the Kishon gorge below Carmel?",
+     "f": "4:2",
+     "note": "\"Harosheth of the nations,\" Sisera's home and base, from which his 900 iron chariots came to the Kishon (4:2, 13, 16). Its site is unknown; it is usually looked for where the Kishon leaves the Jezreel Valley below Carmel."
+    },
+    {
+     "n": "Hazor",
+     "ll": [
+      35.56917,
+      33.01833
+     ],
+     "c": 2,
+     "m": "Tel Hazor",
+     "u": "a6f33c5/hazor-1",
+     "f": "4:2",
+     "note": "Jabin king of Canaan reigned in Hazor, and Sisera led his army (4:2). The huge city was destroyed by fire at the end of the Late Bronze Age."
+    },
+    {
+     "n": "Hebron",
+     "ll": [
+      35.10222,
+      31.52509
+     ],
+     "c": 2,
+     "m": "Tel Rumeida",
+     "u": "a85151a/hebron",
+     "f": "1:10",
+     "note": "Formerly Kiriath-arba. Judah defeated the three sons of Anak here, and it was given to Caleb (1:10, 20). Samson carried the gates of Gaza \"to the top of the mountain overlooking Hebron\" (16:3), about 60 km uphill."
+    },
+    {
+     "n": "Heshbon",
+     "ll": [
+      35.80906,
+      31.80081
+     ],
+     "c": 2,
+     "m": "Tell Hesban",
+     "u": "abf2fc1/heshbon",
+     "f": "11:19",
+     "note": "The city of Sihon king of the Amorites. Jephthah answered the Ammonite king that Israel had lived in Heshbon and Aroer for 300 years (11:19–26)."
+    },
+    {
+     "n": "Hormah",
+     "ll": [
+      34.95828,
+      31.21229
+     ],
+     "c": 1,
+     "m": "Tel Masos",
+     "u": "ada25df/hormah",
+     "f": "1:17",
+     "note": "Formerly Zephath. Judah and Simeon devoted it to destruction, and it was renamed Hormah, \"devoted\" (1:17)."
+    },
+    {
+     "n": "Ibleam",
+     "ll": [
+      35.292,
+      32.4462
+     ],
+     "c": 2,
+     "m": "Khirbet Belameh",
+     "u": "a878d66/ibleam",
+     "f": "1:27"
+    },
+    {
+     "n": "Jabesh-gilead",
+     "ll": [
+      35.6823,
+      32.40237
+     ],
+     "c": 1,
+     "m": "Tell el Maqlub",
+     "u": "af92088/jabesh-gilead",
+     "f": "21:8",
+     "note": "It sent no one to the assembly at Mizpah, and was struck down; its four hundred young women were given to Benjamin (21:8–14). Saul would later rescue it (1 Samuel 11)."
+    },
+    {
+     "n": "Jahaz",
+     "ll": [
+      35.90793,
+      31.58835
+     ],
+     "c": 1,
+     "m": "Khirbet el Medeiyineh",
+     "u": "ad9b1cd/jahaz",
+     "f": "11:20",
+     "note": "Sihon gathered his army at Jahaz and was defeated by Israel (11:20–21)."
+    },
+    {
+     "n": "Jericho",
+     "ll": [
+      35.44456,
+      31.87172
+     ],
+     "c": 2,
+     "m": "Tell es Sultan",
+     "u": "a231f80/jericho-1",
+     "f": "1:16",
+     "note": "The City of Palms. The Kenites set out from here (1:16); Eglon king of Moab took it (3:13). Joshua had cursed the rebuilding of its walls (Joshua 6:26; 1 Kings 16:34)."
+    },
+    {
+     "n": "Jerusalem",
+     "ll": [
+      35.23417,
+      31.77667
+     ],
+     "c": 2,
+     "m": "Jerusalem (the City of David)",
+     "u": "a15257a/jerusalem",
+     "f": "1:7",
+     "note": "Jebus. Judah attacked it and set it on fire (1:8), but the Jebusites stayed (1:21). The Levite would not lodge in this \"city of foreigners\" and went on to Gibeah (19:10–12). David took it later (2 Samuel 5)."
+    },
+    {
+     "n": "Jogbehah",
+     "ll": [
+      35.85575,
+      32.01353
+     ],
+     "c": 1,
+     "m": "Khirbet Jubeiha",
+     "u": "acf6e00/jogbehah",
+     "f": "8:11",
+     "note": "Gideon went up the caravan route east of Nobah and Jogbehah to surprise the army at Karkor (8:11)."
+    },
+    {
+     "n": "Kadesh-barnea",
+     "ll": [
+      34.42222,
+      30.64833
+     ],
+     "c": 2,
+     "m": "Ain el Qudeirat",
+     "u": "ac2cef0/kadesh-barnea",
+     "f": "11:16",
+     "note": "In Jephthah's history of Israel: after leaving Egypt they came through the wilderness to Kadesh (11:16–17)."
+    },
+    {
+     "n": "Kamon",
+     "ll": [
+      35.7256,
+      32.5876
+     ],
+     "c": 0,
+     "m": "Qamm",
+     "u": "a804aeb/kamon",
+     "f": "10:5",
+     "note": "Where the judge Jair was buried (10:5)."
+    },
+    {
+     "n": "Karkor",
+     "ll": [
+      37.54278,
+      31.36306
+     ],
+     "c": 0,
+     "m": "Al Qarqar",
+     "u": "a0415e8/karkor",
+     "f": "8:10",
+     "note": "Zebah and Zalmunna rested at Karkor with 15,000 men, far out on the caravan route east of Nobah and Jogbehah, thinking themselves safe (8:10–11). Its site is uncertain."
+    },
+    {
+     "n": "Kedesh",
+     "ll": [
+      35.55555,
+      32.735
+     ],
+     "c": 1,
+     "m": "Khirbet Qedish",
+     "u": "a48191b/kedesh-naphtali",
+     "f": "4:6",
+     "note": "Barak's home, \"Kedesh in Naphtali\" (4:6). Heber the Kenite camped by the great tree of Zaanannim near Kedesh (4:11). Khirbet Qedish above the Sea of Galilee is the usual choice for this Kedesh, rather than the great Kedesh in upper Galilee."
+    },
+    {
+     "n": "Kiriath-jearim",
+     "ll": [
+      35.10378,
+      31.80896
+     ],
+     "c": 2,
+     "m": "Deir el Azar",
+     "u": "a9bba61/kiriath-jearim",
+     "f": "18:12",
+     "note": "The Danites camped west of it at Mahaneh-dan (18:12)."
+    },
+    {
+     "n": "Kitron",
+     "ll": [
+      35.03215,
+      32.62558
+     ],
+     "c": 0,
+     "m": "Khirbet Qutteina",
+     "u": "ae5cc46/kitron",
+     "f": "1:30"
+    },
+    {
+     "n": "Lebo-hamath",
+     "ll": [
+      36.34956,
+      34.19491
+     ],
+     "c": 2,
+     "m": "Labweh",
+     "u": "a5eb047/lebo-hamath",
+     "f": "3:3",
+     "note": "\"The entrance to Hamath,\" the northern limit of the land (3:3). Usually placed at Labweh in the Beqaa Valley."
+    },
+    {
+     "n": "Lebonah",
+     "ll": [
+      35.24979,
+      32.05906
+     ],
+     "c": 1,
+     "m": "Khan el Lubban",
+     "u": "ab6bb68/lebonah",
+     "f": "21:19",
+     "note": "Shiloh is \"north of Bethel, east of the road that goes up from Bethel to Shechem, and south of Lebonah\" (21:19)."
+    },
+    {
+     "n": "Lehi",
+     "ll": [
+      35.00101,
+      31.7488
+     ],
+     "c": 0,
+     "m": "Khirbet es Siyyagh",
+     "u": "aeeaca0/lehi",
+     "f": "15:9",
+     "note": "\"Jawbone.\" Samson struck down a thousand Philistines here with a donkey's jawbone and named the place Ramath-lehi; God split open a hollow and water came out, En-hakkore, \"the spring of the caller\" (15:9–19)."
+    },
+    {
+     "n": "Luz",
+     "ll": [
+      35.53556,
+      33.46028
+     ],
+     "c": 0,
+     "m": "Luweizeh",
+     "u": "a422a1f/luz-2",
+     "f": "1:26",
+     "note": "The man of Bethel who showed the spies the way in went to the land of the Hittites and built a new Luz (1:26). Its site is unknown; Luweizeh in Lebanon is one guess."
+    },
+    {
+     "n": "Mahaneh-dan",
+     "ll": [
+      35.03,
+      31.79
+     ],
+     "c": 0,
+     "m": "near Kiriath-jearim?",
+     "f": "13:25",
+     "note": "\"The camp of Dan,\" between Zorah and Eshtaol (13:25), where the six hundred Danites camped west of Kiriath-jearim (18:12). Its site is unknown."
+    },
+    {
+     "n": "Megiddo",
+     "ll": [
+      35.18444,
+      32.58528
+     ],
+     "c": 2,
+     "m": "Tel Megiddo",
+     "u": "a8554e3/megiddo",
+     "f": "1:27",
+     "note": "Guarding the pass into the Jezreel Valley; not taken by Manasseh (1:27). Deborah's song: \"the kings of Canaan fought at Taanach by the waters of Megiddo\" (5:19)."
+    },
+    {
+     "n": "Meroz",
+     "ll": [
+      35.52987,
+      33.0322
+     ],
+     "c": 0,
+     "m": "Khirbet Marus",
+     "u": "a8bc4e3/meroz",
+     "f": "5:23",
+     "note": "\"Curse Meroz… for they did not come to help the LORD\" (5:23). The site is uncertain."
+    },
+    {
+     "n": "Minnith",
+     "ll": [
+      35.87468,
+      31.82021
+     ],
+     "c": 0,
+     "m": "Umm el Hanafish",
+     "u": "a222545/minnith",
+     "f": "11:33",
+     "note": "Jephthah struck twenty cities \"from Aroer to the vicinity of Minnith, as far as Abel-keramim\" (11:33)."
+    },
+    {
+     "n": "Mizpah",
+     "ll": [
+      35.21642,
+      31.88514
+     ],
+     "c": 2,
+     "m": "Tell en Nasbeh",
+     "u": "a736f6c/mizpah-3",
+     "f": "20:1",
+     "note": "Mizpah of Benjamin, where all Israel \"from Dan to Beersheba\" assembled before the LORD over the outrage at Gibeah (20:1–3; 21:1–8). Later the city of Samuel's assemblies (1 Samuel 7; 10)."
+    },
+    {
+     "n": "Mizpah of Gilead",
+     "ll": [
+      35.777,
+      32.1185
+     ],
+     "c": 0,
+     "m": "Jel'ad?",
+     "u": "a0f8af9/mizpah-1",
+     "f": "10:17",
+     "note": "Jephthah's home in Gilead, where Israel camped against the Ammonites (10:17), Jephthah was made leader (11:11), and his daughter came out to meet him (11:34). Its site is unknown; Jel'ad is one proposal."
+    },
+    {
+     "n": "Moreh",
+     "ll": [
+      35.34873,
+      32.61764
+     ],
+     "c": 2,
+     "m": "Givat HaMoreh (Jebel Dahi)",
+     "u": "a772880/moreh-2",
+     "k": "mount",
+     "f": "7:1",
+     "note": "The Midianite camp lay in the valley by the hill of Moreh, north of Gideon at the spring of Harod (7:1)."
+    },
+    {
+     "n": "Mount Baal-hermon",
+     "ll": [
+      35.857,
+      33.416
+     ],
+     "c": 1,
+     "m": "Mount Hermon",
+     "k": "mount",
+     "f": "3:3",
+     "note": "The Hivites lived \"in the mountains of Lebanon from Mount Baal-hermon to Lebo-hamath\" (3:3). Probably Mount Hermon or one of its peaks."
+    },
+    {
+     "n": "Mount Gerizim",
+     "ll": [
+      35.27278,
+      32.19944
+     ],
+     "c": 2,
+     "m": "Jebel et-Tor",
+     "u": "a30e967/mount-gerizim",
+     "k": "mount",
+     "f": "9:7",
+     "note": "Jotham stood on top of Mount Gerizim and called out his parable of the trees to the leaders of Shechem (9:7–21)."
+    },
+    {
+     "n": "Mount Heres",
+     "ll": [
+      34.9757,
+      31.7511
+     ],
+     "c": 1,
+     "m": "Beth-shemesh (Tel Beit Shemesh)?",
+     "k": "mount",
+     "f": "1:35",
+     "note": "\"Mountain of the sun.\" The Amorites held on at Mount Heres, Aijalon and Shaalbim (1:35). Probably Beth-shemesh of Judah (\"house of the sun\")."
+    },
+    {
+     "n": "Mount Sinai",
+     "ll": [
+      33.97333,
+      28.53972
+     ],
+     "c": 1,
+     "m": "Jebel Musa",
+     "u": "abfba2a/mount-sinai",
+     "k": "mount",
+     "f": "5:5",
+     "note": "\"The mountains quaked before the LORD, the One of Sinai\" (5:5). The traditional site, Jebel Musa in southern Sinai, is shown; other sites are proposed."
+    },
+    {
+     "n": "Mount Tabor",
+     "ll": [
+      35.39292,
+      32.68625
+     ],
+     "c": 2,
+     "m": "Jebel et Tur",
+     "u": "acd63ee/mount-tabor",
+     "k": "mount",
+     "f": "4:6",
+     "note": "Barak gathered ten thousand men of Naphtali and Zebulun on Mount Tabor and charged down from it on Sisera's chariots (4:6, 12–14). Gideon's brothers were killed at Tabor (8:18)."
+    },
+    {
+     "n": "Nahalol",
+     "ll": [
+      35.19695,
+      32.67914
+     ],
+     "c": 0,
+     "m": "Horbat Sefan",
+     "u": "ac69561/nahalal",
+     "f": "1:30"
+    },
+    {
+     "n": "Ophrah",
+     "ll": [
+      35.29,
+      32.6057
+     ],
+     "c": 1,
+     "m": "Afula",
+     "u": "abd637f/ophrah-2",
+     "f": "6:11",
+     "note": "Ophrah of the Abiezrites, Gideon's town, where the angel of the LORD met him at the winepress, he tore down his father's altar of Baal (6:11–32), and later set up the ephod (8:27). The site is uncertain."
+    },
+    {
+     "n": "Penuel",
+     "ll": [
+      35.69211,
+      32.18702
+     ],
+     "c": 2,
+     "m": "Tell edh Dhahab esh Sherqiyeh",
+     "u": "a8a9ff9/penuel",
+     "f": "8:8",
+     "note": "Penuel also refused Gideon bread, and he tore down its tower (8:8–9, 17). Jacob wrestled with God here (Genesis 32:30–31)."
+    },
+    {
+     "n": "Pirathon",
+     "ll": [
+      35.16583,
+      32.19056
+     ],
+     "c": 2,
+     "m": "Farata",
+     "u": "a40647c/pirathon",
+     "f": "12:13",
+     "note": "The town of the judge Abdon in Ephraim (12:13–15)."
+    },
+    {
+     "n": "Ramah",
+     "ll": [
+      35.23161,
+      31.85434
+     ],
+     "c": 2,
+     "m": "Al Ram",
+     "u": "a6d57ed/ramah-1",
+     "f": "4:5",
+     "note": "Deborah judged under her palm tree \"between Ramah and Bethel\" (4:5). The Levite hoped to reach Gibeah or Ramah for the night (19:13)."
+    },
+    {
+     "n": "Rehob",
+     "ll": [
+      35.16944,
+      32.90139
+     ],
+     "c": 1,
+     "m": "Tell Bir el Gharbi",
+     "u": "ab71288/rehob-3",
+     "f": "1:31"
+    },
+    {
+     "n": "Rimmon",
+     "ll": [
+      35.2967,
+      31.9333
+     ],
+     "c": 1,
+     "m": "the rock of Rimmon: Rammun",
+     "f": "20:45",
+     "note": "Six hundred Benjamites fled to the rock of Rimmon and held out there four months (20:45–47; 21:13)."
+    },
+    {
+     "n": "Shaalbim",
+     "ll": [
+      34.98714,
+      31.86981
+     ],
+     "c": 2,
+     "m": "Salbit",
+     "u": "ae89331/shaalbim",
+     "f": "1:35",
+     "note": "With Aijalon and Mount Heres, held by the Amorites until the house of Joseph pressed them into forced labour (1:35)."
+    },
+    {
+     "n": "Shechem",
+     "ll": [
+      35.28194,
+      32.21361
+     ],
+     "c": 2,
+     "m": "Tell Balatah",
+     "u": "adf74d4/shechem",
+     "f": "8:31",
+     "note": "In the pass between Ebal and Gerizim. Gideon's son Abimelech was made king by the pillar in Shechem (9:6); the city turned against him, and he razed it and burned its tower with the temple of El-berith (9:22–49)."
+    },
+    {
+     "n": "Shiloh",
+     "ll": [
+      35.28954,
+      32.0557
+     ],
+     "c": 2,
+     "m": "Khirbet Seilun",
+     "u": "aa4680a/shiloh",
+     "f": "18:31",
+     "note": "The house of God was at Shiloh (18:31). At its yearly feast the remaining Benjamites seized wives from the girls who came out to dance (21:19–23)."
+    },
+    {
+     "n": "Sidon",
+     "ll": [
+      35.37194,
+      33.56099
+     ],
+     "c": 2,
+     "m": "Saida, Lebanon",
+     "u": "a98e4d7/sidon",
+     "f": "1:31",
+     "note": "Asher did not drive out its people (1:31). Laish lived \"after the manner of the Sidonians,\" far from Sidon (18:7, 28)."
+    },
+    {
+     "n": "Succoth",
+     "ll": [
+      35.62118,
+      32.1966
+     ],
+     "c": 2,
+     "m": "Tell Deir Alla",
+     "u": "a0905b5/succoth-1",
+     "f": "8:5",
+     "note": "The men of Succoth refused Gideon bread, and he punished its elders on his return (8:5–16). Excavated at Tell Deir Alla, where a plaster text about Balaam son of Beor was found."
+    },
+    {
+     "n": "Taanach",
+     "ll": [
+      35.21912,
+      32.52153
+     ],
+     "c": 2,
+     "m": "Tell Ta’anakh",
+     "u": "a6f05f6/taanach",
+     "f": "1:27",
+     "note": "\"At Taanach by the waters of Megiddo\" the kings of Canaan fought Barak (5:19)."
+    },
+    {
+     "n": "Tabbath",
+     "ll": [
+      35.61893,
+      32.28684
+     ],
+     "c": 1,
+     "m": "Ras Abu Tabat",
+     "u": "ab5c435/tabbath",
+     "f": "7:22"
+    },
+    {
+     "n": "Thebez",
+     "ll": [
+      35.36861,
+      32.32222
+     ],
+     "c": 1,
+     "m": "Tubas",
+     "u": "a5d1690/thebez",
+     "f": "9:50",
+     "note": "A woman dropped an upper millstone on Abimelech's head from its tower (9:50–54)."
+    },
+    {
+     "n": "Timnah",
+     "ll": [
+      34.9103,
+      31.78483
+     ],
+     "c": 2,
+     "m": "Tel Batash",
+     "u": "a21f909/timnah-1",
+     "f": "14:1",
+     "note": "A Philistine town in the Sorek Valley where Samson found his wife and killed a lion on the way down (14:1–6). Excavated at Tel Batash."
+    },
+    {
+     "n": "Timnath-heres",
+     "ll": [
+      35.10729,
+      32.00806
+     ],
+     "c": 2,
+     "m": "Khirbet Tibnah",
+     "u": "a6e6528/timnath-heres",
+     "f": "2:9",
+     "note": "Joshua's inheritance and burial place, \"north of Mount Gaash\" (2:9; Joshua 24:30 has Timnath-serah)."
+    },
+    {
+     "n": "Tob",
+     "ll": [
+      36.24389,
+      32.56333
+     ],
+     "c": 1,
+     "m": "Et Tayibeh",
+     "u": "aaff3e1/tob",
+     "f": "11:3",
+     "note": "Jephthah fled to the land of Tob, east of Gilead, and gathered men around him there (11:3–5)."
+    },
+    {
+     "n": "Zaanannim",
+     "ll": [
+      35.41064,
+      32.72113
+     ],
+     "c": 0,
+     "m": "Hanot Taggarim",
+     "u": "a0c4f5e/zaanannim",
+     "f": "4:11",
+     "note": "Heber the Kenite pitched his tent by the great tree of Zaanannim near Kedesh, where Jael killed Sisera (4:11, 17–21)."
+    },
+    {
+     "n": "Zaphon",
+     "ll": [
+      35.57724,
+      32.26769
+     ],
+     "c": 1,
+     "m": "Tell es Sa’idiyeh",
+     "u": "ab49753/zaphon-1",
+     "f": "12:1",
+     "note": "The men of Ephraim crossed the Jordan to Zaphon to quarrel with Jephthah (12:1). Gilead then held the fords: \"Shibboleth\" (12:5–6)."
+    },
+    {
+     "n": "Zorah",
+     "ll": [
+      34.98529,
+      31.77399
+     ],
+     "c": 2,
+     "m": "Tel Tzora",
+     "u": "a08174b/zorah",
+     "f": "13:2",
+     "note": "The home of Manoah, Samson's father (13:2). The Spirit of the LORD began to stir Samson between Zorah and Eshtaol, and he was buried there (13:25; 16:31). The Danites sent out their five spies from here (18:2)."
+    }
+   ],
+   "firstNamed": true
+  },
+  {
+   "id": "other",
+   "name": "Other places of the time",
+   "color": "var(--dbm-city)",
+   "places": [
+    {
+     "n": "Ashdod",
+     "ll": [
+      34.6561,
+      31.7533
+     ],
+     "c": 2,
+     "m": "Tel Ashdod",
+     "note": "One of the five cities of \"the five rulers of the Philistines\" (3:3), not named in Judges. The Ark was later taken to its temple of Dagon (1 Samuel 5)."
+    },
+    {
+     "n": "Gath",
+     "ll": [
+      34.8489,
+      31.7
+     ],
+     "c": 2,
+     "m": "Tell es-Safi",
+     "note": "One of the five Philistine cities (3:3), not named in Judges; later the home of Goliath. A large Philistine city through the 12th–9th centuries BC."
+    },
+    {
+     "n": "Tell Qasile",
+     "ll": [
+      34.8063,
+      32.102
+     ],
+     "c": 2,
+     "m": "Tel Aviv",
+     "note": "A Philistine town founded in the 12th century BC on the Yarkon. Its temple roof rested on two central pillars, which helps picture the temple of Dagon at Gaza (16:25–30)."
+    },
+    {
+     "n": "’Izbet Sartah",
+     "ll": [
+      34.9772,
+      32.1047
+     ],
+     "c": 2,
+     "m": "’Izbet Sartah",
+     "note": "A small Israelite village of the time of the Judges on the edge of the hill country, facing Aphek. One of the earliest Hebrew alphabet inscriptions was found here."
+    },
+    {
+     "n": "Mount Ebal",
+     "ll": [
+      35.2731,
+      32.2332
+     ],
+     "c": 2,
+     "m": "Jebel Eslamiyeh",
+     "k": "mount",
+     "note": "Facing Gerizim across the valley of Shechem. An early Iron Age stone structure on the mountain has been interpreted as Joshua's altar (Joshua 8:30–35)."
+    },
+    {
+     "n": "Mount Gilboa",
+     "ll": [
+      35.42,
+      32.47
+     ],
+     "c": 2,
+     "m": "the Gilboa ridge",
+     "k": "mount",
+     "note": "The ridge above the spring of Harod. Many take \"Mount Gilead\" in 7:3 as a hill here. Saul and Jonathan later died on Gilboa (1 Samuel 31)."
+    },
+    {
+     "n": "Damascus",
+     "ll": [
+      36.30639,
+      33.51111
+     ],
+     "c": 2,
+     "m": "Damascus",
+     "note": "The great city of Aram, beyond Mount Hermon. Israel served \"the gods of Aram\" (10:6)."
+    }
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "The land in the days of the Judges",
+   "p": [
+    "Judges spans the passing of the Late Bronze Age into the early Iron Age. Egypt's hold on Canaan weakened and ended in the 12th century BC, and the Philistines, one of the Sea Peoples, settled on the southern coast in their five cities. In the hill country hundreds of small new villages appear in these centuries, with pillared houses, terraced fields and plastered cisterns, the setting of Gideon threshing wheat in a winepress and Micah's household shrine.",
+    "The tribes lived largely apart, each facing its own neighbours: Moab, Midian and the people of the east, the Canaanite kings of the north, the Ammonites and the Philistines. The judges rose in different regions, and some of their times may overlap. The book closes with Israel united only to fight Benjamin, and the refrain \"In those days there was no king in Israel\" (17:6; 21:25)."
+   ]
+  },
+  {
+   "h": "How to use this map",
+   "p": [
+    "This map opens from any place named in Judges, in chapters that have no map of their own. The red dots are places named in Judges; the black dots are other places of the time, for context. The tribe names show roughly where each tribe lived. Two places share a name: Mizpah in Benjamin and Mizpah of Gilead, Jephthah's home; and Aijalon of Dan and Aijalon in Zebulun."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map engine: MapLibre GL."
+}

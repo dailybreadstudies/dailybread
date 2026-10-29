@@ -142,6 +142,15 @@ fortresses, and other places of the time. Regions (Galilee, Judea, Idumea, Perea
 have their own labels and notes (`regions`, replacing the Old Testament ones); `aliases` point text forms such as
 "Gadarenes" or "Samaritans" to a place or region. Add MRK, LUK or JHN to `BOOKS` to give that Gospel the same map.
 
+### Book map (Judges)
+
+`tools/build_judges_land.py` makes *The Land in the Days of the Judges* (`jdg-land`), on the same pattern as Joshua's
+book map (`tools/build_joshua_land.py`): every place named in Judges (red, from `data/maps/places/JDG.json` plus a few
+springs, hills and rocks added by hand), other places of the time (black), tribe labels and the lands around Israel.
+Where two places share a name, the text form "Mizpah of Gilead" has its own dot, and `except` keeps "Mizpah" in
+10:17–11:34 and "Aijalon" in 12:12 from opening the wrong one. Peoples (Ammonites, Philistines, Midian) are labels
+on the map but are not tappable in the text, since they are named on almost every page of the book.
+
 ## Archaeology finds
 
 A small button beside a verse opens a card about an archaeological find: a picture or two, key facts and a
