@@ -404,11 +404,21 @@ def build_murray(a):
             t, s = ORDINALS[o - 2] + ' Lesson', f['title']
         else:
             t, s = 'A Note on George Müller', None
-        u = {'t': t, 'b': murray_html(f['body_html'])}
-        if s:
-            u['s'] = s
-        units.append(u)
-    return {'id': 'murray', 'title': 'With Christ in the School of Prayer', 'author': 'Andrew Murray', 'unit': 'Lesson',
+        # each lesson in two parts, divided at the paragraph nearest the middle of its words
+        blocks = murray_html(f['body_html'])
+        w = [len(re.sub(r'<[^>]+>', '', b['p']).split()) for b in blocks]
+        total, run, cut = sum(w), 0, 1
+        best = None
+        for k in range(1, len(blocks)):
+            run += w[k - 1]
+            if best is None or abs(run - total / 2) < best:
+                best, cut = abs(run - total / 2), k
+        for part, bl in ((1, blocks[:cut]), (2, blocks[cut:])):
+            u = {'t': t, 'part': part, 'b': bl}
+            if s:
+                u['s'] = s
+            units.append(u)
+    return {'id': 'prayer', 'title': 'With Christ in the School of Prayer', 'author': 'Andrew Murray', 'unit': 'Part',
             'by': 'Andrew Murray (1885)', 'credit': 'Andrew Murray, With Christ in the School of Prayer (1885), public domain.',
             'units': units}
 
@@ -651,7 +661,7 @@ def main():
     books.update(build_anf(a))
     books['1maccabees'] = build_macc_web(a, 1)
     books['2maccabees'] = build_macc_web(a, 2)
-    books['murray'] = build_murray(a)
+    books['prayer'] = build_murray(a)
     books['odes'] = build_odes(a.odes)
     books['enoch'] = build_enoch_palmer(a.enoch)
     books['1clement'] = build_1clement_lightfoot(a.clement, books['1clement'])
@@ -671,7 +681,7 @@ def main():
 
     index = {
         'books': {
-            'murray': meta(books['murray']),
+            'prayer': meta(books['prayer']),   # each lesson in two parts (was 'murray', one lesson a unit)
             'enoch': meta(books['enoch']),
             '1maccabees': dict(meta(books['1maccabees']), filter=True),   # Messianic Filter: Judah, Torah …
             '2maccabees': dict(meta(books['2maccabees']), filter=True),
@@ -689,7 +699,7 @@ def main():
             'didache': meta(books['didache']),
         },
         'tracks': [
-            {'id': 'devotional', 'title': 'Devotional', 'short': 'Devotional', 'books': ['murray'], 'filter': True},
+            {'id': 'devotional', 'title': 'Devotional', 'short': 'Devotional', 'books': ['prayer'], 'filter': True},
             {'id': 'second-temple', 'title': 'Second Temple Literature', 'short': 'Second Temple', 'books': ['enoch', '1maccabees', '2maccabees']},
             {'id': 'rabbinics', 'title': 'Rabbinics', 'short': 'Rabbinics', 'books': ['avot', 'mishnah'], 'hebrew': True},
             {'id': 'early-christian', 'title': 'Early Christian Writings', 'short': 'Early Christian',

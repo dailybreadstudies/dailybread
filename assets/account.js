@@ -90,7 +90,16 @@
   function norm(p) {
     p = p || {};
     var n = { read: p.read || {}, since: p.since || null, chapters: p.chapters || {}, archive: p.archive || {}, from: p.from || null };
-    if (!KIDS) n.tracks = { done: (p.tracks && p.tracks.done) || {} };
+    if (!KIDS) {
+      var done = Object.assign({}, (p.tracks && p.tracks.done) || {});
+      Object.keys(done).forEach(function (k) {     // Murray's lessons are now two parts each (assets/tracks.js, migrate)
+        var m = /^murray:(\d+)$/.exec(k);
+        if (!m) return;
+        ['prayer:' + (2 * m[1] - 1), 'prayer:' + (2 * m[1])].forEach(function (nk) { if (!done[nk]) done[nk] = done[k]; });
+        delete done[k];
+      });
+      n.tracks = { done: done };
+    }
     return n;
   }
   // This device's progress as stored in the cloud: the reading plan, plus (Classic) the study tracks kept under their own key

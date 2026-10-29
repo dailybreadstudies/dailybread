@@ -44,7 +44,24 @@
   }
 
   // ── Marks ──
-  function marks() { var s = load(TKEY); return s && s.done ? s.done : {}; }
+  // Murray's lessons were one unit each ("murray:5"); now each is two parts ("prayer:9", "prayer:10"). Old marks,
+  // here or arriving from another device, become both parts of their lesson.
+  function migrate(done) {
+    var changed = false;
+    Object.keys(done).forEach(function (k) {
+      var m = /^murray:(\d+)$/.exec(k);
+      if (!m) return;
+      var n = +m[1];
+      ['prayer:' + (2 * n - 1), 'prayer:' + (2 * n)].forEach(function (nk) { if (!done[nk]) done[nk] = done[k]; });
+      delete done[k]; changed = true;
+    });
+    return changed;
+  }
+  function marks() {
+    var s = load(TKEY);
+    if (s && s.done && migrate(s.done)) { store(TKEY, s); try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ } }
+    return s && s.done ? s.done : {};
+  }
   function setMark(key, on) {
     var s = load(TKEY) || {};
     s.done = s.done || {};
@@ -118,7 +135,10 @@
     var m = ix.books[book];
     if (m.kind === 'avot') { var a = avotAt(m, i); return Promise.resolve('Pirkei Avot ' + (a.c + 1) + ':' + (a.m + 1)); }
     if (m.kind === 'mishnah') { var x = mishnahAt(m, i); return Promise.resolve('Mishnah ' + x.t[1] + ' ' + (x.c + 1)); }
-    if (book === 'murray') return Promise.resolve(i === 1 ? 'Murray, Preface' : i <= 32 ? 'Murray, ' + MURRAY_ORD[i - 2] + ' Lesson' : 'Murray, Note on George Müller');
+    if (book === 'prayer') {     // two parts to a lesson: units 1–2 the Preface, 3–64 the lessons, 65–66 the note on Müller
+      var L = Math.ceil(i / 2), part = ' (' + (i % 2 ? 1 : 2) + '/2)';
+      return Promise.resolve((L === 1 ? 'Murray, Preface' : L <= 32 ? 'Murray, ' + MURRAY_ORD[L - 2] + ' Lesson' : 'Murray, Note on George Müller') + part);
+    }
     if (book === 'enoch') return file(m.file).then(function (b) { return '1 Enoch ' + b.units[i - 1].t.replace(/^Chapter /, ''); });
     if (book === 'hermas') return file(m.file).then(function (b) { return 'Hermas, ' + b.units[i - 1].t.replace(' · Chapter ', ', chapter '); });
     if (m.pending) return Promise.resolve(m.title + ' ' + i);
@@ -143,7 +163,7 @@
     }
     return file(m.file).then(function (f) {
       var u = f.units[i - 1], head, sub;
-      if (book === 'murray') { head = u.s || u.t; sub = (u.s ? u.t + ' · ' : '') + 'Andrew Murray'; }
+      if (book === 'prayer') { head = u.s || u.t; sub = (u.s ? u.t + ' · ' : '') + 'Part ' + u.part + ' of 2'; }
       else if (book === 'hermas') { head = u.t.replace(' · Chapter ', ', chapter '); sub = (u.s ? u.s + ' · ' : '') + 'The Shepherd of Hermas'; }
       else if (book === 'enoch') { head = '1 Enoch ' + u.t.replace(/^Chapter /, ''); sub = u.s || ''; }
       else if (book === 'odes') { head = 'Ode ' + i; sub = u.s || ''; }
@@ -609,7 +629,7 @@
     mish.tractates.forEach(function (t) { if (!bySeder[t[2]]) { bySeder[t[2]] = [at, at]; orders.push(t[2]); } bySeder[t[2]][1] = at + t[3] - 1; at += t[3]; });
     var ET = 'early-christian';
     return [
-      { label: 'Devotional', lean: '', groups: [['', [vol('murray', 'School of Prayer', 0, 0, 'devotional')], 1]] },
+      { label: 'Devotional', lean: '', groups: [['', [vol('prayer', 'School of Prayer', 0, 0, 'devotional')], 1]] },
       { label: 'Second Temple Literature', lean: '2 Maccabees', groups: [['', [vol('enoch', '1 Enoch', 0, 0, 'second-temple'),
         vol('1maccabees', '1 Maccabees', 0, 0, 'second-temple'), vol('2maccabees', '2 Maccabees', 0, 0, 'second-temple')], 0]] },
       { label: 'Rabbinics', lean: 'Tahorot', groups: [['', [vol('avot', 'Pirkei Avot', 0, 0, 'rabbinics')], 2],

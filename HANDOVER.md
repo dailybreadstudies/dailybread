@@ -143,6 +143,8 @@ Rabbinics (Vilna text). Dig deeper gets a "Your study" section and hero button; 
 Progress gets "Your study" (book bars per track, recently read). Never counted in the plan's catch-up. Data in `data/tracks/`,
 built by `tools/build_tracks.py` (README). 1 Enoch: David Robert Palmer (2026, public domain; from ch. 40 mostly Laurence), 106 chapters in his numbering (48A, two 104s),
 with his notes after each chapter; the markers open them in a bubble like the Bible's translation notes (hover / tap). Odes of Solomon: The Nuhra Version (2021), public domain, set out line by line (Syriac where Coptic/Greek also survive).
+Murray is book `prayer`: each lesson in two parts, cut at the paragraph nearest the middle (66 units); old `murray:N`
+marks become `prayer:2N-1` and `prayer:2N` (tracks.js `migrate`, account.js `norm`).
 Each track has a painted banner (`BANNERS` in tracks.js → assets/img/study-<track>.jpg + -sm), full width under the top bar,
 full strength with a dark wash and light headings (title set lower), fading into the page above the tools and text.
 Each book has an About card (`data/tracks/about.json`, written by hand, 100–170 words with a translation note), styled like an
