@@ -15,6 +15,7 @@ Sources (clone them anywhere, then pass the folders below):
   --murray github.com/jdegreef/ochorus               backend/library/fixtures/content/books/school-of-prayer.en.json
            Andrew Murray, With Christ in the School of Prayer (1885), public domain.
   --enoch  pdftohtml -xml -i of David Robert Palmer, The Book of Enoch the Prophet (2026), public domain, with his notes.
+  --clement saved copy of earlychristianwritings.com/text/1clement-lightfoot.html (J. B. Lightfoot, 1891, public domain).
   --odes   pdftotext -layout of The Odes of Solomon: The Nuhra Version (2021) PDF (nuhra.net), public domain translation.
   --mishnah a folder of <Tractate>.en.json / <Tractate>.he.json, taken from the Sefaria export
            (github.com/Sefaria/Sefaria-Export-Archive, commit 3f10136, json/Mishnah/Seder */*/):
@@ -328,6 +329,54 @@ def build_macc_web(a, n):
             'credit': 'World English Bible with Deuterocanon (eBible.org), public domain.', 'units': units}
 
 
+def build_1clement_lightfoot(path, anf):
+    # J. B. Lightfoot's translation (The Apostolic Fathers, 1891), public domain, as saved from
+    # earlychristianwritings.com/text/1clement-lightfoot.html: verses marked "1Clem 12:3" in the text.
+    # Lightfoot prints the whole letter, with chapters 58–63 (the great prayer) that the Ante-Nicene Fathers lacked.
+    # The short chapter titles are the Ante-Nicene editors' (taken from the earlier build, anf).
+    s = open(path, encoding='utf-8', errors='replace').read()
+    start = s.index('1Clem prologue:1')
+    end = s.index('</p>', s.rindex('1Clem 65:'))
+    body = s[start:end]
+    parts = re.split(r'1Clem (prologue|\d+):(\d+)\s*<br\s*/?>', body)
+    chs = {}
+    for i in range(1, len(parts) - 2, 3):
+        c, v, t = parts[i], int(parts[i + 1]), parts[i + 2]
+        t = re.sub(r'<br\s*/?>', ' ', t)
+        t = re.sub(r'<(?!/?i>)[^>]+>', '', t)               # keep only italics (quotations of Scripture)
+        t = html.unescape(re.sub(r'\s+', ' ', t)).strip()
+        t = re.sub(r'<i>\s*</i>', '', t).replace(' </i>', '</i> ').replace('<i> ', ' <i>')
+        t = re.sub(r'\s+([,.;:!?])', r'\1', re.sub(r'\s+', ' ', t)).strip()
+        if t.count('<i>') != t.count('</i>'):                # an italic run crossing a verse: close / open it here
+            t = (t + '</i>') if t.count('<i>') > t.count('</i>') else ('<i>' + t)
+        chs.setdefault(c, []).append((v, html.escape(t, quote=False).replace('&lt;i&gt;', '<i>').replace('&lt;/i&gt;', '</i>')))
+    titles = {int(u['t'].split()[1]): u.get('s') for u in anf['units']}
+    units = []
+    for n in range(1, 66):
+        vs = chs[str(n)]
+        if n == 1:
+            vs = [(0, chs['prologue'][0][1])] + vs     # the salutation leads into chapter 1
+        paras, cur, words = [], [], 0
+        for v, t in vs:
+            cur.append(('<span class="verse-num">%d</span>' % v if v else '') + t)
+            words += len(re.sub(r'<[^>]+>', '', t).split())
+            if words > 140 or v == 0:
+                paras.append(' '.join(cur)); cur, words = [], 0
+        if cur:
+            paras.append(' '.join(cur))
+        u = {'t': 'Chapter %d' % n, 'b': [{'p': x} for x in paras]}
+        if titles.get(n):
+            u['s'] = titles[n]
+        units.append(u)
+    return {'id': '1clement', 'title': 'First Clement', 'unit': 'Chapter',
+            'by': 'Translated by J. B. Lightfoot (1891)',
+            'note': 'The letter of the assembly at Rome to the assembly at Corinth, about AD 96, in Lightfoot’s translation of the '
+                    'complete Greek text, including the great prayer of chapters 59–61. Italics mark quotations of Scripture; the short '
+                    'chapter titles are those of the Ante-Nicene editors.',
+            'credit': 'J. B. Lightfoot, The Apostolic Fathers (1891), public domain; text from earlychristianwritings.com.',
+            'units': units}
+
+
 def murray_html(h):
     h = h.replace(' ', ' ')
     paras = re.findall(r'<p>(.*?)</p>', h, flags=re.S)
@@ -593,6 +642,7 @@ def main():
     ap.add_argument('--ebible', required=True)
     ap.add_argument('--murray', required=True)
     ap.add_argument('--mishnah', required=True)
+    ap.add_argument('--clement', required=True, help='saved page earlychristianwritings.com/text/1clement-lightfoot.html')
     ap.add_argument('--enoch', required=True, help='pdftohtml -xml -i of David Robert Palmer, The Book of Enoch the Prophet')
     ap.add_argument('--odes', required=True, help='pdftotext -layout of The Odes of Solomon: The Nuhra Version (2021)')
     a = ap.parse_args()
@@ -604,6 +654,7 @@ def main():
     books['murray'] = build_murray(a)
     books['odes'] = build_odes(a.odes)
     books['enoch'] = build_enoch_palmer(a.enoch)
+    books['1clement'] = build_1clement_lightfoot(a.clement, books['1clement'])
     for k, b in books.items():
         write(b['id'] + '.json', b)
 

@@ -221,7 +221,7 @@ A book marked `pending` in `data/tracks/index.json` is passed over by its track 
 
 ```
 python3 tools/build_tracks.py --book ~/src/The-Book --sm ~/src/bible_databases_deuterocanonical \
-  --ebible ~/src/ebible --murray ~/src/ochorus --mishnah ~/src/mishnah --odes ~/src/odes-nuhra-2021.txt --enoch ~/src/enoch-palmer-2026.xml   # sources: see the script's header
+  --ebible ~/src/ebible --murray ~/src/ochorus --mishnah ~/src/mishnah --odes ~/src/odes-nuhra-2021.txt --enoch ~/src/enoch-palmer-2026.xml --clement ~/src/1clement-lightfoot.html   # sources: see the script's header
 ```
 
 ## Rebuilding the BSB data
