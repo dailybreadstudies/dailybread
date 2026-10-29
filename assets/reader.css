@@ -326,6 +326,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 .cm-q { margin: 0 0 1.1rem; padding: 0 0 0 16px; border-left: 3px solid var(--rule); }
 .cm-q p { font-family: var(--serif); font-style: italic; font-size: 1.02rem; line-height: 1.7; color: var(--ink-soft); margin: 0; }
 .cm-more { color: var(--muted); }
+/* Hebrew words inside commentary text: SBL Hebrew, a touch larger to match the Latin, with line-height 1 so the
+   taller vowel points never push the lines of the paragraph apart */
+.cm-he { font-family: var(--hebrew); font-size: 1.14em; line-height: 1; font-style: normal; unicode-bidi: isolate; direction: rtl; }
 .cm-end { margin: 1.8rem 0 0; padding: 1.1rem 1.2rem; border-radius: 12px; background: var(--tint); }
 .cm-end p { font-size: 0.95rem; line-height: 1.6; color: var(--ink-soft); margin: 0 0 0.6rem; }
 .cm-links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 0 !important; }

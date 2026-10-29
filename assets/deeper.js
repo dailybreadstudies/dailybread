@@ -63,7 +63,10 @@
   }
 
   // Commentary: a section of Lars Enarson's Messiah in the Torah for the week's portion (data/commentary.json), Classic only
-  function lordify(t) { return t.replace(/\bLORD\b/g, '<span class="lord">Lord</span>'); }
+  function lordify(t) { return hebrewize(t).replace(/\bLORD\b/g, '<span class="lord">Lord</span>'); }
+  // Hebrew words in the commentary (e.g. ha-makom (הַמָּקוֹם)) in SBL Hebrew, isolated so the parentheses and punctuation around them stay put
+  var HEB_RUN = /[\u0591-\u05F4\uFB1D-\uFB4F]+(?:[ \u05BE]+[\u0591-\u05F4\uFB1D-\uFB4F]+)*/g;
+  function hebrewize(t) { return t.replace(HEB_RUN, '<bdi class="cm-he" lang="he">$&</bdi>'); }
   function commentaryHtml(c, parsha) {
     return '<section class="dp-comm" id="commentary">' +
       '<h2 class="dp-h">Commentary</h2>' +
