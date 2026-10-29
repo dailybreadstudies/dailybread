@@ -969,11 +969,69 @@
     setMode(ctx, ctx.mode || 'ancient');
   }
 
+  // 3D looks a little east of north (up the land toward Hermon). Enlarged, a map of the land opens on the view from the
+  // middle of the Dead Sea to Mount Hermon; other maps keep their own extent.
+  var BEARING_3D = 18, PITCH_3D = 58, LAND_3D = [[35.5, 31.45], [35.85, 33.42], [35.23, 31.78]]   // the middle of the Dead Sea, Mount Hermon, Jerusalem;
+  function in3d(ctx) { var b = ctx.root.querySelector('[data-dbm-3d]'); return !!b && b.getAttribute('aria-pressed') === 'true'; }
+  function coversLand(ctx) {
+    var b = ctx.spec.bounds;
+    return !ctx.spec.world && b && b[0][0] <= 35.5 && b[1][0] >= 35.8 && b[0][1] <= 31.5 && b[1][1] >= 33.3;
+  }
+  // Find the tilted camera that puts both ends of the land (Dead Sea, Hermon) inside the box, by trying it out:
+  // jumpTo is synchronous, so the trial cameras are never drawn.
+  function fitTilted(map, pts, box) {
+    var start = { center: map.getCenter(), zoom: map.getZoom(), bearing: map.getBearing(), pitch: map.getPitch() };
+    var cam = { center: [(pts[0][0] + pts[1][0]) / 2, (pts[0][1] + pts[1][1]) / 2], zoom: start.zoom, bearing: BEARING_3D, pitch: PITCH_3D };
+    for (var i = 0; i < 8; i++) {
+      map.jumpTo(cam);
+      var xy = pts.map(function (p) { return map.project(p); });
+      var x0 = Math.min.apply(null, xy.map(function (q) { return q.x; })), x1 = Math.max.apply(null, xy.map(function (q) { return q.x; }));
+      var y0 = Math.min.apply(null, xy.map(function (q) { return q.y; })), y1 = Math.max.apply(null, xy.map(function (q) { return q.y; }));
+      var h = y1 - y0, w = x1 - x0;
+      var k = Math.min((box.bottom - box.top) / Math.max(h, 1), (box.right - box.left) / Math.max(w, 1));
+      var mid = map.unproject([(x0 + x1) / 2, (y0 + y1) / 2]), want = map.unproject([(box.left + box.right) / 2, (box.top + box.bottom) / 2]);
+      var c = map.getCenter();
+      cam.center = [c.lng + (mid.lng - want.lng), c.lat + (mid.lat - want.lat)];
+      cam.zoom = Math.max(3, Math.min(12, cam.zoom + Math.log(k) / Math.LN2 * 0.8));
+    }
+    map.jumpTo(start);
+    return cam;
+  }
+  function view3d(ctx, duration) {
+    var map = ctx.map, opts = { pitch: PITCH_3D, bearing: BEARING_3D, duration: duration };
+    if (ctx.big && coversLand(ctx)) {
+      var kf = ctx.root.querySelector('.dbm-keyfloat'), cv = map.getCanvas();
+      var W = cv.clientWidth, H = cv.clientHeight;
+      var left = kf && !kf.classList.contains('closed') && window.innerWidth >= 760 ? kf.offsetWidth + 40 : 20;
+      var cam = fitTilted(map, LAND_3D, { left: left + 20, right: W - 40, top: Math.min(130, H * 0.16), bottom: H - 40 });
+      opts.center = cam.center; opts.zoom = cam.zoom;
+    }
+    map.easeTo(opts);
+  }
+  // With terrain switched on, labels can stay hidden until the camera moves again: once the elevation tiles
+  // have loaded, nudge the camera so the labels are placed again.
+  function refreshLabels(map) {
+    var z = map.getZoom();
+    map.jumpTo({ zoom: z + 0.0005 });
+    map.jumpTo({ zoom: z });
+  }
+  function watchTerrain(ctx) {
+    var map = ctx.map, t = null;
+    if (ctx.terrainWatch) return;
+    ctx.terrainWatch = true;
+    function later() { clearTimeout(t); t = setTimeout(function () { if (map.getTerrain && map.getTerrain() && !map.isMoving()) refreshLabels(map); }, 200); }
+    map.on('sourcedata', function (e) { if (e.sourceId === 'dem' && e.tile) later(); });
+    map.on('idle', function () { if (map.getTerrain && map.getTerrain() && !ctx.terrainSettled) { ctx.terrainSettled = true; refreshLabels(map); } });
+  }
   function toggle3d(ctx, b) {
     var on = b.getAttribute('aria-pressed') !== 'true';
     b.setAttribute('aria-pressed', String(on));
-    if (on) { ctx.map.setTerrain({ source: 'dem', exaggeration: 1.5 }); ctx.map.easeTo({ pitch: 58, bearing: -15, duration: reduceMotion ? 0 : 1200 }); }
-    else { ctx.map.setTerrain(null); ctx.map.easeTo({ pitch: 0, bearing: 0, duration: reduceMotion ? 0 : 800 }); }
+    if (on) {
+      watchTerrain(ctx);
+      ctx.terrainSettled = false;
+      ctx.map.setTerrain({ source: 'dem', exaggeration: 1.5 });
+      view3d(ctx, reduceMotion ? 0 : 1200);
+    } else { ctx.map.setTerrain(null); ctx.map.easeTo({ pitch: 0, bearing: 0, duration: reduceMotion ? 0 : 800 }); }
   }
   function fitDefault(ctx, duration) {
     if (!ctx.map) return;
@@ -992,7 +1050,7 @@
       kf.classList.add('closed');
       var kb = ctx.root.querySelector('[data-dbm-keytoggle]'); kb.textContent = 'Show'; kb.setAttribute('aria-expanded', 'false');
     }
-    if (ctx.map) requestAnimationFrame(function () { ctx.map.resize(); fitDefault(ctx, 0); });
+    if (ctx.map) requestAnimationFrame(function () { ctx.map.resize(); if (in3d(ctx)) view3d(ctx, 0); else fitDefault(ctx, 0); });
   }
   function toggleAlt(ctx, b) {
     var alt = ctx.spec.alternates;
