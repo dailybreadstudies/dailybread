@@ -202,10 +202,27 @@
   function messianic(text) {
     return messianicWords(text).replace(LAW_RE, '$1Torah').replace(/\bYeshua Messiah\b/g, 'Yeshua the Messiah');
   }
-  function filterNode(root) {
+  // For Murray, Henry and Ryle only: "Christian" as a person becomes "disciple" (Christians → disciples, Christian's →
+  // disciple's, Christians' → disciples'). The singular changes only when what follows shows it is a noun ("every
+  // Christian must", "the Christian, who"); as an adjective ("Christian love", "Christian church") it is left in the
+  // writer's own words, as are Christianity and Christendom.
+  var NOUN_NEXT = /^(?:[,.;:!?)\]”"’—–-]|$|(?:is|was|are|were|be|been|being|has|have|had|may|might|must|should|would|will|shall|can|could|cannot|ought|does|did|do|doth|hath|who|whom|whose|which|that|to|in|at|on|of|for|from|with|by|as|and|or|nor|but|if|when|whenever|while|so|than|then|there|here|too|also|not|never|ever|still|now|himself|herself|alone|indeed|only|always|often|really|truly|already|needs|need not|rests|knows|feels|lives|finds|sees|says|believes|loves|prays|walks|lies|dies|falls|stands|goes|comes|thinks|hopes|wants|gets|becomes|remains|learns|reads|hears|seeks|takes|makes|gives|keeps|suffers|knew|felt|lived|found|saw|said|believed)\b)/;
+  function disciples(text) {
+    return text.replace(/\b(Christians?)(['’]s|['’](?=\s|$))?(?![A-Za-z-])/g, function (all, word, poss, at, str) {
+      var plural = word === 'Christians', rest = str.slice(at + all.length).replace(/^\s+/, '');
+      if (!plural && !poss && !NOUN_NEXT.test(rest)) return all;                  // an adjective: leave it
+      var before = str.slice(0, at), start = !/\S/.test(before) || /[.!?]["”’)]?\s*$/.test(before) || /^[“"‘(]$/.test(before.slice(-1));
+      return (start ? 'D' : 'd') + 'isciple' + (plural ? 's' : '') + (poss || '');
+    });
+  }
+  function filterNode(root, people) {
     var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), n, list = [];
     while ((n = w.nextNode())) list.push(n);
-    list.forEach(function (t) { var v = messianic(t.nodeValue); if (v !== t.nodeValue) t.nodeValue = v; });
+    list.forEach(function (t) {
+      var v = messianic(t.nodeValue);
+      if (people === true) v = disciples(v);
+      if (v !== t.nodeValue) t.nodeValue = v;
+    });
   }
 
   // ── Rendering a unit ──
@@ -298,7 +315,7 @@
     return Promise.all([getUnit(ix, at.book, at.i), abouts()]).then(function (r) {
       var u = r[0];
       sec.innerHTML = sectionHtml(ix, track, n, ix.tracks.length, at, u, r[1][at.book]);
-      if ((track.filter || ix.books[at.book].filter) && siteSettings().messianic) sec.querySelectorAll('.st-text, .chapter-head, .chapter-sub').forEach(filterNode);
+      if ((track.filter || ix.books[at.book].filter) && siteSettings().messianic) sec.querySelectorAll('.st-text, .chapter-head, .chapter-sub').forEach(function (el) { filterNode(el, at.book === 'prayer'); });
       drawDoneNext(n);
       placeAbout();
     }).catch(function () {
@@ -713,7 +730,7 @@
           wrap.innerHTML = picks.map(function (p, k) { return p && res[k] ? commSectionsHtml(p, res[k], k) : ''; }).join('');
           if (!wrap.innerHTML) return;
           anchor.parentNode.insertBefore(wrap, anchor);
-          if (siteSettings().messianic) wrap.querySelectorAll('.cmx-text, .cmx-hero .ab-h, .cmx-hero .ab-eyebrow').forEach(filterNode);
+          if (siteSettings().messianic) wrap.querySelectorAll('.cmx-text, .cmx-hero .ab-h, .cmx-hero .ab-eyebrow').forEach(function (el) { filterNode(el, true); });
           var btns = document.querySelector('#words-top .ab-btns');
           if (btns && !btns.querySelector('.cmx-btn')) {
             var b = document.createElement('a');
