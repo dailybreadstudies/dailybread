@@ -138,7 +138,7 @@ portion photo: save both sizes in assets/img/ and set `"image"` (and optionally 
 Only for John's and Sofia's accounts (emails stored only as SHA-256 hashes, `READERS` in `assets/tracks.js`; each has her/his own progress; 1 Maccabees and the Didache pre-read are John's only). `study.html` shows four
 tracks like Today's readings (#1–#4, tabs at the top, no checklist; "Mark Chapter/Lesson/Mishnah Complete" at the bottom,
 then on to the next track). A track stays on the unit marked today until tomorrow ("Next time: … Read it now →" reads ahead).
-Messianic Filter switch on Devotional and Early Christian (the same `messianic` setting as the Bible text); Hebrew switch on
+Messianic Filter switch on Devotional, Early Christian and 1–2 Maccabees (index.json book flag `filter`; the same `messianic` setting as the Bible text); Hebrew switch on
 Rabbinics (Vilna text). Dig deeper gets a "Your study" section and hero button; the Dig deeper box on Today gets "Your study";
 Progress gets "Your study" (book bars per track, recently read). Never counted in the plan's catch-up. Data in `data/tracks/`,
 built by `tools/build_tracks.py` (README). 1 Enoch: David Robert Palmer (2026, public domain; from ch. 40 mostly Laurence), 106 chapters in his numbering (48A, two 104s),

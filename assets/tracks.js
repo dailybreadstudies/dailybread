@@ -238,7 +238,8 @@
   }
   function sectionHtml(ix, track, n, total, at, u, about) {
     var done = marks(), on = !!done[mkey(at.book, at.i)], m = ix.books[at.book];
-    var filterOn = track.filter && !!siteSettings().messianic, hebrew = !!prefs().hebrew;
+    var canFilter = track.filter || m.filter;   // a whole track, or one book (1 and 2 Maccabees)
+    var filterOn = canFilter && !!siteSettings().messianic, hebrew = !!prefs().hebrew;
     var unitWord = m.unit;
     var html = '<p class="division-label">' + esc(track.title) + '</p>' +
       '<h2 class="chapter-head">' + esc(u.head) + '</h2>' +
@@ -247,7 +248,7 @@
       (about ? ' <button type="button" class="info-btn st-info" data-about="toggle" aria-pressed="' + !prefs().aboutClosed +
         '" aria-label="About ' + esc(m.title) + '" title="About ' + esc(m.title) + '">' + INFO + '</button>' : '') + '</p>';
     var tools = [];
-    if (track.filter) tools.push('<button type="button" class="st-toggle" data-st="filter" aria-pressed="' + filterOn + '">Messianic Filter</button>');
+    if (canFilter) tools.push('<button type="button" class="st-toggle" data-st="filter" aria-pressed="' + filterOn + '">Messianic Filter</button>');
     if (track.hebrew) tools.push('<button type="button" class="st-toggle" data-st="hebrew" aria-pressed="' + hebrew + '">Hebrew</button>');
     if (tools.length) html += '<div class="st-tools">' + tools.join('') + '</div>';
     if (u.note) html += '<p class="st-note">' + esc(u.note) + '</p>';
@@ -277,7 +278,7 @@
     return Promise.all([getUnit(ix, at.book, at.i), abouts()]).then(function (r) {
       var u = r[0];
       sec.innerHTML = sectionHtml(ix, track, n, ix.tracks.length, at, u, r[1][at.book]);
-      if (track.filter && siteSettings().messianic) sec.querySelectorAll('.st-text, .chapter-head, .chapter-sub').forEach(filterNode);
+      if ((track.filter || ix.books[at.book].filter) && siteSettings().messianic) sec.querySelectorAll('.st-text, .chapter-head, .chapter-sub').forEach(filterNode);
       drawDoneNext(n);
       placeAbout();
     }).catch(function () {
@@ -500,7 +501,7 @@
         var what = t.getAttribute('data-st'), on = t.getAttribute('aria-pressed') !== 'true';
         if (what === 'filter') { var s = siteSettings(); s.messianic = on; store('dbs-settings', s); }
         else setPref('hebrew', on);
-        IX.tracks.forEach(function (tr, j) { if ((what === 'filter' && tr.filter) || (what === 'hebrew' && tr.hebrew)) drawSection(j + 1); });
+        IX.tracks.forEach(function (tr, j) { if (what === 'filter' || tr.hebrew) drawSection(j + 1); });
         return;
       }
       if (t.hasAttribute('data-mark')) {

@@ -673,8 +673,8 @@ def main():
         'books': {
             'murray': meta(books['murray']),
             'enoch': meta(books['enoch']),
-            '1maccabees': meta(books['1maccabees']),
-            '2maccabees': meta(books['2maccabees']),
+            '1maccabees': dict(meta(books['1maccabees']), filter=True),   # Messianic Filter: Judah, Torah …
+            '2maccabees': dict(meta(books['2maccabees']), filter=True),
             'avot': {'title': 'Pirkei Avot', 'by': 'Translated by Dr. Joshua Kulp (Mishnah Yomit)', 'unit': 'Mishnah',
                      'units': sum(avot[4]), 'kind': 'avot', 'file': 'mishnah/%s.json' % avot[0], 'per': avot[4],
                      'uw': [w for c in avot[5] for w in c]},
