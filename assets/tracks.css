@@ -147,3 +147,17 @@ body.banner-on :is(.st-date, .st-title, .st-tabs, .division-label, .chapter-head
 .st-fn-n { font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
 .st-notes sup { font-size: 0.7em; }
 .chapter-head + .st-where { margin-top: 0.3rem; }
+
+/* Dig deeper: commentaries on the day's Prophets, Writings and Apostles readings (private) */
+.cmx-hero { min-height: 62vh; }
+.cmx-hero .ab-photo-bg.cmx-empty { opacity: 1; background: linear-gradient(135deg, #3b2c20 0%, #1d1712 100%); }
+.cmx-hero .ab-photo-bg.cmx-empty::after { background: none; }
+.cmx-sec { min-height: 0; }
+.cmx-text .cmx-ch { font-family: var(--display); font-weight: 400; font-size: 1.5rem; color: var(--heading); margin: 2.4rem 0 0.4rem; }
+.cmx-text .cmx-ch:first-child { margin-top: 0; }
+.cmx-text .cmx-vv { font: 600 0.72rem/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 2rem 0 0.6rem; }
+.cmx-text > .cmx-vv:first-child, .cmx-text .cmx-ch + .cmx-vv { margin-top: 0.6rem; }
+.cmx-text .cm-p { font-size: clamp(1.05rem, 1.35vw, 1.15rem); line-height: 1.8; color: var(--ink); margin: 0 0 1rem; }
+.cmx-text b { font-weight: 600; color: var(--heading); }
+.cmx-sec .st-tools { justify-content: flex-start; margin-bottom: 1.6rem; }
+.cmx-about { margin-top: 3rem; }

@@ -598,6 +598,142 @@
     });
   }
 
+  // ═══════════════ Dig deeper: commentaries on the day's Prophets, Writings and Apostles readings ═══════════════
+  // Matthew Henry's Concise Commentary (data/comm/henry), and for the Gospels J. C. Ryle's Expository Thoughts
+  // (data/comm/ryle); built by tools/build_commentaries.py. Each commentary shows the sections that touch the reading.
+  var BOOK_NAMES = { GEN: 'Genesis', EXO: 'Exodus', LEV: 'Leviticus', NUM: 'Numbers', DEU: 'Deuteronomy', JOS: 'Joshua',
+    JDG: 'Judges', RUT: 'Ruth', '1SA': '1 Samuel', '2SA': '2 Samuel', '1KI': '1 Kings', '2KI': '2 Kings', '1CH': '1 Chronicles',
+    '2CH': '2 Chronicles', EZR: 'Ezra', NEH: 'Nehemiah', EST: 'Esther', JOB: 'Job', PSA: 'Psalm', PRO: 'Proverbs',
+    ECC: 'Ecclesiastes', SNG: 'Song of Songs', ISA: 'Isaiah', JER: 'Jeremiah', LAM: 'Lamentations', EZK: 'Ezekiel',
+    DAN: 'Daniel', HOS: 'Hosea', JOL: 'Joel', AMO: 'Amos', OBA: 'Obadiah', JON: 'Jonah', MIC: 'Micah', NAM: 'Nahum',
+    HAB: 'Habakkuk', ZEP: 'Zephaniah', HAG: 'Haggai', ZEC: 'Zechariah', MAL: 'Malachi', MAT: 'Matthew', MRK: 'Mark',
+    LUK: 'Luke', JHN: 'John', ACT: 'Acts', ROM: 'Romans', '1CO': '1 Corinthians', '2CO': '2 Corinthians', GAL: 'Galatians',
+    EPH: 'Ephesians', PHP: 'Philippians', COL: 'Colossians', '1TH': '1 Thessalonians', '2TH': '2 Thessalonians',
+    '1TI': '1 Timothy', '2TI': '2 Timothy', TIT: 'Titus', PHM: 'Philemon', HEB: 'Hebrews', JAS: 'James', '1PE': '1 Peter',
+    '2PE': '2 Peter', '1JN': '1 John', '2JN': '2 John', '3JN': '3 John', JUD: 'Jude', REV: 'Revelation' };
+  var GOSPELS = { MAT: 1, MRK: 1, LUK: 1, JHN: 1 };
+  // A picture for each commentary, to come: the file name in assets/img (and a -sm copy for phones), or '' for none yet
+  var COMM_IMAGES = { prophets: '', writings: '', apostles: '' };
+  var COMM = [
+    { id: 'prophets', label: 'Prophets', from: ['Prophets', 'Haftarah'] },
+    { id: 'writings', label: 'Writings', from: ['Writings'] },
+    { id: 'apostles', label: 'Apostles', from: ['Apostles', 'Gospels'] }
+  ];
+  // "ISA 27:6-28:13; 29:22-23" → [{ c: 27, a: 6, b: 999 }, { c: 28, a: 1, b: 13 }, { c: 29, a: 22, b: 23 }]
+  function refRanges(ref) {
+    var m0 = /^([1-3A-Z]{3})\s+(.*)$/.exec(ref.trim());
+    if (!m0) return null;
+    var out = [];
+    m0[2].split(/;\s*/).forEach(function (part) {
+      var m = /^(\d+)(?::(\d+))?(?:-(\d+)(?::(\d+))?)?$/.exec(part.trim());
+      if (!m) return;
+      var c1 = +m[1], v1 = m[2] ? +m[2] : 1, c2 = c1, v2 = 999;
+      if (m[3]) {
+        if (m[4]) { c2 = +m[3]; v2 = +m[4]; } else if (m[2]) v2 = +m[3]; else c2 = +m[3];
+      } else if (m[2]) v2 = v1;
+      for (var c = c1; c <= c2; c++) out.push({ c: c, a: c === c1 ? v1 : 1, b: c === c2 ? v2 : 999 });
+    });
+    return { book: m0[1], ranges: out };
+  }
+  function refName(ref) {
+    var m = /^([1-3A-Z]{3})\s+(.*)$/.exec(ref.trim());
+    return m ? (BOOK_NAMES[m[1]] || m[1]) + ' ' + m[2].replace(/-/g, '–').replace(/;\s*/g, '; ') : ref;
+  }
+  function overlaps(v, r) { return v[0] <= r.b && v[1] >= r.a; }
+  function commentaryFor(ref) {
+    var R = refRanges(ref);
+    if (!R) return Promise.resolve(null);
+    if (GOSPELS[R.book]) {
+      return getJSON(DATA.replace('tracks/', '') + 'comm/ryle/' + R.book + '.json').then(function (d) {
+        var parts = [];
+        R.ranges.forEach(function (r) {
+          d.sections.forEach(function (s) { if (s.c === r.c && overlaps(s.v, r)) parts.push({ c: s.c, v: s.v, p: s.p }); });
+        });
+        return { who: 'ryle', book: R.book, parts: parts };
+      });
+    }
+    return getJSON(DATA.replace('tracks/', '') + 'comm/henry/' + R.book + '.json').then(function (d) {
+      var parts = [];
+      R.ranges.forEach(function (r) {
+        var ch = d.chapters[r.c];
+        if (!ch) return;
+        ch.s.forEach(function (s) { if (overlaps(s.v, r)) parts.push({ c: r.c, v: s.v, p: s.p }); });
+      });
+      return { who: 'henry', book: R.book, parts: parts };
+    });
+  }
+  var COMM_ABOUT = {
+    henry: { title: 'Matthew Henry’s Concise Commentary',
+      about: 'Matthew Henry (1662–1714) was an English Presbyterian minister, the son of a pastor ejected from the Church of England in 1662. He served a congregation in Chester for twenty-five years and later in Hackney, London, and wrote his Exposition of the Old and New Testaments between 1706 and his death; friends completed Romans to Revelation from his notes. The Concise Commentary is an abridgement of that great work, made after his death and long one of the most widely read commentaries in English. Henry writes as a devotional expositor rather than a critical scholar: every chapter turns to prayer, holiness and comfort in Messiah. He follows the Reformed reading of his day, and at times applies promises to Israel to the church; read as a post-supersessionist, those places call for discernment, while his warmth and practical wisdom remain.',
+      translation: 'Henry comments on the King James Version. Text from the public-domain abridgement, as published by lyteword/mhenry-concise (CC0).' },
+    ryle: { title: 'J. C. Ryle, Expository Thoughts on the Gospels',
+      about: 'John Charles Ryle (1816–1900) was an evangelical Anglican clergyman, for many years rector of Helmingham and Stradbroke in Suffolk, and in 1880 the first bishop of Liverpool. He wrote his Expository Thoughts on the Gospels between 1856 and 1873, intending them for family prayers, for those who visit the sick, and for private reading. Each passage is followed by a short, plain exposition drawing out a few leading lessons, in Ryle’s direct and searching style. On Luke and John he added long critical notes, which are left out here. Ryle was firmly Protestant and evangelical; unusually for his time, he also taught that Israel will be literally restored to its land and brought to faith in its Messiah, a conviction that resonates with a Messianic reading of the Gospels.',
+      translation: 'Ryle expounded the King James Version; the edition used here (Monergism Books) gives the Scripture quotations in modern English. Ryle’s text is public domain.' }
+  };
+  function commSectionsHtml(item, data, idx) {
+    var c = COMM[idx], img = COMM_IMAGES[c.id], who = data.who, ab = COMM_ABOUT[who];
+    var name = refName(item.ref);
+    var hero = '<section class="ab-sec ab-photo cmx-hero" id="cm-' + c.id + '"><div class="ab-photo-bg' + (img ? ' has-photo' : ' cmx-empty') + '"' +
+      (img ? ' style="background-image:url(assets/img/' + img + (window.innerWidth <= 900 ? '-sm' : '') + '.jpg)"' : '') + ' aria-hidden="true"></div>' +
+      '<div class="ab-in"><p class="ab-eyebrow">' + esc(c.label) + ' · <em>' + esc(name) + '</em></p>' +
+      '<h2 class="ab-h">' + (who === 'ryle' ? 'Ryle on <em>' + esc(name) + '</em>' : 'Matthew Henry on <em>' + esc(name) + '</em>') + '</h2>' +
+      '<p class="ab-p">' + (who === 'ryle' ? 'From J. C. Ryle’s <em>Expository Thoughts on the Gospels</em>, on today’s reading from the Apostles.'
+        : 'From Matthew Henry’s <em>Concise Commentary</em>, on today’s reading from the ' + esc(c.label) + '.') + '</p></div></section>';
+    var body = '', lastC = null, multi = data.parts.some(function (p) { return p.c !== data.parts[0].c; });
+    data.parts.forEach(function (p) {
+      if (multi && p.c !== lastC) body += '<h3 class="cmx-ch">' + esc((BOOK_NAMES[data.book] || data.book) + ' ' + p.c) + '</h3>';
+      lastC = p.c;
+      var vv = p.v[1] >= 999 ? 'The whole chapter' : (p.v[0] === p.v[1] ? 'Verse ' + p.v[0] : 'Verses ' + p.v[0] + '–' + p.v[1]);
+      body += '<p class="cmx-vv">' + vv + '</p>' + p.p.map(function (t) { return '<p class="cm-p">' + t + '</p>'; }).join('');
+    });
+    if (!data.parts.length) body = '<p class="cm-p">There is no commentary on this passage.</p>';
+    var filterOn = !!siteSettings().messianic;
+    return hero + '<section class="ab-sec dp-sec cmx-sec"><div class="ab-in dp-col">' +
+      '<div class="st-tools"><button type="button" class="st-toggle" data-cmx="filter" aria-pressed="' + filterOn + '">Messianic Filter</button></div>' +
+      '<div class="cmx-text">' + body + '</div>' +
+      '<aside class="st-about cmx-about"><div class="st-about-head"><span>About · ' + esc(ab.title) + '</span></div>' +
+      '<p class="st-about-p">' + esc(ab.about) + '</p><p class="st-about-tr"><b>Text.</b> ' + esc(ab.translation) + '</p></aside>' +
+      '</div></section>';
+  }
+  function commentaries() {
+    if (document.getElementById('cmx')) return;
+    var anchor = document.querySelector('.dp-back');
+    anchor = anchor && anchor.closest('section');
+    if (!anchor) return;
+    var date = new URLSearchParams(location.search).get('d') || todayISO();
+    getJSON('data/days/' + date + '.json').then(function (day) {
+      var picks = COMM.map(function (c) {
+        return (day.portions || []).filter(function (p) { return c.from.indexOf(p.label) >= 0 && !p.optional; })[0] || null;
+      });
+      return Promise.all(picks.map(function (p) { return p ? commentaryFor(p.ref).catch(function () { return null; }) : null; }))
+        .then(function (res) {
+          if (document.getElementById('cmx')) return;
+          var wrap = document.createElement('div');
+          wrap.id = 'cmx';
+          wrap.innerHTML = picks.map(function (p, k) { return p && res[k] ? commSectionsHtml(p, res[k], k) : ''; }).join('');
+          if (!wrap.innerHTML) return;
+          anchor.parentNode.insertBefore(wrap, anchor);
+          if (siteSettings().messianic) wrap.querySelectorAll('.cmx-text, .cmx-hero .ab-h, .cmx-hero .ab-eyebrow').forEach(filterNode);
+          var btns = document.querySelector('#words-top .ab-btns');
+          if (btns && !btns.querySelector('.cmx-btn')) {
+            var b = document.createElement('a');
+            b.className = 'ab-btn cmx-btn'; b.href = '#' + wrap.querySelector('.cmx-hero').id; b.textContent = 'Bible commentary';
+            btns.appendChild(b);
+          }
+          if (/^#cm-/.test(location.hash)) { var t = document.querySelector(location.hash); if (t) t.scrollIntoView(); }
+        });
+    }).catch(function () { /* not a day of the plan */ });
+  }
+  if (PAGE === 'deeper') {
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest && e.target.closest('[data-cmx="filter"]');
+      if (!t) return;
+      var s = siteSettings(); s.messianic = !s.messianic; store('dbs-settings', s);
+      var w = document.getElementById('cmx'); if (w) w.remove();
+      commentaries();
+    });
+  }
+
   // ═══════════════ progress.html ═══════════════
   // Your books on four shelves, one per track, drawn exactly like the Bible's "On the shelf" (assets/reader.js, shelvesHtml): each spine
   // as thick as its text is long, on the same scale as the books of the Bible, filling from the bottom as it is read.
@@ -746,10 +882,11 @@
       if (!ok) {
         var p = document.getElementById('study-progress'); if (p) p.hidden = true;
         var s = document.getElementById('study'); if (s && PAGE === 'deeper') s.remove();
+        var cx = document.getElementById('cmx'); if (cx) cx.remove();
         return;
       }
       seedPreRead();
-      if (PAGE === 'deeper') deeperSection();
+      if (PAGE === 'deeper') { deeperSection(); commentaries(); }
       if (PAGE === 'progress') progressSection();
       if (PAGE === 'today') {
         todayBox();

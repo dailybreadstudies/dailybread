@@ -233,6 +233,12 @@ python3 tools/build_tracks.py --book ~/src/The-Book --sm ~/src/bible_databases_d
   --ebible ~/src/ebible --murray ~/src/ochorus --mishnah ~/src/mishnah --odes ~/src/odes-nuhra-2021.txt --enoch ~/src/enoch-palmer-2026.xml --clement ~/src/1clement-lightfoot.html   # sources: see the script's header
 ```
 
+## Bible commentary for the study readers (Dig deeper)
+
+```
+python3 tools/build_commentaries.py --henry ~/src/mhenry-concise --ryle ~/src/ryle.xml   # see the script's header
+```
+
 ## Rebuilding the BSB data
 
 The BSB text comes from https://github.com/usfm-bible/examples.bsb (USFM).
