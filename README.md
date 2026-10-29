@@ -211,7 +211,7 @@ Word study is not available on the Hebrew New Testament (no tagged data); the Gr
 
 Extra reading for the site owner's own account only (`READERS` in `assets/tracks.js` holds the SHA-256 of the account
 email, so the address is not in the code). Four tracks, each a chapter at a time with no dates, so they never fall behind:
-Devotional (Murray, *With Christ in the School of Prayer*), Second Temple Literature (1 Enoch, 1 Maccabees — marked as already read — and 2 Maccabees, KJV),
+Devotional (Murray, *With Christ in the School of Prayer*), Second Temple Literature (1 Enoch, 1 Maccabees — marked as already read — and 2 Maccabees, WEB),
 Rabbinics (Pirkei Avot one mishnah at a time, then the whole Mishnah chapter by chapter), Early Christian Writings
 (1 Clement, Odes of Solomon, Shepherd of Hermas, Polycarp, Didache). `study.html` is the reading page; Dig deeper, the
 Dig deeper box on Today and Progress get a "Your study" part. Marks: `localStorage['dbs-tracks']`, synced as `tracks` in

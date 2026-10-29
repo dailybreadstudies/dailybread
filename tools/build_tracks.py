@@ -10,7 +10,8 @@ Sources (clone them anywhere, then pass the folders below):
            Ante-Nicene Fathers, 1885; 1 Clement 58–63 from Lightfoot & Harmer, 1891). Texts public domain;
            their parse is CC BY 4.0 ("The Book — Chronological Biblical Library").
   --ebible github.com/BibleNLP/ebible                metadata/vref.txt + corpus/eng-engkjvcpb.txt
-           1 and 2 Maccabees, King James Version (Cambridge Paragraph Bible text, eBible.org), public domain.
+           1 Maccabees, King James Version (Cambridge Paragraph Bible text, eBible.org), public domain.
+           (2 Maccabees: World English Bible with Deuterocanon, from The Book's docs/data/works/2-maccabees.json.)
   --murray github.com/jdegreef/ochorus               backend/library/fixtures/content/books/school-of-prayer.en.json
            Andrew Murray, With Christ in the School of Prayer (1885), public domain.
   --enoch  pdftohtml -xml -i of David Robert Palmer, The Book of Enoch the Prophet (2026), public domain, with his notes.
@@ -317,6 +318,16 @@ def build_macc(a, n):
             'units': units}
 
 
+def build_2macc_web(a):
+    # World English Bible with Deuterocanon (eBible.org, ebible.org/eng-web/2MA01.htm), public domain; verse text as
+    # parsed by The Book (docs/data/works/2-maccabees.json), the same words as the eBible.org pages
+    d = json.load(open(os.path.join(a.book, 'docs', 'data', 'works', '2-maccabees.json'), encoding='utf-8'))
+    units = [{'t': 'Chapter %d' % ch['n'], 'b': [{'v': v['v'], 'x': clean(v['t'])} for v in ch['verses']]}
+             for ch in sorted(d['chapters'], key=lambda c: c['n'])]
+    return {'id': '2maccabees', 'title': '2 Maccabees', 'unit': 'Chapter', 'by': 'World English Bible (WEB), Deuterocanon',
+            'credit': 'World English Bible with Deuterocanon (eBible.org), public domain.', 'units': units}
+
+
 def murray_html(h):
     h = h.replace(' ', ' ')
     paras = re.findall(r'<p>(.*?)</p>', h, flags=re.S)
@@ -589,7 +600,7 @@ def main():
     books = build_book(a)
     books.update(build_anf(a))
     books['1maccabees'] = build_macc(a, 1)
-    books['2maccabees'] = build_macc(a, 2)
+    books['2maccabees'] = build_2macc_web(a)
     books['murray'] = build_murray(a)
     books['odes'] = build_odes(a.odes)
     books['enoch'] = build_enoch_palmer(a.enoch)
@@ -636,7 +647,7 @@ def main():
         'credits': [
             'Andrew Murray, With Christ in the School of Prayer (1885), public domain.',
             '1 Enoch: David Robert Palmer (2026, from ch. 40 mostly Laurence 1883), public domain. Roberts and Donaldson, Ante-Nicene Fathers (1885); Lightfoot and Harmer (1891): public domain, text prepared by The Book — Chronological Biblical Library (CC BY 4.0).',
-            '1 and 2 Maccabees: King James Version with Apocrypha (eBible.org), public domain.',
+            '1 Maccabees: King James Version with Apocrypha; 2 Maccabees: World English Bible (eBible.org); public domain.',
             'Mishnah: Mishnah Yomit by Dr. Joshua Kulp (CC BY), via Sefaria; Hebrew: Romm, Vilna 1913, public domain.',
         ],
     }
