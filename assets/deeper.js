@@ -177,10 +177,11 @@
     var cs = document.querySelectorAll('.cm-only');
     cs.forEach(function (el) { el.hidden = !comm; });
     if (comm) {
-      set('cm-eyebrow', 'Commentary · <em>' + esc(day.parsha.name) + '</em>');
+      set('cm-eyebrow', 'Weekly Commentary · <em>' + esc(day.parsha.name) + '</em>');
       var tw = esc(comm.title).split(' '), k = comm.em ? comm.em.split(' ').length : tw.length > 3 ? 2 : 1;   // the last word or two in italics, as on the About pages ('em' in the data overrides)
       set('cm-hero-title', tw.slice(0, -k).join(' ') + ' <em>' + tw.slice(-k).join(' ') + '</em>');
-      set('cm-hero-from', 'An excerpt from Lars Enarson’s commentary on <em>' + esc(day.parsha.name) + '</em>, from <em>Messiah in the Torah</em>, Vol. I.');
+      set('cm-hero-from', 'An excerpt from Lars Enarson’s commentary on <em>' + esc(day.parsha.name) + '</em>' +
+        (day.parsha.meaning ? ' (' + esc(day.parsha.meaning) + ')' : '') + ', from <em>Messiah in the Torah</em>, Vol. I.');
       var first = true;
       set('cm-body', comm.blocks.map(function (b) {
         var t = lordify(esc(b.t));
