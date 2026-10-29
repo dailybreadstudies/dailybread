@@ -613,7 +613,7 @@
     '2PE': '2 Peter', '1JN': '1 John', '2JN': '2 John', '3JN': '3 John', JUD: 'Jude', REV: 'Revelation' };
   var GOSPELS = { MAT: 1, MRK: 1, LUK: 1, JHN: 1 };
   // A picture for each commentary, to come: the file name in assets/img (and a -sm copy for phones), or '' for none yet
-  var COMM_IMAGES = { prophets: '', writings: '', apostles: '' };
+  var COMM_IMAGES = { prophets: 'comm-prophets', writings: 'comm-writings', apostles: 'comm-apostles' };
   var COMM = [
     { id: 'prophets', label: 'Prophets', from: ['Prophets', 'Haftarah'] },
     { id: 'writings', label: 'Writings', from: ['Writings'] },

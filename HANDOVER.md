@@ -147,7 +147,7 @@ Private Bible commentary on Dig deeper (same accounts): after the Lars commentar
 (or Haftarah), Writings and Apostles reading (not the optional 5th): Matthew Henry's Concise Commentary (data/comm/henry, all
 books; lyteword/mhenry-concise lacks 2 Kings 1), and for the Gospels J. C. Ryle's Expository Thoughts (data/comm/ryle,
 expositions only, no technical notes); the sections touching the reading's verses; Messianic Filter switch; About card at the
-bottom. Built by tools/build_commentaries.py. Picture for each to come: `COMM_IMAGES` in tracks.js (empty = dark placeholder).
+bottom. Built by tools/build_commentaries.py. Pictures: `COMM_IMAGES` in tracks.js (olive tree, canyon, lake; empty = dark placeholder).
 Murray is book `prayer`: each lesson in two parts, cut at the paragraph nearest the middle (66 units); old `murray:N`
 marks become `prayer:2N-1` and `prayer:2N` (tracks.js `migrate`, account.js `norm`).
 Each track has a painted banner (`BANNERS` in tracks.js → assets/img/study-<track>.jpg + -sm), full width under the top bar,
