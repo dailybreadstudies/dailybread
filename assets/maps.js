@@ -578,6 +578,8 @@
           sea: { type: 'geojson', data: water.sea }, galilee: { type: 'geojson', data: water.galilee },
           seawest: { type: 'geojson', data: (!spec.world && water.seaWest) || empty }, seawestcoast: { type: 'geojson', data: (!spec.world && water.seaWestCoast) || empty },
           seacoast: { type: 'geojson', data: water.seaCoast || empty },
+          // the seas beyond the detailed box (Syria and Turkey, the Red Sea), seen in the distance when the map is tilted
+          seafar: { type: 'geojson', data: (!spec.world && water.seaFar) || empty }, seafarcoast: { type: 'geojson', data: (!spec.world && water.seaFarCoast) || empty },
           deadsea: { type: 'geojson', data: water.deadSea }, jordan: { type: 'geojson', data: water.jordan },
           waternames: { type: 'geojson', data: spec.waterNames ? pointsOf(spec.waterNames, function (w) { return { n: w.n, s: w.s || '' }; }) : water.names },
           ofm: { type: 'vector', url: BASEMAPS.waterways },
@@ -604,6 +606,8 @@
               'hillshade-shadow-color': css('--dbm-shade'), 'hillshade-highlight-color': css('--dbm-highlight'), 'hillshade-accent-color': css('--dbm-shade') } },
           { id: 'sea-west', type: 'fill', source: 'seawest', paint: { 'fill-color': css('--dbm-water'), 'fill-antialias': false } },   // no antialiasing: the cut along 31°E is a zero-width sliver   // the coast west of 31°E (Egypt)
           { id: 'sea-west-edge', type: 'line', source: 'seawestcoast', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1.2 } },
+          { id: 'sea-far', type: 'fill', source: 'seafar', paint: { 'fill-color': css('--dbm-water'), 'fill-antialias': false } },
+          { id: 'sea-far-edge', type: 'line', source: 'seafarcoast', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1.2 } },
           { id: 'sea', type: 'fill', source: 'sea', paint: { 'fill-color': css('--dbm-water') } },
           { id: 'sea-edge', type: 'line', source: water.seaCoast ? 'seacoast' : 'sea', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1.2 } },
           { id: 'nrivers', type: 'line', source: 'nrivers', layout: { 'line-cap': 'round', 'line-join': 'round' },
@@ -926,7 +930,7 @@
     map.setLayoutProperty('street', 'visibility', m === 'modern' ? 'visible' : 'none');
     map.setLayoutProperty('sat', 'visibility', m === 'sat' ? 'visible' : 'none');
     map.setPaintProperty('hillshade', 'hillshade-exaggeration', m === 'ancient' ? 0.55 : m === 'modern' ? 0.2 : 0);
-    ['deadsea', 'sea', 'sea-edge', 'sea-west', 'sea-west-edge', 'galilee', 'water-label', 'region-label', 'wadi', 'wadi-seasonal', 'stream-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' ? 'visible' : 'none'); });
+    ['deadsea', 'sea', 'sea-edge', 'sea-west', 'sea-west-edge', 'sea-far', 'sea-far-edge', 'galilee', 'water-label', 'region-label', 'wadi', 'wadi-seasonal', 'stream-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' ? 'visible' : 'none'); });
     ['roads', 'roads-label'].forEach(function (id) { map.setLayoutProperty(id, 'visibility', m === 'ancient' && ctx.roadsOn !== false ? 'visible' : 'none'); });
     map.setPaintProperty('places-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-city'));
     map.setPaintProperty('gpoint-label', 'text-color', m === 'sat' ? '#ffffff' : css('--dbm-city'));
@@ -942,8 +946,8 @@
     map.setPaintProperty('hillshade', 'hillshade-shadow-color', css('--dbm-shade'));
     map.setPaintProperty('hillshade', 'hillshade-highlight-color', css('--dbm-highlight'));
     map.setPaintProperty('hillshade', 'hillshade-accent-color', css('--dbm-shade'));
-    ['deadsea', 'sea', 'sea-west', 'galilee'].forEach(function (id) { map.setPaintProperty(id, 'fill-color', css('--dbm-water')); });
-    ['sea-edge', 'sea-west-edge'].forEach(function (id) { map.setPaintProperty(id, 'line-color', css('--dbm-water-line')); });
+    ['deadsea', 'sea', 'sea-west', 'sea-far', 'galilee'].forEach(function (id) { map.setPaintProperty(id, 'fill-color', css('--dbm-water')); });
+    ['sea-edge', 'sea-west-edge', 'sea-far-edge'].forEach(function (id) { map.setPaintProperty(id, 'line-color', css('--dbm-water-line')); });
     map.setPaintProperty('region-label', 'text-color', css('--dbm-region'));
     map.setPaintProperty('region-label', 'text-halo-color', css('--dbm-paper'));
     ['wadi', 'wadi-seasonal'].forEach(function (id) { map.setPaintProperty(id, 'line-color', css('--dbm-water-line')); });
