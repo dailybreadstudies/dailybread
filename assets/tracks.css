@@ -164,5 +164,18 @@ body.banner-on :is(.st-date, .st-title, .st-tabs, .division-label, .chapter-head
 .cmx-text > .cmx-vv:first-child, .cmx-text .cmx-ch + .cmx-vv { margin-top: 0.6rem; }
 .cmx-text .cm-p { font-size: clamp(1.05rem, 1.35vw, 1.15rem); line-height: 1.8; color: var(--ink); margin: 0 0 1rem; }
 .cmx-text b { font-weight: 600; color: var(--heading); }
-.cmx-sec .st-tools { justify-content: flex-start; margin-bottom: 1.6rem; }
 .cmx-about { margin-top: 3rem; }
+
+/* The Messianic Filter switch at the end of the banner's subtitle (light, on the picture); it wraps to its own line if need be */
+.cmx-hero .ab-p { max-width: none; }   /* room for the switch at the end of the line on wide screens */
+.cmx-hero .cmx-pill { vertical-align: 0.15em; margin-left: 0.15em; color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.45);
+  background: rgba(17,17,17,0.18); white-space: nowrap; }
+.cmx-hero .cmx-pill::before { background: rgba(255,255,255,0.35); box-shadow: none; }
+.cmx-hero .cmx-pill:hover { border-color: #fff; color: #fff; }
+.cmx-hero .cmx-pill[aria-pressed="true"] { color: #fff; border-color: rgba(255,255,255,0.8); }
+.cmx-hero .cmx-pill[aria-pressed="true"]::before { background: var(--done); }
+.cmx-hero .cmx-pill::after { background: #fff; }
+/* Drop cap on the first paragraph, as for Lars Enarson's commentary (deeper.html, #cm-body .dc) */
+.cmx-text .dc { float: left; font-family: var(--display); font-weight: 300; color: var(--accent); font-size: 5.3em; line-height: 0.78;
+  margin: 0.08em 0.07em 0 -0.04em; }
+.cmx-text > .cmx-vv:first-child + .cm-first, .cmx-text .cmx-ch + .cmx-vv + .cm-first { margin-top: 0.4rem; }

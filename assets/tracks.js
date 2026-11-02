@@ -695,7 +695,9 @@
       '<div class="ab-in"><p class="ab-eyebrow">' + esc(c.label) + ' · <em>' + esc(name) + '</em></p>' +
       '<h2 class="ab-h">' + (who === 'ryle' ? 'Ryle on <em>' + esc(name) + '</em>' : 'Matthew Henry on <em>' + esc(name) + '</em>') + '</h2>' +
       '<p class="ab-p">' + (who === 'ryle' ? 'From J. C. Ryle’s <em>Expository Thoughts on the Gospels</em>, on today’s reading from the Apostles.'
-        : 'From Matthew Henry’s <em>Concise Commentary</em>, on today’s reading from the ' + esc(c.label) + '.') + '</p></div></section>';
+        : 'From Matthew Henry’s <em>Concise Commentary</em>, on today’s reading from the ' + esc(c.label) + '.') +
+      ' <button type="button" class="st-toggle cmx-pill" data-cmx="filter" aria-pressed="' + !!siteSettings().messianic + '">Messianic Filter</button>' +
+      '</p></div></section>';
     var body = '', lastC = null, multi = data.parts.some(function (p) { return p.c !== data.parts[0].c; });
     data.parts.forEach(function (p) {
       if (multi && p.c !== lastC) body += '<h3 class="cmx-ch">' + esc((BOOK_NAMES[data.book] || data.book) + ' ' + p.c) + '</h3>';
@@ -704,21 +706,36 @@
       body += '<p class="cmx-vv">' + vv + '</p>' + p.p.map(function (t) { return '<p class="cm-p">' + t + '</p>'; }).join('');
     });
     if (!data.parts.length) body = '<p class="cm-p">There is no commentary on this passage.</p>';
-    var filterOn = !!siteSettings().messianic;
     return hero + '<section class="ab-sec dp-sec cmx-sec"><div class="ab-in dp-col">' +
-      '<div class="st-tools"><button type="button" class="st-toggle" data-cmx="filter" aria-pressed="' + filterOn + '">Messianic Filter</button></div>' +
       '<div class="cmx-text">' + body + '</div>' +
       '<aside class="st-about cmx-about"><div class="st-about-head"><span>About · ' + esc(ab.title) + '</span></div>' +
       '<p class="st-about-p">' + esc(ab.about) + '</p><p class="st-about-tr"><b>Text.</b> ' + esc(ab.translation) + '</p></aside>' +
       '</div></section>';
   }
+  // A drop cap on the first paragraph, as in Lars Enarson's commentary above (deeper.js): the first letter, with an opening
+  // quotation mark if there is one, three lines tall; the letter is kept in the text for screen readers
+  function dropCap(p) {
+    var w = document.createTreeWalker(p, NodeFilter.SHOW_TEXT), n;
+    while ((n = w.nextNode())) {
+      if (!n.nodeValue.trim()) continue;
+      var m = /^(\s*)([“"‘']?[A-Za-z0-9])/.exec(n.nodeValue);
+      if (!m) return;
+      var rest = n.splitText(m[1].length + m[2].length);
+      n.nodeValue = m[1];
+      var dc = document.createElement('span'); dc.className = 'dc'; dc.setAttribute('aria-hidden', 'true'); dc.textContent = m[2];
+      var vh = document.createElement('span'); vh.className = 'visually-hidden'; vh.textContent = m[2];
+      rest.parentNode.insertBefore(dc, rest); rest.parentNode.insertBefore(vh, rest);
+      p.classList.add('cm-first');
+      return;
+    }
+  }
   function commentaries() {
-    if (document.getElementById('cmx')) return;
+    if (document.getElementById('cmx')) return Promise.resolve();
     var anchor = document.querySelector('.dp-back');
     anchor = anchor && anchor.closest('section');
-    if (!anchor) return;
+    if (!anchor) return Promise.resolve();
     var date = new URLSearchParams(location.search).get('d') || todayISO();
-    getJSON('data/days/' + date + '.json').then(function (day) {
+    return getJSON('data/days/' + date + '.json').then(function (day) {
       var picks = COMM.map(function (c) {
         return (day.portions || []).filter(function (p) { return c.from.indexOf(p.label) >= 0 && !p.optional; })[0] || null;
       });
@@ -731,6 +748,7 @@
           if (!wrap.innerHTML) return;
           anchor.parentNode.insertBefore(wrap, anchor);
           if (siteSettings().messianic) wrap.querySelectorAll('.cmx-text, .cmx-hero .ab-h, .cmx-hero .ab-eyebrow').forEach(function (el) { filterNode(el, true); });
+          wrap.querySelectorAll('.cmx-text').forEach(function (t) { var p = t.querySelector('.cm-p'); if (p) dropCap(p); });   // after the filter, so whole words are matched
           var btns = document.querySelector('#words-top .ab-btns');
           if (btns && !btns.querySelector('.cmx-btn')) {
             var b = document.createElement('a');
@@ -746,8 +764,14 @@
       var t = e.target.closest && e.target.closest('[data-cmx="filter"]');
       if (!t) return;
       var s = siteSettings(); s.messianic = !s.messianic; store('dbs-settings', s);
-      var w = document.getElementById('cmx'); if (w) w.remove();
-      commentaries();
+      var hero = t.closest('.cmx-hero'), id = hero && hero.id, top = hero ? hero.getBoundingClientRect().top : 0;
+      var w = document.getElementById('cmx');
+      if (w) { w.style.minHeight = w.offsetHeight + 'px'; w.id = ''; }     // keep the page's height while the new text loads
+      commentaries().then(function () {
+        if (w) w.remove();
+        var h = id && document.getElementById(id);
+        if (h) window.scrollBy(0, h.getBoundingClientRect().top - top);   // stay where the reader was
+      });
     });
   }
 
