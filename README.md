@@ -151,6 +151,14 @@ Where two places share a name, the text form "Mizpah of Gilead" has its own dot,
 10:17–11:34 and "Aijalon" in 12:12 from opening the wrong one. Peoples (Ammonites, Philistines, Midian) are labels
 on the map but are not tappable in the text, since they are named on almost every page of the book.
 
+### Story maps (Judges)
+
+`tools/build_judges_maps.py` holds eight hand-drawn Judges maps, in the same format as `tools/build_story_maps.py`:
+the judges and the oppressors (2:11, also at 3:7, 10:1 and 12:8; the judges are two coloured groups at their homes),
+Ehud (3:12), Deborah and Barak (4–5), Gideon (6–8), Jephthah (10:17–12:7), Samson (13–16), the Danites' move north (18)
+and the war against Benjamin (19–21). Each map's `except` keeps a name from linking where it means a person or another
+place (Gilead in 11:1–2, the second Aroer in 11:33). Names a story map leaves out are linked to the book map.
+
 ## Archaeology finds
 
 A small button beside a verse opens a card about an archaeological find: a picture or two, key facts and a

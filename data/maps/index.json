@@ -1523,7 +1523,342 @@
      "10:17",
      "11:11",
      "11:34"
+    ],
+    "Aroer": [
+     "11:33"
     ]
+   }
+  },
+  {
+   "id": "jdg-2-judges",
+   "title": "The Judges and the Oppressors",
+   "ref": "Judges 2:11–16:31",
+   "book": "JDG",
+   "c": 2,
+   "v": 11,
+   "links": [],
+   "range": [
+    11,
+    23
+   ],
+   "also": [
+    {
+     "c": 3,
+     "v": 7,
+     "range": [
+      7,
+      11
+     ]
+    },
+    {
+     "c": 10,
+     "v": 1,
+     "range": [
+      1,
+      5
+     ]
+    },
+    {
+     "c": 12,
+     "v": 8,
+     "range": [
+      8,
+      15
+     ]
+    }
+   ]
+  },
+  {
+   "id": "jdg-3-ehud",
+   "title": "Ehud and Eglon King of Moab",
+   "ref": "Judges 3:12–30",
+   "book": "JDG",
+   "c": 3,
+   "v": 12,
+   "links": [
+    "Moab",
+    "City of Palms",
+    "Gilgal",
+    "Seirah",
+    "Jordan"
+   ],
+   "range": [
+    12,
+    30
+   ],
+   "aliases": {
+    "Jordan": "Fords of the Jordan"
+   }
+  },
+  {
+   "id": "jdg-4-deborah",
+   "title": "Deborah and Barak at the Kishon",
+   "ref": "Judges 4–5",
+   "book": "JDG",
+   "c": 4,
+   "v": 1,
+   "links": [
+    "Hazor",
+    "Harosheth-hagoyim",
+    "Palm of Deborah",
+    "Kedesh",
+    "Mount Tabor",
+    "Tabor",
+    "Kishon",
+    "Zaanannim",
+    "Megiddo",
+    "Taanach"
+   ],
+   "range": [
+    1,
+    24
+   ],
+   "also": [
+    {
+     "c": 5,
+     "v": 1,
+     "range": [
+      1,
+      31
+     ]
+    }
+   ],
+   "aliases": {
+    "Tabor": "Mount Tabor"
+   }
+  },
+  {
+   "id": "jdg-6-gideon",
+   "title": "Gideon's Three Hundred",
+   "ref": "Judges 6–8",
+   "book": "JDG",
+   "c": 6,
+   "v": 1,
+   "links": [
+    "Valley of Jezreel",
+    "Ophrah",
+    "Harod",
+    "Moreh",
+    "Beth-shittah",
+    "Abel-meholah",
+    "Tabbath",
+    "Beth-barah",
+    "Succoth",
+    "Penuel",
+    "Jogbehah",
+    "Karkor"
+   ],
+   "range": [
+    1,
+    40
+   ],
+   "also": [
+    {
+     "c": 7,
+     "v": 1,
+     "range": [
+      1,
+      25
+     ]
+    },
+    {
+     "c": 8,
+     "v": 1,
+     "range": [
+      1,
+      35
+     ]
+    }
+   ]
+  },
+  {
+   "id": "jdg-11-jephthah",
+   "title": "Jephthah of Gilead",
+   "ref": "Judges 10:17–12:7",
+   "book": "JDG",
+   "c": 10,
+   "v": 17,
+   "links": [
+    "Gilead",
+    "Mizpah of Gilead",
+    "Mizpah",
+    "Tob",
+    "Arnon",
+    "Jabbok",
+    "Heshbon",
+    "Jahaz",
+    "Aroer",
+    "Minnith",
+    "Abel-keramim",
+    "Zaphon",
+    "Jordan"
+   ],
+   "range": [
+    17,
+    18
+   ],
+   "also": [
+    {
+     "c": 11,
+     "v": 1,
+     "range": [
+      1,
+      40
+     ]
+    },
+    {
+     "c": 12,
+     "v": 1,
+     "range": [
+      1,
+      7
+     ]
+    }
+   ],
+   "aliases": {
+    "Mizpah": "Mizpah of Gilead",
+    "Jordan": "Fords of the Jordan"
+   },
+   "except": {
+    "Gilead": [
+     "11:1-2"
+    ],
+    "Aroer": [
+     "11:33"
+    ]
+   }
+  },
+  {
+   "id": "jdg-13-samson",
+   "title": "Samson among the Philistines",
+   "ref": "Judges 13–16",
+   "book": "JDG",
+   "c": 13,
+   "v": 1,
+   "links": [
+    "Zorah",
+    "Eshtaol",
+    "Mahaneh-dan",
+    "Timnah",
+    "Ashkelon",
+    "Etam",
+    "Lehi",
+    "Ramath-lehi",
+    "En-hakkore",
+    "Gaza",
+    "Hebron",
+    "Valley of Sorek"
+   ],
+   "range": [
+    1,
+    25
+   ],
+   "also": [
+    {
+     "c": 14,
+     "v": 1,
+     "range": [
+      1,
+      20
+     ]
+    },
+    {
+     "c": 15,
+     "v": 1,
+     "range": [
+      1,
+      20
+     ]
+    },
+    {
+     "c": 16,
+     "v": 1,
+     "range": [
+      1,
+      31
+     ]
+    }
+   ],
+   "aliases": {
+    "Ramath-lehi": "Lehi",
+    "En-hakkore": "Lehi"
+   }
+  },
+  {
+   "id": "jdg-18-dan",
+   "title": "The Danites Move North",
+   "ref": "Judges 18",
+   "book": "JDG",
+   "c": 18,
+   "v": 1,
+   "links": [
+    "Zorah",
+    "Eshtaol",
+    "Mahaneh-dan",
+    "Kiriath-jearim",
+    "Laish",
+    "Dan",
+    "Beth-rehob",
+    "Shiloh"
+   ],
+   "range": [
+    1,
+    31
+   ],
+   "aliases": {
+    "Laish": "Dan"
+   },
+   "except": {
+    "Dan": [
+     "18:29-30"
+    ]
+   }
+  },
+  {
+   "id": "jdg-19-benjamin",
+   "title": "The War against Benjamin",
+   "ref": "Judges 19–21",
+   "book": "JDG",
+   "c": 19,
+   "v": 1,
+   "links": [
+    "Bethlehem",
+    "Jebus",
+    "Jerusalem",
+    "Gibeah",
+    "Ramah",
+    "Mizpah",
+    "Bethel",
+    "Baal-tamar",
+    "Rimmon",
+    "Jabesh-gilead",
+    "Shiloh",
+    "Lebonah"
+   ],
+   "range": [
+    1,
+    30
+   ],
+   "also": [
+    {
+     "c": 20,
+     "v": 1,
+     "range": [
+      1,
+      48
+     ]
+    },
+    {
+     "c": 21,
+     "v": 1,
+     "range": [
+      1,
+      25
+     ]
+    }
+   ],
+   "aliases": {
+    "Jebus": "Jerusalem"
    }
   },
   {

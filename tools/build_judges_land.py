@@ -190,7 +190,8 @@ WATER = [
 
 # verses where a linked name means a person, a tribe or another place, not the place on the map
 EXCEPT = {'Dan': ['5:17', '18:29-30'], 'Gilead': ['7:3', '11:1-2'], 'Shechem': ['9:28'], 'Luz': ['1:26'], 'Aijalon': ['12:12'],
-          'Mizpah': ['10:17', '11:11', '11:34']}
+          'Mizpah': ['10:17', '11:11', '11:34'],
+          'Aroer': ['11:33']}
 # where two places share a name, the one first named at this verse takes the name's links
 PRIMARY = {'Aijalon': '1:35', 'Mizpah': '20:1'}
 

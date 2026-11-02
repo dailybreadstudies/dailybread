@@ -1,0 +1,470 @@
+{
+ "id": "jdg-11-jephthah",
+ "title": "Jephthah of Gilead",
+ "ref": "Judges 10:17–12:7",
+ "anchor": {
+  "book": "JDG",
+  "c": 10,
+  "v": 17
+ },
+ "range": [
+  17,
+  18
+ ],
+ "also": [
+  {
+   "c": 11,
+   "v": 1,
+   "range": [
+    1,
+    40
+   ]
+  },
+  {
+   "c": 12,
+   "v": 1,
+   "range": [
+    1,
+    7
+   ]
+  }
+ ],
+ "places": "JDG",
+ "placesLabel": "Places named in Judges",
+ "placesName": "Judges",
+ "bounds": [
+  [
+   35.35,
+   31.35
+  ],
+  [
+   36.4,
+   32.65
+  ]
+ ],
+ "links": [
+  "Gilead",
+  "Mizpah of Gilead",
+  "Mizpah",
+  "Tob",
+  "Arnon",
+  "Jabbok",
+  "Heshbon",
+  "Jahaz",
+  "Aroer",
+  "Minnith",
+  "Abel-keramim",
+  "Zaphon",
+  "Jordan"
+ ],
+ "aliases": {
+  "Mizpah": "Mizpah of Gilead",
+  "Jordan": "Fords of the Jordan"
+ },
+ "except": {
+  "Gilead": [
+   "11:1-2"
+  ],
+  "Aroer": [
+   "11:33"
+  ]
+ },
+ "named": [
+  {
+   "name": "Gilead",
+   "ll": [
+    35.75,
+    32.36
+   ],
+   "label": "right",
+   "site": "the hill country east of the Jordan",
+   "note": "The wooded highlands between the Yarmuk and the Arnon, settled by Gad and the half-tribe of Manasseh. The Ammonites oppressed \"all the Israelites on the other side of the Jordan in Gilead\" for eighteen years (10:8)."
+  },
+  {
+   "name": "Mizpah of Gilead",
+   "ll": [
+    35.777,
+    32.1185
+   ],
+   "label": "right",
+   "site": "unknown; Jel'ad is one proposal",
+   "note": "Israel camped at Mizpah facing the Ammonites (10:17). Jephthah was made leader here \"before the LORD\" (11:11), and here his daughter came out to meet him with tambourines (11:34). Probably the Mizpah or \"watchtower\" where Jacob and Laban made their covenant (Genesis 31:49).",
+   "ob": "a0f8af9/mizpah-1"
+  },
+  {
+   "name": "Tob",
+   "ll": [
+    36.2439,
+    32.5633
+   ],
+   "label": "right",
+   "site": "et-Tayibeh?",
+   "note": "Driven out by his half-brothers, Jephthah fled to the land of Tob, an Aramean region east of Gilead, where worthless men gathered around him (11:3). Tob later sent men to help the Ammonites against David (2 Samuel 10:6).",
+   "ob": "aaff3e1/tob"
+  },
+  {
+   "name": "Rabbah",
+   "ll": [
+    35.9339,
+    31.9539
+   ],
+   "label": "right",
+   "site": "the citadel of Amman",
+   "note": "The capital of the Ammonites, not named in Judges. Today's Amman takes its name from Ammon."
+  },
+  {
+   "name": "Arnon",
+   "ll": [
+    35.7,
+    31.46
+   ],
+   "label": "below",
+   "site": "Wadi Mujib",
+   "note": "The deep gorge into the Salt Sea, the border of Moab. The Ammonite king claimed \"from the Arnon to the Jabbok\"; Jephthah answered that Israel took that land from Sihon king of the Amorites, not from Ammon or Moab (11:13, 18–22)."
+  },
+  {
+   "name": "Jabbok",
+   "ll": [
+    35.62,
+    32.15
+   ],
+   "label": "below",
+   "site": "the Zarqa river",
+   "note": "The northern limit of the land the Ammonite king claimed (11:13, 22)."
+  },
+  {
+   "name": "Heshbon",
+   "ll": [
+    35.8091,
+    31.8008
+   ],
+   "label": "left",
+   "site": "Tell Hesban",
+   "note": "The city of Sihon. \"Israel lived in Heshbon… for three hundred years. Why did you not take them back during that time?\" (11:26).",
+   "ob": "abf2fc1/heshbon"
+  },
+  {
+   "name": "Jahaz",
+   "ll": [
+    35.9079,
+    31.5883
+   ],
+   "label": "right",
+   "site": "Khirbet el-Medeiyineh?",
+   "note": "Sihon fought Israel at Jahaz and was defeated (11:20–21; Numbers 21:23).",
+   "ob": "ad9b1cd/jahaz"
+  },
+  {
+   "name": "Aroer",
+   "ll": [
+    35.8194,
+    31.4708
+   ],
+   "label": "right",
+   "site": "Arair, on the edge of the Arnon gorge",
+   "note": "Aroer on the Arnon, one of the towns Israel had held for three hundred years (11:26). The Aroer of 11:33 is probably another town of that name near Rabbah (Joshua 13:25), shown as \"Aroer near Rabbah.\"",
+   "ob": "ae46f2e/aroer-1"
+  },
+  {
+   "name": "Aroer near Rabbah",
+   "ll": [
+    35.8713,
+    31.9702
+   ],
+   "label": "left",
+   "site": "unknown; Khirbet Udena is one proposal",
+   "note": "Jephthah struck the Ammonites \"from Aroer to the vicinity of Minnith, as far as Abel-keramim,\" twenty cities (11:33). This Aroer is \"near Rabbah\" (Joshua 13:25)."
+  },
+  {
+   "name": "Minnith",
+   "ll": [
+    35.8747,
+    31.8202
+   ],
+   "label": "right",
+   "site": "unknown; Umm el-Hanafish?",
+   "note": "Known later for its wheat, traded at Tyre (Ezekiel 27:17).",
+   "ob": "a222545/minnith"
+  },
+  {
+   "name": "Abel-keramim",
+   "ll": [
+    36.0049,
+    31.8756
+   ],
+   "label": "right",
+   "site": "Sahab?",
+   "note": "\"Meadow of vineyards,\" the limit of the victory (11:33).",
+   "ob": "a957c5b/abel-keramim"
+  },
+  {
+   "name": "Zaphon",
+   "ll": [
+    35.5772,
+    32.2677
+   ],
+   "label": "left",
+   "site": "Tell es-Sa'idiyeh?",
+   "note": "The men of Ephraim crossed the Jordan to Zaphon to threaten Jephthah: \"We will burn your house down on you\" (12:1).",
+   "ob": "ab49753/zaphon-1"
+  },
+  {
+   "name": "Fords of the Jordan",
+   "ll": [
+    35.55,
+    32.12
+   ],
+   "label": "left",
+   "site": "the fords below the Jabbok",
+   "note": "The Gileadites held the fords. Each fugitive was told to say \"Shibboleth\"; an Ephraimite said \"Sibboleth,\" and was killed. 42,000 of Ephraim fell (12:5–6)."
+  }
+ ],
+ "moves": [
+  {
+   "n": 1,
+   "side": "enemy",
+   "vv": "10:17",
+   "at": 0.5,
+   "text": "The Ammonites are called to arms and camp in Gilead",
+   "coords": [
+    [
+     35.9339,
+     31.9539
+    ],
+    [
+     35.88,
+     32.0
+    ],
+    [
+     35.83,
+     32.06
+    ],
+    [
+     35.8,
+     32.1
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "other",
+   "vv": "11:3",
+   "at": 0.5,
+   "text": "Driven out, Jephthah flees to the land of Tob",
+   "coords": [
+    [
+     35.777,
+     32.1185
+    ],
+    [
+     35.9,
+     32.25
+    ],
+    [
+     36.05,
+     32.4
+    ],
+    [
+     36.2439,
+     32.5633
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 3,
+   "side": "israel",
+   "vv": "11:5–11",
+   "at": 0.5,
+   "text": "The elders of Gilead bring Jephthah back to Mizpah as their leader",
+   "coords": [
+    [
+     36.22,
+     32.54
+    ],
+    [
+     36.0,
+     32.36
+    ],
+    [
+     35.85,
+     32.2
+    ],
+    [
+     35.79,
+     32.13
+    ]
+   ]
+  },
+  {
+   "n": 4,
+   "side": "israel",
+   "vv": "11:32–33",
+   "at": 0.3,
+   "text": "Jephthah strikes twenty cities, from Aroer to Minnith and Abel-keramim",
+   "coords": [
+    [
+     35.777,
+     32.1185
+    ],
+    [
+     35.84,
+     32.02
+    ],
+    [
+     35.8713,
+     31.9702
+    ],
+    [
+     35.88,
+     31.9
+    ],
+    [
+     35.8747,
+     31.8202
+    ],
+    [
+     35.94,
+     31.85
+    ],
+    [
+     36.0049,
+     31.8756
+    ]
+   ],
+   "w": 3.8
+  },
+  {
+   "n": 5,
+   "side": "other",
+   "vv": "11:18–22",
+   "at": 0.3,
+   "text": "Israel's route long before, in Jephthah's answer: around Edom and Moab, then north across the Arnon to Jahaz and Heshbon",
+   "coords": [
+    [
+     36.1,
+     31.36
+    ],
+    [
+     36.08,
+     31.43
+    ],
+    [
+     35.98,
+     31.5
+    ],
+    [
+     35.9079,
+     31.5883
+    ],
+    [
+     35.85,
+     31.7
+    ],
+    [
+     35.8091,
+     31.8008
+    ]
+   ],
+   "dash": [
+    0.4,
+    1.6
+   ],
+   "w": 2.4
+  },
+  {
+   "n": 6,
+   "side": "enemy",
+   "vv": "12:1",
+   "at": 0.5,
+   "text": "The men of Ephraim cross the Jordan to Zaphon",
+   "coords": [
+    [
+     35.38,
+     32.2
+    ],
+    [
+     35.45,
+     32.24
+    ],
+    [
+     35.52,
+     32.26
+    ],
+    [
+     35.57,
+     32.266
+    ]
+   ]
+  },
+  {
+   "n": 7,
+   "side": "israel",
+   "vv": "12:4–5",
+   "at": 0.5,
+   "text": "The men of Gilead strike Ephraim and seize the fords of the Jordan",
+   "coords": [
+    [
+     35.777,
+     32.1185
+    ],
+    [
+     35.7,
+     32.14
+    ],
+    [
+     35.62,
+     32.13
+    ],
+    [
+     35.56,
+     32.12
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "battle",
+   "at": [
+    35.92,
+    31.88
+   ],
+   "key": "The Ammonites are subdued before Israel",
+   "vv": "11:33",
+   "moves": [
+    4
+   ]
+  },
+  {
+   "type": "battle",
+   "at": [
+    35.545,
+    32.15
+   ],
+   "key": "\"Shibboleth\": 42,000 men of Ephraim fall at the fords",
+   "vv": "12:5–6",
+   "moves": [
+    7
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "Jephthah's answer to Ammon",
+   "p": [
+    "Before fighting, Jephthah sent the Ammonite king a history lesson (11:12–28): Israel came from Egypt to Kadesh, asked passage from Edom and Moab and was refused, went around their lands, and took the land \"from the Arnon to the Jabbok\" from Sihon king of the Amorites, who attacked them. It was not Ammon's land, and Israel had lived there three hundred years. \"Let the LORD, the Judge, decide today.\""
+   ]
+  },
+  {
+   "h": "Shibboleth",
+   "p": [
+    "The word means an ear of grain, or a flowing stream. Ephraimites west of the Jordan seem to have pronounced the <i>sh</i> as <i>s</i>, and could not hide their speech. The quarrel recalls Ephraim's complaint to Gideon (8:1–3); this time it ended in civil war, a first sign of the division that runs through the end of the book."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}

@@ -1,0 +1,541 @@
+{
+ "id": "jdg-6-gideon",
+ "title": "Gideon's Three Hundred",
+ "ref": "Judges 6–8",
+ "anchor": {
+  "book": "JDG",
+  "c": 6,
+  "v": 1
+ },
+ "range": [
+  1,
+  40
+ ],
+ "also": [
+  {
+   "c": 7,
+   "v": 1,
+   "range": [
+    1,
+    25
+   ]
+  },
+  {
+   "c": 8,
+   "v": 1,
+   "range": [
+    1,
+    35
+   ]
+  }
+ ],
+ "places": "JDG",
+ "placesLabel": "Places named in Judges",
+ "placesName": "Judges",
+ "bounds": [
+  [
+   35.15,
+   32.0
+  ],
+  [
+   35.95,
+   32.7
+  ]
+ ],
+ "links": [
+  "Valley of Jezreel",
+  "Ophrah",
+  "Harod",
+  "Moreh",
+  "Beth-shittah",
+  "Abel-meholah",
+  "Tabbath",
+  "Beth-barah",
+  "Succoth",
+  "Penuel",
+  "Jogbehah",
+  "Karkor"
+ ],
+ "named": [
+  {
+   "name": "Valley of Jezreel",
+   "ll": [
+    35.33,
+    32.585
+   ],
+   "label": "below",
+   "site": "the eastern Jezreel Valley, between Moreh and Gilboa",
+   "note": "The Midianites, Amalekites and people of the east crossed the Jordan and camped here \"as thick as locusts,\" with camels past counting (6:33; 7:12). The valley leads straight up from the Jordan at Beth-shean."
+  },
+  {
+   "name": "Ophrah",
+   "ll": [
+    35.29,
+    32.6057
+   ],
+   "label": "left",
+   "site": "unknown; Afula is one proposal",
+   "note": "Ophrah of the Abiezrites, Gideon's town. The angel of the LORD found him threshing wheat in a winepress to hide it from Midian; Gideon built an altar, \"The LORD Is Peace,\" and tore down his father's altar of Baal (6:11–32). He later set up a gold ephod here (8:27).",
+   "ob": "abd637f/ophrah-2"
+  },
+  {
+   "name": "Harod",
+   "ll": [
+    35.3925,
+    32.5508
+   ],
+   "label": "below",
+   "site": "the spring of Harod: Ein Harod, at the foot of Gilboa",
+   "note": "Gideon camped \"beside the spring of Harod\" (7:1). Here 22,000 fearful men went home, and the LORD chose the 300 who lapped the water with their hands to their mouths (7:2–7)."
+  },
+  {
+   "name": "Moreh",
+   "ll": [
+    35.3487,
+    32.6176
+   ],
+   "label": "above",
+   "site": "Givat HaMoreh (Jebel Dahi), 515 m",
+   "note": "The camp of Midian was \"in the valley near the hill of Moreh,\" north of Gideon (7:1). Gideon crept down at night and heard a man tell his dream of a barley loaf tumbling into the camp (7:9–15).",
+   "ob": "a772880/moreh-2"
+  },
+  {
+   "name": "Beth-shittah",
+   "ll": [
+    35.4072,
+    32.5392
+   ],
+   "label": "right",
+   "site": "unknown; toward the Jordan",
+   "note": "The Midianites fled toward Beth-shittah and Zererah (7:22).",
+   "ob": "a83d789/beth-shittah"
+  },
+  {
+   "name": "Abel-meholah",
+   "ll": [
+    35.5609,
+    32.3743
+   ],
+   "label": "right",
+   "site": "Tell Abu Sus?",
+   "note": "\"As far as the border of Abel-meholah near Tabbath\" (7:22): the rout ran down the Jordan valley. Later the home of Elisha (1 Kings 19:16).",
+   "ob": "a5a1bdd/abel-meholah"
+  },
+  {
+   "name": "Tabbath",
+   "ll": [
+    35.6189,
+    32.2868
+   ],
+   "label": "right",
+   "site": "Ras Abu Tabat?, east of the Jordan",
+   "note": "Near Abel-meholah (7:22).",
+   "ob": "ab5c435/tabbath"
+  },
+  {
+   "name": "Beth-barah",
+   "ll": [
+    35.52,
+    32.1
+   ],
+   "label": "left",
+   "site": "unknown; by the Jordan fords below the Wadi Far'a",
+   "note": "Gideon sent to Ephraim to \"seize the waters of the Jordan as far as Beth-barah.\" They did, and caught the princes Oreb and Zeeb at the rock of Oreb and the winepress of Zeeb (7:24–25).",
+   "ob": "a0d1977/beth-barah"
+  },
+  {
+   "name": "Succoth",
+   "ll": [
+    35.6212,
+    32.1966
+   ],
+   "label": "left",
+   "site": "Tell Deir Alla",
+   "note": "The leaders of Succoth refused bread to Gideon's exhausted men: \"Are the hands of Zebah and Zalmunna now in your possession?\" Gideon punished them on his return (8:5–7, 14–16). A plaster text found at Tell Deir Alla tells of \"Balaam son of Beor.\"",
+   "ob": "a0905b5/succoth-1"
+  },
+  {
+   "name": "Penuel",
+   "ll": [
+    35.6921,
+    32.187
+   ],
+   "label": "right",
+   "site": "Tell edh-Dhahab esh-Sherqiyeh, on the Jabbok",
+   "note": "Penuel also refused; on his return Gideon tore down its tower (8:8–9, 17). Here Jacob had wrestled with God (Genesis 32:30–31).",
+   "ob": "a8a9ff9/penuel"
+  },
+  {
+   "name": "Jogbehah",
+   "ll": [
+    35.8558,
+    32.0135
+   ],
+   "label": "right",
+   "site": "Khirbet Jubeiha",
+   "note": "Gideon went up \"by way of the caravan route east of Nobah and Jogbehah\" and fell on the Midianite army (8:11).",
+   "ob": "acf6e00/jogbehah"
+  },
+  {
+   "name": "Karkor",
+   "ll": [
+    37.5428,
+    31.3631
+   ],
+   "label": "left",
+   "site": "unknown; Qarqar in Wadi Sirhan is one proposal, far to the east",
+   "note": "Zebah and Zalmunna rested at Karkor with 15,000 men, far out on the desert route and thinking themselves safe (8:10). The site is uncertain; the dot shows one proposal, over 150 km east of the Jordan. Zoom out to see it.",
+   "ob": "a0415e8/karkor"
+  }
+ ],
+ "moves": [
+  {
+   "n": 1,
+   "side": "enemy",
+   "vv": "6:33",
+   "at": 0.35,
+   "text": "Midianites, Amalekites and the people of the east cross the Jordan and camp in the Valley of Jezreel",
+   "coords": [
+    [
+     36.25,
+     32.48
+    ],
+    [
+     35.9,
+     32.5
+    ],
+    [
+     35.6,
+     32.5
+    ],
+    [
+     35.48,
+     32.55
+    ],
+    [
+     35.4,
+     32.6
+    ],
+    [
+     35.36,
+     32.605
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "vv": "6:34–35; 7:1",
+   "at": 0.5,
+   "text": "Gideon calls out Abiezer, Manasseh, Asher, Zebulun and Naphtali and camps at the spring of Harod",
+   "coords": [
+    [
+     35.29,
+     32.6057
+    ],
+    [
+     35.32,
+     32.585
+    ],
+    [
+     35.36,
+     32.565
+    ],
+    [
+     35.39,
+     32.552
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "israel",
+   "vv": "7:16–21",
+   "at": 0.5,
+   "text": "At night the 300 surround the camp with trumpets, jars and torches",
+   "coords": [
+    [
+     35.39,
+     32.556
+    ],
+    [
+     35.375,
+     32.575
+    ],
+    [
+     35.36,
+     32.592
+    ]
+   ],
+   "w": 3.8
+  },
+  {
+   "n": 4,
+   "side": "enemy",
+   "vv": "7:22",
+   "at": 0.45,
+   "text": "The Midianites flee toward Beth-shittah and down the Jordan valley to Abel-meholah near Tabbath",
+   "coords": [
+    [
+     35.37,
+     32.6
+    ],
+    [
+     35.39,
+     32.555
+    ],
+    [
+     35.4072,
+     32.5392
+    ],
+    [
+     35.48,
+     32.48
+    ],
+    [
+     35.53,
+     32.42
+    ],
+    [
+     35.5609,
+     32.3743
+    ],
+    [
+     35.59,
+     32.33
+    ],
+    [
+     35.6189,
+     32.2868
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 5,
+   "side": "ambush",
+   "vv": "7:24–25",
+   "at": 0.5,
+   "text": "Ephraim seizes the waters of the Jordan as far as Beth-barah and captures Oreb and Zeeb",
+   "coords": [
+    [
+     35.3,
+     32.13
+    ],
+    [
+     35.38,
+     32.12
+    ],
+    [
+     35.45,
+     32.11
+    ],
+    [
+     35.51,
+     32.1
+    ]
+   ]
+  },
+  {
+   "n": 6,
+   "side": "israel",
+   "vv": "8:4–9",
+   "at": 0.4,
+   "text": "Gideon and the 300 cross the Jordan, exhausted but pursuing; Succoth and Penuel refuse them bread",
+   "coords": [
+    [
+     35.6,
+     32.3
+    ],
+    [
+     35.6,
+     32.24
+    ],
+    [
+     35.6212,
+     32.1966
+    ],
+    [
+     35.66,
+     32.19
+    ],
+    [
+     35.6921,
+     32.187
+    ]
+   ]
+  },
+  {
+   "n": 7,
+   "side": "israel",
+   "vv": "8:10–12",
+   "at": 0.25,
+   "text": "Up the caravan route east of Nobah and Jogbehah, to the camp at Karkor",
+   "coords": [
+    [
+     35.6921,
+     32.187
+    ],
+    [
+     35.78,
+     32.1
+    ],
+    [
+     35.8558,
+     32.0135
+    ],
+    [
+     36.1,
+     31.9
+    ],
+    [
+     36.6,
+     31.7
+    ],
+    [
+     37.1,
+     31.52
+    ],
+    [
+     37.5428,
+     31.3631
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 8,
+   "side": "israel",
+   "vv": "8:13–17",
+   "at": 0.8,
+   "text": "Returning by the Ascent of Heres, Gideon punishes Succoth and tears down the tower of Penuel",
+   "coords": [
+    [
+     37.45,
+     31.42
+    ],
+    [
+     36.9,
+     31.68
+    ],
+    [
+     36.3,
+     31.93
+    ],
+    [
+     35.9,
+     32.08
+    ],
+    [
+     35.72,
+     32.16
+    ],
+    [
+     35.65,
+     32.19
+    ]
+   ],
+   "dash": [
+    0.4,
+    1.6
+   ],
+   "w": 2.4
+  }
+ ],
+ "symbols": [
+  {
+   "type": "altar",
+   "at": [
+    35.283,
+    32.612
+   ],
+   "key": "\"The LORD Is Peace\": Gideon's altar at Ophrah",
+   "vv": "6:24–27",
+   "moves": [
+    2
+   ],
+   "offset": [
+    -10,
+    -8
+   ]
+  },
+  {
+   "type": "camp",
+   "at": [
+    35.3925,
+    32.5508
+   ],
+   "key": "Gideon's camp at the spring of Harod; the 300 who lapped",
+   "vv": "7:1–8",
+   "moves": [
+    2,
+    3
+   ],
+   "offset": [
+    0,
+    10
+   ]
+  },
+  {
+   "type": "battle",
+   "at": [
+    35.36,
+    32.598
+   ],
+   "key": "\"A sword for the LORD and for Gideon!\" The Midianites turn on one another",
+   "vv": "7:19–22",
+   "moves": [
+    3
+   ]
+  },
+  {
+   "type": "captured",
+   "at": [
+    35.5,
+    32.105
+   ],
+   "key": "Oreb and Zeeb, the princes of Midian, are captured and killed",
+   "vv": "7:25",
+   "moves": [
+    5
+   ],
+   "offset": [
+    -12,
+    6
+   ]
+  },
+  {
+   "type": "captured",
+   "at": [
+    37.5,
+    31.38
+   ],
+   "key": "Gideon takes the camp by surprise and captures Zebah and Zalmunna",
+   "vv": "8:11–12",
+   "moves": [
+    7
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "Raiders on camels",
+   "p": [
+    "The Midianites came every harvest \"like a swarm of locusts,\" with their livestock and tents, and stripped the land \"as far as Gaza\" (6:3–5). This is among the earliest pictures of large-scale camel-riding raids in the Bible; the domesticated camel let desert peoples cross great distances quickly. Israel hid in caves and strongholds, and Gideon threshed wheat in a winepress."
+   ]
+  },
+  {
+   "h": "Three hundred",
+   "p": [
+    "The LORD cut Gideon's army from 32,000 to 300, \"lest Israel glorify themselves over Me, saying, 'My own hand has saved me'\" (7:2). At the change of the night watch the 300 broke their jars, raised their torches and blew their shofars around the camp, and the LORD set the Midianites against one another (7:19–22). The pursuit then ran down the Jordan and far out into the desert. Isaiah remembers \"the day of Midian\" as a picture of the Messiah's victory (Isaiah 9:4)."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}

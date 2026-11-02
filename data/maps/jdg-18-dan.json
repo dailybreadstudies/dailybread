@@ -1,0 +1,293 @@
+{
+ "id": "jdg-18-dan",
+ "title": "The Danites Move North",
+ "ref": "Judges 18",
+ "anchor": {
+  "book": "JDG",
+  "c": 18,
+  "v": 1
+ },
+ "range": [
+  1,
+  31
+ ],
+ "places": "JDG",
+ "placesLabel": "Places named in Judges",
+ "placesName": "Judges",
+ "bounds": [
+  [
+   34.85,
+   31.68
+  ],
+  [
+   35.95,
+   33.32
+  ]
+ ],
+ "links": [
+  "Zorah",
+  "Eshtaol",
+  "Mahaneh-dan",
+  "Kiriath-jearim",
+  "Laish",
+  "Dan",
+  "Beth-rehob",
+  "Shiloh"
+ ],
+ "aliases": {
+  "Laish": "Dan"
+ },
+ "except": {
+  "Dan": [
+   "18:29-30"
+  ]
+ },
+ "named": [
+  {
+   "name": "Zorah",
+   "ll": [
+    34.9853,
+    31.774
+   ],
+   "label": "below",
+   "site": "Tel Tzora",
+   "note": "The Danites sent five spies from Zorah and Eshtaol, and six hundred armed men set out from there (18:2, 11). The tribe had not been able to hold its allotment in the Shephelah against the Amorites (1:34).",
+   "ob": "a08174b/zorah"
+  },
+  {
+   "name": "Eshtaol",
+   "ll": [
+    34.986,
+    31.7977
+   ],
+   "label": "left",
+   "site": "Khirbet Deir Shubeib?",
+   "note": "With Zorah, the home of the Danites (18:2, 8, 11).",
+   "ob": "a355b6e/eshtaol"
+  },
+  {
+   "name": "Mahaneh-dan",
+   "ll": [
+    35.03,
+    31.79
+   ],
+   "label": "right",
+   "site": "unknown; west of Kiriath-jearim",
+   "note": "The six hundred camped at Kiriath-jearim in Judah, \"which is why the place west of Kiriath-jearim is called Mahaneh-dan to this day\" (18:12)."
+  },
+  {
+   "name": "Kiriath-jearim",
+   "ll": [
+    35.1038,
+    31.809
+   ],
+   "label": "right",
+   "site": "Deir el-Azar",
+   "note": "The Danites camped west of it (18:12). The ark later stayed here twenty years (1 Samuel 7:1–2).",
+   "ob": "a9bba61/kiriath-jearim"
+  },
+  {
+   "name": "Dan",
+   "ll": [
+    35.652,
+    33.249
+   ],
+   "label": "right",
+   "site": "Tel Dan, by the springs of the Jordan",
+   "note": "Laish was a quiet and secure town \"far from Sidon,\" with no ally. The Danites burned it, rebuilt it and named it Dan, and set up Micah's carved image with Jonathan son of Gershom, son of Moses, as priest (18:7–31). Tel Dan still has a great Middle Bronze Age gate of mudbrick from the city's Canaanite days.",
+   "ob": "a513646/dan"
+  },
+  {
+   "name": "Beth-rehob",
+   "ll": [
+    36.1453,
+    34.0089
+   ],
+   "label": "left",
+   "site": "unknown; in the valley north of Laish",
+   "note": "Laish lay \"in a valley near Beth-rehob\" (18:28), the upper Jordan and Hula valley running north toward the Beqaa.",
+   "ob": "ad44b24/beth-rehob"
+  },
+  {
+   "name": "Shiloh",
+   "ll": [
+    35.2895,
+    32.0557
+   ],
+   "label": "left",
+   "site": "Khirbet Seilun",
+   "note": "Micah's image stood at Dan \"all the time the house of God was in Shiloh\" (18:31).",
+   "ob": "aa4680a/shiloh"
+  }
+ ],
+ "moves": [
+  {
+   "n": 1,
+   "side": "other",
+   "vv": "18:2–10",
+   "at": 0.3,
+   "text": "Five Danite spies go north by way of Micah's house to Laish, and report back",
+   "coords": [
+    [
+     34.986,
+     31.7977
+    ],
+    [
+     35.06,
+     31.87
+    ],
+    [
+     35.17,
+     31.97
+    ],
+    [
+     35.21,
+     32.06
+    ],
+    [
+     35.22,
+     32.3
+    ],
+    [
+     35.27,
+     32.6
+    ],
+    [
+     35.39,
+     32.86
+    ],
+    [
+     35.53,
+     33.07
+    ],
+    [
+     35.638,
+     33.243
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ],
+   "w": 2.4
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "vv": "18:11–27",
+   "at": 0.55,
+   "text": "Six hundred Danites camp at Mahaneh-dan, take Micah's image and priest, and fall on Laish",
+   "coords": [
+    [
+     34.9853,
+     31.774
+    ],
+    [
+     35.03,
+     31.79
+    ],
+    [
+     35.1,
+     31.83
+    ],
+    [
+     35.19,
+     31.93
+    ],
+    [
+     35.235,
+     32.0
+    ],
+    [
+     35.29,
+     32.12
+    ],
+    [
+     35.34,
+     32.4
+    ],
+    [
+     35.43,
+     32.68
+    ],
+    [
+     35.55,
+     32.92
+    ],
+    [
+     35.63,
+     33.12
+    ],
+    [
+     35.65,
+     33.235
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "captured",
+   "at": [
+    35.235,
+    32.0
+   ],
+   "key": "Micah's house in the hill country of Ephraim (site unknown): the Danites take his carved image, ephod and priest",
+   "vv": "18:13–20",
+   "moves": [
+    2
+   ],
+   "offset": [
+    -14,
+    0
+   ]
+  },
+  {
+   "type": "camp",
+   "at": [
+    35.03,
+    31.79
+   ],
+   "key": "The six hundred camp at Mahaneh-dan",
+   "vv": "18:12",
+   "moves": [
+    2
+   ],
+   "offset": [
+    0,
+    -10
+   ]
+  },
+  {
+   "type": "fire",
+   "at": [
+    35.652,
+    33.249
+   ],
+   "key": "The Danites strike Laish and burn the city; they rebuild it and name it Dan",
+   "vv": "18:27–29",
+   "moves": [
+    2
+   ],
+   "offset": [
+    12,
+    -6
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "No king in Israel",
+   "p": [
+    "The last chapters of Judges are not in time order; they show what Israel had become. Twice the narrator says, \"In those days there was no king in Israel; everyone did what was right in his own eyes\" (17:6; 21:25). A Levite descended from Moses serves a household idol for pay, and a tribe gives up its allotment to take a peaceful town far from help. The priest is Jonathan son of Gershom, son of Moses (18:30), so these events took place within a few generations of the conquest."
+   ]
+  },
+  {
+   "h": "From the coast to the springs of the Jordan",
+   "p": [
+    "Dan's allotment lay in the Shephelah and on the coast (Joshua 19:40–46), but the Amorites, and later the Philistines, pressed them into the hills (1:34). About 150 km north, Laish sat by one of the great springs of the Jordan, well watered and open. From then on Dan was Israel's northern end, \"from Dan to Beersheba\" (20:1), and later Jeroboam set a golden calf there (1 Kings 12:29)."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}

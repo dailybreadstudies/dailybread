@@ -1,0 +1,385 @@
+{
+ "id": "jdg-19-benjamin",
+ "title": "The War against Benjamin",
+ "ref": "Judges 19–21",
+ "anchor": {
+  "book": "JDG",
+  "c": 19,
+  "v": 1
+ },
+ "range": [
+  1,
+  30
+ ],
+ "also": [
+  {
+   "c": 20,
+   "v": 1,
+   "range": [
+    1,
+    48
+   ]
+  },
+  {
+   "c": 21,
+   "v": 1,
+   "range": [
+    1,
+    25
+   ]
+  }
+ ],
+ "places": "JDG",
+ "placesLabel": "Places named in Judges",
+ "placesName": "Judges",
+ "bounds": [
+  [
+   35.08,
+   31.68
+  ],
+  [
+   35.76,
+   32.44
+  ]
+ ],
+ "links": [
+  "Bethlehem",
+  "Jebus",
+  "Jerusalem",
+  "Gibeah",
+  "Ramah",
+  "Mizpah",
+  "Bethel",
+  "Baal-tamar",
+  "Rimmon",
+  "Jabesh-gilead",
+  "Shiloh",
+  "Lebonah"
+ ],
+ "aliases": {
+  "Jebus": "Jerusalem"
+ },
+ "named": [
+  {
+   "name": "Bethlehem",
+   "ll": [
+    35.2076,
+    31.7043
+   ],
+   "label": "right",
+   "site": "Bethlehem",
+   "note": "The Levite's concubine went home to her father in Bethlehem in Judah. He followed, and after five days of hospitality they left late in the day (19:1–10).",
+   "ob": "a112427/bethlehem-1"
+  },
+  {
+   "name": "Jerusalem",
+   "ll": [
+    35.2342,
+    31.7767
+   ],
+   "label": "right",
+   "site": "the City of David",
+   "note": "Jebus, still a Jebusite city. The Levite would not stay \"in a city of foreigners\" and went on to Gibeah (19:10–12).",
+   "ob": "a15257a/jerusalem"
+  },
+  {
+   "name": "Gibeah",
+   "ll": [
+    35.2307,
+    31.8231
+   ],
+   "label": "left",
+   "site": "Tell el-Ful",
+   "note": "Gibeah of Benjamin, where no one took the travellers in except an old man from Ephraim, and where the men of the city abused the Levite's concubine until she died (19:14–28). When Benjamin refused to hand over the guilty men, all Israel went to war against it (20).",
+   "ob": "ac24f5f/gibeah-1"
+  },
+  {
+   "name": "Ramah",
+   "ll": [
+    35.2316,
+    31.8543
+   ],
+   "label": "right",
+   "site": "er-Ram",
+   "note": "\"Let us try to reach… Gibeah or Ramah\" (19:13).",
+   "ob": "a6d57ed/ramah-1"
+  },
+  {
+   "name": "Mizpah",
+   "ll": [
+    35.2164,
+    31.8851
+   ],
+   "label": "left",
+   "site": "Tell en-Nasbeh",
+   "note": "All Israel, \"from Dan to Beersheba and from the land of Gilead,\" assembled before the LORD at Mizpah and swore not to give their daughters to Benjamin (20:1; 21:1).",
+   "ob": "a736f6c/mizpah-3"
+  },
+  {
+   "name": "Bethel",
+   "ll": [
+    35.2414,
+    31.9228
+   ],
+   "label": "right",
+   "site": "Beitin",
+   "note": "Israel went up to inquire of God at Bethel, where the ark of the covenant was in those days with Phinehas son of Eleazar (20:18, 26–28), and wept there over Benjamin (21:2).",
+   "ob": "a64f355/bethel-1"
+  },
+  {
+   "name": "Baal-tamar",
+   "ll": [
+    35.2413,
+    31.8315
+   ],
+   "label": "right",
+   "site": "unknown; Ras et-Tawil?",
+   "note": "On the third day Israel drew up at Baal-tamar while the ambush rushed out west of Gibeah (20:33).",
+   "ob": "a66136c/baal-tamar"
+  },
+  {
+   "name": "Rimmon",
+   "ll": [
+    35.2967,
+    31.9333
+   ],
+   "label": "right",
+   "site": "the rock of Rimmon: Rammun",
+   "note": "Six hundred Benjamites fled to the rock of Rimmon in the wilderness and held out four months, until Israel offered them peace (20:47; 21:13)."
+  },
+  {
+   "name": "Jabesh-gilead",
+   "ll": [
+    35.6823,
+    32.4024
+   ],
+   "label": "right",
+   "site": "Tell el-Maqlub?",
+   "note": "No one from Jabesh-gilead came to Mizpah. Twelve thousand men struck the town and brought back four hundred young women for Benjamin (21:8–14). Saul's first victory later rescued it, and its men buried him (1 Samuel 11; 31:11–13).",
+   "ob": "af92088/jabesh-gilead"
+  },
+  {
+   "name": "Shiloh",
+   "ll": [
+    35.2895,
+    32.0557
+   ],
+   "label": "left",
+   "site": "Khirbet Seilun",
+   "note": "At the yearly feast of the LORD at Shiloh the remaining Benjamites caught wives from the girls who came out to dance (21:19–23).",
+   "ob": "aa4680a/shiloh"
+  },
+  {
+   "name": "Lebonah",
+   "ll": [
+    35.2498,
+    32.0591
+   ],
+   "label": "right",
+   "site": "Khan el-Lubban",
+   "note": "Shiloh is \"north of Bethel, east of the road that goes up from Bethel to Shechem, and south of Lebonah\" (21:19), directions that still lead to the site.",
+   "ob": "ab6bb68/lebonah"
+  }
+ ],
+ "moves": [
+  {
+   "n": 1,
+   "side": "other",
+   "vv": "19:9–15",
+   "at": 0.5,
+   "text": "The Levite and his concubine leave Bethlehem late, pass Jebus, and reach Gibeah at sunset",
+   "coords": [
+    [
+     35.2076,
+     31.7043
+    ],
+    [
+     35.215,
+     31.74
+    ],
+    [
+     35.236,
+     31.79
+    ],
+    [
+     35.231,
+     31.818
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "vv": "20:18–25",
+   "at": 0.5,
+   "text": "Israel goes up to inquire at Bethel, then attacks Gibeah, and is beaten back twice",
+   "coords": [
+    [
+     35.2414,
+     31.9228
+    ],
+    [
+     35.238,
+     31.89
+    ],
+    [
+     35.235,
+     31.86
+    ],
+    [
+     35.232,
+     31.835
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "enemy",
+   "vv": "20:45–47",
+   "at": 0.5,
+   "text": "Six hundred Benjamites flee to the rock of Rimmon",
+   "coords": [
+    [
+     35.24,
+     31.83
+    ],
+    [
+     35.265,
+     31.87
+    ],
+    [
+     35.282,
+     31.9
+    ],
+    [
+     35.294,
+     31.927
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 4,
+   "side": "israel",
+   "vv": "21:10–12",
+   "at": 0.3,
+   "text": "Twelve thousand men strike Jabesh-gilead and bring four hundred young women to the camp at Shiloh",
+   "coords": [
+    [
+     35.3,
+     32.06
+    ],
+    [
+     35.4,
+     32.15
+    ],
+    [
+     35.55,
+     32.3
+    ],
+    [
+     35.675,
+     32.398
+    ],
+    [
+     35.56,
+     32.33
+    ],
+    [
+     35.42,
+     32.2
+    ],
+    [
+     35.305,
+     32.065
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "camp",
+   "at": [
+    35.2164,
+    31.8851
+   ],
+   "key": "All Israel assembles before the LORD at Mizpah",
+   "vv": "20:1–11",
+   "offset": [
+    -12,
+    0
+   ]
+  },
+  {
+   "type": "ambush",
+   "at": [
+    35.205,
+    31.82
+   ],
+   "key": "The ambush rushes out west of Gibeah and sets the city on fire",
+   "vv": "20:29–40",
+   "moves": [
+    2
+   ],
+   "offset": [
+    -10,
+    6
+   ]
+  },
+  {
+   "type": "battle",
+   "at": [
+    35.2307,
+    31.8231
+   ],
+   "key": "Benjamin is drawn out from the city and defeated; 25,000 fall",
+   "vv": "20:31–46",
+   "moves": [
+    2,
+    3
+   ],
+   "offset": [
+    10,
+    4
+   ]
+  },
+  {
+   "type": "tabernacle",
+   "at": [
+    35.2895,
+    32.0557
+   ],
+   "key": "The yearly feast of the LORD at Shiloh",
+   "vv": "21:19–23",
+   "moves": [
+    4
+   ],
+   "offset": [
+    10,
+    -6
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "A crime and a civil war",
+   "p": [
+    "The story runs along the old ridge road north from Bethlehem through Jebus to Gibeah, Ramah and Bethel. The outrage at Gibeah recalls Sodom (Genesis 19), but in a town of Israel. All the tribes gather at Mizpah; Benjamin defends Gibeah and wins twice before Israel takes the city with an ambush, as Joshua took Ai (Joshua 8). Benjamin is left with six hundred men at the rock of Rimmon, and Israel grieves that \"one tribe is cut off\" (21:6)."
+   ]
+  },
+  {
+   "h": "Gibeah and what followed",
+   "p": [
+    "Each of these places returns in 1 Samuel: Shiloh with Eli and Samuel, Mizpah with Samuel's assemblies, and Gibeah as the home of Saul of Benjamin, the first king, whose first deed is to rescue Jabesh-gilead (1 Samuel 11). The book ends where it began its warning: \"In those days there was no king in Israel; everyone did what was right in his own eyes\" (21:25)."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}

@@ -1,0 +1,340 @@
+{
+ "id": "jdg-4-deborah",
+ "title": "Deborah and Barak at the Kishon",
+ "ref": "Judges 4–5",
+ "anchor": {
+  "book": "JDG",
+  "c": 4,
+  "v": 1
+ },
+ "range": [
+  1,
+  24
+ ],
+ "also": [
+  {
+   "c": 5,
+   "v": 1,
+   "range": [
+    1,
+    31
+   ]
+  }
+ ],
+ "places": "JDG",
+ "placesLabel": "Places named in Judges",
+ "placesName": "Judges",
+ "bounds": [
+  [
+   34.9,
+   32.42
+  ],
+  [
+   35.75,
+   33.1
+  ]
+ ],
+ "links": [
+  "Hazor",
+  "Harosheth-hagoyim",
+  "Palm of Deborah",
+  "Kedesh",
+  "Mount Tabor",
+  "Tabor",
+  "Kishon",
+  "Zaanannim",
+  "Megiddo",
+  "Taanach"
+ ],
+ "aliases": {
+  "Tabor": "Mount Tabor"
+ },
+ "named": [
+  {
+   "name": "Hazor",
+   "ll": [
+    35.5692,
+    33.0183
+   ],
+   "label": "right",
+   "site": "Tel Hazor",
+   "note": "Jabin \"king of Canaan\" reigned in Hazor (4:2), the greatest city of Canaan, burned by Joshua (Joshua 11:10–13) and evidently rebuilt as a power again. The excavations show a great fire at the end of the Late Bronze Age; how the layers fit Joshua and Judges is debated.",
+   "ob": "a6f33c5/hazor-1"
+  },
+  {
+   "name": "Harosheth-hagoyim",
+   "ll": [
+    35.105,
+    32.712
+   ],
+   "label": "left",
+   "site": "unknown; perhaps in the Kishon gorge below Carmel",
+   "note": "\"Harosheth of the nations,\" Sisera's home and base. His 900 iron chariots came from here to the Kishon, and Barak pursued them back to it (4:2, 13, 16). Some read the name as \"the forested land of the nations,\" a region rather than a town."
+  },
+  {
+   "name": "Palm of Deborah",
+   "ll": [
+    35.236,
+    31.889
+   ],
+   "label": "right",
+   "site": "between Ramah and Bethel, hill country of Ephraim",
+   "note": "Deborah judged Israel under her palm tree between Ramah and Bethel (4:4–5). From here she summoned Barak, more than 100 km to the north, and went with him to Kedesh (4:6–9)."
+  },
+  {
+   "name": "Kedesh",
+   "ll": [
+    35.5555,
+    32.735
+   ],
+   "label": "right",
+   "site": "Khirbet Qedish, above the Sea of Galilee",
+   "note": "Barak's home, \"Kedesh in Naphtali\" (4:6), where he called out Zebulun and Naphtali (4:10). This Kedesh, near Tabor and the tent of Heber, fits the story better than the great Kedesh in upper Galilee (Tel Kedesh).",
+   "ob": "a48191b/kedesh-naphtali"
+  },
+  {
+   "name": "Mount Tabor",
+   "ll": [
+    35.3929,
+    32.6863
+   ],
+   "label": "above",
+   "site": "Jebel et-Tur (575 m)",
+   "note": "The rounded mountain at the north-east corner of the Jezreel Valley. Barak gathered ten thousand men on it, safe from chariots, and charged down at Deborah's word: \"Arise! For this is the day the LORD has given Sisera into your hand\" (4:14).",
+   "ob": "acd63ee/mount-tabor"
+  },
+  {
+   "name": "Kishon",
+   "ll": [
+    35.17,
+    32.645
+   ],
+   "label": "below",
+   "site": "Nahal Kishon, the stream of the Jezreel Valley",
+   "note": "\"The torrent Kishon swept them away\" (5:21). The song tells of rain from heaven (5:4, 20): a cloudburst would turn the valley floor into deep mud, where chariots were useless."
+  },
+  {
+   "name": "Megiddo",
+   "ll": [
+    35.1844,
+    32.5853
+   ],
+   "label": "left",
+   "site": "Tel Megiddo",
+   "note": "\"The kings of Canaan fought at Taanach by the waters of Megiddo\" (5:19): the battle was fought in the valley below these two cities.",
+   "ob": "a8554e3/megiddo"
+  },
+  {
+   "name": "Taanach",
+   "ll": [
+    35.2191,
+    32.5215
+   ],
+   "label": "right",
+   "site": "Tell Ta'anakh",
+   "note": "Eight km south-east of Megiddo, also on the edge of the valley (5:19).",
+   "ob": "a6f05f6/taanach"
+  },
+  {
+   "name": "Zaanannim",
+   "ll": [
+    35.4106,
+    32.7211
+   ],
+   "label": "right",
+   "site": "unknown; near Kedesh",
+   "note": "Heber the Kenite had separated from the other Kenites and pitched his tent \"by the great tree of Zaanannim, near Kedesh\" (4:11). Sisera fled here on foot, and Jael killed him with a tent peg (4:17–21).",
+   "ob": "a0c4f5e/zaanannim"
+  }
+ ],
+ "moves": [
+  {
+   "n": 1,
+   "side": "israel",
+   "vv": "4:6–10",
+   "at": 0.45,
+   "text": "Barak calls up Zebulun and Naphtali at Kedesh and goes up to Mount Tabor with ten thousand men; Deborah goes with him",
+   "coords": [
+    [
+     35.5555,
+     32.735
+    ],
+    [
+     35.5,
+     32.73
+    ],
+    [
+     35.45,
+     32.71
+    ],
+    [
+     35.405,
+     32.692
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "enemy",
+   "vv": "4:12–13",
+   "at": 0.45,
+   "text": "Sisera brings his 900 iron chariots from Harosheth-hagoyim to the Kishon",
+   "coords": [
+    [
+     35.105,
+     32.712
+    ],
+    [
+     35.13,
+     32.69
+    ],
+    [
+     35.17,
+     32.66
+    ],
+    [
+     35.22,
+     32.63
+    ],
+    [
+     35.27,
+     32.62
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "israel",
+   "vv": "4:14–15",
+   "at": 0.5,
+   "text": "Barak charges down from Tabor; the LORD routs Sisera and his chariots",
+   "coords": [
+    [
+     35.39,
+     32.68
+    ],
+    [
+     35.36,
+     32.665
+    ],
+    [
+     35.33,
+     32.645
+    ],
+    [
+     35.29,
+     32.63
+    ]
+   ],
+   "w": 3.8
+  },
+  {
+   "n": 4,
+   "side": "israel",
+   "vv": "4:16",
+   "at": 0.5,
+   "text": "Barak pursues the chariots to Harosheth-hagoyim; not a man is left",
+   "coords": [
+    [
+     35.25,
+     32.635
+    ],
+    [
+     35.2,
+     32.66
+    ],
+    [
+     35.15,
+     32.69
+    ],
+    [
+     35.11,
+     32.708
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 5,
+   "side": "enemy",
+   "vv": "4:15, 17",
+   "at": 0.55,
+   "text": "Sisera flees on foot to the tent of Jael, near Kedesh",
+   "coords": [
+    [
+     35.28,
+     32.625
+    ],
+    [
+     35.31,
+     32.66
+    ],
+    [
+     35.35,
+     32.69
+    ],
+    [
+     35.385,
+     32.71
+    ],
+    [
+     35.405,
+     32.72
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "battle",
+   "at": [
+    35.25,
+    32.6
+   ],
+   "key": "\"The kings of Canaan fought at Taanach by the waters of Megiddo… the torrent Kishon swept them away\"",
+   "vv": "5:19–21",
+   "moves": [
+    2,
+    3
+   ]
+  },
+  {
+   "type": "camp",
+   "at": [
+    35.4106,
+    32.7211
+   ],
+   "key": "Jael kills Sisera in her tent",
+   "vv": "4:17–22; 5:24–27",
+   "moves": [
+    5
+   ],
+   "offset": [
+    0,
+    -10
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "Chariots and the rain",
+   "p": [
+    "Sisera's strength was his nine hundred iron-fitted chariots (4:3), which ruled the flat Jezreel Valley. Barak waited on Mount Tabor, where chariots could not reach him. Deborah's song tells what turned the battle: \"the clouds poured down water… the stars fought from the heavens… the torrent Kishon swept them away\" (5:4, 20–21). In the mud of the valley floor the chariots became a trap."
+   ]
+  },
+  {
+   "h": "Who came, and who stayed",
+   "p": [
+    "The song names the tribes that came, Ephraim, Benjamin, Machir (Manasseh), Zebulun, Issachar and Naphtali, and those that stayed home: Reuben \"among the sheepfolds,\" Gilead beyond the Jordan, Dan by the ships and Asher by the coast (5:14–18). Meroz is cursed \"for they did not come to help the LORD\" (5:23). The victory is the LORD's, and the honour goes to a woman, as Deborah said: Jael, \"most blessed of women in tents\" (4:9; 5:24)."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}

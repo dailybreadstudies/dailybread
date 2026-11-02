@@ -1,0 +1,466 @@
+{
+ "id": "jdg-13-samson",
+ "title": "Samson among the Philistines",
+ "ref": "Judges 13–16",
+ "anchor": {
+  "book": "JDG",
+  "c": 13,
+  "v": 1
+ },
+ "range": [
+  1,
+  25
+ ],
+ "also": [
+  {
+   "c": 14,
+   "v": 1,
+   "range": [
+    1,
+    20
+   ]
+  },
+  {
+   "c": 15,
+   "v": 1,
+   "range": [
+    1,
+    20
+   ]
+  },
+  {
+   "c": 16,
+   "v": 1,
+   "range": [
+    1,
+    31
+   ]
+  }
+ ],
+ "places": "JDG",
+ "placesLabel": "Places named in Judges",
+ "placesName": "Judges",
+ "bounds": [
+  [
+   34.38,
+   31.45
+  ],
+  [
+   35.2,
+   31.88
+  ]
+ ],
+ "links": [
+  "Zorah",
+  "Eshtaol",
+  "Mahaneh-dan",
+  "Timnah",
+  "Ashkelon",
+  "Etam",
+  "Lehi",
+  "Ramath-lehi",
+  "En-hakkore",
+  "Gaza",
+  "Hebron",
+  "Valley of Sorek"
+ ],
+ "aliases": {
+  "Ramath-lehi": "Lehi",
+  "En-hakkore": "Lehi"
+ },
+ "named": [
+  {
+   "name": "Zorah",
+   "ll": [
+    34.9853,
+    31.774
+   ],
+   "label": "above",
+   "site": "Tel Tzora, above the Sorek Valley",
+   "note": "The home of Manoah and his wife, where the angel of the LORD announced Samson's birth (13:2–24). Samson was buried \"between Zorah and Eshtaol in the tomb of his father Manoah\" (16:31).",
+   "ob": "a08174b/zorah"
+  },
+  {
+   "name": "Eshtaol",
+   "ll": [
+    34.986,
+    31.7977
+   ],
+   "label": "right",
+   "site": "Khirbet Deir Shubeib?",
+   "note": "With Zorah, on the edge of the hill country facing the Philistine plain (13:25; 16:31).",
+   "ob": "a355b6e/eshtaol"
+  },
+  {
+   "name": "Mahaneh-dan",
+   "ll": [
+    35.03,
+    31.79
+   ],
+   "label": "right",
+   "site": "unknown; between Zorah and Eshtaol",
+   "note": "\"The camp of Dan,\" where the Spirit of the LORD began to stir Samson (13:25)."
+  },
+  {
+   "name": "Timnah",
+   "ll": [
+    34.9103,
+    31.7848
+   ],
+   "label": "below",
+   "site": "Tel Batash, in the Sorek Valley",
+   "note": "Samson \"went down to Timnah\" and saw a Philistine woman he wanted as his wife; on the way he tore apart a lion, and later found honey in its carcass (14:1–9). Tel Batash shows a town on the border between Israelite hills and Philistine plain.",
+   "ob": "a21f909/timnah-1"
+  },
+  {
+   "name": "Valley of Sorek",
+   "ll": [
+    34.93,
+    31.765
+   ],
+   "label": "below",
+   "site": "Nahal Sorek",
+   "note": "The valley running from the hills past Beth-shemesh and Timnah toward the coast. Here Samson loved Delilah, and the Philistine lords paid her to learn the secret of his strength (16:4–21)."
+  },
+  {
+   "name": "Ashkelon",
+   "ll": [
+    34.5458,
+    31.6639
+   ],
+   "label": "left",
+   "site": "Tel Ashkelon",
+   "note": "To pay the thirty sets of clothes for his riddle, Samson went down to Ashkelon and struck down thirty men (14:19), about 40 km away.",
+   "ob": "ac87d4c/ashkelon"
+  },
+  {
+   "name": "Etam",
+   "ll": [
+    35.0258,
+    31.7637
+   ],
+   "label": "right",
+   "site": "unknown; a cave near Zorah (\"Arak Isma'in\") is one proposal",
+   "note": "Samson stayed in the cave at the rock of Etam, and three thousand men of Judah came down and bound him with two new ropes to hand him over (15:8–13).",
+   "ob": "ae05348/etam-1"
+  },
+  {
+   "name": "Lehi",
+   "ll": [
+    35.001,
+    31.7488
+   ],
+   "label": "below",
+   "site": "unknown; in Judah near the Philistine border",
+   "note": "\"Jawbone.\" The ropes melted from Samson's arms, and with a donkey's jawbone he struck down a thousand men. He named the place Ramath-lehi, and God split open a hollow for water: En-hakkore, \"the spring of the one who called\" (15:14–19).",
+   "ob": "aeeaca0/lehi"
+  },
+  {
+   "name": "Gaza",
+   "ll": [
+    34.4644,
+    31.504
+   ],
+   "label": "left",
+   "site": "Tell Harube, Gaza",
+   "note": "The southernmost Philistine city. Samson carried off its gates at midnight (16:1–3). Later, blinded, he ground grain in its prison, and died pulling down the temple of Dagon on the lords of the Philistines (16:21–30).",
+   "ob": "aa8edd2/gaza"
+  },
+  {
+   "name": "Hebron",
+   "ll": [
+    35.1022,
+    31.5251
+   ],
+   "label": "right",
+   "site": "Tel Rumeida, Hebron",
+   "note": "Samson carried the doors and posts of Gaza's gate \"to the top of the mountain overlooking Hebron\" (16:3), some 60 km away and 900 m higher. Some read it as a hill near Gaza facing toward Hebron.",
+   "ob": "a85151a/hebron"
+  }
+ ],
+ "moves": [
+  {
+   "n": 1,
+   "side": "israel",
+   "vv": "14:1–5",
+   "at": 0.5,
+   "text": "Samson goes down to Timnah with his parents; on the way he kills a lion",
+   "coords": [
+    [
+     34.9853,
+     31.774
+    ],
+    [
+     34.96,
+     31.775
+    ],
+    [
+     34.93,
+     31.78
+    ],
+    [
+     34.912,
+     31.784
+    ]
+   ]
+  },
+  {
+   "n": 2,
+   "side": "israel",
+   "vv": "14:19",
+   "at": 0.45,
+   "text": "He goes down to Ashkelon and strikes thirty men to pay for his riddle",
+   "coords": [
+    [
+     34.9103,
+     31.7848
+    ],
+    [
+     34.82,
+     31.74
+    ],
+    [
+     34.7,
+     31.69
+    ],
+    [
+     34.56,
+     31.666
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 3,
+   "side": "israel",
+   "vv": "15:8",
+   "at": 0.5,
+   "text": "After the foxes and the slaughter, Samson goes to the cave at the rock of Etam",
+   "coords": [
+    [
+     34.9103,
+     31.7848
+    ],
+    [
+     34.96,
+     31.77
+    ],
+    [
+     35.0,
+     31.765
+    ],
+    [
+     35.024,
+     31.764
+    ]
+   ]
+  },
+  {
+   "n": 4,
+   "side": "enemy",
+   "vv": "15:9",
+   "at": 0.5,
+   "text": "The Philistines camp in Judah and spread out near Lehi",
+   "coords": [
+    [
+     34.72,
+     31.68
+    ],
+    [
+     34.82,
+     31.71
+    ],
+    [
+     34.92,
+     31.74
+    ],
+    [
+     34.995,
+     31.748
+    ]
+   ]
+  },
+  {
+   "n": 5,
+   "side": "other",
+   "vv": "15:11–13",
+   "at": 0.5,
+   "text": "Three thousand men of Judah bind Samson and bring him to Lehi",
+   "coords": [
+    [
+     35.0258,
+     31.7637
+    ],
+    [
+     35.016,
+     31.757
+    ],
+    [
+     35.004,
+     31.75
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 6,
+   "side": "israel",
+   "vv": "16:1–3",
+   "at": 0.4,
+   "text": "Samson at Gaza: at midnight he carries off the city gate toward Hebron",
+   "coords": [
+    [
+     34.4644,
+     31.504
+    ],
+    [
+     34.68,
+     31.48
+    ],
+    [
+     34.88,
+     31.48
+    ],
+    [
+     35.0,
+     31.5
+    ],
+    [
+     35.09,
+     31.522
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 7,
+   "side": "enemy",
+   "vv": "16:21",
+   "at": 0.5,
+   "text": "Seized in the Valley of Sorek, blinded and taken down to Gaza",
+   "coords": [
+    [
+     34.92,
+     31.76
+    ],
+    [
+     34.8,
+     31.7
+    ],
+    [
+     34.66,
+     31.6
+    ],
+    [
+     34.54,
+     31.54
+    ],
+    [
+     34.47,
+     31.507
+    ]
+   ]
+  }
+ ],
+ "symbols": [
+  {
+   "type": "fire",
+   "at": [
+    34.84,
+    31.74
+   ],
+   "key": "Three hundred foxes with torches set the Philistine grain, vineyards and olive groves on fire",
+   "vv": "15:4–5",
+   "offset": [
+    0,
+    -6
+   ]
+  },
+  {
+   "type": "battle",
+   "at": [
+    35.001,
+    31.742
+   ],
+   "key": "With a donkey's jawbone Samson strikes down a thousand men",
+   "vv": "15:14–17",
+   "moves": [
+    4,
+    5
+   ],
+   "offset": [
+    0,
+    10
+   ]
+  },
+  {
+   "type": "captured",
+   "at": [
+    34.93,
+    31.76
+   ],
+   "key": "Delilah: Samson's hair is cut and the Philistines seize him",
+   "vv": "16:19–21",
+   "moves": [
+    7
+   ],
+   "offset": [
+    0,
+    10
+   ]
+  },
+  {
+   "type": "battle",
+   "at": [
+    34.4644,
+    31.504
+   ],
+   "key": "Samson pulls down the temple of Dagon on the lords of the Philistines",
+   "vv": "16:23–30",
+   "moves": [
+    7
+   ],
+   "offset": [
+    -12,
+    0
+   ]
+  },
+  {
+   "type": "tomb",
+   "at": [
+    34.985,
+    31.786
+   ],
+   "key": "Buried between Zorah and Eshtaol, in the tomb of his father Manoah",
+   "vv": "16:31",
+   "offset": [
+    10,
+    0
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "On the border",
+   "p": [
+    "Samson's stories happen in a small area: the Danite towns of Zorah and Eshtaol on the hill country's edge, and the Philistine towns a short walk down the Sorek Valley. The Philistines had come from the Aegean world in the 12th century BC and settled the coast; their pottery, temples and diet (including pork) set their towns apart from the villages of the hills. By Samson's day they ruled Israel, and the men of Judah would rather hand him over than fight (15:11)."
+   ]
+  },
+  {
+   "h": "Two pillars",
+   "p": [
+    "The Philistine temple excavated at Tell Qasile (Tel Aviv) had its roof resting on two central wooden pillars on stone bases, set about two metres apart. It helps picture the house of Dagon at Gaza, where Samson braced himself against the two middle pillars and prayed, \"Remember me, Lord GOD\" (16:26–30). Hebrews 11:32 counts him among the heroes of faith."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}

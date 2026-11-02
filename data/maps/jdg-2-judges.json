@@ -1,0 +1,443 @@
+{
+ "id": "jdg-2-judges",
+ "title": "The Judges and the Oppressors",
+ "ref": "Judges 2:11–16:31",
+ "anchor": {
+  "book": "JDG",
+  "c": 2,
+  "v": 11
+ },
+ "range": [
+  11,
+  23
+ ],
+ "also": [
+  {
+   "c": 3,
+   "v": 7,
+   "range": [
+    7,
+    11
+   ]
+  },
+  {
+   "c": 10,
+   "v": 1,
+   "range": [
+    1,
+    5
+   ]
+  },
+  {
+   "c": 12,
+   "v": 8,
+   "range": [
+    8,
+    15
+   ]
+  }
+ ],
+ "placesName": "Judges",
+ "siteLabel": "Home",
+ "groupsLabel": "Judges",
+ "groupLabelZoom": 6,
+ "bounds": [
+  [
+   34.3,
+   31.15
+  ],
+  [
+   36.55,
+   33.35
+  ]
+ ],
+ "links": [],
+ "named": [],
+ "groups": [
+  {
+   "id": "told",
+   "name": "Judges whose deeds are told",
+   "color": "#a0443a",
+   "places": [
+    {
+     "n": "Othniel",
+     "ll": [
+      35.0149,
+      31.4321
+     ],
+     "c": 2,
+     "m": "Debir (Khirbet Rabud), Judah",
+     "f": "3:9",
+     "note": "Caleb's nephew, of Judah, who took Debir (1:12–13). He delivered Israel from Cushan-rishathaim king of Aram-naharaim after eight years; the land had rest forty years (3:7–11)."
+    },
+    {
+     "n": "Ehud",
+     "ll": [
+      35.3,
+      31.84
+     ],
+     "c": 1,
+     "m": "Benjamin",
+     "f": "3:15",
+     "note": "A left-handed Benjamite. He killed Eglon king of Moab, who held the City of Palms, and Israel took the fords of the Jordan; the land had rest eighty years (3:12–30)."
+    },
+    {
+     "n": "Deborah",
+     "ll": [
+      35.236,
+      31.889
+     ],
+     "c": 1,
+     "m": "the Palm of Deborah, between Ramah and Bethel",
+     "f": "4:4",
+     "note": "A prophetess who judged Israel under her palm tree in the hill country of Ephraim. She called Barak to fight Sisera, and sang the victory song of Judges 5 (4:4–5:31)."
+    },
+    {
+     "n": "Barak",
+     "ll": [
+      35.5555,
+      32.735
+     ],
+     "c": 1,
+     "m": "Kedesh in Naphtali",
+     "f": "4:6",
+     "note": "Of Kedesh in Naphtali. With Deborah he led Zebulun and Naphtali from Mount Tabor against the chariots of Sisera; the land had rest forty years (4:6–5:31; Hebrews 11:32)."
+    },
+    {
+     "n": "Gideon",
+     "ll": [
+      35.29,
+      32.6057
+     ],
+     "c": 1,
+     "m": "Ophrah of the Abiezrites, Manasseh",
+     "f": "6:11",
+     "note": "Of the clan of Abiezer in Manasseh. With three hundred men he routed the Midianites in the Valley of Jezreel and pursued them across the Jordan; the land had rest forty years (6–8)."
+    },
+    {
+     "n": "Jephthah",
+     "ll": [
+      35.777,
+      32.1185
+     ],
+     "c": 0,
+     "m": "Mizpah of Gilead",
+     "f": "11:1",
+     "note": "A Gileadite, driven out to the land of Tob and called back to lead Gilead against the Ammonites. He judged six years and was buried in one of the cities of Gilead (10:17–12:7)."
+    },
+    {
+     "n": "Samson",
+     "ll": [
+      34.9853,
+      31.774
+     ],
+     "c": 2,
+     "m": "Zorah (Tel Tzora), Dan",
+     "f": "13:24",
+     "note": "A Nazirite from birth, of the tribe of Dan. He \"began to save Israel from the hand of the Philistines\" and judged twenty years; he was buried between Zorah and Eshtaol (13–16)."
+    }
+   ]
+  },
+  {
+   "id": "minor",
+   "name": "Judges named briefly",
+   "color": "#24577a",
+   "places": [
+    {
+     "n": "Shamgar",
+     "ll": [
+      35.4331,
+      33.2003
+     ],
+     "c": 0,
+     "m": "unknown; \"son of Anath\" may point to Beth-anath",
+     "f": "3:31",
+     "note": "He struck down six hundred Philistines with an oxgoad (3:31). In his days the roads were deserted (5:6). Where he lived is not said; Beth-anath in Galilee is one guess."
+    },
+    {
+     "n": "Tola",
+     "ll": [
+      35.193,
+      32.276
+     ],
+     "c": 0,
+     "m": "Shamir in the hill country of Ephraim (site unknown)",
+     "f": "10:1",
+     "note": "A man of Issachar who lived in Shamir in the hill country of Ephraim, judged twenty-three years and was buried there (10:1–2). Some suggest Shamir is Samaria (Shomron); the dot shows that guess."
+    },
+    {
+     "n": "Jair",
+     "ll": [
+      35.7256,
+      32.5876
+     ],
+     "c": 0,
+     "m": "Gilead; buried at Kamon",
+     "f": "10:3",
+     "note": "A Gileadite who judged twenty-two years. His thirty sons rode thirty donkeys and had thirty towns, Havvoth-jair (10:3–5)."
+    },
+    {
+     "n": "Ibzan",
+     "ll": [
+      35.1903,
+      32.7358
+     ],
+     "c": 1,
+     "m": "Bethlehem, probably the one in Zebulun",
+     "f": "12:8",
+     "note": "He judged seven years and was buried at Bethlehem (12:8–10). Since Bethlehem of Judah is usually named with \"Judah\" in Judges, many take this to be Bethlehem of Zebulun (Joshua 19:15), near Elon's home."
+    },
+    {
+     "n": "Elon",
+     "ll": [
+      35.309,
+      32.8141
+     ],
+     "c": 0,
+     "m": "Aijalon in the land of Zebulun",
+     "f": "12:11",
+     "note": "A Zebulunite who judged ten years and was buried in Aijalon in the land of Zebulun (12:11–12)."
+    },
+    {
+     "n": "Abdon",
+     "ll": [
+      35.1658,
+      32.1906
+     ],
+     "c": 2,
+     "m": "Pirathon (Farata), Ephraim",
+     "f": "12:13",
+     "note": "He judged eight years; his forty sons and thirty grandsons rode seventy donkeys. He was buried at Pirathon in Ephraim (12:13–15)."
+    }
+   ]
+  }
+ ],
+ "moves": [
+  {
+   "n": 1,
+   "side": "enemy",
+   "vv": "3:8–10",
+   "at": 0.4,
+   "text": "Cushan-rishathaim of Aram-naharaim oppresses Israel eight years (from far to the north-east)",
+   "coords": [
+    [
+     36.55,
+     33.55
+    ],
+    [
+     36.2,
+     33.2
+    ],
+    [
+     35.95,
+     32.95
+    ],
+    [
+     35.75,
+     32.7
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ]
+  },
+  {
+   "n": 2,
+   "side": "enemy",
+   "vv": "3:12–14",
+   "at": 0.45,
+   "text": "Eglon of Moab, with Ammon and Amalek, crosses the Jordan and takes the City of Palms",
+   "coords": [
+    [
+     35.78,
+     31.45
+    ],
+    [
+     35.72,
+     31.62
+    ],
+    [
+     35.62,
+     31.78
+    ],
+    [
+     35.548,
+     31.838
+    ],
+    [
+     35.46,
+     31.87
+    ]
+   ]
+  },
+  {
+   "n": 3,
+   "side": "enemy",
+   "vv": "4:2–3",
+   "at": 0.4,
+   "text": "Jabin of Hazor oppresses the north twenty years; Sisera's chariots hold the Jezreel Valley",
+   "coords": [
+    [
+     35.5692,
+     33.0183
+    ],
+    [
+     35.52,
+     32.92
+    ],
+    [
+     35.42,
+     32.8
+    ],
+    [
+     35.3,
+     32.7
+    ],
+    [
+     35.2,
+     32.64
+    ]
+   ]
+  },
+  {
+   "n": 4,
+   "side": "enemy",
+   "vv": "6:1–6, 33",
+   "at": 0.35,
+   "text": "Midianites, Amalekites and the people of the east cross the Jordan into the Jezreel Valley…",
+   "coords": [
+    [
+     36.45,
+     32.45
+    ],
+    [
+     36.0,
+     32.45
+    ],
+    [
+     35.6,
+     32.48
+    ],
+    [
+     35.42,
+     32.58
+    ],
+    [
+     35.3,
+     32.6
+    ]
+   ]
+  },
+  {
+   "n": 5,
+   "side": "enemy",
+   "vv": "6:4",
+   "at": 0.55,
+   "text": "…and raid the land as far as Gaza",
+   "coords": [
+    [
+     35.3,
+     32.6
+    ],
+    [
+     35.1,
+     32.45
+    ],
+    [
+     34.95,
+     32.15
+    ],
+    [
+     34.8,
+     31.85
+    ],
+    [
+     34.62,
+     31.65
+    ],
+    [
+     34.48,
+     31.52
+    ]
+   ],
+   "dash": [
+    2,
+    1.4
+   ],
+   "w": 2.4
+  },
+  {
+   "n": 6,
+   "side": "enemy",
+   "vv": "10:7–9",
+   "at": 0.35,
+   "text": "The Ammonites oppress Gilead eighteen years and cross the Jordan against Judah, Benjamin and Ephraim",
+   "coords": [
+    [
+     35.9339,
+     31.9539
+    ],
+    [
+     35.85,
+     32.08
+    ],
+    [
+     35.7,
+     32.1
+    ],
+    [
+     35.55,
+     32.05
+    ],
+    [
+     35.4,
+     31.98
+    ]
+   ]
+  },
+  {
+   "n": 7,
+   "side": "enemy",
+   "vv": "10:7; 13:1",
+   "at": 0.5,
+   "text": "The Philistines rule Israel forty years",
+   "coords": [
+    [
+     34.52,
+     31.6
+    ],
+    [
+     34.7,
+     31.72
+    ],
+    [
+     34.88,
+     31.78
+    ]
+   ]
+  }
+ ],
+ "symbols": [],
+ "notes": [
+  {
+   "h": "A cycle, told in the regions",
+   "p": [
+    "Judges 2:11–19 gives the pattern of the book: Israel does evil and serves the Baals; the LORD gives them into the hand of an oppressor; they cry out; the LORD raises up a judge who saves them; the land has rest; and when the judge dies they turn back, \"more corruptly than their fathers.\" Each judge comes from a different tribe and region, from Othniel of Judah in the south to Barak of Naphtali in the north and Jephthah of Gilead in the east, and each faces the neighbour pressing on that part of the land."
+   ]
+  },
+  {
+   "h": "How long was the time of the judges?",
+   "p": [
+    "Added together, the years of oppression and rest in Judges come to about 410. 1 Kings 6:1 gives 480 years from the Exodus to Solomon's fourth year, and Jephthah speaks of 300 years in Heshbon (11:26). Since the judges were regional, many scholars think some of their times overlapped; the Philistine oppression of Samson's days (13:1) may run alongside the Ammonite oppression in Gilead (10:7)."
+   ]
+  },
+  {
+   "h": "How to use this map",
+   "p": [
+    "The red dots are the judges whose deeds are told, at their homes; the blue dots are the judges named only briefly. The red arrows show where each oppressor came from. Tap a judge in the key to show or hide the group, and a dot for the story. Each story has its own map at its chapter."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Routes are approximate. Map engine: MapLibre GL."
+}
