@@ -23,6 +23,19 @@ def stamp(m):
     return m.group(1) + m.group(2) + '?v=' + h + m.group(4)
 
 
+# the map data: one hash of everything under data/maps, written into maps.js (so maps.js gets a new stamp too)
+hm = hashlib.md5()
+for dp, ds, fs in sorted(os.walk(os.path.join(ROOT, 'data', 'maps'))):
+    ds.sort()
+    for f in sorted(fs):
+        hm.update(f.encode()); hm.update(open(os.path.join(dp, f), 'rb').read())
+mj = os.path.join(ROOT, 'assets', 'maps.js')
+if os.path.exists(mj):
+    s0 = open(mj, encoding='utf-8').read()
+    s1 = re.sub(r"var MAPS_DATA_V = '[^']*';", "var MAPS_DATA_V = '%s';" % hm.hexdigest()[:8], s0)
+    if s1 != s0:
+        open(mj, 'w', encoding='utf-8').write(s1)
+
 changed = 0
 for dirpath, dirs, files in os.walk(ROOT):
     dirs[:] = [d for d in dirs if d not in ('.git', 'prototypes', 'node_modules', 'tools', 'data')]

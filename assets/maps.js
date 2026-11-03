@@ -49,7 +49,9 @@
     'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
+  var MAPS_DATA_V = 'd63b4e13';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
   function getJSON(url) {
+    if (/^data\/maps\//.test(url)) url += (url.indexOf('?') < 0 ? '?v=' : '&v=') + MAPS_DATA_V;
     return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + ' (' + r.status + ')'); return r.json(); });
   }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
