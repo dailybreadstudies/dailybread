@@ -19,6 +19,12 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 WATER = os.path.join(ROOT, 'data', 'maps', 'base', 'water.json')
 
 
+# the ancient Pelusiac branch as OpenBible.info draws it (geometry gaff0f6); kept here so reruns start from the source
+PELUSIAC = [[31.2669, 29.8976], [31.5923, 30.3105], [31.577, 30.6287], [31.8289, 30.8053], [32.5628, 31.0834]]
+# the OSM course of the Nile starts at 28.6°N; earlier runs may have added Natural Earth's stretch to the south of it
+OSM_START = 28.6
+
+
 def lines(path, name):
     for f in json.load(open(path, encoding='utf-8'))['features']:
         if f['properties'].get('name') == name:
@@ -78,8 +84,8 @@ def main():
     src = os.path.join(sys.argv[1], 'ne_10m_rivers_lake_centerlines.geojson')
     water = json.load(open(WATER, encoding='utf-8'))
     feats = water['nile']['features']
-    osm = next(f for f in feats if f['properties']['n'] == 'Nile')['geometry']['coordinates']
-    pel = next(f for f in feats if f['properties'].get('ancient'))['geometry']['coordinates']
+    osm = [p for p in next(f for f in feats if f['properties']['n'] == 'Nile')['geometry']['coordinates'] if p[1] >= OSM_START]
+    pel = PELUSIAC
     top = osm[0]                                            # the OSM course starts at 28.6°N and runs north
     # Natural Earth's Nile, the stretch from Aswan (about 24°N) up to where the OSM course begins
     ne = chain(list(lines(src, 'Nile')))
