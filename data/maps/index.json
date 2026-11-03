@@ -272,6 +272,48 @@
    ]
   },
   {
+   "id": "exo-19-sinai",
+   "title": "Where Was Mount Sinai?",
+   "ref": "Exodus 19",
+   "book": "EXO",
+   "c": 19,
+   "v": 1,
+   "links": [
+    "Mount Sinai",
+    "Wilderness of Sinai",
+    "Sinai",
+    "Horeb",
+    "Midian"
+   ],
+   "aliases": {
+    "Mount Sinai": "Sinai",
+    "Wilderness of Sinai": "Sinai",
+    "Horeb": "Sinai"
+   },
+   "range": [
+    1,
+    25
+   ],
+   "also": [
+    {
+     "c": 3,
+     "v": 1,
+     "range": [
+      1,
+      12
+     ]
+    },
+    {
+     "c": 24,
+     "v": 1,
+     "range": [
+      1,
+      18
+     ]
+    }
+   ]
+  },
+  {
    "id": "josh-land",
    "title": "The Land in the Days of Joshua",
    "ref": "Joshua",

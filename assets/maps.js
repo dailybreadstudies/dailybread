@@ -608,7 +608,7 @@
           { id: 'sea-west-edge', type: 'line', source: 'seawestcoast', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1.2 } },
           { id: 'sea-far', type: 'fill', source: 'seafar', paint: { 'fill-color': css('--dbm-water'), 'fill-antialias': false } },
           { id: 'sea-far-edge', type: 'line', source: 'seafarcoast', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1.2 } },
-          { id: 'sea', type: 'fill', source: 'sea', paint: { 'fill-color': css('--dbm-water') } },
+          { id: 'sea', type: 'fill', source: 'sea', paint: { 'fill-color': css('--dbm-water'), 'fill-antialias': spec.world ? true : false } },   // the regional sea runs back along its box edge (28°N) in a zero-width sliver; the coast line is drawn on top
           { id: 'sea-edge', type: 'line', source: water.seaCoast ? 'seacoast' : 'sea', paint: { 'line-color': css('--dbm-water-line'), 'line-width': 1.2 } },
           { id: 'nrivers', type: 'line', source: 'nrivers', layout: { 'line-cap': 'round', 'line-join': 'round' },
             paint: { 'line-color': css('--dbm-water-line'), 'line-opacity': 1, 'line-width': ['interpolate', ['linear'], ['zoom'], 3, 1.4, 7, 2.3] } },
