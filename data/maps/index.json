@@ -45,6 +45,24 @@
    }
   },
   {
+   "id": "gen-8-ararat",
+   "title": "Where Did the Ark Come to Rest?",
+   "ref": "Genesis 8:4",
+   "book": "GEN",
+   "c": 8,
+   "v": 4,
+   "links": [
+    "mountains of Ararat"
+   ],
+   "aliases": {
+    "mountains of Ararat": "Ararat"
+   },
+   "range": [
+    1,
+    22
+   ]
+  },
+  {
    "id": "gen-10-nations",
    "title": "The Table of Nations",
    "ref": "Genesis 10",
