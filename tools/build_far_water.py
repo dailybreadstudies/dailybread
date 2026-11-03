@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""The seas beyond the regional maps' detailed box, so the coast does not end in mid-air when a map is tilted.
+"""SUPERSEDED for the sea by tools/build_regional_sea.py (Natural Earth 1:10m), which removes the pieces built here.
+The seas beyond the regional maps' detailed box, so the coast does not end in mid-air when a map is tilted.
 
     python3 tools/build_far_water.py
 

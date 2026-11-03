@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Egypt on the regional maps: the Nile and its Delta branches, and the coast west to Alexandria.
+"""SUPERSEDED for the sea by tools/build_regional_sea.py (Natural Earth 1:10m), which removes the pieces built here.
+Egypt on the regional maps: the Nile and its Delta branches, and the coast west to Alexandria.
 
     python3 tools/build_egypt_water.py OBGEO_REPO
 
