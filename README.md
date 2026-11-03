@@ -270,7 +270,7 @@ map, and opening a map closes an illustration, since both use the right-hand spa
 ## Illustrations and the full-size viewer
 
 `assets/illus.js` adds an illustration button (an opened-up box) beside a verse listed in `data/illus/index.json`
-(id, title, ref, book, c, v, status, src, small, width, height, alt, caption, credit; images in `data/illus/img/`, a full
+(id, title, ref, book, c, v, status, src, small, width, height, alt, caption, credit, links; images in `data/illus/img/`, a full
 size and a ~900 px margin size). On wide screens the illustration sits in the free space right of the text, beside its
 verse; on phones, below the verse. Tapping the picture opens the standard full-size viewer: a white sheet almost the
 size of the screen with the label in its top-left margin (`DBLightbox.open({ src, title, ref, alt, credit })`, for any

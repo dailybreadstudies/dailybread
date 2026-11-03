@@ -9,7 +9,7 @@
  *
  * The reader calls DBIllus.decorate(root) after it draws a passage. Nothing in the reader depends on this file.
  * Index entries: id, title, ref, book, c, v, also [{c, v}] (more verses), status ("ready" to show on the public site), src (full size),
- * small (about 900 px wide, for the margin), width, height, alt, caption, credit.
+ * small (about 900 px wide, for the margin), width, height, alt, caption, credit, links [[label, url]] (further reading, after the caption).
  */
 (function () {
   'use strict';
@@ -117,7 +117,8 @@
       '<button type="button" class="dbi-img" data-dbi-zoom aria-label="Enlarge: ' + esc(x.title) + '">' +
         '<img src="' + esc(ROOT + (x.small || x.src)) + '" alt="' + esc(x.alt || x.title) + '"' + (x.width ? ' width="' + x.width + '" height="' + x.height + '"' : '') + '>' +
         '<span class="dbi-hint">' + ENLARGE + 'Enlarge</span></button>' +
-      (x.caption ? '<figcaption>' + esc(x.caption) + (x.credit ? ' <span class="dbi-credit">' + esc(x.credit) + '</span>' : '') + '</figcaption>' : '');
+      (x.caption ? '<figcaption>' + esc(x.caption) + (x.credit ? ' <span class="dbi-credit">' + esc(x.credit) + '</span>' : '') +
+        (x.links && x.links.length ? '<span class="dbi-links">' + x.links.map(function (l) { return '<a href="' + esc(l[1]) + '" target="_blank" rel="noopener">' + esc(l[0]) + ' ↗</a>'; }).join('') + '</span>' : '') + '</figcaption>' : '');
     place();
     setPins();
   }

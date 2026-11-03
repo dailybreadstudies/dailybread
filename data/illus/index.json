@@ -37,6 +37,28 @@
    "alt": "Artist's impression of walled Jericho: a ditch, an outer and an inner wall with houses between them, a gate with two towers, a citadel, with a cross-section through the walls and a detail of the main gate",
    "caption": "An artist's impression of Jericho (Tell es-Sultan), by the spring that still waters the oasis and one of the oldest walled towns known. Its Bronze Age defences were a stone retaining wall at the foot of the mound with a mudbrick wall on it, and a second wall higher up; on the north side excavators found houses built against the lower wall, which recalls Rahab's house “built into the wall” (2:15). The last walled city ended in fallen mudbrick and a fire that left storage jars still full of grain (compare 6:20, 24). Its date is debated: Garstang, and later Bryant Wood, put it about 1400 BC; Kathleen Kenyon about 1550 BC. The drawing simplifies the city's plan.",
    "credit": ""
+  },
+  {
+   "id": "jdg-4-chariot",
+   "title": "A Canaanite chariot",
+   "ref": "Judges 4:3",
+   "book": "JDG",
+   "c": 4,
+   "v": 3,
+   "status": "ready",
+   "src": "data/illus/img/jdg-4-chariot.jpg",
+   "small": "data/illus/img/jdg-4-chariot-900.jpg",
+   "width": 2576,
+   "height": 1717,
+   "alt": "Line drawing of a two-horse war chariot at the charge: an archer in scale armor draws his bow behind the driver, with a quiver and a spear fixed to the studded wooden car and scale armor on the horses",
+   "caption": "Much about Canaanite chariots is unknown, and only one confirmed Canaanite depiction has been found. They are thought to have been heavier than Egyptian chariots but lighter than Hittite ones. Nor is it fully known why the Bible calls them chariots of iron. They were built mainly of timber, but may have been reinforced with iron fittings or iron-shod wheels; and since rare iron could be worth more than gold at the time, it may also have adorned them as a display of wealth. The drawing is an artist's impression.",
+   "credit": "",
+   "links": [
+    [
+     "Samuel McKoy, “Iron Chariots: A Biblical Impossibility?”",
+     "https://armstronginstitute.org/812-iron-chariots-a-biblical-impossibility"
+    ]
+   ]
   }
  ]
 }

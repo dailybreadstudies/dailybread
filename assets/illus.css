@@ -36,6 +36,8 @@ body.dbm-margin .dbi-pin { position: absolute; left: -54px; margin: -1px 0 0; }
 .dbi-img:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
 .dbi figcaption { margin-top: 0.6rem; font-size: 0.82rem; color: var(--ink-soft, var(--ink)); }
 .dbi-credit { color: var(--muted); font-size: 0.74rem; }
+.dbi-links { display: block; margin-top: 0.4rem; }
+.dbi-links a { display: block; color: var(--accent); }
 
 /* Full-size viewer: a white sheet almost the size of the screen; the label sits in its top-left margin */
 body.dblx-locked { overflow: hidden; }
