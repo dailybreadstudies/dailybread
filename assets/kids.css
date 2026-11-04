@@ -61,6 +61,7 @@ html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb1: #e3a2cd; --bb3: #F9CE7A; }
 /* Page header: date and weekday */
 .kids .page-date { font-family: var(--kid-font); font-weight: 700; font-size: 2.1rem; letter-spacing: -0.01em; line-height: 1.15; }
 .kids .page-date.is-holy { color: var(--kid-berry); }
+@media (max-width: 700px) { .kids .page-parsha:not(.page-weekday) { font-family: var(--kid-font); } }   /* phones: the small portion line keeps the Kids typeface */
 .kids .page-parsha.page-weekday { font: 700 1.05rem/1.5 var(--kid-font); letter-spacing: 0.09em; color: var(--muted); margin-bottom: 0.25rem; }
 .kids .page-weekday .day-event { color: var(--kid-teal); }
 .kids .page-weekday.is-holy, .kids .page-weekday.is-holy .day-event { color: var(--kid-berry); }

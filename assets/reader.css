@@ -233,6 +233,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
   .dp-label { letter-spacing: 0.1em; font-size: 0.68rem; }
   .dp-ref { font-size: 1rem; }
   .parsha-name { display: block; }   /* phones: "Torah Portion:" on one line, the portion's name on the next */
+  .page-parsha:not(.page-weekday) { font: 400 0.8rem/1.35 var(--sans); }   /* same small type as the audio line ("4 readings · Berean …"), to save room */
 }
 .page-refs {
   text-align: center; font-size: 0.9rem; font-style: italic; color: var(--muted);
