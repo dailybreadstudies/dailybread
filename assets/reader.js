@@ -749,8 +749,8 @@
       (isSat ? 'Shabbat' : dObj.toLocaleDateString('en-GB', { weekday: 'long' })) + '</span>' +
       '<span id="day-events">' + dayEventsHtml(planEvents(day)) + '</span></p>';
     if (day.parsha) {
-      header += '<p class="page-parsha">Torah Portion: <em>' + day.parsha.name + '</em>' +
-        (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</p>';
+      header += '<p class="page-parsha">Torah Portion: <span class="parsha-name"><em>' + day.parsha.name + '</em>' +
+        (day.parsha.meaning ? ' (' + day.parsha.meaning + ')' : '') + '</span></p>';
     }
     // The day's readings: section, reference and a check once marked complete
     header += '<ol class="day-plan" aria-label="Today’s readings">' +

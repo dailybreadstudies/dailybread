@@ -232,6 +232,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: 0.00
 @media (max-width: 700px) {
   .dp-label { letter-spacing: 0.1em; font-size: 0.68rem; }
   .dp-ref { font-size: 1rem; }
+  .parsha-name { display: block; }   /* phones: "Torah Portion:" on one line, the portion's name on the next */
 }
 .page-refs {
   text-align: center; font-size: 0.9rem; font-style: italic; color: var(--muted);
