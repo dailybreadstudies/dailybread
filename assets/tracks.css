@@ -152,7 +152,11 @@ body.banner-on :is(.st-date, .st-title, .st-tabs, .division-label, .chapter-head
 /* The banners are laid out like the Messiah in the Torah banner above them: tall, the title low on the picture, darkest at the
    foot behind the text; the title sits a little lower still (less padding below). Parallax: deeper.html, as for the other photos */
 .ab-sec.cmx-hero { min-height: 82vh; align-items: flex-end; padding-bottom: clamp(52px, 8vh, 96px); }
-.cmx-hero .ab-photo-bg::after { background: linear-gradient(0deg, rgba(17,17,17,0.82) 0%, rgba(17,17,17,0.45) 55%, rgba(17,17,17,0.25) 100%); }
+/* Dark only where the text sits, low on the picture; the top two-thirds of the art barely shaded. The photo layer is 130% of the
+   section's height (for the parallax), so the stops are in its terms: the section's foot is at ~12%, the eyebrow at ~45% */
+.cmx-hero .ab-photo-bg::after { background: linear-gradient(0deg, rgba(17,17,17,0.86) 0%, rgba(17,17,17,0.8) 14%, rgba(17,17,17,0.6) 30%,
+  rgba(17,17,17,0.4) 46%, rgba(17,17,17,0.14) 62%, rgba(17,17,17,0.05) 100%); }
+.cmx-hero :is(.ab-eyebrow, .ab-h, .ab-p) { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.4); }
 .cmx-hero .ab-h { max-width: 13em; }
 @media (max-width: 520px) { .ab-sec.cmx-hero { min-height: 72vh; padding-bottom: 56px; } }
 .cmx-hero .ab-photo-bg.cmx-empty { opacity: 1; background: linear-gradient(135deg, #3b2c20 0%, #1d1712 100%); }
