@@ -59,7 +59,7 @@ GitHub Pages publishes in a minute or two. Always `git pull` first — other ses
 - Menu: Classic shows TODAY · PROGRESS · LISTEN · LEARN · ABOUT · KIDS; Kids shows TODAY · PROGRESS · ABOUT · CLASSIC (+ GIVE).
 - Plan: the whole 5787 Kids year is loaded (4 Oct 2026 – 24 Oct 2027, 386 days).
 - Style: `docs/KIDS-STYLE.md` (black to read, jungle teal to tap, golden yellow for here/well done, berry for holy days; Baloo 2).
-- Kids defaults: Messianic Filter on (the journal says Yeshua, Messiah, Torah). Reading-plan options hidden.
+- Defaults for a new reader (reader.js `settings`): Auto, Serif, Justified Text on, Verse Numbers on, Margin Subtitles on, LORD, original languages off, Apostles in Greek, Messianic Filter on, Hebrew Names off. Saved settings are kept. Kids: the journal says Yeshua, Messiah, Torah. Reading-plan options hidden.
 
 ## Podcast (Daily Bread for Busy Moms)
 - The podcast follows the plan day by day (titles like "Sunday 18 Oct - 7 Cheshvan", out the evening before).

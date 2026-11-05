@@ -51,7 +51,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: KIDS, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: false, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', marginTitles: false };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', marginTitles: true };
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });

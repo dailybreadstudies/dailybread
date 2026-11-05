@@ -87,7 +87,7 @@
     if (changed) { store(TKEY, s); try { window.dispatchEvent(new Event('dbs-progress-saved')); } catch (e) { /* ignore */ } }
   }
   function setPref(k, v) { var p = prefs(); p[k] = v; store(PREFS, p); }
-  function siteSettings() { return load('dbs-settings') || {}; }
+  function siteSettings() { var s = load('dbs-settings') || {}; if (!('messianic' in s)) s.messianic = true; return s; }   // same default as reader.js
 
   // ── Texts ──
   var idxP = null, files = {};
