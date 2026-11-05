@@ -1228,9 +1228,9 @@ html.msub-on .scripture .msub {
 .bp-chapters { grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 8px; margin-top: 14px; }
 .bp-ch { height: 52px; font-size: 16px; border-radius: 10px; }
 @media (max-width: 700px) {
-  .bible-panel { width: 100%; max-width: none; max-height: 88vh; max-height: 88dvh; padding: 18px 16px calc(28px + env(safe-area-inset-bottom)); }
+  .bible-panel { width: 100%; max-width: none; max-height: 88vh; max-height: 88dvh; padding: 14px 20px calc(28px + env(safe-area-inset-bottom)); }
   .bp-books { grid-template-columns: repeat(3, 1fr); gap: 7px; }
-  .bp-book { padding: 13px 3px; font-size: 14px; }
+  .bp-book { padding: 13px 1px; font-size: 13.5px; white-space: nowrap; }
   .bp-chapters { grid-template-columns: repeat(auto-fill, minmax(54px, 1fr)); }
 }
 @media (max-width: 360px) { .bp-books { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
