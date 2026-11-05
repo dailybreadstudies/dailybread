@@ -1188,15 +1188,16 @@ body:not(.dbm-margin) .scripture :is(.dbm-pin, .dbf-pin, .dbt-pin, .dbi-pin) { v
 }
 
 /* Section titles in the left margin (menu: Margin Subtitles; desktop only, see layoutMsub in reader.js).
-   Same look as the titles under the chapter heading; always a narrow column of two or three short lines,
+   Same look and size as the titles under the chapter heading; each line sits on a Bible line's baseline; always a narrow column of two or three short lines,
    right-aligned a little left of the pins, and under them when the verse has pins. */
 .msub { display: none; }
 html.msub-on .scripture .msub {
   display: block; position: absolute; right: calc(100% + 30px); width: 8.5rem;
-  margin-top: calc(var(--msub-i, 0) * 44px + 0.25rem); text-align: right; text-indent: 0;
-  font-size: 0.9rem; font-style: italic; font-weight: 300; line-height: 1.4; color: var(--muted);
+  text-align: right; text-indent: 0;
+  font-size: 1.02rem; font-style: italic; font-weight: 300; line-height: 1.4; color: var(--muted);
   white-space: normal; pointer-events: none;
 }
+html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
 @media (max-width: 999px) { .sp-msub-row { display: none; } }
 @media print { .msub { display: none !important; } }
 

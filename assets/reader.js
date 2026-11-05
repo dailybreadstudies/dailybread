@@ -64,6 +64,7 @@
   // below them when a verse has pins. Hidden while a map, find, tree or illustration is open.
   function msubHtml(t) { return '<span class="msub" aria-hidden="true">' + t + '</span>'; }
   var PIN_RE = /(^| )(dbm-pin|dbf-pin|dbt-pin|dbi-pin)( |$)/;
+  var msubSig = '', msubObs = null, msubFontsReady = 0, MSUB_PIN = 44;
   function layoutMsub() {
     var r = document.getElementById('reader');
     if (!r) return;
@@ -71,14 +72,108 @@
                /(^| )(dbm-side|dbm-split|dbt-split|dblx-locked)( |$)/.test(document.body.className);
     var on = !!settings.marginTitles && !open && r.getBoundingClientRect().left >= 250;
     document.documentElement.classList.toggle('msub-on', on);
-    if (!on) return;
-    r.querySelectorAll('.msub').forEach(function (m) {
+    if (!on) { msubSig = ''; return; }
+    var visible = [].filter.call(r.querySelectorAll('.msub'), function (m) { return m.offsetParent; });
+    var sig = [r.offsetWidth, r.scrollHeight, visible.length, r.querySelectorAll('.dbm-pin,.dbf-pin,.dbt-pin,.dbi-pin').length, msubFontsReady].join('|');
+    if (sig === msubSig && !visible.some(function (m) { return !m.hasAttribute('data-laid'); })) return;
+    msubSig = sig;
+    var cache = [];   // the text lines of each .scripture, measured once per pass
+    visible.forEach(function (m) {
       var n = 0, e = m.previousElementSibling;
       while (e && PIN_RE.test(e.className)) { n++; e = e.previousElementSibling; }
       e = m.nextElementSibling;
       while (e && PIN_RE.test(e.className)) { n++; e = e.nextElementSibling; }
-      m.style.setProperty('--msub-i', n);
+      placeMsub(m, n, cache);
     });
+    if (msubObs) msubObs.takeRecords();   // our own line-splitting is not a change to react to
+  }
+  // Every line of a margin subtitle sits on the baseline of a line of Bible text: the first on the line where its
+  // verse begins (or the first free line under the pins), the next ones on the Bible lines that follow.
+  var msubCanvas = null;
+  function fontDescent(el) {
+    var cs = getComputedStyle(el), size = parseFloat(cs.fontSize);
+    msubCanvas = msubCanvas || document.createElement('canvas').getContext('2d');
+    msubCanvas.font = cs.fontStyle + ' ' + cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+    var d = msubCanvas.measureText('Hg').fontBoundingBoxDescent;
+    return d === undefined ? size * 0.25 : d;
+  }
+  var MSUB_SKIP = 'sup, button, .msub, .chapter-num, .vp-orig, .dbm-pin, .dbf-pin, .dbt-pin, .dbi-pin';
+  function bibleLines(sc) {
+    var w = document.createTreeWalker(sc, NodeFilter.SHOW_TEXT), nodes = [], t, size = {};
+    while ((t = w.nextNode())) {
+      if (!t.nodeValue.trim() || t.parentElement.closest(MSUB_SKIP)) continue;
+      var rg = document.createRange(); rg.selectNodeContents(t);
+      var rects = [].slice.call(rg.getClientRects()).filter(function (x) { return x.width > 0; });
+      if (!rects.length) continue;
+      nodes.push({ node: t, rects: rects });
+      rects.forEach(function (x) { var k = Math.round(x.height * 2); size[k] = (size[k] || 0) + 1; });
+    }
+    // the height of ordinary Bible text; smaller runs (small-capital LORD and the like) would give a false baseline
+    var main = 0, most = 0;
+    Object.keys(size).forEach(function (k) { if (size[k] > most) { most = size[k]; main = +k / 2; } });
+    var first = nodes.length && nodes[0].node.parentElement.closest('p, div') || sc;
+    var desc = fontDescent(first), scY = window.scrollY, seen = [];
+    nodes.forEach(function (o) {
+      o.rects.forEach(function (x) {
+        if (Math.abs(x.height - main) <= 1) seen.push(x.bottom - desc + scY);
+      });
+    });
+    seen.sort(function (a, b) { return a - b; });
+    var lines = [];
+    seen.forEach(function (y) { if (!lines.length || y - lines[lines.length - 1] > 3) lines.push(y); });
+    return { nodes: nodes, lines: lines };
+  }
+  function placeMsub(m, pins, cache) {
+    var sc = m.closest('.scripture');
+    if (!sc) return;
+    var entry = cache.filter(function (c) { return c.sc === sc; })[0];
+    if (!entry) { entry = { sc: sc, data: bibleLines(sc) }; cache.push(entry); }
+    var data = entry.data, scY = window.scrollY;
+    if (!m.hasAttribute('data-t')) m.setAttribute('data-t', m.textContent);
+    m.setAttribute('data-laid', '');
+    // split the title into its wrapped lines
+    var words = m.getAttribute('data-t').split(/\s+/);
+    m.style.marginTop = '0';
+    m.innerHTML = words.map(function (w) { return '<span>' + w + '</span>'; }).join(' ');
+    var rows = [];
+    [].forEach.call(m.children, function (sp) {
+      var top = sp.offsetTop, row = rows[rows.length - 1];
+      if (row && Math.abs(row.top - top) < 3) row.words.push(sp.innerHTML);
+      else rows.push({ top: top, words: [sp.innerHTML] });
+    });
+    m.innerHTML = rows.map(function (row) { return '<span class="msub-l">' + row.words.join(' ') + '</span>'; }).join('');
+    // where the verse begins: the first Bible text after the title
+    var startY = null;
+    for (var i = 0; i < data.nodes.length; i++) {
+      if (m.compareDocumentPosition(data.nodes[i].node) & Node.DOCUMENT_POSITION_FOLLOWING) {
+        var firstRect = data.nodes[i].rects[0];
+        startY = firstRect.bottom - fontDescent(data.nodes[i].node.parentElement) + scY;
+        break;
+      }
+    }
+    if (startY === null || !data.lines.length) return;
+    var k = 0, best = Infinity;
+    data.lines.forEach(function (y, ix) { var d = Math.abs(y - startY); if (d < best) { best = d; k = ix; } });
+    var els = m.children, own = fontDescent(m), rects = [];
+    [].forEach.call(els, function (el) {
+      var rg = document.createRange(); rg.selectNodeContents(el);
+      rects.push(rg.getBoundingClientRect().bottom - own + scY);
+    });
+    // under the pins: move down to the first Bible line that clears them
+    if (pins) {
+      var ascent = parseFloat(getComputedStyle(m).fontSize) * 0.8;
+      var pinBottom = m.getBoundingClientRect().top + scY + pins * MSUB_PIN - 6;
+      while (k < data.lines.length - 1 && data.lines[k] - ascent < pinBottom) k++;
+    }
+    var gap = data.lines[k + 1] - data.lines[k] || 0;
+    var prevTarget = data.lines[k];
+    m.style.marginTop = (prevTarget - rects[0]) + 'px';
+    for (var j = 1; j < els.length; j++) {
+      var nextLine = data.lines[k + j];
+      var target = nextLine !== undefined ? nextLine : prevTarget + (gap || rects[j] - rects[j - 1]);
+      els[j].style.marginTop = (target - prevTarget - (rects[j] - rects[j - 1])) + 'px';
+      prevTarget = target;
+    }
   }
   var msubQueued = false;
   function queueMsub() {
@@ -87,13 +182,14 @@
     requestAnimationFrame(function () { msubQueued = false; layoutMsub(); });
   }
   if (window.MutationObserver) {
-    var msubObs = new MutationObserver(queueMsub);
+    msubObs = new MutationObserver(queueMsub);
     document.addEventListener('DOMContentLoaded', function () {
       msubObs.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-pressed', 'class'] });
     });
     if (document.body) msubObs.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-pressed', 'class'] });
   }
   window.addEventListener('resize', queueMsub);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { msubFontsReady = 1; queueMsub(); });
 
   function applyLook() {
     queueMsub();
