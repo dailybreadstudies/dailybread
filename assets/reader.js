@@ -542,6 +542,30 @@
     if (G_GEN[s[0]]) out.push(G_GEN[s[0]]);
     return out;
   }
+  // Greek transliteration with the accented vowel underlined: the nth vowel of the Greek word is the nth vowel of its
+  // transliteration (eperōtaō: the a of ἐπερωτάω). Returns escaped HTML; left plain if the two do not line up.
+  function greekTr(lemma, tr, escFn) {
+    var g = String(lemma || '').split(/[,=]/)[0].normalize('NFD'), n = 0, hit = 0, parts, i;
+    for (i = 0; i < g.length && !hit; i++) {
+      if ('αεηιουωΑΕΗΙΟΥΩ'.indexOf(g[i]) >= 0) n++;
+      else if (/[̀́͂]/.test(g[i])) hit = n;
+    }
+    var count = 0;
+    for (i = hit ? i : g.length; i < g.length; i++) if ('αεηιουωΑΕΗΙΟΥΩ'.indexOf(g[i]) >= 0) count++;
+    n += count;
+    tr = String(tr || '').normalize('NFC');
+    if (!hit) return escFn(tr);
+    parts = tr.split(/(,\s*)/);
+    var V = /[aeiouyāēīōūȳ]/gi;
+    for (i = 0; i < parts.length; i += 2) {
+      if ((parts[i].match(V) || []).length !== n) continue;
+      var k = 0, at = -1;
+      parts[i].replace(V, function (m, o) { if (++k === hit) at = o; return m; });
+      parts[i] = escFn(parts[i].slice(0, at)) + '<u>' + escFn(parts[i][at]) + '</u>' + escFn(parts[i].slice(at + 1));
+      return parts.map(function (x, j) { return j === i ? x : escFn(x); }).join('');
+    }
+    return escFn(tr);
+  }
   function grkMorph(code) {
     if (!code) return '';
     var p = code.split('-');
@@ -580,7 +604,7 @@
       var strongNo = e[0].replace(/^([HG])0*/, '$1');
       pop.innerHTML =
         '<span class="wd-head"><span class="wd-lemma ' + lang + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '') + '>' + escapeAttr(lx[0] || span.textContent) + '</span>' +
-        (lx[1] ? '<span class="wd-tr">' + escapeAttr(lx[1]) + '</span>' : '') + '</span>' +
+        (lx[1] ? '<span class="wd-tr">' + (lang === 'grc' ? greekTr(lx[0], lx[1], escapeAttr) : escapeAttr(lx[1])) + '</span>' : '') + '</span>' +
         (lx[2] ? '<span class="wd-gloss">' + escapeAttr(lx[2]) + '</span>' : '') +
         '<span class="wd-row"><span class="wd-k">Here</span> ' + cleanGloss(e[1]) + (e[2] ? ' <span class="wd-tr2">(' + escapeAttr(e[2].replace(/\//g, '')) + ')</span>' : '') + '</span>' +
         (morph ? '<span class="wd-row"><span class="wd-k">Form</span> ' + escapeAttr(morph) + '</span>' : '') +

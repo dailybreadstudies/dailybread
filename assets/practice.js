@@ -39,6 +39,31 @@
   }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function translit(t) { return String(t || '').replace(/\./g, '·').replace(/_/g, ' '); }
+  // Greek transliteration with the accented vowel underlined: the nth vowel of the Greek word is the nth vowel of its
+  // transliteration (eperōtaō: the a of ἐπερωτάω). Returns escaped HTML; left plain if the two do not line up.
+  function greekTr(lemma, tr, escFn) {
+    var g = String(lemma || '').split(/[,=]/)[0].normalize('NFD'), n = 0, hit = 0, parts, i;
+    for (i = 0; i < g.length && !hit; i++) {
+      if ('αεηιουωΑΕΗΙΟΥΩ'.indexOf(g[i]) >= 0) n++;
+      else if (/[̀́͂]/.test(g[i])) hit = n;
+    }
+    var count = 0;
+    for (i = hit ? i : g.length; i < g.length; i++) if ('αεηιουωΑΕΗΙΟΥΩ'.indexOf(g[i]) >= 0) count++;
+    n += count;
+    tr = String(tr || '').normalize('NFC');
+    if (!hit) return escFn(tr);
+    parts = tr.split(/(,\s*)/);
+    var V = /[aeiouyāēīōūȳ]/gi;
+    for (i = 0; i < parts.length; i += 2) {
+      if ((parts[i].match(V) || []).length !== n) continue;
+      var k = 0, at = -1;
+      parts[i].replace(V, function (m, o) { if (++k === hit) at = o; return m; });
+      parts[i] = escFn(parts[i].slice(0, at)) + '<u>' + escFn(parts[i][at]) + '</u>' + escFn(parts[i].slice(at + 1));
+      return parts.map(function (x, j) { return j === i ? x : escFn(x); }).join('');
+    }
+    return escFn(tr);
+  }
+  function trHtml(w, e) { return w.lang === 'grc' ? greekTr(e[0], translit(e[1]), esc) : esc(translit(e[1])); }
   function cleanHere(h) { return String(h || '').replace(/\//g, ' ').replace(/[<>\[\]]/g, '').replace(/\s+/g, ' ').trim().replace(/[.,;:!?]+$/, ''); }
   function shortDef(d) {
     d = String(d || '').replace(/\s+/g, ' ').trim();
@@ -177,12 +202,12 @@
         '<p class="fc-tap">' + (td ? TODAY.flip : T.flip) + '</p>';
     }
     if (td) {
-      return label + word + '<p class="fc-tr">' + esc(translit(e[1])) + '</p>' + mean +
+      return label + word + '<p class="fc-tr">' + trHtml(w, e) + '</p>' + mean +
         (e[3] && w.lang === 'he' && shortDef(e[3]) ? '<p class="fc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
         '<div class="fc-more-back">' + td.back + '</div>';
     }
-    return label + (rev ? word + '<p class="fc-tr">' + esc(translit(e[1])) + '</p>' + mean
-                        : word + '<p class="fc-tr">' + esc(translit(e[1])) + '</p>' + mean) +
+    return label + (rev ? word + '<p class="fc-tr">' + trHtml(w, e) + '</p>' + mean
+                        : word + '<p class="fc-tr">' + trHtml(w, e) + '</p>' + mean) +
       (e[3] && w.lang === 'he' && shortDef(e[3]) ? '<p class="fc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
       '<p class="fc-src">' + esc(where) + ' · translated “' + esc(cleanHere(w.here)) + '” · used ' + w.n + ' times in the Bible' +
         (ref[0] ? ' · <a href="./?r=' + ref[0] + '.' + cv[0] + '.' + cv[1] + '">Read it</a>' : '') + '</p>';

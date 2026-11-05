@@ -19,6 +19,30 @@
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function today() { var d = new Date(); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  // Greek transliteration with the accented vowel underlined: the nth vowel of the Greek word is the nth vowel of its
+  // transliteration (eperōtaō: the a of ἐπερωτάω). Returns escaped HTML; left plain if the two do not line up.
+  function greekTr(lemma, tr, escFn) {
+    var g = String(lemma || '').split(/[,=]/)[0].normalize('NFD'), n = 0, hit = 0, parts, i;
+    for (i = 0; i < g.length && !hit; i++) {
+      if ('αεηιουωΑΕΗΙΟΥΩ'.indexOf(g[i]) >= 0) n++;
+      else if (/[̀́͂]/.test(g[i])) hit = n;
+    }
+    var count = 0;
+    for (i = hit ? i : g.length; i < g.length; i++) if ('αεηιουωΑΕΗΙΟΥΩ'.indexOf(g[i]) >= 0) count++;
+    n += count;
+    tr = String(tr || '').normalize('NFC');
+    if (!hit) return escFn(tr);
+    parts = tr.split(/(,\s*)/);
+    var V = /[aeiouyāēīōūȳ]/gi;
+    for (i = 0; i < parts.length; i += 2) {
+      if ((parts[i].match(V) || []).length !== n) continue;
+      var k = 0, at = -1;
+      parts[i].replace(V, function (m, o) { if (++k === hit) at = o; return m; });
+      parts[i] = escFn(parts[i].slice(0, at)) + '<u>' + escFn(parts[i][at]) + '</u>' + escFn(parts[i].slice(at + 1));
+      return parts.map(function (x, j) { return j === i ? x : escFn(x); }).join('');
+    }
+    return escFn(tr);
+  }
   function translit(t) { return String(t || '').replace(/\./g, '·').replace(/_/g, ' '); }
   function shortDef(d) {
     d = String(d || '').replace(/\s+/g, ' ').trim();
@@ -120,7 +144,7 @@
             '<p class="wc-lemma ' + p.lang + '" lang="' + p.lang + '"' + (p.lang === 'he' ? ' dir="rtl"' : '') + '>' + esc(e[0] || '') + '</p>' +
             '<button type="button" class="wc-reveal" aria-expanded="false" aria-controls="wc-a' + i + '">' + (KIDS ? 'Show me!' : 'Reveal the meaning') + '</button>' +
             '<div class="wc-answer" id="wc-a' + i + '" hidden>' +
-              '<p class="wc-tr">' + esc(translit(e[1])) + '</p>' +
+              '<p class="wc-tr">' + (p.lang === 'grc' ? greekTr(e[0], translit(e[1]), esc) : esc(translit(e[1]))) + '</p>' +
               '<p class="wc-gloss">' + esc(e[2] || '') + '</p>' +
               (e[3] && p.lang === 'he' ? '<p class="wc-def">' + esc(shortDef(e[3])) + '</p>' : '') +
               (vt ? '<blockquote class="wc-verse"><p>' + vt + '</p>' +
