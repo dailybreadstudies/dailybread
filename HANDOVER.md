@@ -151,7 +151,8 @@ expositions with Ryle's own italics kept, typographic quotes; his notes on Luke 
 "Ryle's notes on verses …" under each passage, loaded when opened); the sections touching the reading's verses; Messianic Filter switch; About card at the
 bottom. Built by tools/build_commentaries.py. With the Messianic Filter on, Henry, Ryle and Murray (only) also say "disciple(s)" for "Christian(s)" as a noun
 (tracks.js `disciples`); "Christian" as an adjective, Christianity and Christendom are left as written. They also capitalize God's Temple
-(tracks.js `TEMPLE_RE`, not pagan temples, His body, or believers as the temple of the Holy Spirit). Pictures: `COMM_IMAGES` in tracks.js (olive tree, canyon, lake; empty = dark placeholder).
+(tracks.js `TEMPLE_RE`, not pagan temples, His body, or believers as the temple of the Holy Spirit), and leave "Gospel" as a book name
+(John’s Gospel, the Gospel of Luke, this Gospel: `BOOK_GOSPEL`). Pictures: `COMM_IMAGES` in tracks.js (olive tree, canyon, lake; empty = dark placeholder).
 Murray is book `prayer`: each lesson in two parts, cut at the paragraph nearest the middle (66 units); old `murray:N`
 marks become `prayer:2N-1` and `prayer:2N` (tracks.js `migrate`, account.js `norm`).
 Each track has a painted banner (`BANNERS` in tracks.js → assets/img/study-<track>.jpg + -sm), full width under the top bar,

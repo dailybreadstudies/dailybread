@@ -199,8 +199,12 @@
     'Hades': 'Sheol'
   });
   var LAW_RE = /(?<![A-Za-z\-])((?:the|The|His|his|My|my|Your|your|Thy|thy|our|Our|this|This|that|God[ʼ’']s|Moses[ʼ’']) )law(?![A-Za-z])(?! of (?:sin|the sin|the Spirit|faith|works|my mind|the Medes|the king|liberty|freedom|nature|love|the land|the Persians|this world|this city|the city|the country|the Lord's|truth))/g;
+  // "Gospel" as the name of a book stays: John's Gospel, the Gospel of Luke, this Gospel, his Gospel (the evangelist's),
+  // the four / other Gospel, Gospel writers. (The plural, Gospels, is not changed at all.)
+  var BOOK_GOSPEL = /(?:\b(?:Matthew|Mark|Luke|John)[ʼ’']s |\b(?:this|his|four|three|other|fourth|first|second|third) )Gospel\b|\bGospel(?= of (?:St\. )?(?:Matthew|Mark|Luke|John)\b| (?:writers?|narratives?|histor(?:y|ies)|records?|harmony)\b)/g;
   function messianic(text) {
-    return messianicWords(text).replace(LAW_RE, '$1Torah').replace(/\bYeshua Messiah\b/g, 'Yeshua the Messiah');
+    text = text.replace(BOOK_GOSPEL, function (m) { return m.replace('Gospel', 'G\uE000ospel'); });
+    return messianicWords(text).replace(LAW_RE, '$1Torah').replace(/\bYeshua Messiah\b/g, 'Yeshua the Messiah').replace(/\uE000/g, '');
   }
   // For Murray, Henry and Ryle only: "Christian" as a person becomes "disciple" (Christians → disciples, Christian's →
   // disciple's, Christians' → disciples'). The singular changes only when what follows shows it is a noun ("every
