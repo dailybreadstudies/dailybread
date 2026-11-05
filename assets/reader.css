@@ -482,8 +482,9 @@ html.orig-off .blessing .hebrew-blessing { display: none; }
 
 .verse-num {
   font-size: 0.7em; vertical-align: super; line-height: 0; color: var(--verse);
-  font-weight: 500; margin-right: 0.3em; font-family: var(--sans); text-indent: 0;
+  font-weight: 400; margin-right: 0.3em; font-family: var(--sans); text-indent: 0;
 }
+@media (max-width: 700px) { .verse-num { position: relative; top: 0.05em; } }   /* phones: sit a touch lower against the line */
 .chapter-num {
   font-family: var(--display); font-size: 1.6em; line-height: 1; color: var(--verse);
   margin-right: 0.25em; vertical-align: -0.12em;
