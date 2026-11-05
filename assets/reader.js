@@ -29,18 +29,44 @@
     place();
   })();
   // Phones: the floating buttons (Bible, calendar, settings) slip away while scrolling down to read, and come back
-  // as soon as the reader scrolls up, nears the top, or reaches the end of the page (CSS: html.tools-tucked, phones only)
+  // as soon as the reader scrolls up, nears the top, or reaches the end of the page (CSS: html.tools-tucked, phones only).
+  // Safari on iPhone can be unreliable here, so a finger pulling the page down or any tap also brings them back,
+  // and --tools-lift keeps them above Safari's bottom bar when it slides back in.
   (function () {
-    var root = document.documentElement, lastY = window.scrollY, queued = false;
+    var root = document.documentElement, lastY = window.scrollY, queued = false, touchY = null;
+    function pageY() {   // ignores the iPhone's rubber-band overscroll at either end of the page
+      return Math.max(0, Math.min(window.scrollY, root.scrollHeight - window.innerHeight));
+    }
+    function show() { root.classList.remove('tools-tucked'); lastY = pageY(); }
     function check() {
       queued = false;
-      var y = window.scrollY, dy = y - lastY;
-      var nearEnd = y + window.innerHeight >= document.documentElement.scrollHeight - 60;
+      var y = pageY(), dy = y - lastY;
+      var nearEnd = y + window.innerHeight >= root.scrollHeight - 60;
       if (y < 80 || nearEnd || dy < -6) root.classList.remove('tools-tucked');
       else if (dy > 6) root.classList.add('tools-tucked');
       if (Math.abs(dy) > 6 || y < 80) lastY = y;
     }
     window.addEventListener('scroll', function () { if (!queued) { queued = true; requestAnimationFrame(check); } }, { passive: true });
+    window.addEventListener('touchstart', function (e) { touchY = e.touches.length === 1 ? e.touches[0].clientY : null; }, { passive: true });
+    window.addEventListener('touchmove', function (e) {
+      if (touchY === null || e.touches.length !== 1) return;
+      var y = e.touches[0].clientY;
+      if (y - touchY > 12) { show(); touchY = y; }      // finger moving down = page moving up
+      else if (y < touchY) touchY = y;                  // follow the finger, so turning back counts straight away
+    }, { passive: true });
+    window.addEventListener('touchend', function () { touchY = null; }, { passive: true });
+    document.addEventListener('click', show, true);
+    window.addEventListener('pageshow', show);          // coming back with the browser's Back button
+    var vv = window.visualViewport;
+    if (vv) {
+      var lift = function () {
+        var gap = vv.scale > 1.01 ? 0 : Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+        root.style.setProperty('--tools-lift', gap + 'px');
+      };
+      vv.addEventListener('resize', lift);
+      vv.addEventListener('scroll', lift);
+      lift();
+    }
   })();
   // Which edition: Classic (the site root) or Daily Bread for Kids (the pages in kids/, data in data/kids/)
   var KIDS = document.body.getAttribute('data-edition') === 'kids';

@@ -834,14 +834,15 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 
 /* Phones: button bottom-right within thumb reach; panel becomes a bottom sheet */
 @media (max-width: 700px) {
-  .tools { top: auto; bottom: 18px; right: 16px; gap: 10px; align-items: center; }
-  .tool-btn { height: 44px; padding: 0 1rem; border-radius: 22px; box-shadow: 0 4px 14px var(--shadow); }
+  .tools { top: auto; bottom: calc(18px + var(--tools-lift, 0px)); right: 16px; gap: 10px; align-items: center; }
+  .tool-btn { height: 44px; padding: 0 1rem; border-radius: 22px; box-shadow: 0 4px 14px var(--shadow);
+    -webkit-backdrop-filter: none; backdrop-filter: none; }   /* iPhone Safari can fail to repaint blurred buttons as they fade back in */
   .cal-btn { width: 44px; padding: 0; }
   .settings-panel { top: auto; bottom: 0; right: 0; left: 0; width: 100%; max-width: none;
     border-radius: 14px 14px 0 0; padding: 14px 20px calc(16px + env(safe-area-inset-bottom)); max-height: 86vh; }
   .settings-panel:not([hidden]) { animation: sheetUp 0.22s ease-out; }
   body.panel-open .tools { display: none; }   /* sheets have their own close button */
-  .tools { transition: opacity 0.25s ease, transform 0.25s ease; }
+  .tools { transition: opacity 0.25s ease, transform 0.25s ease; transform: translateZ(0); will-change: opacity, transform; }
   html.tools-tucked .tools { opacity: 0; transform: translateY(24px); pointer-events: none; }   /* scrolling down: out of the way */
   body { padding-bottom: 5.5rem; }
 }
@@ -851,7 +852,7 @@ a.sref:hover { color: var(--accent-deep); text-decoration-color: var(--accent-so
 
 @media (max-width: 700px) {
   body { padding: calc(var(--topbar-h) + 1.25rem) 16px 5.5rem; }
-  .reader { padding: 0.5rem 0 2.5rem; }
+  .reader { padding: 0.5rem 14px 2.5rem; }   /* with the body's 16px: a 30px text margin on phones */
   .page-title, .page-date { font-size: 1.5rem; }
   .chapter-head { font-size: 1.25rem; }
   .scripture { font-size: 1.04rem; }
