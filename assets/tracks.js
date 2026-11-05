@@ -215,12 +215,15 @@
       return (start ? 'D' : 'd') + 'isciple' + (plural ? 's' : '') + (poss || '');
     });
   }
+  // Henry, Ryle and Murray: God's Temple capitalized, as in the Bible text (reader.js, TEMPLE_RE), but not pagan temples,
+  // the temple of His body, nor believers as the temple of the Holy Spirit ("a living temple", "the temple of our bodies")
+  var TEMPLE_RE = /(?<![A-Za-z\-ʼ’'])(?<!\bhis )(?<!up to its )(?<!whose )(?<!idol[ʼ’']s )(?<!(?:are|destroys|for) God[ʼ’']s )(?<!are that )(?<!body is a )(?<!body a [“"])(?<!living )(?<!spiritual )(?<!heathen )temple(?![A-Za-z])(?!\s+of\s+(?:his gods?|their gods|their idols|the gods|Baal|Dagon|Rimmon|Babylon|the Ashtoreths|the great|[Hh]is body|my body|our bod|your bod|the body|the Holy (?:Ghost|Spirit)))/g;
   function filterNode(root, people) {
     var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), n, list = [];
     while ((n = w.nextNode())) list.push(n);
     list.forEach(function (t) {
       var v = messianic(t.nodeValue);
-      if (people === true) v = disciples(v);
+      if (people === true) v = disciples(v).replace(TEMPLE_RE, 'Temple');
       if (v !== t.nodeValue) t.nodeValue = v;
     });
   }
@@ -664,7 +667,7 @@
       return getJSON(DATA.replace('tracks/', '') + 'comm/ryle/' + R.book + '.json').then(function (d) {
         var parts = [];
         R.ranges.forEach(function (r) {
-          d.sections.forEach(function (s) { if (s.c === r.c && overlaps(s.v, r)) parts.push({ c: s.c, v: s.v, p: s.p }); });
+          d.sections.forEach(function (s) { if (s.c === r.c && overlaps(s.v, r)) parts.push({ c: s.c, v: s.v, p: s.p, n: s.n }); });
         });
         return { who: 'ryle', book: R.book, parts: parts };
       });
@@ -684,7 +687,7 @@
       about: 'Matthew Henry (1662–1714) was an English Presbyterian minister, the son of a pastor ejected from the Church of England in 1662. He served a congregation in Chester for twenty-five years and later in Hackney, London, and wrote his Exposition of the Old and New Testaments between 1706 and his death; friends completed Romans to Revelation from his notes. The Concise Commentary is an abridgement of that great work, made after his death and long one of the most widely read commentaries in English. Henry writes as a devotional expositor rather than a critical scholar: every chapter turns to prayer, holiness and comfort in Messiah. He follows the Reformed reading of his day, and at times applies promises to Israel to the church; read as a post-supersessionist, those places call for discernment, while his warmth and practical wisdom remain.',
       translation: 'Henry comments on the King James Version. Text from the public-domain abridgement, as published by lyteword/mhenry-concise (CC0).' },
     ryle: { title: 'J. C. Ryle, Expository Thoughts on the Gospels',
-      about: 'John Charles Ryle (1816–1900) was an evangelical Anglican clergyman, for many years rector of Helmingham and Stradbroke in Suffolk, and in 1880 the first bishop of Liverpool. He wrote his Expository Thoughts on the Gospels between 1856 and 1873, intending them for family prayers, for those who visit the sick, and for private reading. Each passage is followed by a short, plain exposition drawing out a few leading lessons, in Ryle’s direct and searching style. On Luke and John he added long critical notes, which are left out here. Ryle was firmly Protestant and evangelical; unusually for his time, he also taught that Israel will be literally restored to its land and brought to faith in its Messiah, a conviction that resonates with a Messianic reading of the Gospels.',
+      about: 'John Charles Ryle (1816–1900) was an evangelical Anglican clergyman, for many years rector of Helmingham and Stradbroke in Suffolk, and in 1880 the first bishop of Liverpool. He wrote his Expository Thoughts on the Gospels between 1856 and 1873, intending them for family prayers, for those who visit the sick, and for private reading. Each passage is followed by a short, plain exposition drawing out a few leading lessons, in Ryle’s direct and searching style. On Luke and John he added long critical notes, which open below each passage. Ryle was firmly Protestant and evangelical; unusually for his time, he also taught that Israel will be literally restored to its land and brought to faith in its Messiah, a conviction that resonates with a Messianic reading of the Gospels.',
       translation: 'Ryle expounded the King James Version; the edition used here (Monergism Books) gives the Scripture quotations in modern English. Ryle’s text is public domain.' }
   };
   function commSectionsHtml(item, data, idx) {
@@ -704,6 +707,9 @@
       lastC = p.c;
       var vv = p.v[1] >= 999 ? 'The whole chapter' : (p.v[0] === p.v[1] ? 'Verse ' + p.v[0] : 'Verses ' + p.v[0] + '–' + p.v[1]);
       body += '<p class="cmx-vv">' + vv + '</p>' + p.p.map(function (t) { return '<p class="cm-p">' + t + '</p>'; }).join('');
+      if (p.n) body += '<details class="cmx-notes" data-book="' + esc(data.book) + '" data-key="' + p.c + ':' + p.v[0] + '-' + p.v[1] + '">' +
+        '<summary>Ryle’s notes on ' + (p.v[0] === p.v[1] ? 'verse ' + p.v[0] : 'verses ' + p.v[0] + '–' + p.v[1]) + '</summary>' +
+        '<div class="cmx-notes-body"><p class="status">Loading…</p></div></details>';
     });
     if (!data.parts.length) body = '<p class="cm-p">There is no commentary on this passage.</p>';
     return hero + '<section class="ab-sec dp-sec cmx-sec"><div class="ab-in dp-col">' +
@@ -759,7 +765,23 @@
         });
     }).catch(function () { /* not a day of the plan */ });
   }
+  // Ryle's notes on Luke and John (data/comm/ryle/notes/<BOOK>.json, long for John): loaded when first opened
+  function openNotes(d) {
+    var box = d.querySelector('.cmx-notes-body');
+    if (d.getAttribute('data-done')) return;
+    d.setAttribute('data-done', '1');
+    getJSON(DATA.replace('tracks/', '') + 'comm/ryle/notes/' + d.getAttribute('data-book') + '.json').then(function (j) {
+      var ns = j.notes[d.getAttribute('data-key')] || [];
+      box.innerHTML = ns.map(function (t) {     // John's notes open with the verses (KJV) all in bold: set them quietly instead
+        return /^<b>\d+\. /.test(t) ? '<p class="cm-p cmx-nt">' + t.replace(/<\/?b>/g, '') + '</p>' : '<p class="cm-p">' + t + '</p>';
+      }).join('');
+      if (siteSettings().messianic) filterNode(box, true);
+    }).catch(function () { d.removeAttribute('data-done'); box.innerHTML = '<p class="status">Could not load the notes. Please try again.</p>'; });
+  }
   if (PAGE === 'deeper') {
+    document.addEventListener('toggle', function (e) {
+      if (e.target.classList && e.target.classList.contains('cmx-notes') && e.target.open) openNotes(e.target);
+    }, true);
     document.addEventListener('click', function (e) {
       var t = e.target.closest && e.target.closest('[data-cmx="filter"]');
       if (!t) return;

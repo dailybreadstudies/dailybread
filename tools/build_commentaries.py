@@ -4,13 +4,13 @@
   data/comm/henry/<BOOK>.json   Matthew Henry's Concise Commentary, every book; per chapter its sections
                                 ({"v": [first, last], "p": [paragraphs]}) and the book's introduction
   data/comm/ryle/<BOOK>.json    J. C. Ryle, Expository Thoughts on the Gospels (MAT, MRK, LUK, JHN), the expositions only
-                                (his technical notes on Luke and John are left out)
+                                (his notes on Luke and John in ryle/notes/)
 
 Sources:
   --henry  a clone of github.com/lyteword/mhenry-concise (CC0): <book>/_index.md and <book>/chapter-N.md (psalms/psalm-N.md)
   --ryle   `pdftohtml -xml -i` of the Monergism e-book "Expository Thoughts on the Gospels" (Ryle's text is public domain).
            Passage headings are bold ("MATTHEW 20:1-16"), the Scripture passage before each exposition is italic (left out),
-           Ryle's key sentences bold italic (kept as bold).
+           Ryle's key sentences bold italic (kept as bold), his own italics kept; notes on Luke and John in ryle/notes/<BOOK>.json ("n" on a passage: how many).
 
   python3 tools/build_commentaries.py --henry ~/src/mhenry --ryle ~/src/ryle.xml
 """
@@ -89,72 +89,143 @@ def henry(root):
     print('henry: %d chapters' % total)
 
 
+def smart_quotes(t):
+    """Straight quotes to typographic ones, across the <i>/<b> tags (they are skipped when looking at the neighbours)."""
+    parts = re.split(r'(<[^>]+>)', t)
+    plain = ''.join(x for x in parts if not x.startswith('<'))
+    out, k = [], 0                                # k: position in the plain text
+    for x in parts:
+        if x.startswith('<'):
+            out.append(x); continue
+        y = []
+        for ch in x:
+            prev = plain[k - 1] if k else ' '
+            nxt = plain[k + 1] if k + 1 < len(plain) else ' '
+            if ch == '"':
+                ch = '“' if (prev.isspace() or prev in '([{—–-‘') else '”'
+            elif ch == "'":
+                if prev.isalnum() or prev in '.,;:!?”)':
+                    ch = '’'                 # apostrophe or closing quote
+                elif re.match(r"(?:tis|twas|em)\b", plain[k + 1:k + 5]):
+                    ch = '’'                 # 'tis, 'twas
+                else:
+                    ch = '‘' if (nxt.isalnum() or nxt in '“"') else '’'
+            y.append(ch); k += 1
+        out.append(''.join(y))
+    return ''.join(out)
+
+
 def ryle(path):
+    """Each passage: the Scripture passage that opens it (paragraphs wholly in italics) is left out; Ryle's own italics
+    inside the exposition are kept as <i>, his key sentences (bold, or bold italic) as <b>. His notes on Luke ("Notes on
+    1:13-17") and John ("Technical Notes:") go in "n" for the passage they follow."""
     x = open(path, encoding='utf-8').read()
     fonts = {i: (int(s), f.split('+')[0]) for i, s, f in re.findall(r'<fontspec id="(\d+)" size="(\d+)" family="([^"]+)"', x)}
     BOOK = {'MATTHEW': 'MAT', 'MARK': 'MRK', 'LUKE': 'LUK', 'JOHN': 'JHN'}
     HEAD = re.compile(r'^(?:(MATTHEW|MARK|LUKE|JOHN)\s+)?(\d+):(\d+)(?:\s*[-–]\s*(\d+))?$', re.I)
-    secs, cur, para, skip, book, last = [], None, [], False, None, None
+    secs, cur, para, mode, book, last, lastline = [], None, [], None, None, None, None
+    # para: runs [style, text]; style '' roman, 'i' italic, 'b' bold. mode: None (skipping), 'p' exposition, 'n' notes
 
     def flush():
         nonlocal para
-        if cur is not None and para:
-            t = re.sub(r'\s+', ' ', ''.join(para)).strip().replace('</b> <b>', ' ').replace('</b><b>', '')
-            t = re.sub(r'\s+([,.;:!?])', r'\1', t)
-            t = re.sub(r'(^|[.?!]["”’]? )we ', lambda m: m.group(1) + 'We ', t)   # the e-book lost a few capitals
-            t = re.sub(r'\s*--\s*', '—', t)
-            if t:
-                cur['p'].append(t)
+        if cur is not None and para and mode:
+            cur[mode].append(para)
         para = []
+
+    def add(style, t, newline):
+        if para and para[-1][0] == style:
+            sep = '' if (newline and para[-1][1].endswith('-')) else ' '
+            para[-1][1] += sep + t
+        else:
+            if para and newline and para[-1][1].endswith('-'):
+                t = '⁠' + t                   # joined on (marker removed below)
+            para.append([style, t])
 
     for page in re.split(r'<page number="', x)[1:]:
         first = True
         for m in re.finditer(r'<text top="(\d+)" left="(\d+)" width="\d+" height="\d+" font="(\d+)">(.*?)</text>', page):
-            top, raw = int(m.group(1)), m.group(4)
+            top, left, raw = int(m.group(1)), int(m.group(2)), m.group(4)
             sz, fam = fonts[m.group(3)]
-            t = html.unescape(re.sub(r'<[^>]+>', '', raw)).strip()
+            t = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', raw)))
             if sz >= 36:                           # a chapter or book title, or a book's preface: the passage has ended
-                flush(); skip = True
-                mm = re.match(r'^(Matthew|Mark|Luke|John|JOHN)\b', t)
+                flush(); mode = None
+                mm = re.match(r'^(Matthew|Mark|Luke|John|JOHN)\b', t.strip())
                 if mm:
                     book = BOOK[mm.group(1).upper()]
                 continue
-            if fam == 'AAAAAB':
-                if t.startswith('Notes on') or t.startswith('Technical Notes'):
-                    flush(); skip = True
+            st = t.strip()
+            if fam == 'AAAAAB' and left == 108 and (last is None or top != lastline or first):
+                if st.startswith('Notes on') or st.startswith('Technical Notes'):
+                    flush()
+                    mode = 'n' if cur is not None else None
+                    last = top; lastline = top; first = False
                     continue
-                hm = HEAD.match(t)
+                hm = HEAD.match(st)
                 if hm and (hm.group(1) or book):
                     flush()
                     if hm.group(1):
                         book = BOOK[hm.group(1).upper()]
                     a = int(hm.group(3))
-                    cur = {'book': book, 'c': int(hm.group(2)), 'v': [a, int(hm.group(4) or a)], 'p': []}
-                    secs.append(cur); skip = False; last = None
+                    cur = {'book': book, 'c': int(hm.group(2)), 'v': [a, int(hm.group(4) or a)], 'p': [], 'n': []}
+                    secs.append(cur); mode = 'p'; last = None; lastline = None
                     continue
-            if skip or cur is None or not t or fam == 'AAAAAC':   # italic: the Scripture passage itself
+            if not mode or cur is None or not st:
                 continue
+            newline = top != lastline or first
             gap = (top - last) if (last is not None and not first) else None
-            if (gap is not None and gap > 36) or (first and para and re.search(r'[.?!:"”’)]\s*$', para[-1])):
+            prevtxt = para[-1][1] if para else ''
+            if (gap is not None and gap > 36) or (first and para and re.search(r'[.?!:"”’)]\s*$', prevtxt)):
                 flush()
-            piece = html.escape(re.sub(r'\s+', ' ', t), quote=False)
-            piece = ('<b>' + piece + '</b> ') if (fam == 'AAAAAD' or '<b>' in raw) else piece + ' '
-            para.append(piece)
-            last = top; first = False
+            elif mode == 'n' and newline and left == 108 and fam == 'AAAAAA' and re.match(r'^\d+\.\s', st) and para:
+                flush()                            # Luke's notes: each numbered note its own paragraph
+            ital = fam in ('AAAAAC', 'AAAAAD') or '<i>' in raw
+            bold = fam in ('AAAAAB', 'AAAAAD') or '<b>' in raw
+            add('b' if bold else ('i' if ital else ''), st, newline)
+            last = top; lastline = top; first = False
     flush()
-    NOTE = re.compile(r'^(?:<[bi]>)?\s*(?:Technical Notes|\[|\d+\.\s*--|\d+\.\s*\[|\d+\.\s*"|MONERGISM)')
-    out = {}
+
+    def render(runs):
+        h = ''
+        for style, t in runs:
+            e = html.escape(t, quote=False)
+            if style:
+                lead = re.match(r'^\s*', e).group(0)
+                e = lead + '<%s>%s</%s>' % (style, e.strip(), style)
+            if h and not e.startswith('⁠') and not re.match(r'^(?:<[ib]>)?[,.;:!?)]', e):
+                h += ' '
+            h += e.replace('⁠', '')
+        h = re.sub(r'\s+', ' ', h).strip()
+        h = re.sub(r'\s+([,.;:!?])', r'\1', h)
+        h = re.sub(r'(<[ib]>)\s+', r' \1', h); h = re.sub(r'\s+(</[ib]>)', r'\1 ', h)
+        h = re.sub(r'\s+([,.;:!?])', r'\1', h).strip()
+        h = re.sub(r'(^|[.?!]["”’]? )we ', lambda m: m.group(1) + 'We ', h)   # the e-book lost a few capitals
+        h = re.sub(r'\s*--\s*', '—', h)
+        h = re.sub(r'\[\s+', '[', h); h = re.sub(r'\s+\]', ']', h)
+        return smart_quotes(h)
+
+    out, dropped, allnotes = {}, 0, {}
     for s in secs:
-        keep = []
-        for k, p in enumerate(s['p']):
-            if k >= 2 and NOTE.match(p):
-                break
-            keep.append(p)
+        paras = s['p']
+        k = 0
+        while k < len(paras) and all(st == 'i' for st, t in paras[k]):   # the Scripture passage
+            k += 1
+        dropped += k
+        keep = [render(r) for r in paras[k:]]
+        keep = [p for p in keep if p and not p.startswith('MONERGISM')]
+        notes = [render(r) for r in s['n']]
+        notes = [p for p in notes if p and not p.startswith('MONERGISM')]
         if keep:
-            out.setdefault(s['book'], []).append({'c': s['c'], 'v': s['v'], 'p': keep})
+            sec = {'c': s['c'], 'v': s['v'], 'p': keep}
+            if notes:
+                sec['n'] = len(notes)              # the notes themselves: ryle/notes/<BOOK>.json, loaded when opened
+                allnotes.setdefault(s['book'], {})['%d:%d-%d' % (s['c'], s['v'][0], s['v'][1])] = notes
+            out.setdefault(s['book'], []).append(sec)
     for b, ss in out.items():
         write('ryle/%s.json' % b, {'book': b, 'sections': ss})
-        print('ryle %s: %d passages' % (b, len(ss)))
+        if b in allnotes:
+            write('ryle/notes/%s.json' % b, {'book': b, 'notes': allnotes[b]})
+        print('ryle %s: %d passages, %d with notes' % (b, len(ss), sum(1 for z in ss if 'n' in z)))
+    print('Scripture paragraphs left out:', dropped)
 
 
 if __name__ == '__main__':

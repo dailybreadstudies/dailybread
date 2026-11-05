@@ -169,6 +169,16 @@ body.banner-on :is(.st-date, .st-title, .st-tabs, .division-label, .chapter-head
 .cmx-text .cm-p { font-size: clamp(1.05rem, 1.35vw, 1.15rem); line-height: 1.8; color: var(--ink); margin: 0 0 1rem; }
 .cmx-text b { font-weight: 600; color: var(--heading); }
 .cmx-about { margin-top: 3rem; }
+/* Ryle's notes on Luke and John: closed under each passage, smaller type */
+.cmx-notes { margin: 0.4rem 0 1.8rem; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.cmx-notes summary { cursor: pointer; padding: 0.8rem 0; font: 600 0.72rem/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); list-style: none; }
+.cmx-notes summary::-webkit-details-marker { display: none; }
+.cmx-notes summary::before { content: '+'; display: inline-block; width: 1.1em; font-weight: 400; }
+.cmx-notes[open] summary::before { content: '\2013'; }
+.cmx-notes-body { padding: 0.2rem 0 1rem; }
+.cmx-notes-body .cm-p { font-size: 0.98rem; line-height: 1.75; color: var(--ink-soft, var(--ink)); }
+.cmx-notes-body .cmx-nt { font-style: italic; color: var(--muted); padding-left: 1.2rem; border-left: 2px solid var(--rule); }
 
 /* The Messianic Filter switch at the end of the banner's subtitle (light, on the picture); it wraps to its own line if need be */
 .cmx-hero .ab-p { max-width: none; }   /* room for the switch at the end of the line on wide screens */
