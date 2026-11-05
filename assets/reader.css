@@ -1214,7 +1214,7 @@ html.msub-on .scripture .msub {
 .pg-stats > div:first-child b { color: var(--done); }
 
 /* Bible picker, roomier (Nov 2026): to restore the smaller one, delete this block */
-.bible-panel { width: 640px; max-width: calc(100vw - 32px); max-height: min(84vh, 760px); padding: 22px 24px 26px; }
+.bible-panel { width: 580px; max-width: calc(100vw - 32px); max-height: min(84vh, 760px); padding: 22px 24px 26px; }
 .bp-go { gap: 8px; margin: 2px 0 10px; }
 .bp-input, .bp-go-btn { height: 46px; font-size: 16px; border-radius: 10px; }
 .bp-input { padding: 0 14px; }
@@ -1223,14 +1223,13 @@ html.msub-on .scripture .msub {
 .bp-group .he { font-size: 16px; }
 .bp-books { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .bp-book { padding: 11px 6px; font-size: 15px; border-radius: 10px; text-align: center; }
-.bp-bookname { font-size: 19px; }
-.bp-back { font-size: 15px; }
-.bp-chapters { grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 8px; margin-top: 14px; }
+.bp-book.is-open, .bp-book.is-open:hover { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.bp-chapters { grid-column: 1 / -1; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 8px; margin: 4px 0 8px; }
 .bp-ch { height: 52px; font-size: 16px; border-radius: 10px; }
 @media (max-width: 700px) {
   .bible-panel { width: 100%; max-width: none; max-height: 88vh; max-height: 88dvh; padding: 14px 20px calc(28px + env(safe-area-inset-bottom)); }
   .bp-books { grid-template-columns: repeat(3, 1fr); gap: 7px; }
-  .bp-book { padding: 13px 1px; font-size: 13.5px; white-space: nowrap; }
+  .bp-book { padding: 13px 1px; font-size: 13.5px; }
   .bp-chapters { grid-template-columns: repeat(auto-fill, minmax(54px, 1fr)); }
 }
 @media (max-width: 360px) { .bp-books { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

@@ -287,7 +287,7 @@
       var head = displayRef(r.parts[0]), name0 = head.replace(/\s\d.*$/, '');
       return head + r.parts.slice(1).map(function (p) { return '; ' + displayRef(p).replace(name0 + ' ', ''); }).join('');
     }
-    var name = bookName(r.book);
+    var name = (settings.hebrewNames && HEB_BOOKS[r.book]) || bookName(r.book);
     var one = (bookIndex || []).filter(function (b) { return b.id === r.book; })[0];
     if (one && one.chapters === 1 && r.c1 === 1 && r.c2 === 1 && !(r.v1 === 1 && r.v2 === null)) {   // Jude 5–25
       return name + ' ' + r.v1 + (r.v2 === null ? '–end' : r.v2 !== r.v1 ? '–' + r.v2 : '');
@@ -2495,8 +2495,10 @@
     for (var i = 0; i < GROUPS.length; i++) if (GROUPS[i][2].indexOf(id) >= 0) return GROUPS[i];
     return GROUPS[0];
   }
-  // Book names in the Bible browser follow the Hebrew names / Messianic options
-  var HEB_BOOKS = { JOS: 'Yehoshua', RUT: 'Rut', '1SA': '1 Shmuel', '2SA': '2 Shmuel', NEH: 'Nechemyah', EST: 'Ester',
+  // Book names follow the Hebrew names / Messianic options
+  var HEB_BOOKS = { GEN: 'Beresheet', EXO: 'Shemot', LEV: 'Vayikra', NUM: 'Bamidbar', DEU: 'Devarim', JDG: 'Shoftim',
+    '1KI': '1 Melachim', '2KI': '2 Melachim', '1CH': '1 Divrei HaYamim', '2CH': '2 Divrei HaYamim', PSA: 'Tehillim', PRO: 'Mishlei',
+    SNG: 'Shir HaShirim', ECC: 'Kohelet', LAM: 'Eichah', JOS: 'Yehoshua', RUT: 'Rut', '1SA': '1 Shmuel', '2SA': '2 Shmuel', NEH: 'Nechemyah', EST: 'Ester',
     JOB: 'Iyov', ISA: 'Yeshayahu', JER: 'Yirmeyahu', EZK: 'Yechezkel', HOS: 'Hoshea', JOL: 'Yoel', OBA: 'Ovadyah',
     JON: 'Yonah', MIC: 'Michah', NAM: 'Nachum', HAB: 'Chavakuk', ZEP: 'Tzefanyah', HAG: 'Chaggai', ZEC: 'Zecharyah',
     MAT: 'Mattityahu', JHN: 'Yochanan', '1JN': '1 Yochanan', '2JN': '2 Yochanan', '3JN': '3 Yochanan', JAS: 'Yaakov',
@@ -2722,29 +2724,49 @@
   var pickerBook = null;
 
   function drawPicker() {
-    var html = '<div class="sp-head"><span class="sp-title">' + (pickerBook ? '' : 'Bible') + '</span>' +
+    var html = '<div class="sp-head"><span class="sp-title">Bible</span>' +
       '<button type="button" class="sp-close" data-bible-close aria-label="Close">&times;</button></div>';
-    if (!pickerBook) {
-      html += '<form class="bp-go" autocomplete="off"><input type="text" class="bp-input" placeholder="Go to… e.g. John 3:16" aria-label="Go to a passage" enterkeyhint="go">' +
-        '<button type="submit" class="bp-go-btn">Go</button></form><p class="bp-msg" hidden></p>';
-      GROUPS.forEach(function (g) {
-        html += '<p class="bp-group">' + g[0] + ' <span class="he">' + g[1].replace(/[\u0591-\u05C7]/g, '') + '</span></p><div class="bp-books">' +
-          g[2].map(function (id) { return '<button type="button" class="bp-book" data-book="' + id + '">' + escapeAttr(bookLabel(id)) + '</button>'; }).join('') +
-          '</div>';
-      });
-    } else {
-      var n = chapterCount(pickerBook);
-      html = '<div class="sp-head"><button type="button" class="bp-back" data-bible-books>&lsaquo; Books</button>' +
-        '<span class="bp-bookname">' + escapeAttr(bookLabel(pickerBook)) + '</span>' +
-        '<button type="button" class="sp-close" data-bible-close aria-label="Close">&times;</button></div>' +
-        '<div class="bp-chapters">';
+    html += '<form class="bp-go" autocomplete="off"><input type="text" class="bp-input" placeholder="Go to… e.g. John 3:16" aria-label="Go to a passage" enterkeyhint="go">' +
+      '<button type="submit" class="bp-go-btn">Go</button></form><p class="bp-msg" hidden></p>';
+    GROUPS.forEach(function (g) {
+      html += '<p class="bp-group">' + g[0] + ' <span class="he">' + g[1].replace(/[֑-ׇ]/g, '') + '</span></p><div class="bp-books">' +
+        g[2].map(function (id) { return '<button type="button" class="bp-book" data-book="' + id + '"' + (chapterCount(id) === 1 ? '' : ' aria-expanded="false"') + '>' + escapeAttr(bookLabel(id)) + '</button>'; }).join('') +
+        '</div>';
+    });
+    biblePanel.innerHTML = html;
+  }
+
+  // Tapping a book opens its chapters right under that book's row, pushing the books below further down
+  function toggleChapters(btn) {
+    var oldTop = btn.getBoundingClientRect().top, wasOpen = btn.classList.contains('is-open');
+    biblePanel.querySelectorAll('.bp-chapters').forEach(function (x) { x.remove(); });
+    biblePanel.querySelectorAll('.bp-book.is-open').forEach(function (x) { x.classList.remove('is-open'); x.setAttribute('aria-expanded', 'false'); });
+    pickerBook = null;
+    var grid = null;
+    if (!wasOpen) {
+      pickerBook = btn.getAttribute('data-book');
+      btn.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      var html = '', n = chapterCount(pickerBook);
       for (var i = 1; i <= n; i++) {
         var on = current && current.bible && current.book === pickerBook && current.c === i;
-        html += '<button type="button" class="bp-ch' + (on ? ' is-selected' : '') + '" data-ch="' + i + '">' + i + '</button>';
+        html += '<button type="button" class="bp-ch' + (on ? ' is-selected' : '') + '" data-ch="' + i + '" aria-label="' + escapeAttr(labelRef(pickerBook, i)) + '">' + i + '</button>';
       }
-      html += '</div>';
+      grid = document.createElement('div');
+      grid.className = 'bp-chapters';
+      grid.innerHTML = html;
+      var last = btn, next = btn.nextElementSibling;
+      while (next && next.offsetTop === btn.offsetTop) { last = next; next = next.nextElementSibling; }
+      last.parentNode.insertBefore(grid, last.nextSibling);
     }
-    biblePanel.innerHTML = html;
+    // Keep the tapped book where it was, then bring as many of its chapters into view as fit
+    biblePanel.scrollTop += btn.getBoundingClientRect().top - oldTop;
+    if (grid) {
+      var box = biblePanel.getBoundingClientRect(), head = biblePanel.querySelector('.sp-head');
+      var below = grid.getBoundingClientRect().bottom - box.bottom + 12;
+      var room = btn.getBoundingClientRect().top - box.top - (head ? head.offsetHeight : 0) - 8;
+      if (below > 0 && room > 0) biblePanel.scrollTop += Math.min(below, room);
+    }
   }
 
   function openBible(open) {
@@ -2766,11 +2788,10 @@
     var t = e.target.closest('button');
     if (!t) return;
     if (t.hasAttribute('data-bible-close')) { openBible(false); bibleBtn.focus(); return; }
-    if (t.hasAttribute('data-bible-books')) { pickerBook = null; drawPicker(); return; }
     if (t.hasAttribute('data-book')) {
       var id = t.getAttribute('data-book');
       if (chapterCount(id) === 1) { openBible(false); loadChapter(id, 1); return; }
-      pickerBook = id; drawPicker(); biblePanel.scrollTop = 0; return;
+      toggleChapters(t); return;
     }
     if (t.hasAttribute('data-ch')) { openBible(false); loadChapter(pickerBook, +t.getAttribute('data-ch')); }
   });

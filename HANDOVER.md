@@ -172,6 +172,7 @@ Page: Text Size, Appearance (Light/Sepia/Dark/Auto), Typeface, Justified Text (s
 Bible Text: Verse Numbers (switch, on by default — hidden numbers stay in the DOM for maps/notes), Divine Name
 (LORD/ADONAI/HASHEM), Original Languages (Off/Under Verses/Only) + Hebrew Marks.
 Names & Terms: Messianic Filter, Hebrew Names.
+Hebrew Names also changes book names (`HEB_BOOKS` in reader.js: Beresheet, Shemot …) in the Bible browser, headings and Today's references. The Bible browser opens a book's chapters in place under its row (`toggleChapters`).
 - Original Languages → "Apostles In": Greek (SBLGNT) / Hebrew (Delitzsch, `data/orig-hent/`, non-commercial licence) / Both; setting `ntOrig`.
 
 
