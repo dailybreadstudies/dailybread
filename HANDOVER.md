@@ -125,6 +125,7 @@ day’s two words again” and “Add the words from earlier days of the plan”
 which opens once the first way is known. Leitner boxes: Got it → next review after 1, 3, 7, 14, 30, 60 days; Again → box 1,
 repeated later in the session. Up to 10 new words a day (Kids 5). Keys: Space turns, 1/← Again, 2/→ Got it.
 “Practise anyway” and “See … again” leave the schedule unchanged.
+The big meaning on a card comes from `tools/card-glosses.txt` (two or three words where the word has them, e.g. ethnos: “Gentile, nation”; edit there, then run `tools/build_card_glosses.py`), falling back to the lexicon's one-word gloss. New picks need a line there.
 
 **Layout (Oct 2026):** deeper.html is styled like the About/Learn pages (its own inline styles, `body.dp-rich`): a photo
 section with the word study cards below, then (Classic, weeks with commentary) a photo section with the commentary title,

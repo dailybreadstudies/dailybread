@@ -211,9 +211,12 @@
     getJSON('data/words/lex-he.json'),
     getJSON('data/words/lex-grc.json'),
     getJSON('data/bsb/index.json'),
-    KIDS ? Promise.resolve({}) : getJSON('data/commentary.json', true).catch(function () { return {}; })
+    KIDS ? Promise.resolve({}) : getJSON('data/commentary.json', true).catch(function () { return {}; }),
+    getJSON('data/words/card-glosses.json').catch(function () { return {}; })
   ]).then(function (res) {
     var day = res[0], picks = res[1][date] || [], lex = { he: res[2], grc: res[3] };
+    // The cards' big meaning: two or three words where the word has them (tools/card-glosses.txt)
+    Object.keys(res[6]).forEach(function (k) { var e = lex.he[k] || lex.grc[k]; if (e) e[2] = res[6][k]; });
     var comm = day.parsha && (res[5].portions || {})[day.parsha.name];
     var names = {};
     res[4].forEach(function (b) { names[b.id] = b.name === 'Song' ? 'Song of Songs' : b.name === 'Psalm' ? 'Psalms' : b.name; });
