@@ -2617,15 +2617,18 @@
     for (var i = 0; i < GROUPS.length; i++) if (GROUPS[i][2].indexOf(id) >= 0) return GROUPS[i];
     return GROUPS[0];
   }
-  // Book names follow the Hebrew names / Messianic options
-  var HEB_BOOKS = { GEN: 'Beresheet', EXO: 'Shemot', LEV: 'Vayikra', NUM: 'Bamidbar', DEU: 'Devarim', JDG: 'Shoftim',
-    '1KI': '1 Melachim', '2KI': '2 Melachim', '1CH': '1 Divrei HaYamim', '2CH': '2 Divrei HaYamim', PSA: 'Tehillim', PRO: 'Mishlei',
-    SNG: 'Shir HaShirim', ECC: 'Kohelet', LAM: 'Eichah', JOS: 'Yehoshua', RUT: 'Rut', '1SA': '1 Shmuel', '2SA': '2 Shmuel', NEH: 'Nechemyah', EST: 'Ester',
+  // Book names follow the Hebrew names / Messianic options.
+  // Only books named after a person; descriptive titles (Genesis, Judges, Psalms …) stay in English
+  var HEB_BOOKS = { JOS: 'Yehoshua', RUT: 'Rut', '1SA': '1 Shmuel', '2SA': '2 Shmuel', NEH: 'Nechemyah', EST: 'Ester',
     JOB: 'Iyov', ISA: 'Yeshayahu', JER: 'Yirmeyahu', EZK: 'Yechezkel', HOS: 'Hoshea', JOL: 'Yoel', OBA: 'Ovadyah',
     JON: 'Yonah', MIC: 'Michah', NAM: 'Nachum', HAB: 'Chavakuk', ZEP: 'Tzefanyah', HAG: 'Chaggai', ZEC: 'Zecharyah',
     MAT: 'Mattityahu', JHN: 'Yochanan', '1JN': '1 Yochanan', '2JN': '2 Yochanan', '3JN': '3 Yochanan', JAS: 'Yaakov',
     JUD: 'Yehudah', '1PE': '1 Kefa', '2PE': '2 Kefa' };
   var MES_BOOKS = { JAS: 'Jacob', JUD: 'Judah' };
+  // Hebrew titles are still understood in the Go to box ("Tehillim 23"), but not shown
+  var HEB_TITLES = { GEN: 'Beresheet', EXO: 'Shemot', LEV: 'Vayikra', NUM: 'Bamidbar', DEU: 'Devarim', JDG: 'Shoftim',
+    '1KI': '1 Melachim', '2KI': '2 Melachim', '1CH': '1 Divrei HaYamim', '2CH': '2 Divrei HaYamim', PSA: 'Tehillim',
+    PRO: 'Mishlei', SNG: 'Shir HaShirim', ECC: 'Kohelet', LAM: 'Eichah' };
   function bookLabel(id) {
     if (settings.hebrewNames && HEB_BOOKS[id]) return HEB_BOOKS[id];
     if (settings.messianic && MES_BOOKS[id]) return MES_BOOKS[id];
@@ -2662,7 +2665,7 @@
     var key = String(text).toLowerCase().trim().replace(/^(i{1,3})[\s.]+(?=[a-z])/, function (all, r) { return r.length; }).replace(/[\s.]/g, '');
     if (!key) return null;
     if (ALIASES[key]) return ALIASES[key];
-    var other = [HEB_BOOKS, MES_BOOKS];
+    var other = [HEB_BOOKS, HEB_TITLES, MES_BOOKS];
     for (var oi = 0; oi < other.length; oi++) {
       for (var oid in other[oi]) {
         if (other[oi][oid].toLowerCase().replace(/\s/g, '') === key) return oid;
