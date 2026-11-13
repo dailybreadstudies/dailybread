@@ -290,9 +290,12 @@
   // ("the temple of Baal", "an idolʼs temple", "temples of their idols"), nor the temple of the head (Judges 4–5),
   // nor believers as God's temple (1 Corinthians 3:16–17, 6:19).
   var TEMPLE_RE = /(?<![A-Za-z\-ʼ’'])(?<!\bhis )(?<!up to its )(?<!whose )(?<!idol[ʼ’']s )(?<!(?:are|destroys|for) God[ʼ’']s )(?<!are that )(?<!body is a )temple(?![A-Za-z])(?!\s+of\s+(?:his gods?|their gods|their idols|the gods|Baal|Dagon|Rimmon|Babylon|the Ashtoreths|the great))/g;
-  function messianic(text) {
-    text = messianicWords(text);
-    return text.replace(LAW_RE, '$1Torah').replace(TEMPLE_RE, 'Temple');
+  // Verses where a bare "temple" is a pagan temple, so it stays lower-case: the Philistine temple of Dagon
+  // (Judges 16:26–30), El-berith at Shechem (Judges 9:46), the sun temple in Egypt (Jeremiah 43:13), Artemis (Acts 19:37)
+  var PAGAN_TEMPLE = { 'JDG 9:46': 1, 'JDG 16:26': 1, 'JDG 16:27': 1, 'JDG 16:29': 1, 'JDG 16:30': 1, 'JER 43:13': 1, 'ACT 19:37': 1 };
+  function messianic(text, at) {
+    text = messianicWords(text).replace(LAW_RE, '$1Torah');
+    return at && PAGAN_TEMPLE[at.key] ? text : text.replace(TEMPLE_RE, 'Temple');
   }
   var hebrewNames = function (t) { return t; };
   /* Like wordReplacer, plus per-verse forms from "_byVerse" in hebrew-names.json:
@@ -316,7 +319,7 @@
   }
 
   function transformText(text, at) {
-    if (settings.messianic) text = messianic(text);
+    if (settings.messianic) text = messianic(text, at);
     if (settings.hebrewNames) text = hebrewNames(text, at);
     if (settings.messianic || settings.hebrewNames) {
       text = text.replace(/\bYeshua Messiah\b/g, 'Yeshua the Messiah');
