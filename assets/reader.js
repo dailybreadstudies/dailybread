@@ -98,7 +98,7 @@
                /(^| )(dbm-side|dbm-split|dbt-split|dblx-locked)( |$)/.test(document.body.className);
     var on = !!settings.marginTitles && !open && r.getBoundingClientRect().left >= 250;
     document.documentElement.classList.toggle('msub-on', on);
-    if (!on) { msubSig = ''; return; }
+    if (!on) { msubSig = ''; clearPinShift(r); return; }
     var visible = [].filter.call(r.querySelectorAll('.msub'), function (m) { return m.offsetParent; });
     var sig = [r.offsetWidth, r.scrollHeight, visible.length, r.querySelectorAll('.dbm-pin,.dbf-pin,.dbt-pin,.dbi-pin').length, msubFontsReady].join('|');
     if (sig === msubSig && !visible.some(function (m) { return !m.hasAttribute('data-laid'); })) return;
@@ -111,7 +111,37 @@
       while (e && PIN_RE.test(e.className)) { n++; e = e.nextElementSibling; }
       placeMsub(m, n, cache);
     });
+    clearPinShift(r);
+    shiftPins(r, visible);
     if (msubObs) msubObs.takeRecords();   // our own line-splitting is not a change to react to
+  }
+  // A verse's buttons that would cover a line of another verse's margin title (a verse beginning on the title's second
+  // or third line) move down one Bible line at a time until they are clear. The buttons of one verse move together.
+  function clearPinShift(r) {
+    [].forEach.call(r.querySelectorAll('.dbm-pin,.dbf-pin,.dbt-pin,.dbi-pin'), function (b) { b.style.removeProperty('--pin-shift'); });
+  }
+  function shiftPins(r, titles) {
+    var lines = [];
+    titles.forEach(function (m) { [].forEach.call(m.querySelectorAll('.msub-l'), function (l) { var x = l.getBoundingClientRect(); if (x.height) lines.push(x); }); });
+    if (!lines.length) return;
+    var groups = [], seen = [];
+    [].forEach.call(r.querySelectorAll('.dbm-pin,.dbf-pin,.dbt-pin,.dbi-pin'), function (b) {
+      if (seen.indexOf(b) >= 0 || !b.offsetParent || getComputedStyle(b).position !== 'absolute') return;
+      var g = [b], e = b.nextElementSibling;
+      while (e && PIN_RE.test(e.className)) { g.push(e); seen.push(e); e = e.nextElementSibling; }
+      groups.push(g);
+    });
+    groups.forEach(function (g) {
+      var top = Infinity, bottom = -Infinity, left = Infinity, right = -Infinity;
+      g.forEach(function (b) { var x = b.getBoundingClientRect(); top = Math.min(top, x.top); bottom = Math.max(bottom, x.bottom); left = Math.min(left, x.left); right = Math.max(right, x.right); });
+      var host = g[0].closest('p, div') || g[0].parentElement;
+      var step = parseFloat(getComputedStyle(host).lineHeight) || 36, shift = 0;
+      function hits(dy) {
+        return lines.some(function (l) { return l.right > left - 4 && l.left < right + 4 && l.bottom > top + dy + 3 && l.top < bottom + dy - 3; });
+      }
+      while (hits(shift) && shift < step * 6) shift += step;
+      if (shift) g.forEach(function (b) { b.style.setProperty('--pin-shift', shift + 'px'); });
+    });
   }
   // Every line of a margin subtitle sits on the baseline of a line of Bible text: the first on the line where its
   // verse begins (or the first free line under the pins), the next ones on the Bible lines that follow.
