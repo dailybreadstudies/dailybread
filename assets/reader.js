@@ -301,28 +301,52 @@
   /* Like wordReplacer, plus per-verse forms from "_byVerse" in hebrew-names.json:
      { "GEN 11:31": { "Haran": ["Haran", "Charan"] } } — a list gives the forms in order of appearance in the verse. */
   function namesReplacer(map) {
-    var plain = wordReplacer(map), byVerse = map._byVerse || {};
+    var byVerse = map._byVerse || {};
     var keys = Object.keys(map).filter(function (k) { return k[0] !== '_'; }).sort(function (a, b) { return b.length - a.length; });
+    // A Hebrew form that more than one English name turns into (Judas, Judah, Judea → Yehudah; Simon, Simeon →
+    // Shimon) is marked with the English it came from (NAME_MARK, then wrapped in <span class="hn" data-en> by
+    // applyFilters), so the map and lineage links can tell Yehudah the man from Yehudah the land.
+    var count = {};
+    keys.forEach(function (k) { count[map[k]] = (count[map[k]] || 0) + 1; });
     var re = new RegExp('(?<![A-Za-z\\-])(' + keys.map(function (k) { return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')(?![A-Za-z]|-[a-z])([’ʼ](?=\\s))?', 'g');
     return function (text, at) {
       var over = at && at.key && byVerse[at.key];
-      if (!over) return plain(text);
       return text.replace(re, function (m, name, apos) {
-        var to = map[name];
-        if (name in over) {
+        var to = map[name], form;
+        if (over && name in over) {
           var o = over[name], k = at.key + '|' + name;
           if (Array.isArray(o)) { var i = at.seen[k] || 0; at.seen[k] = i + 1; to = o[Math.min(i, o.length - 1)]; } else to = o;
         }
-        return to + (apos ? (/s$/.test(name) && !/s$/.test(to) ? apos + 's' : apos) : '');
+        form = to;
+        if (count[map[name]] > 1) to = NAME_MARK[0] + name + NAME_MARK[1] + to + NAME_MARK[2];
+        return to + (apos ? (/s$/.test(name) && !/s$/.test(form) ? apos + 's' : apos) : '');
       });
     };
+  }
+  var NAME_MARK = ['\uE000', '\uE001', '\uE002'];
+  var NAME_MARK_RE = /\uE000([^\uE001]*)\uE001([^\uE002]*)\uE002/g;
+  // Text with marked names → a fragment with each marked name in <span class="hn" data-en="Judas">Yehudah</span>
+  function markedFragment(t) {
+    var frag = document.createDocumentFragment(), last = 0, mt;
+    NAME_MARK_RE.lastIndex = 0;
+    while ((mt = NAME_MARK_RE.exec(t))) {
+      if (mt.index > last) frag.appendChild(document.createTextNode(t.slice(last, mt.index)));
+      var sp = document.createElement('span');
+      sp.className = 'hn';
+      sp.setAttribute('data-en', mt[1]);
+      sp.textContent = mt[2];
+      frag.appendChild(sp);
+      last = mt.index + mt[0].length;
+    }
+    if (last < t.length) frag.appendChild(document.createTextNode(t.slice(last)));
+    return frag;
   }
 
   function transformText(text, at) {
     if (settings.messianic) text = messianic(text, at);
     if (settings.hebrewNames) text = hebrewNames(text, at);
     if (settings.messianic || settings.hebrewNames) {
-      text = text.replace(/\bYeshua Messiah\b/g, 'Yeshua the Messiah');
+      text = text.replace(/\bYeshua(\uE002?) Messiah\b/g, 'Yeshua$1 the Messiah');   // $1: a name mark (namesReplacer)
     }
     return text;
   }
@@ -336,7 +360,7 @@
       var book = sec && sec.getAttribute('data-book'), c = sec ? parseInt(sec.getAttribute('data-c') || '1', 10) : 0;
       var at = book ? { key: '', seen: {} } : null;
       var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT);
-      var node;
+      var node, marked = [];
       while ((node = walker.nextNode())) {
         if (node.nodeType === 1) {
           if (at && node.classList.contains('chapter-num')) { c = parseInt(node.textContent, 10) || c; at.key = book + ' ' + c + ':1'; }
@@ -345,8 +369,10 @@
         }
         if (node.parentNode && node.parentNode.classList && (node.parentNode.classList.contains('verse-num') || node.parentNode.classList.contains('chapter-num'))) continue;
         var t = transformText(node.nodeValue, at);
-        if (t !== node.nodeValue) node.nodeValue = t;
+        if (t.indexOf(NAME_MARK[0]) >= 0) marked.push([node, t]);   // replaced after the walk
+        else if (t !== node.nodeValue) node.nodeValue = t;
       }
+      marked.forEach(function (x) { x[0].parentNode.replaceChild(markedFragment(x[1]), x[0]); });
     });
   }
 

@@ -148,6 +148,7 @@
       if (!/\(/.test(p.n)) list.push(p.n);
       list.forEach(function (f) {
         [f, p.hn || hn[f]].forEach(function (k) { if (k) (forms[k] = forms[k] || []).push(p); });
+        (p._en = p._en || []).push(f);                 // the English this person goes by (for <span class="hn">)
       });
     });
     var keys = Object.keys(forms).sort(function (x, y) { return y.length - x.length; });
@@ -175,6 +176,10 @@
       var frag = document.createDocumentFragment(), last = 0, mt;
       while ((mt = re.exec(s))) {
         var cands = forms[mt[1]];
+        // Hebrew Names on: Yehudah from "Judea" (reader.js marks it <span class="hn" data-en>) is not Judah the man
+        var en = tn.parentNode && tn.parentNode.classList && tn.parentNode.classList.contains('hn') && tn.parentNode.getAttribute('data-en');
+        if (en) cands = cands.filter(function (x) { return (x._en || []).indexOf(en) >= 0; });
+        if (!cands.length) continue;
         var p = cands.filter(function (x) { return x.vv.indexOf(tv[1]) >= 0; })[0] || cands[0];
         frag.appendChild(document.createTextNode(s.slice(last, mt.index)));
         var span = el('span', 'dbt-name', esc(mt[1]));

@@ -185,13 +185,14 @@
 
   /* Wrap the map's place names in the chapter so a tap shows them on the map */
   function linkPlaces(scr, marks, m, hn) {
-    var forms = {};
+    var forms = {}, from = {};                         // from: Hebrew form → the English place names it stands for
     var al = m.aliases || {};                          // "Gadarenes" → Gadara, "Samaritans" → Samaria
     m.links.forEach(function (n) {
       var to = al[n] || n;
       forms[n] = to;
+      (from[n] = from[n] || []).push(n);
       var h = hn[n] || n.split(' ').map(function (w) { return hn[w] || w; }).join(' ');
-      if (h !== n) forms[h] = to;
+      if (h !== n) { forms[h] = to; (from[h] = from[h] || []).push(n); }
     });
     var keys = Object.keys(forms).sort(function (a, b) { return b.length - a.length; });
     var re = new RegExp('(?<![A-Za-z\\-])(' + keys.map(function (k) { return k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|') + ')(?![A-Za-z]|-[a-z])', 'g');
@@ -228,6 +229,7 @@
       var frag = document.createDocumentFragment(), last = 0, mt, s = t.nodeValue, cv = inCh.get(t);
       while ((mt = re.exec(s))) {
         if (cv && (skip(mt[1], cv) || skip(forms[mt[1]], cv))) continue;   // keyed by the form in the text or by the place
+        if (!placeSense(t, s, mt, from[mt[1]])) continue;
         frag.appendChild(document.createTextNode(s.slice(last, mt.index)));
         var span = el('span', 'dbm-place', esc(mt[1]));
         span.setAttribute('data-dbm-place', forms[mt[1]]);
@@ -240,6 +242,27 @@
       frag.appendChild(document.createTextNode(s.slice(last)));
       t.parentNode.replaceChild(frag, t);
     });
+  }
+
+  /* Is this name the place, or a person of the same name? Works for every map without a list of verses:
+     - Hebrew Names on: a name that more than one English name becomes (Judas, Judah, Judea → Yehudah) carries the
+       English it came from (<span class="hn" data-en>, reader.js), and only the place's own English name links.
+     - The words around it: "Judah said", "Judah son of", "the son of Judah" are people, not places. */
+  var PERSON_AFTER = /^[’ʼ]?\s*(?:,\s*)?(?:said|says|answered|replied|asked|fathered|begot|son of|daughter of|the son of|the daughter of|Iscariot)\b/;
+  var PERSON_BEFORE = /\b(?:son|daughter|father|mother|brother|sister|wife|husband) of\s*$/;
+  function placeSense(t, s, mt, english) {
+    var src = t.parentNode && t.parentNode.classList && t.parentNode.classList.contains('hn') && t.parentNode.getAttribute('data-en');
+    if (src && english && english.indexOf(src) < 0) return false;
+    var after = s.slice(mt.index + mt[1].length), before = s.slice(0, mt.index);
+    if (!after && t.parentNode.classList.contains('hn')) {                 // the words after the name are in the next node
+      var nx = t.parentNode.nextSibling;
+      after = nx && nx.nodeType === 3 ? nx.nodeValue : '';
+    }
+    if (!before && t.parentNode.classList.contains('hn')) {
+      var pv = t.parentNode.previousSibling;
+      before = pv && pv.nodeType === 3 ? pv.nodeValue : '';
+    }
+    return !PERSON_AFTER.test(after) && !PERSON_BEFORE.test(before);
   }
 
   // ── Where the map opens ────────────────────────────────────
