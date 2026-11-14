@@ -1,0 +1,213 @@
+{
+ "_about": "Notes shown under the Septuagint where the Apostles quote its Greek wording. Each note goes live only when \"approved\": true (John reviews first). Preview all drafts on the site with ?lxxquotes=all. Written Nov 2026.",
+ "notes": {
+  "GEN": {
+   "5:24": {
+    "nt": "Hebrews 11:5",
+    "note": "“he was not found, because God had taken him”",
+    "approved": false
+   },
+   "15:6": {
+    "nt": "Romans 4:3",
+    "note": "“Abraham believed God, and it was credited to him as righteousness”",
+    "approved": false
+   },
+   "47:31": {
+    "nt": "Hebrews 11:21",
+    "note": "“leaning on the top of his staff” (the Hebrew reads “bed”)",
+    "approved": false
+   }
+  },
+  "DEU": {
+   "32:43": {
+    "nt": "Hebrews 1:6",
+    "note": "“Let all God’s angels worship Him”: the Greek of this verse has lines that the Hebrew does not",
+    "approved": false
+   }
+  },
+  "PSA": {
+   "8:2": {
+    "nt": "Matthew 21:16",
+    "note": "“You have prepared praise” (the Hebrew reads “strength”)",
+    "approved": false
+   },
+   "16:9": {
+    "nt": "Acts 2:26",
+    "note": "“my flesh also will dwell in hope”",
+    "approved": false
+   },
+   "16:10": {
+    "nt": "Acts 2:27",
+    "note": "“nor will You let Your Holy One see decay”",
+    "approved": false
+   },
+   "40:6": {
+    "nt": "Hebrews 10:5",
+    "note": "“but a body You prepared for Me” (the Hebrew reads “ears You have opened”)",
+    "approved": false
+   },
+   "51:4": {
+    "nt": "Romans 3:4",
+    "note": "“and prevail when You are judged”",
+    "approved": false
+   },
+   "95:8": {
+    "nt": "Hebrews 3:8",
+    "note": "“as in the rebellion, in the day of testing”",
+    "approved": false
+   },
+   "102:25": {
+    "nt": "Hebrews 1:10",
+    "note": "“In the beginning, O Lord, You laid the foundations of the earth”",
+    "approved": false
+   },
+   "104:4": {
+    "nt": "Hebrews 1:7",
+    "note": "“He makes His angels winds, His servants flames of fire”",
+    "approved": false
+   }
+  },
+  "PRO": {
+   "3:12": {
+    "nt": "Hebrews 12:6",
+    "note": "“and He chastises every son He receives”",
+    "approved": false
+   },
+   "3:34": {
+    "nt": "James 4:6",
+    "note": "“God opposes the proud, but gives grace to the humble” (also 1 Peter 5:5)",
+    "approved": false
+   },
+   "11:31": {
+    "nt": "1 Peter 4:18",
+    "note": "“if it is hard for the righteous to be saved”",
+    "approved": false
+   }
+  },
+  "ISA": {
+   "1:9": {
+    "nt": "Romans 9:29",
+    "note": "“had left us descendants” (Greek “seed”)",
+    "approved": false
+   },
+   "6:9": {
+    "nt": "Matthew 13:14",
+    "note": "“you will be ever hearing but never understanding” (also Acts 28:26)",
+    "approved": false
+   },
+   "6:10": {
+    "nt": "Matthew 13:15",
+    "note": "“and I would heal them” (also Acts 28:27)",
+    "approved": false
+   },
+   "7:14": {
+    "nt": "Matthew 1:23",
+    "note": "“the virgin will conceive” (Greek <i>parthenos</i>)",
+    "approved": false
+   },
+   "10:22": {
+    "nt": "Romans 9:27",
+    "note": "“only the remnant will be saved”",
+    "approved": false
+   },
+   "11:10": {
+    "nt": "Romans 15:12",
+    "note": "“in Him the Gentiles will put their hope”",
+    "approved": false
+   },
+   "28:16": {
+    "nt": "Romans 9:33",
+    "note": "“the one who believes in Him will never be put to shame” (also 1 Peter 2:6)",
+    "approved": false
+   },
+   "29:13": {
+    "nt": "Matthew 15:9",
+    "note": "“they worship Me in vain; they teach as doctrine the precepts of men” (also Mark 7:7)",
+    "approved": false
+   },
+   "40:3": {
+    "nt": "Matthew 3:3",
+    "note": "“A voice of one calling in the wilderness” (also Mark 1:3, Luke 3:4, John 1:23)",
+    "approved": false
+   },
+   "40:6": {
+    "nt": "1 Peter 1:24",
+    "note": "“all its glory like the flowers of the field”",
+    "approved": false
+   },
+   "42:4": {
+    "nt": "Matthew 12:21",
+    "note": "“In His name the Gentiles will put their hope”",
+    "approved": false
+   },
+   "45:23": {
+    "nt": "Romans 14:11",
+    "note": "“every tongue will confess to God”",
+    "approved": false
+   },
+   "52:5": {
+    "nt": "Romans 2:24",
+    "note": "“God’s name is blasphemed among the Gentiles because of you”",
+    "approved": false
+   },
+   "53:7": {
+    "nt": "Acts 8:32",
+    "note": "“like a lamb before the shearer is silent”",
+    "approved": false
+   },
+   "53:8": {
+    "nt": "Acts 8:33",
+    "note": "“In His humiliation He was deprived of justice”",
+    "approved": false
+   },
+   "55:3": {
+    "nt": "Acts 13:34",
+    "note": "“the holy and sure blessings promised to David”",
+    "approved": false
+   },
+   "59:20": {
+    "nt": "Romans 11:26",
+    "note": "“He will remove godlessness from Jacob”",
+    "approved": false
+   },
+   "61:1": {
+    "nt": "Luke 4:18",
+    "note": "“recovery of sight to the blind”",
+    "approved": false
+   },
+   "65:1": {
+    "nt": "Romans 10:20",
+    "note": "“I was found by those who did not seek Me”",
+    "approved": false
+   }
+  },
+  "JER": {
+   "31:32": {
+    "nt": "Hebrews 8:9",
+    "note": "“and I disregarded them” (the Hebrew reads “I was a husband to them”)",
+    "approved": false
+   }
+  },
+  "JOL": {
+   "2:28": {
+    "nt": "Acts 2:17",
+    "note": "“in the last days … I will pour out My Spirit on all people”",
+    "approved": false
+   }
+  },
+  "AMO": {
+   "9:12": {
+    "nt": "Acts 15:17",
+    "note": "“so that the remnant of men may seek the Lord” (the Hebrew reads “possess the remnant of Edom”)",
+    "approved": false
+   }
+  },
+  "HAB": {
+   "2:4": {
+    "nt": "Hebrews 10:38",
+    "note": "“if he shrinks back, I will take no pleasure in him”",
+    "approved": false
+   }
+  }
+ }
+}

@@ -77,7 +77,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', marginTitles: true };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', otOrig: 'he', showOG: false, marginTitles: true };
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -254,6 +254,7 @@
     document.documentElement.classList.toggle('justify', !!settings.justify);
     document.documentElement.classList.toggle('no-verses', settings.verseNumbers === false);
     document.documentElement.classList.toggle('orig-off', settings.original === 'off');   // Hebrew blessings only with Original Text on
+    document.documentElement.classList.toggle('show-og', !!settings.showOG);   // Daniel: Old Greek under Theodotion
     if (settings.theme === 'light' || settings.theme === 'dark' || settings.theme === 'sepia') document.documentElement.setAttribute('data-theme', settings.theme);
     else document.documentElement.removeAttribute('data-theme');
     applyDivineName(document);
@@ -803,6 +804,16 @@
   document.addEventListener('click', function (e) {
     var w = e.target.closest && e.target.closest('.w[data-w]');
     if (w) { showWord(w); }
+    var og = e.target.closest && e.target.closest('.lxx-og-btn');
+    if (og) {
+      settings.showOG = !settings.showOG;
+      saveSettings();
+      applyLook();
+      document.querySelectorAll('.lxx-og-btn').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(settings.showOG));
+        b.textContent = b.textContent.replace(/^(Show|Hide)/, settings.showOG ? 'Hide' : 'Show');
+      });
+    }
   });
 
   // ── Original languages (Hebrew: MAM via Sefaria; Greek: SBLGNT) ──
@@ -819,16 +830,42 @@
     }
     return origCache[key];
   }
-  // Which original texts to show for a book: Hebrew Bible for the Tanakh; Greek, Hebrew or both for the Apostles
+  // Septuagint (Swete) for the Tanakh readings, aligned to BSB verses (data/lxx/, built by tools/build_lxx.py)
+  // Notes where the Apostles quote the Septuagint's wording (data/lxx/quotes.json): shown once approved;
+  // ?lxxquotes=all previews the drafts
+  var LXX_DRAFTS = /[?&]lxxquotes=all\b/.test(location.search);
+  var lxxQuotes = null;
+  function loadOrigLxx(id) {
+    var key = id + ':lxx';
+    if (!origCache[key]) {
+      if (!lxxQuotes) lxxQuotes = getJSON('data/lxx/quotes.json').then(function (q) { lxxQuotes.data = q.notes || {}; }).catch(function () {});
+      origCache[key] = Promise.all([getJSON('data/lxx/' + id + '.json'), lxxQuotes]).then(function (res) {
+        var d = res[0];
+        d.missSet = {};
+        (d.miss || []).forEach(function (k) { d.missSet[k] = 1; });
+        d.quotes = (lxxQuotes.data || {})[id] || {};
+        origCache[key + 'data'] = d;
+        return d;
+      }).catch(function () { delete origCache[key]; return null; });
+    }
+    return origCache[key];
+  }
+  // Which original texts to show for a book: Hebrew, Greek (Septuagint) or both for the Tanakh;
+  // Greek, Hebrew or both for the Apostles
   function origSources(id) {
-    if (!isNT(id)) return ['main'];
+    if (!isNT(id)) {
+      var t = settings.otOrig || 'he';
+      return t === 'both' ? ['main', 'lxx'] : t === 'lxx' ? ['lxx'] : ['main'];
+    }
     var o = settings.ntOrig || 'grc';
     return o === 'both' ? ['main', 'he'] : o === 'he' ? ['he'] : ['main'];
   }
   function origsFor(id) {
-    return origSources(id).map(function (k) { return k === 'he' ? origCache[id + ':hedata'] : origCache[id + ':data']; })
-      .filter(Boolean);
+    return origSources(id).map(function (k) {
+      return k === 'he' ? origCache[id + ':hedata'] : k === 'lxx' ? origCache[id + ':lxxdata'] : origCache[id + ':data'];
+    }).filter(Boolean);
   }
+  function loadSource(id, k) { return k === 'he' ? loadOrigHe(id) : k === 'lxx' ? loadOrigLxx(id) : loadOrig(id); }
   function loadOrig(id) {
     if (!origCache[id]) {
       origCache[id] = getJSON('data/orig/' + id + '.json').then(function (d) { origCache[id + ':data'] = d; return d; })
@@ -840,12 +877,68 @@
     var t = orig.v[key];
     if (!t) return '';
     if (link) t = link(t);
-    if (!orig.nt) t = wrapWords(t, orig.lang === 'he' ? 'he' : 'grc', orig.id, key);   // no word study data for the Hebrew NT
+    if (!orig.nt && !orig.lxx) t = wrapWords(t, orig.lang === 'he' ? 'he' : 'grc', orig.id, key);   // no word study data for the Hebrew NT or the Septuagint
     if (orig.lang === 'he' && !settings.cantillation) {
       t = t.replace(/[\u0591-\u05AF\u05BD]/g, '').replace(/\s*\u05C0\s*/g, ' ').replace(/\u2009/g, '');
     }
     return t.replace(/\s{2,}/g, ' ');
   }
+  // ── Septuagint display helpers ──
+  // Greek under one BSB verse: the Septuagint's own number where it differs, a quiet line where the verse is
+  // missing or printed with another verse, and (Daniel) the Old Greek beside Theodotion.
+  function lxxUnder(o, key, c) {
+    var attrs = ' class="vp-orig grc lxx" lang="grc"';
+    var t = o.v[key];
+    if (t) {
+      var lab = o.r && o.r[key] ? '<span class="lxx-ref" title="Verse number in the Septuagint">' + o.r[key] + '</span> ' : '';
+      var out = '<p' + attrs + '>' + lab + t.replace(/\s{2,}/g, ' ') + '</p>';
+      var q = o.quotes && o.quotes[key];
+      if (q && (q.approved || LXX_DRAFTS)) {
+        out += '<p class="lxx-q">' + (q.approved ? '' : '<span class="lxx-draft">Draft</span> ') +
+          'The Apostles quote this Greek wording in ' + linkRefs(escapeAttr(q.nt)) + (q.note ? ': ' + q.note : '') + '.</p>';
+      }
+      if (o.alt) {
+        var a = o.alt[key];
+        out += '<p class="vp-orig grc lxx lxx-og" lang="grc"><span class="lxx-ref">' + escapeAttr(o.altName || '') + '</span> ' +
+          (a ? a : '<span class="lxx-none">— not in this Greek text</span>') + '</p>';
+      }
+      return out;
+    }
+    var w = o['with'] && o['with'][key];
+    if (w) {
+      var wc = w.split(':');
+      var where = +wc[0] === c ? 'verse ' + wc[1] : wc[0] + ':' + wc[1];
+      var inPlus = lxxBlocks(o, w, false).length || lxxBlocks(o, w, true).length;
+      return '<p class="vp-orig lxx-none">' + (inPlus ? '— in the Septuagint this is part of the longer passage after ' + where :
+        '— in the Septuagint this is printed with ' + where) + '</p>';
+    }
+    if (o.missSet && o.missSet[key]) return '<p class="vp-orig lxx-none" title="Swete’s Septuagint follows Codex Vaticanus, which does not have this verse">— not in the Septuagint</p>';
+    return '';
+  }
+  function lxxBlocks(o, key, before) {
+    var list = (o.plus && o.plus[key]) || [];
+    return list.filter(function (b) { return !!b.before === before; });
+  }
+  // Septuagint-only passages, folded: "Septuagint only · 23 verses"
+  function lxxPlus(o, key, before) {
+    return lxxBlocks(o, key, before).map(function (b) {
+      var n = b.t.length;
+      var body = b.t.map(function (x) {
+        return '<span class="lxx-pv"><span class="lxx-ref">' + x[0] + '</span> ' + x[1] + '</span>';
+      }).join(' ');
+      return '<details class="lxx-plus"><summary><span class="lxx-plus-k">Septuagint only</span> · ' + n + (n === 1 ? ' verse' : ' verses') +
+        '<span class="lxx-plus-r">· LXX ' + escapeAttr(b.r) + '</span>' +
+        (b.title ? '<span class="lxx-plus-t">' + escapeAttr(b.title) + '</span>' : '') + '</summary>' +
+        '<p class="vp-orig grc lxx" lang="grc">' + body + '</p></details>';
+    }).join('');
+  }
+  // Daniel: Theodotion is shown; the Old Greek can be shown under it
+  function lxxAltSwitch(o) {
+    return '<p class="lxx-alt-note">Greek of Daniel: ' + escapeAttr(o.name || 'Theodotion') +
+      '. <button type="button" class="lxx-og-btn" aria-pressed="' + String(!!settings.showOG) + '">' +
+      (settings.showOG ? 'Hide' : 'Show') + ' the ' + escapeAttr(o.altName || 'other Greek text') + '</button></p>';
+  }
+
   function renderOriginal(units, origs, multiChapter, tnotes) {
     var markerNo = 0;
     // Opening apparatus marks (⸀ ⸁ ⸂ ⸄) become buttons that open their note; closing marks stay plain
@@ -868,24 +961,36 @@
       return '<sup class="verse-num" data-v="' + u.v + '">' + u.v + '</sup>';
     };
     var html = '';
+    var lxx = origs.filter(function (o) { return o.lxx; })[0];
     if (settings.original === 'under') {
-      units.forEach(function (u) {
+      var ogNote = lxx && lxx.alt ? lxxAltSwitch(lxx) : '';
+      units.forEach(function (u, ui) {
+        var key = u.c + ':' + u.v;
+        if (lxx) html += lxxPlus(lxx, key, true);
         html += '<div class="vp' + (u.v === 0 ? ' vp-title' : '') + '"><p class="vp-en">' + num(u) + u.html + '</p>';
         origs.forEach(function (o) {
-          var t = origText(o, u.c + ':' + u.v, o.n ? linkMarks : null);
+          if (o.lxx) { html += lxxUnder(o, key, u.c); return; }
+          var t = origText(o, key, o.n ? linkMarks : null);
           if (t) html += '<p' + attrsOf(o) + '>' + t + '</p>';
         });
         html += '</div>';
+        if (lxx) html += lxxPlus(lxx, key, false);
       });
-      return html;
+      return ogNote + html;
     }
     // Original only: flowing text; poetry one verse per line. With Greek and Hebrew both chosen, one after the other.
     origs.forEach(function (o) {
       var lang = o.lang === 'he' ? 'he' : 'grc', attrs = attrsOf(o), block = '', para = '';
       var flush = function () { if (para) block += '<p' + attrs.replace('vp-orig', 'vp-orig vo-para') + '>' + para + '</p>'; para = ''; };
       units.forEach(function (u) {
-        var t = origText(o, u.c + ':' + u.v, o.n ? linkMarks : null);
-        if (!t) return;
+        var key = u.c + ':' + u.v;
+        if (o.lxx && lxxBlocks(o, key, true).length) { flush(); block += lxxPlus(o, key, true); }
+        var t = origText(o, key, o.n ? linkMarks : null);
+        if (o.lxx && o.r && o.r[key] && t) t = '<span class="lxx-ref" title="Verse number in the Septuagint">' + o.r[key] + '</span> ' + t;
+        if (!t) {
+          if (o.lxx && lxxBlocks(o, key, false).length) { flush(); block += lxxPlus(o, key, false); }
+          return;
+        }
         var n = u.v === 0 ? '' : '<sup class="verse-num" data-v="' + u.v + '">' + u.v + '</sup>';
         if (u.poetic || u.v === 0) {
           flush();
@@ -896,9 +1001,10 @@
         var breakHere = lang === 'he' && !o.nt ? /class="pe"/.test(para.slice(-40)) : u.newPara;
         if (breakHere) flush();
         para += (para ? ' ' : '') + n + t;
+        if (o.lxx && lxxBlocks(o, key, false).length) { flush(); block += lxxPlus(o, key, false); }
       });
       flush();
-      if (origs.length > 1) block = '<p class="vo-label">' + (o.nt ? 'Hebrew · Delitzsch' : 'Greek · SBLGNT') + '</p>' + block;
+      if (origs.length > 1) block = '<p class="vo-label">' + (o.lxx ? 'Greek · Septuagint' : o.nt ? 'Hebrew · Delitzsch' : o.lang === 'he' ? 'Hebrew · Masoretic Text' : 'Greek · SBLGNT') + '</p>' + block;
       html += block;
     });
     return '<div class="orig-only">' + html + '</div>';
@@ -2071,6 +2177,11 @@
     if (cantRow) cantRow.hidden = settings.original === 'off';
     var ntRow = panel.querySelector('.sp-nt-row');
     if (ntRow) ntRow.hidden = settings.original === 'off';
+    var otRow = panel.querySelector('.sp-ot-row');
+    if (otRow) otRow.hidden = settings.original === 'off';
+    panel.querySelectorAll('[data-otorig]').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.getAttribute('data-otorig') === (settings.otOrig || 'he')));
+    });
     panel.querySelectorAll('[data-ntorig]').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.getAttribute('data-ntorig') === (settings.ntOrig || 'grc')));
     });
@@ -2113,6 +2224,9 @@
       rerender();
     } else if (t.hasAttribute('data-ntorig')) {
       settings.ntOrig = t.getAttribute('data-ntorig');
+      rerender();
+    } else if (t.hasAttribute('data-otorig')) {
+      settings.otOrig = t.getAttribute('data-otorig');
       rerender();
     } else if (t.hasAttribute('data-cant')) {
       settings.cantillation = t.getAttribute('data-cant') === 'on';
@@ -2779,7 +2893,7 @@
     if (settings.original === 'off') return Promise.resolve();
     var jobs = [];
     ids.forEach(function (id) {
-      origSources(id).forEach(function (k) { jobs.push(k === 'he' ? loadOrigHe(id) : loadOrig(id)); });
+      origSources(id).forEach(function (k) { jobs.push(loadSource(id, k)); });
     });
     return Promise.all(jobs);
   }

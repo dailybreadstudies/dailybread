@@ -1,0 +1,244 @@
+Septuagint alignment report (tools/build_lxx.py)
+
+Verses whose Greek seems to fit a neighbouring verse better (check by eye; most are repeated wording):
+GEN 25:32  Greek fits 25:31 better (0.67 vs 0.17)
+GEN 27:20  Greek fits 27:24 better (1.00 vs 0.29)
+GEN 35:21  Greek fits 35:22 better (0.60 vs 0.00)
+GEN 41:21  Greek fits 41:20 better (0.50 vs 0.12)
+EXO 6:9  Greek fits 6:10 better (1.00 vs 0.17)
+EXO 10:29  Greek fits 11:4 better (0.60 vs 0.25)
+EXO 25:19  Greek fits 25:18 better (0.62 vs 0.20)
+EXO 25:35  Greek fits 25:34 better (0.67 vs 0.25)
+EXO 37:10  Greek fits 37:11 better (0.67 vs 0.20)
+LEV 25:49  Greek fits 25:48 better (0.50 vs 0.12)
+NUM 1:46  Greek fits 1:43 better (0.50 vs 0.00)
+NUM 9:8  Greek fits 9:9 better (1.00 vs 0.25)
+NUM 26:45  Greek fits 26:49 better (1.00 vs 0.17)
+NUM 31:18  Greek fits 31:15 better (0.50 vs 0.00)
+DEU 5:17  Greek fits 5:18 better (0.50 vs 0.00)
+DEU 5:18  Greek fits 5:17 better (1.00 vs 0.00)
+DEU 14:17  Greek fits 14:18 better (0.50 vs 0.00)
+DEU 28:5  Greek fits 28:6 better (1.00 vs 0.25)
+DEU 28:17  Greek fits 28:19 better (1.00 vs 0.25)
+DEU 28:32  Greek fits 28:34 better (0.67 vs 0.27)
+JOS 12:21  Greek fits 12:22 better (0.50 vs 0.00)
+JOS 12:23  Greek fits 12:22 better (0.50 vs 0.00)
+JOS 17:7  Greek fits 17:8 better (0.75 vs 0.18)
+JOS 19:46  Greek fits 19:44 better (1.00 vs 0.25)
+JOS 24:31  Greek fits 24:29 better (0.83 vs 0.17)
+RUT 2:9  Greek fits 2:5 better (0.75 vs 0.29)
+1SA 5:2  Greek fits 5:1 better (0.67 vs 0.17)
+1CH 1:42  Greek fits 1:41 better (0.67 vs 0.25)
+1CH 2:31  Greek fits 2:33 better (0.50 vs 0.00)
+1CH 5:5  Greek fits 5:4 better (0.40 vs 0.00)
+1CH 8:5  Greek fits 8:4 better (0.50 vs 0.00)
+1CH 8:19  Greek fits 8:15 better (0.50 vs 0.00)
+1CH 14:5  Greek fits 14:7 better (0.50 vs 0.00)
+EZR 2:21  Greek fits 2:17 better (1.00 vs 0.00)
+EZR 2:26  Greek fits 2:30 better (1.00 vs 0.00)
+EZR 2:33  Greek fits 2:30 better (1.00 vs 0.00)
+EZR 2:58  Greek fits 2:54 better (1.00 vs 0.20)
+NEH 7:37  Greek fits 7:38 better (1.00 vs 0.00)
+EST 4:13  Greek fits 4:9 better (0.75 vs 0.20)
+EST 5:6  Greek fits 5:4 better (0.50 vs 0.11)
+JOB 3:6  Greek fits 3:4 better (0.60 vs 0.22)
+JOB 14:6  Greek fits 14:9 better (0.50 vs 0.14)
+JOB 16:3  Greek fits 16:1 better (0.50 vs 0.00)
+JOB 20:3  Greek fits 20:2 better (1.00 vs 0.00)
+JOB 25:3  Greek fits 25:1 better (1.00 vs 0.25)
+JOB 32:12  Greek fits 32:14 better (0.67 vs 0.25)
+JOB 33:28  Greek fits 33:30 better (0.75 vs 0.29)
+JOB 36:15  Greek fits 36:17 better (0.50 vs 0.00)
+JOB 40:4  Greek fits 40:2 better (1.00 vs 0.29)
+PSA 15:1  Greek fits 15:0 better (1.00 vs 0.25)
+PSA 16:1  Greek fits 16:0 better (1.00 vs 0.00)
+PSA 28:1  Greek fits 28:0 better (1.00 vs 0.12)
+PSA 41:7  Greek fits 41:11 better (0.50 vs 0.00)
+PSA 87:1  Greek fits 87:0 better (0.75 vs 0.25)
+PSA 106:34  Greek fits 106:35 better (1.00 vs 0.00)
+PSA 109:6  Greek fits 109:7 better (0.50 vs 0.14)
+PSA 124:1  Greek fits 124:0 better (1.00 vs 0.25)
+PSA 124:4  Greek fits 124:5 better (1.00 vs 0.00)
+PSA 129:1  Greek fits 129:0 better (1.00 vs 0.20)
+PSA 130:1  Greek fits 130:0 better (1.00 vs 0.00)
+PSA 139:1  Greek fits 139:0 better (1.00 vs 0.00)
+PRO 1:23  Greek fits 1:25 better (0.50 vs 0.14)
+PRO 3:3  Greek fits 3:4 better (0.60 vs 0.12)
+PRO 10:17  Greek fits 10:16 better (0.60 vs 0.25)
+PRO 11:3  Greek fits 11:5 better (0.40 vs 0.00)
+PRO 14:7  Greek fits 14:3 better (0.60 vs 0.25)
+PRO 16:17  Greek fits 16:13 better (0.67 vs 0.20)
+PRO 16:26  Greek fits 16:23 better (0.50 vs 0.00)
+PRO 23:6  Greek fits 23:3 better (1.00 vs 0.00)
+ISA 3:20  Greek fits 3:19 better (1.00 vs 0.00)
+ISA 27:4  Greek fits 27:3 better (0.50 vs 0.14)
+ISA 43:26  Greek fits 43:25 better (0.40 vs 0.00)
+AMO 5:21  Greek fits 5:22 better (0.57 vs 0.12)
+JON 4:4  Greek fits 4:1 better (0.50 vs 0.00)
+
+Passages repeated elsewhere in the Septuagint (shown as Septuagint-only):
+1KI 12:24a  copy of 11:43 (shown as Septuagint-only)
+1KI 12:24b  copy of 11:26 (shown as Septuagint-only)
+1KI 12:24c  copy of 11:40 (shown as Septuagint-only)
+1KI 12:24d  copy of 11:21 (shown as Septuagint-only)
+1KI 12:24e  copy of 11:19 (shown as Septuagint-only)
+1KI 12:24f  copy of 11:24 (shown as Septuagint-only)
+1KI 12:24g  copy of 14:1 (shown as Septuagint-only)
+1KI 12:24h  copy of 14:3 (shown as Septuagint-only)
+1KI 12:24i  copy of 14:4 (shown as Septuagint-only)
+1KI 12:24j  copy of 14:6 (shown as Septuagint-only)
+1KI 12:24k  copy of 14:12 (shown as Septuagint-only)
+1KI 12:24l  copy of 14:11 (shown as Septuagint-only)
+1KI 12:24m  copy of 14:17 (shown as Septuagint-only)
+1KI 12:24n  copy of 11:31 (shown as Septuagint-only)
+1KI 12:24o  copy of 12:5 (shown as Septuagint-only)
+1KI 12:24p  copy of 12:6 (shown as Septuagint-only)
+1KI 12:24q  copy of 12:11 (shown as Septuagint-only)
+1KI 12:24r  copy of 12:14 (shown as Septuagint-only)
+1KI 12:24s  copy of 12:16 (shown as Septuagint-only)
+1KI 12:24t  copy of 12:17 (shown as Septuagint-only)
+1KI 12:24u  copy of 12:21 (shown as Septuagint-only)
+1KI 12:24v  copy of 12:22 (shown as Septuagint-only)
+1KI 12:24w  copy of 12:24 (shown as Septuagint-only)
+
+Where several TVTMS traditions fitted, the content chose:
+Exo.25:6 → Exo.25:7 (of Exo.25:6 | Exo.25:7)
+Exo.36:10 → Exo.39:3 (of Exo.36:10 | Exo.39:3)
+Exo.36:11 → Exo.39:4 (of Exo.36:11 | Exo.39:4)
+Exo.36:12 → Exo.39:5 (of Exo.36:12 | Exo.39:5)
+Exo.36:14 → Exo.39:7 (of Exo.36:14 | Exo.39:7)
+Exo.36:15 → Exo.39:8 (of Exo.36:15 | Exo.39:8)
+Exo.36:16 → Exo.39:9 (of Exo.36:16 | Exo.39:9)
+Exo.36:17 → Exo.39:10 (of Exo.36:17 | Exo.39:10)
+Exo.36:18 → Exo.39:11 (of Exo.36:18 | Exo.39:11)
+Exo.36:19 → Exo.39:12 (of Exo.36:19 | Exo.39:12)
+Exo.36:20 → Exo.39:13 (of Exo.36:20 | Exo.39:13)
+Exo.36:21 → Exo.39:14 (of Exo.36:21 | Exo.39:14)
+Exo.36:22 → Exo.39:15 (of Exo.36:22 | Exo.39:15)
+Exo.36:23 → Exo.39:16!a (of Exo.36:23 | Exo.39:16!a)
+Exo.36:24 → Exo.39:16!b (of Exo.36:24 | Exo.39:16!b)
+Exo.36:25 → Exo.39:17 (of Exo.36:25 | Exo.39:17)
+Exo.36:26 → Exo.39:18 (of Exo.36:26 | Exo.39:18)
+Exo.36:27 → Exo.39:19 (of Exo.36:27 | Exo.39:19)
+Exo.36:28 → Exo.39:20 (of Exo.36:28 | Exo.39:20)
+Exo.36:29 → Exo.39:21 (of Exo.36:29 | Exo.39:21)
+Exo.36:30 → Exo.39:22 (of Exo.36:30 | Exo.39:22)
+Exo.36:31 → Exo.39:23 (of Exo.36:31 | Exo.39:23)
+Exo.36:32 → Exo.39:24 (of Exo.36:32 | Exo.39:24)
+Exo.36:33 → Exo.39:25 (of Exo.36:33 | Exo.39:25)
+Exo.36:34 → Exo.39:26 (of Exo.36:34 | Exo.39:26)
+Exo.37:10 → Exo.38:12 (of Exo.37:10 | Exo.38:12 | Exo.38:12)
+Exo.37:12 → Exo.38:14 (of Exo.37:12 | Exo.38:14 | Exo.38:14)
+Exo.37:14 → Exo.38:16 (of Exo.37:14 | Exo.38:16 | Exo.38:16)
+Exo.37:20 → Exo.38:22 (of Exo.37:20 | Exo.38:22 | Exo.38:22)
+Exo.37:21 → Exo.38:23 (of Exo.37:21 | Exo.38:23 | Exo.38:23)
+Exo.40:7 → Exo.40:9 (of Exo.40:9 | Exo.40:7)
+Exo.40:11 → Exo.40:13 (of Exo.40:13 | Exo.40:11)
+Exo.40:28 → Exo.40:34 (of Exo.40:34 | Exo.40:28)
+Num.1:24 → Num.1:26 (of Num.1:24 | Num.1:26)
+Num.1:25 → Num.1:27 (of Num.1:25 | Num.1:27)
+Num.1:26 → Num.1:28 (of Num.1:26 | Num.1:28)
+Num.1:27 → Num.1:29 (of Num.1:27 | Num.1:29)
+Num.1:28 → Num.1:28 (of Num.1:28 | Num.1:30)
+Num.1:29 → Num.1:29 (of Num.1:29 | Num.1:31)
+Num.1:30 → Num.1:32 (of Num.1:30 | Num.1:32)
+Num.1:31 → Num.1:33 (of Num.1:31 | Num.1:33)
+Num.1:32 → Num.1:34 (of Num.1:32 | Num.1:34)
+Num.1:33 → Num.1:33 (of Num.1:33 | Num.1:35)
+Num.1:34 → Num.1:36 (of Num.1:34 | Num.1:36)
+Num.1:35 → Num.1:35 (of Num.1:35 | Num.1:37)
+Num.1:36 → Num.1:24 (of Num.1:36 | Num.1:24)
+Num.1:37 → Num.1:25 (of Num.1:37 | Num.1:25)
+1Ki.7:22 → 1Ki.7:36 (of 1Ki.7:36 | 1Ki.7:22)
+1Ki.7:31 → 1Ki.7:45 (of 1Ki.7:45 | 1Ki.7:31)
+1Ki.8:53 → 1Ki.8:53 (of 1Ki.8:53 | 1Ki.8:53; 8:12-13)
+1Ki.10:22 → 1Ki.10:22 (of 1Ki.10:22 | 1Ki.10:22; 9:15,17-22)
+1Ki.12:24!a1 → 1Ki.11:43 (of 1Ki.11:43 | 1Ki.14:22)
+1Ki.12:24!b1 → 1Ki.11:26 (of 1Ki.11:26 | 1Ki.11:27 | 1Ki.11:28)
+1Ki.12:24!d1 → 1Ki.11:21 (of 1Ki.11:21 | 1Ki.11:22)
+1Ki.12:24!g1 → 1Ki.14:1 (of 1Ki.14:1 | 1Ki.14:2)
+1Ki.12:24!m1 → 1Ki.14:17 (of 1Ki.14:17 | 1Ki.14:18)
+1Ki.12:24!o1 → 1Ki.12:5 (of 1Ki.12:3 | 1Ki.12:4 | 1Ki.12:5)
+1Ki.12:24!p1 → 1Ki.12:6 (of 1Ki.12:6 | 1Ki.12:7)
+1Ki.12:24!q1 → 1Ki.12:11 (of 1Ki.12:8 | 1Ki.12:9 | 1Ki.12:10 | 1Ki.12:11)
+1Ki.12:24!v1 → 1Ki.12:22 (of 1Ki.12:22 | 1Ki.12:23)
+1Ki.16:28!a1 → 1Ki.22:42 (of 1Ki.22:41 | 1Ki.22:42)
+1Ki.16:28!b1 → 1Ki.22:43 (of 1Ki.22:43 | 1Ki.22:44)
+1Ki.20:3 → 1Ki.21:3 (of 1Ki.21:3 | 1Ki.20:3)
+1Ki.22:44 → 1Ki.22:43!b (of 1Ki.22:43!b | 1Ki.22:44)
+Est.9:30 → Est.9:31 (of Est.9:31 | Est.9:30)
+Psa.12:1 → Psa.13:Title (of Psa.13:1 | Psa.13:Title | Psa.13:1)
+Psa.12:2 → Psa.13:1 (of Psa.13:2!a | Psa.13:1 | Psa.13:2)
+Psa.12:3 → Psa.13:2!b (of Psa.13:2!b | Psa.13:2 | Psa.13:3)
+Psa.12:4 → Psa.13:3 (of Psa.13:3 | Psa.13:3 | Psa.13:4)
+Psa.12:5 → Psa.13:4 (of Psa.13:4 | Psa.13:4 | Psa.13:5)
+Psa.12:6 → Psa.13:5-6 (of Psa.13:5-6 | Psa.13:5-6 | Psa.13:6)
+Jer.27:1 → Jer.50:1 (of Jer.27:1 | Jer.50:1)
+Jer.27:7 → Jer.50:7 (of Jer.27:7 | Jer.50:7)
+Jer.27:13 → Jer.50:13 (of Jer.27:13 | Jer.50:13)
+Jer.27:21 → Jer.27:21 (of Jer.27:21 | Jer.50:21)
+Jer.33:14 → Jer.26:14 (of Jer.26:14 | Jer.33:14)
+Jer.33:15 → Jer.26:15 (of Jer.26:15 | Jer.33:15)
+Jer.33:16 → Jer.26:16 (of Jer.26:16 | Jer.33:16)
+Jer.33:17 → Jer.26:17 (of Jer.26:17 | Jer.33:17)
+Jer.33:18 → Jer.26:18 (of Jer.26:18 | Jer.33:18)
+Jer.33:19 → Jer.26:19 (of Jer.26:19 | Jer.33:19)
+Jer.33:20 → Jer.26:20 (of Jer.26:20 | Jer.33:20)
+Jer.33:21 → Jer.26:21 (of Jer.26:21 | Jer.33:21)
+Jer.33:22 → Jer.26:22 (of Jer.26:22 | Jer.33:22)
+Jer.33:23 → Jer.26:23 (of Jer.26:23 | Jer.33:23)
+Jer.33:24 → Jer.26:24 (of Jer.26:24 | Jer.33:24)
+Hag.2:1 → Hag.2:1 (of Hag.1:15 | Hag.2:1)
+
+TVTMS rows used with word-count tests relaxed:
+Gen.5:31 Latin
+Exo.28:22 GreekUndivided
+Exo.28:23 GreekUndivided
+Exo.28:24 GreekUndivided
+Exo.28:25 GreekUndivided
+Exo.28:26 GreekUndivided
+Exo.28:27 GreekUndivided
+Exo.28:28 GreekUndivided
+Exo.28:29 GreekUndivided
+Exo.28:30 GreekUndivided
+Exo.28:31 GreekUndivided
+Exo.28:32 GreekUndivided
+Exo.28:33 GreekUndivided
+Exo.28:34 GreekUndivided
+Exo.28:35 GreekUndivided
+Exo.28:36 GreekUndivided
+Exo.28:37 GreekUndivided
+Exo.28:38 GreekUndivided
+Exo.28:39 GreekUndivided
+Num.1:24 Greek
+Num.1:25 Greek
+Num.1:26 Greek
+Num.1:27 Greek
+Num.1:28 Eng-KJV+Hebrew+Latin
+Num.1:29 Eng-KJV+Hebrew+Latin
+Num.1:30 Greek
+Num.1:31 Greek
+Num.1:32 Greek
+Num.1:33 Eng-KJV+Hebrew+Latin
+Num.1:34 Greek
+Num.1:35 Eng-KJV+Hebrew+Latin
+Num.1:36 Greek
+Num.1:37 Greek
+Jos.9:2 GreekUndivided
+Jos.24:29 Greek2
+Jos.24:30 Greek2
+Jos.24:31 Greek2
+1Ki.8:53 Eng-KJV+Hebrew+Latin
+1Ki.9:9 Eng-KJV+Hebrew+Latin
+1Ki.10:22 Eng-KJV+Hebrew+Latin
+1Ki.11:14 Greek
+Psa.12:1 Greek
+Psa.12:2 Greek
+Psa.12:3 Latin
+Psa.12:4 Latin
+Psa.12:5 Latin
+Psa.12:6 Latin
+Pro.20:9 GreekUndivided
+Mal.4:1 Eng-KJV+Latin
+Mal.4:2 Eng-KJV+Latin
+Mal.4:3 Eng-KJV+Latin

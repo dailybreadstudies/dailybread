@@ -81,6 +81,27 @@ git clone --depth 1 https://github.com/LogosBible/SBLGNT /tmp/sblgnt
 python3 tools/build_originals.py /tmp/mam/MAM-for-Sefaria/csv /tmp/sblgnt/data/sblgnt/text data/orig
 ```
 
+## Septuagint (Greek Old Testament)
+
+`data/lxx/<BOOK>.json` holds Swete's Septuagint (public domain; digital text GPL-3.0, see `data/lxx/LICENSE.md`),
+regrouped under BSB verse numbers. Reading Settings → Original Languages → **Hebrew Bible In: Hebrew · Greek · Both**
+(setting `otOrig`). Each file has the Greek per BSB verse (`v`), the Septuagint's own number where it differs (`r`),
+verses Swete's text lacks (`miss`), verses printed with another (`with`), Septuagint-only passages shown folded
+(`plus`), and for Daniel the Old Greek beside Theodotion (`alt`).
+
+```
+git clone --depth 1 https://github.com/eliranwong/LXX-Swete-1930 /tmp/swete
+git clone --depth 1 --filter=blob:none --sparse https://github.com/STEPBible/STEPBible-Data /tmp/step
+git -C /tmp/step sparse-checkout set Versification
+python3 tools/build_lxx.py /tmp/swete /tmp/step/Versification data/lxx
+```
+
+The verse matching uses STEPBible's TVTMS tables (CC BY 4.0); where several fit, a word-association check (Greek
+words that go with English words across the whole Bible) picks the one whose content matches. Places where the
+digital Swete numbers verses differently from every TVTMS pattern are corrected by hand in `tools/lxx-overrides.json`.
+Each build writes `tools/lxx-report.txt` (verses to check by eye). Notes where the Apostles quote the Greek wording
+are in `data/lxx/quotes.json`; each shows only once `"approved": true` (preview drafts with `?lxxquotes=all`).
+
 ## Word study
 
 Word study (`data/words/`) uses STEPBible-Data (TAHOT, TAGNT, TBESH, TBESG; CC BY 4.0), aligned to the text in `data/orig/`:

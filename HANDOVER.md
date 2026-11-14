@@ -173,6 +173,13 @@ Bible Text: Verse Numbers (switch, on by default — hidden numbers stay in the 
 (LORD/ADONAI/HASHEM), Original Languages (Off/Under Verses/Only) + Hebrew Marks.
 Names & Terms: Messianic Filter, Hebrew Names.
 Hebrew Names also changes the names of books named after a person (`HEB_BOOKS` in reader.js: Yehoshua, Shmuel, Yeshayahu, Mattityahu …) in the Bible browser, headings and Today's references. Descriptive titles (Genesis, Judges, Kings, Psalms …) stay in English by John's decision (Nov 2026); their Hebrew titles (`HEB_TITLES`) are only accepted in the Go to box. The Bible browser opens a book's chapters in place under its row (`toggleChapters`).
+- Original Languages → "Hebrew Bible In": Hebrew (MAM) / Greek (Septuagint, Swete, `data/lxx/`, GPL-3.0) / Both; setting `otOrig`
+  (Nov 2026). Under each verse the Greek shows the LXX number in small grey type where it differs ("LXX 22:1"); a verse Swete's
+  text lacks shows "— not in the Septuagint"; Septuagint-only passages (Esther additions, Dan 3:24–90, Susanna before Dan 1,
+  Bel after Dan 12, 1 Kgs 12:24a–z, Job 42:17a–e, Ps 151 …) are folded "Septuagint only · N verses"; Daniel shows Theodotion
+  with a "Show the Old Greek" switch (`showOG`). No word study for the Greek OT (no free tagged text). Build: README "Septuagint";
+  hand corrections `tools/lxx-overrides.json`; review list `tools/lxx-report.txt`. Apostles-quote notes `data/lxx/quotes.json`
+  (38 drafts, none approved yet; preview `?r=ISA.7&lxxquotes=all`). Restore point before this work: branch `backup/before-lxx`.
 - Original Languages → "Apostles In": Greek (SBLGNT) / Hebrew (Delitzsch, `data/orig-hent/`, non-commercial licence) / Both; setting `ntOrig`.
 
 
