@@ -249,6 +249,7 @@
   "Galilean",
   "Samaritans",
   "Judea",
+  "Judah",
   "Decapolis",
   "Syria",
   "Sea of Galilee",
@@ -284,9 +285,13 @@
  "aliases": {
   "Galilean": "Galilee",
   "Samaritans": "Samaria",
+  "Judah": "Judea",
   "Nazarene": "Nazareth",
   "Magadan": "Magdala",
   "Gadarenes": "Gadara"
+ },
+ "need": {
+  "Judah": "\\b(?:land|lands|towns?|cities|hill country|wilderness|region|people|tribe|kings?|mountains?) of\\s*$"
  },
  "groups": [
   {

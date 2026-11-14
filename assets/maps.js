@@ -49,7 +49,7 @@
     'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
-  var MAPS_DATA_V = 'd63b4e13';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
+  var MAPS_DATA_V = '59e49013';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
   function getJSON(url) {
     if (/^data\/maps\//.test(url)) url += (url.indexOf('?') < 0 ? '?v=' : '&v=') + MAPS_DATA_V;
     return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + ' (' + r.status + ')'); return r.json(); });
@@ -229,7 +229,7 @@
       var frag = document.createDocumentFragment(), last = 0, mt, s = t.nodeValue, cv = inCh.get(t);
       while ((mt = re.exec(s))) {
         if (cv && (skip(mt[1], cv) || skip(forms[mt[1]], cv))) continue;   // keyed by the form in the text or by the place
-        if (!placeSense(t, s, mt, from[mt[1]])) continue;
+        if (!placeSense(t, s, mt, from[mt[1]], m.need)) continue;
         frag.appendChild(document.createTextNode(s.slice(last, mt.index)));
         var span = el('span', 'dbm-place', esc(mt[1]));
         span.setAttribute('data-dbm-place', forms[mt[1]]);
@@ -250,7 +250,10 @@
      - The words around it: "Judah said", "Judah son of", "the son of Judah" are people, not places. */
   var PERSON_AFTER = /^[’ʼ]?\s*(?:,\s*)?(?:said|says|answered|replied|asked|fathered|begot|son of|daughter of|the son of|the daughter of|Iscariot)\b/;
   var PERSON_BEFORE = /\b(?:son|daughter|father|mother|brother|sister|wife|husband) of\s*$/;
-  function placeSense(t, s, mt, english) {
+  /* "need": {"Judah": "\\b(?:land|towns?) of\\s*$"} in a map's index entry: a name that is also a man links only
+     when the words before it match ("the land of Judah", not "Judah and his brothers") */
+  var needRe = {};
+  function placeSense(t, s, mt, english, need) {
     var src = t.parentNode && t.parentNode.classList && t.parentNode.classList.contains('hn') && t.parentNode.getAttribute('data-en');
     if (src && english && english.indexOf(src) < 0) return false;
     var after = s.slice(mt.index + mt[1].length), before = s.slice(0, mt.index);
@@ -261,6 +264,15 @@
     if (!before && t.parentNode.classList.contains('hn')) {
       var pv = t.parentNode.previousSibling;
       before = pv && pv.nodeType === 3 ? pv.nodeValue : '';
+    }
+    if (need) {
+      // the English behind the word: marked by reader.js, or the word itself; else (unmarked Hebrew) be careful
+      var names = src ? [src] : (english || []).filter(function (n) { return n === mt[1]; });
+      if (!names.length) names = english || [];
+      var ctx = names.filter(function (n) { return need[n]; });
+      if (ctx.length && !ctx.some(function (n) {
+        return (needRe[need[n]] = needRe[need[n]] || new RegExp(need[n])).test(before);
+      })) return false;
     }
     return !PERSON_AFTER.test(after) && !PERSON_BEFORE.test(before);
   }

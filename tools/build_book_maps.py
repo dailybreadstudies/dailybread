@@ -19,6 +19,9 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 MAPS = os.path.join(ROOT, 'data', 'maps')
 NAMES = {'MAT': 'Matthew', 'MRK': 'Mark', 'LUK': 'Luke', 'JHN': 'John'}
 
+# A name that is both a man and a land links only after words like these (the reader tests the text just before it)
+LAND_OF = r'\b(?:land|lands|towns?|cities|hill country|wilderness|region|people|tribe|kings?|mountains?) of\s*$'
+
 # ── Regions of the land in the first century (label points; r = label rank) ──
 # `hide`: not labelled on the map (the map already shows it), but tappable in the text.
 REGIONS = [
@@ -28,7 +31,9 @@ REGIONS = [
     {'n': 'Samaria', 'll': [35.2, 32.3], 'r': 1, 'aka': ['Samaritans'],
      'note': 'Between Galilee and Judea, the land of the Samaritans, who worshipped on Mount Gerizim. Governed with Judea, first by Archelaus, then by Roman prefects. '
              'Jesus sends the Twelve "not into any town of the Samaritans" (Matthew 10:5); in John 4 He speaks with a Samaritan woman at Sychar.'},
-    {'n': 'Judea', 'll': [34.98, 31.6], 'r': 1,
+    {'n': 'Judea', 'll': [34.98, 31.6], 'r': 1, 'aka': ['Judah'],
+     # "the land of Judah" (Matthew 2:6) is Judea; plain "Judah" is the patriarch (1:2) or, filtered, Judas
+     'need': {'Judah': LAND_OF},
      'note': 'The heartland around Jerusalem. On Herod the Great\'s death (4 BC) it passed to his son Archelaus (Matthew 2:22); from AD 6 it was a Roman prefecture, '
              'governed by Pontius Pilate from AD 26 to 36, while the high priest and the council ran the Temple and much of daily life.'},
     {'n': 'Idumea', 'll': [34.92, 31.27], 'r': 1,
@@ -247,7 +252,7 @@ def first(verses, forms):
 def build(b):
     name = NAMES[b]
     verses = book_verses(b)
-    links, aliases, in_book = [], {}, set()
+    links, aliases, in_book, need = [], {}, set(), {}
 
     def found(n, aka):
         hit = False
@@ -264,6 +269,7 @@ def build(b):
     for r in REGIONS:
         d = {k: r[k] for k in ('n', 'label', 'll', 'r', 'hide', 'z', 'note') if k in r}
         found(r['n'], r.get('aka'))
+        need.update({f: rx for f, rx in r.get('need', {}).items() if f in links})
         regions.append(d)
     groups = {g: [] for g, _, _ in GROUPS}
     taken = set()
@@ -304,7 +310,7 @@ def build(b):
         'bounds': [[34.3, 30.85], [36.75, 33.7]],
         'groupLabelZoom': 7.2, 'groupsLabel': 'Places',
         'regions': regions, 'waterNames': WATER,
-        'links': links, 'aliases': aliases,
+        'links': links, 'aliases': aliases, 'need': need,
         'groups': out_groups,
         'alternates': {'for': 'Bethsaida', 'bounds': [[35.6, 32.875], [35.66, 32.925]], 'sites': [{'name': 'el-Araj', 'll': [35.6272, 32.8938]}]},
         'notes': [
@@ -339,7 +345,7 @@ def main():
             json.dump(m, fh, ensure_ascii=False, indent=1)
         idx['maps'] = [e for e in idx['maps'] if e['id'] != m['id']]
         idx['maps'].append({'id': m['id'], 'title': m['title'], 'ref': m['ref'], 'book': b, 'c': 1, 'v': 1, 'bookwide': True,
-                            'links': m['links'], 'aliases': m['aliases']})
+                            'links': m['links'], 'aliases': m['aliases'], **({'need': m['need']} if m['need'] else {})})
         n = sum(len(g['places']) for g in m['groups'])
         print('%s: %d places, %d regions, %d tappable names' % (m['id'], n, len(m['regions']), len(m['links'])))
     order = ['GEN', 'EXO', 'JOS', 'JDG', 'MAT']
