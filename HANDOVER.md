@@ -179,7 +179,9 @@ Hebrew Names also changes the names of books named after a person (`HEB_BOOKS` i
   Bel after Dan 12, 1 Kgs 12:24a–z, Job 42:17a–e, Ps 151 …) are folded "Septuagint only · N verses"; Daniel shows Theodotion
   with a "Show the Old Greek" switch (`showOG`). No word study for the Greek OT (no free tagged text). Build: README "Septuagint";
   hand corrections `tools/lxx-overrides.json`; review list `tools/lxx-report.txt`. Apostles-quote notes `data/lxx/quotes.json`
-  (38 drafts, none approved yet; preview `?r=ISA.7&lxxquotes=all`). Restore point before this work: branch `backup/before-lxx`.
+  (38 notes, all approved and live 14 Nov 2026; a new one shows once `"approved": true`, drafts preview with `?r=ISA.7&lxxquotes=all`).
+  Hebrew Psalm 13 fixed the same day (its Hebrew title is verse 1: `PSALM_TITLE_VERSES` in tools/build_originals.py); the whole
+  Hebrew Psalter was checked against STEPBible TVTMS and no other psalm differs. Restore point before this work: branch `backup/before-lxx`.
 - Original Languages → "Apostles In": Greek (SBLGNT) / Hebrew (Delitzsch, `data/orig-hent/`, non-commercial licence) / Both; setting `ntOrig`.
 
 

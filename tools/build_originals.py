@@ -86,13 +86,18 @@ OVERRIDES = {
     ('1SA', 20, 42): [(20, 42), (21, 1)],
     ('1KI', 22, 43): [(22, 43), (22, 44)],
     ('1CH', 12, 4): [(12, 4), (12, 5)],
-    ('NEH', 7, 68): [],                       # not in the Hebrew text (BSB includes it from Ezra 2:66)
+    ('NEH', 7, 68): [],
+    ('PSA', 13, 6): [],                       # with 13:5 in the Hebrew (13:6)                       # not in the Hebrew text (BSB includes it from Ezra 2:66)
     # Greek
     ('2CO', 13, 12): [(13, 12)], ('2CO', 13, 13): [], ('2CO', 13, 14): [(13, 13)],
     ('3JN', 1, 14): [(1, 14), (1, 15)],
     ('REV', 12, 17): [(12, 17), (12, 18)],
     ('ACT', 19, 41): [],                      # included in Acts 19:40 in the SBLGNT
 }
+# Psalms whose Hebrew title is a verse of its own although the verse counts match (the BSB splits a verse
+# elsewhere): chapter → number of Hebrew title verses. Checked against STEPBible TVTMS (Nov 2026).
+PSALM_TITLE_VERSES = {13: 1}   # Hebrew 13:1 = title; 13:6 = English 13:5–6
+
 # Original verses that intentionally have no BSB verse of their own
 NO_BSB = {('ROM', 16, 24)}   # SBLGNT 16:24 — the BSB omits this verse (footnoted)
 
@@ -144,6 +149,7 @@ def build_hebrew(book, path, report):
         offset = 0
         if book == 'PSA' and 0 in vs:   # psalm with a superscription: Hebrew counts it as verse 1 (or 1–2)
             offset = max(0, len(heb.get(c, {})) - max(vs))
+            offset = PSALM_TITLE_VERSES.get(c, offset)
         for v in vs:
             if v == 0:      # psalm title
                 hv = list(range(1, offset + 1))

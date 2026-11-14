@@ -25,7 +25,6 @@ JOS 12:21  Greek fits 12:22 better (0.50 vs 0.00)
 JOS 12:23  Greek fits 12:22 better (0.50 vs 0.00)
 JOS 17:7  Greek fits 17:8 better (0.75 vs 0.18)
 JOS 19:46  Greek fits 19:44 better (1.00 vs 0.25)
-JOS 24:31  Greek fits 24:29 better (0.83 vs 0.17)
 RUT 2:9  Greek fits 2:5 better (0.75 vs 0.29)
 1SA 5:2  Greek fits 5:1 better (0.67 vs 0.17)
 1CH 1:42  Greek fits 1:41 better (0.67 vs 0.25)
@@ -225,9 +224,7 @@ Num.1:35 Eng-KJV+Hebrew+Latin
 Num.1:36 Greek
 Num.1:37 Greek
 Jos.9:2 GreekUndivided
-Jos.24:29 Greek2
 Jos.24:30 Greek2
-Jos.24:31 Greek2
 1Ki.8:53 Eng-KJV+Hebrew+Latin
 1Ki.9:9 Eng-KJV+Hebrew+Latin
 1Ki.10:22 Eng-KJV+Hebrew+Latin

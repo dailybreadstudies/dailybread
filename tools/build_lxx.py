@@ -265,9 +265,9 @@ def parse_overrides(sb, ov):
     """tools/lxx-overrides.json: {"Pro": [["19:1-26", "19:4"], ["6:8", "+"], ["4:20", "4:27"]]} → {(c, v): target}"""
     out = {}
     for src, dst in ov.get(sb, []):
-        m = re.match(r'^(\d+):(\d+)([a-z])$', src)
-        if m:
-            out[('sub', src)] = '+' if dst == '+' else [tuple(int(x) for x in dst.split(':'))]
+        m = re.match(r'^(\d+):(\d+)([a-z]|\.0)$', src)
+        if m:   # one part of a verse Swete divides: "24:33a", or "24:33.0" for the part before [1]
+            out[('sub', src.replace('.0', ''))] = '+' if dst == '+' else [tuple(int(x) for x in dst.split(':'))]
             continue
         m = re.match(r'^(\d+):(\d+)(?:-(\d+))?$', src)
         c, v1 = int(m.group(1)), int(m.group(2))
