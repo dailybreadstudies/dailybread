@@ -983,7 +983,9 @@
   function audioUrl(book, c) {
     var i = AUDIO_BOOKS.indexOf(book);
     if (i < 0) return null;
-    var ab = book === 'TIT' ? 'Tts' : book.charAt(0) + book.slice(1).toLowerCase();
+    // OpenBible's names: Gen, Sng, Tts; numbered books keep the letter after the digit capital (1Ki, 2Sa, 1Co, 1Jn)
+    var ab = book === 'TIT' ? 'Tts' : /^\d/.test(book) ? book.slice(0, 2) + book.slice(2).toLowerCase()
+      : book.charAt(0) + book.slice(1).toLowerCase();
     return AUDIO_BASE + 'BSB_' + (i < 9 ? '0' : '') + (i + 1) + '_' + ab + '_' + ('00' + c).slice(-3) + '.mp3';
   }
   // Characters of read-aloud text before each verse of a chapter (headings and cross-references are not read)
