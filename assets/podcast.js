@@ -21,8 +21,8 @@
   var STORE = 'dbs-podcast';
   var SPEEDS = [1, 1.15, 1.25, 1.5, 1.75, 2, 0.75, 0.85];
   var data = null, audio = null, dock = null, current = null, lastSave = 0, scrubbing = false;
-  var saved = { pos: {}, rate: 1, src: 'moms' };
-  try { var s = JSON.parse(localStorage.getItem(STORE) || '{}'); if (s && typeof s === 'object') { saved.pos = s.pos || {}; saved.rate = s.rate || 1; saved.src = s.src || 'moms'; } } catch (e) {}
+  var saved = { pos: {}, rate: 1, src: 'moms', len: {} };
+  try { var s = JSON.parse(localStorage.getItem(STORE) || '{}'); if (s && typeof s === 'object') { saved.pos = s.pos || {}; saved.rate = s.rate || 1; saved.src = s.src || 'moms'; saved.len = s.len || {}; } } catch (e) {}
   var daySpecs = {};                                         // date -> the day's readings as Bible audio
   function save() { try { localStorage.setItem(STORE, JSON.stringify(saved)); } catch (e) {} }
 
@@ -186,6 +186,7 @@
     });
     seek.addEventListener('change', function () {
       scrubbing = false;
+      if (current) current.want = null;
       if (timed()) seekAll(seek.value / 1000 * current.total);
       else if (audio.duration) audio.currentTime = seek.value / 1000 * audio.duration;
     });
@@ -195,12 +196,10 @@
     audio.addEventListener('seeked', function () { if (isQueue()) checkStop(); });
     audio.addEventListener('loadedmetadata', function () {
       if (isQueue()) {
-        var it = current.queue[current.i];
-        if (audio.duration) {
-          var at = current.pending != null ? current.pending : bounds(it, audio.duration).s;
-          if (at > 0) audio.currentTime = at;
-        }
-        current.pending = null;
+        var it = current.queue[current.i], D = knownLen(it.u);
+        keepLen(it.u, audio.duration);
+        if (D) { wantStart(current.pending != null ? current.pending : bounds(it, D).s); current.pending = null; }
+        else current.late = true;                             // place the start once the length is known (durationchange)
         audio.playbackRate = saved.rate;
         tick();
         return;
@@ -210,9 +209,19 @@
       audio.playbackRate = saved.rate;
       tick();
     });
-    audio.addEventListener('timeupdate', function () { tick(); if (isQueue()) checkStop(); else remember(false); });
+    ['loadeddata', 'canplay', 'playing'].forEach(function (ev) { audio.addEventListener(ev, holdStart); });
+    audio.addEventListener('durationchange', function () {    // the length can arrive later than the file opens
+      if (!isQueue() || !isFinite(audio.duration) || !(audio.duration > 0)) return;
+      var it = current.queue[current.i];
+      keepLen(it.u, audio.duration);
+      if (!current.late) return;
+      current.late = false;
+      wantStart(current.pending != null ? current.pending : bounds(it, audio.duration).s);
+      current.pending = null;
+    });
+    audio.addEventListener('timeupdate', function () { tick(); if (isQueue()) { holdStart(); checkStop(); } else remember(false); });
     audio.addEventListener('ended', function () {
-      if (isQueue()) { nextItem(); return; }
+      if (isQueue()) { var it = current.queue[current.i]; if (it.fe >= 1 && it.fs <= 0) keepLen(it.u, audio.currentTime); nextItem(); return; }
       if (current) { delete saved.pos[current.ep.u]; save(); }
       var show = dock.querySelector('.pd-show');            // at the end: an invitation to subscribe
       show.textContent = 'Subscribe free for tomorrow’s episode';
@@ -325,6 +334,7 @@
     } catch (e) {}
   }
   function back(sec) {
+    if (current) current.want = null;
     if (timed()) seekAll(nowAll() - sec);
     else audio.currentTime = Math.max(0, audio.currentTime - sec);
   }
@@ -333,7 +343,34 @@
   // Each item is one chapter file from s to e seconds (a reading that starts or ends inside a chapter uses only part of
   // it). Once every file's length is known (read from its header), the seek bar, times, back 15 s and the
   // previous/next reading buttons run across all the items as one track; until then, across the file playing.
+  // A chapter file's length: from the browser when it knows it, otherwise as last measured (some browsers report a
+  // streamed mp3's length as unknown, and without it the start and stop points inside a chapter cannot be placed)
+  function knownLen(u) {
+    if (audio && audio.getAttribute('src') === u && isFinite(audio.duration) && audio.duration > 0) return audio.duration;
+    return saved.len[u] || null;
+  }
+  function keepLen(u, d) {
+    if (!u || !isFinite(d) || d <= 0 || Math.abs((saved.len[u] || 0) - d) < 0.5) return;
+    saved.len[u] = Math.round(d * 10) / 10;
+    var keys = Object.keys(saved.len);
+    if (keys.length > 300) delete saved.len[keys[0]];
+    save();
+  }
+  // Where the reading should start in the file now loading. Some browsers drop a jump made the moment a file opens
+  // and play from the top, so the jump is checked as the audio gets going and made again (a few tries) until it holds.
+  function wantStart(at) {
+    if (!current) return;
+    current.want = at > 0.5 ? at : null; current.tries = 0;
+    if (current.want != null) audio.currentTime = at;
+  }
+  function holdStart() {
+    if (!isQueue() || current.want == null || scrubbing) return;
+    if (audio.currentTime >= current.want - 1.5) { current.want = null; return; }
+    if (++current.tries > 6) { current.want = null; return; }
+    try { audio.currentTime = current.want; } catch (e) {}
+  }
   function bounds(it, D) {
+    if (!isFinite(D) || !(D > 0)) return { s: 0, e: Infinity };
     return { s: it.fs > 0 ? Math.max(0, it.fs * D - LEAD) : 0, e: it.fe < 1 ? Math.min(D, it.fe * D + TAIL) : D };
   }
   function timed() { return !!(isQueue() && current.total); }
@@ -348,7 +385,7 @@
     while (i < current.queue.length - 1 && T >= current.queue[i].off + current.queue[i].len) i++;
     var it = current.queue[i], at = it.s + (T - it.off), playing = !audio.paused || current.done;
     current.done = false;
-    if (i === current.i && audio.readyState >= 1) audio.currentTime = at;
+    if (i === current.i && audio.readyState >= 1) { current.want = null; audio.currentTime = at; }
     else { current.i = i; current.pending = at; loadItem(); if (playing) start(); }
     tick();
   }
@@ -383,9 +420,9 @@
     Promise.all(Object.keys(urls).map(function (u) {
       return new Promise(function (done) {
         var a = new Audio(), t = setTimeout(function () { finish(null); }, 20000);
-        function finish(d) { clearTimeout(t); a.removeAttribute('src'); try { a.load(); } catch (e) {} done([u, d]); }
+        function finish(d) { if (!d && saved.len[u]) d = saved.len[u]; else keepLen(u, d); clearTimeout(t); a.removeAttribute('src'); try { a.load(); } catch (e) {} done([u, d]); }
         a.preload = 'metadata';
-        a.addEventListener('loadedmetadata', function () { finish(isFinite(a.duration) ? a.duration : null); });
+        a.addEventListener('loadedmetadata', function () { finish(isFinite(a.duration) && a.duration > 0 ? a.duration : null); });
         a.addEventListener('error', function () { finish(null); });
         a.src = u;
       });
@@ -417,8 +454,9 @@
     var it = current.queue[current.i];
     stopFade();
     audio.volume = 1;
+    current.want = null; current.late = false;
     if (audio.getAttribute('src') !== it.u) audio.src = it.u;
-    else if (audio.readyState >= 1) { audio.currentTime = current.pending != null ? current.pending : bounds(it, audio.duration).s; current.pending = null; }
+    else if (audio.readyState >= 1) { wantStart(current.pending != null ? current.pending : bounds(it, knownLen(it.u)).s); current.pending = null; }
     var ep = dock.querySelector('.pd-ep');
     ep.textContent = (it.title || current.title) + (it.sub ? ' · ' + it.sub : '');
     ep.title = ep.textContent;
@@ -468,9 +506,10 @@
   function checkStop() {
     if (!isQueue()) { stopFade(); return; }
     var it = current.queue[current.i];
-    if (it.fe >= 1 || !audio.duration || scrubbing) { stopFade(); audio.volume = 1; return; }
+    var D = knownLen(it.u);
+    if (it.fe >= 1 || !D || scrubbing) { stopFade(); audio.volume = 1; return; }
     var rate = audio.playbackRate || 1;
-    var left = (bounds(it, audio.duration).e - audio.currentTime) / rate;   // real seconds to the stop
+    var left = (bounds(it, D).e - audio.currentTime) / rate;   // real seconds to the stop
     if (left <= 0) { stopFade(); audio.volume = 1; nextItem(); return; }
     var v = left < FADE ? left / FADE : 1;
     audio.volume = Math.max(0, Math.min(1, v * v));                       // eased, so the fall sounds even
