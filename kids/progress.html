@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+Hebrew:wght@400;500&family=Baloo+2:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/reader.css?v=3a1a57c1">
+  <link rel="stylesheet" href="../assets/reader.css?v=e2ca8e97">
   <link rel="stylesheet" href="../assets/kids.css?v=cef30754">
   <link rel="stylesheet" href="../assets/tracks.css?v=3925a34a">
   <link rel="stylesheet" href="../assets/maps.css?v=f0e0cd3a">
@@ -121,107 +121,130 @@
     <button type="button" class="sp-close" data-close aria-label="Close settings">&times;</button>
   </div>
 
-  <p class="sp-group">Page</p>
-  <div class="sp-row">
-    <span class="sp-label">Text Size</span>
-    <div class="sp-stepper">
-      <button type="button" data-size="-1" aria-label="Smaller text"><span class="sp-a-small">A</span></button>
-      <span class="sp-value" data-size-label>113%</span>
-      <button type="button" data-size="1" aria-label="Larger text"><span class="sp-a-large">A</span></button>
-    </div>
-  </div>
-  <div class="sp-row">
-    <span class="sp-label">Appearance</span>
-    <div class="sp-seg sp-seg-theme" role="group" aria-label="Appearance">
-      <button type="button" data-theme-opt="light" aria-pressed="false">Light</button>
-      <button type="button" data-theme-opt="sepia" aria-pressed="false">Sepia</button>
-      <button type="button" data-theme-opt="dark" aria-pressed="false">Dark</button>
-      <button type="button" data-theme-opt="system" aria-pressed="true">Auto</button>
-    </div>
-  </div>
-  <div class="sp-row">
-    <span class="sp-label">Typeface</span>
-    <div class="sp-seg" role="group" aria-label="Typeface">
-      <button type="button" data-font="serif" aria-pressed="true" class="sp-serif">Serif</button>
-      <button type="button" data-font="sans" aria-pressed="false" class="sp-sans">Sans</button>
-    </div>
-  </div>
-  <button type="button" class="sp-switch sp-switch-row" role="switch" aria-checked="false" data-setting="justify">
-    <span class="sp-label">Justified Text</span>
-    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
-  </button>
+  <!-- Live preview: two short verses drawn with the current settings (drawPreview in reader.js) -->
+  <div class="sp-preview" aria-hidden="true"></div>
 
-  <p class="sp-group">Bible Text</p>
-  <button type="button" class="sp-switch sp-switch-row" role="switch" aria-checked="false" data-setting="verseNumbers">
-    <span class="sp-label">Verse Numbers</span>
-    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
-  </button>
-  <button type="button" class="sp-switch sp-switch-row sp-msub-row" role="switch" aria-checked="false" data-setting="marginTitles">
-    <span class="sp-label">Margin Subtitles</span>
-    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
-  </button>
-  <div class="sp-row">
-    <span class="sp-label">Divine Name</span>
-    <div class="sp-seg sp-seg-name" role="group" aria-label="Divine name">
-      <button type="button" data-name="lord" aria-pressed="true"><span class="dn-sample">Lord</span></button>
-      <button type="button" data-name="adonai" aria-pressed="false"><span class="dn-sample">Adonai</span></button>
-      <button type="button" data-name="hashem" aria-pressed="false"><span class="dn-sample">HaShem</span></button>
+  <section class="sp-sec">
+    <p class="sp-group">Display</p>
+    <div class="sp-row">
+      <span class="sp-label">Text Size</span>
+      <div class="sp-stepper sp-ctl">
+        <button type="button" data-size="-1" aria-label="Smaller text"><span class="sp-a-small">A</span></button>
+        <span class="sp-value" data-size-label>113%</span>
+        <button type="button" data-size="1" aria-label="Larger text"><span class="sp-a-large">A</span></button>
+      </div>
     </div>
-  </div>
-  <div class="sp-row">
-    <span class="sp-label">Original Languages</span>
-    <div class="sp-seg sp-seg-name" role="group" aria-label="Original language text">
-      <button type="button" data-orig="off" aria-pressed="true">Off</button>
-      <button type="button" data-orig="under" aria-pressed="false">Under Verses</button>
-      <button type="button" data-orig="only" aria-pressed="false">Only</button>
+    <div class="sp-row">
+      <span class="sp-label">Appearance</span>
+      <div class="sp-swatches sp-ctl" role="group" aria-label="Appearance">
+        <button type="button" class="sp-sw sp-sw-light" data-theme-opt="light" aria-pressed="false"><span class="sp-sw-dot">A</span><span class="sp-sw-name">Light</span></button>
+        <button type="button" class="sp-sw sp-sw-sepia" data-theme-opt="sepia" aria-pressed="false"><span class="sp-sw-dot">A</span><span class="sp-sw-name">Sepia</span></button>
+        <button type="button" class="sp-sw sp-sw-dark" data-theme-opt="dark" aria-pressed="false"><span class="sp-sw-dot">A</span><span class="sp-sw-name">Dark</span></button>
+        <button type="button" class="sp-sw sp-sw-auto" data-theme-opt="system" aria-pressed="true" title="Follows your device"><span class="sp-sw-dot"><span>A</span></span><span class="sp-sw-name">Auto</span></button>
+      </div>
     </div>
-  </div>
-  <div class="sp-row sp-ot-row" hidden>
-    <span class="sp-label">Hebrew Bible In</span>
-    <div class="sp-seg" role="group" aria-label="Original language of the Hebrew Bible readings">
-      <button type="button" data-otorig="he" aria-pressed="true">Hebrew</button>
-      <button type="button" data-otorig="lxx" aria-pressed="false" title="The Septuagint (LXX), the ancient Greek translation">Greek</button>
-      <button type="button" data-otorig="both" aria-pressed="false">Both</button>
+    <div class="sp-row">
+      <span class="sp-label">Font</span>
+      <div class="sp-ctl sp-pair">
+        <div class="sp-seg" role="group" aria-label="Typeface">
+          <button type="button" data-font="serif" aria-pressed="true" class="sp-serif" title="Serif" aria-label="Serif">Aa</button>
+          <button type="button" data-font="sans" aria-pressed="false" class="sp-sans" title="Sans serif" aria-label="Sans serif">Aa</button>
+        </div>
+        <div class="sp-seg sp-seg-icons" role="group" aria-label="Text alignment">
+          <button type="button" data-justify="off" aria-pressed="false" title="Align left" aria-label="Align left">
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 5h14M3 8.5h9M3 12h13M3 15.5h8"/></svg>
+          </button>
+          <button type="button" data-justify="on" aria-pressed="true" title="Justified" aria-label="Justified">
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 5h14M3 8.5h14M3 12h14M3 15.5h9"/></svg>
+          </button>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="sp-row sp-nt-row" hidden>
-    <span class="sp-label">Apostles In</span>
-    <div class="sp-seg" role="group" aria-label="Original language of the Apostles readings">
-      <button type="button" data-ntorig="grc" aria-pressed="true">Greek</button>
-      <button type="button" data-ntorig="he" aria-pressed="false">Hebrew</button>
-      <button type="button" data-ntorig="both" aria-pressed="false">Both</button>
-    </div>
-  </div>
-  <div class="sp-row sp-cant-row" hidden>
-    <span class="sp-label">Hebrew Marks</span>
-    <div class="sp-seg" role="group" aria-label="Hebrew marks">
-      <button type="button" data-cant="off" aria-pressed="true">Vowels</button>
-      <button type="button" data-cant="on" aria-pressed="false">+ Cantillation</button>
-    </div>
-  </div>
+  </section>
 
-  <p class="sp-group">Names &amp; Terms</p>
-  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="messianic">
-    <span class="sp-switch-text">
-      <span class="sp-switch-title">Messianic Filter</span>
-      <span class="sp-switch-sub">Yeshua, Messiah, Torah, immersion, assembly…</span>
-    </span>
-    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
-  </button>
-  <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="hebrewNames">
-    <span class="sp-switch-text">
-      <span class="sp-switch-title">Hebrew Names</span>
-      <span class="sp-switch-sub">Yerushalayim, Moshe, Yehoshafat, Yoram…</span>
-    </span>
-    <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
-  </button>
-  <p class="sp-guide"><a href="../guide.html">How to use the reader</a></p>
+  <section class="sp-sec">
+    <p class="sp-group">Bible Text</p>
+    <button type="button" class="sp-switch sp-switch-row" role="switch" aria-checked="false" data-setting="verseNumbers">
+      <span class="sp-label">Verse Numbers</span>
+      <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+    </button>
+    <div class="sp-row">
+      <span class="sp-label">Divine Name</span>
+      <div class="sp-seg sp-ctl sp-seg-name" role="group" aria-label="Divine name">
+        <button type="button" data-name="lord" aria-pressed="true"><span class="dn-sample">Lord</span></button>
+        <button type="button" data-name="adonai" aria-pressed="false"><span class="dn-sample">Adonai</span></button>
+        <button type="button" data-name="hashem" aria-pressed="false"><span class="dn-sample">HaShem</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-sec">
+    <p class="sp-group">Original Languages</p>
+    <div class="sp-row">
+      <span class="sp-label">Show</span>
+      <div class="sp-seg sp-ctl" role="group" aria-label="Original language text">
+        <button type="button" data-orig="off" aria-pressed="true">Off</button>
+        <button type="button" data-orig="under" aria-pressed="false" title="Under each verse">Below</button>
+        <button type="button" data-orig="only" aria-pressed="false" title="Original language only">Only</button>
+      </div>
+    </div>
+    <div class="sp-sub" data-orig-sub>
+      <div class="sp-sub-in">
+        <div class="sp-row sp-ot-row">
+          <span class="sp-label">Hebrew Bible</span>
+          <div class="sp-seg sp-ctl" role="group" aria-label="Original language of the Hebrew Bible readings">
+            <button type="button" data-otorig="he" aria-pressed="true">Hebrew</button>
+            <button type="button" data-otorig="lxx" aria-pressed="false" title="The Septuagint (LXX), the ancient Greek translation">Greek</button>
+            <button type="button" data-otorig="both" aria-pressed="false">Both</button>
+          </div>
+        </div>
+        <div class="sp-row sp-nt-row">
+          <span class="sp-label">Apostles</span>
+          <div class="sp-seg sp-ctl" role="group" aria-label="Original language of the Apostles readings">
+            <button type="button" data-ntorig="grc" aria-pressed="true">Greek</button>
+            <button type="button" data-ntorig="he" aria-pressed="false" title="Delitzsch’s Hebrew New Testament">Hebrew</button>
+            <button type="button" data-ntorig="both" aria-pressed="false">Both</button>
+          </div>
+        </div>
+        <div class="sp-row sp-cant-row">
+          <span class="sp-label">Hebrew Marks</span>
+          <div class="sp-seg sp-ctl" role="group" aria-label="Hebrew marks">
+            <button type="button" data-cant="off" aria-pressed="true">Vowels</button>
+            <button type="button" data-cant="on" aria-pressed="false" title="Vowels and cantillation marks (te’amim)">+ Cantillation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-sec">
+    <p class="sp-group">Names &amp; Terms</p>
+    <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="messianic">
+      <span class="sp-switch-text">
+        <span class="sp-switch-title">Messianic Filter</span>
+        <span class="sp-switch-sub">Yeshua, Messiah, Torah, immersion, assembly…</span>
+      </span>
+      <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+    </button>
+    <button type="button" class="sp-switch" role="switch" aria-checked="false" data-setting="hebrewNames">
+      <span class="sp-switch-text">
+        <span class="sp-switch-title">Hebrew Names</span>
+        <span class="sp-switch-sub">Yerushalayim, Moshe, Yehoshafat, Yoram…</span>
+      </span>
+      <span class="sp-track" aria-hidden="true"><span class="sp-thumb"></span></span>
+    </button>
+  </section>
+
+  <div class="sp-foot">
+    <a href="../guide.html">How to use the reader</a>
+    <button type="button" class="sp-reset" data-reset>Reset to defaults</button>
+  </div>
 </div>
 
 <script src="../assets/maps.js?v=f6ccda23"></script>
 <script src="../assets/history.js?v=7c0a2ff8"></script>
 <script src="../assets/account.js?v=d80079da"></script>
-<script src="../assets/reader.js?v=6f77e0ee"></script>
+<script src="../assets/reader.js?v=8377abd6"></script>
 <script src="../assets/tracks.js?v=a581e5b3"></script>
 </body>
 </html>

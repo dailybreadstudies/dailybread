@@ -163,7 +163,15 @@ illustration card: right margin from 1240px, after the text below that; X closes
 before the tracks began (`PRE_READ` in tracks.js marks its chapters "before", not a date, so they stay out of the day log). Progress has "On your shelf": four shelves (one per track) drawn like the Bible's, spines on the same
 words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its six orders.
 
-## Settings menu (A/א) — four groups
+## Settings menu (A/א)
+Redesigned Nov 2026: a live **preview** at the top (Isaiah 2:3b and Matthew 1:21, `PREVIEW`/`drawPreview` in reader.js, hand-copied
+Hebrew/Greek, so it shows the divine name, filters, Hebrew names, originals, marks, verse numbers, font, size, alignment);
+then Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),
+Bible Text, Original Languages (Show: Off/Below/Only; Hebrew Bible / Apostles fold open under it only when on; Hebrew Marks
+only while Hebrew is shown), Names & Terms, Reading Plan (last; `section.sp-plan`, removed on Kids by make_kids_pages.py), and a
+foot with the Guide link and **Reset to defaults** (keeps the reading plan, place and open/closed states). All right-hand
+controls share one width (`--sp-ctl`). The panel markup is the same in index.html, progress.html (no Margin Subtitles) and maps-test.html.
+Older notes:
 Reading Plan: **Apostolic Scriptures Twice a Year** (off by default) adds the journal's reading in ( ) as a fifth reading;
 the two are then labelled Gospels (Matthew–Acts) / Epistles (Romans–Revelation). The optional reading is always last in
 a day (index entry `[label, ref, 1]`, day file `"optional": true`), so progress numbering never shifts. It counts for

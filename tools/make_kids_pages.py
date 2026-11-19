@@ -73,7 +73,7 @@ def kidsify(html, page):
                         'built on the solid scholarship of the Berean Standard Bible (BSB), with its translation notes. '
                         '“Did you know?” and the questions are from the Daily Bread for Kids journal © 2026 John Enarson; '
                         'Scripture quoted there is from the New American Standard Bible® (NASB), © The Lockman Foundation, used by permission.', 1)
-    html = re.sub(r'\s*<p class="sp-group">Reading Plan</p>.*?(?=\s*<p class="sp-group">Page</p>)', '', html, count=1, flags=re.S)
+    html = re.sub(r'\s*<section class="sp-sec sp-plan">.*?</section>', '', html, count=1, flags=re.S)
     html = html.replace('<h1 class="page-title visually-hidden">Daily Bread Online</h1>',
                         '<h1 class="page-title visually-hidden">Daily Bread for Kids</h1>')
     return '<!-- Made by tools/make_kids_pages.py from the Classic page; edit that page and run the script again. -->\n' + html

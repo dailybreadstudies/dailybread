@@ -78,6 +78,7 @@
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
   var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', otOrig: 'he', showOG: false, marginTitles: true };
+  var DEFAULTS = JSON.parse(JSON.stringify(settings));   // for "Reset to defaults" in the A/א menu
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
     Object.keys(settings).forEach(function (k) { if (k in saved) settings[k] = saved[k]; });
@@ -2160,41 +2161,82 @@
   var panel = document.getElementById('settings-panel');
   var toggleBtn = document.getElementById('settings-btn');
 
+  // Live preview at the top of the menu: a verse from the Tanakh and one from the Apostles, drawn with the
+  // current settings (divine name, Messianic filter, Hebrew names, original languages, verse numbers, font).
+  var PREVIEW = [
+    { book: 'ISA', ref: '2:3', at: 'ISA 2:3', nt: false, v: '3',
+      en: ['…For the law will go forth from Zion, and the word of the ', 0, ' from Jerusalem.'],
+      he: 'כִּ֤י מִצִּיּוֹן֙ תֵּצֵ֣א תוֹרָ֔ה וּדְבַר־יְהֹוָ֖ה מִירוּשָׁלָֽ͏ִם׃',
+      gr: '…ἐκ γὰρ Σειὼν ἐξελεύσεται νόμος, καὶ λόγος Κυρίου ἐξ Ἰερουσαλήμ.' },
+    { book: 'MAT', ref: '1:21', at: 'MAT 1:21', nt: true, v: '21',
+      en: ['She will give birth to a Son, and you are to give Him the name Jesus, because He will save His people from their sins.'],
+      gr: 'τέξεται δὲ υἱὸν καὶ καλέσεις τὸ ὄνομα αὐτοῦ Ἰησοῦν, αὐτὸς γὰρ σώσει τὸν λαὸν αὐτοῦ ἀπὸ τῶν ἁμαρτιῶν αὐτῶν.',
+      he: 'וְהִיא יֹלֶדֶת בֵּן וְקָרָאתָ אֶת־שְׁמוֹ יֵשׁוּעַ כִּי הוּא יוֹשִׁיעַ אֶת־עַמּוֹ מֵעֲוֺנוֹתֵיהֶם׃' }
+  ];
+  function drawPreview() {
+    var box = panel.querySelector('.sp-preview');
+    if (!box) return;
+    var esc = function (t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
+    var vn = settings.verseNumbers === false ? '' : function (n) { return '<span class="sp-pv-num">' + n + '</span>'; };
+    var heText = function (t) {
+      if (!settings.cantillation) t = t.replace(/[֑-ֽ֯]/g, '').replace(/\s*׀\s*/g, ' ');
+      return t;
+    };
+    box.innerHTML = PREVIEW.map(function (p) {
+      var at = { key: p.at, seen: {} };
+      var en = p.en.map(function (part) {
+        if (part === 0) return '<span class="lord">Lord</span>';
+        return esc(transformText(part, at).replace(NAME_MARK_RE, '$2'));
+      }).join('');
+      var origs = p.nt ? ({ both: ['gr', 'he'], he: ['he'] }[settings.ntOrig] || ['gr'])
+                       : ({ both: ['he', 'gr'], lxx: ['gr'] }[settings.otOrig] || ['he']);
+      var html = '<div class="sp-pv-item"><p class="sp-pv-ref">' + esc(bookLabel(p.book)) + ' ' + p.ref + '</p>';
+      if (settings.original !== 'only') html += '<p class="sp-pv-en">' + (vn ? vn(p.v) : '') + en + '</p>';
+      if (settings.original !== 'off') {
+        html += origs.map(function (k, i) {
+          var t = k === 'he' ? heText(p[k]) : p[k];
+          var lang = k === 'he' ? 'he' : 'grc';
+          var num = settings.original === 'only' && i === 0 && vn ? vn(p.v) : '';
+          return '<p class="sp-pv-orig ' + lang + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '') + '>' + num + t + '</p>';
+        }).join('');
+      }
+      return html + '</div>';
+    }).join('');
+    applyDivineName(box);
+  }
+
   function refreshPanel() {
     panel.querySelector('[data-size-label]').textContent = Math.round(SIZES[settings.size]) + '%';
     panel.querySelector('[data-size="-1"]').disabled = settings.size === 0;
     panel.querySelector('[data-size="1"]').disabled = settings.size === SIZES.length - 1;
-    panel.querySelectorAll('[data-name]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-name') === settings.divineName));
-    });
-    panel.querySelectorAll('[data-orig]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-orig') === settings.original));
-    });
-    panel.querySelectorAll('[data-cant]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String((b.getAttribute('data-cant') === 'on') === !!settings.cantillation));
-    });
+    var pressed = function (attr, value) {
+      panel.querySelectorAll('[' + attr + ']').forEach(function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute(attr) === value));
+      });
+    };
+    pressed('data-name', settings.divineName);
+    pressed('data-orig', settings.original);
+    pressed('data-cant', settings.cantillation ? 'on' : 'off');
+    pressed('data-otorig', settings.otOrig || 'he');
+    pressed('data-ntorig', settings.ntOrig || 'grc');
+    pressed('data-theme-opt', settings.theme);
+    pressed('data-font', settings.font);
+    pressed('data-justify', settings.justify ? 'on' : 'off');
+    // The original-language choices open only while original text is shown; Hebrew Marks only while Hebrew is shown
+    var sub = panel.querySelector('[data-orig-sub]');
+    if (sub) {
+      var open = settings.original !== 'off';
+      sub.classList.toggle('is-open', open);
+      sub.querySelectorAll('button').forEach(function (b) { b.tabIndex = open ? 0 : -1; });
+      sub.setAttribute('aria-hidden', String(!open));
+    }
     var cantRow = panel.querySelector('.sp-cant-row');
-    if (cantRow) cantRow.hidden = settings.original === 'off';
-    var ntRow = panel.querySelector('.sp-nt-row');
-    if (ntRow) ntRow.hidden = settings.original === 'off';
-    var otRow = panel.querySelector('.sp-ot-row');
-    if (otRow) otRow.hidden = settings.original === 'off';
-    panel.querySelectorAll('[data-otorig]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-otorig') === (settings.otOrig || 'he')));
-    });
-    panel.querySelectorAll('[data-ntorig]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-ntorig') === (settings.ntOrig || 'grc')));
-    });
-    panel.querySelectorAll('[data-theme-opt]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-theme-opt') === settings.theme));
-    });
-    panel.querySelectorAll('[data-font]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-font') === settings.font));
-    });
-
+    if (cantRow) cantRow.hidden = !(settings.otOrig === 'he' || settings.otOrig === 'both' || !settings.otOrig ||
+                                    settings.ntOrig === 'he' || settings.ntOrig === 'both');
     panel.querySelectorAll('[role="switch"]').forEach(function (b) {
       b.setAttribute('aria-checked', String(!!settings[b.getAttribute('data-setting')]));
     });
+    drawPreview();
   }
 
   function openPanel(open) {
@@ -2237,6 +2279,17 @@
     } else if (t.hasAttribute('data-font')) {
       settings.font = t.getAttribute('data-font');
       applyLook();
+    } else if (t.hasAttribute('data-justify')) {
+      settings.justify = t.getAttribute('data-justify') === 'on';
+      applyLook();
+    } else if (t.hasAttribute('data-reset')) {
+      // Back to the defaults for how the text looks and reads; the reading plan, place and open/closed states are kept
+      Object.keys(DEFAULTS).forEach(function (k) {
+        if (k === 'apostlesTwice' || k === 'apostlesSince' || k === 'location' || k === 'blessingsOpen') return;
+        settings[k] = DEFAULTS[k];
+      });
+      applyLook();
+      rerender();
 
     } else if (t.getAttribute('role') === 'switch') {
       var key = t.getAttribute('data-setting');
@@ -3254,6 +3307,7 @@
       archiveOldYears();
       bookIndex = res[1];
       hebrewNames = namesReplacer(res[2]);
+      if (!panel.hidden) drawPreview();
       if (PAGE === 'progress') { drawProgressPage(); return; }
       var r = new URLSearchParams(location.search).get('r');
       var t = r && parseTarget(r);

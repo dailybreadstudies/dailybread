@@ -605,46 +605,104 @@ html.font-sans .scripture { line-height: 1.8; }
 .sp-title { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
 .sp-close { background: none; border: none; font-size: 22px; line-height: 1; color: var(--muted); cursor: pointer; padding: 2px 4px; border-radius: 4px; }
 .sp-close:hover { color: var(--accent-deep); background: var(--tint); }
-.sp-row { display: flex; justify-content: space-between; align-items: center; min-height: 44px; gap: 12px; }
-.sp-group { margin: 14px 0 2px; padding-top: 12px; border-top: 1px solid var(--rule);
-  font: 600 10.5px/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-faint); }
-.sp-head + .sp-group { border-top: none; padding-top: 0; margin-top: 14px; }
-.sp-switch.sp-switch-row { min-height: 44px; padding: 0; }
-.sp-switch.sp-switch-row + .sp-row, .sp-row + .sp-switch.sp-switch-row { border-top: none; }
+.sp-row { display: flex; justify-content: space-between; align-items: center; min-height: 46px; gap: 12px; }
+.sp-row[hidden] { display: none; }
+/* Groups are set apart by space and a quiet heading, not by rules */
+.sp-sec { padding-top: 6px; }
+.sp-sec + .sp-sec { margin-top: 10px; }
+.sp-group { margin: 12px 0 2px; font: 600 10.5px/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-faint); }
+.sp-switch.sp-switch-row { min-height: 46px; padding: 0; }
 .sp-label { color: var(--ink-soft); white-space: nowrap; }
 .sp-static { color: var(--muted); font-size: 13px; }
+
+/* Every control on the right has the same width, so their edges line up down the menu */
+.settings-panel { --sp-ctl: 196px; }
+.sp-ctl { width: var(--sp-ctl); flex: none; }
+.sp-seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.sp-seg button { flex: 1 1 0; min-width: 0; height: 34px; padding: 0 6px; background: var(--surface); border: none; cursor: pointer;
+  color: var(--ink-soft); font: 400 13px/1 var(--sans); white-space: nowrap; transition: background 0.15s, color 0.15s; }
+.sp-seg button + button { border-left: 1px solid var(--line-strong); }
+.sp-seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.sp-seg button:hover:not([aria-pressed="true"]) { background: var(--tint); }
+.sp-seg-name button { font-size: 12px; }
+.dn-sample { font-family: var(--serif); text-transform: uppercase; letter-spacing: 0.04em; }
+.sp-smallcaps { font-variant: small-caps; }
+.sp-serif { font-family: 'Source Serif 4', Georgia, serif !important; font-size: 16px !important; }
+.sp-sans { font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important; font-size: 15px !important; }
+.sp-seg-icons button { display: inline-flex; align-items: center; justify-content: center; }
+
 .sp-stepper { display: inline-flex; align-items: center; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; }
-.sp-stepper button { width: 40px; height: 34px; background: var(--surface); border: none; cursor: pointer; color: var(--accent); font-family: 'Source Serif 4', Georgia, serif; }
+.sp-stepper button { flex: 1 1 0; height: 34px; background: var(--surface); border: none; cursor: pointer; color: var(--accent); font-family: 'Source Serif 4', Georgia, serif; }
 .sp-stepper button:hover:not(:disabled) { background: var(--tint); }
 .sp-stepper button:disabled { color: var(--accent-line); cursor: default; }
 .sp-a-small { font-size: 13px; }
 .sp-a-large { font-size: 19px; }
-.sp-value { min-width: 52px; text-align: center; font-size: 12px; color: var(--muted); border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); line-height: 34px; }
-.sp-seg { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 8px; overflow: hidden; }
-.sp-seg button { height: 34px; padding: 0 14px; background: var(--surface); border: none; cursor: pointer; color: var(--ink-soft); font-size: 14px; }
-.sp-seg button + button { border-left: 1px solid var(--line-strong); }
-.sp-seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
-.sp-seg button:hover:not([aria-pressed="true"]) { background: var(--tint); }
-.sp-seg-name button { padding: 0 9px; font-size: 12.5px; }
-.sp-seg-theme button { padding: 0 10px; font-size: 13.5px; }
-.dn-sample { text-transform: uppercase; letter-spacing: 0.02em; }
-.sp-smallcaps { font-variant: small-caps; }
-.sp-serif { font-family: 'Source Serif 4', Georgia, serif; }
-.sp-sans { font-family: var(--sans); }
-.sp-divider { height: 1px; background: var(--rule); margin: 6px 0 2px; }
+.sp-value { flex: 1 1 0; text-align: center; font-size: 12px; color: var(--muted); border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); line-height: 34px; font-variant-numeric: tabular-nums; }
+
+/* Font row: typeface and alignment side by side */
+.sp-pair { display: flex; gap: 8px; }
+.sp-pair .sp-seg { flex: 1 1 0; }
+
+/* Appearance: the page colours themselves */
+.sp-swatches { display: flex; justify-content: space-between; padding: 6px 0 4px; }
+.sp-sw { display: flex; flex-direction: column; align-items: center; gap: 5px; background: none; border: none; padding: 0; cursor: pointer; width: 44px; }
+.sp-sw-dot { position: relative; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%;
+  font: 400 15px/1 'Source Serif 4', Georgia, serif; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14); overflow: hidden;
+  transition: box-shadow 0.15s; }
+.sp-sw-light .sp-sw-dot { background: #ffffff; color: #1e1e1e; }
+.sp-sw-sepia .sp-sw-dot { background: #f5ecd7; color: #3b2f22; }
+.sp-sw-dark .sp-sw-dot { background: #17130f; color: #e8e0d5; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16); }
+.sp-sw-auto .sp-sw-dot { background: linear-gradient(135deg, #ffffff 50%, #17130f 50%); }
+.sp-sw-auto .sp-sw-dot span { display: none; }
+.sp-sw-name { font: 400 11px/1 var(--sans); color: var(--muted); }
+.sp-sw:hover .sp-sw-dot { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14), 0 0 0 2px var(--surface), 0 0 0 3.5px var(--accent-line); }
+.sp-sw[aria-pressed="true"] .sp-sw-dot { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.14), 0 0 0 2px var(--surface), 0 0 0 4px var(--accent); }
+.sp-sw[aria-pressed="true"] .sp-sw-name { color: var(--accent); font-weight: 600; }
+.sp-sw:focus-visible { outline: none; }
+.sp-sw:focus-visible .sp-sw-dot { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent-soft); }
+
+/* Original languages: the choices under "Show" fold open when original text is on */
+.sp-sub { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.25s ease, opacity 0.2s ease; }
+.sp-sub.is-open { grid-template-rows: 1fr; opacity: 1; }
+.sp-sub-in { overflow: hidden; min-height: 0; }
+.sp-sub .sp-row { margin-left: 4px; padding-left: 12px; border-left: 2px solid var(--accent-line); min-height: 42px; }
+.sp-sub .sp-label { font-size: 13.5px; color: var(--muted); }
+.sp-sub.is-open .sp-sub-in { padding-bottom: 2px; }
+@media (prefers-reduced-motion: reduce) { .sp-sub { transition: none; } }
+
 .sp-switch {
   display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 14px;
-  background: none; border: none; text-align: left; cursor: pointer; padding: 10px 0; font: inherit; color: inherit;
+  background: none; border: none; text-align: left; cursor: pointer; padding: 9px 0; font: inherit; color: inherit;
 }
-.sp-switch:not(.sp-switch-row) + .sp-switch:not(.sp-switch-row) { border-top: 1px solid var(--rule); }
-.sp-switch-text { display: flex; flex-direction: column; gap: 2px; }
-.sp-switch-title { font-size: 14px; color: var(--ink); }
+.sp-switch-text { display: flex; flex-direction: column; gap: 3px; }
+.sp-switch-title { font-size: 14px; color: var(--ink-soft); }
 .sp-switch-sub { font-size: 12px; color: var(--muted); }
 .sp-track { flex: none; width: 40px; height: 24px; border-radius: 12px; background: var(--track); position: relative; transition: background 0.2s; }
 .sp-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); transition: transform 0.2s; }
 .sp-switch[aria-checked="true"] .sp-track { background: var(--accent); }
 .sp-switch[aria-checked="true"] .sp-thumb { transform: translateX(16px); }
-.sp-switch:focus-visible, .sp-seg button:focus-visible, .sp-stepper button:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.sp-switch:focus-visible, .sp-seg button:focus-visible, .sp-stepper button:focus-visible, .sp-foot :focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+
+/* Live preview of the settings */
+.sp-preview { margin: 4px 0 2px; padding: 10px 14px 11px; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper);
+  color: var(--ink); font-family: var(--serif); }
+.sp-pv-item + .sp-pv-item { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); }
+.sp-pv-ref { margin: 0 0 3px; font: 600 9.5px/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-faint); }
+.sp-pv-en { margin: 0; font-size: 0.86rem; line-height: 1.5; }
+html.justify .sp-pv-en { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.sp-pv-num { font: 400 0.68em/0 var(--sans); vertical-align: super; color: var(--verse); margin-right: 0.3em; }
+.sp-pv-orig { margin: 4px 0 0; }
+.sp-pv-orig.he { font-family: var(--hebrew); direction: rtl; text-align: right; font-size: 1.02rem; line-height: 1.6; }
+.sp-pv-orig.he .sp-pv-num { margin: 0 0 0 0.3em; }
+.sp-pv-orig.grc { font-family: var(--greek); font-size: 0.94rem; line-height: 1.5; }
+.sp-pv-en + .sp-pv-orig.grc { padding-left: 1.2rem; }
+
+/* Foot of the menu: the Guide, and back to the defaults */
+.sp-foot { display: flex; justify-content: space-between; align-items: center; margin: 16px 0 2px; padding-top: 12px;
+  border-top: 1px solid var(--rule); font: 400 12.5px var(--sans); }
+.sp-foot a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
+.sp-reset { background: none; border: none; padding: 4px 0; font: inherit; color: var(--muted); cursor: pointer; }
+.sp-reset:hover { color: var(--accent-deep); text-decoration: underline; text-underline-offset: 3px; }
 
 /* Calendar button & month view */
 .cal-btn { width: 38px; padding: 0; justify-content: center; }
@@ -713,7 +771,6 @@ html.font-sans .scripture { line-height: 1.8; }
 .kt { font-size: 0.78em; color: var(--muted); }
 .kt::before { content: '('; } .kt::after { content: ') '; }
 .qr::before { content: '['; color: var(--muted); } .qr::after { content: ']'; color: var(--muted); }
-.sp-cant-row[hidden] { display: none; }
 
 /* Greek textual notes */
 .tc-apparatus > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; user-select: none; }
@@ -1210,9 +1267,6 @@ html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
 @keyframes try-pulse { 0% { box-shadow: 0 0 0 0 rgba(36, 152, 225, 0.55); } 100% { box-shadow: 0 0 0 16px rgba(36, 152, 225, 0); } }
 @media (prefers-reduced-motion: reduce) { .try-pulse { animation-duration: 2s; animation-iteration-count: 1; } }
 
-/* Link to the Guide at the foot of the A/א menu */
-.sp-guide { margin: 14px 0 2px; padding-top: 12px; border-top: 1px solid var(--rule); font: 400 0.8rem var(--sans); text-align: center; }
-.sp-guide a { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
 .pg-empty p a:not(.pg-btn) { color: var(--accent); text-decoration-color: var(--accent-line); text-underline-offset: 3px; }
 
 /* Brand blue for what is done: the readings-complete count on Progress */
@@ -1240,7 +1294,6 @@ html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
 @media (max-width: 360px) { .bp-books { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* ── Septuagint (Greek Old Testament) under the Tanakh readings ── */
-.sp-ot-row[hidden] { display: none; }
 .lxx-ref { font: 500 0.6em/1 var(--sans); letter-spacing: 0.04em; color: var(--accent-faint); vertical-align: 0.15em; margin-right: 0.15em; white-space: nowrap; }
 .lxx-ref::before { content: 'LXX '; letter-spacing: 0.08em; }
 .lxx-plus .lxx-ref::before, .lxx-og .lxx-ref::before { content: none; }
