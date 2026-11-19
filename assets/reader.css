@@ -683,20 +683,6 @@ html.font-sans .scripture { line-height: 1.8; }
 .sp-switch[aria-checked="true"] .sp-thumb { transform: translateX(16px); }
 .sp-switch:focus-visible, .sp-seg button:focus-visible, .sp-stepper button:focus-visible, .sp-foot :focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
 
-/* Live preview of the settings */
-.sp-preview { margin: 4px 0 2px; padding: 10px 14px 11px; border: 1px solid var(--rule); border-radius: 10px; background: var(--paper);
-  color: var(--ink); font-family: var(--serif); }
-.sp-pv-item + .sp-pv-item { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); }
-.sp-pv-ref { margin: 0 0 3px; font: 600 9.5px/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-faint); }
-.sp-pv-en { margin: 0; font-size: 0.86rem; line-height: 1.5; }
-html.justify .sp-pv-en { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
-.sp-pv-num { font: 400 0.68em/0 var(--sans); vertical-align: super; color: var(--verse); margin-right: 0.3em; }
-.sp-pv-orig { margin: 4px 0 0; }
-.sp-pv-orig.he { font-family: var(--hebrew); direction: rtl; text-align: right; font-size: 1.02rem; line-height: 1.6; }
-.sp-pv-orig.he .sp-pv-num { margin: 0 0 0 0.3em; }
-.sp-pv-orig.grc { font-family: var(--greek); font-size: 0.94rem; line-height: 1.5; }
-.sp-pv-en + .sp-pv-orig.grc { padding-left: 1.2rem; }
-
 /* Foot of the menu: the Guide, and back to the defaults */
 .sp-foot { display: flex; justify-content: space-between; align-items: center; margin: 16px 0 2px; padding-top: 12px;
   border-top: 1px solid var(--rule); font: 400 12.5px var(--sans); }

@@ -164,9 +164,7 @@ before the tracks began (`PRE_READ` in tracks.js marks its chapters "before", no
 words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its six orders.
 
 ## Settings menu (A/א)
-Redesigned Nov 2026: a live **preview** at the top (Isaiah 2:3b and Matthew 1:21, `PREVIEW`/`drawPreview` in reader.js, hand-copied
-Hebrew/Greek, so it shows the divine name, filters, Hebrew names, originals, marks, verse numbers, font, size, alignment);
-then Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),
+Redesigned Nov 2026 (a live preview at the top was tried and removed at John's request): Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),
 Bible Text, Original Languages (Show: Off/Below/Only; Hebrew Bible / Apostles fold open under it only when on; Hebrew Marks
 only while Hebrew is shown), Names & Terms, Reading Plan (last; `section.sp-plan`, removed on Kids by make_kids_pages.py), and a
 foot with the Guide link and **Reset to defaults** (keeps the reading plan, place and open/closed states). All right-hand

@@ -2161,50 +2161,6 @@
   var panel = document.getElementById('settings-panel');
   var toggleBtn = document.getElementById('settings-btn');
 
-  // Live preview at the top of the menu: a verse from the Tanakh and one from the Apostles, drawn with the
-  // current settings (divine name, Messianic filter, Hebrew names, original languages, verse numbers, font).
-  var PREVIEW = [
-    { book: 'ISA', ref: '2:3', at: 'ISA 2:3', nt: false, v: '3',
-      en: ['…For the law will go forth from Zion, and the word of the ', 0, ' from Jerusalem.'],
-      he: 'כִּ֤י מִצִּיּוֹן֙ תֵּצֵ֣א תוֹרָ֔ה וּדְבַר־יְהֹוָ֖ה מִירוּשָׁלָֽ͏ִם׃',
-      gr: '…ἐκ γὰρ Σειὼν ἐξελεύσεται νόμος, καὶ λόγος Κυρίου ἐξ Ἰερουσαλήμ.' },
-    { book: 'MAT', ref: '1:21', at: 'MAT 1:21', nt: true, v: '21',
-      en: ['She will give birth to a Son, and you are to give Him the name Jesus, because He will save His people from their sins.'],
-      gr: 'τέξεται δὲ υἱὸν καὶ καλέσεις τὸ ὄνομα αὐτοῦ Ἰησοῦν, αὐτὸς γὰρ σώσει τὸν λαὸν αὐτοῦ ἀπὸ τῶν ἁμαρτιῶν αὐτῶν.',
-      he: 'וְהִיא יֹלֶדֶת בֵּן וְקָרָאתָ אֶת־שְׁמוֹ יֵשׁוּעַ כִּי הוּא יוֹשִׁיעַ אֶת־עַמּוֹ מֵעֲוֺנוֹתֵיהֶם׃' }
-  ];
-  function drawPreview() {
-    var box = panel.querySelector('.sp-preview');
-    if (!box) return;
-    var esc = function (t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); };
-    var vn = settings.verseNumbers === false ? '' : function (n) { return '<span class="sp-pv-num">' + n + '</span>'; };
-    var heText = function (t) {
-      if (!settings.cantillation) t = t.replace(/[֑-ֽ֯]/g, '').replace(/\s*׀\s*/g, ' ');
-      return t;
-    };
-    box.innerHTML = PREVIEW.map(function (p) {
-      var at = { key: p.at, seen: {} };
-      var en = p.en.map(function (part) {
-        if (part === 0) return '<span class="lord">Lord</span>';
-        return esc(transformText(part, at).replace(NAME_MARK_RE, '$2'));
-      }).join('');
-      var origs = p.nt ? ({ both: ['gr', 'he'], he: ['he'] }[settings.ntOrig] || ['gr'])
-                       : ({ both: ['he', 'gr'], lxx: ['gr'] }[settings.otOrig] || ['he']);
-      var html = '<div class="sp-pv-item"><p class="sp-pv-ref">' + esc(bookLabel(p.book)) + ' ' + p.ref + '</p>';
-      if (settings.original !== 'only') html += '<p class="sp-pv-en">' + (vn ? vn(p.v) : '') + en + '</p>';
-      if (settings.original !== 'off') {
-        html += origs.map(function (k, i) {
-          var t = k === 'he' ? heText(p[k]) : p[k];
-          var lang = k === 'he' ? 'he' : 'grc';
-          var num = settings.original === 'only' && i === 0 && vn ? vn(p.v) : '';
-          return '<p class="sp-pv-orig ' + lang + '" lang="' + lang + '"' + (lang === 'he' ? ' dir="rtl"' : '') + '>' + num + t + '</p>';
-        }).join('');
-      }
-      return html + '</div>';
-    }).join('');
-    applyDivineName(box);
-  }
-
   function refreshPanel() {
     panel.querySelector('[data-size-label]').textContent = Math.round(SIZES[settings.size]) + '%';
     panel.querySelector('[data-size="-1"]').disabled = settings.size === 0;
@@ -2236,7 +2192,6 @@
     panel.querySelectorAll('[role="switch"]').forEach(function (b) {
       b.setAttribute('aria-checked', String(!!settings[b.getAttribute('data-setting')]));
     });
-    drawPreview();
   }
 
   function openPanel(open) {
@@ -3307,7 +3262,6 @@
       archiveOldYears();
       bookIndex = res[1];
       hebrewNames = namesReplacer(res[2]);
-      if (!panel.hidden) drawPreview();
       if (PAGE === 'progress') { drawProgressPage(); return; }
       var r = new URLSearchParams(location.search).get('r');
       var t = r && parseTarget(r);
