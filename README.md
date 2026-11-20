@@ -180,6 +180,15 @@ Ehud (3:12), Deborah and Barak (4–5), Gideon (6–8), Jephthah (10:17–12:7),
 and the war against Benjamin (19–21). Each map's `except` keeps a name from linking where it means a person or another
 place (Gilead in 11:1–2, the second Aroer in 11:33). Names a story map leaves out are linked to the book map.
 
+### Acts maps
+
+`tools/build_acts_maps.py` holds the Acts maps, one per BSB section (so far: Paul returns to Antioch, 18:18–22). They are
+wide maps (`"world": true`) drawn on a detailed coastline: `"sea": "sea-med"` loads `data/maps/base/sea-med.json`, Natural
+Earth's 1:10m ocean for Italy to Mesopotamia, built by `python3 tools/build_detail_sea.py /tmp/nev/geojson` (instructions at
+the top of the script), in place of the coarser sea in `world.json`. Routes are written as a few waypoints and drawn as smooth
+curves; the script checks that every sea leg stays on water and every land leg on land, and stops if one crosses the coast.
+Regions are the Roman provinces (Achaia, Asia, Galatia, Cilicia, Syria, Judea…).
+
 ## Archaeology finds
 
 A small button beside a verse opens a card about an archaeological find: a picture or two, key facts and a

@@ -2059,6 +2059,27 @@
      ]
     }
    ]
+  },
+  {
+   "id": "act-18-return",
+   "title": "Paul Returns to Antioch",
+   "ref": "Acts 18:18–22",
+   "book": "ACT",
+   "c": 18,
+   "v": 18,
+   "links": [
+    "Corinth",
+    "Cenchrea",
+    "Syria",
+    "Ephesus",
+    "Caesarea",
+    "Jerusalem",
+    "Antioch"
+   ],
+   "range": [
+    18,
+    22
+   ]
   }
  ]
 }

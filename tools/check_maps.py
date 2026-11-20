@@ -34,6 +34,7 @@ Map file format (data/maps/<id>.json):
   waterNames [{n, s, ll}]      the map's own sea and river labels
   groupLabelZoom               zoom from which group place names show (default 8.3)
   world true                   optional: a wide map (seas and rivers from data/maps/base/world.json, labels at low zoom)
+  sea "sea-med"                optional, with world: a more detailed sea from data/maps/base/<sea>.json (tools/build_detail_sea.py)
   siteLabel, sources           optional: popup label for p.m ("Region"), and this map's own sources line
   groups [{id, name, color, vv, places[{n, ll, c, m, f, u, note}], area, labelAt, hidden}]
                                coloured sets of places (tribal allotments, clans, kings); area is an
@@ -117,6 +118,8 @@ for entry in index.get('maps', []):
         bad(mid, 'chapter %s %s is not in the BSB data' % (a.get('book'), a.get('c')))
     elif a.get('v') not in verses:
         bad(mid, 'verse %s:%s does not exist' % (a.get('c'), a.get('v')))
+    if m.get('sea') and not os.path.exists(os.path.join(MAPS, 'base', m['sea'] + '.json')):
+        bad(mid, 'no sea file data/maps/base/%s.json' % m['sea'])
     b = m.get('bounds')
     if not (isinstance(b, list) and len(b) == 2 and is_ll(b[0]) and is_ll(b[1]) and b[0][0] < b[1][0] and b[0][1] < b[1][1]):
         bad(mid, 'bounds must be [[west, south], [east, north]]')

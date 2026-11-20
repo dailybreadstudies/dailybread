@@ -49,7 +49,7 @@
     'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
-  var MAPS_DATA_V = '59e49013';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
+  var MAPS_DATA_V = '542086c2';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
   function getJSON(url) {
     if (/^data\/maps\//.test(url)) url += (url.indexOf('?') < 0 ? '?v=' : '&v=') + MAPS_DATA_V;
     return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + ' (' + r.status + ')'); return r.json(); });
@@ -559,9 +559,11 @@
       .then(function (res) {
         if (!res[1].world) return res;
         // A wide map (e.g. the Table of Nations): seas, lakes and great rivers of the whole region
-        return getJSON('data/maps/base/world.json').then(function (w) {
-          var water = res[2];
-          water.sea = w.sea; water.rivers = w.rivers; water.box = w.box; water.seaCoast = null;
+        // a map may name a more detailed sea of its own (e.g. "sea-med": the 1:10m Mediterranean coast for Acts)
+        return Promise.all([getJSON('data/maps/base/world.json'),
+                            res[1].sea ? getJSON('data/maps/base/' + res[1].sea + '.json').catch(function () { return null; }) : null]).then(function (ws) {
+          var w = ws[0], d = ws[1], water = res[2];
+          water.sea = d ? d.sea : w.sea; water.rivers = w.rivers; water.box = d ? d.box : w.box; water.seaCoast = null;
           water.names = { type: 'FeatureCollection', features: water.names.features.filter(function (f) { return f.properties.n === 'The Great Sea'; })
             .map(function (f) { return { type: 'Feature', properties: f.properties, geometry: { type: 'Point', coordinates: [20.5, 34.6] } }; }).concat(w.names.features) };
           return res;
