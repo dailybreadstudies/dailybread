@@ -146,6 +146,17 @@ MAPS_OUT.append({
 })
 
 
+# ─────────────────────────── Drafts (unlisted) ───────────────────────────
+# Private working copies, opened full screen at map-draft.html?m=<id>. They are written to data/maps/ but never
+# listed in index.json, so the reader never shows them and the public map is untouched. Start a draft as a copy
+# of a public map, then edit the copy here (title, waypoints, places, notes) without changing the original.
+import copy
+DRAFTS = []
+_d = copy.deepcopy(MAPS_OUT[0])
+_d['id'] = 'act-18-draft'
+DRAFTS.append(_d)
+
+
 def check_routes(maps):
     """Every sea leg must stay on water (except where it reaches its harbour) and every land leg on land."""
     from matplotlib.path import Path
@@ -169,7 +180,7 @@ def check_routes(maps):
 def main():
     if os.environ.get('ACTS_DUMP'):
         json.dump([{'coords': mo['coords'], 'way': mo['_way']} for m in MAPS_OUT for mo in m['moves']], open(os.environ['ACTS_DUMP'], 'w'))
-    bad = check_routes(MAPS_OUT)
+    bad = check_routes(MAPS_OUT + DRAFTS)
     if bad and '--force' not in sys.argv:
         print('\n'.join(bad))
         sys.exit('Routes cross the coast; move the waypoints (or run with --force).')
@@ -190,9 +201,17 @@ def main():
                 e[k] = m[k]
         idx['maps'].append(e)
     order = ['GEN', 'EXO', 'JOS', 'JDG', 'MAT', 'MRK', 'LUK', 'JHN', 'ACT']
+    for m in DRAFTS:                                  # unlisted: written, never put in index.json
+        for mo in m['moves']:
+            mo.pop('_sea', None)
+            mo.pop('_way', None)
+        m['draft'] = True
+        with open(os.path.join(MAPS, m['id'] + '.json'), 'w', encoding='utf-8') as fh:
+            json.dump(m, fh, ensure_ascii=False, indent=1)
+    idx['maps'] = [e for e in idx['maps'] if e['id'] not in {m['id'] for m in DRAFTS}]
     idx['maps'].sort(key=lambda e: (order.index(e['book']) if e['book'] in order else 99, e['c'], e['v']))
     json.dump(idx, open(idx_path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-    print('%d maps written' % len(MAPS_OUT))
+    print('%d maps written, %d unlisted drafts' % (len(MAPS_OUT), len(DRAFTS)))
 
 
 main()

@@ -189,6 +189,10 @@ the top of the script), in place of the coarser sea in `world.json`. Routes are 
 curves; the script checks that every sea leg stays on water and every land leg on land, and stops if one crosses the coast.
 Regions are the Roman provinces (Achaia, Asia, Galatia, Cilicia, Syria, Judea…).
 
+**Drafts.** `map-draft.html?m=<id>` (unlisted, noindex, linked from nowhere) opens one map full screen. Drafts are
+written by the build scripts (`DRAFTS` in `tools/build_acts_maps.py`) with `"draft": true` and are never put in
+`index.json`, so editing a draft never changes the public map. `act-18-draft` started as a copy of `act-18-return`.
+
 ## Archaeology finds
 
 A small button beside a verse opens a card about an archaeological find: a picture or two, key facts and a

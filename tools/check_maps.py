@@ -225,6 +225,8 @@ for entry in index.get('maps', []):
 
 for f in os.listdir(MAPS):
     if f.endswith('.json') and f != 'index.json' and f[:-5] not in seen:
+        if json.load(open(os.path.join(MAPS, f), encoding='utf-8')).get('draft'):
+            continue                                   # unlisted drafts (map-draft.html?m=<id>) are not in the index
         problems.append('%s is not listed in data/maps/index.json' % f)
 
 if problems:

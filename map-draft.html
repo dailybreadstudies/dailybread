@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Map draft · Daily Bread Online</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <!-- Unlisted: a full-screen view of one map draft (data/maps/<id>.json, not in index.json), for the site owner
+       to look at. Nothing on the site links here. Open map-draft.html?m=act-18-draft (the default). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/reader.css?v=6639d99f">
+  <link rel="stylesheet" href="assets/maps.css?v=f0e0cd3a">
+  <script>
+    try { var t = JSON.parse(localStorage.getItem('dbs-settings') || '{}').theme;
+          if (t === 'light' || t === 'dark' || t === 'sepia') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  </script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    .draft-host { position: absolute; left: -9999px; top: 0; width: 600px; }
+    /* always full screen: no Close or Shrink */
+    .dbm-close, [data-dbm-big] { display: none !important; }
+    .draft-tag { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px)); z-index: 1001;
+      font: 600 0.62rem/1 var(--sans, Inter, sans-serif); letter-spacing: 0.12em; text-transform: uppercase;
+      background: rgba(0,0,0,.55); color: #fff; padding: 0.35rem 0.6rem; border-radius: 999px; pointer-events: none; }
+    @media (max-width: 600px) { .draft-tag { bottom: auto; top: calc(4.2rem + env(safe-area-inset-top, 0px)); } }
+    .draft-err { padding: 2rem; font: 1rem/1.5 var(--sans, Inter, sans-serif); }
+  </style>
+</head>
+<body>
+<div class="draft-host"><div class="scripture"><p id="draft-anchor">&nbsp;</p></div></div>
+<div class="draft-tag">Draft · not public</div>
+<script src="assets/maps.js?v=0821d7fb"></script>
+<script>
+{
+  var id = (new URLSearchParams(location.search).get('m') || 'act-18-draft').replace(/[^\w-]/g, '');
+  if (!window.DBMaps) document.body.innerHTML = '<p class="draft-err">The map tool could not load.</p>';
+  else {
+    DBMaps.open(id, null, document.getElementById('draft-anchor'));
+    var tries = 0, t = setInterval(function () {        // switch to the full-screen (Enlarge) view as soon as the map is built
+      var b = document.querySelector('[data-dbm-big]');
+      if (b && b.getAttribute('aria-pressed') !== 'true') { b.click(); clearInterval(t); }
+      if (++tries > 100) clearInterval(t);
+    }, 100);
+  }
+}
+</script>
+</body>
+</html>
