@@ -49,7 +49,7 @@
     'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
-  var MAPS_DATA_V = 'a1e3e7e4';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
+  var MAPS_DATA_V = 'a9dcd8c6';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
   function getJSON(url) {
     if (/^data\/maps\//.test(url)) url += (url.indexOf('?') < 0 ? '?v=' : '&v=') + MAPS_DATA_V;
     return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + ' (' + r.status + ')'); return r.json(); });
@@ -1024,8 +1024,8 @@
       if (!map.getLayer(id)) return;
       map.setPaintProperty(id, 'line-color', '#c8102e');
       map.setPaintProperty(id, 'line-width', 1.5);
-      map.setPaintProperty(id, 'line-dasharray', [1, 0]);
-      map.setLayoutProperty(id, 'line-cap', 'butt');
+      map.setPaintProperty(id, 'line-dasharray', spec.baseDash || [1, 0]);    // baseDash: e.g. [0.01, 2.4] for a dotted line
+      map.setLayoutProperty(id, 'line-cap', spec.baseDash ? 'round' : 'butt');
     });
     function trim() {
       var feats = [];
