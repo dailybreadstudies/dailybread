@@ -2565,5 +2565,6 @@
   }
  ],
  "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Coastline: Natural Earth 1:10m; rivers: Natural Earth (public domain); Sea of Galilee shoreline © OpenStreetMap contributors; ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Routes are approximate: sea routes follow the usual coasting course between harbours. Map engine: MapLibre GL.",
+ "base": true,
  "draft": true
 }

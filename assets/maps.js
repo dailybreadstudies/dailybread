@@ -49,7 +49,7 @@
     'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
-  var MAPS_DATA_V = '8423e372';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
+  var MAPS_DATA_V = 'a1e3e7e4';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
   function getJSON(url) {
     if (/^data\/maps\//.test(url)) url += (url.indexOf('?') < 0 ? '?v=' : '&v=') + MAPS_DATA_V;
     return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + ' (' + r.status + ')'); return r.json(); });
@@ -695,6 +695,7 @@
         setMode(ctx, 'ancient');
         fitDefault(ctx, 0);
         applyVisibility(ctx);
+        if (spec.base) baseSetup(ctx);
         var q = ctx.queue; ctx.queue = [];
         q.forEach(function (fn) { setTimeout(function () { fn(ctx); }, 250); });
       } catch (err) { console.error('Map setup failed', err); }
@@ -897,6 +898,11 @@
     function mk(node, ll, opts) { return new ml.Marker(Object.assign({ element: node }, opts || {})).setLngLat(ll).addTo(map); }
     ctx.mk = mk;
     ctx.marks = { moves: {}, symbol: {} };
+    if (spec.base) {                                   // bare base map: only the named places, as small dots
+      (spec.named || []).forEach(function (p) { mk(el('div', 'dbm-basedot'), p.ll); });
+      ctx.hn = hn;
+      return;
+    }
     (spec.symbols || []).forEach(function (s, i) {
       var list = ctx.marks.symbol[i] = [];
       var color = SYM_COLOR[s.type];
@@ -976,6 +982,61 @@
     map.setPaintProperty('gpoint-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
     map.setPaintProperty('garea-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
     map.setPaintProperty('places-label', 'text-halo-color', m === 'sat' ? 'rgba(0,0,0,0.85)' : m === 'modern' ? 'rgba(255,255,255,0.9)' : css('--dbm-paper'));
+    if (ctx.spec.base) baseHide(ctx);
+  }
+
+  /* "base": true — a bare base map to trace in design software (map drafts only): no labels, key or numbers; the
+     map's named places as small black dots; routes as thin solid red lines that stop a few pixels short of the dots. */
+  var BASE_GAP = 9;                                   // px between a dot's centre and the end of a line
+  function baseHide(ctx) {
+    var map = ctx.map;
+    map.getStyle().layers.forEach(function (l) { if (l.type === 'symbol') map.setLayoutProperty(l.id, 'visibility', 'none'); });
+  }
+  function trimEnds(map, c, gap) {
+    var px = c.map(function (p) { return map.project(p); });
+    function cut(pts, cc) {                            // drop the first `gap` pixels of the line
+      var left = gap;
+      for (var i = 1; i < pts.length; i++) {
+        var d = Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+        if (d >= left) {
+          var f = left / d, a = cc[i - 1], b = cc[i];
+          return [[a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f]].concat(cc.slice(i));
+        }
+        left -= d;
+      }
+      return null;
+    }
+    var fwd = cut(px, c);
+    if (!fwd) return null;
+    var px2 = fwd.map(function (p) { return map.project(p); }).reverse();
+    var back = cut(px2, fwd.slice().reverse());
+    return back ? back.reverse() : null;
+  }
+  function baseSetup(ctx) {
+    var map = ctx.map, spec = ctx.spec;
+    baseHide(ctx);
+    var kf = ctx.root.querySelector('.dbm-keyfloat');  // no key: let the map use the whole width
+    if (kf) kf.classList.add('closed');
+    fitDefault(ctx, 0);
+    if (map.getLayer('moves-casing')) map.setLayoutProperty('moves-casing', 'visibility', 'none');
+    (spec.moves || []).forEach(function (m) {
+      var id = 'move-' + m.n;
+      if (!map.getLayer(id)) return;
+      map.setPaintProperty(id, 'line-color', '#c8102e');
+      map.setPaintProperty(id, 'line-width', 1.5);
+      map.setPaintProperty(id, 'line-dasharray', [1, 0]);
+      map.setLayoutProperty(id, 'line-cap', 'butt');
+    });
+    function trim() {
+      var feats = [];
+      (spec.moves || []).forEach(function (m) {
+        var lines = linesOf(m).map(function (c) { return trimEnds(map, c, BASE_GAP); }).filter(Boolean);
+        if (lines.length) feats.push({ type: 'Feature', properties: { n: m.n }, geometry: { type: 'MultiLineString', coordinates: lines } });
+      });
+      map.getSource('moves').setData({ type: 'FeatureCollection', features: feats });
+    }
+    trim();
+    map.on('zoom', trim); map.on('pitch', trim); map.on('rotate', trim);
   }
   function repaint() {
     var ctx = state.ctx;

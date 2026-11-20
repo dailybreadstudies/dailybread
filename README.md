@@ -192,6 +192,9 @@ Regions are the Roman provinces (Achaia, Asia, Galatia, Cilicia, Syria, Judea…
 **Drafts.** `map-draft.html?m=<id>` (unlisted, noindex, linked from nowhere) opens one map full screen. Drafts are
 written by the build scripts (`DRAFTS` in `tools/build_acts_maps.py`) with `"draft": true` and are never put in
 `index.json`, so editing a draft never changes the public map. `act-18-draft` started as a copy of `act-18-return`.
+A draft with `"base": true` is a bare base map for tracing in design software: no labels, key, numbers or arrows (only the
+map-style and 3D tools), the named places as small black dots, and the routes as thin solid red lines that stop a few
+pixels short of the dots (`BASE_GAP` in maps.js). `act-18-draft` is one.
 
 ## Archaeology finds
 

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/reader.css?v=6639d99f">
-  <link rel="stylesheet" href="assets/maps.css?v=f0e0cd3a">
+  <link rel="stylesheet" href="assets/maps.css?v=1bd44a69">
   <script>
     try { var t = JSON.parse(localStorage.getItem('dbs-settings') || '{}').theme;
           if (t === 'light' || t === 'dark' || t === 'sepia') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
@@ -26,19 +26,22 @@
       font: 600 0.62rem/1 var(--sans, Inter, sans-serif); letter-spacing: 0.12em; text-transform: uppercase;
       background: rgba(0,0,0,.55); color: #fff; padding: 0.35rem 0.6rem; border-radius: 999px; pointer-events: none; }
     @media (max-width: 600px) { .draft-tag { bottom: auto; top: calc(4.2rem + env(safe-area-inset-top, 0px)); } }
+    /* a bare base map ("base": true): nothing but the map and the tools at the top right */
+    body.draft-base .dbm-keyfloat, body.draft-base .dbm-cartouche, body.draft-base .maplibregl-ctrl-bottom-left,
+    body.draft-base .maplibregl-ctrl-bottom-right, body.draft-base .draft-tag { display: none !important; }
     .draft-err { padding: 2rem; font: 1rem/1.5 var(--sans, Inter, sans-serif); }
   </style>
 </head>
 <body>
 <div class="draft-host"><div class="scripture"><p id="draft-anchor">&nbsp;</p></div></div>
 <div class="draft-tag">Draft · not public</div>
-<script src="assets/maps.js?v=0821d7fb"></script>
+<script src="assets/maps.js?v=e35b7898"></script>
 <script>
 {
   var id = (new URLSearchParams(location.search).get('m') || 'act-18-draft').replace(/[^\w-]/g, '');
   if (!window.DBMaps) document.body.innerHTML = '<p class="draft-err">The map tool could not load.</p>';
   else {
-    DBMaps.open(id, null, document.getElementById('draft-anchor'));
+    DBMaps.open(id, function (ctx) { if (ctx.spec.base) document.body.classList.add('draft-base'); }, document.getElementById('draft-anchor'));
     var tries = 0, t = setInterval(function () {        // switch to the full-screen (Enlarge) view as soon as the map is built
       var b = document.querySelector('[data-dbm-big]');
       if (b && b.getAttribute('aria-pressed') !== 'true') { b.click(); clearInterval(t); }

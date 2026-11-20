@@ -154,6 +154,7 @@ import copy
 DRAFTS = []
 _d = copy.deepcopy(MAPS_OUT[0])
 _d['id'] = 'act-18-draft'
+_d['base'] = True          # bare base map for tracing: no labels or key, cities as dots, thin red routes
 DRAFTS.append(_d)
 
 

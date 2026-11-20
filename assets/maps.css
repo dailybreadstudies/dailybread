@@ -254,3 +254,6 @@ body.dbm-locked { overflow: hidden; }
   .dbm-glow::before, .dbm-glow::after { animation: none; transform: scale(1.6); opacity: 0.6; }
 }
 @media print { .dbm-pin, .dbm-panel, .scripture .dbm { display: none !important; } }
+
+/* Bare base map ("base": true, map drafts only): the named places as small black dots */
+.dbm-basedot { width: 7px; height: 7px; border-radius: 50%; background: #111; pointer-events: none; }
