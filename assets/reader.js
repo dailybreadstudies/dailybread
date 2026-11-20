@@ -2908,11 +2908,11 @@
   // Keep the verse the reader was looking at in place when a setting redraws the text (e.g. Hebrew under each verse
   // doubles the length): note the verse number nearest the middle of the screen, then scroll it back to the same spot.
   var ANCHOR_SEL = '.portion.active .verse-num, .portion.active .chapter-num';
-  function verseMarks() {
+  function anchorMarks() {
     return Array.prototype.filter.call(document.querySelectorAll(ANCHOR_SEL), function (el) { return el.getClientRects().length; });
   }
   function readingAnchor() {
-    var marks = verseMarks(), mid = window.innerHeight / 2, best = -1, bestDist = Infinity;
+    var marks = anchorMarks(), mid = window.innerHeight / 2, best = -1, bestDist = Infinity;
     if (!marks.length || window.scrollY < 50) return null;   // at the top of the page: nothing to keep
     marks.forEach(function (el, i) {
       var d = Math.abs(el.getBoundingClientRect().top - mid);
@@ -2923,7 +2923,7 @@
   function restoreAnchor(a) {
     if (!a) return;
     var fix = function () {
-      var marks = verseMarks();
+      var marks = anchorMarks();
       var el = marks[Math.min(a.i, marks.length - 1)];
       if (el) window.scrollBy(0, el.getBoundingClientRect().top - a.top);
     };
