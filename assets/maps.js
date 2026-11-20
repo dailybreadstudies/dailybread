@@ -49,7 +49,7 @@
     'contributors. Imagery © Esri. Map labels and streams: OpenFreeMap (OpenMapTiles, OpenStreetMap). Main ancient roads are approximations, after standard reconstructions of the route corridors. Map engine: MapLibre GL.';
 
   // ── Small helpers ───────────────────────────────────────────
-  var MAPS_DATA_V = 'a9dcd8c6';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
+  var MAPS_DATA_V = '5fcd14b2';     // set by tools/stamp_assets.py from the contents of data/maps, so updated maps are fetched fresh
   function getJSON(url) {
     if (/^data\/maps\//.test(url)) url += (url.indexOf('?') < 0 ? '?v=' : '&v=') + MAPS_DATA_V;
     return fetch(url).then(function (r) { if (!r.ok) throw new Error(url + ' (' + r.status + ')'); return r.json(); });
@@ -1037,6 +1037,26 @@
     }
     trim();
     map.on('zoom', trim); map.on('pitch', trim); map.on('rotate', trim);
+    baseScale(ctx);
+  }
+  /* A plain scale line without numbers: ticks above at 0, 100 and 200 km, one tick below at 100 miles */
+  function baseScale(ctx) {
+    var map = ctx.map, NSs = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NSs, 'svg');
+    svg.setAttribute('class', 'dbm-basescale'); svg.setAttribute('aria-hidden', 'true');
+    ctx.frame.appendChild(svg);
+    function draw() {
+      var lat = map.getCenter().lat;
+      var mPerPx = 40075016.686 * Math.cos(lat * Math.PI / 180) / (512 * Math.pow(2, map.getZoom()));
+      var km = 1000 / mPerPx, L = 200 * km, mi = 160.9344 * km, x0 = 1.5, y = 8, H = 7;
+      svg.setAttribute('width', Math.ceil(L + 3)); svg.setAttribute('height', 2 * y);
+      svg.innerHTML = '<g stroke="#333" stroke-width="1" fill="none" shape-rendering="crispEdges">' +
+        '<path d="M' + x0 + ' ' + y + 'H' + (x0 + L).toFixed(1) + '"/>' +
+        [0, 100 * km, L].map(function (x) { return '<path d="M' + (x0 + x).toFixed(1) + ' ' + y + 'V' + (y - H + (x === 100 * km ? 2 : 0)) + '"/>'; }).join('') +
+        '<path d="M' + (x0 + mi).toFixed(1) + ' ' + y + 'V' + (y + H - 2) + '"/></g>';
+    }
+    draw();
+    map.on('move', draw);
   }
   function repaint() {
     var ctx = state.ctx;

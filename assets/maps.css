@@ -256,4 +256,5 @@ body.dbm-locked { overflow: hidden; }
 @media print { .dbm-pin, .dbm-panel, .scripture .dbm { display: none !important; } }
 
 /* Bare base map ("base": true, map drafts only): the named places as small black dots */
-.dbm-basedot { width: 7px; height: 7px; border-radius: 50%; background: #111; pointer-events: none; }
+.dbm-basedot { width: 5.25px; height: 5.25px; border-radius: 50%; background: #111; pointer-events: none; }
+.dbm-basescale { position: absolute; left: 16px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 2; pointer-events: none; opacity: 0.8; }

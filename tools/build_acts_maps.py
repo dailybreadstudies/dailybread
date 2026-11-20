@@ -157,7 +157,6 @@ _d['id'] = 'act-18-draft'
 _d['base'] = True          # bare base map for tracing: no labels or key, cities as dots, thin red routes
 _d['baseDash'] = [0.01, 2.4]                                      # dotted red line
 _d['moves'] = [m for m in _d['moves'] if m['n'] != 5]                 # no leg on to Antioch
-_d['named'] = [p for p in _d['named'] if p['name'] != 'Antioch']      # so no Antioch dot either
 DRAFTS.append(_d)
 
 
