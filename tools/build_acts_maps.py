@@ -97,7 +97,7 @@ MAPS_OUT = []
 
 # ─────────────────────────── Acts 18:18–22, Paul returns to Antioch ───────────────────────────
 MAPS_OUT.append({
-    'id': 'act-18-return', 'title': 'Paul Returns to Antioch', 'ref': 'Acts 18:18–22',
+    'id': 'act-18-return', 'title': 'Paul Returns to Jerusalem and Antioch', 'ref': 'Acts 18:18–22',
     'anchor': {'book': 'ACT', 'c': 18, 'v': 18}, 'range': [18, 22],
     'world': True, 'sea': 'sea-med', 'siteLabel': 'Site', 'placesName': 'Acts',
     'bounds': [[21.7, 31.1], [37.3, 38.5]], 'regionZoom': 5.6,
