@@ -35,6 +35,10 @@
     'Synagogue': 'Synagogan', 'Morning': 'Morgon', 'Afternoon': 'Eftermiddag', 'Evening': 'Kväll',
     'Take a moment to pray before reading the Scriptures.': 'Ta en stund och be innan du läser Skriften.',
     'Traditional Blessings': 'Traditionella välsignelser',
+    'Torah studies (all Scripture included) is of even higher importance than prayer and should be done daily. Since it is a commandment (see Dt. 6:6–7) and a spiritual undertaking, it is customary in Israel to first pray and bless God before reading. These blessings are considered to cover all Scripture reading and studies for the rest of the day.':
+      'Torastudier (hela Skriften inkluderad) är till och med viktigare än bön och bör göras varje dag. Eftersom det är ett bud och en andlig gärning att studera Skriften (se 5 Mos. 6:6–7) är det sed i Israel att först be och välsigna Gud innan man läser. Dessa välsignelser anses gälla för all skriftläsning och alla studier under resten av dagen.',
+    'The Apostle Shaul (Paul) writes, “Then what advantage has the Jew? Or what is the benefit of circumcision? Great in every respect. First of all, that they were entrusted with the oracles of God” (Rom. 3:1–2). Jews therefore pray this blessing.':
+      'Aposteln Shaul (Paulus) skriver: ”Vilket företräde har då juden, eller vilken nytta har omskärelsen? Ett stort företräde på allt sätt. Först och främst att Guds ord har anförtrotts åt dem” (Rom. 3:1–2). Judar ber därför denna välsignelse.',
     'Translation Notes': 'Översättningsnoter', '← Previous': '← Föregående', 'Next →': 'Nästa →',
     'Go deeper into': 'Gå djupare i', 'with the commentary': 'med kommentaren', 'and the weekly': 'och den veckovisa',
     'Dig deeper →': 'Gräv djupare →',
@@ -145,6 +149,40 @@
     [/^Signed in as (\S+) · your progress is kept in step on all your devices\.$/, 'Inloggad som $1 · dina framsteg hålls i takt på alla dina enheter.']
   ];
 
+  // The blessings before reading (Traditional Blessings), from the journal "Dagligt bröd"; the Hebrew is kept as it is.
+  // The first blessing is filled out to match the full Hebrew (the journal's is shorter).
+  var L = function (w) { return '<span class="lord">' + w + '</span>'; };
+  var SV_BLESSINGS = [
+    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som har avskilt oss genom sina bud och befallt oss ' +
+      'att fördjupa oss i Torans ord. ' + L('Herre') + ', vår Gud, låt din Toras ord vara ljuvliga i vår mun och i ditt folk Israels hus mun, ' +
+      'så att vi och våra efterkommande, och efterkommandena till ditt folk Israels hus, alla känner ditt namn och studerar din Tora för dess egen skull. ' +
+      'Välsignad är du, ' + L('Herre') + ', som lär sitt folk Israel Tora.',
+    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som ger sanningens Tora och glädjebudskapet om frälsning ' +
+      'till sitt folk Israel och till alla folk genom sin Son Jeshua Messias, vår Mästare. Välsignad är du, ' + L('Herre') + ', som ger Toran.',
+    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som har utvalt oss bland alla folk och givit oss sin Tora. ' +
+      'Välsignad är du, ' + L('Herre') + ', som ger Toran.'
+  ];
+  var SV_WHO = { 'For all believers in Messiah:': 'För alla troende i Messias:', 'Jewish disciples pray:': 'Judiska lärjungar ber:' };
+  function svBlessings(root) {
+    (root.querySelectorAll ? root : document).querySelectorAll('.blessings-section:not([data-sv])').forEach(function (sec) {
+      sec.setAttribute('data-sv', '');
+      var title = sec.querySelector('.blessings-title');
+      if (title) title.textContent = 'Välsignelser';
+      sec.querySelectorAll('.blessing').forEach(function (bl, i) {
+        if (!SV_BLESSINGS[i]) return;
+        var who = bl.querySelector('.blessing-who'), he = bl.querySelector('.hebrew-blessing');
+        if (who && who.firstChild && who.firstChild.nodeType === 3) {
+          var k = who.firstChild.nodeValue.trim();
+          if (SV_WHO[k]) who.firstChild.nodeValue = SV_WHO[k] + ' ';
+        }
+        Array.prototype.slice.call(bl.childNodes).forEach(function (n) { if (n !== who && n !== he) bl.removeChild(n); });
+        var tmp = document.createElement('span');
+        tmp.innerHTML = SV_BLESSINGS[i] + ' ';
+        while (tmp.firstChild) bl.insertBefore(tmp.firstChild, he || null);
+      });
+    });
+  }
+
   // ── State ──
   var lang = 'en', allowed = false;
   function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
@@ -199,6 +237,7 @@
     var n, todo = [];
     while ((n = w.nextNode())) { var t = tr(n.nodeValue); if (t !== null) todo.push([n, t]); }
     todo.forEach(function (x) { x[0].nodeValue = x[1]; });
+    svBlessings(base.querySelectorAll ? base : document);
     var els = [base].concat(Array.prototype.slice.call(base.querySelectorAll('[aria-label],[title],[placeholder]')));
     els.forEach(function (el) {
       if (!el.getAttribute || el.closest(EXCLUDE)) return;
