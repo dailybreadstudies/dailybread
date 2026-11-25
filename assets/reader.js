@@ -502,11 +502,17 @@
   //   BSB's own paragraph and poetry breaks (sfbReflow).
   var YV = { key: 'kXbev4xSYcSwh1hVfcEBlfdArRxWreFU9MtDf2kapzApfBiP', api: 'https://api.youversion.com/v1' };
   var SWE = {
-    sv1917: { id: 166, lang: 'sv', label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, divine: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' },
+    sv1917: { id: 166, lang: 'sv', label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, divine: true, filter: 'Jeshua, Messias, Tora, glada budskapet…',
+      foot: { en: 'The Swedish biblical text is <i>Svenska 1917</i>, the Church of Sweden’s authorized translation of 1917, public domain, via the <a href="https://platform.youversion.com" rel="noopener">YouVersion Platform</a>; laid out in the paragraphs of the Berean Standard Bible (BSB).',
+              sv: 'Den svenska bibeltexten är <i>Svenska 1917</i> (1917 års kyrkobibel), fri från upphovsrätt, via <a href="https://platform.youversion.com" rel="noopener">YouVersion Platform</a>; styckeindelningen följer Berean Standard Bible (BSB).' } },
     // From Bible Brain (Faith Comes By Hearing) through the Supabase function "bible-text" (the key stays there).
     // fileset: the text fileset id once found with the key (null hides the choice). Licensed texts: no filters.
-    sfb98: { fileset: null, lang: 'sv', label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true },
-    esv: { fileset: null, lang: 'en', label: 'ESV', name: 'English Standard Version', credit: 'ESV® Bible · © Crossway', flow: true }
+    sfb98: { fileset: null, lang: 'sv', label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true,
+      foot: { en: 'The Swedish biblical text is <i>Svenska Folkbibeln 98</i>. Old Testament © 1998 Stiftelsen Svenska Folkbibeln, Stockholm; New Testament © 1996, 1998 Stiftelsen Svenska Folkbibeln, Stockholm, and Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
+              sv: 'Den svenska bibeltexten är <i>Svenska Folkbibeln 98</i>. Gamla testamentet © 1998 Stiftelsen Svenska Folkbibeln, Stockholm; Nya testamentet © 1996, 1998 Stiftelsen Svenska Folkbibeln, Stockholm, och Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } },
+    esv: { fileset: null, lang: 'en', label: 'ESV', name: 'English Standard Version', credit: 'ESV® Bible · © Crossway', flow: true,
+      foot: { en: 'Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>',
+              sv: 'Bibeltexten är ESV® Bible (The Holy Bible, English Standard Version®), © 2001 Crossway, en verksamhet inom Good News Publishers. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>' } }
   };
   var BB = 'https://khmoofwmfyhpnxtbsswv.supabase.co/functions/v1/bible-text';
   function sweOk(k) { var v = SWE[k]; return !!(v && (v.id ? YV.key : v.fileset)); }
@@ -725,23 +731,27 @@
     blocks(doc.body);
     return out;
   }
-  // After a page is drawn: the copyright line under each SFB98 reading, or a notice when it fell back to the BSB
+  // After a page is drawn: the footer names the Bible text being read (the chosen translation's credits, else the
+  // BSB line); a reading that fell back to the BSB says so where it is read
   function sfbDecorate() {
-    if (!sfbOk || !sweVer()) return;
+    var ct = document.getElementById('credit-text');
+    if (ct && !ct.hasAttribute('data-bsb')) ct.setAttribute('data-bsb', ct.innerHTML);
+    var v = sfbOk ? sweVer() : null, shown = false;
     document.querySelectorAll('#portions section.portion[data-book]').forEach(function (sec) {
+      if (!v) return;
+      if (isSfb(sec.getAttribute('data-book'))) { shown = true; return; }
       var sc = sec.querySelector('.scripture');
       if (!sc || sec.querySelector('.sfb-credit')) return;
       var p = document.createElement('p');
-      p.className = 'sfb-credit';
-      if (isSfb(sec.getAttribute('data-book'))) {
-        var v = sweVer(), c = sfbMeta && ((sfbMeta.copyright || '').trim() || (sfbMeta.promotional_content || '').trim());
-        p.textContent = c ? v.name + ' · ' + c : v.credit;
-      } else {
-        p.classList.add('sfb-off');
-        p.textContent = (sweVer() ? sweVer().name : 'The Swedish text') + ' could not be loaded just now' + (sfbFail ? ' (' + sfbFail + ')' : '') + ', so this reading is shown in the BSB.';
-      }
+      p.className = 'sfb-credit sfb-off';
+      p.textContent = v.name + ' could not be loaded just now' + (sfbFail ? ' (' + sfbFail + ')' : '') + ', so this reading is shown in the BSB.';
       sc.parentNode.insertBefore(p, sc.nextSibling);
     });
+    if (ct) {
+      var lang = window.DBI18N && DBI18N.lang && DBI18N.lang() === 'sv' ? 'sv' : 'en';
+      var bsb = lang === 'sv' ? 'Bibeltexten återges i en klassisk engelsk översättningsstil, byggd på den gedigna forskningen bakom Berean Standard Bible (BSB), med dess översättningsnoter.' : ct.getAttribute('data-bsb');
+      ct.innerHTML = shown && v.foot ? (v.foot[lang] || v.foot.en) : bsb;
+    }
   }
   // The "Translation" choice in Reading Settings, for the readers allowed to see it
   function sfbSettingsRow() {
