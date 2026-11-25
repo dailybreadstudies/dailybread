@@ -332,15 +332,9 @@
   // ── The Messianic filter for the Swedish texts (Svenska 1917), John's wording, Nov 2026 ──
   // Jesus → Jeshua, Kristus → Messias, evangelium → glada budskapet, Judas → Juda, Maria → Mirjam;
   // lagen → Toran / lagens → Torans, and God's law after a possessive ("Guds lag", "min lag") → Torah;
-  // dödsriket → Sheol in the Tanakh and, in the Apostles, only where the Greek has Hades; God's Temple capitalized. Döpa/dop stay as they are.
+  // God's Temple capitalized. Döpa/dop and dödsriket stay as they are.
   var SVL = 'A-Za-zÅÄÖåäöÉéÜü';
   function svRe(src, flags) { return new RegExp(src.replace(/\{L\}/g, SVL), flags || 'g'); }
-  var SV_HADES = { 'MAT 11:23': 1, 'MAT 16:18': 1, 'LUK 10:15': 1, 'LUK 16:23': 1, 'ACT 2:27': 1, 'ACT 2:31': 1,
-    'REV 1:18': 1, 'REV 6:8': 1, 'REV 20:13': 1, 'REV 20:14': 1 };   // ᾅδης in the Greek (data/orig)
-  // In the Tanakh "dödsriket" translates Sheol itself, so there it always becomes Sheol
-  var SV_TANAKH = {};
-  'GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST JOB PSA PRO ECC SNG ISA JER LAM EZK DAN HOS JOL AMO OBA JON MIC NAM HAB ZEP HAG ZEC MAL'
-    .split(' ').forEach(function (b) { SV_TANAKH[b] = 1; });
   // "lagen" for the Persian law (all of Esther) and Romans 7:21 ("den lagen" = a principle) stays
   var SV_LAW_SKIP = { 'ROM 7:21': 1 };
   // "templet" that is not the Lord's Temple: pagan temples, and believers as God's temple
@@ -377,12 +371,19 @@
         .replace(svRe('(?<![{L}])[Ll]agens(?![{L}])'), 'Torans')
         .replace(svRe('(?<![{L}])[Ll]agen(?![{L}])'), 'Toran');
     }
-    if (SV_HADES[key] || SV_TANAKH[book]) text = text.replace(svRe('(?<![{L}])dödsrikets(?![{L}])'), 'Sheols').replace(svRe('(?<![{L}])(dödsriket|dödsrike)(?![{L}])'), 'Sheol');
     if (!SV_TEMPLE_SKIP[key]) {
       text = text.replace(svRe('(?<![{L}])templet(s?)(?![{L}])'), 'Templet$1')
         .replace(svRe('(?<![{L}])(Guds|HERRENS|Herrens|hans|ditt|mitt|sitt|heliga|helga) tempel(?![{L}])'), '$1 Tempel');
     }
     return text;
+  }
+  // Gehenna: the twelve verses with γέεννα in the Greek read "Gehenna" in the Swedish text too ("helvetet" in the 1917),
+  // as in the BSB emendation; always, with the filter on or off
+  var SV_GEHENNA = { 'MAT 5:22': 1, 'MAT 5:29': 1, 'MAT 5:30': 1, 'MAT 10:28': 1, 'MAT 18:9': 1, 'MAT 23:15': 1, 'MAT 23:33': 1,
+    'MRK 9:43': 1, 'MRK 9:45': 1, 'MRK 9:47': 1, 'LUK 12:5': 1, 'JAS 3:6': 1 };
+  function svGehenna(text, at) {
+    if (!at || !SV_GEHENNA[at.key]) return text;
+    return text.replace(svRe('(?<![{L}])(helvetets|helvetes)(?![{L}])'), 'Gehennas').replace(svRe('(?<![{L}])(helvetet|helvete)(?![{L}])'), 'Gehenna');
   }
   var hebrewNames = function (t) { return t; };
   /* Like wordReplacer, plus per-verse forms from "_byVerse" in hebrew-names.json:
@@ -439,14 +440,14 @@
   }
 
   function applyFilters(root) {
-    if (!settings.messianic && !settings.hebrewNames) return;
+    var anySv = sfbOk && !!sweVer();   // Swedish text: Gehenna applies even with the filters off
+    if (!settings.messianic && !settings.hebrewNames && !anySv) return;
     root.querySelectorAll('.scripture, .chapter-sub, .footnote-list').forEach(function (el) {
       // in the Bible text, keep track of the verse, so that a name spelled the same in English
       // but differently in Hebrew (Haran the man, Charan the city) gets the right form
       var own = el.closest('section[data-book]');
       var sv = own && isSfb(own.getAttribute('data-book'));   // a Swedish text: its own Messianic filter, no English word lists
-      if (sv && !settings.messianic) return;
-      var fix = sv ? svMessianic : transformText;
+      var fix = sv ? function (t, at) { t = svGehenna(t, at); return settings.messianic ? svMessianic(t, at) : t; } : transformText;
       var sec = el.classList.contains('scripture') && el.closest('section[data-book]');
       var book = sec && sec.getAttribute('data-book'), c = sec ? parseInt(sec.getAttribute('data-c') || '1', 10) : 0;
       var at = book ? { key: '', seen: {} } : null;
