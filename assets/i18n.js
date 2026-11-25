@@ -31,7 +31,7 @@
     // the day
     'Sunday': 'Söndag', 'Monday': 'Måndag', 'Tuesday': 'Tisdag', 'Wednesday': 'Onsdag', 'Thursday': 'Torsdag', 'Friday': 'Fredag', 'Saturday': 'Lördag',
     'Torah Portion:': 'Veckans Toratext:',
-    'Torah': 'Tora', 'Prophets': 'Profeterna', 'Writings': 'Skrifterna', 'Apostles': 'Apostlarna', 'Haftarah': 'Haftara',
+    'Torah': 'Torah', 'Prophets': 'Profeterna', 'Writings': 'Skrifterna', 'Apostles': 'Apostlarna', 'Haftarah': 'Haftara',
     'Synagogue': 'Synagogan', 'Morning': 'Morgon', 'Afternoon': 'Eftermiddag', 'Evening': 'Kväll',
     'Take a moment to pray before reading the Scriptures.': 'Ta en stund och be innan du läser Skriften.',
     'Traditional Blessings': 'Traditionella välsignelser',
@@ -101,7 +101,7 @@
     'Delitzsch’s Hebrew New Testament': 'Delitzschs hebreiska Nya testamente', 'Hebrew marks': 'Hebreiska tecken',
     'Vowels and cantillation marks (te’amim)': 'Vokaler och kantillationstecken (teamim)', 'Bible translation': 'Bibelöversättning',
     'Previous chapter': 'Föregående kapitel', 'Next chapter': 'Nästa kapitel', 'Close': 'Stäng', 'Previous month': 'Föregående månad',
-    'Next month': 'Nästa månad', 'Close calendar': 'Stäng kalendern', 'Torah': 'Tora', 'Prophets': 'Profeterna', 'Writings': 'Skrifterna',
+    'Next month': 'Nästa månad', 'Close calendar': 'Stäng kalendern', 'Torah': 'Torah', 'Prophets': 'Profeterna', 'Writings': 'Skrifterna',
     'Apostles': 'Apostlarna', 'Haftarah': 'Haftara', 'Interface language': 'Gränssnittets språk',
     'Your study books on four shelves': 'Dina studieböcker på fyra hyllor'
   };
@@ -124,7 +124,7 @@
   var MON_SHORT = { Jan: 'Jan.', Feb: 'Feb.', Mar: 'Mars', Apr: 'Apr.', May: 'Maj', Jun: 'Juni', Jul: 'Juli', Aug: 'Aug.', Sep: 'Sep.', Oct: 'Okt.', Nov: 'Nov.', Dec: 'Dec.' };
   var MON_LONG = { January: 'januari', February: 'februari', March: 'mars', April: 'april', May: 'maj', June: 'juni', July: 'juli',
     August: 'augusti', September: 'september', October: 'oktober', November: 'november', December: 'december' };
-  var LABEL = { Torah: 'Tora', Prophets: 'Profeterna', Writings: 'Skrifterna', Apostles: 'Apostlarna', Haftarah: 'Haftara', Maftir: 'Maftir',
+  var LABEL = { Torah: 'Torah', Prophets: 'Profeterna', Writings: 'Skrifterna', Apostles: 'Apostlarna', Haftarah: 'Haftara', Maftir: 'Maftir',
     'Rosh Chodesh': 'Rosh Chodesh', Synagogue: 'Synagogan', Morning: 'Morgon', Afternoon: 'Eftermiddag', Evening: 'Kväll' };
   function lab(x) { return LABEL[x] || x; }
   // Texts with a changing part
@@ -153,13 +153,13 @@
   // The first blessing is filled out to match the full Hebrew (the journal's is shorter).
   var L = function (w) { return '<span class="lord">' + w + '</span>'; };
   var SV_BLESSINGS = [
-    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som har avskilt oss genom sina bud och befallt oss ' +
-      'att fördjupa oss i Torans ord. ' + L('Herre') + ', vår Gud, låt din Toras ord vara ljuvliga i vår mun och i ditt folk Israels hus mun, ' +
-      'så att vi och våra efterkommande, och efterkommandena till ditt folk Israels hus, alla känner ditt namn och studerar din Tora för dess egen skull. ' +
-      'Välsignad är du, ' + L('Herre') + ', som lär sitt folk Israel Tora.',
-    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som ger sanningens Tora och glädjebudskapet om frälsning ' +
+    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som har helgat oss genom sina bud och befallt oss ' +
+      'att fördjupa oss i Torans ord. ' + L('Herre') + ', vår Gud, låt din Torahs ord vara ljuvliga i vår mun och i ditt folk Israels hus mun, ' +
+      'så att vi och våra efterkommande, och efterkommandena till ditt folk Israels hus, alla känner ditt namn och studerar din Torah för dess egen skull. ' +
+      'Välsignad är du, ' + L('Herre') + ', som lär sitt folk Israel Torah.',
+    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som ger sanningens Torah och glädjebudskapet om frälsning ' +
       'till sitt folk Israel och till alla folk genom sin Son Jeshua Messias, vår Mästare. Välsignad är du, ' + L('Herre') + ', som ger Toran.',
-    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som har utvalt oss bland alla folk och givit oss sin Tora. ' +
+    '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som har utvalt oss bland alla folk och givit oss sin Torah. ' +
       'Välsignad är du, ' + L('Herre') + ', som ger Toran.'
   ];
   var SV_WHO = { 'For all believers in Messiah:': 'För alla troende i Messias:', 'Jewish disciples pray:': 'Judiska lärjungar ber:' };

@@ -502,7 +502,7 @@
   //   BSB's own paragraph and poetry breaks (sfbReflow).
   var YV = { key: 'kXbev4xSYcSwh1hVfcEBlfdArRxWreFU9MtDf2kapzApfBiP', api: 'https://api.youversion.com/v1' };
   var SWE = {
-    sv1917: { id: 166, lang: 'sv', label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, divine: true, filter: 'Jeshua, Messias, Tora, glada budskapet…',
+    sv1917: { id: 166, lang: 'sv', label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, divine: true, filter: 'Jeshua, Messias, Torah, glada budskapet…',
       foot: { en: 'The Swedish biblical text is <i>Svenska 1917</i>, the Church of Sweden’s authorized translation of 1917, public domain, via the <a href="https://platform.youversion.com" rel="noopener">YouVersion Platform</a>; laid out in the paragraphs of the Berean Standard Bible (BSB).',
               sv: 'Den svenska bibeltexten är <i>Svenska 1917</i> (1917 års kyrkobibel), fri från upphovsrätt, via <a href="https://platform.youversion.com" rel="noopener">YouVersion Platform</a>; styckeindelningen följer Berean Standard Bible (BSB).' } },
     // From Bible Brain (Faith Comes By Hearing) through the Supabase function "bible-text" (the key stays there).
