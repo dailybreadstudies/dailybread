@@ -57,9 +57,9 @@ account panel, delete account) on **dailybread.study** (dailybread.online was lo
 7. Subscribers are sent to **Shopify** customers with marketing consent (so Shopify Email can reach them together
    with journal customers) — or to a separate list (Mailchimp/Brevo). John to decide. List = **Ariel Media**, broadly.
 
-### Consent box wording (chosen by John, 15 Oct 2026)
+### Consent box wording (chosen by John, 15 Oct 2026; "and new resources from Israel" dropped 25 Nov 2026)
 > ☐ **Join the Daily Bread family**
-> Everything here is given freely. Friends of Ariel Media get occasional news and new resources from Israel.
+> Everything here is given freely. Friends of Ariel Media get occasional news.
 > It costs nothing and helps more than you'd think. Unsubscribe anytime.
 
 The wording names the sender (Ariel Media), as consent requires. Link "Privacy" next to it (to the privacy page).
