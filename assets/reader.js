@@ -707,16 +707,27 @@
   // The "Translation" choice in Reading Settings, for the readers allowed to see it
   function sfbSettingsRow() {
     var sec = document.querySelector('#settings-panel .sp-sec .sp-switch[data-setting="verseNumbers"]');
-    if (!sfbOk || !sec || document.querySelector('[data-version]')) return;
+    if (!sfbOk || !sec || document.querySelector('[data-version-select]')) return;
     var row = document.createElement('div');
     row.className = 'sp-row sp-version-row';
-    row.innerHTML = '<span class="sp-label">Translation</span><div class="sp-seg sp-ctl" role="group" aria-label="Bible translation">' +
-      '<button type="button" data-version="bsb" aria-pressed="true" title="Berean Standard Bible">BSB</button>' +
+    row.innerHTML = '<span class="sp-label">Translation</span><select class="sp-select sp-ctl" data-version-select aria-label="Bible translation">' +
+      '<option value="bsb">DBSB*</option>' +
       Object.keys(SWE).filter(function (k) { return SWE[k].id; }).map(function (k) {
-        return '<button type="button" data-version="' + k + '" aria-pressed="false" title="' + SWE[k].name + '">' + SWE[k].label + '</button>';
-      }).join('') + '</div>';
+        return '<option value="' + k + '">' + SWE[k].name + '</option>';
+      }).join('') + '</select>';
+    var note = document.createElement('p');
+    note.className = 'sp-note sp-version-note';
+    note.textContent = '*Adapted from the BSB.';
     sec.parentNode.insertBefore(row, sec);
+    sec.parentNode.insertBefore(note, sec);
+    row.querySelector('select').addEventListener('change', function (e) {
+      settings.version = e.target.value;
+      saveSettings();
+      if (current && current.bible) loadChapter(current.book, current.c, null, true);   // fetch the text again in the chosen translation
+      else if (current && current.day) loadDay(current.day.date, true);
+    });
   }
+
 
   function todayISO() {
     var d = new Date();
@@ -873,7 +884,7 @@
           if (typeof it === 'number') {
             unit = { c: c, v: it, html: '', poetic: poetic, newPara: k === 0 && !POETRY[bl.k] && bl.k !== 'd' };
             units.push(unit);
-            if (pendSub) { unit.sub = pendSub; inner += msubHtml(pendSub); pendSub = null; }
+            if (pendSub) { unit.sub = pendSub; if (!book.sfb) inner += msubHtml(pendSub); pendSub = null; }   // no margin titles for the Swedish text: its one heading stays under the chapter title
             if (it === 0) continue;
             if (inner && !/\s$/.test(inner)) inner += ' ';   // space between verses
             if (it === 1 && multiChapter) inner += '<span class="chapter-num">' + c + '</span>';
@@ -1406,7 +1417,7 @@
       html += '<h2 class="chapter-head">' + displayRef(r) + '</h2>';
       var sub = p.title || passage.titles.join(' &middot; ');
       if (p.reading && READING_ORDINALS[p.reading]) {      // "… · Fourth reading from the Torah Portion" (the section titles first)
-        sub = (sub ? sub + ' &middot; ' : '') + READING_ORDINALS[p.reading] + ' reading from the Torah Portion';
+        sub = (sub ? sub + ' &middot; ' : '') + '<span class="sub-reading">' + READING_ORDINALS[p.reading] + ' reading from the Torah Portion</span>';
       }
       if (sub) html += '<p class="chapter-sub">' + sub + '</p>';
       html += '<div class="scripture">' + passage.html + '</div>';
@@ -2473,7 +2484,8 @@
     pressed('data-cant', settings.cantillation ? 'on' : 'off');
     pressed('data-otorig', settings.otOrig || 'he');
     pressed('data-ntorig', settings.ntOrig || 'grc');
-    pressed('data-version', settings.version || 'bsb');
+    var vs = panel.querySelector('[data-version-select]');
+    if (vs) vs.value = SWE[settings.version] && SWE[settings.version].id ? settings.version : 'bsb';
     pressed('data-theme-opt', settings.theme);
     pressed('data-font', settings.font);
     pressed('data-justify', settings.justify ? 'on' : 'off');
@@ -2518,12 +2530,6 @@
       settings.original = t.getAttribute('data-orig');
       applyLook();
       rerender();
-    } else if (t.hasAttribute('data-version')) {
-      settings.version = t.getAttribute('data-version');
-      saveSettings(); refreshPanel();
-      if (current && current.bible) loadChapter(current.book, current.c, null, true);   // fetch the text again in the chosen translation
-      else if (current && current.day) loadDay(current.day.date, true);
-      return;
     } else if (t.hasAttribute('data-ntorig')) {
       settings.ntOrig = t.getAttribute('data-ntorig');
       rerender();

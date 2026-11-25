@@ -186,6 +186,23 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
   If YouVersion can't be reached, the BSB is shown with a one-line notice.
 - To open it to everyone: return true from `sfbCheck()` (instead of the `SFB_READERS` check).
 
+## Interface language — English / Svenska (assets/i18n.js, Nov 2026 — private test)
+
+- Globe next to the account button (top bar) and a Language/Språk row at the top of Reading settings. Only the
+  accounts in `READERS` in assets/i18n.js see them (same SHA-256 check as the study tracks).
+- Choosing a language reloads the page and sets that language's default Bible text (English → DBSB, Swedish →
+  Svenska 1917); Reading settings → Translation (a dropdown: DBSB*, Svenska 1917, with "*Adapted from the BSB.")
+  can then mix them. First visit follows the browser's language. Stored in localStorage `dbs-lang`.
+- How it works: the site stays written in English; with Swedish on, i18n.js swaps known interface texts (SV, SV_ATTR,
+  SV_PATTERNS, SV_PARASHA) as they appear, via a MutationObserver. Unknown texts stay English. EXCLUDE keeps it out
+  of the Bible text, notes, maps, finds, trees, history and the TODAY box; INCLUDE lets the reading subtitle and the
+  blessings heading through. Book names follow the Bible text, not the interface.
+- Swedish wording follows the printed journal "Dagligt bröd" (3rd Swedish ed., 5778): Tora / Profeterna / Skrifterna /
+  Apostlarna / Haftara, "Veckans Toratext", the portions' Swedish meanings, "27 Nov." dates.
+- Not translated yet (round 2+): TODAY blurbs, This Day in History, maps, finds, trees, Dig deeper, About pages,
+  Kids, holiday/event names, account panel, private study tracks' book titles.
+- The 1917 has no margin titles (its one heading per chapter stays under the chapter title).
+
 ## Settings menu (A/א)
 Redesigned Nov 2026 (a live preview at the top was tried and removed at John's request): Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),
 Bible Text, Original Languages (Show: Off/Below/Only; Hebrew Bible / Apostles fold open under it only when on; Hebrew Marks

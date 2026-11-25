@@ -1389,3 +1389,25 @@ html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
 /* Svenska Folkbibeln 98 (from the YouVersion Platform): its copyright line, or the notice when the BSB stood in */
 .sfb-credit { margin: 0.9rem 0 0; font-size: 0.78rem; color: var(--muted, #777); font-family: var(--sans, system-ui, sans-serif); }
 .sfb-credit.sfb-off { font-style: italic; }
+/* Translation dropdown (Reading settings → Bible Text) and its note */
+.sp-select { height: 34px; padding: 0 28px 0 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); color: inherit;
+  font: 500 13px/1 var(--sans); cursor: pointer; appearance: none; -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 15px) 15px, calc(100% - 10px) 15px; background-size: 5px 5px; background-repeat: no-repeat; }
+.sp-select:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+.sp-note { margin: -4px 0 8px; font: 400 11.5px/1.4 var(--sans); color: var(--muted); text-align: right; }
+
+/* Interface language: the globe in the top bar (assets/i18n.js) */
+.tb-lang { position: relative; margin-left: clamp(14px, 2vw, 24px); display: flex; align-items: center; }
+.tb-lang-btn { display: inline-flex; align-items: center; gap: 4px; background: none; border: none; cursor: pointer; padding: 6px 2px;
+  color: var(--accent-soft); font: 600 11px/1 var(--sans); letter-spacing: 0.12em; }
+.tb-lang-btn:hover, .tb-lang-btn[aria-expanded="true"] { color: var(--accent-deep); }
+.tb-lang-btn:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; border-radius: 2px; }
+.tb-lang-menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 60; min-width: 130px; padding: 6px; border: 1px solid var(--line-strong);
+  border-radius: 10px; background: var(--surface); box-shadow: 0 8px 24px rgba(0,0,0,.12); display: flex; flex-direction: column; }
+.tb-lang-menu[hidden] { display: none; }
+.tb-lang-menu button { text-align: left; background: none; border: none; padding: 8px 10px; border-radius: 6px; cursor: pointer; font: 500 14px/1.2 var(--sans); color: inherit; }
+.tb-lang-menu button:hover { background: var(--tint); }
+.tb-lang-menu button[aria-checked="true"] { color: var(--accent); font-weight: 600; }
+.tb-lang-menu button[aria-checked="true"]::after { content: " ✓"; }
+@media (max-width: 760px) { .tb-lang-code { display: none; } }
