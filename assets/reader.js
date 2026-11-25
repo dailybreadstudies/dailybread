@@ -378,7 +378,7 @@
     return text;
   }
   // Gehenna: the twelve verses with γέεννα in the Greek read "Gehenna" in the Swedish text too ("helvetet" in the 1917),
-  // as in the BSB emendation; always, with the filter on or off
+  // as in the BSB emendation; part of the Messianic filter for the Swedish text
   var SV_GEHENNA = { 'MAT 5:22': 1, 'MAT 5:29': 1, 'MAT 5:30': 1, 'MAT 10:28': 1, 'MAT 18:9': 1, 'MAT 23:15': 1, 'MAT 23:33': 1,
     'MRK 9:43': 1, 'MRK 9:45': 1, 'MRK 9:47': 1, 'LUK 12:5': 1, 'JAS 3:6': 1 };
   function svGehenna(text, at) {
@@ -440,14 +440,14 @@
   }
 
   function applyFilters(root) {
-    var anySv = sfbOk && !!sweVer();   // Swedish text: Gehenna applies even with the filters off
-    if (!settings.messianic && !settings.hebrewNames && !anySv) return;
+    if (!settings.messianic && !settings.hebrewNames) return;
     root.querySelectorAll('.scripture, .chapter-sub, .footnote-list').forEach(function (el) {
       // in the Bible text, keep track of the verse, so that a name spelled the same in English
       // but differently in Hebrew (Haran the man, Charan the city) gets the right form
       var own = el.closest('section[data-book]');
       var sv = own && isSfb(own.getAttribute('data-book'));   // a Swedish text: its own Messianic filter, no English word lists
-      var fix = sv ? function (t, at) { t = svGehenna(t, at); return settings.messianic ? svMessianic(t, at) : t; } : transformText;
+      if (sv && !settings.messianic) return;
+      var fix = sv ? function (t, at) { return svMessianic(svGehenna(t, at), at); } : transformText;
       var sec = el.classList.contains('scripture') && el.closest('section[data-book]');
       var book = sec && sec.getAttribute('data-book'), c = sec ? parseInt(sec.getAttribute('data-c') || '1', 10) : 0;
       var at = book ? { key: '', seen: {} } : null;

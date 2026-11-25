@@ -182,7 +182,7 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
   Judas → Juda, Maria → Mirjam; lagen → Toran, lagens → Torans, possessive + lag ("Guds lag", "hans lag") → Torah
   (not Esther, not Rom 7:21, not "syndens lag" etc.); God's Temple capitalized (`SV_TEMPLE_SKIP` for pagan temples and believers as the temple).
   Döpa/dop and dödsriket are left as they are. Gehenna: in the 12 verses with γέεννα in the Greek, "helvetet" →
-  Gehenna on the Swedish text always, filter on or off (`SV_GEHENNA`, like the BSB emendation). Reference previews, audio and word study stay BSB.
+  Gehenna, only with the Messianic filter on (`SV_GEHENNA`). Reference previews, audio and word study stay BSB.
   If YouVersion can't be reached, the BSB is shown with a one-line notice.
 - To open it to everyone: return true from `sfbCheck()` (instead of the `SFB_READERS` check).
 
