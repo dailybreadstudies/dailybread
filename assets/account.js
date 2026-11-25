@@ -336,18 +336,26 @@
     return '<header class="ap-head"><div class="ap-avatar" aria-hidden="true">' + initial + '</div>' +
       '<div class="ap-who"><p class="ap-label">Your account</p><h1 class="ap-name">' + esc(email) + '</h1></div>' +
       '<button type="button" class="acct-btn ghost" data-acct="out">Sign out</button></header>' +
-      '<div class="ap-grid">' +
-      '<section class="ap-sec"><h2 class="ap-h">Reading progress</h2>' + st +
-      '<p class="ap-p">Your progress is kept in step on every device where you sign in with this email.</p>' +
-      '<div class="acct-row"><button type="button" class="acct-btn" data-acct="sync">Sync now</button>' +
-      '<a class="acct-btn ghost" href="/progress.html">See your progress</a></div></section>' +
-      '<section class="ap-sec"><h2 class="ap-h">Daily Bread family</h2>' + fam + '</section>' +
-      '</div>' +
-      '<section class="ap-sec ap-data"><div><h2 class="ap-h">Your data</h2>' +
-      '<p class="ap-p">We keep your email address, your reading progress and your email-list choice, stored in the EU, and nothing else. ' +
-      '<a class="acct-link" href="/privacy.html">Privacy</a></p>' +
-      (msg ? '<p class="acct-msg">' + esc(msg) + '</p>' : '') + '</div>' +
-      '<button type="button" class="acct-btn ghost is-danger" data-acct="delete">Delete my account</button></section>';
+      tabsHtml() + '<div class="ap-panel" role="tabpanel">' + (
+      apTab === 'family' ? '<section class="ap-sec">' + fam + '</section>' :
+      apTab === 'data' ? '<section class="ap-sec">' +
+        '<p class="ap-p">We keep your email address, your reading progress and your email-list choice, stored in the EU, and nothing else. ' +
+        '<a class="acct-link" href="/privacy.html">Privacy</a></p>' +
+        '<div class="acct-row"><button type="button" class="acct-btn ghost is-danger" data-acct="delete">Delete my account</button></div>' +
+        (msg ? '<p class="acct-msg">' + esc(msg) + '</p>' : '') + '</section>' :
+      '<section class="ap-sec">' + st +
+        '<p class="ap-p">Your progress is kept in step on every device where you sign in with this email.</p>' +
+        '<div class="acct-row"><button type="button" class="acct-btn" data-acct="sync">Sync now</button>' +
+        '<a class="acct-btn ghost" href="/progress.html">See your progress</a></div></section>') + '</div>';
+  }
+  // Account page tabs; Reading progress first. account.html#family or #data opens another (e.g. from an email link).
+  var AP_TABS = [['progress', 'Reading progress', 'Progress'], ['family', 'Daily Bread family', 'Family'], ['data', 'Your data', 'Your data']];
+  var apTab = (function () { var h = location.hash.slice(1); return h === 'family' || h === 'data' ? h : 'progress'; })();
+  function tabsHtml() {
+    return '<nav class="ap-tabs" role="tablist" aria-label="Account">' + AP_TABS.map(function (t) {
+      var on = t[0] === apTab;
+      return '<button type="button" class="ap-tab' + (on ? ' is-on' : '') + '" role="tab" aria-selected="' + on + '" data-acct="tab" data-tab="' + t[0] + '"><span class="ap-tab-full">' + t[1] + '</span><span class="ap-tab-short">' + t[2] + '</span></button>';
+    }).join('') + '</nav>';
   }
   function panelHtml(onPage) {
     var s = load(AUTH_KEY);
@@ -440,6 +448,11 @@
     var t = e.target.closest && e.target.closest('[data-acct], .tb-acct, .tb-acct-m');
     if (!t) return;
     var a = t.getAttribute('data-acct') || 'open';
+    if (a === 'tab') {
+      apTab = t.getAttribute('data-tab'); drawPanel();
+      try { history.replaceState(null, '', apTab === 'progress' ? location.pathname : '#' + apTab); } catch (e2) { /* fine */ }
+      return;
+    }
     if (a === 'open') {
       e.preventDefault();
       if (load(AUTH_KEY)) { if (PAGE !== 'account') location.href = '/account.html'; return; }   // signed in: the account page
