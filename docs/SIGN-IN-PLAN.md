@@ -98,7 +98,13 @@ The wording names the sender (Ariel Media), as consent requires. Link "Privacy" 
 - **privacy.html**, linked from the sign-in panel, the account panel and the footers.
 - Deleting a site account does not unsubscribe from Shopify (said on the privacy page and in the delete prompt).
 
-### Setup (John, once)
+### Setup (done 25 Nov 2026)
+Shopify app "Daily Bread Online" (Dev Dashboard org 7821397, installed on ariel-media), function `shopify-consent`
+deployed with Verify JWT off, secrets SHOPIFY_SHOP / SHOPIFY_CLIENT_ID / SHOPIFY_CLIENT_SECRET set. Tested live: John's
+existing customer got the tags and kept his subscription. Later: the function reads `Customer.emailMarketingConsent`,
+deprecated in API 2026-10 (still works); move to `defaultEmailAddress.marketingState` at the next redeploy.
+
+The steps, for reference:
 1. Supabase → SQL Editor: run supabase/schema.sql again (adds `variant` and `shopify_synced_at`). **Before** the
    Phase 2 code goes live, or the choices can't be saved.
 2. Shopify Dev Dashboard (dev.shopify.com): create an app "Daily Bread Online", scopes `read_customers,write_customers`,

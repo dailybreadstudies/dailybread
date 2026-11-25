@@ -13,14 +13,20 @@
 //   SHOPIFY_SHOP           the store's myshopify subdomain, e.g. "ariel-media" for ariel-media.myshopify.com
 //   SHOPIFY_CLIENT_ID      the Dev Dashboard app's client ID
 //   SHOPIFY_CLIENT_SECRET  the Dev Dashboard app's client secret
-// SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are provided by Supabase automatically.
+// SUPABASE_URL and the server key (SUPABASE_SECRET_KEYS or SUPABASE_SERVICE_ROLE_KEY) are provided by Supabase automatically.
 // Deploy with "Verify JWT" turned off: the function checks the reader's sign-in itself.
 
 const API_VERSION = "2026-10";
 const ORIGINS = ["https://dailybread.study", "https://www.dailybread.study", "https://dailybreadstudies.github.io"];
 
 const SB_URL = Deno.env.get("SUPABASE_URL")!;
-const SB_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+// The server key: the newer "sb_secret_…" style (SUPABASE_SECRET_KEYS) or the older service-role JWT
+function serverKey(): string {
+  try { const k = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") || "{}"); if (k.default) return k.default; } catch (_) { /* fall back */ }
+  return Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
+}
+const SB_KEY = serverKey();
+const SB_AUTH: Record<string, string> = SB_KEY.startsWith("sb_") ? { apikey: SB_KEY } : { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` };
 const SHOP = (Deno.env.get("SHOPIFY_SHOP") || "").replace(/\.myshopify\.com$/, "");
 const CLIENT_ID = Deno.env.get("SHOPIFY_CLIENT_ID") || "";
 const CLIENT_SECRET = Deno.env.get("SHOPIFY_CLIENT_SECRET") || "";
@@ -72,7 +78,7 @@ function userErrors(d: Record<string, { userErrors?: { message: string }[] }>) {
 async function sb(path: string, init: RequestInit = {}) {
   const r = await fetch(SB_URL + path, {
     ...init,
-    headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, "Content-Type": "application/json", ...(init.headers || {}) },
+    headers: { ...SB_AUTH, "Content-Type": "application/json", ...(init.headers || {}) },
   });
   if (!r.ok) throw new Error(`Supabase ${path}: ${r.status} ${await r.text()}`);
   const t = await r.text();
