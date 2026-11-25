@@ -7,14 +7,14 @@
  * (Ariel Media, 3rd Swedish edition 5778/2017–18) where it has it.
  *
  * Only the readers in READERS (SHA-256 of the account email, as in tracks.js) see the globe and the choice.
- * Choosing a language also chooses that language's default Bible text (English → DBSB, Swedish → Svenska 1917);
+ * Choosing a language also chooses that language's default Bible text (English → DBSB, Swedish → Svenska Folkbibeln 98);
  * the reader can then pick another text in Reading settings → Translation.
  */
 (function () {
   'use strict';
   var READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];   // John
   var LKEY = 'dbs-lang';
-  var DEFAULT_TEXT = { en: 'bsb', sv: 'sv1917' };
+  var DEFAULT_TEXT = { en: 'bsb', sv: 'sfb98' };
   var EXCLUDE = '.scripture, .chapter-sub, .footnote-list, .vp-orig, .history-box, .today-box, .calendar-intro, .bless-apparatus, ' +
     '.tc-apparatus, .credits, .dbm, .dbf, .dbt, .dbi, .acct-panel, .bp-books, .bp-book, script, style, textarea, [data-no-i18n]';
 
