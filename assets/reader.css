@@ -1385,3 +1385,7 @@ html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
   .ap-tab-full { display: none; }
   .ap-tab-short { display: inline; }
 }
+
+/* Svenska Folkbibeln 98 (from the YouVersion Platform): its copyright line, or the notice when the BSB stood in */
+.sfb-credit { margin: 0.9rem 0 0; font-size: 0.78rem; color: var(--muted, #777); font-family: var(--sans, system-ui, sans-serif); }
+.sfb-credit.sfb-off { font-style: italic; }

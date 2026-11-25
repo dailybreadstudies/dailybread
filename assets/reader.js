@@ -77,7 +77,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', otOrig: 'he', showOG: false, marginTitles: true };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb' };
   var DEFAULTS = JSON.parse(JSON.stringify(settings));   // for "Reset to defaults" in the A/א menu
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
@@ -388,6 +388,8 @@
     root.querySelectorAll('.scripture, .chapter-sub, .footnote-list').forEach(function (el) {
       // in the Bible text, keep track of the verse, so that a name spelled the same in English
       // but differently in Hebrew (Haran the man, Charan the city) gets the right form
+      var own = el.closest('section[data-book]');
+      if (own && isSfb(own.getAttribute('data-book'))) return;   // the filters' word lists are English: SFB98 is shown as it is
       var sec = el.classList.contains('scripture') && el.closest('section[data-book]');
       var book = sec && sec.getAttribute('data-book'), c = sec ? parseInt(sec.getAttribute('data-c') || '1', 10) : 0;
       var at = book ? { key: '', seen: {} } : null;
@@ -419,6 +421,198 @@
   function loadBook(id) {
     if (!bookCache[id]) bookCache[id] = getJSON('data/bsb/' + id + '.json');
     return bookCache[id];
+  }
+
+  // ── Svenska Folkbibeln 98, fetched live from the YouVersion Platform API ──
+  // The text is never stored in this repository: each chapter is fetched while reading, converted into the
+  // same shape as the BSB chapters (data/bsb/*.json) and kept in memory for this visit only.
+  // YouVersion app keys are not secrets (YouVersion's own guidance), so the key can sit here like the
+  // Supabase publishable key. bible: SFB98's id on the platform; 0 = look it up from the Swedish list once.
+  // Until approved the choice shows only on SFB_READERS' accounts (SHA-256 of the email, as in tracks.js).
+  var YV = { key: '', bible: 0, api: 'https://api.youversion.com/v1' };
+  var SFB_READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];   // John
+  var sfbOk = false, sfbMeta = null, sfbFail = null;
+  var SV_BOOKS = {
+    GEN: '1 Mosebok', EXO: '2 Mosebok', LEV: '3 Mosebok', NUM: '4 Mosebok', DEU: '5 Mosebok', JOS: 'Josua',
+    JDG: 'Domarboken', RUT: 'Rut', '1SA': '1 Samuelsboken', '2SA': '2 Samuelsboken', '1KI': '1 Kungaboken',
+    '2KI': '2 Kungaboken', '1CH': '1 Krönikeboken', '2CH': '2 Krönikeboken', EZR: 'Esra', NEH: 'Nehemja',
+    EST: 'Ester', JOB: 'Job', PSA: 'Psaltaren', PRO: 'Ordspråksboken', ECC: 'Predikaren', SNG: 'Höga visan',
+    ISA: 'Jesaja', JER: 'Jeremia', LAM: 'Klagovisorna', EZK: 'Hesekiel', DAN: 'Daniel', HOS: 'Hosea', JOL: 'Joel',
+    AMO: 'Amos', OBA: 'Obadja', JON: 'Jona', MIC: 'Mika', NAM: 'Nahum', HAB: 'Habackuk', ZEP: 'Sefanja',
+    HAG: 'Haggai', ZEC: 'Sakarja', MAL: 'Malaki', MAT: 'Matteus', MRK: 'Markus', LUK: 'Lukas', JHN: 'Johannes',
+    ACT: 'Apostlagärningarna', ROM: 'Romarbrevet', '1CO': '1 Korinthierbrevet', '2CO': '2 Korinthierbrevet',
+    GAL: 'Galaterbrevet', EPH: 'Efesierbrevet', PHP: 'Filipperbrevet', COL: 'Kolosserbrevet',
+    '1TH': '1 Thessalonikerbrevet', '2TH': '2 Thessalonikerbrevet', '1TI': '1 Timotheosbrevet',
+    '2TI': '2 Timotheosbrevet', TIT: 'Titusbrevet', PHM: 'Filemonbrevet', HEB: 'Hebreerbrevet', JAS: 'Jakobsbrevet',
+    '1PE': '1 Petrusbrevet', '2PE': '2 Petrusbrevet', '1JN': '1 Johannesbrevet', '2JN': '2 Johannesbrevet',
+    '3JN': '3 Johannesbrevet', JUD: 'Judasbrevet', REV: 'Uppenbarelseboken'
+  };
+  function useSfb() { return sfbOk && !!YV.key && settings.version === 'sfb98'; }
+  function sfbCheck() {   // may this reader see the choice?
+    var a = null;
+    try { a = JSON.parse(localStorage.getItem('dbs-auth') || 'null'); } catch (e) { /* ignore */ }
+    var e = a && a.email;
+    if (!YV.key || !e || !window.crypto || !crypto.subtle || !window.TextEncoder) return Promise.resolve(false);
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(e).trim().toLowerCase())).then(function (b) {
+      var h = Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
+      sfbOk = SFB_READERS.indexOf(h) >= 0;
+      return sfbOk;
+    }).catch(function () { return false; });
+  }
+  function yvGet(path) {
+    return fetch(YV.api + path, { headers: { 'X-YVP-App-Key': YV.key, Accept: 'application/json' } }).then(function (r) {
+      if (!r.ok) throw new Error('YouVersion ' + r.status);
+      return r.json();
+    });
+  }
+  var sfbBible = null;
+  function sfbBibleId() {   // the id from YV.bible, else found once in the Swedish list (and remembered)
+    if (sfbBible) return sfbBible;
+    var known = YV.bible || +(localStorage.getItem('dbs-sfb-id') || 0);
+    var find = known ? Promise.resolve(known) : yvGet('/bibles?language_ranges[]=sv&page_size=100').then(function (j) {
+      var hit = (j.data || []).filter(function (b) {
+        var s = (b.abbreviation || '') + ' ' + (b.localized_abbreviation || '') + ' ' + (b.title || '') + ' ' + (b.localized_title || '');
+        return /SFB\s?98|Folkbibeln\s?(19)?98|^SFB\s/i.test(s) || (/Folkbibeln/i.test(s) && !/15|2015/.test(s));
+      })[0];
+      if (!hit) throw new Error('SFB98 is not enabled for this app key');
+      try { localStorage.setItem('dbs-sfb-id', String(hit.id)); } catch (e) { /* ignore */ }
+      return hit.id;
+    });
+    sfbBible = find.then(function (id) {
+      return yvGet('/bibles/' + id).then(function (m) { sfbMeta = m; return id; }, function () { return id; });
+    });
+    sfbBible.catch(function () { sfbBible = null; });
+    return sfbBible;
+  }
+  var sfbCache = {};
+  function sfbChapter(book, c) {
+    var key = book.id + '.' + c;
+    if (!sfbCache[key]) {
+      sfbCache[key] = sfbBibleId().then(function (id) {
+        return yvGet('/bibles/' + id + '/passages/' + key + '?format=html&include_headings=true&include_notes=true');
+      }).then(function (j) { book.chapters[c - 1] = yvChapter(j.content || '', c); });
+      sfbCache[key].catch(function () { delete sfbCache[key]; });
+    }
+    return sfbCache[key];
+  }
+  var sfbBooks = {};
+  // The book to render a reading from: SFB98 (the chapters it needs) when chosen, else the BSB.
+  // If YouVersion can't be reached, the BSB is shown with a short notice (see sfbDecorate).
+  function loadText(id, refs) {
+    if (!useSfb()) return loadBook(id);
+    var cs = [];
+    refs.forEach(function (r) {
+      (r.parts || [r]).forEach(function (p) { for (var c = p.c1; c <= p.c2; c++) if (cs.indexOf(c) < 0) cs.push(c); });
+    });
+    var book = sfbBooks[id] || (sfbBooks[id] = { id: id, name: SV_BOOKS[id] || id, chapters: [], sfb: true });
+    return Promise.all(cs.map(function (c) { return sfbChapter(book, c); })).then(function () { sfbFail = null; return book; },
+      function (err) { sfbFail = err.message || 'not reachable'; return loadBook(id); });
+  }
+  function isSfb(id) {
+    if (!current) return false;
+    if (current.bible) return !!(current.bookData && current.bookData.id === id && current.bookData.sfb);
+    return !!(current.books && current.books[id] && current.books[id].sfb);
+  }
+  // YouVersion's passage HTML (USFM classes: div.p / .q1 / .s1.yv-h, span.yv-v[v] verse marks, span.yv-n.f notes)
+  // → { b: [{ k, c: [verse number | html string | { f: note }] }], n: [{ r, h }] }, as in data/bsb
+  var YV_KINDS = { p: 'p', m: 'm', pi: 'pi1', pi1: 'pi1', pi2: 'pi1', mi: 'm', nb: 'p', pmo: 'pmo', pc: 'pc', q: 'q1', q1: 'q1',
+    q2: 'q2', q3: 'q2', q4: 'q2', qm: 'q1', qm1: 'q1', qm2: 'q2', qc: 'q1', qr: 'qr', li: 'li1', li1: 'li1', li2: 'li2', li3: 'li2',
+    d: 'd', s: 's1', s1: 's1', s2: 's2', s3: 's2', ms: 'ms', ms1: 'ms', ms2: 'ms', mr: 'mr', r: 'r', sr: 'r', qa: 'qa', b: 'b' };
+  var YV_HEAD = { s1: 1, s2: 1, ms: 1, mr: 1, r: 1, qa: 1 };
+  function escText(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function yvChapter(html, c) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var out = { b: [], n: [] }, verse = 0;
+    function kindOf(el) {
+      var cls = (el.getAttribute('class') || '').split(/\s+/).filter(function (x) { return x && x !== 'yv-h'; });
+      for (var i = 0; i < cls.length; i++) if (YV_KINDS[cls[i]]) return YV_KINDS[cls[i]];
+      return el.classList.contains('yv-h') ? 's1' : null;
+    }
+    function noteOf(el) {
+      var fr = el.querySelector('.fr'), ref = fr ? fr.textContent.replace(/[\s.:]+$/, '').trim() : '';
+      if (fr) fr.remove();
+      return { r: /^\d+[:.,]\d+/.test(ref) ? ref.replace(/[.,]/, ':') : c + ':' + verse, h: inline(el).trim() };
+    }
+    function inline(node) {   // the html of a stretch of text, for headings and notes
+      var s = '';
+      node.childNodes.forEach(function (n) {
+        if (n.nodeType === 3) { s += escText(n.nodeValue); return; }
+        if (n.nodeType !== 1 || n.classList.contains('yv-n') || n.classList.contains('yv-vlbl') || n.classList.contains('yv-v')) return;
+        if (n.classList.contains('nd')) s += '<span class="lord">' + escText(n.textContent) + '</span>';
+        else if (n.classList.contains('xt')) s += '<span class="xt">' + inline(n) + '</span>';
+        else if (n.classList.contains('fq') || n.classList.contains('fqa') || n.classList.contains('add') || n.classList.contains('it') || n.tagName === 'I' || n.tagName === 'EM') s += '<em>' + inline(n) + '</em>';
+        else s += inline(n);
+      });
+      return s;
+    }
+    function content(node, c2) {   // verse numbers, text and note marks of one paragraph
+      node.childNodes.forEach(function (n) {
+        if (n.nodeType === 3) { push(c2, escText(n.nodeValue)); return; }
+        if (n.nodeType !== 1) return;
+        var cl = n.classList;
+        if (cl.contains('yv-v')) { verse = parseInt(n.getAttribute('v'), 10) || verse; c2.push(verse); return; }
+        if (cl.contains('yv-vlbl')) return;
+        if (cl.contains('yv-n')) {
+          if (cl.contains('f')) { out.n.push(noteOf(n)); c2.push({ f: out.n.length - 1 }); }
+          return;   // cross-references (.x) are left out
+        }
+        if (n.tagName === 'BR') { push(c2, ' '); return; }
+        if (cl.contains('nd')) { push(c2, '<span class="lord">' + escText(n.textContent) + '</span>'); return; }
+        if (cl.contains('add') || cl.contains('it') || n.tagName === 'I' || n.tagName === 'EM') { var t = []; content(n, t); push(c2, '<em>'); t.forEach(function (x) { typeof x === 'string' ? push(c2, x) : c2.push(x); }); push(c2, '</em>'); return; }
+        content(n, c2);   // words of Jesus, names and other character styles: their text only
+      });
+    }
+    function push(c2, s) {
+      if (typeof c2[c2.length - 1] === 'string') c2[c2.length - 1] += s; else c2.push(s);
+    }
+    function blocks(parent) {
+      Array.prototype.forEach.call(parent.children, function (el) {
+        var k = kindOf(el);
+        if (!k) {   // a wrapper (or an unknown block): its own blocks, else read it as a paragraph
+          if (el.querySelector('div, p')) { blocks(el); return; }
+          k = 'p';
+        }
+        if (k === 'b') { out.b.push({ k: 'b', c: [] }); return; }
+        if (YV_HEAD[k]) { var h = inline(el).trim(); if (h) out.b.push({ k: k, c: [h] }); return; }
+        var c2 = [];
+        content(el, c2);
+        if (k === 'd' && typeof c2[0] !== 'number') c2.unshift(0);   // a psalm title without a verse number: "verse 0", as in the BSB
+        c2 = c2.map(function (x, i) { return typeof x === 'string' && typeof c2[i - 1] === 'number' ? x.replace(/^\s+/, '') : x; })
+          .filter(function (x) { return typeof x !== 'string' || x !== ''; });
+        if (c2.length) out.b.push({ k: k, c: c2 });
+      });
+    }
+    blocks(doc.body);
+    return out;
+  }
+  // After a page is drawn: the copyright line under each SFB98 reading, or a notice when it fell back to the BSB
+  function sfbDecorate() {
+    if (!sfbOk || settings.version !== 'sfb98') return;
+    document.querySelectorAll('#portions section.portion[data-book]').forEach(function (sec) {
+      var sc = sec.querySelector('.scripture');
+      if (!sc || sec.querySelector('.sfb-credit')) return;
+      var p = document.createElement('p');
+      p.className = 'sfb-credit';
+      if (isSfb(sec.getAttribute('data-book'))) {
+        var c = sfbMeta && ((sfbMeta.copyright || '').trim() || (sfbMeta.promotional_content || '').trim());
+        p.textContent = 'Svenska Folkbibeln 98' + (c ? ' · ' + c : ' · © Stiftelsen Svenska Folkbibeln');
+      } else {
+        p.classList.add('sfb-off');
+        p.textContent = 'Svenska Folkbibeln could not be loaded just now' + (sfbFail ? ' (' + sfbFail + ')' : '') + ', so this reading is shown in the BSB.';
+      }
+      sc.parentNode.insertBefore(p, sc.nextSibling);
+    });
+  }
+  // The "Translation" choice in Reading Settings, for the readers allowed to see it
+  function sfbSettingsRow() {
+    var sec = document.querySelector('#settings-panel .sp-sec .sp-switch[data-setting="verseNumbers"]');
+    if (!sfbOk || !sec || document.querySelector('[data-version]')) return;
+    var row = document.createElement('div');
+    row.className = 'sp-row sp-version-row';
+    row.innerHTML = '<span class="sp-label">Translation</span><div class="sp-seg sp-ctl" role="group" aria-label="Bible translation">' +
+      '<button type="button" data-version="bsb" aria-pressed="true" title="Berean Standard Bible">BSB</button>' +
+      '<button type="button" data-version="sfb98" aria-pressed="false" title="Svenska Folkbibeln 98">SFB 98</button></div>';
+    sec.parentNode.insertBefore(row, sec);
   }
 
   function todayISO() {
@@ -470,7 +664,7 @@
       var head = displayRef(r.parts[0]), name0 = head.replace(/\s\d.*$/, '');
       return head + r.parts.slice(1).map(function (p) { return '; ' + displayRef(p).replace(name0 + ' ', ''); }).join('');
     }
-    var name = (settings.hebrewNames && HEB_BOOKS[r.book]) || bookName(r.book);
+    var name = (settings.hebrewNames && HEB_BOOKS[r.book]) || (useSfb() && SV_BOOKS[r.book]) || bookName(r.book);
     var one = (bookIndex || []).filter(function (b) { return b.id === r.book; })[0];
     if (one && one.chapters === 1 && r.c1 === 1 && r.c2 === 1 && !(r.v1 === 1 && r.v2 === null)) {   // Jude 5–25
       return name + ' ' + r.v1 + (r.v2 === null ? '–end' : r.v2 !== r.v1 ? '–' + r.v2 : '');
@@ -1124,6 +1318,7 @@
     document.getElementById('portions').innerHTML = html;
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
+    sfbDecorate();
     goTo(location.hash ? portionFromHash() : firstUnread(day.date, total), false);   // no #n: pick up where the reader left off
     decorateMaps();
     fillToday(day);
@@ -2175,6 +2370,7 @@
     pressed('data-cant', settings.cantillation ? 'on' : 'off');
     pressed('data-otorig', settings.otOrig || 'he');
     pressed('data-ntorig', settings.ntOrig || 'grc');
+    pressed('data-version', settings.version || 'bsb');
     pressed('data-theme-opt', settings.theme);
     pressed('data-font', settings.font);
     pressed('data-justify', settings.justify ? 'on' : 'off');
@@ -2219,6 +2415,12 @@
       settings.original = t.getAttribute('data-orig');
       applyLook();
       rerender();
+    } else if (t.hasAttribute('data-version')) {
+      settings.version = t.getAttribute('data-version');
+      saveSettings(); refreshPanel();
+      if (current && current.bible) loadChapter(current.book, current.c, null, true);   // fetch the text again in the chosen translation
+      else if (current && current.day) loadDay(current.day.date, true);
+      return;
     } else if (t.hasAttribute('data-ntorig')) {
       settings.ntOrig = t.getAttribute('data-ntorig');
       rerender();
@@ -2814,6 +3016,7 @@
     PRO: 'Mishlei', SNG: 'Shir HaShirim', ECC: 'Kohelet', LAM: 'Eichah' };
   function bookLabel(id) {
     if (settings.hebrewNames && HEB_BOOKS[id]) return HEB_BOOKS[id];
+    if (useSfb() && SV_BOOKS[id]) return SV_BOOKS[id];
     if (settings.messianic && MES_BOOKS[id]) return MES_BOOKS[id];
     return bookName(id);
   }
@@ -2944,7 +3147,7 @@
 
   function loadChapter(book, c, v, replace) {
     if (PAGE !== 'today') { location.href = './?r=' + book + '.' + c + (v ? '.' + v : ''); return new Promise(function () {}); }
-    return Promise.all([loadBook(book), neededOrig([book])]).then(function (res) {
+    return Promise.all([loadText(book, [{ c1: c, c2: c }]), neededOrig([book])]).then(function (res) {
       var data = res[0];
       var url = location.pathname + '?r=' + book + '.' + c + (v ? '.' + v : '');
       if (replace) history.replaceState({ r: book + '.' + c }, '', url);
@@ -3042,6 +3245,7 @@
     document.getElementById('portions').innerHTML = html;
     applyFilters(document.getElementById('portions'));
     applyDivineName(document.getElementById('portions'));
+    sfbDecorate();
     decorateMaps();
     drawChapterDone();
     if (window.DBPodcast && DBPodcast.refresh) DBPodcast.refresh();
@@ -3228,7 +3432,8 @@
       day = trackDay(day);
       var ids = day.portions.map(function (p) { return parseRef(p.ref).book; })
         .filter(function (v, i, a) { return a.indexOf(v) === i; });
-      return Promise.all(ids.map(loadBook).concat([neededOrig(ids)])).then(function (list) {
+      var refsOf = function (id) { return day.portions.map(function (p) { return parseRef(p.ref); }).filter(function (r) { return r.book === id; }); };
+      return Promise.all(ids.map(function (id) { return loadText(id, refsOf(id)); }).concat([neededOrig(ids)])).then(function (list) {
         list = list.slice(0, ids.length);
         var books = {};
         list.forEach(function (b) { books[b.id] = b; });
@@ -3253,7 +3458,8 @@
 
   // ── Start ────────────────────────────────────────────────────
   Promise.all([getJSON(DAYS_DIR + 'index.json'), getJSON('data/bsb/index.json'),
-               getJSON('data/hebrew-names.json').catch(function () { return {}; })])
+               getJSON('data/hebrew-names.json').catch(function () { return {}; }),
+               sfbCheck().then(sfbSettingsRow)])
     .then(function (res) {
       planDays = res[0].days.slice().sort();
       fullPlan = res[0].plan || {};
