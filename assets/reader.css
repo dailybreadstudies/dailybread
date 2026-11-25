@@ -1168,7 +1168,7 @@ body:not(.dbm-margin) .scripture :is(.dbm-pin, .dbf-pin, .dbt-pin, .dbi-pin) { v
 .acct-h { font-family: var(--display); font-weight: 300; font-size: 1.75rem; line-height: 1.2; color: var(--heading); margin: 0 0 0.8rem; }
 .acct-h em { font-style: italic; color: var(--accent); }
 .acct-p { font-size: 1rem; line-height: 1.6; color: var(--ink-soft); margin: 0 0 1.1rem; }
-.acct-card form { display: flex; flex-direction: column; gap: 10px; margin: 0 0 0.6rem; }
+.acct-card form, .acct-page-card form { display: flex; flex-direction: column; gap: 10px; margin: 0 0 0.6rem; }
 .acct-input { font: 400 1rem var(--sans); padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--paper); color: var(--ink); }
 .acct-input:focus { outline: 2px solid var(--accent-soft); outline-offset: 1px; }
 .acct-code { font-size: 1.6rem; letter-spacing: 0.4em; text-align: center; }
@@ -1212,6 +1212,24 @@ body:not(.dbm-margin) .scripture :is(.dbm-pin, .dbf-pin, .dbt-pin, .dbi-pin) { v
 .acct-switch input:focus-visible + .acct-switch-track { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
 .acct-switch-text { font: 400 0.84rem/1.5 var(--sans); color: var(--muted); }
 .acct-switch-text b { display: block; font-weight: 600; color: var(--ink); }
+/* signin.html and account.html: the same forms on a page of their own */
+a.acct-btn { display: inline-flex; align-items: center; text-decoration: none; }
+a.acct-btn.ghost:hover { color: var(--accent-deep); }
+.acct-page-card { max-width: 30rem; margin: 0 auto; background: var(--surface); border: 1px solid var(--rule); border-radius: 18px; padding: 28px 28px 22px; }
+.acct-page-card .acct-h { font-size: 1.5rem; }
+.acct-page-card .acct-email { font-size: 1.3rem; margin: 0; }
+.acct-page-card > .acct-small { margin-top: 0.8rem; }
+.acct-page-card .acct-family { padding: 16px 18px; }
+.ap-sec { padding: 0 0 1.3rem; margin: 0 0 1.3rem; border-bottom: 1px solid var(--rule); }
+.ap-sec:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.ap-label { font: 600 0.7rem/1.4 var(--sans); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-soft); margin: 0 0 0.4rem; }
+.ap-h { font-family: var(--display); font-weight: 400; font-size: 1.2rem; color: var(--heading); margin: 0 0 0.5rem; }
+.ap-p { font: 400 0.9rem/1.6 var(--sans); color: var(--ink-soft); margin: 0 0 0.9rem; }
+.acct-page-card .acct-row { margin-bottom: 0; }
+.acct-page-card .acct-status { margin-bottom: 0.4rem; }
+.acct-page-card .acct-switch { border-top: none; padding: 4px 0 0; }
+.acct-btn.ghost.is-danger { color: #a5432f; }
+.acct-btn.ghost.is-danger:hover { background: transparent; border-color: #a5432f; color: #a5432f; }
 .sync-note { font: 400 0.85rem/1.6 var(--sans); color: var(--muted); text-align: center; margin: 2rem 0 0; }
 @media (max-width: 520px) {
   .acct-panel { align-items: flex-end; padding: 0; }

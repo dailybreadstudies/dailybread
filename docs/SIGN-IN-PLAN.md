@@ -92,6 +92,9 @@ The wording names the sender (Ariel Media), as consent requires. Link "Privacy" 
   choice from the database and updates Shopify: subscribed (confirmed opt-in) with tags `daily-bread-online` +
   `dbo-us-preticked` / `dbo-opted-in`; switched off in the account → unsubscribed; unticked at sign-in → no change.
   It sets `shopify_synced_at`; anything not yet sent is retried on the reader's next visit.
+- **signin.html** (a full sign-in page for links from emails, print and social media; the top bar's SIGN IN still opens
+  the quick panel) and **account.html** (sync, the family switch, privacy, sign out, delete). Signed in, the initial in
+  the top bar goes to account.html; signin.html forwards there. Both render into `<div id="acct-page" data-page=…>`.
 - **privacy.html**, linked from the sign-in panel, the account panel and the footers.
 - Deleting a site account does not unsubscribe from Shopify (said on the privacy page and in the delete prompt).
 
