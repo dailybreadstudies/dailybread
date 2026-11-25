@@ -331,7 +331,7 @@
   }
   // ── The Messianic filter for the Swedish texts (Svenska 1917), John's wording, Nov 2026 ──
   // Jesus → Jeshua, Kristus → Messias, evangelium → glada budskapet, Judas → Juda, Maria → Mirjam;
-  // lagen → Toran / lagens → Torans, and God's law after a possessive ("Guds lag", "min lag") → Tora;
+  // lagen → Toran / lagens → Torans, and God's law after a possessive ("Guds lag", "min lag") → Torah;
   // dödsriket → Sheol only where the Greek has Hades; God's Temple capitalized. Döpa/dop stay as they are.
   var SVL = 'A-Za-zÅÄÖåäöÉéÜü';
   function svRe(src, flags) { return new RegExp(src.replace(/\{L\}/g, SVL), flags || 'g'); }
@@ -369,7 +369,7 @@
     var key = at && at.key, book = key ? key.split(' ')[0] : '';
     SV_RULES.forEach(function (r) { text = text.replace(r[0], r[1]); });
     if (book !== 'EST' && !SV_LAW_SKIP[key]) {
-      text = text.replace(svRe('(?<![{L}])' + SV_POSS + ' lag(s?)(?![{L}])'), '$1 Tora$2')
+      text = text.replace(svRe('(?<![{L}])' + SV_POSS + ' lag(s?)(?![{L}])'), '$1 Torah$2')
         .replace(svRe('(?<![{L}])[Ll]agens(?![{L}])'), 'Torans')
         .replace(svRe('(?<![{L}])[Ll]agen(?![{L}])'), 'Toran');
     }

@@ -179,7 +179,7 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
 - With a Swedish text: Swedish book names (`SV_BOOKS`), a credit line under each reading. Hebrew Names (English list)
   is not applied. The Messianic Filter uses its own Swedish rules (`svMessianic`, John's wording Nov 2026):
   Jesus → Jeshua (Jesu → Jeshuas), Kristus → Messias (Kristi → Messias’), evangelium → glada budskapet,
-  Judas → Juda, Maria → Mirjam; lagen → Toran, lagens → Torans, possessive + lag ("Guds lag", "hans lag") → Tora
+  Judas → Juda, Maria → Mirjam; lagen → Toran, lagens → Torans, possessive + lag ("Guds lag", "hans lag") → Torah
   (not Esther, not Rom 7:21, not "syndens lag" etc.); dödsriket → Sheol only in the ten verses with ᾅδης in the Greek
   (`SV_HADES`); God's Temple capitalized (`SV_TEMPLE_SKIP` for pagan temples and believers as the temple).
   Döpa/dop are left as they are. Reference previews, audio and word study stay BSB.
