@@ -163,22 +163,23 @@ illustration card: right margin from 1240px, after the text below that; X closes
 before the tracks began (`PRE_READ` in tracks.js marks its chapters "before", not a date, so they stay out of the day log). Progress has "On your shelf": four shelves (one per track) drawn like the Bible's, spines on the same
 words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its six orders.
 
-## Svenska Folkbibeln 98 (YouVersion Platform, Nov 2026 — private test)
+## Swedish Bible text — Svenska 1917 (YouVersion Platform, Nov 2026 — private test)
 
-- Reading Settings → Bible Text → **Translation: BSB · SFB 98**. Shown only to the accounts in `SFB_READERS` in
-  assets/reader.js (SHA-256 of the email, like the study tracks) and only once `YV.key` is filled in.
-- The text is fetched live from `https://api.youversion.com/v1` (header `X-YVP-App-Key`) chapter by chapter and kept
-  in memory for the visit only; nothing is stored in the repo. YouVersion app keys are not secrets, so no proxy.
-- `YV.bible` = SFB98's numeric id on the platform; 0 means "find it in the Swedish list once" (remembered in
-  localStorage `dbs-sfb-id`).
-- `yvChapter()` turns YouVersion's USFM-class HTML into the BSB chapter shape, so paragraphs, poetry, section titles
-  and footnotes render like the BSB. Cross-references are left out.
-- With SFB 98: Swedish book names (`SV_BOOKS`), the copyright line from the version's metadata under each reading,
-  and the Messianic Filter / Hebrew Names word lists are not applied (they are English). The divine name shows as HERREN.
-- If YouVersion can't be reached, the BSB is shown with a one-line notice. Reference previews, audio and word
-  study stay with the BSB. Versification: day references are BSB verse numbers; check partial readings where
-  Swedish numbering differs (some Psalms, Malachi 4/3).
-- To open it to everyone: empty the `SFB_READERS` check in `sfbCheck()` (return true when `YV.key` is set).
+- Reading Settings → Bible Text → **Translation: BSB · SV 1917**. Shown only to the accounts in `SFB_READERS` in
+  assets/reader.js (SHA-256 of the email, like the study tracks).
+- YouVersion Platform app "Daily Bread Online" (account: The Watchman International, Inc, non-commercial).
+  App key in `YV.key` — YouVersion app keys are not secrets. Swedish Bibles open to the key: SK73 (161),
+  SKB Svenska Kärnbibeln (1111), SVEN Svenska 1917 (166). Svenska Folkbibeln 98 is NOT on the platform (only in
+  YouVersion's own app); `SWE.sfb98` is ready with `id: null` in case Stiftelsen Svenska Folkbibeln adds it.
+- Text fetched live per chapter from `https://api.youversion.com/v1/bibles/{id}/passages/{BOOK}.{c}?format=html`,
+  kept in memory for the visit only; nothing stored in the repo. `yvChapter()` converts YouVersion's USFM-class HTML
+  to the BSB chapter shape. The platform's 1917 has no paragraphs (one block per chapter, psalms as prose), so
+  `sfbReflow()` lays its verses into the BSB's paragraph breaks and puts poetry one verse per line (`flow: true`).
+  Its footnotes come as `.yv-n.x` and are shown as Translation Notes.
+- With a Swedish text: Swedish book names (`SV_BOOKS`), a credit line under each reading, and the Messianic Filter /
+  Hebrew Names word lists are not applied (they are English). Reference previews, audio and word study stay BSB.
+  If YouVersion can't be reached, the BSB is shown with a one-line notice.
+- To open it to everyone: return true from `sfbCheck()` (instead of the `SFB_READERS` check).
 
 ## Settings menu (A/א)
 Redesigned Nov 2026 (a live preview at the top was tried and removed at John's request): Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),

@@ -423,13 +423,21 @@
     return bookCache[id];
   }
 
-  // ── Svenska Folkbibeln 98, fetched live from the YouVersion Platform API ──
+  // ── Swedish Bible text, fetched live from the YouVersion Platform API ──
   // The text is never stored in this repository: each chapter is fetched while reading, converted into the
   // same shape as the BSB chapters (data/bsb/*.json) and kept in memory for this visit only.
   // YouVersion app keys are not secrets (YouVersion's own guidance), so the key can sit here like the
-  // Supabase publishable key. bible: SFB98's id on the platform; 0 = look it up from the Swedish list once.
+  // Supabase publishable key (app "Daily Bread Online", The Watchman International, Inc).
   // Until approved the choice shows only on SFB_READERS' accounts (SHA-256 of the email, as in tracks.js).
-  var YV = { key: '', bible: 0, api: 'https://api.youversion.com/v1' };
+  // SWE: the Swedish versions offered. Svenska Folkbibeln 98 is not on the platform (Nov 2026); id: null hides it.
+  //   flow: the platform's copy has no paragraphs (each chapter one block), so the verses are laid out in the
+  //   BSB's own paragraph and poetry breaks (sfbReflow).
+  var YV = { key: 'kXbev4xSYcSwh1hVfcEBlfdArRxWreFU9MtDf2kapzApfBiP', api: 'https://api.youversion.com/v1' };
+  var SWE = {
+    sv1917: { id: 166, label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true },
+    sfb98: { id: null, label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln' }
+  };
+  function sweVer() { return SWE[settings.version] && SWE[settings.version].id ? SWE[settings.version] : null; }
   var SFB_READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];   // John
   var sfbOk = false, sfbMeta = null, sfbFail = null;
   var SV_BOOKS = {
@@ -447,7 +455,7 @@
     '1PE': '1 Petrusbrevet', '2PE': '2 Petrusbrevet', '1JN': '1 Johannesbrevet', '2JN': '2 Johannesbrevet',
     '3JN': '3 Johannesbrevet', JUD: 'Judasbrevet', REV: 'Uppenbarelseboken'
   };
-  function useSfb() { return sfbOk && !!YV.key && settings.version === 'sfb98'; }
+  function useSfb() { return sfbOk && !!YV.key && !!sweVer(); }
   function sfbCheck() {   // may this reader see the choice?
     var a = null;
     try { a = JSON.parse(localStorage.getItem('dbs-auth') || 'null'); } catch (e) { /* ignore */ }
@@ -465,35 +473,66 @@
       return r.json();
     });
   }
-  var sfbBible = null;
-  function sfbBibleId() {   // the id from YV.bible, else found once in the Swedish list (and remembered)
-    if (sfbBible) return sfbBible;
-    var known = YV.bible || +(localStorage.getItem('dbs-sfb-id') || 0);
-    var find = known ? Promise.resolve(known) : yvGet('/bibles?language_ranges[]=sv&page_size=100').then(function (j) {
-      var hit = (j.data || []).filter(function (b) {
-        var s = (b.abbreviation || '') + ' ' + (b.localized_abbreviation || '') + ' ' + (b.title || '') + ' ' + (b.localized_title || '');
-        return /SFB\s?98|Folkbibeln\s?(19)?98|^SFB\s/i.test(s) || (/Folkbibeln/i.test(s) && !/15|2015/.test(s));
-      })[0];
-      if (!hit) throw new Error('SFB98 is not enabled for this app key');
-      try { localStorage.setItem('dbs-sfb-id', String(hit.id)); } catch (e) { /* ignore */ }
-      return hit.id;
-    });
-    sfbBible = find.then(function (id) {
-      return yvGet('/bibles/' + id).then(function (m) { sfbMeta = m; return id; }, function () { return id; });
-    });
-    sfbBible.catch(function () { sfbBible = null; });
-    return sfbBible;
+  var sfbMetaFor = {};
+  function sfbMeta2(v) {   // the version's metadata (copyright line), once
+    if (!sfbMetaFor[v.id]) sfbMetaFor[v.id] = yvGet('/bibles/' + v.id).then(function (m) { sfbMeta = m; return m; }, function () { return null; });
+    return sfbMetaFor[v.id];
   }
   var sfbCache = {};
   function sfbChapter(book, c) {
-    var key = book.id + '.' + c;
+    var v = sweVer(), key = v.id + ':' + book.id + '.' + c;
     if (!sfbCache[key]) {
-      sfbCache[key] = sfbBibleId().then(function (id) {
-        return yvGet('/bibles/' + id + '/passages/' + key + '?format=html&include_headings=true&include_notes=true');
-      }).then(function (j) { book.chapters[c - 1] = yvChapter(j.content || '', c); });
+      sfbCache[key] = Promise.all([
+        yvGet('/bibles/' + v.id + '/passages/' + book.id + '.' + c + '?format=html&include_headings=true&include_notes=true'),
+        v.flow ? loadBook(book.id).catch(function () { return null; }) : null,
+        sfbMeta2(v)
+      ]).then(function (res) {
+        var ch = yvChapter(res[0].content || '', c);
+        var en = res[1] && res[1].chapters[c - 1];
+        book.chapters[c - 1] = v.flow && en ? sfbReflow(ch, en) : ch;
+      });
       sfbCache[key].catch(function () { delete sfbCache[key]; });
     }
     return sfbCache[key];
+  }
+  // Lay a chapter's verses out in the BSB's paragraph and poetry breaks: each BSB block that begins with a verse
+  // number starts a new block of the same kind here. Section titles stay where the Swedish text has them.
+  function sfbReflow(ch, en) {
+    var verses = {}, order = [], heads = [], cur = null;
+    ch.b.forEach(function (bl) {
+      if (HEADINGS[bl.k]) { if (bl.k !== 'b') heads.push({ before: order.length ? null : 'start', bl: bl, after: cur }); return; }
+      bl.c.forEach(function (it) {
+        if (typeof it === 'number') { cur = it; if (!verses[it]) { verses[it] = []; order.push(it); } return; }
+        if (cur === null) { cur = 0; verses[0] = []; order.push(0); }
+        verses[cur].push(it);
+      });
+    });
+    var starts = [];   // [verse, kind] where the BSB starts a block with a verse number
+    en.b.forEach(function (bl) {
+      if (HEADINGS[bl.k]) return;
+      if (typeof bl.c[0] === 'number') starts.push([bl.c[0], bl.k]);
+    });
+    var kindAt = {};
+    starts.forEach(function (x) { if (!(x[0] in kindAt)) kindAt[x[0]] = x[1]; });
+    var out = [], block = null;
+    heads.filter(function (h) { return h.after === null || h.before === 'start'; }).forEach(function (h) { out.push(h.bl); });
+    order.forEach(function (v) {
+      heads.forEach(function (h) { if (h.after !== null && h.before !== 'start' && h.after === v - 1 && v > 1) out.push(h.bl); });
+      var k = kindAt[v];
+      if (!block || k) {
+        k = k ? (POETRY[k] ? 'q1' : (k === 'd' ? 'd' : 'p')) : (block ? block.k : 'p');
+        block = { k: k, c: [] };
+        out.push(block);
+      }
+      block.c.push(v);
+      verses[v].forEach(function (it, i) {
+        if (typeof it === 'string') it = it.replace(/\s{2,}/g, ' ');
+        if (typeof it === 'string' && !i) it = it.replace(/^\s+/, '');
+        if (typeof it === 'string' && typeof block.c[block.c.length - 1] === 'string') block.c[block.c.length - 1] += it;
+        else block.c.push(it);
+      });
+    });
+    return { b: out, n: ch.n };
   }
   var sfbBooks = {};
   // The book to render a reading from: SFB98 (the chapters it needs) when chosen, else the BSB.
@@ -504,7 +543,8 @@
     refs.forEach(function (r) {
       (r.parts || [r]).forEach(function (p) { for (var c = p.c1; c <= p.c2; c++) if (cs.indexOf(c) < 0) cs.push(c); });
     });
-    var book = sfbBooks[id] || (sfbBooks[id] = { id: id, name: SV_BOOKS[id] || id, chapters: [], sfb: true });
+    var bk = settings.version + ':' + id;
+    var book = sfbBooks[bk] || (sfbBooks[bk] = { id: id, name: SV_BOOKS[id] || id, chapters: [], sfb: true });
     return Promise.all(cs.map(function (c) { return sfbChapter(book, c); })).then(function () { sfbFail = null; return book; },
       function (err) { sfbFail = err.message || 'not reachable'; return loadBook(id); });
   }
@@ -553,8 +593,8 @@
         if (cl.contains('yv-v')) { verse = parseInt(n.getAttribute('v'), 10) || verse; c2.push(verse); return; }
         if (cl.contains('yv-vlbl')) return;
         if (cl.contains('yv-n')) {
-          if (cl.contains('f')) { out.n.push(noteOf(n)); c2.push({ f: out.n.length - 1 }); }
-          return;   // cross-references (.x) are left out
+          if (cl.contains('f') || cl.contains('x')) { out.n.push(noteOf(n)); c2.push({ f: out.n.length - 1 }); }   // Svenska 1917 has its footnotes as .x
+          return;
         }
         if (n.tagName === 'BR') { push(c2, ' '); return; }
         if (cl.contains('nd')) { push(c2, '<span class="lord">' + escText(n.textContent) + '</span>'); return; }
@@ -579,26 +619,29 @@
         if (k === 'd' && typeof c2[0] !== 'number') c2.unshift(0);   // a psalm title without a verse number: "verse 0", as in the BSB
         c2 = c2.map(function (x, i) { return typeof x === 'string' && typeof c2[i - 1] === 'number' ? x.replace(/^\s+/, '') : x; })
           .filter(function (x) { return typeof x !== 'string' || x !== ''; });
+        if (c2.length && c2.every(function (x) { return typeof x === 'number'; })) { carry = (carry || []).concat(c2); return; }   // a verse number alone, before a heading
+        if (carry) { c2 = carry.concat(c2); carry = null; }
         if (c2.length) out.b.push({ k: k, c: c2 });
       });
     }
+    var carry = null;
     blocks(doc.body);
     return out;
   }
   // After a page is drawn: the copyright line under each SFB98 reading, or a notice when it fell back to the BSB
   function sfbDecorate() {
-    if (!sfbOk || settings.version !== 'sfb98') return;
+    if (!sfbOk || !sweVer()) return;
     document.querySelectorAll('#portions section.portion[data-book]').forEach(function (sec) {
       var sc = sec.querySelector('.scripture');
       if (!sc || sec.querySelector('.sfb-credit')) return;
       var p = document.createElement('p');
       p.className = 'sfb-credit';
       if (isSfb(sec.getAttribute('data-book'))) {
-        var c = sfbMeta && ((sfbMeta.copyright || '').trim() || (sfbMeta.promotional_content || '').trim());
-        p.textContent = 'Svenska Folkbibeln 98' + (c ? ' · ' + c : ' · © Stiftelsen Svenska Folkbibeln');
+        var v = sweVer(), c = sfbMeta && ((sfbMeta.copyright || '').trim() || (sfbMeta.promotional_content || '').trim());
+        p.textContent = c ? v.name + ' · ' + c : v.credit;
       } else {
         p.classList.add('sfb-off');
-        p.textContent = 'Svenska Folkbibeln could not be loaded just now' + (sfbFail ? ' (' + sfbFail + ')' : '') + ', so this reading is shown in the BSB.';
+        p.textContent = (sweVer() ? sweVer().name : 'The Swedish text') + ' could not be loaded just now' + (sfbFail ? ' (' + sfbFail + ')' : '') + ', so this reading is shown in the BSB.';
       }
       sc.parentNode.insertBefore(p, sc.nextSibling);
     });
@@ -611,7 +654,9 @@
     row.className = 'sp-row sp-version-row';
     row.innerHTML = '<span class="sp-label">Translation</span><div class="sp-seg sp-ctl" role="group" aria-label="Bible translation">' +
       '<button type="button" data-version="bsb" aria-pressed="true" title="Berean Standard Bible">BSB</button>' +
-      '<button type="button" data-version="sfb98" aria-pressed="false" title="Svenska Folkbibeln 98">SFB 98</button></div>';
+      Object.keys(SWE).filter(function (k) { return SWE[k].id; }).map(function (k) {
+        return '<button type="button" data-version="' + k + '" aria-pressed="false" title="' + SWE[k].name + '">' + SWE[k].label + '</button>';
+      }).join('') + '</div>';
     sec.parentNode.insertBefore(row, sec);
   }
 
