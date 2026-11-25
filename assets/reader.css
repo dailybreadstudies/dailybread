@@ -1352,7 +1352,7 @@ html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
 .lxx-draft { font-weight: 600; font-size: 0.85em; letter-spacing: 0.08em; text-transform: uppercase; color: #b5533c; }
 
 /* account.html: an open, page-wide layout (profile header, then tabs; room for highlights, notes and more later) */
-.gv.ap-wide { max-width: 68rem; }
+.gv.ap-wide { max-width: 54rem; margin: 0 auto; }
 .ap-signin { max-width: 36rem; margin: 0 auto; }
 .ap-head { display: flex; align-items: center; gap: 24px; margin: 0 0 2.6rem; }
 .ap-tabs { display: flex; gap: 2.4rem; border-bottom: 1px solid var(--rule); margin: 0 0 2.6rem; overflow-x: auto; scrollbar-width: none; }
