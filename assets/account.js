@@ -253,15 +253,16 @@
       if (!s || !s.id) return;
       var pending = load(CKEY);
       return latestChoice(s).then(function (last) {
-        store(CKEY, null);
         var add = !pending ? null : !last ? !!pending.opted_in : (pending.opted_in && !last.opted_in) ? true : null;
         if (add === null) {
+          store(CKEY, null);
           familyState = last ? last.opted_in : false;
           drawPanel();
           if (last && !last.shopify_synced_at) toShopify(s);
           return;
         }
-        return saveChoice(s, add, pending.variant, method).then(function () { familyState = add; drawPanel(); toShopify(s); });
+        // cleared only once saved, so a page change mid-way (signin.html → account.html) can't lose it; saving twice is harmless
+        return saveChoice(s, add, pending.variant, method).then(function () { store(CKEY, null); familyState = add; drawPanel(); toShopify(s); });
       });
     }).catch(function () { /* tried again next visit */ });
   }
@@ -309,29 +310,53 @@
     var s = Math.round((Date.now() - d.getTime()) / 1000);
     return s < 45 ? 'just now' : s < 3600 ? Math.round(s / 60) + ' min ago' : d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   }
-  function panelHtml() {
+  // The panel (quick sign-in over any page) and the two full pages, signin.html and account.html (<div id="acct-page" data-page="…">)
+  var pageEl = document.getElementById('acct-page');
+  var PAGE = pageEl ? pageEl.getAttribute('data-page') : '';
+  function syncLine() {
+    return state.status === 'syncing' ? 'Syncing…' : state.status === 'error' ? esc(state.error || 'Could not sync just now.')
+      : state.status === 'synced' ? 'Your progress is synced · ' + ago(state.at) : 'Your progress syncs on every device where you sign in.';
+  }
+  function familyCard() {
+    return '<label class="acct-family"><input type="checkbox" name="family"' + (familyChoice ? ' checked' : '') + '>' +
+      '<span class="acct-family-box" aria-hidden="true"></span>' +
+      '<span class="acct-family-text"><b>Join the Daily Bread family</b>' +
+      'Everything here is given freely. Friends of Ariel Media get occasional news. ' +
+      'It costs nothing and helps more than you’d think. Unsubscribe anytime.</span></label>';
+  }
+  function accountPageHtml(s) {
+    var st = '<p class="acct-status' + (state.status === 'error' ? ' is-error' : '') + '">' + syncLine() + '</p>';
+    var fam = familyState === null ? '<p class="ap-p">Loading…</p>' :
+      '<label class="acct-switch"><input type="checkbox" data-acct="family"' + (familyState ? ' checked' : '') + '>' +
+      '<span class="acct-switch-track" aria-hidden="true"></span>' +
+      '<span class="acct-switch-text"><b>' + (familyState ? 'You’re in the Daily Bread family' : 'Join the Daily Bread family') + '</b>' +
+      'Occasional news from Ariel Media, such as when next year’s journal is ready. Every email also has an unsubscribe link.</span></label>';
+    return '<section class="ap-sec"><p class="ap-label">Signed in as</p><p class="acct-email">' + esc(s.email || 'Signed in') + '</p></section>' +
+      '<section class="ap-sec"><h2 class="ap-h">Reading progress</h2>' + st +
+      '<p class="ap-p">Your progress is kept in step on every device where you sign in with this email.</p>' +
+      '<div class="acct-row"><button type="button" class="acct-btn" data-acct="sync">Sync now</button>' +
+      '<a class="acct-btn ghost" href="/progress.html">See your progress</a></div></section>' +
+      '<section class="ap-sec"><h2 class="ap-h">Daily Bread family</h2>' + fam + '</section>' +
+      '<section class="ap-sec"><h2 class="ap-h">Your data</h2>' +
+      '<p class="ap-p">We keep your email address, your reading progress and your email-list choice, stored in the EU, and nothing else. ' +
+      '<a class="acct-link" href="/privacy.html">Privacy</a></p>' +
+      '<div class="acct-row"><button type="button" class="acct-btn ghost" data-acct="out">Sign out</button>' +
+      '<button type="button" class="acct-btn ghost is-danger" data-acct="delete">Delete my account</button></div>' +
+      (msg ? '<p class="acct-msg">' + esc(msg) + '</p>' : '') + '</section>';
+  }
+  function panelHtml(onPage) {
     var s = load(AUTH_KEY);
-    var close = '<button type="button" class="acct-x" data-acct="close" aria-label="Close">&times;</button>';
+    var close = onPage ? '' : '<button type="button" class="acct-x" data-acct="close" aria-label="Close">&times;</button>';
     if (s) {
-      var st = state.status === 'syncing' ? 'Syncing…' : state.status === 'error' ? esc(state.error || 'Could not sync just now.')
-        : state.status === 'synced' ? 'Your progress is synced · ' + ago(state.at) : 'Your progress syncs on every device where you sign in.';
-      return close + '<p class="acct-eyebrow">Your account</p>' +
+      if (onPage) return accountPageHtml(s);
+      return close + '<p class="acct-eyebrow">Signed in</p>' +
         '<p class="acct-email">' + esc(s.email || 'Signed in') + '</p>' +
-        '<p class="acct-status' + (state.status === 'error' ? ' is-error' : '') + '">' + st + '</p>' +
-        '<div class="acct-row"><button type="button" class="acct-btn" data-acct="sync">Sync now</button>' +
-        '<button type="button" class="acct-btn ghost" data-acct="out">Sign out</button></div>' +
-        (familyState === null ? '' :
-          '<label class="acct-switch"><input type="checkbox" data-acct="family"' + (familyState ? ' checked' : '') + '>' +
-          '<span class="acct-switch-track" aria-hidden="true"></span>' +
-          '<span class="acct-switch-text"><b>Daily Bread family</b>' +
-          (familyState ? 'You get occasional news from Ariel Media.' : 'Occasional news from Ariel Media.') +
-          '</span></label>') +
-        '<p class="acct-small">We keep your email address, your reading progress and your email-list choice, stored in the EU. ' +
-        '<a class="acct-link" href="/privacy.html">Privacy</a> · ' +
-        '<button type="button" class="acct-link" data-acct="delete">Delete my account</button></p>';
+        '<p class="acct-status' + (state.status === 'error' ? ' is-error' : '') + '">' + syncLine() + '</p>' +
+        '<div class="acct-row"><a class="acct-btn" href="/account.html">Your account</a>' +
+        '<button type="button" class="acct-btn ghost" data-acct="out">Sign out</button></div>';
     }
     if (step === 'code') {
-      return close + '<p class="acct-eyebrow">Check your email</p>' +
+      return close + (onPage ? '' : '<p class="acct-eyebrow">Check your email</p>') +
         '<h2 class="acct-h">Enter your code</h2>' +
         '<p class="acct-p">We sent a six-digit code to <b>' + esc(pendingEmail) + '</b>. You can also tap the button in that email.</p>' +
         '<form data-acct="verify"><input class="acct-input acct-code" name="code" inputmode="numeric" autocomplete="one-time-code" ' +
@@ -341,26 +366,33 @@
         '<p class="acct-small"><button type="button" class="acct-link" data-acct="again">Send a new code</button> · ' +
         '<button type="button" class="acct-link" data-acct="other">Use a different email</button></p>';
     }
-    return close + '<p class="acct-eyebrow">Sign in · optional</p>' +
-      '<h2 class="acct-h">Your progress, <em>on every device.</em></h2>' +
-      '<p class="acct-p">Sign in to keep your reading progress in step on your phone, tablet and computer. No password: we email you a code.</p>' +
+    var intro = onPage ? (PAGE === 'account' ? '<p class="acct-p">Sign in with your email to see your account.</p>' : '')
+      : '<p class="acct-eyebrow">Sign in · optional</p>' +
+        '<h2 class="acct-h">Your progress, <em>on every device.</em></h2>' +
+        '<p class="acct-p">Sign in to keep your reading progress in step on your phone, tablet and computer. No password: we email you a code.</p>';
+    return close + intro +
       '<form data-acct="send"><input class="acct-input" type="email" name="email" autocomplete="email" placeholder="you@example.com" ' +
-      'aria-label="Your email address" required value="' + esc(pendingEmail) + '">' +
-      '<label class="acct-family"><input type="checkbox" name="family"' + (familyChoice ? ' checked' : '') + '>' +
-      '<span class="acct-family-box" aria-hidden="true"></span>' +
-      '<span class="acct-family-text"><b>Join the Daily Bread family</b>' +
-      'Everything here is given freely. Friends of Ariel Media get occasional news. ' +
-      'It costs nothing and helps more than you’d think. Unsubscribe anytime.</span></label>' +
+      'aria-label="Your email address" required value="' + esc(pendingEmail) + '">' + familyCard() +
       '<button class="acct-btn" type="submit"' + (busy ? ' disabled' : '') + '>' + (busy ? 'Sending…' : 'Email me a code') + '</button></form>' +
       (msg ? '<p class="acct-msg">' + esc(msg) + '</p>' : '') +
       '<p class="acct-small">Reading never needs an account. We keep your email address and reading progress, stored in the EU, to sync it. ' +
       '<a class="acct-link" href="/privacy.html">Privacy</a></p>';
   }
   function drawPanel() {
+    drawPage();
     if (!panel || panel.hidden) return;
     var focused = document.activeElement && document.activeElement.name;
-    panel.querySelector('.acct-card').innerHTML = panelHtml();
+    panel.querySelector('.acct-card').innerHTML = panelHtml(false);
     var f = panel.querySelector('input[name="' + focused + '"]') || panel.querySelector('input');
+    if (f && !busy) f.focus();
+  }
+  function drawPage() {
+    if (!pageEl) return;
+    if (PAGE === 'signin' && load(AUTH_KEY)) { location.replace('/account.html'); return; }
+    var inside = pageEl.contains(document.activeElement), focused = inside && document.activeElement.name;
+    pageEl.innerHTML = panelHtml(true);
+    var f = focused && pageEl.querySelector('input[name="' + focused + '"]');
+    if (!f && inside) f = pageEl.querySelector('input:not([type=checkbox])');
     if (f && !busy) f.focus();
   }
   function drawSyncNote() {
@@ -399,7 +431,12 @@
     var t = e.target.closest && e.target.closest('[data-acct], .tb-acct, .tb-acct-m');
     if (!t) return;
     var a = t.getAttribute('data-acct') || 'open';
-    if (a === 'open') { e.preventDefault(); openPanel(); return; }
+    if (a === 'open') {
+      e.preventDefault();
+      if (load(AUTH_KEY)) { if (PAGE !== 'account') location.href = '/account.html'; return; }   // signed in: the account page
+      if (pageEl) { var em = pageEl.querySelector('input[name=email]'); if (em) { em.focus(); return; } }  // already on a sign-in page
+      openPanel(); return;
+    }
     if (a === 'close') { closePanel(); return; }
     if (a === 'sync') { sync(false); return; }
     if (a === 'out') { signOut(); closePanel(); return; }
@@ -413,7 +450,7 @@
     if (a === 'delete') {
       if (!window.confirm('Delete your Daily Bread account? Your synced progress is removed from our servers. Progress on this device stays. This cannot be undone. (If you joined the Daily Bread family, the unsubscribe link in any of our emails takes you off the list.)')) return;
       deleteAccount().then(function () { msg = 'Your account has been deleted.'; step = 'email'; drawPanel(); })
-        .catch(function (err) { state.error = friendly(err); state.status = 'error'; drawPanel(); });
+        .catch(function (err) { msg = friendly(err); drawPanel(); });
     }
   });
   document.addEventListener('change', function (e) {
