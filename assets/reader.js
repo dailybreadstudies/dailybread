@@ -332,11 +332,15 @@
   // ── The Messianic filter for the Swedish texts (Svenska 1917), John's wording, Nov 2026 ──
   // Jesus → Jeshua, Kristus → Messias, evangelium → glada budskapet, Judas → Juda, Maria → Mirjam;
   // lagen → Toran / lagens → Torans, and God's law after a possessive ("Guds lag", "min lag") → Torah;
-  // dödsriket → Sheol only where the Greek has Hades; God's Temple capitalized. Döpa/dop stay as they are.
+  // dödsriket → Sheol in the Tanakh and, in the Apostles, only where the Greek has Hades; God's Temple capitalized. Döpa/dop stay as they are.
   var SVL = 'A-Za-zÅÄÖåäöÉéÜü';
   function svRe(src, flags) { return new RegExp(src.replace(/\{L\}/g, SVL), flags || 'g'); }
   var SV_HADES = { 'MAT 11:23': 1, 'MAT 16:18': 1, 'LUK 10:15': 1, 'LUK 16:23': 1, 'ACT 2:27': 1, 'ACT 2:31': 1,
     'REV 1:18': 1, 'REV 6:8': 1, 'REV 20:13': 1, 'REV 20:14': 1 };   // ᾅδης in the Greek (data/orig)
+  // In the Tanakh "dödsriket" translates Sheol itself, so there it always becomes Sheol
+  var SV_TANAKH = {};
+  'GEN EXO LEV NUM DEU JOS JDG RUT 1SA 2SA 1KI 2KI 1CH 2CH EZR NEH EST JOB PSA PRO ECC SNG ISA JER LAM EZK DAN HOS JOL AMO OBA JON MIC NAM HAB ZEP HAG ZEC MAL'
+    .split(' ').forEach(function (b) { SV_TANAKH[b] = 1; });
   // "lagen" for the Persian law (all of Esther) and Romans 7:21 ("den lagen" = a principle) stays
   var SV_LAW_SKIP = { 'ROM 7:21': 1 };
   // "templet" that is not the Lord's Temple: pagan temples, and believers as God's temple
@@ -373,7 +377,7 @@
         .replace(svRe('(?<![{L}])[Ll]agens(?![{L}])'), 'Torans')
         .replace(svRe('(?<![{L}])[Ll]agen(?![{L}])'), 'Toran');
     }
-    if (SV_HADES[key]) text = text.replace(svRe('(?<![{L}])dödsrikets(?![{L}])'), 'Sheols').replace(svRe('(?<![{L}])(dödsriket|dödsrike)(?![{L}])'), 'Sheol');
+    if (SV_HADES[key] || SV_TANAKH[book]) text = text.replace(svRe('(?<![{L}])dödsrikets(?![{L}])'), 'Sheols').replace(svRe('(?<![{L}])(dödsriket|dödsrike)(?![{L}])'), 'Sheol');
     if (!SV_TEMPLE_SKIP[key]) {
       text = text.replace(svRe('(?<![{L}])templet(s?)(?![{L}])'), 'Templet$1')
         .replace(svRe('(?<![{L}])(Guds|HERRENS|Herrens|hans|ditt|mitt|sitt|heliga|helga) tempel(?![{L}])'), '$1 Tempel');

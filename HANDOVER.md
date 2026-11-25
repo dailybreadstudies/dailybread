@@ -180,8 +180,8 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
   is not applied. The Messianic Filter uses its own Swedish rules (`svMessianic`, John's wording Nov 2026):
   Jesus → Jeshua (Jesu → Jeshuas), Kristus → Messias (Kristi → Messias’), evangelium → glada budskapet,
   Judas → Juda, Maria → Mirjam; lagen → Toran, lagens → Torans, possessive + lag ("Guds lag", "hans lag") → Torah
-  (not Esther, not Rom 7:21, not "syndens lag" etc.); dödsriket → Sheol only in the ten verses with ᾅδης in the Greek
-  (`SV_HADES`); God's Temple capitalized (`SV_TEMPLE_SKIP` for pagan temples and believers as the temple).
+  (not Esther, not Rom 7:21, not "syndens lag" etc.); dödsriket → Sheol everywhere in the Tanakh and, in the Apostles, only in the ten verses with
+  ᾅδης in the Greek (`SV_HADES`); God's Temple capitalized (`SV_TEMPLE_SKIP` for pagan temples and believers as the temple).
   Döpa/dop are left as they are. Reference previews, audio and word study stay BSB.
   If YouVersion can't be reached, the BSB is shown with a one-line notice.
 - To open it to everyone: return true from `sfbCheck()` (instead of the `SFB_READERS` check).
