@@ -180,6 +180,11 @@
         tmp.innerHTML = SV_BLESSINGS[i] + ' ';
         while (tmp.firstChild) bl.insertBefore(tmp.firstChild, he || null);
       });
+      // the Divine Name setting (Reading settings) applies to the Swedish blessings too
+      var st = {};
+      try { st = JSON.parse(load((document.body.getAttribute('data-edition') === 'kids' ? 'dbs-kids-' : 'dbs-') + 'settings') || '{}') || {}; } catch (e) { /* ignore */ }
+      var word = { adonai: 'Adonai', hashem: 'HaShem' }[st.divineName];
+      sec.querySelectorAll('.lord').forEach(function (el) { el.setAttribute('data-orig', 'Herre'); if (word) el.textContent = word; });
     });
   }
 

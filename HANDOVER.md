@@ -184,6 +184,8 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
   Döpa/dop and dödsriket are left as they are. Gehenna: in the 12 verses with γέεννα in the Greek, "helvetet" →
   Gehenna, only with the Messianic filter on (`SV_GEHENNA`). Reference previews, audio and word study stay BSB.
   If YouVersion can't be reached, the BSB is shown with a one-line notice.
+- Divine Name works on the 1917 (public domain): HERREN/HERRE/HERRENS are wrapped in .lord when converted and
+  become ADONAI/ADONAIS or HASHEM/HASHEMS; the Swedish blessings follow the same setting.
 - To open it to everyone: return true from `sfbCheck()` (instead of the `SFB_READERS` check).
 
 ## Interface language — English / Svenska (assets/i18n.js, Nov 2026 — private test)

@@ -267,7 +267,13 @@
     var word = { lord: 'Lord', adonai: 'Adonai', hashem: 'HaShem' }[settings.divineName] || 'Lord';
     root.querySelectorAll('.lord').forEach(function (el) {
       if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent);
-      if (el.getAttribute('data-orig') !== 'Lord') return;
+      var o = el.getAttribute('data-orig');
+      // Swedish (Svenska 1917, the Swedish blessings): HERREN / HERRE / Herre → ADONAI, HERRENS → ADONAIS (no article to drop)
+      if (/^(HERREN|HERRE|HERRENS|Herre|Herrens)$/.test(o)) {
+        el.textContent = word === 'Lord' ? o : word + (/S$|s$/.test(o) && /ENS$|rens$/i.test(o) ? 's' : '');
+        return;
+      }
+      if (o !== 'Lord') return;
       el.textContent = word;
       if (word === 'Lord') return;
       // "the LORD said" → "ADONAI said" / "HaShem said": a name takes no article
@@ -447,7 +453,11 @@
       var own = el.closest('section[data-book]');
       var sv = own && isSfb(own.getAttribute('data-book'));   // a Swedish text: its own Messianic filter, no English word lists
       if (sv && !settings.messianic) return;
-      var fix = sv ? function (t, at) { return svMessianic(svGehenna(t, at), at); } : transformText;
+      var fix = sv ? function (t, at, node) {
+        var prev = node && node.previousSibling;
+        if (prev && prev.nodeType === 1 && prev.classList.contains('lord') && (!at || at.key.split(' ')[0] !== 'EST')) t = t.replace(svRe('^(\\s+)lag(s?)(?![{L}])'), '$1Torah$2');   // "HERRENS lag"
+        return svMessianic(svGehenna(t, at), at);
+      } : transformText;
       var sec = el.classList.contains('scripture') && el.closest('section[data-book]');
       var book = sec && sec.getAttribute('data-book'), c = sec ? parseInt(sec.getAttribute('data-c') || '1', 10) : 0;
       var at = book ? { key: '', seen: {} } : null;
@@ -460,7 +470,7 @@
           continue;
         }
         if (node.parentNode && node.parentNode.classList && (node.parentNode.classList.contains('verse-num') || node.parentNode.classList.contains('chapter-num'))) continue;
-        var t = fix(node.nodeValue, at);
+        var t = fix(node.nodeValue, at, node);
         if (t.indexOf(NAME_MARK[0]) >= 0) marked.push([node, t]);   // replaced after the walk
         else if (t !== node.nodeValue) node.nodeValue = t;
       }
@@ -492,7 +502,7 @@
   //   BSB's own paragraph and poetry breaks (sfbReflow).
   var YV = { key: 'kXbev4xSYcSwh1hVfcEBlfdArRxWreFU9MtDf2kapzApfBiP', api: 'https://api.youversion.com/v1' };
   var SWE = {
-    sv1917: { id: 166, label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' },
+    sv1917: { id: 166, label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, divine: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' },
     sfb98: { id: null, label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' }
   };
   function sweVer() { return SWE[settings.version] && SWE[settings.version].id ? SWE[settings.version] : null; }
@@ -645,7 +655,7 @@
     }
     function content(node, c2) {   // verse numbers, text and note marks of one paragraph
       node.childNodes.forEach(function (n) {
-        if (n.nodeType === 3) { push(c2, escText(n.nodeValue)); return; }
+        if (n.nodeType === 3) { push(c2, escText(n.nodeValue).replace(/(?<![A-Za-zÅÄÖåäö])(HERRENS|HERREN|HERRE)(?![A-Za-zÅÄÖåäö])/g, '<span class="lord">$1</span>')); return; }
         if (n.nodeType !== 1) return;
         var cl = n.classList;
         if (cl.contains('yv-v')) { verse = parseInt(n.getAttribute('v'), 10) || verse; c2.push(verse); return; }
@@ -2494,7 +2504,7 @@
     var sw = useSfb() ? sweVer() : null;
     var hide = function (el, h) { if (el) el.hidden = !!h; };
     hide(panel.querySelector('.sp-msub-row'), sw);
-    var dn = panel.querySelector('.sp-seg-name'); hide(dn && dn.closest('.sp-row'), sw);
+    var dn = panel.querySelector('.sp-seg-name'); hide(dn && dn.closest('.sp-row'), sw && !sw.divine);
     hide(panel.querySelector('[data-setting="hebrewNames"]'), sw);
     var mf = panel.querySelector('[data-setting="messianic"]');
     hide(mf, sw && !sw.filter);
