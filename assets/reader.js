@@ -720,9 +720,11 @@
     note.textContent = '*Adapted from the BSB.';
     sec.parentNode.insertBefore(row, sec);
     sec.parentNode.insertBefore(note, sec);
+    note.hidden = !!(SWE[settings.version] && SWE[settings.version].id);
     row.querySelector('select').addEventListener('change', function (e) {
       settings.version = e.target.value;
       saveSettings();
+      note.hidden = e.target.value !== 'bsb';
       if (current && current.bible) loadChapter(current.book, current.c, null, true);   // fetch the text again in the chosen translation
       else if (current && current.day) loadDay(current.day.date, true);
     });
@@ -2486,6 +2488,8 @@
     pressed('data-ntorig', settings.ntOrig || 'grc');
     var vs = panel.querySelector('[data-version-select]');
     if (vs) vs.value = SWE[settings.version] && SWE[settings.version].id ? settings.version : 'bsb';
+    var vn = panel.querySelector('.sp-version-note');
+    if (vn) vn.hidden = !!(vs && vs.value !== 'bsb');   // "*Adapted from the BSB." only beside DBSB*
     pressed('data-theme-opt', settings.theme);
     pressed('data-font', settings.font);
     pressed('data-justify', settings.justify ? 'on' : 'off');

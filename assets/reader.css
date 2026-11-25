@@ -1411,3 +1411,4 @@ html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
 .tb-lang-menu button[aria-checked="true"] { color: var(--accent); font-weight: 600; }
 .tb-lang-menu button[aria-checked="true"]::after { content: " ✓"; }
 @media (max-width: 760px) { .tb-lang-code { display: none; } }
+.sp-note[hidden] { display: none; }
