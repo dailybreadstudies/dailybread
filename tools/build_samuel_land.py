@@ -42,7 +42,7 @@ DROP = {'a734b66/millo', 'ae67841/perez-uzzah', 'a077262/siphmoth', 'aeb5f24/bet
 # corrections to OpenBible's points
 FIX = {
     # OpenBible puts Samuel's Ramah beside Gibeah; the usual identification is er-Ram (as in its other books)
-    'Ramah': {'ll': [35.23161, 31.85434], 'c': 1, 'm': 'er-Ram? (Rentis is also proposed)', 'u': 'a6d57ed/ramah-1'},
+    'Ramah': {'ll': [35.23161, 31.85434], 'c': 1, 'm': 'er-Ram? (other sites proposed)', 'u': 'a6d57ed/ramah-1'},
     'Naioth': {'ll': [35.2296, 31.8559], 'c': 0, 'm': 'in Ramah'},
     'Beth-aven': {'ll': [35.2745, 31.8768], 'm': 'near Michmash; Tell Maryam?'},       # shares Tell Maryam with Migron
     'Aroer': {'m': 'Khirbet ’Ar’arah'},
@@ -112,7 +112,7 @@ NOTES = {
     'Naioth': 'In Ramah, where Samuel led a company of prophets. David fled here; Saul\'s messengers, and then Saul himself, began to prophesy (1 Samuel 19:18–24).',
     'Nob': '"The town of the priests." Ahimelech gave David the holy bread and Goliath\'s sword (1 Samuel 21:1–9); Doeg the Edomite killed its priests (22:9–19). It stood within sight of Jerusalem (Isaiah 10:32), perhaps on Mount Scopus.',
     'Ophrah': 'Ophrah of Benjamin: a Philistine raiding party went toward Ophrah (1 Samuel 13:17). The town "Ephraim" near Baal-hazor (2 Samuel 13:23) is usually taken to be the same place (compare John 11:54).',
-    'Ramah': 'Ramathaim-zophim, Samuel\'s home: he was born, lived, judged and was buried here (1 Samuel 1:1, 19; 7:17; 25:1). Er-Ram, north of Jerusalem, is the usual site; Rentis, farther west, is also proposed.',
+    'Ramah': 'Ramathaim-zophim, Samuel\'s home: he was born, lived, judged and was buried here (1 Samuel 1:1, 19; 7:17; 25:1). Er-Ram, north of Jerusalem, is the usual site; OpenBible.info puts it beside Gibeah, and Rentis, farther west, is also proposed (see "Where was Ramah?" in the notes).',
     'Secu': 'Saul came to "the great cistern at Secu" on his way to Naioth (1 Samuel 19:22).',
     'Shaaraim': 'The wounded Philistines fell "along the road to Shaaraim" after Goliath died (1 Samuel 17:52). Khirbet Qeiyafa, with its two gates, has been proposed (Shaaraim means "two gates").',
     'Shiloh': 'The house of the LORD stood here. Hannah prayed for a son, and Samuel grew up serving under Eli; the LORD revealed Himself to him at Shiloh (1 Samuel 1–3). The Ark was taken from here into battle and lost (4:3–11).',
@@ -376,6 +376,9 @@ def build(b):
         'groups': [{'id': 'book', 'name': 'Named in ' + name, 'color': RED, 'places': mine, 'firstNamed': True},
                    {'id': 'sister', 'name': 'Named in ' + oname, 'color': DARK, 'places': theirs},
                    {'id': 'other', 'name': 'Other places of the time', 'color': BLACK, 'places': CONTEXT}],
+        'alternates': {'for': 'Ramah', 'bounds': [[34.97, 31.79], [35.3, 32.06]],
+                       'sites': [{'name': 'beside Gibeah (OpenBible.info)', 'll': [35.23072, 31.82311]},
+                                 {'name': 'Rentis', 'll': [35.01944, 32.02806]}]},
         'notes': [
             {'h': 'The land in the days of Samuel, Saul and David', 'p': [
                 'The books of Samuel cover roughly a century, from Samuel\'s birth to the last years of David, about 1100–970 BC: the end of the Iron Age I and the beginning of the Iron Age II. '
@@ -383,6 +386,10 @@ def build(b):
                 'Against them Israel asked for a king. Saul, from Gibeah in Benjamin, fought the Philistines in the hills north of Jerusalem and died on Gilboa. '
                 'David, from Bethlehem in Judah, was hunted through the wildernesses of Judah, reigned in Hebron, then took Jerusalem from the Jebusites and made it the city of the Ark. '
                 'He subdued the Philistines, Moab, Ammon, Edom and the Aramean kingdoms of Zobah and Damascus.']},
+            {'h': 'Where was Ramah?', 'alternates': True, 'p': [
+                'Samuel\'s home is called Ramathaim-zophim in 1 Samuel 1:1 and Ramah everywhere else. This map follows the usual identification, er-Ram, '
+                'about 8 km north of Jerusalem, the Ramah of Benjamin. OpenBible.info places it right beside Gibeah instead. Others look for it at Rentis, '
+                'on the western edge of the hill country of Ephraim (1:1), the likely site of New Testament Arimathea.']},
             {'h': 'How to use this map', 'p': [
                 'This map opens from any place named in ' + name + '. The red dots are places named in ' + name + ', the blue-grey dots places named only in ' + oname + ', '
                 'and the black dots other places of the time, for context; tap a group in the key to show or hide it. The tribe names show roughly where each tribe lived. '

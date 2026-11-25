@@ -1601,11 +1601,11 @@
       31.85434
      ],
      "c": 1,
-     "m": "er-Ram? (Rentis is also proposed)",
+     "m": "er-Ram? (other sites proposed)",
      "u": "a6d57ed/ramah-1",
      "k": "mount",
      "f": "first at 1:1",
-     "note": "Ramathaim-zophim, Samuel's home: he was born, lived, judged and was buried here (1 Samuel 1:1, 19; 7:17; 25:1). Er-Ram, north of Jerusalem, is the usual site; Rentis, farther west, is also proposed."
+     "note": "Ramathaim-zophim, Samuel's home: he was born, lived, judged and was buried here (1 Samuel 1:1, 19; 7:17; 25:1). Er-Ram, north of Jerusalem, is the usual site; OpenBible.info puts it beside Gibeah, and Rentis, farther west, is also proposed (see \"Where was Ramah?\" in the notes)."
     },
     {
      "n": "Secu",
@@ -1766,12 +1766,48 @@
    ]
   }
  ],
+ "alternates": {
+  "for": "Ramah",
+  "bounds": [
+   [
+    34.97,
+    31.79
+   ],
+   [
+    35.3,
+    32.06
+   ]
+  ],
+  "sites": [
+   {
+    "name": "beside Gibeah (OpenBible.info)",
+    "ll": [
+     35.23072,
+     31.82311
+    ]
+   },
+   {
+    "name": "Rentis",
+    "ll": [
+     35.01944,
+     32.02806
+    ]
+   }
+  ]
+ },
  "notes": [
   {
    "h": "The land in the days of Samuel, Saul and David",
    "p": [
     "The books of Samuel cover roughly a century, from Samuel's birth to the last years of David, about 1100–970 BC: the end of the Iron Age I and the beginning of the Iron Age II. In the Hebrew Bible they are one book. The Philistines, strong in their five cities on the coast, pushed into the hill country, took the Ark at Ebenezer and set garrisons as far inland as Geba and Bethlehem.",
     "Against them Israel asked for a king. Saul, from Gibeah in Benjamin, fought the Philistines in the hills north of Jerusalem and died on Gilboa. David, from Bethlehem in Judah, was hunted through the wildernesses of Judah, reigned in Hebron, then took Jerusalem from the Jebusites and made it the city of the Ark. He subdued the Philistines, Moab, Ammon, Edom and the Aramean kingdoms of Zobah and Damascus."
+   ]
+  },
+  {
+   "h": "Where was Ramah?",
+   "alternates": true,
+   "p": [
+    "Samuel's home is called Ramathaim-zophim in 1 Samuel 1:1 and Ramah everywhere else. This map follows the usual identification, er-Ram, about 8 km north of Jerusalem, the Ramah of Benjamin. OpenBible.info places it right beside Gibeah instead. Others look for it at Rentis, on the western edge of the hill country of Ephraim (1:1), the likely site of New Testament Arimathea."
    ]
   },
   {
