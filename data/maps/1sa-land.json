@@ -1,0 +1,1763 @@
+{
+ "id": "1sa-land",
+ "title": "The Land in the Days of Samuel, Saul and David",
+ "ref": "1 Samuel",
+ "anchor": {
+  "book": "1SA",
+  "c": 1,
+  "v": 1
+ },
+ "bookwide": true,
+ "placesName": "1 Samuel",
+ "siteLabel": "Site",
+ "groupsLabel": "Places",
+ "bounds": [
+  [
+   34.25,
+   30.5
+  ],
+  [
+   36.7,
+   33.7
+  ]
+ ],
+ "groupLabelZoom": 8.2,
+ "waterNames": [
+  {
+   "n": "The Great Sea",
+   "s": "(Mediterranean)",
+   "ll": [
+    34.25,
+    32.45
+   ]
+  },
+  {
+   "n": "Sea of Chinnereth",
+   "s": "(Galilee)",
+   "ll": [
+    35.59,
+    32.83
+   ]
+  },
+  {
+   "n": "Salt Sea",
+   "s": "(Dead Sea)",
+   "ll": [
+    35.49,
+    31.5
+   ]
+  },
+  {
+   "n": "Jordan",
+   "s": "",
+   "ll": [
+    35.555,
+    32.2
+   ]
+  }
+ ],
+ "regions": [
+  {
+   "n": "Asher",
+   "ll": [
+    35.2,
+    32.98
+   ],
+   "r": 1,
+   "note": "The coast and hills from Carmel north toward Tyre and Sidon. Ish-bosheth was made king over Gilead, Asher, Jezreel, Ephraim and Benjamin (2 Samuel 2:9)."
+  },
+  {
+   "n": "Naphtali",
+   "ll": [
+    35.5,
+    33.17
+   ],
+   "r": 1,
+   "note": "Upper Galilee. Abel-beth-maacah, where Sheba's revolt ended, lay at its northern edge (2 Samuel 20:14–22)."
+  },
+  {
+   "n": "Zebulun",
+   "ll": [
+    35.27,
+    32.78
+   ],
+   "r": 1,
+   "note": "Lower Galilee, north of the Jezreel Valley."
+  },
+  {
+   "n": "Issachar",
+   "ll": [
+    35.45,
+    32.62
+   ],
+   "r": 1,
+   "note": "The eastern Jezreel Valley, where the Philistines camped at Shunem before Gilboa (1 Samuel 28:4)."
+  },
+  {
+   "n": "Manasseh",
+   "ll": [
+    35.15,
+    32.4
+   ],
+   "r": 1,
+   "note": "The hill country north of Shechem to the Jezreel Valley."
+  },
+  {
+   "n": "Ephraim",
+   "ll": [
+    35.2,
+    32.1
+   ],
+   "r": 1,
+   "note": "The central hill country. Samuel's family came from the hill country of Ephraim (1 Samuel 1:1), and Shiloh lay in it. Sheba son of Bichri was \"from the hill country of Ephraim\" (2 Samuel 20:21)."
+  },
+  {
+   "n": "Benjamin",
+   "ll": [
+    35.31,
+    31.84
+   ],
+   "r": 1,
+   "note": "Saul's tribe (1 Samuel 9:1–2), the small hill country between Judah and Ephraim, with Gibeah, Geba, Michmash, Mizpah, Ramah and Gibeon. Much of Saul's war with the Philistines was fought here."
+  },
+  {
+   "n": "Tribe of Dan",
+   "label": "Dan",
+   "ll": [
+    34.85,
+    31.93
+   ],
+   "r": 1,
+   "note": "Dan's first allotment, west of Benjamin. Most of the tribe had moved north and taken Laish, which they named Dan (Judges 18)."
+  },
+  {
+   "n": "Judah",
+   "ll": [
+    35.13,
+    31.42
+   ],
+   "r": 1,
+   "note": "David's tribe. He hid from Saul in its wildernesses, and reigned over Judah at Hebron for seven and a half years before all Israel made him king (2 Samuel 2:1–11; 5:1–5)."
+  },
+  {
+   "n": "Simeon",
+   "ll": [
+    34.78,
+    31.17
+   ],
+   "r": 1,
+   "note": "Towns within Judah in the Negev. Ziklag had been allotted to Simeon (Joshua 19:5)."
+  },
+  {
+   "n": "Reuben",
+   "ll": [
+    35.8,
+    31.62
+   ],
+   "r": 1,
+   "note": "The plateau east of the Salt Sea, north of the Arnon. David's census began at Aroer on the Arnon (2 Samuel 24:5)."
+  },
+  {
+   "n": "Gad",
+   "ll": [
+    35.7,
+    32.0
+   ],
+   "r": 1,
+   "note": "Gilead east of the Jordan. When the Philistines gathered at Michmash, some Hebrews crossed the Jordan \"into the land of Gad and Gilead\" (1 Samuel 13:7)."
+  },
+  {
+   "n": "East Manasseh",
+   "label": "Manasseh",
+   "ll": [
+    35.95,
+    32.62
+   ],
+   "r": 1,
+   "note": "The half-tribe east of the Jordan, in northern Gilead and Bashan."
+  },
+  {
+   "n": "Land of the Philistines",
+   "label": "Land of the\nPhilistines",
+   "ll": [
+    34.48,
+    31.45
+   ],
+   "r": 2,
+   "note": "The coast of the five Philistine cities, Gaza, Ashdod, Ashkelon, Gath and Ekron (1 Samuel 6:17). The Philistines were Israel's great enemy through Samuel's and Saul's days, until David subdued them (2 Samuel 5:17–25; 8:1)."
+  },
+  {
+   "n": "Amalek",
+   "label": "Amalekites",
+   "ll": [
+    34.55,
+    30.7
+   ],
+   "r": 2,
+   "note": "Raiding nomads of the Negev and Sinai. Saul fought them and spared Agag (1 Samuel 15); they burned Ziklag, and David pursued and struck them (30)."
+  },
+  {
+   "n": "Negev",
+   "ll": [
+    34.95,
+    30.85
+   ],
+   "r": 2,
+   "note": "The dry south. David, living at Ziklag, told Achish he had raided \"the Negev of Judah\" (1 Samuel 27:10); the Amalekites raided the Negev and Ziklag (30:1, 14)."
+  },
+  {
+   "n": "Wilderness of Paran",
+   "ll": [
+    34.75,
+    30.6
+   ],
+   "r": 3,
+   "note": "After Samuel died, David went down to the Wilderness of Paran (1 Samuel 25:1), the desert south of Judah (Greek manuscripts read Maon)."
+  },
+  {
+   "n": "Wilderness of Ziph",
+   "ll": [
+    35.2,
+    31.5
+   ],
+   "r": 3,
+   "note": "The barren hills east of Ziph, falling to the Dead Sea, where David hid from Saul (1 Samuel 23:14–24; 26:2)."
+  },
+  {
+   "n": "Wilderness of Maon",
+   "ll": [
+    35.21,
+    31.38
+   ],
+   "r": 3,
+   "note": "The wilderness east of Maon \"in the Arabah south of Jeshimon,\" where Saul almost caught David (1 Samuel 23:24–28)."
+  },
+  {
+   "n": "Wilderness of En-gedi",
+   "ll": [
+    35.33,
+    31.47
+   ],
+   "hide": true,
+   "z": 10,
+   "note": "The cliffs and caves above En-gedi, where David spared Saul's life (1 Samuel 24)."
+  },
+  {
+   "n": "Arabah",
+   "ll": [
+    35.52,
+    31.98
+   ],
+   "r": 3,
+   "note": "The rift valley of the Jordan and the Salt Sea. Abner's men marched all night through the Arabah after the battle at Gibeon (2 Samuel 2:29)."
+  },
+  {
+   "n": "Gilead",
+   "ll": [
+    35.85,
+    32.3
+   ],
+   "r": 2,
+   "note": "The hill country east of the Jordan, with Jabesh-gilead and Mahanaim. Ish-bosheth was made king over Gilead (2 Samuel 2:9); Absalom's army camped in the land of Gilead (17:26)."
+  },
+  {
+   "n": "Moab",
+   "ll": [
+    35.85,
+    31.25
+   ],
+   "r": 2,
+   "note": "David took his parents to the king of Moab at \"Mizpeh of Moab\" while he hid from Saul (1 Samuel 22:3–4); Ruth, his great-grandmother, was a Moabite. Saul fought Moab (14:47), and David later made it subject (2 Samuel 8:2)."
+  },
+  {
+   "n": "Edom",
+   "ll": [
+    35.55,
+    30.55
+   ],
+   "r": 2,
+   "note": "South-east of the Salt Sea. Saul fought Edom (1 Samuel 14:47); David put garrisons throughout Edom (2 Samuel 8:14)."
+  },
+  {
+   "n": "Ammon",
+   "label": "Ammonites",
+   "ll": [
+    36.12,
+    31.95
+   ],
+   "r": 2,
+   "note": "The land around Rabbah. Nahash the Ammonite besieged Jabesh-gilead (1 Samuel 11); his son Hanun shamed David's envoys, which led to the war in which Uriah was killed (2 Samuel 10–12)."
+  },
+  {
+   "n": "Aram",
+   "ll": [
+    36.55,
+    33.25
+   ],
+   "r": 2,
+   "note": "The Aramean kingdoms north-east of Israel. David defeated Hadadezer and \"Aram of Damascus,\" and put garrisons there (2 Samuel 8:3–6)."
+  },
+  {
+   "n": "Zobah",
+   "ll": [
+    36.25,
+    33.95
+   ],
+   "r": 2,
+   "note": "The Aramean kingdom of Hadadezer son of Rehob, in the Beqaa Valley and beyond, reaching toward the Euphrates. Saul fought its kings (1 Samuel 14:47); David defeated Hadadezer twice (2 Samuel 8:3–8; 10:6–19)."
+  },
+  {
+   "n": "Geshur",
+   "ll": [
+    35.72,
+    32.92
+   ],
+   "r": 3,
+   "note": "A small Aramean kingdom east of the Sea of Chinnereth. David married Maacah, daughter of Talmai king of Geshur; their son Absalom fled to his grandfather here for three years (2 Samuel 3:3; 13:37–38)."
+  },
+  {
+   "n": "Maacah",
+   "ll": [
+    35.75,
+    33.18
+   ],
+   "r": 3,
+   "note": "A small Aramean kingdom below Mount Hermon, which sent a thousand men to help the Ammonites (2 Samuel 10:6–8)."
+  },
+  {
+   "n": "Valley of Elah",
+   "ll": [
+    34.965,
+    31.692
+   ],
+   "hide": true,
+   "z": 11,
+   "note": "The valley where Israel faced the Philistines and David killed Goliath (1 Samuel 17:2–52; 21:9). Wadi es-Sunt, below Socoh and Azekah."
+  },
+  {
+   "n": "Valley of Rephaim",
+   "ll": [
+    35.2,
+    31.755
+   ],
+   "hide": true,
+   "z": 11,
+   "note": "South-west of Jerusalem. The Philistines spread out here twice and David defeated them (2 Samuel 5:18–25); the three mighty men broke through their camp here for water from Bethlehem (23:13–17)."
+  },
+  {
+   "n": "Kidron Valley",
+   "ll": [
+    35.2375,
+    31.776
+   ],
+   "hide": true,
+   "z": 13,
+   "note": "Between the City of David and the Mount of Olives. David crossed it weeping as he fled from Absalom (2 Samuel 15:23)."
+  },
+  {
+   "n": "Valley of Salt",
+   "ll": [
+    35.3,
+    30.95
+   ],
+   "hide": true,
+   "z": 9,
+   "note": "Where David's army struck down 18,000 Edomites (2 Samuel 8:13). Usually placed in the Arabah south of the Salt Sea; others suggest the valley east of Beersheba."
+  },
+  {
+   "n": "Brook of Besor",
+   "ll": [
+    34.48,
+    31.29
+   ],
+   "hide": true,
+   "z": 10,
+   "note": "Two hundred of David's men were too exhausted to cross it, and stayed with the baggage. David ruled that they share the plunder equally with those who fought (1 Samuel 30:9–25). Nahal Besor, south of Gaza."
+  },
+  {
+   "n": "forest of Ephraim",
+   "ll": [
+    35.74,
+    32.22
+   ],
+   "hide": true,
+   "z": 10,
+   "note": "East of the Jordan, near Mahanaim: Absalom's army was defeated here, and his head caught in a great oak (2 Samuel 18:6–15). \"The forest devoured more people that day than the sword.\""
+  },
+  {
+   "n": "Jordan",
+   "ll": [
+    35.56,
+    32.15
+   ],
+   "hide": true,
+   "z": 8,
+   "note": "David crossed the Jordan fleeing from Absalom, and the men of Judah brought him back across it (2 Samuel 17:22; 19:15–18)."
+  }
+ ],
+ "links": [
+  "Adullam",
+  "Aijalon",
+  "Aphek",
+  "Aroer",
+  "Ashdod",
+  "Ashkelon",
+  "Azekah",
+  "Beersheba",
+  "Beth-aven",
+  "Beth-shan",
+  "Beth-shemesh",
+  "Bethel",
+  "Bethlehem",
+  "Bezek",
+  "Carmel",
+  "Dan",
+  "Ebenezer",
+  "Ekron",
+  "Ekronites",
+  "En-gedi",
+  "Endor",
+  "Ephes-dammim",
+  "Eshtemoa",
+  "Gallim",
+  "Gath",
+  "Gaza",
+  "Geba",
+  "Gibeah",
+  "Gilgal",
+  "Hachilah",
+  "Hazor",
+  "Hebron",
+  "Hereth",
+  "Horesh",
+  "Hormah",
+  "Jabesh-gilead",
+  "Jabesh",
+  "Jattir",
+  "Jerusalem",
+  "Jezreel",
+  "Keilah",
+  "Kiriath-jearim",
+  "Maon",
+  "Michmash",
+  "Migron",
+  "Mizpah",
+  "Gilboa",
+  "Mount Gilboa",
+  "Naioth",
+  "Nob",
+  "Ophrah",
+  "Ramathaim-zophim",
+  "Ramah",
+  "Secu",
+  "Shaaraim",
+  "Shiloh",
+  "Shunem",
+  "Shur",
+  "Socoh",
+  "Telaim",
+  "Ziklag",
+  "Ziphites",
+  "Ziph",
+  "Negev",
+  "Wilderness of Paran",
+  "Wilderness of Ziph",
+  "Wilderness of Maon",
+  "wilderness of En-gedi",
+  "Arabah",
+  "Gilead",
+  "Moab",
+  "Zobah",
+  "Valley of Elah",
+  "Brook of Besor",
+  "Jordan"
+ ],
+ "aliases": {
+  "Ekronites": "Ekron",
+  "Jabesh": "Jabesh-gilead",
+  "Gilboa": "Mount Gilboa",
+  "Ramathaim-zophim": "Ramah",
+  "Ziphites": "Ziph",
+  "wilderness of En-gedi": "Wilderness of En-gedi"
+ },
+ "need": {},
+ "except": {
+  "Bethel": [
+   "30:27"
+  ],
+  "Jezreel": [
+   "25:43",
+   "27:3",
+   "30:5"
+  ],
+  "Ebenezer": [
+   "7:12"
+  ],
+  "Negev": [
+   "30:27"
+  ]
+ },
+ "groups": [
+  {
+   "id": "book",
+   "name": "Named in 1 Samuel",
+   "color": "#a0443a",
+   "places": [
+    {
+     "n": "Adullam",
+     "ll": [
+      35.00167,
+      31.65167
+     ],
+     "c": 2,
+     "m": "Khirbet esh Sheikh Madhkur",
+     "u": "af82614/adullam",
+     "f": "22:1",
+     "note": "David escaped here from Gath and hid in the cave of Adullam; his family came to him, and about four hundred men in trouble or debt gathered around him (1 Samuel 22:1–2). The three mighty men came to him at the cave at harvest time (2 Samuel 23:13)."
+    },
+    {
+     "n": "Aijalon",
+     "ll": [
+      35.02361,
+      31.84111
+     ],
+     "c": 2,
+     "m": "Yalo",
+     "u": "a1c600b/aijalon-1",
+     "f": "14:31",
+     "note": "After Jonathan's exploit at Michmash, Israel struck down the Philistines \"from Michmash to Aijalon\" (1 Samuel 14:31), down the Beth-horon road toward the coastal plain."
+    },
+    {
+     "n": "Aphek",
+     "ll": [
+      34.93042,
+      32.105
+     ],
+     "c": 2,
+     "m": "Tell Ras el Ain",
+     "u": "a7b2e63/aphek-2",
+     "f": "4:1",
+     "note": "At the springs of the Yarkon, where the coast road meets the hills. The Philistines camped here before the battle in which the Ark was taken (1 Samuel 4:1–11), and mustered here again before Gilboa (29:1). Some take the Aphek of chapter 29 to be another town, nearer Jezreel."
+    },
+    {
+     "n": "Aroer",
+     "ll": [
+      34.97907,
+      31.15214
+     ],
+     "c": 2,
+     "m": "Khirbet ’Ar’arah",
+     "u": "a1b9ca6/aroer-3",
+     "f": "30:28",
+     "note": "A town in the Negev of Judah to which David sent a share of the plunder taken from the Amalekites (1 Samuel 30:26–28)."
+    },
+    {
+     "n": "Ashdod",
+     "ll": [
+      34.6578,
+      31.7572
+     ],
+     "c": 2,
+     "m": "Tel Ashdod",
+     "u": "a30c937/ashdod",
+     "f": "5:1",
+     "note": "The Philistines carried the captured Ark into the temple of Dagon at Ashdod; Dagon fell on his face before it, and the city was struck with tumours (1 Samuel 5:1–7)."
+    },
+    {
+     "n": "Ashkelon",
+     "ll": [
+      34.54583,
+      31.66389
+     ],
+     "c": 2,
+     "m": "Tel Ashkelon",
+     "u": "ac87d4c/ashkelon",
+     "f": "6:17",
+     "note": "One of the five Philistine cities that sent a gold tumour with the Ark (1 Samuel 6:17). \"Tell it not in Gath, proclaim it not in the streets of Ashkelon\" (2 Samuel 1:20)."
+    },
+    {
+     "n": "Azekah",
+     "ll": [
+      34.9357,
+      31.70023
+     ],
+     "c": 2,
+     "m": "Tel Azekah",
+     "u": "af2ca0c/azekah",
+     "f": "17:1",
+     "note": "The Philistines camped \"between Socoh and Azekah, in Ephes-dammim\" before Goliath came out (1 Samuel 17:1), and were chased back past it."
+    },
+    {
+     "n": "Beersheba",
+     "ll": [
+      34.84083,
+      31.24472
+     ],
+     "c": 2,
+     "m": "Tel Beer Sheva",
+     "u": "ad2f6c2/beersheba-1",
+     "f": "3:20",
+     "note": "The southern end of the land, \"from Dan to Beersheba\" (1 Samuel 3:20; 2 Samuel 24:2). Samuel's sons judged here and took bribes (1 Samuel 8:1–3)."
+    },
+    {
+     "n": "Beth-aven",
+     "ll": [
+      35.2745,
+      31.8768
+     ],
+     "c": 0,
+     "m": "near Michmash; Tell Maryam?",
+     "u": "a03cb21/beth-aven-1",
+     "f": "13:5",
+     "note": "Near Michmash: the Philistines camped at Michmash, \"east of Beth-aven,\" and the battle moved past it (1 Samuel 13:5; 14:23). Its site is uncertain."
+    },
+    {
+     "n": "Beth-shan",
+     "ll": [
+      35.50306,
+      32.50361
+     ],
+     "c": 2,
+     "m": "Tel Bet Shean",
+     "u": "a2a8df0/beth-shan",
+     "f": "31:10",
+     "note": "After Gilboa the Philistines fastened the bodies of Saul and his sons to the wall of Beth-shan, until the men of Jabesh-gilead came by night and took them down (1 Samuel 31:10–13; 2 Samuel 21:12)."
+    },
+    {
+     "n": "Beth-shemesh",
+     "ll": [
+      34.97474,
+      31.75062
+     ],
+     "c": 2,
+     "m": "Tel Bet Shemesh",
+     "u": "a3b5b53/beth-shemesh-1",
+     "f": "6:9",
+     "note": "The cows pulling the cart with the Ark went straight up the road to Beth-shemesh, to the field of Joshua; the people were struck for looking into the Ark (1 Samuel 6:9–20)."
+    },
+    {
+     "n": "Bethel",
+     "ll": [
+      35.24139,
+      31.92278
+     ],
+     "c": 2,
+     "m": "Beitin",
+     "u": "a64f355/bethel-1",
+     "f": "7:16",
+     "note": "Samuel went on a yearly circuit from Bethel to Gilgal to Mizpah (1 Samuel 7:16); Saul would meet three men going up to God at Bethel (10:3). The Bethel of 30:27 is another town, in the Negev."
+    },
+    {
+     "n": "Bethel in the Negev",
+     "ll": [
+      35.12438,
+      31.34495
+     ],
+     "c": 0,
+     "m": "Bethul? Khirbet el-Qaryatein?",
+     "u": "aeb5f24/bethel-2",
+     "f": "30:27",
+     "note": "David sent plunder \"to those in Bethel\" (1 Samuel 30:27): a town in the Negev of Judah, probably Bethul or Bethuel (Joshua 19:4; 1 Chronicles 4:30), not the Bethel north of Jerusalem."
+    },
+    {
+     "n": "Bethlehem",
+     "ll": [
+      35.20764,
+      31.70431
+     ],
+     "c": 2,
+     "u": "a112427/bethlehem-1",
+     "f": "16:1",
+     "note": "The town of Jesse, where Samuel anointed David (1 Samuel 16:1–13; 17:12). David longed for water from its well while a Philistine garrison held it (2 Samuel 23:14–17). Asahel was buried in his father's tomb here (2:32)."
+    },
+    {
+     "n": "Bezek",
+     "ll": [
+      35.39736,
+      32.36884
+     ],
+     "c": 2,
+     "m": "Khirbet Ibziq",
+     "u": "a206291/bezek-2",
+     "f": "11:8",
+     "note": "Saul mustered Israel and Judah at Bezek, across the valley from Jabesh-gilead, before he rescued the city (1 Samuel 11:8–11)."
+    },
+    {
+     "n": "Carmel",
+     "ll": [
+      35.13295,
+      31.42288
+     ],
+     "c": 2,
+     "m": "Khirbet el Kirmil",
+     "u": "a053f15/carmel-1",
+     "f": "15:12",
+     "note": "A town in the hill country of Judah (not Mount Carmel by the sea). Saul set up a monument for himself here (1 Samuel 15:12). Nabal sheared his sheep at Carmel, and Abigail met David with gifts (25)."
+    },
+    {
+     "n": "Dan",
+     "ll": [
+      35.652,
+      33.249
+     ],
+     "c": 2,
+     "m": "Tel Dan",
+     "u": "a513646/dan",
+     "f": "3:20",
+     "note": "The northern end of the land: \"all Israel from Dan to Beersheba\" (1 Samuel 3:20; 2 Samuel 3:10; 17:11; 24:2, 15). Excavated at Tel Dan."
+    },
+    {
+     "n": "Ebenezer",
+     "ll": [
+      34.9645,
+      32.1046
+     ],
+     "c": 1,
+     "m": "Izbet Sartah",
+     "u": "abfdefc/ebenezer-1",
+     "f": "4:1",
+     "note": "\"Stone of help.\" Israel camped at Ebenezer, facing the Philistines at Aphek, and the Ark was taken (1 Samuel 4:1–11); Izbet Sartah is a likely site. Twenty years later Samuel set up a stone between Mizpah and Shen and named it Ebenezer, \"Thus far the LORD has helped us\" (7:12): that stone stood near Mizpah."
+    },
+    {
+     "n": "Ekron",
+     "ll": [
+      34.85194,
+      31.7775
+     ],
+     "c": 2,
+     "m": "Tel Miqne",
+     "u": "a3fc47a/ekron",
+     "f": "5:10",
+     "note": "The Ark was sent on from Gath to Ekron, whose people cried out (1 Samuel 5:10–12); the cows took it from Ekron to Beth-shemesh (6:16). At Tel Miqne an inscription naming Ekron and its kings was found in 1996."
+    },
+    {
+     "n": "En-gedi",
+     "ll": [
+      35.3889,
+      31.4614
+     ],
+     "c": 2,
+     "m": "Tel Goren, En-gedi",
+     "f": "23:29",
+     "note": "The oasis by the Dead Sea. David hid in its strongholds; in a cave in the wilderness of En-gedi he cut off the corner of Saul's robe but spared his life (1 Samuel 23:29–24:22)."
+    },
+    {
+     "n": "Endor",
+     "ll": [
+      35.39022,
+      32.64361
+     ],
+     "c": 1,
+     "m": "Khirbet es Safsafa",
+     "u": "aca444b/en-dor",
+     "f": "28:7",
+     "note": "Saul went by night to the medium at En-dor, across the valley from the Philistine camp at Shunem, the night before he died on Gilboa (1 Samuel 28:7–25)."
+    },
+    {
+     "n": "Ephes-dammim",
+     "ll": [
+      35.05224,
+      31.68449
+     ],
+     "c": 0,
+     "m": "Khirbet Damun",
+     "u": "aafd7c4/ephes-dammim",
+     "f": "17:1",
+     "note": "The Philistine camp before Goliath came out, between Socoh and Azekah (1 Samuel 17:1)."
+    },
+    {
+     "n": "Eshtemoa",
+     "ll": [
+      35.06708,
+      31.40079
+     ],
+     "c": 2,
+     "m": "As Samu",
+     "u": "ad68510/eshtemoa",
+     "f": "30:28",
+     "note": "One of the towns of Judah to which David sent plunder (1 Samuel 30:28). Modern as-Samu."
+    },
+    {
+     "n": "Gallim",
+     "ll": [
+      35.25078,
+      31.81544
+     ],
+     "c": 1,
+     "m": "Khirbet Kakul",
+     "u": "ac10bcf/gallim",
+     "f": "25:44",
+     "note": "Saul gave Michal, David's wife, to Palti son of Laish from Gallim (1 Samuel 25:44)."
+    },
+    {
+     "n": "Gath",
+     "ll": [
+      34.84694,
+      31.69972
+     ],
+     "c": 2,
+     "m": "Tell es Safi",
+     "u": "a18873f/gath-1",
+     "f": "5:8",
+     "note": "Philistine city, the home of Goliath (1 Samuel 17:4). The Ark was sent here (5:8); David feigned madness before Achish king of Gath (21:10–15) and later lived in his service (27). At Tell es-Safi a potsherd with two names similar to Goliath was found."
+    },
+    {
+     "n": "Gaza",
+     "ll": [
+      34.4644,
+      31.504
+     ],
+     "c": 2,
+     "m": "Tell Harube",
+     "u": "aa8edd2/gaza",
+     "f": "6:17",
+     "note": "The southernmost Philistine city, one of the five that sent a guilt offering with the Ark (1 Samuel 6:17)."
+    },
+    {
+     "n": "Geba",
+     "ll": [
+      35.26111,
+      31.8575
+     ],
+     "c": 2,
+     "m": "Jaba",
+     "u": "a264254/geba-1",
+     "f": "13:3",
+     "note": "Jonathan struck the Philistine garrison at Geba (1 Samuel 13:3), across the gorge from Michmash; Saul's army held it (13:16)."
+    },
+    {
+     "n": "Gibeah",
+     "ll": [
+      35.23072,
+      31.82311
+     ],
+     "c": 2,
+     "m": "Tel el Ful",
+     "u": "ac24f5f/gibeah-1",
+     "f": "10:5",
+     "note": "Gibeah of Saul, his home and royal seat (1 Samuel 10:26; 11:4; 15:34). Seven of Saul's descendants were put to death here (2 Samuel 21:6). Tell el-Ful, north of Jerusalem, is the usual site. \"Gibeah of God\" (1 Samuel 10:5) may be Geba, or this town."
+    },
+    {
+     "n": "Gilgal",
+     "ll": [
+      35.45997,
+      31.88188
+     ],
+     "c": 1,
+     "m": "Khirbet el Mefjir",
+     "u": "ab94aea/gilgal-1",
+     "f": "7:16",
+     "note": "In the Jordan valley near Jericho. Samuel came here on his circuit (1 Samuel 7:16); Saul was confirmed as king here (11:14–15), offered the burnt offering before Samuel came (13:8–14), and was rejected after the war with Amalek (15:12–35). Judah met David here on his return (2 Samuel 19:15, 40)."
+    },
+    {
+     "n": "Hachilah",
+     "ll": [
+      35.2228,
+      31.4703
+     ],
+     "c": 0,
+     "m": "Zahrat al Kula",
+     "u": "a28a7df/hachilah",
+     "f": "23:19",
+     "note": "\"The hill of Hachilah, opposite Jeshimon\": David hid here, and here he took Saul's spear and water jug while Saul slept (1 Samuel 23:19; 26:1–12)."
+    },
+    {
+     "n": "Hazor",
+     "ll": [
+      35.56917,
+      33.01833
+     ],
+     "c": 2,
+     "m": "Tel Hazor",
+     "u": "a6f33c5/hazor-1",
+     "f": "12:9",
+     "note": "Named in Samuel's farewell: the LORD sold Israel \"into the hand of Sisera, commander of the army of Hazor\" (1 Samuel 12:9)."
+    },
+    {
+     "n": "Hebron",
+     "ll": [
+      35.10222,
+      31.52509
+     ],
+     "c": 2,
+     "m": "Tel Rumeida",
+     "u": "a85151a/hebron",
+     "f": "30:31",
+     "note": "David sent plunder here (1 Samuel 30:31). He was anointed king of Judah at Hebron and reigned here seven and a half years, and here all Israel made him king (2 Samuel 2:1–4, 11; 5:1–5). Joab killed Abner in its gate (3:27), and Absalom began his revolt here (15:7–10)."
+    },
+    {
+     "n": "Hereth",
+     "ll": [
+      35.05,
+      31.6
+     ],
+     "c": 0,
+     "m": "near Keilah?",
+     "f": "22:5",
+     "note": "The prophet Gad told David to leave the stronghold, and he went to the forest of Hereth in Judah (1 Samuel 22:5). Its site is unknown; Kharas near Keilah is one proposal."
+    },
+    {
+     "n": "Horesh",
+     "ll": [
+      35.1305,
+      31.4572
+     ],
+     "c": 0,
+     "m": "Khirbet Khoreisa?",
+     "f": "23:15",
+     "note": "David stayed at Horesh in the Wilderness of Ziph, and Jonathan came there to strengthen his hand in God (1 Samuel 23:15–19). Khirbet Khoreisa, south of Ziph, is one proposal."
+    },
+    {
+     "n": "Hormah",
+     "ll": [
+      34.95828,
+      31.21229
+     ],
+     "c": 1,
+     "m": "Tel Masos",
+     "u": "ada25df/hormah",
+     "f": "30:30",
+     "note": "One of the towns to which David sent plunder (1 Samuel 30:30)."
+    },
+    {
+     "n": "Jabesh-gilead",
+     "ll": [
+      35.6823,
+      32.40237
+     ],
+     "c": 1,
+     "m": "Tell el Maqlub",
+     "u": "af92088/jabesh-gilead",
+     "f": "11:1",
+     "note": "Saul's first victory was to save it from Nahash the Ammonite (1 Samuel 11). Its men never forgot it: they took the bodies of Saul and his sons from the wall of Beth-shan and buried them (31:11–13; 2 Samuel 2:4–7). David later moved the bones to Zela (21:12–14)."
+    },
+    {
+     "n": "Jattir",
+     "ll": [
+      35.01611,
+      31.3525
+     ],
+     "c": 2,
+     "m": "Khirbet Attir",
+     "u": "ad6eb0b/jattir",
+     "f": "30:27",
+     "note": "One of the towns to which David sent plunder (1 Samuel 30:27)."
+    },
+    {
+     "n": "Jerusalem",
+     "ll": [
+      35.23417,
+      31.77667
+     ],
+     "c": 2,
+     "u": "a15257a/jerusalem",
+     "f": "17:54",
+     "note": "David brought Goliath's head to Jerusalem (1 Samuel 17:54). He took the city from the Jebusites and made it his capital (2 Samuel 5:6–10), brought up the Ark (6), and was promised a house and a kingdom forever (7)."
+    },
+    {
+     "n": "Jezreel",
+     "ll": [
+      35.32795,
+      32.55785
+     ],
+     "c": 2,
+     "m": "Tel Yizre’el",
+     "u": "ae0bf4a/jezreel-2",
+     "f": "29:1",
+     "note": "Israel camped by the spring in Jezreel before the battle on Gilboa (1 Samuel 29:1, 11); Ish-bosheth was made king over Jezreel (2 Samuel 2:9). Ahinoam \"of Jezreel,\" David's wife, came from another Jezreel, in the hill country of Judah."
+    },
+    {
+     "n": "Jezreel in Judah",
+     "ll": [
+      35.09,
+      31.44778
+     ],
+     "c": 0,
+     "m": "near Juttah?",
+     "u": "ad94cc9/jezreel-1",
+     "f": "25:43",
+     "note": "A town in the hill country of Judah near Maon and Carmel (Joshua 15:55–56), probably the home of David's wife Ahinoam \"of Jezreel\" (1 Samuel 25:43; 2 Samuel 3:2). Its site is unknown."
+    },
+    {
+     "n": "Keilah",
+     "ll": [
+      35.0036,
+      31.6137
+     ],
+     "c": 2,
+     "m": "Khirbet Qila",
+     "u": "ad9df93/keilah",
+     "f": "23:1",
+     "note": "David saved Keilah from the Philistines, but the LORD told him its people would hand him over to Saul, so he left (1 Samuel 23:1–13)."
+    },
+    {
+     "n": "Kiriath-jearim",
+     "ll": [
+      35.10378,
+      31.80896
+     ],
+     "c": 2,
+     "m": "Deir el Azar",
+     "u": "a9bba61/kiriath-jearim",
+     "f": "6:21",
+     "note": "The Ark stayed in the house of Abinadab here for twenty years (1 Samuel 6:21–7:2), until David brought it up from \"Baale of Judah\" (2 Samuel 6:2)."
+    },
+    {
+     "n": "Maon",
+     "ll": [
+      35.13384,
+      31.40945
+     ],
+     "c": 2,
+     "m": "Tel Main",
+     "u": "a6845b1/maon",
+     "f": "25:2",
+     "note": "Home of Nabal (1 Samuel 25:2). In the Wilderness of Maon Saul was closing in on David when news of a Philistine raid called him away, at the Rock of Escape (23:24–28)."
+    },
+    {
+     "n": "Michmash",
+     "ll": [
+      35.27686,
+      31.87282
+     ],
+     "c": 2,
+     "m": "Mukhmas",
+     "u": "adea06c/michmash",
+     "f": "13:2",
+     "note": "The Philistines camped at Michmash. Jonathan and his armour-bearer climbed the cliffs between the crags Bozez and Seneh and threw the camp into panic (1 Samuel 13:23–14:23)."
+    },
+    {
+     "n": "Migron",
+     "ll": [
+      35.26807,
+      31.86921
+     ],
+     "c": 1,
+     "m": "Tell Maryam",
+     "u": "a4335ba/migron-1",
+     "f": "14:2",
+     "note": "Saul stayed \"under the pomegranate tree in Migron\" on the outskirts of Gibeah with six hundred men (1 Samuel 14:2)."
+    },
+    {
+     "n": "Mizpah",
+     "ll": [
+      35.21642,
+      31.88514
+     ],
+     "c": 2,
+     "m": "Tell en Nasbeh",
+     "u": "a736f6c/mizpah-3",
+     "f": "7:5",
+     "note": "Israel gathered at Mizpah; Samuel prayed, and the LORD thundered against the Philistines (1 Samuel 7:5–11). Here Saul was chosen by lot (10:17–24). Tell en-Nasbeh."
+    },
+    {
+     "n": "Mount Gilboa",
+     "ll": [
+      35.41444,
+      32.43389
+     ],
+     "c": 2,
+     "u": "acf57c5/mount-gilboa",
+     "k": "mount",
+     "f": "28:4",
+     "note": "Saul and three of his sons died on Mount Gilboa fighting the Philistines (1 Samuel 31:1–6). David's lament: \"O mountains of Gilboa, may you have no dew or rain\" (2 Samuel 1:21)."
+    },
+    {
+     "n": "Naioth",
+     "ll": [
+      35.2296,
+      31.8559
+     ],
+     "c": 0,
+     "m": "in Ramah",
+     "u": "ae1c9ea/naioth",
+     "f": "19:18",
+     "note": "In Ramah, where Samuel led a company of prophets. David fled here; Saul's messengers, and then Saul himself, began to prophesy (1 Samuel 19:18–24)."
+    },
+    {
+     "n": "Nob",
+     "ll": [
+      35.24417,
+      31.7925
+     ],
+     "c": 0,
+     "m": "Ras el Mesharif",
+     "u": "afdda14/nob",
+     "f": "21:1",
+     "note": "\"The town of the priests.\" Ahimelech gave David the holy bread and Goliath's sword (1 Samuel 21:1–9); Doeg the Edomite killed its priests (22:9–19). It stood within sight of Jerusalem (Isaiah 10:32), perhaps on Mount Scopus."
+    },
+    {
+     "n": "Ophrah",
+     "ll": [
+      35.30028,
+      31.95444
+     ],
+     "c": 2,
+     "m": "et-Taiyibeh",
+     "u": "a53b82d/ophrah-1",
+     "f": "13:17",
+     "note": "Ophrah of Benjamin: a Philistine raiding party went toward Ophrah (1 Samuel 13:17). The town \"Ephraim\" near Baal-hazor (2 Samuel 13:23) is usually taken to be the same place (compare John 11:54)."
+    },
+    {
+     "n": "Ramah",
+     "ll": [
+      35.23161,
+      31.85434
+     ],
+     "c": 1,
+     "m": "er-Ram? (Rentis is also proposed)",
+     "u": "a6d57ed/ramah-1",
+     "k": "mount",
+     "f": "1:1",
+     "note": "Ramathaim-zophim, Samuel's home: he was born, lived, judged and was buried here (1 Samuel 1:1, 19; 7:17; 25:1). Er-Ram, north of Jerusalem, is the usual site; Rentis, farther west, is also proposed."
+    },
+    {
+     "n": "Secu",
+     "ll": [
+      35.14474,
+      31.93738
+     ],
+     "c": 2,
+     "m": "between Gibeah and Ramah",
+     "u": "a4052df/secu",
+     "f": "19:22",
+     "note": "Saul came to \"the great cistern at Secu\" on his way to Naioth (1 Samuel 19:22)."
+    },
+    {
+     "n": "Shaaraim",
+     "ll": [
+      35.02757,
+      31.7355
+     ],
+     "c": 0,
+     "m": "Khirbet es Sira",
+     "u": "a28da66/shaaraim-1",
+     "f": "17:52",
+     "note": "The wounded Philistines fell \"along the road to Shaaraim\" after Goliath died (1 Samuel 17:52). Khirbet Qeiyafa, with its two gates, has been proposed (Shaaraim means \"two gates\")."
+    },
+    {
+     "n": "Shiloh",
+     "ll": [
+      35.28954,
+      32.0557
+     ],
+     "c": 2,
+     "m": "Khirbet Seilun",
+     "u": "aa4680a/shiloh",
+     "f": "1:3",
+     "note": "The house of the LORD stood here. Hannah prayed for a son, and Samuel grew up serving under Eli; the LORD revealed Himself to him at Shiloh (1 Samuel 1–3). The Ark was taken from here into battle and lost (4:3–11)."
+    },
+    {
+     "n": "Shunem",
+     "ll": [
+      35.33431,
+      32.60563
+     ],
+     "c": 2,
+     "m": "Sulam",
+     "u": "ac86af5/shunem",
+     "f": "28:4",
+     "note": "The Philistines camped at Shunem, facing Saul on Gilboa (1 Samuel 28:4)."
+    },
+    {
+     "n": "Shur",
+     "ll": [
+      32.95667,
+      30.49333
+     ],
+     "c": 1,
+     "m": "region around Ar Ruwaysat",
+     "u": "acdbce0/shur",
+     "f": "15:7",
+     "note": "Saul struck the Amalekites \"from Havilah to Shur, east of Egypt\" (1 Samuel 15:7); David raided toward Shur from Ziklag (27:8)."
+    },
+    {
+     "n": "Socoh",
+     "ll": [
+      34.9749,
+      31.6822
+     ],
+     "c": 2,
+     "m": "Tel Socho",
+     "u": "a39a6b9/socoh-1",
+     "f": "17:1",
+     "note": "Socoh of Judah, where the Philistines gathered before Goliath came out (1 Samuel 17:1)."
+    },
+    {
+     "n": "Telaim",
+     "ll": [
+      34.91217,
+      31.14205
+     ],
+     "c": 0,
+     "m": "Khirbet Abu Tulul",
+     "u": "a6ef6a9/telem",
+     "f": "15:4",
+     "note": "Saul numbered his troops at Telaim before the war with Amalek (1 Samuel 15:4); probably Telem in the Negev (Joshua 15:24)."
+    },
+    {
+     "n": "Ziklag",
+     "ll": [
+      34.6816,
+      31.3912
+     ],
+     "c": 2,
+     "m": "Tell esh Sharia",
+     "u": "a0ed7ff/ziklag",
+     "f": "27:6",
+     "note": "Achish of Gath gave Ziklag to David (1 Samuel 27:6). The Amalekites burned it while David was away, and he pursued them and recovered all (30). Here he heard of Saul's death (2 Samuel 1:1). Tell esh-Sharia is the usual site; Khirbet al-Ra'i near Lachish has also been proposed."
+    },
+    {
+     "n": "Ziph",
+     "ll": [
+      35.13514,
+      31.47475
+     ],
+     "c": 2,
+     "m": "Tell Zif",
+     "u": "a9b852f/ziph-1",
+     "f": "23:19",
+     "note": "The Ziphites twice told Saul where David was hiding (1 Samuel 23:19; 26:1). In the Wilderness of Ziph Jonathan met David for the last time (23:15–18)."
+    }
+   ],
+   "firstNamed": true
+  },
+  {
+   "id": "sister",
+   "name": "Named in 2 Samuel",
+   "color": "#4f6d7a",
+   "places": [
+    {
+     "n": "Abel-beth-maacah",
+     "ll": [
+      35.58101,
+      33.25805
+     ],
+     "c": 2,
+     "m": "Tel Abel Beth Maacah",
+     "u": "abffcaa/abel-beth-maacah",
+     "f": "first at 20:14",
+     "note": "Sheba son of Bichri took refuge here; a wise woman of the city persuaded its people to throw his head over the wall to Joab (2 Samuel 20:14–22)."
+    },
+    {
+     "n": "Ammah",
+     "ll": [
+      35.27954,
+      31.84105
+     ],
+     "c": 1,
+     "m": "in the region east of Gibeon",
+     "u": "a8e4a15/ammah",
+     "k": "mount",
+     "f": "first at 2:24",
+     "note": "Joab and Abishai chased Abner until sunset, \"to the hill of Ammah, opposite Giah\" (2 Samuel 2:24)."
+    },
+    {
+     "n": "Anathoth",
+     "ll": [
+      35.25758,
+      31.80752
+     ],
+     "c": 2,
+     "m": "Ras el Kharruba",
+     "u": "ab34789/anathoth",
+     "f": "first at 23:27",
+     "note": "Home of Abiezer the Anathothite, one of David's mighty men (2 Samuel 23:27); later Jeremiah's town."
+    },
+    {
+     "n": "Aroer on the Arnon",
+     "ll": [
+      35.81939,
+      31.4708
+     ],
+     "c": 2,
+     "m": "Arair",
+     "u": "ae46f2e/aroer-1",
+     "f": "first at 24:5",
+     "note": "On the rim of the Arnon gorge. Joab's officers began the census here, \"south of the town in the middle of the valley\" (2 Samuel 24:5)."
+    },
+    {
+     "n": "Baal-hazor",
+     "ll": [
+      35.28611,
+      31.97861
+     ],
+     "c": 2,
+     "m": "Jebel Asur",
+     "u": "a366989/baal-hazor",
+     "k": "mount",
+     "f": "first at 13:23",
+     "note": "Absalom's sheepshearing, where he had his brother Amnon killed (2 Samuel 13:23–29). Jebel Asur, the highest point of the central hills."
+    },
+    {
+     "n": "Baal-perazim",
+     "ll": [
+      35.18332,
+      31.74185
+     ],
+     "c": 0,
+     "m": "Ez Zuhur",
+     "u": "a6bf059/baal-perazim",
+     "f": "first at 5:20",
+     "note": "\"Lord of breaking through\": David defeated the Philistines here: \"The LORD has broken out against my enemies like a bursting flood\" (2 Samuel 5:20). Near the Valley of Rephaim; the site is uncertain."
+    },
+    {
+     "n": "Bahurim",
+     "ll": [
+      35.25694,
+      31.7912
+     ],
+     "c": 1,
+     "m": "Ras Tumeim",
+     "u": "a9ed5a4/bahurim",
+     "f": "first at 3:16",
+     "note": "Paltiel followed Michal weeping as far as Bahurim (2 Samuel 3:16). Shimei cursed David here (16:5–13), and Jonathan and Ahimaaz hid in a well in a courtyard (17:18–20)."
+    },
+    {
+     "n": "Beeroth",
+     "ll": [
+      35.1872,
+      31.82383
+     ],
+     "c": 0,
+     "m": "Khirbet el Burj",
+     "u": "a046454/beeroth",
+     "f": "first at 4:2",
+     "note": "Town of Rechab and Baanah, who murdered Ish-bosheth (2 Samuel 4:2–3)."
+    },
+    {
+     "n": "Beth-rehob",
+     "ll": [
+      36.14528,
+      34.00889
+     ],
+     "c": 0,
+     "m": "in the Beqaa Valley",
+     "u": "ad44b24/beth-rehob",
+     "f": "first at 10:6",
+     "note": "The Ammonites hired Arameans of Beth-rehob and Zobah against David (2 Samuel 10:6, 8). In the far north, near Dan (Judges 18:28)."
+    },
+    {
+     "n": "City of David",
+     "ll": [
+      35.23556,
+      31.77361
+     ],
+     "c": 2,
+     "u": "a84f426/city-of-david",
+     "f": "first at 5:7",
+     "note": "The fortress of Zion, the Jebusite stronghold on the ridge south of the Temple Mount, which David captured and named for himself (2 Samuel 5:7–9). The Stepped Stone Structure and the \"Large Stone Structure\" above it, excavated here, have been proposed as remains of David's city and palace; their dating is debated."
+    },
+    {
+     "n": "Damascus",
+     "ll": [
+      36.30639,
+      33.51111
+     ],
+     "c": 2,
+     "u": "a69c1d4/damascus",
+     "f": "first at 8:5",
+     "note": "When the Arameans of Damascus came to help Hadadezer, David defeated them and put garrisons in Aram of Damascus (2 Samuel 8:5–6)."
+    },
+    {
+     "n": "En-rogel",
+     "ll": [
+      35.2353,
+      31.7676
+     ],
+     "c": 2,
+     "m": "Bir Ayyub",
+     "f": "first at 17:17",
+     "note": "The spring below the City of David where Jonathan and Ahimaaz waited for news to take to David (2 Samuel 17:17). Bir Ayyub, where the Kidron meets the Hinnom Valley."
+    },
+    {
+     "n": "Gaash",
+     "ll": [
+      35.10729,
+      32.00806
+     ],
+     "c": 1,
+     "m": "within 10 km of Timnath-heres",
+     "u": "ab05a42/gaash",
+     "k": "mount",
+     "f": "first at 23:30",
+     "note": "Hiddai, one of David's mighty men, came \"from the brooks of Gaash\" (2 Samuel 23:30), by Joshua's burial place."
+    },
+    {
+     "n": "Gezer",
+     "ll": [
+      34.91917,
+      31.85917
+     ],
+     "c": 2,
+     "m": "Tel Gezer",
+     "u": "aed6538/gezer",
+     "f": "first at 5:25",
+     "note": "David struck down the Philistines \"all the way from Gibeon to Gezer\" (2 Samuel 5:25)."
+    },
+    {
+     "n": "Gibeon",
+     "ll": [
+      35.18335,
+      31.84745
+     ],
+     "c": 2,
+     "m": "El Jib",
+     "u": "aede336/gibeon",
+     "f": "first at 2:12",
+     "note": "Twelve of Abner's men and twelve of Joab's fought by the pool of Gibeon, and the place was named Helkath-hazzurim (2 Samuel 2:12–17). Joab killed Amasa at the great stone in Gibeon (20:8–10). The Gibeonites avenged Saul's wrong against them (21:1–9). A great rock-cut pool with a spiral stair was excavated at el-Jib."
+    },
+    {
+     "n": "Giloh",
+     "ll": [
+      35.01485,
+      31.43209
+     ],
+     "c": 0,
+     "m": "within 6 km of Khirbet Rabud",
+     "u": "a6df20a/giloh",
+     "f": "first at 15:12",
+     "note": "Ahithophel the Gilonite, David's counsellor, joined Absalom from his town of Giloh (2 Samuel 15:12)."
+    },
+    {
+     "n": "Gittaim",
+     "ll": [
+      34.88994,
+      31.90302
+     ],
+     "c": 1,
+     "m": "Ras Abu Hamid",
+     "u": "ab98f8c/gittaim",
+     "f": "first at 4:3",
+     "note": "The Beerothites fled to Gittaim (2 Samuel 4:3)."
+    },
+    {
+     "n": "Hamath",
+     "ll": [
+      36.75,
+      35.1365
+     ],
+     "c": 2,
+     "m": "Hama",
+     "u": "ac62cbc/hamath-1",
+     "f": "first at 8:9",
+     "note": "Toi king of Hamath, an enemy of Hadadezer, sent his son with gifts to congratulate David (2 Samuel 8:9–10). Hama, on the Orontes in Syria."
+    },
+    {
+     "n": "Harod",
+     "ll": [
+      35.2721,
+      31.73333
+     ],
+     "c": 0,
+     "m": "Khirbet el Harazan",
+     "u": "afd8b40/harod-2",
+     "f": "first at 23:25",
+     "note": "Home of Shammah and Elika the Harodites, two of David's mighty men (2 Samuel 23:25). Not the spring of Harod (Judges 7:1)."
+    },
+    {
+     "n": "Helam",
+     "ll": [
+      36.24083,
+      32.75
+     ],
+     "c": 1,
+     "m": "Alma",
+     "u": "aeb09c0/helam",
+     "f": "first at 10:16",
+     "note": "Hadadezer brought Arameans from beyond the Euphrates to Helam, and David defeated them there and killed their commander Shobach (2 Samuel 10:16–18)."
+    },
+    {
+     "n": "Hushah",
+     "ll": [
+      35.13242,
+      31.71181
+     ],
+     "c": 1,
+     "m": "Husan",
+     "u": "a54fdd6/hushah",
+     "f": "first at 21:18",
+     "note": "Home of Sibbecai the Hushathite, who killed the giant Saph (2 Samuel 21:18)."
+    },
+    {
+     "n": "Jazer",
+     "ll": [
+      35.83008,
+      31.94447
+     ],
+     "c": 0,
+     "m": "Khirbet Sara",
+     "u": "a095b6e/jazer",
+     "f": "first at 24:5",
+     "note": "On the census route through the land east of the Jordan (2 Samuel 24:5)."
+    },
+    {
+     "n": "Jericho",
+     "ll": [
+      35.44456,
+      31.87172
+     ],
+     "c": 2,
+     "m": "Tell es Sultan",
+     "u": "a231f80/jericho-1",
+     "f": "first at 10:5",
+     "note": "David's envoys, shamed by Hanun the Ammonite, stayed at Jericho until their beards grew back (2 Samuel 10:5)."
+    },
+    {
+     "n": "Kabzeel",
+     "ll": [
+      34.93235,
+      31.28619
+     ],
+     "c": 0,
+     "m": "Khirbet Hora",
+     "u": "a2715db/kabzeel",
+     "f": "first at 23:20",
+     "note": "Home of Benaiah son of Jehoiada, who killed the lion in the pit on a snowy day (2 Samuel 23:20)."
+    },
+    {
+     "n": "Lo-debar",
+     "ll": [
+      35.62992,
+      32.68393
+     ],
+     "c": 0,
+     "m": "Tel Dover",
+     "u": "a376eed/lo-debar",
+     "f": "first at 9:4",
+     "note": "Mephibosheth lived here in the house of Machir until David sent for him to eat at his table (2 Samuel 9:4–13). Machir later brought supplies to David at Mahanaim (17:27)."
+    },
+    {
+     "n": "Mahanaim",
+     "ll": [
+      35.68667,
+      32.18575
+     ],
+     "c": 2,
+     "m": "Tell edh Dhahab el Gharbi",
+     "u": "ae5bfe9/mahanaim",
+     "f": "first at 2:8",
+     "note": "East of the Jordan. Abner made Ish-bosheth king here (2 Samuel 2:8–12). David fled here from Absalom and sat in its gate waiting for news of the battle (17:24–18:33)."
+    },
+    {
+     "n": "Mount of Olives",
+     "ll": [
+      35.24569,
+      31.77795
+     ],
+     "c": 2,
+     "u": "ac2c4c5/mount-of-olives",
+     "k": "mount",
+     "f": "first at 15:30",
+     "note": "David went up the Mount of Olives weeping, barefoot and with his head covered, as he fled from Absalom; Hushai met him at the summit, \"where God used to be worshipped\" (2 Samuel 15:30–32)."
+    },
+    {
+     "n": "Netophah",
+     "ll": [
+      35.22103,
+      31.66765
+     ],
+     "c": 1,
+     "m": "Khirbet Badd Faluh",
+     "u": "a9ad5ae/netophah",
+     "f": "first at 23:28",
+     "note": "Home of Maharai and Heled the Netophathites, two of David's mighty men (2 Samuel 23:28–29)."
+    },
+    {
+     "n": "Pirathon",
+     "ll": [
+      35.16583,
+      32.19056
+     ],
+     "c": 2,
+     "m": "Farata",
+     "u": "a40647c/pirathon",
+     "f": "first at 23:30",
+     "note": "Home of Benaiah the Pirathonite, one of David's mighty men (2 Samuel 23:30), and of the judge Abdon (Judges 12:13–15)."
+    },
+    {
+     "n": "Rabbah",
+     "ll": [
+      35.9343,
+      31.9547
+     ],
+     "c": 2,
+     "m": "Amman",
+     "u": "ae067b5/rabbah-1",
+     "f": "first at 11:1",
+     "note": "The Ammonite capital. Uriah was sent to his death during its siege (2 Samuel 11). Joab took \"the city of waters,\" and David took the king's crown (12:26–31). The citadel of Amman."
+    },
+    {
+     "n": "Rogelim",
+     "ll": [
+      35.78063,
+      32.52789
+     ],
+     "c": 0,
+     "m": "Zaharet",
+     "u": "a7d0e71/rogelim",
+     "f": "first at 17:27",
+     "note": "Home of Barzillai the Gileadite, who provided for David at Mahanaim (2 Samuel 17:27–29; 19:31–39)."
+    },
+    {
+     "n": "Sidon",
+     "ll": [
+      35.37194,
+      33.56099
+     ],
+     "c": 2,
+     "m": "Sandikli archaeological site in Sidon",
+     "u": "a98e4d7/sidon",
+     "f": "first at 24:6",
+     "note": "On the census route, which went round \"toward Sidon\" (2 Samuel 24:6)."
+    },
+    {
+     "n": "Tekoa",
+     "ll": [
+      35.21048,
+      31.63247
+     ],
+     "c": 2,
+     "m": "Khirbet Teku’a",
+     "u": "a2e3aa0/tekoa",
+     "f": "first at 14:2",
+     "note": "Joab brought a wise woman from Tekoa to win Absalom's return (2 Samuel 14:1–24); Ira the Tekoite was one of the mighty men (23:26). Later the home of Amos."
+    },
+    {
+     "n": "Thebez",
+     "ll": [
+      35.36861,
+      32.32222
+     ],
+     "c": 1,
+     "m": "Tubas",
+     "u": "a5d1690/thebez",
+     "f": "first at 11:21",
+     "note": "Joab expected David to remember how Abimelech was killed by a millstone a woman dropped from the wall of Thebez (2 Samuel 11:21; Judges 9:50–54)."
+    },
+    {
+     "n": "Threshing Floor of Araunah",
+     "ll": [
+      35.2355,
+      31.778
+     ],
+     "c": 1,
+     "m": "the Temple Mount",
+     "f": "first at 24:16",
+     "note": "David bought the threshing floor of Araunah the Jebusite, built an altar, and the plague was stopped (2 Samuel 24:16–25). Solomon built the Temple here, on Mount Moriah (2 Chronicles 3:1)."
+    },
+    {
+     "n": "Tob",
+     "ll": [
+      36.24389,
+      32.56333
+     ],
+     "c": 1,
+     "m": "Et Tayibeh",
+     "u": "aaff3e1/tob",
+     "f": "first at 10:6",
+     "note": "The Ammonites hired men of Tob against David (2 Samuel 10:6–8). Jephthah had fled to the land of Tob (Judges 11:3)."
+    },
+    {
+     "n": "Tyre",
+     "ll": [
+      35.19611,
+      33.27083
+     ],
+     "c": 2,
+     "u": "a160272/tyre",
+     "f": "first at 5:11",
+     "note": "Hiram king of Tyre sent cedar logs, carpenters and stonemasons to build David's house (2 Samuel 5:11). The census reached \"the fortress of Tyre\" (24:7)."
+    },
+    {
+     "n": "Zela",
+     "ll": [
+      35.20964,
+      31.80253
+     ],
+     "c": 0,
+     "m": "Khirbet Salah",
+     "u": "a597dd0/zela",
+     "f": "first at 21:14",
+     "note": "David buried the bones of Saul and Jonathan in the tomb of Saul's father Kish at Zela in Benjamin (2 Samuel 21:14)."
+    }
+   ]
+  },
+  {
+   "id": "other",
+   "name": "Other places of the time",
+   "color": "var(--dbm-city)",
+   "places": [
+    {
+     "n": "Khirbet Qeiyafa",
+     "ll": [
+      34.9573,
+      31.6964
+     ],
+     "c": 2,
+     "m": "Khirbet Qeiyafa",
+     "note": "A fortified town above the Valley of Elah, built about 1000 BC with a casemate wall and two gates, excavated from 2007. An ink inscription found here is among the earliest alphabetic texts from Judah. Some identify it with Shaaraim (1 Samuel 17:52)."
+    },
+    {
+     "n": "Tell Qasile",
+     "ll": [
+      34.8063,
+      32.102
+     ],
+     "c": 2,
+     "m": "Tel Aviv",
+     "note": "A Philistine town on the Yarkon with a temple of the 12th–11th centuries BC, the kind of shrine the Ark was taken into at Ashdod (1 Samuel 5:2)."
+    },
+    {
+     "n": "Shechem",
+     "ll": [
+      35.28194,
+      32.21361
+     ],
+     "c": 2,
+     "m": "Tell Balatah",
+     "u": "adf74d4/shechem",
+     "note": "Not named in Samuel. In the pass between Ebal and Gerizim; here Israel later gathered to make Rehoboam king and the kingdom divided (1 Kings 12)."
+    },
+    {
+     "n": "Megiddo",
+     "ll": [
+      35.18444,
+      32.58528
+     ],
+     "c": 2,
+     "m": "Tel Megiddo",
+     "u": "a8554e3/megiddo",
+     "note": "Not named in Samuel. The city guarding the pass into the Jezreel Valley, fortified by Solomon (1 Kings 9:15)."
+    },
+    {
+     "n": "Mount Carmel",
+     "ll": [
+      35.03,
+      32.74
+     ],
+     "c": 2,
+     "m": "the Carmel ridge",
+     "k": "mount",
+     "note": "The ridge by the sea where Elijah later faced the prophets of Baal (1 Kings 18). Not the town of Carmel in Judah, where Saul set up his monument and Nabal kept his flocks (1 Samuel 15:12; 25)."
+    }
+   ]
+  }
+ ],
+ "notes": [
+  {
+   "h": "The land in the days of Samuel, Saul and David",
+   "p": [
+    "The books of Samuel cover roughly a century, from Samuel's birth to the last years of David, about 1100–970 BC: the end of the Iron Age I and the beginning of the Iron Age II. In the Hebrew Bible they are one book. The Philistines, strong in their five cities on the coast, pushed into the hill country, took the Ark at Ebenezer and set garrisons as far inland as Geba and Bethlehem.",
+    "Against them Israel asked for a king. Saul, from Gibeah in Benjamin, fought the Philistines in the hills north of Jerusalem and died on Gilboa. David, from Bethlehem in Judah, was hunted through the wildernesses of Judah, reigned in Hebron, then took Jerusalem from the Jebusites and made it the city of the Ark. He subdued the Philistines, Moab, Ammon, Edom and the Aramean kingdoms of Zobah and Damascus."
+   ]
+  },
+  {
+   "h": "How to use this map",
+   "p": [
+    "This map opens from any place named in 1 Samuel. The red dots are places named in 1 Samuel, the blue-grey dots places named only in 2 Samuel, and the black dots other places of the time, for context; tap a group in the key to show or hide it. The tribe names show roughly where each tribe lived. Two towns are called Aroer (in the Negev, 1 Samuel 30:28, and on the Arnon, 2 Samuel 24:5), and Bethel and Jezreel each have a namesake in Judah."
+   ]
+  }
+ ],
+ "sources": "Scripture: Berean Standard Bible (public domain). Places: OpenBible.info Bible Geocoding Data (CC BY 4.0) and standard identifications, as noted for each place. Ancient Dead Sea outline from OpenBible.info (CC BY 4.0). Ancient roads are approximations. Terrain: Terrain Tiles on AWS Open Data (Mapzen). Street map © OpenStreetMap contributors. Imagery © Esri. Map engine: MapLibre GL."
+}
