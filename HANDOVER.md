@@ -176,8 +176,13 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
   to the BSB chapter shape. The platform's 1917 has no paragraphs (one block per chapter, psalms as prose), so
   `sfbReflow()` lays its verses into the BSB's paragraph breaks and puts poetry one verse per line (`flow: true`).
   Its footnotes come as `.yv-n.x` and are shown as Translation Notes.
-- With a Swedish text: Swedish book names (`SV_BOOKS`), a credit line under each reading, and the Messianic Filter /
-  Hebrew Names word lists are not applied (they are English). Reference previews, audio and word study stay BSB.
+- With a Swedish text: Swedish book names (`SV_BOOKS`), a credit line under each reading. Hebrew Names (English list)
+  is not applied. The Messianic Filter uses its own Swedish rules (`svMessianic`, John's wording Nov 2026):
+  Jesus → Jeshua (Jesu → Jeshuas), Kristus → Messias (Kristi → Messias’), evangelium → glada budskapet,
+  Judas → Juda, Maria → Mirjam; lagen → Toran, lagens → Torans, possessive + lag ("Guds lag", "hans lag") → Tora
+  (not Esther, not Rom 7:21, not "syndens lag" etc.); dödsriket → Sheol only in the ten verses with ᾅδης in the Greek
+  (`SV_HADES`); God's Temple capitalized (`SV_TEMPLE_SKIP` for pagan temples and believers as the temple).
+  Döpa/dop are left as they are. Reference previews, audio and word study stay BSB.
   If YouVersion can't be reached, the BSB is shown with a one-line notice.
 - To open it to everyone: return true from `sfbCheck()` (instead of the `SFB_READERS` check).
 

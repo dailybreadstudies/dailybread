@@ -329,6 +329,57 @@
     text = messianicWords(text).replace(LAW_RE, '$1Torah');
     return at && PAGAN_TEMPLE[at.key] ? text : text.replace(TEMPLE_RE, 'Temple');
   }
+  // ── The Messianic filter for the Swedish texts (Svenska 1917), John's wording, Nov 2026 ──
+  // Jesus → Jeshua, Kristus → Messias, evangelium → glada budskapet, Judas → Juda, Maria → Mirjam;
+  // lagen → Toran / lagens → Torans, and God's law after a possessive ("Guds lag", "min lag") → Tora;
+  // dödsriket → Sheol only where the Greek has Hades; God's Temple capitalized. Döpa/dop stay as they are.
+  var SVL = 'A-Za-zÅÄÖåäöÉéÜü';
+  function svRe(src, flags) { return new RegExp(src.replace(/\{L\}/g, SVL), flags || 'g'); }
+  var SV_HADES = { 'MAT 11:23': 1, 'MAT 16:18': 1, 'LUK 10:15': 1, 'LUK 16:23': 1, 'ACT 2:27': 1, 'ACT 2:31': 1,
+    'REV 1:18': 1, 'REV 6:8': 1, 'REV 20:13': 1, 'REV 20:14': 1 };   // ᾅδης in the Greek (data/orig)
+  // "lagen" for the Persian law (all of Esther) and Romans 7:21 ("den lagen" = a principle) stays
+  var SV_LAW_SKIP = { 'ROM 7:21': 1 };
+  // "templet" that is not the Lord's Temple: pagan temples, and believers as God's temple
+  var SV_TEMPLE_SKIP = { 'JDG 9:46': 1, 'JDG 16:26': 1, 'JDG 16:27': 1, 'JDG 16:29': 1, 'JDG 16:30': 1, '1SA 5:2': 1, '1SA 5:5': 1,
+    '2KI 10:21': 1, '2KI 10:23': 1, '2KI 10:25': 1, '2KI 10:26': 1, '2KI 10:27': 1, '2CH 23:17': 1, 'EZR 5:14': 1, 'JER 43:13': 1,
+    'ACT 19:27': 1, 'ACT 19:37': 1, '1CO 3:16': 1, '1CO 3:17': 1, '1CO 6:19': 1, '2CO 6:16': 1, 'EPH 2:21': 1 };
+  var SV_POSS = '(Guds|HERRENS|Herrens|Mose|Moses[’\']?|Den Högstes|min|din|hans|sin|vår|er|eder|deras)';
+  var SV_EV_DET = '(det|detta|mitt|ditt|vårt|ert|edert|hans|Guds|Kristi)';
+  var SV_RULES = [
+    [svRe('(?<![{L}])(ett annat|annat|ett) evangelium(?![{L}])'), '$1 glatt budskap'],
+    [svRe('(?<![{L}])' + SV_EV_DET + ' evangelium(?![{L}])'), '$1 glada budskap'],
+    [svRe('(?<![{L}])evangelii(?![{L}])'), 'glada budskapets'],
+    [svRe('(?<![{L}])evangeliets(?![{L}])'), 'glada budskapets'],
+    [svRe('(?<![{L}])(evangeliet|evangelium)(?![{L}])'), 'glada budskapet'],
+    [svRe('(?<![{L}])(Evangeliet|Evangelium)(?![{L}])'), 'Glada budskapet'],
+    [svRe('(?<![{L}])Jesu Kristi(?![{L}])'), 'Jeshua Messias’'],
+    [svRe('(?<![{L}])Kristi Jesu(?![{L}])'), 'Messias Jeshuas'],
+    [svRe('(?<![{L}])Jesus Kristus(?![{L}])'), 'Jeshua Messias'],
+    [svRe('(?<![{L}])Kristus Jesus(?![{L}])'), 'Messias Jeshua'],
+    [svRe('(?<![{L}])Jesus[’\'](?![{L}])'), 'Jeshuas'],
+    [svRe('(?<![{L}])Jesu(?![{L}])'), 'Jeshuas'],
+    [svRe('(?<![{L}])Jesus(?![{L}])'), 'Jeshua'],
+    [svRe('(?<![{L}])Kristi(?![{L}])'), 'Messias’'],
+    [svRe('(?<![{L}])(Kristus|Kristo)(?![{L}])'), 'Messias'],
+    [svRe('(?<![{L}])Judas(?![{L}])'), 'Juda'],
+    [svRe('(?<![{L}])Marias(?![{L}])'), 'Mirjams'],
+    [svRe('(?<![{L}])Maria(?![{L}])'), 'Mirjam']
+  ];
+  function svMessianic(text, at) {
+    var key = at && at.key, book = key ? key.split(' ')[0] : '';
+    SV_RULES.forEach(function (r) { text = text.replace(r[0], r[1]); });
+    if (book !== 'EST' && !SV_LAW_SKIP[key]) {
+      text = text.replace(svRe('(?<![{L}])' + SV_POSS + ' lag(s?)(?![{L}])'), '$1 Tora$2')
+        .replace(svRe('(?<![{L}])[Ll]agens(?![{L}])'), 'Torans')
+        .replace(svRe('(?<![{L}])[Ll]agen(?![{L}])'), 'Toran');
+    }
+    if (SV_HADES[key]) text = text.replace(svRe('(?<![{L}])dödsrikets(?![{L}])'), 'Sheols').replace(svRe('(?<![{L}])(dödsriket|dödsrike)(?![{L}])'), 'Sheol');
+    if (!SV_TEMPLE_SKIP[key]) {
+      text = text.replace(svRe('(?<![{L}])templet(s?)(?![{L}])'), 'Templet$1')
+        .replace(svRe('(?<![{L}])(Guds|HERRENS|Herrens|hans|ditt|mitt|sitt|heliga|helga) tempel(?![{L}])'), '$1 Tempel');
+    }
+    return text;
+  }
   var hebrewNames = function (t) { return t; };
   /* Like wordReplacer, plus per-verse forms from "_byVerse" in hebrew-names.json:
      { "GEN 11:31": { "Haran": ["Haran", "Charan"] } } — a list gives the forms in order of appearance in the verse. */
@@ -389,7 +440,9 @@
       // in the Bible text, keep track of the verse, so that a name spelled the same in English
       // but differently in Hebrew (Haran the man, Charan the city) gets the right form
       var own = el.closest('section[data-book]');
-      if (own && isSfb(own.getAttribute('data-book'))) return;   // the filters' word lists are English: SFB98 is shown as it is
+      var sv = own && isSfb(own.getAttribute('data-book'));   // a Swedish text: its own Messianic filter, no English word lists
+      if (sv && !settings.messianic) return;
+      var fix = sv ? svMessianic : transformText;
       var sec = el.classList.contains('scripture') && el.closest('section[data-book]');
       var book = sec && sec.getAttribute('data-book'), c = sec ? parseInt(sec.getAttribute('data-c') || '1', 10) : 0;
       var at = book ? { key: '', seen: {} } : null;
@@ -402,7 +455,7 @@
           continue;
         }
         if (node.parentNode && node.parentNode.classList && (node.parentNode.classList.contains('verse-num') || node.parentNode.classList.contains('chapter-num'))) continue;
-        var t = transformText(node.nodeValue, at);
+        var t = fix(node.nodeValue, at);
         if (t.indexOf(NAME_MARK[0]) >= 0) marked.push([node, t]);   // replaced after the walk
         else if (t !== node.nodeValue) node.nodeValue = t;
       }
