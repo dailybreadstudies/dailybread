@@ -452,7 +452,7 @@
       // but differently in Hebrew (Haran the man, Charan the city) gets the right form
       var own = el.closest('section[data-book]');
       var sv = own && isSfb(own.getAttribute('data-book'));   // a Swedish text: its own Messianic filter, no English word lists
-      if (sv && !settings.messianic) return;
+      if (sv && (!settings.messianic || !sweVer() || !sweVer().filter || sweVer().lang !== 'sv')) return;   // licensed texts are shown as they are
       var fix = sv ? function (t, at, node) {
         var prev = node && node.previousSibling;
         if (prev && prev.nodeType === 1 && prev.classList.contains('lord') && (!at || at.key.split(' ')[0] !== 'EST')) t = t.replace(svRe('^(\\s+)lag(s?)(?![{L}])'), '$1Torah$2');   // "HERRENS lag"
@@ -502,10 +502,32 @@
   //   BSB's own paragraph and poetry breaks (sfbReflow).
   var YV = { key: 'kXbev4xSYcSwh1hVfcEBlfdArRxWreFU9MtDf2kapzApfBiP', api: 'https://api.youversion.com/v1' };
   var SWE = {
-    sv1917: { id: 166, label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, divine: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' },
-    sfb98: { id: null, label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' }
+    sv1917: { id: 166, lang: 'sv', label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, divine: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' },
+    // From Bible Brain (Faith Comes By Hearing) through the Supabase function "bible-text" (the key stays there).
+    // fileset: the text fileset id once found with the key (null hides the choice). Licensed texts: no filters.
+    sfb98: { fileset: null, lang: 'sv', label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true },
+    esv: { fileset: null, lang: 'en', label: 'ESV', name: 'English Standard Version', credit: 'ESV® Bible · © Crossway', flow: true }
   };
-  function sweVer() { return SWE[settings.version] && SWE[settings.version].id ? SWE[settings.version] : null; }
+  var BB = 'https://khmoofwmfyhpnxtbsswv.supabase.co/functions/v1/bible-text';
+  function sweOk(k) { var v = SWE[k]; return !!(v && (v.id ? YV.key : v.fileset)); }
+  function sweVer() { return sweOk(settings.version) ? SWE[settings.version] : null; }
+  function svText() { var v = useSfb() && sweVer(); return !!(v && v.lang === 'sv'); }   // Swedish book names follow a Swedish text
+  function bbGet(path) {
+    return fetch(BB + '?path=' + encodeURIComponent(path)).then(function (r) {
+      if (!r.ok) throw new Error('Bible Brain ' + r.status);
+      return r.json();
+    });
+  }
+  // Bible Brain plain text: one entry per verse → the BSB chapter shape (one block; sfbReflow then lays it out)
+  function bbChapter(j) {
+    var c = [];
+    (j.data || []).forEach(function (v) {
+      var n = +v.verse_start || 0, t = String(v.verse_text || '').trim();
+      if (!t) return;
+      c.push(n, escText(t) + ' ');
+    });
+    return { b: c.length ? [{ k: 'p', c: c }] : [], n: [] };
+  }
   var SFB_READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];   // John
   var sfbOk = false, sfbMeta = null, sfbFail = null;
   var SV_BOOKS = {
@@ -523,12 +545,12 @@
     '1PE': '1 Petrusbrevet', '2PE': '2 Petrusbrevet', '1JN': '1 Johannesbrevet', '2JN': '2 Johannesbrevet',
     '3JN': '3 Johannesbrevet', JUD: 'Judasbrevet', REV: 'Uppenbarelseboken'
   };
-  function useSfb() { return sfbOk && !!YV.key && !!sweVer(); }
+  function useSfb() { return sfbOk && !!sweVer(); }
   function sfbCheck() {   // may this reader see the choice?
     var a = null;
     try { a = JSON.parse(localStorage.getItem('dbs-auth') || 'null'); } catch (e) { /* ignore */ }
     var e = a && a.email;
-    if (!YV.key || !e || !window.crypto || !crypto.subtle || !window.TextEncoder) return Promise.resolve(false);
+    if (!e || !window.crypto || !crypto.subtle || !window.TextEncoder) return Promise.resolve(false);
     return crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(e).trim().toLowerCase())).then(function (b) {
       var h = Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join('');
       sfbOk = SFB_READERS.indexOf(h) >= 0;
@@ -543,19 +565,26 @@
   }
   var sfbMetaFor = {};
   function sfbMeta2(v) {   // the version's metadata (copyright line), once
-    if (!sfbMetaFor[v.id]) sfbMetaFor[v.id] = yvGet('/bibles/' + v.id).then(function (m) { sfbMeta = m; return m; }, function () { return null; });
-    return sfbMetaFor[v.id];
+    var k = v.id || v.fileset;
+    if (!sfbMetaFor[k]) sfbMetaFor[k] = (v.id ? yvGet('/bibles/' + v.id) : bbGet('/bibles/filesets/' + v.fileset + '/copyright').then(function (j) {
+      var c = j && (j.copyright || j.data || j);
+      var line = c && (c.copyright || c.copyright_description || c.description);
+      return { copyright: typeof line === 'string' ? line.replace(/<[^>]+>/g, '').trim() : '' };
+    })).then(function (m) { sfbMeta = m; return m; }, function () { return null; });
+    return sfbMetaFor[k];
   }
   var sfbCache = {};
   function sfbChapter(book, c) {
-    var v = sweVer(), key = v.id + ':' + book.id + '.' + c;
+    var v = sweVer(), key = (v.id || v.fileset) + ':' + book.id + '.' + c;
     if (!sfbCache[key]) {
       sfbCache[key] = Promise.all([
-        yvGet('/bibles/' + v.id + '/passages/' + book.id + '.' + c + '?format=html&include_headings=true&include_notes=true'),
+        v.id ? yvGet('/bibles/' + v.id + '/passages/' + book.id + '.' + c + '?format=html&include_headings=true&include_notes=true')
+             : bbGet('/bibles/filesets/' + v.fileset + '/' + book.id + '/' + c),
         v.flow ? loadBook(book.id).catch(function () { return null; }) : null,
         sfbMeta2(v)
       ]).then(function (res) {
-        var ch = yvChapter(res[0].content || '', c);
+        var ch = v.id ? yvChapter(res[0].content || '', c) : bbChapter(res[0]);
+        if (!ch.b.length) throw new Error('no text for this chapter');
         var en = res[1] && res[1].chapters[c - 1];
         book.chapters[c - 1] = v.flow && en ? sfbReflow(ch, en) : ch;
       });
@@ -612,7 +641,7 @@
       (r.parts || [r]).forEach(function (p) { for (var c = p.c1; c <= p.c2; c++) if (cs.indexOf(c) < 0) cs.push(c); });
     });
     var bk = settings.version + ':' + id;
-    var book = sfbBooks[bk] || (sfbBooks[bk] = { id: id, name: SV_BOOKS[id] || id, chapters: [], sfb: true });
+    var book = sfbBooks[bk] || (sfbBooks[bk] = { id: id, name: (sweVer().lang === 'sv' && SV_BOOKS[id]) || bookName(id), chapters: [], sfb: true });
     return Promise.all(cs.map(function (c) { return sfbChapter(book, c); })).then(function () { sfbFail = null; return book; },
       function (err) { sfbFail = err.message || 'not reachable'; return loadBook(id); });
   }
@@ -722,7 +751,7 @@
     row.className = 'sp-row sp-version-row';
     row.innerHTML = '<span class="sp-label">Translation</span><select class="sp-select sp-ctl" data-version-select aria-label="Bible translation">' +
       '<option value="bsb">DBSB*</option>' +
-      Object.keys(SWE).filter(function (k) { return SWE[k].id; }).map(function (k) {
+      Object.keys(SWE).filter(sweOk).map(function (k) {
         return '<option value="' + k + '">' + SWE[k].name + '</option>';
       }).join('') + '</select>';
     var note = document.createElement('p');
@@ -730,7 +759,7 @@
     note.textContent = '*Adapted from the BSB.';
     sec.parentNode.insertBefore(row, sec);
     sec.parentNode.insertBefore(note, sec);
-    note.hidden = !!(SWE[settings.version] && SWE[settings.version].id);
+    note.hidden = sweOk(settings.version);
     row.querySelector('select').addEventListener('change', function (e) {
       settings.version = e.target.value;
       saveSettings();
@@ -791,7 +820,7 @@
       var head = displayRef(r.parts[0]), name0 = head.replace(/\s\d.*$/, '');
       return head + r.parts.slice(1).map(function (p) { return '; ' + displayRef(p).replace(name0 + ' ', ''); }).join('');
     }
-    var name = (settings.hebrewNames && HEB_BOOKS[r.book]) || (useSfb() && SV_BOOKS[r.book]) || bookName(r.book);
+    var name = (settings.hebrewNames && HEB_BOOKS[r.book]) || (svText() && SV_BOOKS[r.book]) || bookName(r.book);
     var one = (bookIndex || []).filter(function (b) { return b.id === r.book; })[0];
     if (one && one.chapters === 1 && r.c1 === 1 && r.c2 === 1 && !(r.v1 === 1 && r.v2 === null)) {   // Jude 5–25
       return name + ' ' + r.v1 + (r.v2 === null ? '–end' : r.v2 !== r.v1 ? '–' + r.v2 : '');
@@ -2498,7 +2527,7 @@
     pressed('data-otorig', settings.otOrig || 'he');
     pressed('data-ntorig', settings.ntOrig || 'grc');
     var vs = panel.querySelector('[data-version-select]');
-    if (vs) vs.value = SWE[settings.version] && SWE[settings.version].id ? settings.version : 'bsb';
+    if (vs) vs.value = sweOk(settings.version) ? settings.version : 'bsb';
     // Only the options that apply to the chosen Bible text: the Swedish texts have no margin titles, no switchable
     // divine name and no Hebrew Names list; the Messianic Filter shows the words it changes in that text
     var sw = useSfb() ? sweVer() : null;
@@ -3154,7 +3183,7 @@
     PRO: 'Mishlei', SNG: 'Shir HaShirim', ECC: 'Kohelet', LAM: 'Eichah' };
   function bookLabel(id) {
     if (settings.hebrewNames && HEB_BOOKS[id]) return HEB_BOOKS[id];
-    if (useSfb() && SV_BOOKS[id]) return SV_BOOKS[id];
+    if (svText() && SV_BOOKS[id]) return SV_BOOKS[id];
     if (settings.messianic && MES_BOOKS[id]) return MES_BOOKS[id];
     return bookName(id);
   }

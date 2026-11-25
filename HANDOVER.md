@@ -186,6 +186,8 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
   If YouVersion can't be reached, the BSB is shown with a one-line notice.
 - Divine Name works on the 1917 (public domain): HERREN/HERRE/HERRENS are wrapped in .lord when converted and
   become ADONAI/ADONAIS or HASHEM/HASHEMS; the Swedish blessings follow the same setting.
+- Bible Brain texts (SFB98, ESV): fetched through the Supabase function `bible-text` (key in its secret
+  BIBLE_BRAIN_KEY); plain verses laid out in the BSB's paragraphs; no filters (licensed). Hidden until `fileset` is set.
 - To open it to everyone: return true from `sfbCheck()` (instead of the `SFB_READERS` check).
 
 ## Interface language — English / Svenska (assets/i18n.js, Nov 2026 — private test)
