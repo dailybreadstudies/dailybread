@@ -26,8 +26,8 @@
   // everyone else, Israel and the EU included, sees it unticked. Set US_PRETICK to false to show it unticked for all.
   var US_PRETICK = true;
   var CKEY = 'dbs-consent-pending';     // the choice made in the sign-in panel, kept until the sign-in completes
-  var WORDING = 'Join the Daily Bread family. Everything here is given freely. Friends of Ariel Media get occasional news ' +
-    'and new resources from Israel. It costs nothing and helps more than you’d think. Unsubscribe anytime.';
+  var WORDING = 'Join the Daily Bread family. Everything here is given freely. Friends of Ariel Media get occasional news. ' +
+    'It costs nothing and helps more than you’d think. Unsubscribe anytime.';
   function inUS() {
     var t = /[?&]family-test=(us|other)/.exec(location.search);   // for checking both versions: ?family-test=us
     if (t) return t[1] === 'us';
@@ -324,7 +324,7 @@
           '<label class="acct-switch"><input type="checkbox" data-acct="family"' + (familyState ? ' checked' : '') + '>' +
           '<span class="acct-switch-track" aria-hidden="true"></span>' +
           '<span class="acct-switch-text"><b>Daily Bread family</b>' +
-          (familyState ? 'You get occasional news and new resources from Ariel Media.' : 'Occasional news and new resources from Ariel Media.') +
+          (familyState ? 'You get occasional news from Ariel Media.' : 'Occasional news from Ariel Media.') +
           '</span></label>') +
         '<p class="acct-small">We keep your email address, your reading progress and your email-list choice, stored in the EU. ' +
         '<a class="acct-link" href="/privacy.html">Privacy</a> · ' +
@@ -349,7 +349,7 @@
       '<label class="acct-family"><input type="checkbox" name="family"' + (familyChoice ? ' checked' : '') + '>' +
       '<span class="acct-family-box" aria-hidden="true"></span>' +
       '<span class="acct-family-text"><b>Join the Daily Bread family</b>' +
-      'Everything here is given freely. Friends of Ariel Media get occasional news and new resources from Israel. ' +
+      'Everything here is given freely. Friends of Ariel Media get occasional news. ' +
       'It costs nothing and helps more than you’d think. Unsubscribe anytime.</span></label>' +
       '<button class="acct-btn" type="submit"' + (busy ? ' disabled' : '') + '>' + (busy ? 'Sending…' : 'Email me a code') + '</button></form>' +
       (msg ? '<p class="acct-msg">' + esc(msg) + '</p>' : '') +
