@@ -507,15 +507,20 @@
               sv: 'Den svenska bibeltexten är <i>Svenska 1917</i> (1917 års kyrkobibel), fri från upphovsrätt, via <a href="https://platform.youversion.com" rel="noopener">YouVersion Platform</a>; styckeindelningen följer Berean Standard Bible (BSB).' } },
     // From Bible Brain (Faith Comes By Hearing) through the Supabase function "bible-text" (the key stays there).
     // fileset: the text fileset id once found with the key (null hides the choice). Licensed texts: no filters.
-    sfb98: { fileset: null, lang: 'sv', label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true,
+    sfb98: { fileset: { O: 'SWESFBO_ET', N: 'SWESFBN_ET' }, lang: 'sv', label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true,
       foot: { en: 'The Swedish biblical text is <i>Svenska Folkbibeln 98</i>. Old Testament © 1998 Stiftelsen Svenska Folkbibeln, Stockholm; New Testament © 1996, 1998 Stiftelsen Svenska Folkbibeln, Stockholm, and Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
               sv: 'Den svenska bibeltexten är <i>Svenska Folkbibeln 98</i>. Gamla testamentet © 1998 Stiftelsen Svenska Folkbibeln, Stockholm; Nya testamentet © 1996, 1998 Stiftelsen Svenska Folkbibeln, Stockholm, och Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } },
-    esv: { fileset: null, lang: 'en', label: 'ESV', name: 'English Standard Version', credit: 'ESV® Bible · © Crossway', flow: true,
+    sfb15: { fileset: { O: 'SWESFVO_ET', N: 'SWESFVN_ET' }, lang: 'sv', label: 'SFB 15', name: 'Svenska Folkbibeln 2015', credit: 'Svenska Folkbibeln 2015 · © Stiftelsen Svenska Folkbibeln', flow: true,
+      foot: { en: 'The Swedish biblical text is <i>Svenska Folkbibeln 2015</i>. Old Testament © 1998, 2015 Stiftelsen Svenska Folkbibeln, Stockholm; New Testament © 1996, 2015 Stiftelsen Svenska Folkbibeln, Stockholm, and Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
+              sv: 'Den svenska bibeltexten är <i>Svenska Folkbibeln 2015</i>. Gamla testamentet © 1998, 2015 Stiftelsen Svenska Folkbibeln, Stockholm; Nya testamentet © 1996, 2015 Stiftelsen Svenska Folkbibeln, Stockholm, och Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } },
+    esv: { fileset: { O: 'ENGESVO_ET', N: 'ENGESVN_ET' }, lang: 'en', label: 'ESV', name: 'English Standard Version', credit: 'ESV® Bible · © Crossway', flow: true,
       foot: { en: 'Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>',
               sv: 'Bibeltexten är ESV® Bible (The Holy Bible, English Standard Version®), © 2001 Crossway, en verksamhet inom Good News Publishers. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>' } }
   };
   var BB = 'https://khmoofwmfyhpnxtbsswv.supabase.co/functions/v1/bible-text';
   function sweOk(k) { var v = SWE[k]; return !!(v && (v.id ? YV.key : v.fileset)); }
+  var NT_BOOKS = 'MAT MRK LUK JHN ACT ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM HEB JAS 1PE 2PE 1JN 2JN 3JN JUD REV';
+  function fsFor(v, book) { var f = v.fileset; return typeof f === 'string' ? f : f[NT_BOOKS.indexOf(book) >= 0 ? 'N' : 'O']; }
   function sweVer() { return sweOk(settings.version) ? SWE[settings.version] : null; }
   function svText() { var v = useSfb() && sweVer(); return !!(v && v.lang === 'sv'); }   // Swedish book names follow a Swedish text
   function bbGet(path) {
@@ -571,8 +576,8 @@
   }
   var sfbMetaFor = {};
   function sfbMeta2(v) {   // the version's metadata (copyright line), once
-    var k = v.id || v.fileset;
-    if (!sfbMetaFor[k]) sfbMetaFor[k] = (v.id ? yvGet('/bibles/' + v.id) : bbGet('/bibles/filesets/' + v.fileset + '/copyright').then(function (j) {
+    var k = v.id || fsFor(v, 'GEN');
+    if (!sfbMetaFor[k]) sfbMetaFor[k] = (v.id ? yvGet('/bibles/' + v.id) : bbGet('/bibles/filesets/' + k + '/copyright').then(function (j) {
       var c = j && (j.copyright || j.data || j);
       var line = c && (c.copyright || c.copyright_description || c.description);
       return { copyright: typeof line === 'string' ? line.replace(/<[^>]+>/g, '').trim() : '' };
@@ -581,11 +586,11 @@
   }
   var sfbCache = {};
   function sfbChapter(book, c) {
-    var v = sweVer(), key = (v.id || v.fileset) + ':' + book.id + '.' + c;
+    var v = sweVer(), key = (v.id || fsFor(v, book.id)) + ':' + book.id + '.' + c;
     if (!sfbCache[key]) {
       sfbCache[key] = Promise.all([
         v.id ? yvGet('/bibles/' + v.id + '/passages/' + book.id + '.' + c + '?format=html&include_headings=true&include_notes=true')
-             : bbGet('/bibles/filesets/' + v.fileset + '/' + book.id + '/' + c),
+             : bbGet('/bibles/filesets/' + fsFor(v, book.id) + '/' + book.id + '/' + c),
         v.flow ? loadBook(book.id).catch(function () { return null; }) : null,
         sfbMeta2(v)
       ]).then(function (res) {
