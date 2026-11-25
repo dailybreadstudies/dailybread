@@ -330,7 +330,7 @@
       '<label class="acct-switch"><input type="checkbox" data-acct="family"' + (familyState ? ' checked' : '') + '>' +
       '<span class="acct-switch-track" aria-hidden="true"></span>' +
       '<span class="acct-switch-text"><b>' + (familyState ? 'You’re in the Daily Bread family' : 'Join the Daily Bread family') + '</b>' +
-      'Occasional news from Ariel Media, such as when next year’s journal is ready. Every email also has an unsubscribe link.</span></label>';
+      'Occasional news from Ariel Media, such as when next year’s journal is ready. Unsubscribe anytime.</span></label>';
     return '<section class="ap-sec"><p class="ap-label">Signed in as</p><p class="acct-email">' + esc(s.email || 'Signed in') + '</p></section>' +
       '<section class="ap-sec"><h2 class="ap-h">Reading progress</h2>' + st +
       '<p class="ap-p">Your progress is kept in step on every device where you sign in with this email.</p>' +
