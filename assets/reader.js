@@ -492,8 +492,8 @@
   //   BSB's own paragraph and poetry breaks (sfbReflow).
   var YV = { key: 'kXbev4xSYcSwh1hVfcEBlfdArRxWreFU9MtDf2kapzApfBiP', api: 'https://api.youversion.com/v1' };
   var SWE = {
-    sv1917: { id: 166, label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true },
-    sfb98: { id: null, label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln' }
+    sv1917: { id: 166, label: 'SV 1917', name: 'Svenska 1917', credit: 'Svenska 1917 · public domain', flow: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' },
+    sfb98: { id: null, label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true, filter: 'Jeshua, Messias, Tora, glada budskapet…' }
   };
   function sweVer() { return SWE[settings.version] && SWE[settings.version].id ? SWE[settings.version] : null; }
   var SFB_READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];   // John
@@ -725,6 +725,7 @@
       settings.version = e.target.value;
       saveSettings();
       note.hidden = e.target.value !== 'bsb';
+      refreshPanel();
       if (current && current.bible) loadChapter(current.book, current.c, null, true);   // fetch the text again in the chosen translation
       else if (current && current.day) loadDay(current.day.date, true);
     });
@@ -2488,6 +2489,20 @@
     pressed('data-ntorig', settings.ntOrig || 'grc');
     var vs = panel.querySelector('[data-version-select]');
     if (vs) vs.value = SWE[settings.version] && SWE[settings.version].id ? settings.version : 'bsb';
+    // Only the options that apply to the chosen Bible text: the Swedish texts have no margin titles, no switchable
+    // divine name and no Hebrew Names list; the Messianic Filter shows the words it changes in that text
+    var sw = useSfb() ? sweVer() : null;
+    var hide = function (el, h) { if (el) el.hidden = !!h; };
+    hide(panel.querySelector('.sp-msub-row'), sw);
+    var dn = panel.querySelector('.sp-seg-name'); hide(dn && dn.closest('.sp-row'), sw);
+    hide(panel.querySelector('[data-setting="hebrewNames"]'), sw);
+    var mf = panel.querySelector('[data-setting="messianic"]');
+    hide(mf, sw && !sw.filter);
+    var mfSub = mf && mf.querySelector('.sp-switch-sub');
+    if (mfSub) {
+      if (!mfSub.hasAttribute('data-en')) mfSub.setAttribute('data-en', mfSub.textContent);
+      mfSub.textContent = sw && sw.filter ? sw.filter : mfSub.getAttribute('data-en');
+    }
     var vn = panel.querySelector('.sp-version-note');
     if (vn) vn.hidden = !!(vs && vs.value !== 'bsb');   // "*Adapted from the BSB." only beside DBSB*
     pressed('data-theme-opt', settings.theme);

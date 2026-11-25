@@ -53,7 +53,7 @@
     'Divine Name': 'Guds namn', 'Lord': 'Herren', 'Original Languages': 'Grundtext', 'Show': 'Visa', 'Off': 'Av', 'Below': 'Under',
     'Only': 'Endast', 'Hebrew Bible': 'Tanach', 'Hebrew': 'Hebreiska', 'Greek': 'Grekiska', 'Both': 'Båda',
     'Hebrew Marks': 'Hebreiska tecken', 'Vowels': 'Vokaler', '+ Cantillation': '+ Kantillation', 'Names & Terms': 'Namn och termer',
-    'Messianic Filter': 'Messianskt filter', 'Yeshua, Messiah, Torah, immersion, assembly…': 'Jeshua, Messias, Tora, glada budskapet…',
+    'Messianic Filter': 'Messianskt filter',   // its description shows the words of the chosen Bible text, so it is not translated
     'Hebrew Names': 'Hebreiska namn', 'Reading Plan': 'Läsplan',
     'Apostolic Scriptures Twice a Year': 'De Apostoliska Skrifterna två gånger om året',
     'Reads the Gospels and Epistles every day': 'Läser evangelierna och breven varje dag',
