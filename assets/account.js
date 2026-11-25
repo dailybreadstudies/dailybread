@@ -331,18 +331,23 @@
       '<span class="acct-switch-track" aria-hidden="true"></span>' +
       '<span class="acct-switch-text"><b>' + (familyState ? 'You’re in the Daily Bread family' : 'Join the Daily Bread family') + '</b>' +
       'Occasional news from Ariel Media, such as when next year’s journal is ready. Unsubscribe anytime.</span></label>';
-    return '<section class="ap-sec"><p class="ap-label">Signed in as</p><p class="acct-email">' + esc(s.email || 'Signed in') + '</p></section>' +
+    var email = s.email || 'Signed in', initial = esc((email.charAt(0) || '?').toUpperCase());
+    // An open, page-wide layout: a profile header, then sections side by side (room for highlights, notes and more later)
+    return '<header class="ap-head"><div class="ap-avatar" aria-hidden="true">' + initial + '</div>' +
+      '<div class="ap-who"><p class="ap-label">Your account</p><h1 class="ap-name">' + esc(email) + '</h1></div>' +
+      '<button type="button" class="acct-btn ghost" data-acct="out">Sign out</button></header>' +
+      '<div class="ap-grid">' +
       '<section class="ap-sec"><h2 class="ap-h">Reading progress</h2>' + st +
       '<p class="ap-p">Your progress is kept in step on every device where you sign in with this email.</p>' +
       '<div class="acct-row"><button type="button" class="acct-btn" data-acct="sync">Sync now</button>' +
       '<a class="acct-btn ghost" href="/progress.html">See your progress</a></div></section>' +
       '<section class="ap-sec"><h2 class="ap-h">Daily Bread family</h2>' + fam + '</section>' +
-      '<section class="ap-sec"><h2 class="ap-h">Your data</h2>' +
+      '</div>' +
+      '<section class="ap-sec ap-data"><div><h2 class="ap-h">Your data</h2>' +
       '<p class="ap-p">We keep your email address, your reading progress and your email-list choice, stored in the EU, and nothing else. ' +
       '<a class="acct-link" href="/privacy.html">Privacy</a></p>' +
-      '<div class="acct-row"><button type="button" class="acct-btn ghost" data-acct="out">Sign out</button>' +
-      '<button type="button" class="acct-btn ghost is-danger" data-acct="delete">Delete my account</button></div>' +
-      (msg ? '<p class="acct-msg">' + esc(msg) + '</p>' : '') + '</section>';
+      (msg ? '<p class="acct-msg">' + esc(msg) + '</p>' : '') + '</div>' +
+      '<button type="button" class="acct-btn ghost is-danger" data-acct="delete">Delete my account</button></section>';
   }
   function panelHtml(onPage) {
     var s = load(AUTH_KEY);
@@ -390,7 +395,11 @@
     if (!pageEl) return;
     if (PAGE === 'signin' && load(AUTH_KEY)) { location.replace('/account.html'); return; }
     var inside = pageEl.contains(document.activeElement), focused = inside && document.activeElement.name;
-    pageEl.innerHTML = panelHtml(true);
+    var html = panelHtml(true);
+    if (PAGE === 'account' && !load(AUTH_KEY))   // signed out: the narrow sign-in card, centred
+      html = '<div class="ap-signin"><p class="gv-eyebrow">Account</p><h1 class="gv-h">Your <em>account.</em></h1>' +
+        '<div class="acct-page-card">' + html + '</div></div>';
+    pageEl.innerHTML = html;
     var f = focused && pageEl.querySelector('input[name="' + focused + '"]');
     if (!f && inside) f = pageEl.querySelector('input:not([type=checkbox])');
     if (f && !busy) f.focus();
