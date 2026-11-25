@@ -154,7 +154,7 @@
   var L = function (w) { return '<span class="lord">' + w + '</span>'; };
   var SV_BLESSINGS = [
     '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som har helgat oss genom sina bud och befallt oss ' +
-      'att fördjupa oss i Torans ord. ' + L('Herre') + ', vår Gud, låt din Torahs ord vara ljuvliga i vår mun och i ditt folk Israels hus mun, ' +
+      'att fördjupa oss i Torans ord. ' + L('Herre') + ', vår Gud, låt orden i din Torah vara ljuvliga i vår mun och i ditt folk Israels hus mun, ' +
       'så att vi och våra efterkommande, och efterkommandena till ditt folk Israels hus, alla känner ditt namn och studerar din Torah för dess egen skull. ' +
       'Välsignad är du, ' + L('Herre') + ', som lär sitt folk Israel Torah.',
     '<span class="lead">Välsignad</span> är du, ' + L('Herre') + ', vår Gud, världens konung, som ger sanningens Torah och glädjebudskapet om frälsning ' +
