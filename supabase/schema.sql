@@ -60,3 +60,11 @@ grant execute on function public.delete_my_account() to authenticated;
 -- 6. Keep-alive: a harmless public call the GitHub podcast job can make every few hours so the free project never pauses
 create or replace function public.ping() returns text language sql stable set search_path = '' as $$ select 'ok'::text $$;
 grant execute on function public.ping() to anon, authenticated;
+
+-- 7. Phase 2 (Nov 2026): the "Join the Daily Bread family" choice and its link to the Ariel Media Shopify list
+--    variant: which box the reader saw ('us-preticked' = ticked in advance for US visitors, 'unticked'),
+--             or 'switch' for a change made later in the account panel
+--    shopify_synced_at: set by the shopify-consent function once Shopify has been updated
+alter table public.consent add column if not exists variant text;
+alter table public.consent add column if not exists shopify_synced_at timestamptz;
+create index if not exists consent_user_latest on public.consent (user_id, created_at desc);

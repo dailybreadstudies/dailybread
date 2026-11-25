@@ -2,7 +2,8 @@
 
 Agreed with John on 15 Oct 2026. **Phase 1 built 20 Oct 2026** (sign-in by email code or link, progress sync,
 account panel, delete account) on **dailybread.study** (dailybread.online was lost to a domain investor).
-Phase 2 (email-list consent, privacy page, Shopify) and "Continue with Google" are still to do.
+**Phase 2 built 25 Nov 2026** (email-list box, account switch, privacy page, Shopify function); see "Phase 2" below.
+"Continue with Google" is still to do.
 
 ## Status (20 Oct 2026)
 - Supabase project "dailybread" (West EU, Ireland, free) — see supabase/README.md and supabase/schema.sql (run).
@@ -42,9 +43,11 @@ Phase 2 (email-list consent, privacy page, Shopify) and "Continue with Google" a
 - A small account area: email, sync status, email-list switch, sign out, delete account.
 
 ## The email list (consent)
-1. A separate consent choice, **unticked by default**. Signing in never depends on it. This meets GDPR (EU), and
-   the US (CAN-SPAM) is less strict.
-2. It may be large and inviting (a card-sized tick box, see wording below), but never pre-ticked and never
+1. A separate consent choice. Signing in never depends on it. **Changed 25 Nov 2026 (John's decision):** the box is
+   ticked in advance for visitors whose device is in a US time zone (CAN-SPAM allows this; The Watchman and
+   Ariel Media are US-registered); everyone else, Israel and the EU included, sees it unticked (GDPR, Israel's
+   anti-spam law). One switch, `US_PRETICK` in assets/account.js, turns the US pre-tick off.
+2. It may be large and inviting (a card-sized tick box, see wording below), never
    "confirmshaming" (no "No thanks, I don't want to support…" button).
 3. The sign-in confirmation proves the address, so for those who tick the box it also serves as the
    **double opt-in** (confirmed opt-in) that Germany and others expect — no second "please confirm" email needed.
@@ -76,3 +79,29 @@ The wording names the sender (Ariel Media), as consent requires. Link "Privacy" 
 4. Privacy page; link in the footer and in the sign-in panel.
 5. Consent → Shopify (or list) via a small Supabase function.
 6. Test on phones, desktops, Light/Sepia/Dark; test delete-account and unsubscribe.
+
+## Phase 2 (built 25 Nov 2026)
+- **assets/account.js**: the "Join the Daily Bread family" card in the sign-in panel; ticked in advance only when the
+  device's time zone is a US one (time zone rather than IP: no third-party lookup, and a US traveller abroad or an
+  EU reader on a US VPN falls on the cautious side). Test either version with `?family-test=us` or `?family-test=other`.
+  The choice is kept in localStorage (`dbs-consent-pending`) until the sign-in completes, then saved to `consent`
+  with the wording, `variant` (`us-preticked`, `unticked`, or `switch`) and `method` (`email-code`, `email-link`,
+  `account`). A first choice is always saved; later sign-ins only ever add a yes, so leaving the box empty never
+  unsubscribes anyone. The account panel has a "Daily Bread family" switch (method `account`).
+- **supabase/functions/shopify-consent**: after each saved choice the site calls it; it reads the reader's latest
+  choice from the database and updates Shopify: subscribed (confirmed opt-in) with tags `daily-bread-online` +
+  `dbo-us-preticked` / `dbo-opted-in`; switched off in the account → unsubscribed; unticked at sign-in → no change.
+  It sets `shopify_synced_at`; anything not yet sent is retried on the reader's next visit.
+- **privacy.html**, linked from the sign-in panel, the account panel and the footers.
+- Deleting a site account does not unsubscribe from Shopify (said on the privacy page and in the delete prompt).
+
+### Setup (John, once)
+1. Supabase → SQL Editor: run supabase/schema.sql again (adds `variant` and `shopify_synced_at`). **Before** the
+   Phase 2 code goes live, or the choices can't be saved.
+2. Shopify Dev Dashboard (dev.shopify.com): create an app "Daily Bread Online", scopes `read_customers,write_customers`,
+   release a version, install it on the Ariel Media store. Note the client ID and secret and the store's
+   *.myshopify.com subdomain.
+3. Supabase → Edge Functions → Secrets: `SHOPIFY_SHOP`, `SHOPIFY_CLIENT_ID`, `SHOPIFY_CLIENT_SECRET`.
+4. Supabase → Edge Functions → Deploy a new function → via editor, name `shopify-consent`, paste
+   supabase/functions/shopify-consent/index.ts, turn **Verify JWT off** (the function checks the sign-in itself).
+5. Test: sign in with a test address, tick the box, check the customer appears in Shopify with the tags.
