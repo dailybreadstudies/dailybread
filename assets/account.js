@@ -21,6 +21,24 @@
   var SKEY = KIDS ? 'dbs-kids-sync' : 'dbs-sync';               // { seen: cloud updated_at, dirty: true|false }
   var TKEY = 'dbs-tracks';   // Classic only: the private study tracks (assets/tracks.js), synced inside the same row as "tracks"
 
+  // ── "Join the Daily Bread family": the Ariel Media email list (phase 2, docs/SIGN-IN-PLAN.md) ──
+  // The box is ticked in advance only for visitors whose device is set to a US time zone (John's decision, Nov 2026);
+  // everyone else, Israel and the EU included, sees it unticked. Set US_PRETICK to false to show it unticked for all.
+  var US_PRETICK = true;
+  var CKEY = 'dbs-consent-pending';     // the choice made in the sign-in panel, kept until the sign-in completes
+  var WORDING = 'Join the Daily Bread family. Everything here is given freely. Friends of Ariel Media get occasional news ' +
+    'and new resources from Israel. It costs nothing and helps more than you’d think. Unsubscribe anytime.';
+  function inUS() {
+    var t = /[?&]family-test=(us|other)/.exec(location.search);   // for checking both versions: ?family-test=us
+    if (t) return t[1] === 'us';
+    var tz = '';
+    try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { /* old browsers: treat as outside the US */ }
+    return /^(America\/(New_York|Detroit|Chicago|Denver|Phoenix|Los_Angeles|Anchorage|Juneau|Sitka|Metlakatla|Yakutat|Nome|Adak|Boise|Menominee|Indianapolis|Louisville|Fort_Wayne|Indiana\/\w+|Kentucky\/\w+|North_Dakota\/\w+)|Pacific\/Honolulu|US\/\w+)$/.test(tz);
+  }
+  var FAMILY_VARIANT = US_PRETICK && inUS() ? 'us-preticked' : 'unticked';
+  var familyChoice = FAMILY_VARIANT === 'us-preticked';   // the box in the sign-in panel
+  var familyState = null;                                 // the signed-in reader's saved choice (null = not loaded yet)
+
   function store(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } }
   function load(k) { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) { return null; } }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -212,10 +230,52 @@
   }
   function verifyCode(email, code) {
     return api('/auth/v1/verify', { method: 'POST', body: { type: 'email', email: email, token: code } })
-      .then(function (j) { var s = saveSession(j, email); s.fresh = true; store(AUTH_KEY, s); return sync(true); });
+      .then(function (j) { var s = saveSession(j, email); s.fresh = true; store(AUTH_KEY, s); checkChoice('email-code'); return sync(true); });
   }
+  // ── The email-list choice: saved in the "consent" table, then passed on to Shopify by the shopify-consent function ──
+  function latestChoice(s) {
+    return api('/rest/v1/consent?select=opted_in,created_at,shopify_synced_at&order=created_at.desc&limit=1', {}, s.access_token)
+      .then(function (r) { return (r && r[0]) || null; });
+  }
+  function saveChoice(s, optedIn, variant, method) {
+    return api('/rest/v1/consent', { method: 'POST', headers: { Prefer: 'return=minimal' },
+      body: { user_id: s.id, opted_in: optedIn, wording: WORDING, variant: variant, method: method } }, s.access_token);
+  }
+  function toShopify(s) {   // fire and forget: if it fails, it is tried again on the next visit
+    return fetch(SB + '/functions/v1/shopify-consent', { method: 'POST',
+      headers: { apikey: APIKEY, Authorization: 'Bearer ' + s.access_token, 'Content-Type': 'application/json' }, body: '{}' })
+      .catch(function () { /* offline or not set up yet */ });
+  }
+  // After sign-in (and on each visit): save the choice from the sign-in panel. A first choice is always saved.
+  // Later sign-ins only ever add a yes: leaving the box empty never unsubscribes someone already on the list.
+  function checkChoice(method) {
+    return session().then(function (s) {
+      if (!s || !s.id) return;
+      var pending = load(CKEY);
+      return latestChoice(s).then(function (last) {
+        store(CKEY, null);
+        var add = !pending ? null : !last ? !!pending.opted_in : (pending.opted_in && !last.opted_in) ? true : null;
+        if (add === null) {
+          familyState = last ? last.opted_in : false;
+          drawPanel();
+          if (last && !last.shopify_synced_at) toShopify(s);
+          return;
+        }
+        return saveChoice(s, add, pending.variant, method).then(function () { familyState = add; drawPanel(); toShopify(s); });
+      });
+    }).catch(function () { /* tried again next visit */ });
+  }
+  function switchChoice(on) {
+    return session().then(function (s) {
+      if (!s || !s.id) return;
+      familyState = on; drawPanel();
+      return saveChoice(s, on, 'switch', 'account').then(function () { toShopify(s); });
+    }).catch(function (err) { familyState = !on; state.error = friendly(err); state.status = 'error'; drawPanel(); });
+  }
+
   function signOut() {
     var s = load(AUTH_KEY);
+    familyState = null;
     store(AUTH_KEY, null); store(SKEY, null);
     if (s && s.access_token) api('/auth/v1/logout', { method: 'POST' }, s.access_token).catch(function () {});
     state = { status: 'idle', at: null, error: '' };
@@ -225,7 +285,7 @@
     return session().then(function (s) {
       if (!s) return;
       return api('/rest/v1/rpc/delete_my_account', { method: 'POST', body: {} }, s.access_token);
-    }).then(function () { store(AUTH_KEY, null); store(SKEY, null); state = { status: 'idle', at: null, error: '' }; drawAll(); });
+    }).then(function () { familyState = null; store(AUTH_KEY, null); store(SKEY, null); state ={ status: 'idle', at: null, error: '' }; drawAll(); });
   }
 
   // ── UI: a button in the top bar (and in the phone menu), a small panel, a line on the Progress page ──
@@ -260,7 +320,14 @@
         '<p class="acct-status' + (state.status === 'error' ? ' is-error' : '') + '">' + st + '</p>' +
         '<div class="acct-row"><button type="button" class="acct-btn" data-acct="sync">Sync now</button>' +
         '<button type="button" class="acct-btn ghost" data-acct="out">Sign out</button></div>' +
-        '<p class="acct-small">We keep only your email address and your reading progress, stored in the EU, to sync it. ' +
+        (familyState === null ? '' :
+          '<label class="acct-switch"><input type="checkbox" data-acct="family"' + (familyState ? ' checked' : '') + '>' +
+          '<span class="acct-switch-track" aria-hidden="true"></span>' +
+          '<span class="acct-switch-text"><b>Daily Bread family</b>' +
+          (familyState ? 'You get occasional news and new resources from Ariel Media.' : 'Occasional news and new resources from Ariel Media.') +
+          '</span></label>') +
+        '<p class="acct-small">We keep your email address, your reading progress and your email-list choice, stored in the EU. ' +
+        '<a class="acct-link" href="/privacy.html">Privacy</a> · ' +
         '<button type="button" class="acct-link" data-acct="delete">Delete my account</button></p>';
     }
     if (step === 'code') {
@@ -279,9 +346,15 @@
       '<p class="acct-p">Sign in to keep your reading progress in step on your phone, tablet and computer. No password: we email you a code.</p>' +
       '<form data-acct="send"><input class="acct-input" type="email" name="email" autocomplete="email" placeholder="you@example.com" ' +
       'aria-label="Your email address" required value="' + esc(pendingEmail) + '">' +
+      '<label class="acct-family"><input type="checkbox" name="family"' + (familyChoice ? ' checked' : '') + '>' +
+      '<span class="acct-family-box" aria-hidden="true"></span>' +
+      '<span class="acct-family-text"><b>Join the Daily Bread family</b>' +
+      'Everything here is given freely. Friends of Ariel Media get occasional news and new resources from Israel. ' +
+      'It costs nothing and helps more than you’d think. Unsubscribe anytime.</span></label>' +
       '<button class="acct-btn" type="submit"' + (busy ? ' disabled' : '') + '>' + (busy ? 'Sending…' : 'Email me a code') + '</button></form>' +
       (msg ? '<p class="acct-msg">' + esc(msg) + '</p>' : '') +
-      '<p class="acct-small">Reading never needs an account. We keep only your email address and your reading progress, stored in the EU, to sync it.</p>';
+      '<p class="acct-small">Reading never needs an account. We keep your email address and reading progress, stored in the EU, to sync it. ' +
+      '<a class="acct-link" href="/privacy.html">Privacy</a></p>';
   }
   function drawPanel() {
     if (!panel || panel.hidden) return;
@@ -338,10 +411,15 @@
       return;
     }
     if (a === 'delete') {
-      if (!window.confirm('Delete your Daily Bread account? Your synced progress is removed from our servers. Progress on this device stays. This cannot be undone.')) return;
+      if (!window.confirm('Delete your Daily Bread account? Your synced progress is removed from our servers. Progress on this device stays. This cannot be undone. (If you joined the Daily Bread family, the unsubscribe link in any of our emails takes you off the list.)')) return;
       deleteAccount().then(function () { msg = 'Your account has been deleted.'; step = 'email'; drawPanel(); })
         .catch(function (err) { state.error = friendly(err); state.status = 'error'; drawPanel(); });
     }
+  });
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.name === 'family' && t.closest && t.closest('form[data-acct="send"]')) familyChoice = t.checked;
+    if (t.getAttribute && t.getAttribute('data-acct') === 'family') switchChoice(t.checked);
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel && !panel.hidden) closePanel(); });
   document.addEventListener('submit', function (e) {
@@ -351,6 +429,8 @@
     if (busy) return;
     if (f.getAttribute('data-acct') === 'send') {
       pendingEmail = f.email.value.trim();
+      familyChoice = !!(f.family && f.family.checked);
+      store(CKEY, { opted_in: familyChoice, variant: FAMILY_VARIANT });
       busy = true; msg = ''; drawPanel();
       sendCode(pendingEmail).then(function () { step = 'code'; })
         .catch(function (err) { msg = friendly(err); }).then(function () { busy = false; drawPanel(); });
@@ -387,7 +467,10 @@
   }
   addButtons();
   drawAll();
-  if (load(AUTH_KEY)) sync(false).then(function () { if (cameFromLink) openPanel(); });
+  if (load(AUTH_KEY)) {
+    sync(false).then(function () { if (cameFromLink) openPanel(); });
+    checkChoice(cameFromLink ? 'email-link' : 'email-code');
+  }
   if (linkError) openPanel();
   window.DBAccount = { open: openPanel, sync: sync };
 })();
