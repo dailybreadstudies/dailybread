@@ -755,8 +755,8 @@
     if (ct) {
       var lang = window.DBI18N && DBI18N.lang && DBI18N.lang() === 'sv' ? 'sv' : 'en';
       // The revised BSB's working title, "Daily Bread Version (DBV)", shows only to the readers who see the Translation menu for now
-      var bsb = sfbOk ? (lang === 'sv' ? 'Bibeltexten är Daily Bread Version (DBV), bearbetad från Berean Standard Bible (BSB), med dess översättningsnoter.'
-                                       : 'The biblical text is the Daily Bread Version (DBV), adapted from the Berean Standard Bible (BSB), with its translation notes.')
+      var bsb = sfbOk ? (lang === 'sv' ? 'Bibeltexten är Daily Bread Version (DBV), som återges i en klassisk engelsk översättningsstil och bygger på den gedigna forskningen bakom Berean Standard Bible (BSB), med dess översättningsnoter.'
+                                       : 'The biblical text is the Daily Bread Version (DBV), presented in a classic English translation style and built on the solid scholarship of the Berean Standard Bible (BSB), with its translation notes.')
               : lang === 'sv' ? 'Bibeltexten återges i en klassisk engelsk översättningsstil, byggd på den gedigna forskningen bakom Berean Standard Bible (BSB), med dess översättningsnoter.' : ct.getAttribute('data-bsb');
       ct.innerHTML = shown && v.foot ? (v.foot[lang] || v.foot.en) : bsb;
     }
