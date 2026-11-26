@@ -271,6 +271,8 @@ pixels; decide per panel (mirror, or keep the map itself `dir="ltr"`). Script-se
   and the psalm-title verses are numbered as in English.
 - Kept raw, applied when drawn (`heMarks`): Hebrew Marks (vowels / + cantillation) and the **Divine Name** setting
   `heDivine`: `pointed` (as MAM writes it), `plain` (יהוה), `hashem` (ה׳, also inside words: לה׳). Regex `HE_YHWH`.
+- Verse markers in the Hebrew text: Hebrew letters in Heebo, as Sefaria (א … יא, טו, טז; `heNum`), or numerals —
+  Reading settings → Verse Markers (`heVerseNums`: letters | digits, default letters). References keep the journal style.
 - Book names from the journal (`HE_BOOKS`); references journal-style (`heRef`): chapter in letters, verse in digits
   (בראשית לד 1–לה 11, תהילים מח); in-text chapter numbers in letters (`heNum`). Word study tap works on the Tanakh.
 - With the Hebrew text the settings show Divine Name (יְהוָה · יהוה · ה׳), Hebrew Marks, Hebrew NT in Bible Text and hide

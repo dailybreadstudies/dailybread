@@ -1477,7 +1477,7 @@ html[dir="rtl"] .pod-dock { direction: ltr; }
    Shofar for the biblical text; the Masoretic paragraphs (petucha = new paragraph, setuma = a gap in the line). */
 .scripture.he-text { font-family: var(--bible-he); font-size: 1.42rem; line-height: 2.05; }
 html.cant-on .scripture.he-text { --bible-he: 'Shofar Text', 'SBL Hebrew', serif; }   /* with cantillation: the Regular */
-.scripture.he-text .verse-num { font-family: var(--sans); font-size: 0.5em; margin-inline-end: 0.25em; }
+.scripture.he-text .verse-num { font-family: 'Heebo', var(--sans); font-size: 0.5em; font-weight: 500; margin-inline-end: 0.25em; }   /* letters (א, יא, טו) or numerals, Reading settings → Verse Markers */
 .scripture.he-text .chapter-num { font-family: var(--bible-he); }
 /* The Hebrew font (Reading settings → Hebrew Font, html[data-hefont]): Shofar or SBL Hebrew, for the Hebrew Bible text,
    the Hebrew under the verses and the Hebrew blessings. Not chosen: Shofar for the Hebrew text and the Hebrew

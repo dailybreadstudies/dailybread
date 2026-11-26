@@ -77,7 +77,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', heNT: 'delitzsch', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb', heDivine: 'pointed', heFont: '' };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', heNT: 'delitzsch', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb', heDivine: 'pointed', heFont: '', heVerseNums: 'letters' };
   var DEFAULTS = JSON.parse(JSON.stringify(settings));   // for "Reset to defaults" in the A/א menu
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
@@ -1002,6 +1002,7 @@
       ['Divine Name', 'Divine name in the Hebrew text', [['data-hediv', 'pointed', 'יְהוָה', 'With vowels'], ['data-hediv', 'plain', 'יהוה', 'Without vowels'], ['data-hediv', 'hashem', 'ה׳', 'HaShem']], ' sp-he-dn'],
       ['Hebrew Marks', 'Hebrew marks', [['data-cant', 'off', 'Vowels', 'Vowels only'], ['data-cant', 'on', '+ Cantillation', 'Vowels and cantillation marks (te’amim)']], ''],
       ['Hebrew Font', 'Hebrew font', HEFONT_BTNS, ''],
+      ['Verse Markers', 'Verse markers in the Hebrew text', [['data-hevn', 'letters', 'א ב ג', 'Hebrew letters'], ['data-hevn', 'digits', '<bdi dir="ltr">1 2 3</bdi>', 'Numerals']], ''],
       ['Hebrew NT', 'Hebrew New Testament', [['data-hent', 'delitzsch', 'Delitzsch', 'Franz Delitzsch, 1885'], ['data-hent', 'bs1995', '1995', 'Bible Society in Israel, 1995 (modern Hebrew)']], '']
     ];
     var note = vr.nextSibling && vr.nextSibling.classList && vr.nextSibling.classList.contains('sp-version-note') ? vr.nextSibling : vr;
@@ -1206,7 +1207,7 @@
             if (it === 0) continue;
             if (inner && !/\s$/.test(inner)) inner += ' ';   // space between verses
             if (it === 1 && multiChapter) inner += '<span class="chapter-num"' + (book.he ? ' data-c="' + c + '">' + heNum(c) : '>' + c) + '</span>';
-            else inner += '<sup class="verse-num" data-v="' + it + '">' + it + '</sup>';
+            else inner += '<sup class="verse-num" data-v="' + it + '">' + (book.he && settings.heVerseNums !== 'digits' ? heNum(it) : it) + '</sup>';   // Hebrew text: verses in letters, as Sefaria
           } else if (typeof it === 'string') {
             if (book.he) it = heMarks(it);
             inner += it;
@@ -2842,6 +2843,7 @@
     var oSec = panel.querySelector('[data-orig]'); hide(oSec && oSec.closest('.sp-sec'), he);
     var nSec = panel.querySelector('[data-setting="messianic"]'); hide(nSec && nSec.closest('.sp-sec'), he);
     pressed('data-hediv', settings.heDivine || 'pointed');
+    pressed('data-hevn', settings.heVerseNums === 'digits' ? 'digits' : 'letters');
     pressed('data-hefont', settings.heFont || (he ? 'shofar' : 'sbl'));
     var mf = panel.querySelector('[data-setting="messianic"]');
     hide(mf, sw && !sw.filter);
@@ -2902,6 +2904,9 @@
     } else if (t.hasAttribute('data-hefont')) {
       settings.heFont = t.getAttribute('data-hefont');
       applyLook();
+    } else if (t.hasAttribute('data-hevn')) {
+      settings.heVerseNums = t.getAttribute('data-hevn');
+      rerender();
     } else if (t.hasAttribute('data-hediv')) {
       settings.heDivine = t.getAttribute('data-hediv');
       rerender();
