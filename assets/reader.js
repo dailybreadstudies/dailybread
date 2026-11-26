@@ -777,9 +777,14 @@
     if (n) s += ones.charAt(n - 1);
     return s;
   }
-  // "בראשית לד 1–לה 11", "תהילים מח", "יהודה 5–25"
+  // With geresh / gershayim, as Sefaria writes references: א׳, ל״ד, קי״ט
+  function heNumG(n) { var s = heNum(n); return s.length > 1 ? s.slice(0, -1) + '״' + s.slice(-1) : s + '׳'; }
+  function heLetters() { return settings.heVerseNums !== 'digits'; }   // Verse Markers: Hebrew letters (default) or numerals
+  // Letters (default, as Sefaria): "בראשית ל״ד:א׳–ל״ה:י״א", "תהילים מ״ח", "יהודה ה׳–כ״ה"
+  // Numerals (the journal's style): "בראשית לד 1–לה 11", "תהילים מח", "יהודה 5–25"
   function heRef(r) {
     var name = HE_BOOKS[r.book] || r.book;
+    if (heLetters()) return heRefS(r, name);
     var one = (bookIndex || []).filter(function (b) { return b.id === r.book; })[0];
     if (one && one.chapters === 1 && r.c1 === 1 && r.c2 === 1 && !(r.v1 === 1 && r.v2 === null)) {
       return name + ' ' + r.v1 + (r.v2 === null ? '–סוף' : r.v2 !== r.v1 ? '–' + r.v2 : '');
@@ -792,6 +797,20 @@
     }
     if (whole && r.v2 === null) return s + '–' + heNum(r.c2);
     return s + ' ' + r.v1 + '–' + heNum(r.c2) + ' ' + (r.v2 === null ? 'סוף' : r.v2);
+  }
+  function heRefS(r, name) {
+    var C = heNumG, one = (bookIndex || []).filter(function (b) { return b.id === r.book; })[0];
+    if (one && one.chapters === 1 && r.c1 === 1 && r.c2 === 1 && !(r.v1 === 1 && r.v2 === null)) {
+      return name + ' ' + C(r.v1) + (r.v2 === null ? '–סוף' : r.v2 !== r.v1 ? '–' + C(r.v2) : '');
+    }
+    var s = name + ' ' + C(r.c1), whole = r.v1 === 1;
+    if (r.c1 === r.c2) {
+      if (r.v2 === null && whole) return s;
+      if (r.v2 === null) return s + ':' + C(r.v1) + '–סוף';
+      return s + ':' + C(r.v1) + (r.v2 !== r.v1 ? '–' + C(r.v2) : '');
+    }
+    if (whole && r.v2 === null) return s + '–' + C(r.c2);
+    return s + ':' + C(r.v1) + '–' + C(r.c2) + ':' + (r.v2 === null ? 'סוף' : C(r.v2));
   }
   var HE_POETIC = { PSA: 1, PRO: 1, JOB: 1, LAM: 1 };   // one verse per line (the DBV's poetry layout)
   function heH95(id, c) {   // one chapter of the 1995 NT
@@ -2906,7 +2925,10 @@
       applyLook();
     } else if (t.hasAttribute('data-hevn')) {
       settings.heVerseNums = t.getAttribute('data-hevn');
-      rerender();
+      saveSettings();
+      if (current && current.bible) loadChapter(current.book, current.c, null, true);   // headings and references too
+      else if (current && current.day) loadDay(current.day.date, true);
+      else rerender();
     } else if (t.hasAttribute('data-hediv')) {
       settings.heDivine = t.getAttribute('data-hediv');
       rerender();
@@ -3534,7 +3556,7 @@
     return bookName(id);
   }
   function labelRef(book, c) {
-    if (heText() && HE_BOOKS[book]) return HE_BOOKS[book] + ' ' + heNum(c);
+    if (heText() && HE_BOOKS[book]) return HE_BOOKS[book] + ' ' + (heLetters() ? heNumG(c) : heNum(c));
     var name = bookLabel(book);
     if (book === 'PSA' && name === 'Psalms') name = 'Psalm';
     return name + ' ' + c;
