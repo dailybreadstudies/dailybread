@@ -1740,7 +1740,7 @@
           '<button type="button" class="dp-check" data-read="' + (i + 1) + '" aria-pressed="false" aria-label="Mark ' + p.label + ' complete">' +
           '<svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button>' +
           '<a class="dp-row" href="#' + (i + 1) + '" data-n="' + (i + 1) + '">' +
-          '<span class="dp-label">' + p.label + '</span><span class="dp-ref"' + (i === refs.length - 1 ? ' style="grid-row:' + (i + 1) + ';grid-column:3;padding-right:34px"' : '') + '>' + displayRef(r) + '</span></a>' +
+          '<span class="dp-label">' + p.label + '</span><span class="dp-ref"' + (i === refs.length - 1 ? ' style="grid-row:' + (i + 1) + ';grid-column:3;padding-inline-end:34px"' : '') + '>' + displayRef(r) + '</span></a>' +
           (i === refs.length - 1 ? '<button type="button" class="dp-copy" style="grid-row:' + (i + 1) + '" title="Copy the day’s readings" aria-label="Copy all of today’s Scripture readings">' +
             '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' +
             '<rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></svg></button>' : '') + '</li>';

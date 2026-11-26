@@ -1491,7 +1491,14 @@ html.cant-on .scripture.he-text { --bible-he: 'Shofar Text', 'SBL Hebrew', serif
    the Hebrew under the verses and the Hebrew blessings. Not chosen: Shofar for the Hebrew text and the Hebrew
    interface's blessings, SBL Hebrew under the English verses (as before). */
 html[data-hefont="sbl"] .scripture.he-text, html[data-hefont="sbl"][data-rtl] .blessing .hebrew-blessing { font-family: var(--hebrew); }
-html[data-hefont="sbl"] .scripture.he-text { font-size: 1.36rem; }
+/* SBL Hebrew runs ~10% smaller than Shofar: matched so that switching keeps the same reading size (John, Nov 2026) */
+html[data-hefont="sbl"] .scripture.he-text { font-size: 1.56rem; }
+html[data-hefont="sbl"][data-rtl] .blessing .hebrew-blessing { font-size: 1.52rem; }
+html[data-hefont="shofar"] .vp-orig.he { font-size: 1.18em; }   /* the Hebrew under the verses: Shofar to SBL's size */
+@media (max-width: 600px) {
+  html[data-hefont="sbl"] .scripture.he-text { font-size: 1.43rem; }
+  html[data-hefont="sbl"][data-rtl] .blessing .hebrew-blessing { font-size: 1.38rem; }
+}
 .hf-sample { font-size: 1.15em; margin-inline-end: 0.25em; }
 .hf-shofar { font-family: 'Shofar', serif; }
 .hf-sbl { font-family: var(--hebrew); }
