@@ -515,10 +515,18 @@
               sv: 'Den svenska bibeltexten är <i>Svenska Folkbibeln 2015</i>. Gamla testamentet © 1998, 2015 Stiftelsen Svenska Folkbibeln, Stockholm; Nya testamentet © 1996, 2015 Stiftelsen Svenska Folkbibeln, Stockholm, och Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } },
     esv: { fileset: { O: 'ENGESVO_ET', N: 'ENGESVN_ET' }, lang: 'en', label: 'ESV', name: 'English Standard Version', credit: 'ESV® Bible · © Crossway', flow: true,
       foot: { en: 'Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>',
-              sv: 'Bibeltexten är ESV® Bible (The Holy Bible, English Standard Version®), © 2001 Crossway, en verksamhet inom Good News Publishers. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>' } }
+              sv: 'Bibeltexten är ESV® Bible (The Holy Bible, English Standard Version®), © 2001 Crossway, en verksamhet inom Good News Publishers. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>' } },
+    nkjv: { fileset: { O: 'ENGNKJO_ET', N: 'ENGNKJN_ET' }, lang: 'en', label: 'NKJV', name: 'New King James Version', credit: 'NKJV · © Thomas Nelson', flow: true,
+      foot: { en: 'Scripture taken from the New King James Version®. Copyright © 1982 by Thomas Nelson. Used by permission. All rights reserved. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
+              sv: 'Bibeltexten är New King James Version®, © 1982 Thomas Nelson. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } },
+    nasb: { fileset: { O: 'ENGNASO_ET', N: 'ENGNASN_ET' }, lang: 'en', label: 'NASB', name: 'New American Standard Bible (1995)', credit: 'NASB · © The Lockman Foundation', flow: true,
+      foot: { en: 'Scripture taken from the New American Standard Bible®, Copyright © 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 by The Lockman Foundation. Used by permission. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
+              sv: 'Bibeltexten är New American Standard Bible®, © 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 The Lockman Foundation. Används med tillstånd. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } }
   };
   var BB = 'https://khmoofwmfyhpnxtbsswv.supabase.co/functions/v1/bible-text';
-  function sweOk(k) { var v = SWE[k]; return !!(v && (v.id ? YV.key : v.fileset)); }
+  function uiLang() { try { return localStorage.getItem('dbs-lang') === 'sv' ? 'sv' : 'en'; } catch (e) { return 'en'; } }
+  // With the English interface the Swedish texts are not offered; with the Swedish interface everything is
+  function sweOk(k) { var v = SWE[k]; return !!(v && (v.id ? YV.key : v.fileset) && !(v.lang === 'sv' && uiLang() === 'en')); }
   var NT_BOOKS = 'MAT MRK LUK JHN ACT ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM HEB JAS 1PE 2PE 1JN 2JN 3JN JUD REV';
   function fsFor(v, book) { var f = v.fileset; return typeof f === 'string' ? f : f[NT_BOOKS.indexOf(book) >= 0 ? 'N' : 'O']; }
   function sweVer() { return sweOk(settings.version) ? SWE[settings.version] : null; }
@@ -769,7 +777,7 @@
     row.className = 'sp-row sp-version-row';
     row.innerHTML = '<span class="sp-label">Translation</span><select class="sp-select sp-ctl" data-version-select aria-label="Bible translation">' +
       '<option value="bsb">Daily Bread Version (DBV)</option>' +
-      Object.keys(SWE).filter(sweOk).map(function (k) {
+      Object.keys(SWE).filter(sweOk).sort(function (a, b) { return (SWE[a].lang === 'en' ? 0 : 1) - (SWE[b].lang === 'en' ? 0 : 1); }).map(function (k) {
         return '<option value="' + k + '">' + SWE[k].name + '</option>';
       }).join('') + '</select>';
     var note = document.createElement('p');
