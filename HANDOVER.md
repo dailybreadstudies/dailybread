@@ -186,6 +186,12 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
   If YouVersion can't be reached, the BSB is shown with a one-line notice.
 - Divine Name works on the 1917 (public domain): HERREN/HERRE/HERRENS are wrapped in .lord when converted and
   become ADONAI/ADONAIS or HASHEM/HASHEMS; the Swedish blessings follow the same setting.
+- Bible Brain structured text: texts with `json: true` (SFB98, ESV, NKJV, NASB) load the "-json" fileset (SOFRIA,
+  `sofriaChapter()`): the publisher's own paragraphs, poetry, section titles (margin titles allowed) and footnotes
+  (Translation Notes); NKJV's set has cross-references only (left out) and no divine-name small caps. Falls back to the
+  plain verses + BSB layout if the structured file can't be had. SFB 2015 has no structured set (plain + BSB layout).
+- Hebrew NT choice (Reading settings → Hebrew NT: Delitzsch · 1995, shown when a Hebrew NT is on): the Bible Society in
+  Israel's 1995 Modern Hebrew NT (Bible Brain HBRHMTN_ET), fetched per chapter (`loadOrigH95`), footer credit added.
 - Bible Brain texts (SFB98, SFB 2015, ESV, NKJV, NASB 1995; English interface lists only the English ones): fetched through the Supabase function `bible-text` (key in its secret
   BIBLE_BRAIN_KEY); plain verses laid out in the BSB's paragraphs; no filters (licensed). Hidden until `fileset` is set.
 - To open it to everyone: return true from `sfbCheck()` (instead of the `SFB_READERS` check).
