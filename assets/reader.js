@@ -507,21 +507,21 @@
               sv: 'Den svenska bibeltexten är <i>Svenska 1917</i> (1917 års kyrkobibel), fri från upphovsrätt, via <a href="https://platform.youversion.com" rel="noopener">YouVersion Platform</a>; styckeindelningen följer Berean Standard Bible (BSB).' } },
     // From Bible Brain (Faith Comes By Hearing) through the Supabase function "bible-text" (the key stays there).
     // fileset: the text fileset id once found with the key (null hides the choice). Licensed texts: no filters.
-    sfb98: { fileset: { O: 'SWESFBO_ET', N: 'SWESFBN_ET' }, lang: 'sv', label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true,
-      foot: { en: 'The Swedish biblical text is <i>Svenska Folkbibeln 98</i>. Old Testament © 1998 Stiftelsen Svenska Folkbibeln, Stockholm; New Testament © 1996, 1998 Stiftelsen Svenska Folkbibeln, Stockholm, and Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
-              sv: 'Den svenska bibeltexten är <i>Svenska Folkbibeln 98</i>. Gamla testamentet © 1998 Stiftelsen Svenska Folkbibeln, Stockholm; Nya testamentet © 1996, 1998 Stiftelsen Svenska Folkbibeln, Stockholm, och Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } },
+    sfb98: { fileset: { O: 'SWESFBO_ET', N: 'SWESFBN_ET' }, json: true, lang: 'sv', label: 'SFB 98', name: 'Svenska Folkbibeln 98', credit: 'Svenska Folkbibeln 98 · © Stiftelsen Svenska Folkbibeln', flow: true,
+      foot: { en: 'The Swedish biblical text is <i>Svenska Folkbibeln 98</i>. Old Testament © 1998 Stiftelsen Svenska Folkbibeln, Stockholm; New Testament © 1996, 1998 Stiftelsen Svenska Folkbibeln, Stockholm, and Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing).',
+              sv: 'Den svenska bibeltexten är <i>Svenska Folkbibeln 98</i>. Gamla testamentet © 1998 Stiftelsen Svenska Folkbibeln, Stockholm; Nya testamentet © 1996, 1998 Stiftelsen Svenska Folkbibeln, Stockholm, och Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing).' } },
     sfb15: { fileset: { O: 'SWESFVO_ET', N: 'SWESFVN_ET' }, lang: 'sv', label: 'SFB 15', name: 'Svenska Folkbibeln 2015', credit: 'Svenska Folkbibeln 2015 · © Stiftelsen Svenska Folkbibeln', flow: true,
       foot: { en: 'The Swedish biblical text is <i>Svenska Folkbibeln 2015</i>. Old Testament © 1998, 2015 Stiftelsen Svenska Folkbibeln, Stockholm; New Testament © 1996, 2015 Stiftelsen Svenska Folkbibeln, Stockholm, and Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
               sv: 'Den svenska bibeltexten är <i>Svenska Folkbibeln 2015</i>. Gamla testamentet © 1998, 2015 Stiftelsen Svenska Folkbibeln, Stockholm; Nya testamentet © 1996, 2015 Stiftelsen Svenska Folkbibeln, Stockholm, och Stiftelsen Biblicum, Ljungby. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } },
-    esv: { fileset: { O: 'ENGESVO_ET', N: 'ENGESVN_ET' }, lang: 'en', label: 'ESV', name: 'English Standard Version', credit: 'ESV® Bible · © Crossway', flow: true,
+    esv: { fileset: { O: 'ENGESVO_ET', N: 'ENGESVN_ET' }, json: true, lang: 'en', label: 'ESV', name: 'English Standard Version', credit: 'ESV® Bible · © Crossway', flow: true,
       foot: { en: 'Scripture quotations are from the ESV® Bible (The Holy Bible, English Standard Version®), © 2001 by Crossway, a publishing ministry of Good News Publishers. Used by permission. All rights reserved. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>',
               sv: 'Bibeltexten är ESV® Bible (The Holy Bible, English Standard Version®), © 2001 Crossway, en verksamhet inom Good News Publishers. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing). <a href="https://www.esv.org" rel="noopener">esv.org</a>' } },
-    nkjv: { fileset: { O: 'ENGNKJO_ET', N: 'ENGNKJN_ET' }, lang: 'en', label: 'NKJV', name: 'New King James Version', credit: 'NKJV · © Thomas Nelson', flow: true,
-      foot: { en: 'Scripture taken from the New King James Version®. Copyright © 1982 by Thomas Nelson. Used by permission. All rights reserved. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
-              sv: 'Bibeltexten är New King James Version®, © 1982 Thomas Nelson. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } },
-    nasb: { fileset: { O: 'ENGNASO_ET', N: 'ENGNASN_ET' }, lang: 'en', label: 'NASB', name: 'New American Standard Bible (1995)', credit: 'NASB · © The Lockman Foundation', flow: true,
-      foot: { en: 'Scripture taken from the New American Standard Bible®, Copyright © 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 by The Lockman Foundation. Used by permission. Via Bible Brain (Faith Comes By Hearing); laid out in the paragraphs of the Berean Standard Bible (BSB).',
-              sv: 'Bibeltexten är New American Standard Bible®, © 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 The Lockman Foundation. Används med tillstånd. Via Bible Brain (Faith Comes By Hearing); styckeindelningen följer Berean Standard Bible (BSB).' } }
+    nkjv: { fileset: { O: 'ENGNKJO_ET', N: 'ENGNKJN_ET' }, json: true, lang: 'en', label: 'NKJV', name: 'New King James Version', credit: 'NKJV · © Thomas Nelson', flow: true,
+      foot: { en: 'Scripture taken from the New King James Version®. Copyright © 1982 by Thomas Nelson. Used by permission. All rights reserved. Via Bible Brain (Faith Comes By Hearing).',
+              sv: 'Bibeltexten är New King James Version®, © 1982 Thomas Nelson. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing).' } },
+    nasb: { fileset: { O: 'ENGNASO_ET', N: 'ENGNASN_ET' }, json: true, lang: 'en', label: 'NASB', name: 'New American Standard Bible (1995)', credit: 'NASB · © The Lockman Foundation', flow: true,
+      foot: { en: 'Scripture taken from the New American Standard Bible®, Copyright © 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 by The Lockman Foundation. Used by permission. Via Bible Brain (Faith Comes By Hearing).',
+              sv: 'Bibeltexten är New American Standard Bible®, © 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 The Lockman Foundation. Används med tillstånd. Via Bible Brain (Faith Comes By Hearing).' } }
   };
   var BB = 'https://khmoofwmfyhpnxtbsswv.supabase.co/functions/v1/bible-text';
   function uiLang() { try { return localStorage.getItem('dbs-lang') === 'sv' ? 'sv' : 'en'; } catch (e) { return 'en'; } }
@@ -546,6 +546,92 @@
       c.push(n, escText(t) + ' ');
     });
     return { b: c.length ? [{ k: 'p', c: c }] : [], n: [] };
+  }
+  // Bible Brain's structured text (the "-json" filesets, SOFRIA format): the publisher's own paragraphs, section titles,
+  // footnotes, italics and divine name → the BSB chapter shape. Cross-references are left out.
+  function sofriaChapter(doc, c) {
+    var out = { b: [], n: [] }, verse = 0, carry = null;
+    function txt(content) {   // plain html of a run (headings, notes)
+      var s = '';
+      (content || []).forEach(function (x) {
+        if (typeof x === 'string') { s += escText(x); return; }
+        if (x.type === 'graft' || x.type === 'mark') return;
+        var st = (x.subtype || '').replace('usfm:', '');
+        if (st === 'fr') return;
+        var inner = txt(x.content);
+        s += st === 'nd' ? '<span class="lord">' + inner + '</span>' : /^(it|add|fq|fqa)$/.test(st) ? '<em>' + inner + '</em>' : inner;
+      });
+      return s;
+    }
+    function noteOf(g) {
+      var blocks = (g.sequence && g.sequence.blocks) || [], ref = '', h = '';
+      blocks.forEach(function (bl) {
+        (bl.content || []).forEach(function (x) {
+          if (x && x.subtype === 'usfm:fr') ref = (x.content || []).join('').trim();
+        });
+        h += txt(bl.content);
+      });
+      ref = ref.replace(/[\s.:]+$/, '');
+      return { r: /^\d+[:.,]\d+/.test(ref) ? ref.replace(/[.,]/, ':') : c + ':' + verse, h: h.trim() };
+    }
+    function push(c2, s) { if (typeof c2[c2.length - 1] === 'string') c2[c2.length - 1] += s; else c2.push(s); }
+    function walk(content, c2) {
+      (content || []).forEach(function (x) {
+        if (typeof x === 'string') { push(c2, escText(x)); return; }
+        var st = (x.subtype || '').replace('usfm:', '');
+        if (x.type === 'mark') { if (st === 'verses_label') { verse = parseInt(x.atts && x.atts.number, 10) || verse; c2.push(verse); } return; }
+        if (x.type === 'graft') {
+          if (st === 'footnote') { out.n.push(noteOf(x)); c2.push({ f: out.n.length - 1 }); }
+          return;   // cross-references and the like
+        }
+        if (st === 'nd') { push(c2, '<span class="lord">' + txt(x.content) + '</span>'); return; }
+        if (/^(it|add)$/.test(st)) { var t = []; walk(x.content, t); push(c2, '<em>'); t.forEach(function (y) { typeof y === 'string' ? push(c2, y) : c2.push(y); }); push(c2, '</em>'); return; }
+        walk(x.content, c2);   // chapter and verse wrappers, words of Jesus, other character styles
+      });
+    }
+    ((doc.sequence && doc.sequence.blocks) || []).forEach(function (bl) {
+      if (bl.type === 'graft') {
+        var seq = bl.sequence || {};
+        if (seq.type !== 'heading' && seq.type !== 'title') return;
+        (seq.blocks || []).forEach(function (hb) {
+          var k = YV_KINDS[(hb.subtype || '').replace('usfm:', '')] || 's1';
+          var h = txt(hb.content).trim();
+          if (h && YV_HEAD[k]) out.b.push({ k: k, c: [h] });
+        });
+        return;
+      }
+      var k = YV_KINDS[(bl.subtype || '').replace('usfm:', '')] || 'p';
+      if (k === 'b') { out.b.push({ k: 'b', c: [] }); return; }
+      if (YV_HEAD[k]) { var h = txt(bl.content).trim(); if (h) out.b.push({ k: k, c: [h] }); return; }
+      var c2 = [];
+      walk(bl.content, c2);
+      if (k === 'd' && typeof c2[0] !== 'number') c2.unshift(0);
+      c2 = c2.map(function (x, i) { return typeof x === 'string' && typeof c2[i - 1] === 'number' ? x.replace(/^\s+/, '') : x; })
+        .filter(function (x) { return typeof x !== 'string' || x.trim() !== ''; });
+      if (c2.length && c2.every(function (x) { return typeof x === 'number'; })) { carry = (carry || []).concat(c2); return; }
+      if (carry) { c2 = carry.concat(c2); carry = null; }
+      if (c2.length) out.b.push({ k: k, c: c2 });
+    });
+    return out;
+  }
+  // A chapter from Bible Brain: the structured "-json" set when the text has one, else the plain verses (laid out later)
+  function bbFetchChapter(v, book, c) {
+    var plain = function () { return bbGet('/bibles/filesets/' + fsFor(v, book) + '/' + book + '/' + c).then(function (j) { return { ch: bbChapter(j), own: false }; }); };
+    if (!v.json) return plain();
+    var path = '/bibles/filesets/' + fsFor(v, book) + '-json/' + book + '/' + c;
+    var file = function (bust) {
+      return fetch(BB + '?path=' + encodeURIComponent(path) + (bust ? '&t=' + Date.now() : '')).then(function (r) {
+        if (!r.ok) throw new Error('Bible Brain ' + r.status);
+        return r.json();
+      }).then(function (j) {
+        var u = j.data && j.data[0] && j.data[0].path;
+        if (!u) throw new Error('no file');
+        return fetch(u).then(function (r) { if (!r.ok) throw new Error('file ' + r.status); return r.json(); });
+      });
+    };
+    return file(false).catch(function () { return file(true); })   // a cached link may have expired: ask again once
+      .then(function (doc) { var ch = sofriaChapter(doc, c); if (!ch.b.length) throw new Error('empty'); return { ch: ch, own: true }; })
+      .catch(plain);
   }
   var SFB_READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];   // John
   var sfbOk = false, sfbMeta = null, sfbFail = null;
@@ -598,12 +684,14 @@
     if (!sfbCache[key]) {
       sfbCache[key] = Promise.all([
         v.id ? yvGet('/bibles/' + v.id + '/passages/' + book.id + '.' + c + '?format=html&include_headings=true&include_notes=true')
-             : bbGet('/bibles/filesets/' + fsFor(v, book.id) + '/' + book.id + '/' + c),
+             : bbFetchChapter(v, book.id, c),
         v.flow ? loadBook(book.id).catch(function () { return null; }) : null,
         sfbMeta2(v)
       ]).then(function (res) {
-        var ch = v.id ? yvChapter(res[0].content || '', c) : bbChapter(res[0]);
+        var own = !v.id && res[0].own;   // structured text: the publisher's own paragraphs, no layout from the BSB
+        var ch = v.id ? yvChapter(res[0].content || '', c) : res[0].ch;
         if (!ch.b.length) throw new Error('no text for this chapter');
+        if (own) { book.chapters[c - 1] = ch; return; }
         var en = res[1] && res[1].chapters[c - 1];
         book.chapters[c - 1] = v.flow && en ? sfbReflow(ch, en) : ch;
       });
