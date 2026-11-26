@@ -6,7 +6,8 @@
  * and the TODAY box are left alone (EXCLUDE). Swedish wording follows the printed journal "Dagligt bröd"
  * (Ariel Media, 3rd Swedish edition 5778/2017–18) where it has it.
  *
- * Only the readers in READERS (SHA-256 of the account email, as in tracks.js) see the globe and the choice.
+ * Only the readers in READERS (SHA-256 of the account email, as in tracks.js) see the globe and the choice: in the top
+ * bar and at the foot of Reading settings (globe + initials; no Language row at the top of the menu since Nov 2026).
  * Choosing a language also chooses that language's default Bible text (English → DBV, Swedish → Svenska Folkbibeln 98);
  * the reader can then pick another text in Reading settings → Translation.
  *
@@ -443,44 +444,39 @@
         (l[0] === 'he' ? ' lang="he" dir="rtl"' : '') + '>' + l[1] + '</button>';
     }).join('');
   }
+  // The globe with the language's initials and its menu: in the top bar, and at the foot of Reading settings
+  function langControl(cls) {
+    var wrap = document.createElement('div');
+    wrap.className = 'tb-lang' + (cls ? ' ' + cls : '');
+    wrap.setAttribute('data-no-i18n', '');
+    wrap.innerHTML = '<button type="button" class="tb-lang-btn" aria-haspopup="menu" aria-expanded="false" aria-label="' +
+      LABEL_LANG[lang] + '" title="' + LABEL_LANG[lang] + '">' + GLOBE +
+      '<span class="tb-lang-code">' + lang.toUpperCase() + '</span></button><div class="tb-lang-menu" role="menu" hidden>' + menuHtml() + '</div>';
+    var btn = wrap.querySelector('.tb-lang-btn'), menu = wrap.querySelector('.tb-lang-menu');
+    function close() { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      menu.hidden = !menu.hidden;
+      btn.setAttribute('aria-expanded', String(!menu.hidden));
+    });
+    menu.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var b = e.target.closest('[data-lang]');
+      if (b && b.getAttribute('data-lang') !== lang) setLang(b.getAttribute('data-lang'));
+      else close();
+    });
+    document.addEventListener('click', close);
+    return wrap;
+  }
   function addControls() {
     if (!allowed) return;
     var end = document.querySelector('.tb-end');
     if (end && !end.querySelector('.tb-lang')) {
-      var wrap = document.createElement('div');
-      wrap.className = 'tb-lang';
-      wrap.setAttribute('data-no-i18n', '');
-      wrap.innerHTML = '<button type="button" class="tb-lang-btn" aria-haspopup="menu" aria-expanded="false" aria-label="' +
-        LABEL_LANG[lang] + '" title="' + LABEL_LANG[lang] + '">' + GLOBE +
-        '<span class="tb-lang-code">' + lang.toUpperCase() + '</span></button><div class="tb-lang-menu" role="menu" hidden>' + menuHtml() + '</div>';
       var acct = end.querySelector('.tb-acct');
-      end.insertBefore(wrap, acct || end.querySelector('.tb-give') || null);
-      var btn = wrap.querySelector('.tb-lang-btn'), menu = wrap.querySelector('.tb-lang-menu');
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        menu.hidden = !menu.hidden;
-        btn.setAttribute('aria-expanded', String(!menu.hidden));
-      });
-      menu.addEventListener('click', function (e) {
-        var b = e.target.closest('[data-lang]');
-        if (b && b.getAttribute('data-lang') !== lang) setLang(b.getAttribute('data-lang'));
-        else { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
-      });
-      document.addEventListener('click', function () { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); });
+      end.insertBefore(langControl(), acct || end.querySelector('.tb-give') || null);
     }
-    var first = document.querySelector('#settings-panel .sp-sec');
-    if (first && !document.querySelector('.sp-lang-row')) {
-      var row = document.createElement('div');
-      row.className = 'sp-row sp-lang-row';
-      row.setAttribute('data-no-i18n', '');
-      row.innerHTML = '<span class="sp-label">' + LABEL_LANG[lang] + '</span>' +
-        '<select class="sp-select sp-ctl" aria-label="' + LABEL_IFACE[lang] + '">' +
-        LANGS.map(function (l) { return '<option value="' + l[0] + '"' + (lang === l[0] ? ' selected' : '') + '>' + l[1] + '</option>'; }).join('') +
-        '</select>';
-      var head = first.querySelector('.sp-group');
-      first.insertBefore(row, head ? head.nextSibling : first.firstChild);
-      row.querySelector('select').addEventListener('change', function (e) { setLang(e.target.value); });
-    }
+    var foot = document.querySelector('#settings-panel .sp-foot');
+    if (foot && !foot.querySelector('.tb-lang')) foot.appendChild(langControl('sp-foot-lang'));
   }
 
   // ── Start ──

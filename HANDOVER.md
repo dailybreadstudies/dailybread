@@ -198,7 +198,8 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
 
 ## Interface language — English / Svenska (assets/i18n.js, Nov 2026 — private test)
 
-- Globe next to the account button (top bar) and a Language/Språk row at the top of Reading settings. Only the
+- Globe next to the account button (top bar) and the same globe + initials ("EN") at the foot of Reading settings
+  (the Language row at the top of the menu was removed at John's request, Nov 2026). Only the
   accounts in `READERS` in assets/i18n.js see them (same SHA-256 check as the study tracks).
 - Choosing a language reloads the page and sets that language's default Bible text (English → DBV, Swedish →
   Svenska 1917); Reading settings → Translation (a dropdown: Daily Bread Version (DBV) — the working title of the revised BSB — with "Adapted from the Berean Standard Bible (BSB).", then the Swedish texts and the ESV)
@@ -285,6 +286,10 @@ pixels; decide per panel (mirror, or keep the map itself `dir="ltr"`). Script-se
   for the Hebrew reading text (`--bible-he`); **Heebo** (Google Fonts, OFL) as the interface sans when `html[data-rtl]`.
   The Hebrew lines under the English verses still use SBL Hebrew (`--hebrew`) — switch them to Shofar too if wanted.
 - Not yet: "Parallel" (DBV under the Hebrew verses).
+
+**Translation menu (26 Nov 2026):** names as John set them: Daily Bread Version (DBV), English Standard Version (ESV),
+New King James Version (NKJV), New American Standard (NAS95), Hebrew (עברית in the Hebrew interface); a plain dropdown
+(name + chevron, no box).
 
 **Hebrew interface, first round (26 Nov 2026, John's notes):**
 - i18n.js now has one dictionary per language (`DICT.sv`, `DICT.he`: `HE`, `HE_ATTR`, `HE_PATTERNS`), wording from the
