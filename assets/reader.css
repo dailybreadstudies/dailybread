@@ -7,13 +7,28 @@
   src: url('fonts/SBL_Hbrw.ttf') format('truetype');
   font-display: swap;
 }
-/* Shofar (Yoram Gnat, Culmus; GPL 2 with the font exception, see assets/fonts/shofar/): the Hebrew Bible text and
-   the serif type of the Hebrew interface. Demi-Bold at every weight (John, Nov 2026: the regular is too thin).
-   Only downloaded when Hebrew is shown in it. */
+/* Shofar (Yoram Gnat, Culmus; GPL 2 with the font exception, see assets/fonts/shofar/). Bold, as John wants it
+   (the regular is too thin). Two faces, because the Demi-Bold file draws no cantillation marks (its te'amim are
+   misplaced, an incomplete build):
+   'Shofar'      — Demi-Bold, the serif of the Hebrew interface (letters and vowels only);
+   'Shofar Text' — Regular, made bold by the browser (font-weight 700, synthetic), for the Bible text and the
+                   blessings, so vowels and cantillation are all drawn. Only downloaded when Hebrew is shown in it. */
 @font-face {
   font-family: 'Shofar';
   src: url('fonts/shofar/ShofarDemi-Bold.woff') format('woff');
   font-weight: 100 900; font-display: swap;
+}
+@font-face {
+  font-family: 'Shofar Text';
+  src: url('fonts/shofar/ShofarRegular.woff') format('woff');
+  font-weight: 400; font-display: swap;
+}
+/* Heebo (OFL, google/fonts), the Hebrew letters only, 15% larger: it runs small beside the Latin type (John) */
+@font-face {
+  font-family: 'Heebo';
+  src: url('fonts/heebo/Heebo-Hebrew.woff') format('woff');
+  font-weight: 100 900; font-display: swap; size-adjust: 115%;
+  unicode-range: U+0590-05FF, U+FB1D-FB4F, U+20AA;
 }
 @font-face {
   font-family: 'SBL Greek';
@@ -155,7 +170,7 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --display: 'Merriweather', Georgia, serif;
   --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --hebrew: 'SBL Hebrew', 'Noto Serif Hebrew', 'Times New Roman', serif;
-  --bible-he: 'Shofar', 'SBL Hebrew', 'Noto Serif Hebrew', serif;   /* the Hebrew Bible as the reading text */
+  --bible-he: 'Shofar Text', 'SBL Hebrew', 'Noto Serif Hebrew', serif;   /* the Hebrew Bible as the reading text */
   --greek: 'SBL Greek', 'Times New Roman', serif;
 }
 
@@ -1445,7 +1460,7 @@ html[data-rtl] .page-parsha[data-he] .parsha-name { display: inline; }   /* "פ�
 html[data-rtl] .division-label .he { display: none; }
 /* Blessings: the Hebrew is the blessing (not only with Original Languages on) */
 html[data-rtl] .blessing .hebrew-blessing { display: block !important; margin-top: 0; }
-html[data-rtl] .blessing .hebrew-blessing { font-family: 'Shofar', var(--hebrew); }
+html[data-rtl]:not([data-hefont="sbl"]) .blessing .hebrew-blessing { font-family: 'Shofar Text', var(--hebrew); font-weight: 700; }
 /* A Bible text that is not Hebrew stays left to right as a whole (verses, margin titles, map pins). */
 html[dir="rtl"] .scripture:not([dir="rtl"]), html[dir="rtl"] .footnote-list:not([dir="rtl"]) { direction: ltr; }
 /* Mixed snippets take their direction from what they say ("1 Samuel 8", "26 Nov. / 16 Kislev", "18 min") */
@@ -1461,9 +1476,19 @@ html[dir="rtl"] .pod-dock { direction: ltr; }
 
 /* ── The Hebrew Bible as the reading text (Hebrew edition: .scripture.he-text, dir="rtl") ──
    Shofar for the biblical text; the Masoretic paragraphs (petucha = new paragraph, setuma = a gap in the line). */
-.scripture.he-text { font-family: var(--bible-he); font-size: 1.42rem; line-height: 2.05; }
+.scripture.he-text { font-family: var(--bible-he); font-weight: 700; font-size: 1.42rem; line-height: 2.05; }
+.scripture.he-text .verse-num { font-weight: 400; }
 .scripture.he-text .verse-num { font-family: var(--sans); font-size: 0.5em; margin-inline-end: 0.25em; }
 .scripture.he-text .chapter-num { font-family: var(--bible-he); }
+/* The Hebrew font (Reading settings → Hebrew Font, html[data-hefont]): Shofar or SBL Hebrew, for the Hebrew Bible text,
+   the Hebrew under the verses and the Hebrew blessings. Not chosen: Shofar for the Hebrew text and the Hebrew
+   interface's blessings, SBL Hebrew under the English verses (as before). */
+html[data-hefont="sbl"] .scripture.he-text, html[data-hefont="sbl"][data-rtl] .blessing .hebrew-blessing { font-family: var(--hebrew); font-weight: 400; }
+html[data-hefont="sbl"] .scripture.he-text { font-size: 1.36rem; }
+.hf-sample { font-size: 1.15em; margin-inline-end: 0.25em; }
+.hf-shofar { font-family: 'Shofar Text', serif; font-weight: 700; }
+.hf-sbl { font-family: var(--hebrew); }
+html[data-hefont="shofar"] .vp-orig.he, html[data-hefont="shofar"] .blessing .hebrew-blessing { font-family: 'Shofar Text', var(--hebrew); font-weight: 700; }
 .scripture.he-text .se-gap { display: inline-block; width: 2.2em; }
 .scripture.he-text .w { cursor: pointer; border-radius: 3px; transition: background 0.15s; }
 .scripture.he-text .w:hover { background: var(--tint); }

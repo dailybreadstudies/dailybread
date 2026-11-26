@@ -234,7 +234,7 @@
     'Messianic Filter': 'מסנן משיחי', 'Hebrew Names': 'שמות עבריים', 'Reading Plan': 'תוכנית קריאה',
     'Apostolic Scriptures Twice a Year': 'כתבי השליחים פעמיים בשנה',
     'Reads the Gospels and Epistles every day': 'קריאה בבשורות ובאיגרות בכל יום',
-    'How to use the reader': 'איך משתמשים בקורא', 'Reset to defaults': 'איפוס הגדרות', 'Language': 'שפה', 'Hebrew NT': 'הברית החדשה',
+    'How to use the reader': 'איך משתמשים בקורא', 'Reset to defaults': 'איפוס הגדרות', 'Language': 'שפה', 'Hebrew NT': 'הברית החדשה', 'Hebrew Font': 'גופן עברי',
     // calendar
     'Sun': 'א׳', 'Mon': 'ב׳', 'Tue': 'ג׳', 'Wed': 'ד׳', 'Thu': 'ה׳', 'Fri': 'ו׳', 'Sat': 'ש׳',
     'read': 'נקרא', 'holiday or Rosh Chodesh': 'חג או ראש חודש',
@@ -261,7 +261,7 @@
     'Previous month': 'החודש הקודם', 'Next month': 'החודש הבא', 'Close calendar': 'סגירת לוח השנה', 'Interface language': 'שפת הממשק',
     'Divine name in the Hebrew text': 'שם ה׳ בטקסט העברי', 'With vowels': 'בניקוד', 'Without vowels': 'בלי ניקוד', 'HaShem': 'השם',
     'Vowels only': 'ניקוד בלבד', 'Vowels and cantillation marks (te’amim)': 'ניקוד וטעמי המקרא', 'Hebrew New Testament': 'הברית החדשה בעברית',
-    'Franz Delitzsch, 1885': 'פרנץ דליטש, 1885', 'Bible Society in Israel, 1995 (modern Hebrew)': 'החברה לכתבי הקודש בישראל, 1995 (עברית בת זמננו)'
+    'Franz Delitzsch, 1885': 'פרנץ דליטש, 1885', 'Hebrew font': 'גופן עברי', 'Bible Society in Israel, 1995 (modern Hebrew)': 'החברה לכתבי הקודש בישראל, 1995 (עברית בת זמננו)'
   };
   // The Torah portions and months, in Hebrew
   var HE_PARASHA = {

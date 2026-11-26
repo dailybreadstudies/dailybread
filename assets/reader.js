@@ -77,7 +77,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', heNT: 'delitzsch', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb', heDivine: 'pointed' };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', heNT: 'delitzsch', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb', heDivine: 'pointed', heFont: '' };
   var DEFAULTS = JSON.parse(JSON.stringify(settings));   // for "Reset to defaults" in the A/א menu
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
@@ -256,6 +256,8 @@
     document.documentElement.classList.toggle('no-verses', settings.verseNumbers === false);
     document.documentElement.classList.toggle('orig-off', settings.original === 'off');   // Hebrew blessings only with Original Text on
     document.documentElement.classList.toggle('show-og', !!settings.showOG);   // Daniel: Old Greek under Theodotion
+    if (settings.heFont === 'shofar' || settings.heFont === 'sbl') document.documentElement.setAttribute('data-hefont', settings.heFont);
+    else document.documentElement.removeAttribute('data-hefont');   // not chosen: Shofar for the Hebrew text, SBL under English verses
     if (settings.theme === 'light' || settings.theme === 'dark' || settings.theme === 'sepia') document.documentElement.setAttribute('data-theme', settings.theme);
     else document.documentElement.removeAttribute('data-theme');
     applyDivineName(document);
@@ -978,13 +980,27 @@
       '<button type="button" data-hent="bs1995" aria-pressed="false" title="Bible Society in Israel, 1995 (modern Hebrew)">1995</button></div>';
     nt.parentNode.insertBefore(row, nt.nextSibling);
   }
+  // The Hebrew font: Shofar (Culmus) or SBL Hebrew, each named in its own type
+  var HEFONT_BTNS = [['data-hefont', 'shofar', '<span class="hf-sample hf-shofar" lang="he">שופר</span> Shofar', 'Shofar (Yoram Gnat, Culmus)'],
+    ['data-hefont', 'sbl', '<span class="hf-sample hf-sbl" lang="he">אבג</span> SBL', 'SBL Hebrew (Tiro Typeworks / SBL)']];
   // Rows for the Hebrew text (Bible Text section): its divine name, its marks and which Hebrew NT; shown only with it
   function heSettingsRows() {
     var vr = document.querySelector('#settings-panel .sp-version-row');
+    // the Hebrew font also beside Hebrew Marks under Original Languages (for the Hebrew under the English verses)
+    var marks = document.querySelector('#settings-panel [data-orig-sub] [data-cant="on"]');
+    var mrow = marks && marks.closest('.sp-row');
+    if (sfbOk && mrow && !document.querySelector('.sp-hefont-row')) {
+      var fr = document.createElement('div');
+      fr.className = 'sp-row sp-hefont-row';
+      fr.innerHTML = '<span class="sp-label">Hebrew Font</span><div class="sp-seg sp-ctl" role="group" aria-label="Hebrew font">' +
+        HEFONT_BTNS.map(function (b) { return '<button type="button" ' + b[0] + '="' + b[1] + '" aria-pressed="false" title="' + b[3] + '">' + b[2] + '</button>'; }).join('') + '</div>';
+      mrow.parentNode.insertBefore(fr, mrow.nextSibling);
+    }
     if (!sfbOk || !vr || document.querySelector('.sp-he-row')) return;
     var rows = [
       ['Divine Name', 'Divine name in the Hebrew text', [['data-hediv', 'pointed', 'יְהוָה', 'With vowels'], ['data-hediv', 'plain', 'יהוה', 'Without vowels'], ['data-hediv', 'hashem', 'ה׳', 'HaShem']], ' sp-he-dn'],
       ['Hebrew Marks', 'Hebrew marks', [['data-cant', 'off', 'Vowels', 'Vowels only'], ['data-cant', 'on', '+ Cantillation', 'Vowels and cantillation marks (te’amim)']], ''],
+      ['Hebrew Font', 'Hebrew font', HEFONT_BTNS, ''],
       ['Hebrew NT', 'Hebrew New Testament', [['data-hent', 'delitzsch', 'Delitzsch', 'Franz Delitzsch, 1885'], ['data-hent', 'bs1995', '1995', 'Bible Society in Israel, 1995 (modern Hebrew)']], '']
     ];
     var note = vr.nextSibling && vr.nextSibling.classList && vr.nextSibling.classList.contains('sp-version-note') ? vr.nextSibling : vr;
@@ -2825,6 +2841,7 @@
     var oSec = panel.querySelector('[data-orig]'); hide(oSec && oSec.closest('.sp-sec'), he);
     var nSec = panel.querySelector('[data-setting="messianic"]'); hide(nSec && nSec.closest('.sp-sec'), he);
     pressed('data-hediv', settings.heDivine || 'pointed');
+    pressed('data-hefont', settings.heFont || (he ? 'shofar' : 'sbl'));
     var mf = panel.querySelector('[data-setting="messianic"]');
     hide(mf, sw && !sw.filter);
     var mfSub = mf && mf.querySelector('.sp-switch-sub');
@@ -2881,6 +2898,9 @@
     } else if (t.hasAttribute('data-ntorig')) {
       settings.ntOrig = t.getAttribute('data-ntorig');
       rerender();
+    } else if (t.hasAttribute('data-hefont')) {
+      settings.heFont = t.getAttribute('data-hefont');
+      applyLook();
     } else if (t.hasAttribute('data-hediv')) {
       settings.heDivine = t.getAttribute('data-hediv');
       rerender();

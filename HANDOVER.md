@@ -294,9 +294,15 @@ pixels; decide per panel (mirror, or keep the map itself `dir="ltr"`). Script-se
   English calendar notes, the Shabbat "about" paragraphs and Today in History are hidden in the Hebrew interface until
   they are translated.
 - **Listen is hidden in Hebrew** (menu, the LISTEN row, ▶ beside chapters, the player) until there is a Hebrew audio Bible.
-- Type in Hebrew: every sans → **Heebo**; every serif keeps its Latin face for English words and sets Hebrew in **Shofar**,
-  which is **Demi-Bold at every weight** (John: the regular is too thin; the regular .woff stays in the folder, unused).
-  No letter-spacing and no italics for Hebrew.
+- Type in Hebrew: every sans → **Heebo**, self-hosted (assets/fonts/heebo/, OFL, subset from google/fonts to the Hebrew
+  letters only, `size-adjust: 115%` — John: Heebo runs ~15% small; Latin in the same text stays Inter); every serif keeps
+  its Latin face for English words and sets Hebrew in **Shofar Demi-Bold** (`'Shofar'`). No letter-spacing or italics.
+- **Shofar Demi-Bold has no usable cantillation** (its te'amim glyphs are misplaced, an incomplete build: 16 GPOS lookups
+  against 60 in the Regular), so the Bible text and the blessings use **`'Shofar Text'` = the Regular file made bold by
+  the browser** (font-weight 700, synthetic bold): bold look, every vowel and cantillation mark drawn.
+- **Hebrew Font setting** (`heFont`, html[data-hefont]): Shofar · SBL — in the Hebrew text's rows and beside Hebrew Marks
+  under Original Languages (only SFB_READERS for now). Not chosen: Shofar for the Hebrew text and Hebrew blessings, SBL
+  under the English verses (as before). A choice applies to all three.
 - Not yet in Hebrew: Progress page details, Dig deeper, About/Learn, account pages, the "Go deeper into … Messiah in the
   Torah" line, the day-complete box's longer texts, the DAILY BREAD wordmark (an SVG; a לחם חוקנו mark would be new art).
 
