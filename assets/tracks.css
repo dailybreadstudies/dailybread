@@ -21,7 +21,7 @@
 .st-toggle[aria-pressed="true"] { color: var(--accent); border-color: var(--accent-soft); }
 .st-toggle[aria-pressed="true"]::before { background: var(--done); }
 .st-toggle { position: relative; }
-.st-toggle::after { content: ''; position: absolute; left: 12px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%;
+.st-toggle::after { content: ''; position: absolute; inset-inline-start: 12px; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%;
   background: var(--paper); transition: transform 0.2s; }
 .st-toggle[aria-pressed="true"]::after { transform: translateX(10px); }
 .st-toggle:hover { border-color: var(--accent-soft); }
@@ -62,7 +62,7 @@
 .st-pb-name { color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .st-pb-lane { height: 6px; border-radius: 3px; background: var(--tint); overflow: hidden; }
 .st-pb-lane span { display: block; height: 100%; border-radius: 3px; background: var(--done); }
-.st-pb-n { text-align: right; color: var(--muted); font-size: 0.74rem; font-variant-numeric: tabular-nums; }
+.st-pb-n { text-align: end; color: var(--muted); font-size: 0.74rem; font-variant-numeric: tabular-nums; }
 .st-pb.is-current .st-pb-name { color: var(--heading); font-weight: 600; }
 .st-pb.is-done .st-pb-n { color: var(--done); }
 .st-pb.is-pending { opacity: 0.55; }
@@ -72,7 +72,7 @@
 .st-log-d { color: var(--muted); font-variant-numeric: tabular-nums; }
 .st-log a { color: var(--ink); text-decoration: none; }
 .st-log a:hover { color: var(--accent-deep); text-decoration: underline; text-decoration-color: var(--accent-line); }
-.st-log-t { color: var(--accent-faint); font-size: 0.74rem; text-align: right; }
+.st-log-t { color: var(--accent-faint); font-size: 0.74rem; text-align: end; }
 
 @media (max-width: 600px) {
   .st-cards { grid-template-columns: 1fr; }
@@ -83,7 +83,7 @@
 
 /* ── About the book: like an illustration card — no frame, in the right margin (narrower screens: after the text); X closes,
       the (i) beside "1 Enoch · 5 of 108" opens it again ── */
-.st-about { margin: 2.2rem 0 0; padding: 1.4rem 0 0; border-top: 1px solid var(--rule); font-family: var(--sans); text-align: left; line-height: 1.5; }
+.st-about { margin: 2.2rem 0 0; padding: 1.4rem 0 0; border-top: 1px solid var(--rule); font-family: var(--sans); text-align: start; line-height: 1.5; }
 .st-about[hidden] { display: none; }
 .st-about-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 0.55rem;
   font: 600 0.62rem/1.2 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
@@ -95,22 +95,22 @@
 .st-about-p { margin: 0 0 0.6rem; font-size: 0.82rem; line-height: 1.6; color: var(--ink-soft, var(--ink)); }
 .st-about-tr { margin: 0; font-size: 0.74rem; line-height: 1.55; color: var(--muted); }
 .st-about-tr b { font-weight: 600; color: var(--ink-soft, var(--ink)); }
-.st-info { vertical-align: -4px; margin-left: 4px; }
+.st-info { vertical-align: -4px; margin-inline-start: 4px; }
 .st-info[aria-pressed="true"] { color: var(--accent); }
 @media (min-width: 1240px) {
   body[data-page="study"] .portion { position: relative; }
-  body[data-page="study"] .st-about { position: absolute; top: 3.4rem; left: calc(100% + 28px); margin: 0; padding: 0; border-top: none;
+  body[data-page="study"] .st-about { position: absolute; top: 3.4rem; inset-inline-start: calc(100% + 28px); margin: 0; padding: 0; border-top: none;
     width: min(460px, calc((100vw - 32rem) / 2 - 56px)); }
 }
 .st-shelf-blurb { margin-top: 0; }
 
 /* The Odes: verse by verse, line by line */
-.st-text .st-poem { margin: 0 0 0.85rem; padding-left: 1.6em; text-indent: -1.6em; }
+.st-text .st-poem { margin: 0 0 0.85rem; padding-inline-start: 1.6em; text-indent: -1.6em; }
 .st-text .st-poem .verse-num { display: inline-block; min-width: 1.3em; text-indent: 0; }
 
 /* A painted banner behind the top of each track (tracks.js, placeBanner): full width from under the top bar, at full
    strength behind light headings (like the photo sections on Dig deeper), then fading into the page above the reading */
-.st-banner { position: absolute; top: var(--topbar-h); left: 0; right: 0; z-index: 0; overflow: hidden; pointer-events: none;
+.st-banner { position: absolute; top: var(--topbar-h); inset-inline-start: 0; inset-inline-end: 0; z-index: 0; overflow: hidden; pointer-events: none;
   -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 7rem), transparent);
           mask-image: linear-gradient(to bottom, #000 calc(100% - 7rem), transparent); }
 .st-banner[hidden] { display: none; }
@@ -178,11 +178,11 @@ body.banner-on :is(.st-date, .st-title, .st-tabs, .division-label, .chapter-head
 .cmx-notes[open] summary::before { content: '\2013'; }
 .cmx-notes-body { padding: 0.2rem 0 1rem; }
 .cmx-notes-body .cm-p { font-size: 0.98rem; line-height: 1.75; color: var(--ink-soft, var(--ink)); }
-.cmx-notes-body .cmx-nt { font-style: italic; color: var(--muted); padding-left: 1.2rem; border-left: 2px solid var(--rule); }
+.cmx-notes-body .cmx-nt { font-style: italic; color: var(--muted); padding-inline-start: 1.2rem; border-inline-start: 2px solid var(--rule); }
 
 /* The Messianic Filter switch at the end of the banner's subtitle (light, on the picture); it wraps to its own line if need be */
 .cmx-hero .ab-p { max-width: none; }   /* room for the switch at the end of the line on wide screens */
-.cmx-hero .cmx-pill { vertical-align: 0.15em; margin-left: 0.15em; color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.45);
+.cmx-hero .cmx-pill { vertical-align: 0.15em; margin-inline-start: 0.15em; color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.45);
   background: rgba(17,17,17,0.18); white-space: nowrap; }
 .cmx-hero .cmx-pill::before { background: rgba(255,255,255,0.35); box-shadow: none; }
 .cmx-hero .cmx-pill:hover { border-color: #fff; color: #fff; }
@@ -190,6 +190,6 @@ body.banner-on :is(.st-date, .st-title, .st-tabs, .division-label, .chapter-head
 .cmx-hero .cmx-pill[aria-pressed="true"]::before { background: var(--done); }
 .cmx-hero .cmx-pill::after { background: #fff; }
 /* Drop cap on the first paragraph, as for Lars Enarson's commentary (deeper.html, #cm-body .dc) */
-.cmx-text .dc { float: left; font-family: var(--display); font-weight: 300; color: var(--accent); font-size: 5.3em; line-height: 0.78;
+.cmx-text .dc { float: inline-start; font-family: var(--display); font-weight: 300; color: var(--accent); font-size: 5.3em; line-height: 0.78;
   margin: 0.08em 0.07em 0 -0.04em; }
 .cmx-text > .cmx-vv:first-child + .cm-first, .cmx-text .cmx-ch + .cmx-vv + .cm-first { margin-top: 0.4rem; }

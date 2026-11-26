@@ -209,9 +209,39 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
   blessings heading through. Book names follow the Bible text, not the interface.
 - Swedish wording follows the printed journal "Dagligt bröd" (3rd Swedish ed., 5778): Tora / Profeterna / Skrifterna /
   Apostlarna / Haftara, "Veckans Toratext", the portions' Swedish meanings, "27 Nov." dates.
+- Hebrew (עברית) is being added as the third interface language: see "Hebrew edition" below.
 - Not translated yet (round 2+): TODAY blurbs, This Day in History, maps, finds, trees, Dig deeper, About pages,
   Kids, holiday/event names, account panel, private study tracks' book titles.
 - The 1917 has no margin titles (its one heading per chapter stays under the chapter title).
+
+## Hebrew edition (עברית, right to left — started Nov 2026, private test)
+
+Restore point before this work: branch **`backup/before-rtl`** (= main at 7ae96ed, 26 Nov 2026).
+
+**Scope agreed (round 1, John's account only, like Swedish):** Hebrew interface with `dir="rtl"`; Hebrew as a real
+Bible text choice (not "Original Languages: Only"): Tanakh = MAM with paragraphs (petuchot/setumot, to be added to
+data/orig; until then the DBV paragraphs), Apostles = **Delitzsch by default**, the 1995 Bible Society NT as an option;
+Original Languages becomes a "Parallel" row (DBV / Greek under the Hebrew); Messianic Filter, Hebrew Names and margin
+subtitles hidden for the Hebrew text; Hebrew book names; Hebrew date first; holiday names from Hebcal's Hebrew mode;
+blessings in Hebrew only. Not in round 1: TODAY blurbs, This Day in History, maps, finds, trees, Dig deeper, About/
+Learn/Listen, Kids, study tracks, sign-up copy, audio (LISTEN stays English BSB, labelled English).
+- **Wording source:** the Hebrew journal *לחם חוקנו* (תשע״ח 2017–18, 1st Hebrew ed., translated by "אות"); John's
+  copy is the PDF Lechem_chukenu_5778_03.pdf (not in the repo). Today's English governs where they differ.
+- Section labels from the journal: **תורה · נביאים · כתובים · שליחים** (in running text: כתבי השליחים (הברית החדשה)).
+- References as in the journal: chapter in Hebrew letters, verse in digits: מלכים א ח 54–66, דברים ח 3; מתי ד 4.
+- **Divine Name in the Hebrew text — three options (John, 26 Nov 2026):** with vowels (יְהוָה), without (יהוה), and ה׳.
+- Later (not round 1): a Diaspora / Israel reading-plan switch, set to **Israel by default for Hebrew**.
+
+**Step 1 done (26 Nov 2026): direction-neutral CSS.** `reader.css`, `podcast.css`, `tracks.css`, `kids.css` were
+rewritten by `python3 tools/css_logical.py <files>` from left/right to start/end (margin/padding/border-inline-*,
+inset-inline-*, text-align start/end, float inline-start). English looks exactly the same (139 page states compared
+pixel by pixel, `tools/rtl-check/`). Kept physical on purpose: rules for Hebrew elements (they are already rtl inside
+an English page, so start/end would flip them: `.he`, `*-he`, `.vp-orig`, `.hebrew-*`, word-study lemmas …, see
+`RTL_SEL`), `left/right: 50%` centring, the bubble arrow (`--arrow-x`, measured by script from the left; marked
+`/* physical */`), four-value shorthands and transforms (switch thumbs `translateX(16px)` will need an rtl rule).
+Not yet converted: `maps.css`, `finds.css`, `trees.css`, `illus.css` — their side panels are placed by script in
+pixels; decide per panel (mirror, or keep the map itself `dir="ltr"`). Script-set `style.left` on bubbles too.
+Next: step 2, `dir="rtl"` set before first paint for `dbs-lang = he`, and fix what the rtl screenshots show.
 
 ## Settings menu (A/א)
 Redesigned Nov 2026 (a live preview at the top was tried and removed at John's request): Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),

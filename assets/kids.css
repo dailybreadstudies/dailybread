@@ -86,8 +86,8 @@ html.kids[data-theme="dark"] { --bb0: #74c4bd; --bb1: #e3a2cd; --bb3: #F9CE7A; }
 
 /* Kids journal prompts in the Today box */
 .kids .kid-prompts { margin: 0.9rem 0 0; padding: 0; list-style: none; }
-.kids .kid-prompts li { position: relative; padding-left: 1.3em; margin-bottom: 0.35rem; color: var(--ink-soft); font-style: italic; }
-.kids .kid-prompts li::before { content: ""; position: absolute; left: 0.2em; top: 0.72em; width: 0.42em; height: 0.42em; border-radius: 50%; background: var(--kid-gold); }
+.kids .kid-prompts li { position: relative; padding-inline-start: 1.3em; margin-bottom: 0.35rem; color: var(--ink-soft); font-style: italic; }
+.kids .kid-prompts li::before { content: ""; position: absolute; inset-inline-start: 0.2em; top: 0.72em; width: 0.42em; height: 0.42em; border-radius: 50%; background: var(--kid-gold); }
 
 /* "Well done": a burst of yellow rays when a reading is marked complete */
 .kid-ray { position: absolute; left: 50%; top: 50%; width: 3px; height: 9px; margin: -4.5px 0 0 -1.5px; border-radius: 2px;
