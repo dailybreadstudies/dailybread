@@ -691,7 +691,7 @@
         var own = !v.id && res[0].own;   // structured text: the publisher's own paragraphs, no layout from the BSB
         var ch = v.id ? yvChapter(res[0].content || '', c) : res[0].ch;
         if (!ch.b.length) throw new Error('no text for this chapter');
-        if (own) { book.chapters[c - 1] = ch; return; }
+        if (own) { book.chapters[c - 1] = ch; book.heads = true; return; }
         var en = res[1] && res[1].chapters[c - 1];
         book.chapters[c - 1] = v.flow && en ? sfbReflow(ch, en) : ch;
       });
@@ -1063,7 +1063,7 @@
           if (typeof it === 'number') {
             unit = { c: c, v: it, html: '', poetic: poetic, newPara: k === 0 && !POETRY[bl.k] && bl.k !== 'd' };
             units.push(unit);
-            if (pendSub) { unit.sub = pendSub; if (!book.sfb) inner += msubHtml(pendSub); pendSub = null; }   // no margin titles for the Swedish text: its one heading stays under the chapter title
+            if (pendSub) { unit.sub = pendSub; if (!book.sfb || book.heads) inner += msubHtml(pendSub); pendSub = null; }   // no margin titles for the Swedish text: its one heading stays under the chapter title
             if (it === 0) continue;
             if (inner && !/\s$/.test(inner)) inner += ' ';   // space between verses
             if (it === 1 && multiChapter) inner += '<span class="chapter-num">' + c + '</span>';
@@ -2688,7 +2688,7 @@
     // divine name and no Hebrew Names list; the Messianic Filter shows the words it changes in that text
     var sw = useSfb() ? sweVer() : null;
     var hide = function (el, h) { if (el) el.hidden = !!h; };
-    hide(panel.querySelector('.sp-msub-row'), sw);
+    hide(panel.querySelector('.sp-msub-row'), sw && !sw.json);   // texts with their own section titles keep margin titles
     var dn = panel.querySelector('.sp-seg-name'); hide(dn && dn.closest('.sp-row'), sw && !sw.divine);
     hide(panel.querySelector('[data-setting="hebrewNames"]'), sw);
     var mf = panel.querySelector('[data-setting="messianic"]');
