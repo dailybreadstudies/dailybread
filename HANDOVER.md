@@ -241,7 +241,28 @@ an English page, so start/end would flip them: `.he`, `*-he`, `.vp-orig`, `.hebr
 `/* physical */`), four-value shorthands and transforms (switch thumbs `translateX(16px)` will need an rtl rule).
 Not yet converted: `maps.css`, `finds.css`, `trees.css`, `illus.css` — their side panels are placed by script in
 pixels; decide per panel (mirror, or keep the map itself `dir="ltr"`). Script-set `style.left` on bubbles too.
-Next: step 2, `dir="rtl"` set before first paint for `dbs-lang = he`, and fix what the rtl screenshots show.
+**Step 2 done (26 Nov 2026): right to left for the Hebrew interface.**
+- The globe menu and Reading settings → Language now offer English · Svenska · **עברית** (still only READERS in
+  i18n.js). Hebrew's default text is the DBV until the Hebrew Bible text is in (`DEFAULT_TEXT.he`). No Hebrew wording
+  yet (step 4), so the interface is still English, laid out right to left.
+- A small script in the `<head>` of **index.html, progress.html, maps-test.html** sets `<html dir="rtl" data-rtl>`
+  before the page paints when `dbs-lang` is `he` (not under kids/). i18n.js removes it if the account may not use
+  Hebrew. Other pages stay left to right until they are translated (their own inline styles are still physical).
+  Add a page by copying that script (after the Light/Dark one) once its text is translated.
+- `reader.css` → "Right to left" (end of file): a non-Hebrew Bible text stays ltr as a block (`.scripture`,
+  `.footnote-list`: verses, margin titles, map pins keep their English places); mixed snippets get
+  `unicode-bidi: plaintext` (references, date, book buttons, chapter heading, podcast length, catch-up links,
+  footnote bubbles) so "1 Samuel 8" and "18 min" read right; references sit next to their labels
+  (`.dp-ref { text-align: right }`); switch knobs slide the other way (also `.st-toggle` in tracks.css); the podcast
+  dock stays ltr like media players in Hebrew apps. ‹ › arrows mirror by themselves (Unicode), so the calendar and date
+  arrows needed nothing; ← → in texts don't, so the Hebrew wording must use the right arrow.
+- Maps, finds, trees and illustrations stay where they are (side panel on the left) for now.
+- Note: `tools/make_kids_pages.py` currently writes a different Kids footer than the committed kids/index.html and
+  kids/progress.html (the "Did you know?" credit ends up inside `#credit-text`, which the reader replaces for other
+  translations). The committed Kids pages were kept; check that script before regenerating them.
+- Test: `tools/rtl-check/` (English unchanged: 139 states) plus forced-rtl screenshots.
+Next: step 3, the Hebrew Bible text (MAM + Delitzsch, 1995 as an option; divine name: with vowels / without / ה׳);
+then step 4, the Hebrew interface wording from *לחם חוקנו*.
 
 ## Settings menu (A/א)
 Redesigned Nov 2026 (a live preview at the top was tried and removed at John's request): Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),

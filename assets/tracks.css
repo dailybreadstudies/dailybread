@@ -193,3 +193,5 @@ body.banner-on :is(.st-date, .st-title, .st-tabs, .division-label, .chapter-head
 .cmx-text .dc { float: inline-start; font-family: var(--display); font-weight: 300; color: var(--accent); font-size: 5.3em; line-height: 0.78;
   margin: 0.08em 0.07em 0 -0.04em; }
 .cmx-text > .cmx-vv:first-child + .cm-first, .cmx-text .cmx-ch + .cmx-vv + .cm-first { margin-top: 0.4rem; }
+/* Right to left (Hebrew interface): the toggle knob slides the other way */
+html[dir="rtl"] .st-toggle[aria-pressed="true"]::after { transform: translateX(-10px); }

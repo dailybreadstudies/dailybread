@@ -14,6 +14,7 @@ cd /tmp && python3 /path/to/repo/tools/rtl-check/diff.py   # compares before/ be
 
 - `shots.py`: 21 pages × desktop/phone × light/dark (+ a sepia desktop run with original languages, both Apostles
   readings and the blessings open), panels opened (settings, calendar, Bible). External requests blocked, Hebcal mocked.
+- `rtlshots.py OUT`: the Hebrew layout, by serving the pages with `dir="rtl"` forced on (no login needed).
 - `shots2.py`: private study pages (a test login added to READERS on the fly, never in the repo), footnote and
   word-study bubbles, the podcast dock.
 - A page counts as changed only if the new shot differs from **both** baseline runs (the two baselines show

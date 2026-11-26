@@ -1,4 +1,4 @@
-/* Daily Bread Online — interface language (English / Svenska), Nov 2026, private test.
+/* Daily Bread Online — interface language (English / Svenska / עברית), Nov 2026, private test.
  *
  * The site is written in English; with Swedish chosen, this script swaps the interface texts it knows
  * (menus, buttons, settings, reading labels, dates) for their Swedish wording, as they appear on the page.
@@ -9,12 +9,19 @@
  * Only the readers in READERS (SHA-256 of the account email, as in tracks.js) see the globe and the choice.
  * Choosing a language also chooses that language's default Bible text (English → DBV, Swedish → Svenska Folkbibeln 98);
  * the reader can then pick another text in Reading settings → Translation.
+ *
+ * Hebrew (he, Nov 2026 — in progress): the page turns right to left. A small script in the <head> of the pages
+ * translated so far (index, progress) sets dir="rtl" before the page paints; this script removes it again if the
+ * account may not use Hebrew. The Hebrew wording comes next (HE, from the journal "לחם חוקנו"), then the Hebrew
+ * Bible text as Hebrew's default (until then the DBV).
  */
 (function () {
   'use strict';
   var READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];   // John
   var LKEY = 'dbs-lang';
-  var DEFAULT_TEXT = { en: 'bsb', sv: 'sfb98' };
+  var DEFAULT_TEXT = { en: 'bsb', sv: 'sfb98', he: 'bsb' };   // he → the Hebrew text once it is in
+  var LANGS = [['en', 'English'], ['sv', 'Svenska'], ['he', 'עברית']];
+  var LABEL_LANG = { en: 'Language', sv: 'Språk', he: 'שפה' }, LABEL_IFACE = { en: 'Interface language', sv: 'Gränssnittets språk', he: 'שפת הממשק' };
   var EXCLUDE = '.scripture, .chapter-sub, .footnote-list, .vp-orig, .history-box, .today-box, .calendar-intro, .bless-apparatus, ' +
     '.tc-apparatus, .credits, .dbm, .dbf, .dbt, .dbi, .acct-panel, .bp-books, .bp-book, script, style, textarea, [data-no-i18n]';
 
@@ -272,8 +279,10 @@
   var GLOBE = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' +
     '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg>';
   function menuHtml() {
-    return '<button type="button" role="menuitemradio" data-lang="en" aria-checked="' + (lang === 'en') + '">English</button>' +
-      '<button type="button" role="menuitemradio" data-lang="sv" aria-checked="' + (lang === 'sv') + '">Svenska</button>';
+    return LANGS.map(function (l) {
+      return '<button type="button" role="menuitemradio" data-lang="' + l[0] + '" aria-checked="' + (lang === l[0]) + '"' +
+        (l[0] === 'he' ? ' lang="he" dir="rtl"' : '') + '>' + l[1] + '</button>';
+    }).join('');
   }
   function addControls() {
     if (!allowed) return;
@@ -283,7 +292,7 @@
       wrap.className = 'tb-lang';
       wrap.setAttribute('data-no-i18n', '');
       wrap.innerHTML = '<button type="button" class="tb-lang-btn" aria-haspopup="menu" aria-expanded="false" aria-label="' +
-        (lang === 'sv' ? 'Språk' : 'Language') + '" title="' + (lang === 'sv' ? 'Språk' : 'Language') + '">' + GLOBE +
+        LABEL_LANG[lang] + '" title="' + LABEL_LANG[lang] + '">' + GLOBE +
         '<span class="tb-lang-code">' + lang.toUpperCase() + '</span></button><div class="tb-lang-menu" role="menu" hidden>' + menuHtml() + '</div>';
       var acct = end.querySelector('.tb-acct');
       end.insertBefore(wrap, acct || end.querySelector('.tb-give') || null);
@@ -305,10 +314,10 @@
       var row = document.createElement('div');
       row.className = 'sp-row sp-lang-row';
       row.setAttribute('data-no-i18n', '');
-      row.innerHTML = '<span class="sp-label">' + (lang === 'sv' ? 'Språk' : 'Language') + '</span>' +
-        '<select class="sp-select sp-ctl" aria-label="' + (lang === 'sv' ? 'Gränssnittets språk' : 'Interface language') + '">' +
-        '<option value="en"' + (lang === 'en' ? ' selected' : '') + '>English</option>' +
-        '<option value="sv"' + (lang === 'sv' ? ' selected' : '') + '>Svenska</option></select>';
+      row.innerHTML = '<span class="sp-label">' + LABEL_LANG[lang] + '</span>' +
+        '<select class="sp-select sp-ctl" aria-label="' + LABEL_IFACE[lang] + '">' +
+        LANGS.map(function (l) { return '<option value="' + l[0] + '"' + (lang === l[0] ? ' selected' : '') + '>' + l[1] + '</option>'; }).join('') +
+        '</select>';
       var head = first.querySelector('.sp-group');
       first.insertBefore(row, head ? head.nextSibling : first.firstChild);
       row.querySelector('select').addEventListener('change', function (e) { setLang(e.target.value); });
@@ -317,9 +326,10 @@
 
   // ── Start ──
   window.DBI18N = { lang: function () { return lang; } };
+  function unRtl() { document.documentElement.removeAttribute('dir'); document.documentElement.removeAttribute('data-rtl'); }
   check().then(function (ok) {
     allowed = ok;
-    if (!ok) return;
+    if (!ok) { unRtl(); return; }
     var saved = load(LKEY);
     if (!saved) {   // first time: follow the browser's language, with that language's Bible text
       var nav = (navigator.languages && navigator.languages[0]) || navigator.language || '';
@@ -327,8 +337,9 @@
       store(LKEY, 'en');
       saved = 'en';
     }
-    lang = saved === 'sv' ? 'sv' : 'en';
+    lang = saved === 'sv' || saved === 'he' ? saved : 'en';
     addControls();
+    if (lang !== 'he') unRtl();
     if (lang !== 'sv') return;
     document.documentElement.lang = 'sv';
     translate(document);
