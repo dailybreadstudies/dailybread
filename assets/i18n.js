@@ -196,8 +196,166 @@
     });
   }
 
+
+  // ── Hebrew (עברית): wording from the Hebrew journal "לחם חוקנו" (תשע״ח) where it has it; the English governs ──
+  var HE = {
+    // top bar and footer
+    'Today': 'היום', 'Progress': 'התקדמות', 'Listen': 'האזנה', 'Learn': 'לימוד', 'About': 'אודות', 'Kids': 'ילדים', 'Give': 'תרומה',
+    'Sign in': 'כניסה', 'Daily Bread Online': 'לחם חוקנו', 'Loading today’s readings…': 'טוען את קריאות היום…',
+    'About Daily Bread': 'אודות לחם חוקנו', 'Support this ministry': 'תמכו בשירות', 'Privacy': 'פרטיות', 'more': 'עוד',
+    // the day
+    'Sunday': 'יום ראשון', 'Monday': 'יום שני', 'Tuesday': 'יום שלישי', 'Wednesday': 'יום רביעי', 'Thursday': 'יום חמישי',
+    'Friday': 'יום שישי', 'Saturday': 'שבת', 'Shabbat': 'שבת',
+    'Torah': 'תורה', 'Prophets': 'נביאים', 'Writings': 'כתובים', 'Apostles': 'שליחים', 'Haftarah': 'הפטרה', 'Maftir': 'מפטיר',
+    'Gospels': 'בשורות', 'Epistles': 'איגרות', 'Rosh Chodesh': 'ראש חודש',
+    'Synagogue': 'בית הכנסת', 'Morning': 'בוקר', 'Afternoon': 'אחר הצהריים', 'Evening': 'ערב',
+    'Take a moment to pray before reading the Scriptures.': 'הקדישו רגע לתפילה לפני קריאת הכתובים.',
+    'Traditional Blessings': 'ברכות', 'Blessings': 'ברכות',
+    'Torah studies (all Scripture included) is of even higher importance than prayer and should be done daily. Since it is a commandment (see Dt. 6:6–7) and a spiritual undertaking, it is customary in Israel to first pray and bless God before reading. These blessings are considered to cover all Scripture reading and studies for the rest of the day.':
+      'ללימוד התורה (כל הכתובים בכלל זה) יש חשיבות גדולה יותר אפילו מזו של התפילה, ויש ללמוד מדי יום. הואיל וזוהי מצווה (ראה דברים ו 6–7) ועבודה רוחנית, נהוג בישראל להתפלל ולברך את ה׳ לפני הקריאה. ברכות אלה מתייחסות לכל הקריאה והלימוד בכתובים במשך היום כולו.',
+    'The Apostle Shaul (Paul) writes, “Then what advantage has the Jew? Or what is the benefit of circumcision? Great in every respect. First of all, that they were entrusted with the oracles of God” (Rom. 3:1–2). Jews therefore pray this blessing.':
+      'שאול השליח כותב: ״אם כן, מה יתרונו של היהודי או מה התועלת אשר במילה? הרבה, על כל פנים; ראשית כל, בידיהם הופקדו דברי אלוהים״ (אל הרומים ג 1–2). משום כך מתפללים היהודים ברכה זו.',
+    'Translation Notes': 'הערות תרגום', '← Previous': '→ הקודם', 'Next →': 'הבא ←',
+    'Dig deeper →': 'להעמיק ←', 'Dig deeper': 'להעמיק', 'Well done!': 'כל הכבוד!', 'Word study': 'לימוד מילים', 'Commentary': 'פירוש',
+    'Review your progress': 'להתקדמות שלכם', 'A Hebrew word and a Greek word from today’s reading': 'מילה בעברית ומילה ביוונית מקריאות היום',
+    'One Hebrew and one Greek word from today’s readings': 'מילה בעברית ומילה ביוונית מקריאות היום',
+    'Marked as read. Tap again to undo.': 'סומן כנקרא. הקישו שוב לביטול.',
+    'Studies find we understand more when we read on paper, and remember more when we write by hand. The printed':
+      'מחקרים מראים שאנו מבינים יותר כשאנו קוראים על נייר, וזוכרים יותר כשאנו כותבים ביד. היומן המודפס',
+    'Daily Bread journal': 'לחם חוקנו', 'follows this plan day by day.': 'מלווה את התוכנית הזו יום אחר יום.',
+    '← Back to today’s Daily Bread': '→ חזרה לקריאות היום', 'Bible': 'הכתובים', 'Go': 'עבור',
+    // settings
+    'Reading settings': 'הגדרות קריאה', 'Display': 'תצוגה', 'Text Size': 'גודל טקסט', 'Font': 'גופן',
+    'Appearance': 'מראה', 'Light': 'בהיר', 'Dark': 'כהה', 'Sepia': 'ספיה', 'Auto': 'אוטומטי', 'Bible Text': 'נוסח הכתובים', 'Translation': 'תרגום',
+    'Adapted from the Berean Standard Bible (BSB).': 'מעובד מתוך Berean Standard Bible (BSB).', 'Verse Numbers': 'מספרי פסוקים', 'Margin Subtitles': 'כותרות בשוליים',
+    'Divine Name': 'שם ה׳', 'Lord': 'Lord', 'Original Languages': 'שפות המקור', 'Show': 'הצגה', 'Off': 'כבוי', 'Below': 'מתחת',
+    'Only': 'בלבד', 'Hebrew Bible': 'תנ״ך', 'Hebrew': 'עברית', 'Greek': 'יוונית', 'Both': 'שתיהן',
+    'Hebrew Marks': 'סימני ניקוד', 'Vowels': 'ניקוד', '+ Cantillation': 'ניקוד וטעמים', 'Names & Terms': 'שמות ומונחים',
+    'Messianic Filter': 'מסנן משיחי', 'Hebrew Names': 'שמות עבריים', 'Reading Plan': 'תוכנית קריאה',
+    'Apostolic Scriptures Twice a Year': 'כתבי השליחים פעמיים בשנה',
+    'Reads the Gospels and Epistles every day': 'קריאה בבשורות ובאיגרות בכל יום',
+    'How to use the reader': 'איך משתמשים בקורא', 'Reset to defaults': 'איפוס הגדרות', 'Language': 'שפה', 'Hebrew NT': 'הברית החדשה',
+    // calendar
+    'Sun': 'א׳', 'Mon': 'ב׳', 'Tue': 'ג׳', 'Wed': 'ד׳', 'Thu': 'ה׳', 'Fri': 'ו׳', 'Sat': 'ש׳',
+    'read': 'נקרא', 'holiday or Rosh Chodesh': 'חג או ראש חודש',
+    // progress
+    'Your Progress': 'ההתקדמות שלך', 'Your progress will appear here.': 'ההתקדמות שלך תופיע כאן.',
+    'See how it works': 'איך זה עובד', 'Go to today’s reading': 'לקריאת היום',
+    'Your account': 'החשבון שלך', 'Account': 'חשבון', 'Your study': 'הלימוד שלך', 'only on your account': 'רק בחשבון שלך'
+  };
+  var HE_ATTR = {
+    'Daily Bread Online, today’s reading': 'לחם חוקנו, קריאת היום', 'Main': 'תפריט ראשי',
+    'Sign in to sync your progress across devices': 'היכנסו כדי לסנכרן את ההתקדמות בין המכשירים',
+    'Your account · progress synced on all your devices': 'החשבון שלך · ההתקדמות מסונכרנת בכל המכשירים',
+    'Go to a Bible passage, for example Genesis 1 or John 3:16': 'מעבר לקטע בכתובים, למשל בראשית 1 או יוחנן 3:16',
+    'Go to … Gen 1': 'מעבר אל … בראשית 1', 'Go to a passage': 'מעבר לקטע', 'Go to… e.g. John 3:16': 'מעבר אל… למשל יוחנן 3:16',
+    'Previous day': 'היום הקודם', 'Next day': 'היום הבא', 'Today’s readings': 'קריאות היום',
+    'Copy all of today’s Scripture readings': 'העתקת כל קריאות היום', 'Copy the day’s readings': 'העתקת קריאות היום',
+    'Why pray first?': 'למה להתפלל קודם?', 'About this blessing': 'על ברכה זו', 'Bible: open any book and chapter': 'הכתובים: פתיחת כל ספר ופרק',
+    'Calendar': 'לוח שנה', 'Calendar: choose a day': 'לוח שנה: בחירת יום',
+    'Reading settings: text, appearance, divine name and wording': 'הגדרות קריאה: טקסט, מראה, שם ה׳ וניסוח',
+    'Close settings': 'סגירת ההגדרות', 'Smaller text': 'טקסט קטן יותר', 'Larger text': 'טקסט גדול יותר',
+    'Typeface': 'גופן', 'Serif': 'סריף', 'Sans serif': 'ללא סריף', 'Text alignment': 'יישור טקסט', 'Align left': 'יישור לצד',
+    'Justified': 'יישור לשני הצדדים', 'Follows your device': 'לפי המכשיר', 'Divine name': 'שם ה׳',
+    'Bible translation': 'תרגום', 'Previous chapter': 'הפרק הקודם', 'Next chapter': 'הפרק הבא', 'Close': 'סגירה',
+    'Previous month': 'החודש הקודם', 'Next month': 'החודש הבא', 'Close calendar': 'סגירת לוח השנה', 'Interface language': 'שפת הממשק',
+    'Divine name in the Hebrew text': 'שם ה׳ בטקסט העברי', 'With vowels': 'בניקוד', 'Without vowels': 'בלי ניקוד', 'HaShem': 'השם',
+    'Vowels only': 'ניקוד בלבד', 'Vowels and cantillation marks (te’amim)': 'ניקוד וטעמי המקרא', 'Hebrew New Testament': 'הברית החדשה בעברית',
+    'Franz Delitzsch, 1885': 'פרנץ דליטש, 1885', 'Bible Society in Israel, 1995 (modern Hebrew)': 'החברה לכתבי הקודש בישראל, 1995 (עברית בת זמננו)'
+  };
+  // The Torah portions and months, in Hebrew
+  var HE_PARASHA = {
+    'Beresheet': 'בראשית', 'Noach': 'נח', 'Lech Lecha': 'לך לך', 'Vayera': 'וירא', 'Chayei Sarah': 'חיי שרה', 'Toldot': 'תולדות',
+    'Vayetze': 'ויצא', 'Vayishlach': 'וישלח', 'Vayeshev': 'וישב', 'Miketz': 'מקץ', 'Vayigash': 'ויגש', 'Vayechi': 'ויחי',
+    'Shmot': 'שמות', 'Va’era': 'וארא', 'Bo': 'בא', 'Beshalach': 'בשלח', 'Yitro': 'יתרו', 'Mishpatim': 'משפטים', 'Trumah': 'תרומה',
+    'Tetzaveh': 'תצוה', 'Ki Tisa': 'כי תשא', 'Vayak’hel': 'ויקהל', 'Pekudei': 'פקודי', 'Vayikra': 'ויקרא', 'Tsav': 'צו',
+    'Shmini': 'שמיני', 'Tazria': 'תזריע', 'Metzora': 'מצורע', 'Acharei Mot': 'אחרי מות', 'Kedoshim': 'קדושים', 'Emor': 'אמור',
+    'Behar': 'בהר', 'Bechukotai': 'בחוקותי', 'Bamidbar': 'במדבר', 'Nasso': 'נשא', 'Beha’alotcha': 'בהעלותך', 'Shlach': 'שלח',
+    'Korach': 'קרח', 'Chukat–Balak': 'חוקת–בלק', 'Pinchas': 'פינחס', 'Mattot–Massei': 'מטות–מסעי', 'Dvarim': 'דברים',
+    'Va’etchanan': 'ואתחנן', 'Ekev': 'עקב', 'Re’eh': 'ראה', 'Shoftim': 'שופטים', 'Ki Tetze': 'כי תצא', 'Ki Tavo': 'כי תבוא',
+    'Nitzavim–Vayelech': 'נצבים–וילך', 'Ha’azinu': 'האזינו', 'Vezot HaBracha': 'וזאת הברכה', 'Pesach': 'פסח', 'Shavuot': 'שבועות',
+    'Rosh HaShanah': 'ראש השנה', 'Yom Kippur': 'יום כיפור', 'Sukkot': 'סוכות'
+  };
+  var HE_HMON = { Tishrei: 'תשרי', Cheshvan: 'חשוון', Kislev: 'כסלו', Tevet: 'טבת', Shvat: 'שבט', Adar: 'אדר', 'Adar I': 'אדר א׳',
+    'Adar II': 'אדר ב׳', Nisan: 'ניסן', Iyar: 'אייר', Sivan: 'סיוון', Tamuz: 'תמוז', Av: 'אב', Elul: 'אלול' };
+  var HE_GMON = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+  var EN_MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  // A day of the month in Hebrew letters: ט״ז, כ׳
+  function heDay(n) {
+    var ones = 'אבגדהוזחט', tens = 'יכל', s;
+    if (n === 15) s = 'טו'; else if (n === 16) s = 'טז';
+    else s = (n >= 10 ? tens.charAt(Math.floor(n / 10) - 1) : '') + (n % 10 ? ones.charAt(n % 10 - 1) : '');
+    return s.length > 1 ? s.slice(0, -1) + '״' + s.slice(-1) : s + '׳';
+  }
+  var HE_LABEL = { Torah: 'תורה', Prophets: 'נביאים', Writings: 'כתובים', Apostles: 'שליחים', Haftarah: 'הפטרה', Maftir: 'מפטיר',
+    Gospels: 'בשורות', Epistles: 'איגרות', 'Rosh Chodesh': 'ראש חודש', Synagogue: 'בית הכנסת', Morning: 'בוקר', Afternoon: 'אחר הצהריים', Evening: 'ערב' };
+  var HE_ORD = { First: 'הראשונה', Second: 'השנייה', Third: 'השלישית', Fourth: 'הרביעית', Fifth: 'החמישית', Sixth: 'השישית', Seventh: 'השביעית' };
+  var HE_PATTERNS = [
+    [/^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$/, function (m, mo, y) {
+      return HE_GMON[EN_MON.indexOf(mo.slice(0, 3))] + ' ' + y; }],
+    [/^Mark (.+) [Cc]omplete$/, function (m, x) { return 'סיום קריאה: ' + (HE_LABEL[x] || x); }],
+    [/^Mark (.+) Read$/, function (m, x) { return 'סיום קריאה: ' + x; }],
+    [/^(\d+) of (\d+)$/, '$1 מתוך $2'],
+    [/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh) reading from the Torah Portion$/, function (m, o) { return 'הקריאה ' + HE_ORD[o] + ' בפרשת השבוע'; }],
+    [/^All (\d+) readings complete$/, 'כל $1 הקריאות הושלמו'],
+    [/^(\d+) readings?$/, function (m, n) { return n === '1' ? 'קריאה אחת' : n + ' קריאות'; }],
+    [/^(\d{4}) · Day (\d+) of (\d+)$/, '$1 · יום $2 מתוך $3'],
+    [/^(\d+)% of the year$/, '$1% מהשנה']
+  ];
+  // The top of the day: the date (Hebrew date first, as in the journal: "כ״ג בתשרי / 13 באוקטובר") and the portion
+  function all(base, sel) {   // the matching elements in base, base itself included
+    var list = Array.prototype.slice.call(base.querySelectorAll(sel));
+    if (base.matches && base.matches(sel)) list.unshift(base);
+    return list;
+  }
+  function heHeader(root) {
+    var base = root.querySelectorAll ? root : document;
+    all(base, '.page-date-text:not([data-he])').forEach(function (el) {
+      var sp = el.querySelectorAll('.nw');
+      if (!sp.length) return;
+      var g = sp[0].textContent.trim().match(/^(\d{1,2}) ([A-Za-z]{3})/);
+      var h = sp[1] && sp[1].textContent.trim().match(/^(\d{1,2}) (.+)$/);
+      var gs = g ? g[1] + ' ב' + HE_GMON[EN_MON.indexOf(g[2])] : sp[0].textContent;
+      var hs = h ? heDay(+h[1]) + ' ב' + (HE_HMON[h[2]] || h[2]) : '';
+      el.setAttribute('data-he', '');
+      el.innerHTML = (hs ? '<span class="nw">' + hs + '</span> / ' : '') + '<span class="nw">' + gs + '</span>';
+    });
+    all(base, '.page-parsha:not(.page-weekday):not([data-he])').forEach(function (el) {
+      var em = el.querySelector('.parsha-name em');
+      if (!em || !/^Torah Portion/.test(el.textContent)) return;
+      var name = em.textContent.trim();
+      el.setAttribute('data-he', '');
+      el.innerHTML = 'פרשת <span class="parsha-name">' + (HE_PARASHA[name] || name) + '</span>';
+    });
+    all(base, '.division-label:not([data-he])').forEach(function (el) {
+      var t = el.firstChild;
+      if (t && t.nodeType === 3 && HE_LABEL[t.nodeValue.trim()]) { t.nodeValue = HE_LABEL[t.nodeValue.trim()] + ' '; el.setAttribute('data-he', ''); }
+    });
+  }
+  // The blessings: the Hebrew alone (as in the journal), with the journal's headings for who prays them
+  var HE_WHO = { 'For all believers in Messiah:': 'לכל המאמינים במשיח:', 'Jewish disciples pray:': 'תלמידים יהודים מתפללים:' };
+  function heBlessings(root) {
+    all(root.querySelectorAll ? root : document, '.blessings-section:not([data-he])').forEach(function (sec) {
+      sec.setAttribute('data-he', '');
+      var title = sec.querySelector('.blessings-title');
+      if (title) title.textContent = 'ברכות';
+      sec.querySelectorAll('.blessing').forEach(function (bl) {
+        var who = bl.querySelector('.blessing-who'), he = bl.querySelector('.hebrew-blessing');
+        if (!he) return;
+        if (who && who.firstChild && who.firstChild.nodeType === 3) {
+          var k = who.firstChild.nodeValue.trim();
+          if (HE_WHO[k]) who.firstChild.nodeValue = HE_WHO[k] + ' ';
+        }
+        Array.prototype.slice.call(bl.childNodes).forEach(function (n) { if (n !== who && n !== he) bl.removeChild(n); });
+        bl.setAttribute('lang', 'he');
+      });
+    });
+  }
+
   // ── State ──
   var lang = 'en', allowed = false;
+  var DICT = { sv: { t: SV, a: SV_ATTR, p: SV_PATTERNS, extra: svBlessings },
+               he: { t: HE, a: HE_ATTR, p: HE_PATTERNS, extra: function (r) { heHeader(r); heBlessings(r); } } };
   function hex(buf) { return Array.prototype.map.call(new Uint8Array(buf), function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
   function check() {
     var a = null;
@@ -221,12 +379,12 @@
 
   // ── Translating the page ──
   function tr(t) {
-    var key = t.trim();
-    if (!key) return null;
-    var out = SV[key];
+    var key = t.trim(), D = DICT[lang];
+    if (!key || !D) return null;
+    var out = D.t[key];
     if (out === undefined) {
-      for (var i = 0; i < SV_PATTERNS.length; i++) {
-        var p = SV_PATTERNS[i];
+      for (var i = 0; i < D.p.length; i++) {
+        var p = D.p[i];
         if (p[0].test(key)) { out = key.replace(p[0], p[1]); break; }
       }
     }
@@ -234,10 +392,11 @@
     return t.replace(key, out);   // keep the spaces around it
   }
   function trAttr(v) {
-    var k = v.trim();
-    if (SV_ATTR[k] !== undefined) return SV_ATTR[k];
-    if (SV[k] !== undefined) return SV[k];
-    for (var i = 0; i < SV_PATTERNS.length; i++) if (SV_PATTERNS[i][0].test(k)) return k.replace(SV_PATTERNS[i][0], SV_PATTERNS[i][1]);
+    var k = v.trim(), D = DICT[lang];
+    if (!D) return null;
+    if (D.a[k] !== undefined) return D.a[k];
+    if (D.t[k] !== undefined) return D.t[k];
+    for (var i = 0; i < D.p.length; i++) if (D.p[i][0].test(k)) return k.replace(D.p[i][0], D.p[i][1]);
     return null;
   }
   function translate(root) {
@@ -250,7 +409,7 @@
     var n, todo = [];
     while ((n = w.nextNode())) { var t = tr(n.nodeValue); if (t !== null) todo.push([n, t]); }
     todo.forEach(function (x) { x[0].nodeValue = x[1]; });
-    svBlessings(base.querySelectorAll ? base : document);
+    DICT[lang].extra(base.querySelectorAll ? base : document);
     var els = [base].concat(Array.prototype.slice.call(base.querySelectorAll('[aria-label],[title],[placeholder]')));
     els.forEach(function (el) {
       if (!el.getAttribute || el.closest(EXCLUDE)) return;
@@ -340,8 +499,8 @@
     lang = saved === 'sv' || saved === 'he' ? saved : 'en';
     addControls();
     if (lang !== 'he') unRtl();
-    if (lang !== 'sv') return;
-    document.documentElement.lang = 'sv';
+    if (!DICT[lang]) return;
+    document.documentElement.lang = lang;
     translate(document);
     new MutationObserver(function (list) {
       list.forEach(function (m) {

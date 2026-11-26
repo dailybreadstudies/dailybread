@@ -280,7 +280,25 @@ pixels; decide per panel (mirror, or keep the map itself `dir="ltr"`). Script-se
   converted unchanged from the built .ttf in EzerIT/BibleOL, since the Culmus GitHub repo has only .sfd sources)
   for the Hebrew reading text (`--bible-he`); **Heebo** (Google Fonts, OFL) as the interface sans when `html[data-rtl]`.
   The Hebrew lines under the English verses still use SBL Hebrew (`--hebrew`) — switch them to Shofar too if wanted.
-- Not yet: "Parallel" (DBV under the Hebrew verses), Hebrew interface wording (step 4).
+- Not yet: "Parallel" (DBV under the Hebrew verses).
+
+**Hebrew interface, first round (26 Nov 2026, John's notes):**
+- i18n.js now has one dictionary per language (`DICT.sv`, `DICT.he`: `HE`, `HE_ATTR`, `HE_PATTERNS`), wording from the
+  journal *לחם חוקנו* where it has it. Covered: top menu, Today's top (date "ט״ז בכסלו / 26 בנובמבר" — Hebrew date first,
+  journal style, `heHeader`; weekday; "פרשת וישלח" `HE_PARASHA`; the reading list labels תורה נביאים כתובים שליחים הפטרה),
+  prayer line and its (i), section labels (Hebrew only), the Torah reading's subtitle, Mark complete/Prev/Next, the
+  settings panel, calendar, footer basics. Special days use Hebcal's Hebrew names (reader.js `dayEventsHtml`).
+- Blessings: the Hebrew alone, under "ברכות" with the journal's headings (`heBlessings`); shown whatever Original
+  Languages is set to.
+- Today box in Hebrew: "היום" + Hebcal's Hebrew names; candle lighting "הדלקת נרות לשבת: … · צאת השבת: …". John's own
+  English calendar notes, the Shabbat "about" paragraphs and Today in History are hidden in the Hebrew interface until
+  they are translated.
+- **Listen is hidden in Hebrew** (menu, the LISTEN row, ▶ beside chapters, the player) until there is a Hebrew audio Bible.
+- Type in Hebrew: every sans → **Heebo**; every serif keeps its Latin face for English words and sets Hebrew in **Shofar**,
+  which is **Demi-Bold at every weight** (John: the regular is too thin; the regular .woff stays in the folder, unused).
+  No letter-spacing and no italics for Hebrew.
+- Not yet in Hebrew: Progress page details, Dig deeper, About/Learn, account pages, the "Go deeper into … Messiah in the
+  Torah" line, the day-complete box's longer texts, the DAILY BREAD wordmark (an SVG; a לחם חוקנו mark would be new art).
 
 ## Settings menu (A/א)
 Redesigned Nov 2026 (a live preview at the top was tried and removed at John's request): Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),

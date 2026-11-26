@@ -7,17 +7,13 @@
   src: url('fonts/SBL_Hbrw.ttf') format('truetype');
   font-display: swap;
 }
-/* Shofar (Yoram Gnat, Culmus; GPL 2 with the font exception, see assets/fonts/shofar/): the Hebrew Bible text
-   in the Hebrew edition. Only downloaded when that text is shown. */
-@font-face {
-  font-family: 'Shofar';
-  src: url('fonts/shofar/ShofarRegular.woff') format('woff');
-  font-weight: 400; font-display: swap;
-}
+/* Shofar (Yoram Gnat, Culmus; GPL 2 with the font exception, see assets/fonts/shofar/): the Hebrew Bible text and
+   the serif type of the Hebrew interface. Demi-Bold at every weight (John, Nov 2026: the regular is too thin).
+   Only downloaded when Hebrew is shown in it. */
 @font-face {
   font-family: 'Shofar';
   src: url('fonts/shofar/ShofarDemi-Bold.woff') format('woff');
-  font-weight: 600 700; font-display: swap;
+  font-weight: 100 900; font-display: swap;
 }
 @font-face {
   font-family: 'SBL Greek';
@@ -1429,8 +1425,27 @@ html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
 
 /* ── Right to left: the Hebrew interface (html[dir="rtl"], set from dbs-lang before the page paints) ──
    The layout mirrors by itself (start/end rules, tools/css_logical.py). What is added here: */
-/* Interface type: Heebo (OFL, Google Fonts) for Hebrew, Inter kept for Latin */
-html[data-rtl] { --sans: 'Heebo', 'Inter', 'Helvetica Neue', Arial, sans-serif; }
+/* Interface type in Hebrew: every sans serif becomes Heebo (OFL, Google Fonts); every serif keeps its Latin face
+   for English words, and its Hebrew letters are set in Shofar Demi-Bold */
+html[data-rtl] {
+  --sans: 'Heebo', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Source Serif 4', 'Shofar', 'Merriweather', Georgia, serif;
+  --display: 'Merriweather', 'Shofar', Georgia, serif;
+}
+/* Hebrew is not letter-spaced or set in capitals (the English labels' small caps) */
+html[data-rtl] body *:not(.scripture):not(.scripture *) { letter-spacing: normal !important; }
+/* No Hebrew audio Bible yet: Listen is left out of the Hebrew interface (menu, the LISTEN row, ▶ beside chapters) */
+html[data-rtl] a[href$="listen.html"], html[data-rtl] .dp-listen, html[data-rtl] .ba-btn, html[data-rtl] .pod-dock { display: none !important; }
+/* Hebrew is not set in italics (the reading's subtitle, the portion name) */
+html[data-rtl] :is(.sub-reading, .parsha-name, .parsha-name em, .chapter-sub:has(.sub-reading)) { font-style: normal; }
+/* Today in History is English for now: left out of the Hebrew interface until it is translated */
+html[data-rtl] .history-box { display: none !important; }
+html[data-rtl] .page-parsha[data-he] .parsha-name { display: inline; }   /* "פרשת וישלח" on one line, also on phones */
+/* The section labels: Hebrew only (the English label is translated, the pointed Hebrew beside it is left out) */
+html[data-rtl] .division-label .he { display: none; }
+/* Blessings: the Hebrew is the blessing (not only with Original Languages on) */
+html[data-rtl] .blessing .hebrew-blessing { display: block !important; margin-top: 0; }
+html[data-rtl] .blessing .hebrew-blessing { font-family: 'Shofar', var(--hebrew); }
 /* A Bible text that is not Hebrew stays left to right as a whole (verses, margin titles, map pins). */
 html[dir="rtl"] .scripture:not([dir="rtl"]), html[dir="rtl"] .footnote-list:not([dir="rtl"]) { direction: ltr; }
 /* Mixed snippets take their direction from what they say ("1 Samuel 8", "26 Nov. / 16 Kislev", "18 min") */

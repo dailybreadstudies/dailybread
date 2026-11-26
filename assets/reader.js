@@ -3124,7 +3124,7 @@
     dayEvents = list;
     return list.map(function (ev, i) {
       return ', <button type="button" class="day-event" data-ev="' + i + '"' + (ev.memo ? '' : ' disabled') + '>' +
-        escapeAttr(shortEvent(ev.title)) + '</button>';
+        escapeAttr(document.documentElement.hasAttribute('data-rtl') && ev.he ? ev.he : shortEvent(ev.title)) + '</button>';   // Hebrew interface: Hebcal's Hebrew name
     }).join('');
   }
   document.addEventListener('click', function (e) {
@@ -3203,7 +3203,16 @@
       });
       notes.forEach(function (n) { if (!n.used) items.push({ own: n.text }); });
       var label = 'Today';
+      // Hebrew interface: Hebcal's Hebrew names only; the English notes (John's own, the Shabbat "about" paragraphs)
+      // wait for their translation
+      var heUI = document.documentElement.hasAttribute('data-rtl');
+      if (heUI) { label = 'היום'; items = items.filter(function (it) { return !it.own; }); }
       var html = items.map(function (it, i) {
+        if (heUI) {
+          var hl = i === 0 ? '<span class="lead">' + label + '</span> ' : '';
+          if (it.parasha) return '<p>' + hl + 'קוראים בבתי הכנסת ברחבי העולם את ' + escapeAttr(it.he || ('פרשת ' + it.title.replace(/^Parashat\s+/, ''))) + '.</p>';
+          return '<p>' + hl + '<span class="today-title">' + escapeAttr(it.he || it.title) + '</span>.</p>';
+        }
         var lead = i === 0 ? '<span class="lead">' + label + '</span> ' : '';
         if (it.own) return '<p class="own-note">' + lead + richText(i === 0 ? afterLead(it.own) : it.own) + '</p>';
         // "Today the Torah portion Noach (Noah) is read in synagogues around the world."
@@ -3225,12 +3234,12 @@
       html = lastP >= 0 ? html.slice(0, lastP) + ' ' + shabbatSpan + html.slice(lastP)
         : '<p>' + shabbatSpan + '</p>';
       // Shabbat / Yom Tov: how the Haftarah and the Apostles reading connect (day file "about"), then any note
-      if (day.about && day.about.length) {
+      if (day.about && day.about.length && !heUI) {
         html += day.about.map(function (para) { return '<p class="today-about">' + richText(para) + '</p>'; }).join('');
       }
       box.innerHTML = html;
       applyDivineName(box);
-      box.hidden = !items.length && !(day.about && day.about.length);
+      box.hidden = !items.length && !(day.about && day.about.length && !heUI);
       drawShabbat(day.date);
     });
   }
@@ -3302,6 +3311,16 @@
     shabbatTimes(iso, loc).then(function (t) {
       if (!document.body.contains(line) || !t) return;
       var parts = [];
+      var heUI = document.documentElement.hasAttribute('data-rtl');
+      if (heUI) {   // "היום הדלקת נרות לשבת: 16:12 · צאת השבת: 17:20 (Jerusalem)"
+        if (t.havdalah[iso]) parts.push('צאת ' + (new Date(iso + 'T12:00:00').getDay() === 6 ? 'השבת' : 'החג') + ': <strong>' + t.havdalah[iso] + '</strong>');
+        if (t.candles[iso]) parts.push('הדלקת נרות ל<span class="cl-for">' + (new Date(iso + 'T12:00:00').getDay() === 5 ? 'שבת' : 'יום טוב') + '</span>: <strong>' + t.candles[iso] + '</strong>');
+        if (!parts.length) return;
+        line.innerHTML = (box.hidden ? '<span class="lead">היום</span> ' : '') + parts.join(' · ') + ' (' + escapeAttr(loc.name) + ') ' + locPicker();
+        line.hidden = false;
+        box.hidden = false;
+        return;
+      }
       // "Today the candle lighting time for Shabbat is 17:21 in Jerusalem"
       if (t.havdalah[iso]) parts.push('havdalah time marking the end of ' +
         (new Date(iso + 'T12:00:00').getDay() === 6 ? 'Shabbat' : 'the festival') + ' is at <strong>' + t.havdalah[iso] + '</strong>');
