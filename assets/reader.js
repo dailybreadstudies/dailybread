@@ -77,7 +77,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb' };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', heNT: 'delitzsch', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb' };
   var DEFAULTS = JSON.parse(JSON.stringify(settings));   // for "Reset to defaults" in the A/א menu
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
@@ -664,6 +664,15 @@
     return Promise.all(cs.map(function (c) { return sfbChapter(book, c); })).then(function () { sfbFail = null; return book; },
       function (err) { sfbFail = err.message || 'not reachable'; return loadBook(id); });
   }
+  function chaptersOf(day, id) {   // the chapters of a book that a day's readings use
+    var cs = [];
+    day.portions.forEach(function (p) {
+      var r = parseRef(p.ref);
+      if (r.book !== id) return;
+      (r.parts || [r]).forEach(function (x) { for (var c = x.c1; c <= x.c2; c++) if (cs.indexOf(c) < 0) cs.push(c); });
+    });
+    return cs;
+  }
   function isSfb(id) {
     if (!current) return false;
     if (current.bible) return !!(current.bookData && current.bookData.id === id && current.bookData.sfb);
@@ -767,9 +776,23 @@
                                        : 'The biblical text is the Daily Bread Version (DBV) working project, presented in a classic English translation style and built on the solid scholarship of the Berean Standard Bible (BSB), with its translation notes.')
               : lang === 'sv' ? 'Bibeltexten återges i en klassisk engelsk översättningsstil, byggd på den gedigna forskningen bakom Berean Standard Bible (BSB), med dess översättningsnoter.' : ct.getAttribute('data-bsb');
       ct.innerHTML = shown && v.foot ? (v.foot[lang] || v.foot.en) : bsb;
+      if (heNT95() && settings.original !== 'off' && document.querySelector('#portions .vp-orig.he, #portions .orig-only .he, #portions [lang="he"]') &&
+          Object.keys(current && current.books || {}).concat(current && current.book ? [current.book] : []).some(isNT)) {
+        ct.innerHTML += lang === 'sv' ? ' Hebreiska Nya testamentet (1995): © 1995 Bible Society in Israel, via Bible Brain.' : ' Hebrew New Testament (1995): © 1995 Bible Society in Israel, via Bible Brain.';
+      }
     }
   }
   // The "Translation" choice in Reading Settings, for the readers allowed to see it
+  function heNTRow() {
+    var nt = document.querySelector('#settings-panel .sp-nt-row');
+    if (!sfbOk || !nt || document.querySelector('.sp-hent-row')) return;
+    var row = document.createElement('div');
+    row.className = 'sp-row sp-hent-row';
+    row.innerHTML = '<span class="sp-label">Hebrew NT</span><div class="sp-seg sp-ctl" role="group" aria-label="Hebrew New Testament">' +
+      '<button type="button" data-hent="delitzsch" aria-pressed="true" title="Franz Delitzsch, 1885">Delitzsch</button>' +
+      '<button type="button" data-hent="bs1995" aria-pressed="false" title="Bible Society in Israel, 1995 (modern Hebrew)">1995</button></div>';
+    nt.parentNode.insertBefore(row, nt.nextSibling);
+  }
   function sfbSettingsRow() {
     var sec = document.querySelector('#settings-panel .sp-sec .sp-switch[data-setting="verseNumbers"]');
     if (!sfbOk || !sec || document.querySelector('[data-version-select]')) return;
@@ -1207,6 +1230,22 @@
     }
     return origCache[key];
   }
+  // The Bible Society in Israel's 1995 Modern Hebrew New Testament (Bible Brain, HBRHMTN_ET), a second Hebrew NT beside
+  // Delitzsch: licensed, so fetched live chapter by chapter (only the chapters being read) through the bible-text function
+  var H95 = 'HBRHMTN_ET';
+  var origChapters = {};   // book → chapters the page is about to show (set where the readings are loaded)
+  function heNT95() { return sfbOk && settings.heNT === 'bs1995'; }
+  function loadOrigH95(id) {
+    var key = id + ':h95data';
+    var d = origCache[key] || (origCache[key] = { id: id, lang: 'he', nt: true, h95: true, v: {}, got: {} });
+    var cs = (origChapters[id] || []).filter(function (c) { return !d.got[c]; });
+    return Promise.all(cs.map(function (c) {
+      d.got[c] = bbGet('/bibles/filesets/' + H95 + '/' + id + '/' + c).then(function (j) {
+        (j.data || []).forEach(function (v) { if (v.verse_text) d.v[c + ':' + v.verse_start] = escText(String(v.verse_text).trim()); });
+      }, function () { delete d.got[c]; });
+      return d.got[c];
+    })).then(function () { return d; });
+  }
   // Septuagint (Swete) for the Tanakh readings, aligned to BSB verses (data/lxx/, built by tools/build_lxx.py)
   // Notes where the Apostles quote the Septuagint's wording (data/lxx/quotes.json): shown once approved;
   // ?lxxquotes=all previews the drafts
@@ -1239,10 +1278,10 @@
   }
   function origsFor(id) {
     return origSources(id).map(function (k) {
-      return k === 'he' ? origCache[id + ':hedata'] : k === 'lxx' ? origCache[id + ':lxxdata'] : origCache[id + ':data'];
+      return k === 'he' ? origCache[id + (heNT95() ? ':h95data' : ':hedata')] : k === 'lxx' ? origCache[id + ':lxxdata'] : origCache[id + ':data'];
     }).filter(Boolean);
   }
-  function loadSource(id, k) { return k === 'he' ? loadOrigHe(id) : k === 'lxx' ? loadOrigLxx(id) : loadOrig(id); }
+  function loadSource(id, k) { return k === 'he' ? (heNT95() ? loadOrigH95(id) : loadOrigHe(id)) : k === 'lxx' ? loadOrigLxx(id) : loadOrig(id); }
   function loadOrig(id) {
     if (!origCache[id]) {
       origCache[id] = getJSON('data/orig/' + id + '.json').then(function (d) { origCache[id + ':data'] = d; return d; })
@@ -2552,6 +2591,9 @@
     pressed('data-cant', settings.cantillation ? 'on' : 'off');
     pressed('data-otorig', settings.otOrig || 'he');
     pressed('data-ntorig', settings.ntOrig || 'grc');
+    pressed('data-hent', settings.heNT || 'delitzsch');
+    var hr = panel.querySelector('.sp-hent-row');
+    if (hr) hr.hidden = !(settings.ntOrig === 'he' || settings.ntOrig === 'both');   // only when a Hebrew NT is shown
     var vs = panel.querySelector('[data-version-select]');
     if (vs) vs.value = sweOk(settings.version) ? settings.version : 'bsb';
     // Only the options that apply to the chosen Bible text: the Swedish texts have no margin titles, no switchable
@@ -2616,6 +2658,9 @@
       rerender();
     } else if (t.hasAttribute('data-ntorig')) {
       settings.ntOrig = t.getAttribute('data-ntorig');
+      rerender();
+    } else if (t.hasAttribute('data-hent')) {
+      settings.heNT = t.getAttribute('data-hent');
       rerender();
     } else if (t.hasAttribute('data-otorig')) {
       settings.otOrig = t.getAttribute('data-otorig');
@@ -3330,6 +3375,8 @@
   function rerender() {
     if (!current) return;
     var ids = current.bible ? [current.book] : Object.keys(current.books);
+    if (current.bible) origChapters[current.book] = [current.c];
+    else ids.forEach(function (id) { origChapters[id] = chaptersOf(current.day, id); });
     var anchor = readingAnchor();
     neededOrig(ids).then(function () {
       if (current.bible) renderChapter(current.bookData, current.c, null);
@@ -3340,6 +3387,7 @@
 
   function loadChapter(book, c, v, replace) {
     if (PAGE !== 'today') { location.href = './?r=' + book + '.' + c + (v ? '.' + v : ''); return new Promise(function () {}); }
+    origChapters[book] = [c];
     return Promise.all([loadText(book, [{ c1: c, c2: c }]), neededOrig([book])]).then(function (res) {
       var data = res[0];
       var url = location.pathname + '?r=' + book + '.' + c + (v ? '.' + v : '');
@@ -3626,6 +3674,7 @@
       var ids = day.portions.map(function (p) { return parseRef(p.ref).book; })
         .filter(function (v, i, a) { return a.indexOf(v) === i; });
       var refsOf = function (id) { return day.portions.map(function (p) { return parseRef(p.ref); }).filter(function (r) { return r.book === id; }); };
+      ids.forEach(function (id) { origChapters[id] = chaptersOf(day, id); });
       return Promise.all(ids.map(function (id) { return loadText(id, refsOf(id)); }).concat([neededOrig(ids)])).then(function (list) {
         list = list.slice(0, ids.length);
         var books = {};
@@ -3652,7 +3701,7 @@
   // ── Start ────────────────────────────────────────────────────
   Promise.all([getJSON(DAYS_DIR + 'index.json'), getJSON('data/bsb/index.json'),
                getJSON('data/hebrew-names.json').catch(function () { return {}; }),
-               sfbCheck().then(sfbSettingsRow)])
+               sfbCheck().then(function () { sfbSettingsRow(); heNTRow(); })])
     .then(function (res) {
       planDays = res[0].days.slice().sort();
       fullPlan = res[0].plan || {};

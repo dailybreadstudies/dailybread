@@ -58,7 +58,7 @@
     'Apostolic Scriptures Twice a Year': 'De Apostoliska Skrifterna två gånger om året',
     'Reads the Gospels and Epistles every day': 'Läser evangelierna och breven varje dag',
     'How to use the reader': 'Så använder du läsaren', 'Reset to defaults': 'Återställ standardinställningar',
-    'Language': 'Språk',
+    'Language': 'Språk', 'Hebrew NT': 'Hebreiska NT',
     // calendar
     'Sun': 'Sön', 'Mon': 'Mån', 'Tue': 'Tis', 'Wed': 'Ons', 'Thu': 'Tor', 'Fri': 'Fre', 'Sat': 'Lör',
     'read': 'läst', 'holiday or Rosh Chodesh': 'högtid eller Rosh Chodesh',
@@ -103,7 +103,8 @@
     'Previous chapter': 'Föregående kapitel', 'Next chapter': 'Nästa kapitel', 'Close': 'Stäng', 'Previous month': 'Föregående månad',
     'Next month': 'Nästa månad', 'Close calendar': 'Stäng kalendern', 'Torah': 'Torah', 'Prophets': 'Profeterna', 'Writings': 'Skrifterna',
     'Apostles': 'Apostlarna', 'Haftarah': 'Haftara', 'Interface language': 'Gränssnittets språk',
-    'Your study books on four shelves': 'Dina studieböcker på fyra hyllor'
+    'Your study books on four shelves': 'Dina studieböcker på fyra hyllor',
+    'Hebrew New Testament': 'Hebreiska Nya testamentet', 'Bible Society in Israel, 1995 (modern Hebrew)': 'Bibelsällskapet i Israel, 1995 (modern hebreiska)'
   };
   // The Torah portions' meanings, from the journal where it has them
   var SV_PARASHA = {
