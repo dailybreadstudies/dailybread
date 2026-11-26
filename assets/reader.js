@@ -77,7 +77,7 @@
 
   // Which page this is: 'today' (index.html) or 'progress' (progress.html)
   var PAGE = document.body.getAttribute('data-page') || 'today';
-  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', heNT: 'delitzsch', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb' };
+  var settings = { size: 1, font: 'serif', theme: 'system', divineName: 'lord', messianic: true, hebrewNames: false, location: null, original: 'off', cantillation: false, blessingsOpen: false, justify: true, verseNumbers: true, apostlesTwice: false, apostlesSince: null, ntOrig: 'grc', heNT: 'delitzsch', otOrig: 'he', showOG: false, marginTitles: true, version: 'bsb', heDivine: 'pointed' };
   var DEFAULTS = JSON.parse(JSON.stringify(settings));   // for "Reset to defaults" in the A/א menu
   try {
     var saved = JSON.parse(localStorage.getItem(KEY + 'settings') || '{}');
@@ -519,18 +519,26 @@
     nkjv: { fileset: { O: 'ENGNKJO_ET', N: 'ENGNKJN_ET' }, json: true, lang: 'en', label: 'NKJV', name: 'New King James Version', credit: 'NKJV · © Thomas Nelson', flow: true,
       foot: { en: 'Scripture taken from the New King James Version®. Copyright © 1982 by Thomas Nelson. Used by permission. All rights reserved. Via Bible Brain (Faith Comes By Hearing).',
               sv: 'Bibeltexten är New King James Version®, © 1982 Thomas Nelson. Används med tillstånd. Alla rättigheter förbehållna. Via Bible Brain (Faith Comes By Hearing).' } },
+    // The Hebrew Bible from the site's own data (Hebrew edition, Nov 2026): Tanakh = Miqra according to the Masorah
+    // (data/orig, with its petuchot and setumot as paragraphs), Apostles = Delitzsch (data/orig-hent) or the Bible
+    // Society in Israel's 1995 NT (Bible Brain), in the DBV's paragraphs. No filters (heChapter, heMarks).
+    he: { local: true, lang: 'he', label: 'עברית', name: 'עברית · Hebrew', credit: 'מקרא על פי המסורה · דליטש', flow: true,
+      foot: { en: 'The Hebrew biblical text: the Tanakh is <i>Miqra according to the Masorah</i> (MAM), with its open and closed paragraphs, from <a href="https://en.wikisource.org/wiki/User:Dovi/Miqra_according_to_the_Masorah#beginning" rel="noopener">Hebrew Wikisource</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>; the Apostolic Writings are Franz Delitzsch’s Hebrew New Testament (1885; vowel pointing © 2003 Streams in the Negev, non-commercial use) or the Bible Society in Israel’s Modern Hebrew New Testament (© 1995, via Bible Brain), laid out in the paragraphs of the DBV. Hebrew type: Shofar (Yoram Gnat, Culmus project, GPL with the font exception).',
+              sv: 'Den hebreiska bibeltexten: Tanach är <i>Miqra according to the Masorah</i> (MAM), med dess öppna och slutna stycken, från hebreiska Wikisource, CC BY-SA 4.0; de apostoliska skrifterna är Franz Delitzschs hebreiska Nya testamente (1885; vokalisering © 2003 Streams in the Negev) eller Bibelsällskapet i Israels moderna hebreiska Nya testamente (© 1995, via Bible Brain). Hebreiskt typsnitt: Shofar (Yoram Gnat, Culmus).',
+              he: 'הטקסט העברי: התנ״ך – מקרא על פי המסורה (MAM), עם הפרשות הפתוחות והסתומות, מוויקיטקסט העברי, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener">CC BY-SA 4.0</a>; כתבי השליחים – תרגום פרנץ דליטש (1885; ניקוד © 2003 Streams in the Negev) או תרגום החברה לכתבי הקודש בישראל (© 1995, באמצעות Bible Brain). גופן: שופר (יורם גנת, פרויקט קולמוס).' } },
     nasb: { fileset: { O: 'ENGNASO_ET', N: 'ENGNASN_ET' }, json: true, lang: 'en', label: 'NASB', name: 'New American Standard Bible (1995)', credit: 'NASB · © The Lockman Foundation', flow: true,
       foot: { en: 'Scripture taken from the New American Standard Bible®, Copyright © 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 by The Lockman Foundation. Used by permission. Via Bible Brain (Faith Comes By Hearing).',
               sv: 'Bibeltexten är New American Standard Bible®, © 1960, 1962, 1963, 1968, 1971, 1972, 1973, 1975, 1977, 1995 The Lockman Foundation. Används med tillstånd. Via Bible Brain (Faith Comes By Hearing).' } }
   };
   var BB = 'https://khmoofwmfyhpnxtbsswv.supabase.co/functions/v1/bible-text';
-  function uiLang() { try { return localStorage.getItem('dbs-lang') === 'sv' ? 'sv' : 'en'; } catch (e) { return 'en'; } }
+  function uiLang() { try { var l = localStorage.getItem('dbs-lang'); return l === 'sv' || l === 'he' ? l : 'en'; } catch (e) { return 'en'; } }
   // With the English interface the Swedish texts are not offered; with the Swedish interface everything is
-  function sweOk(k) { var v = SWE[k]; return !!(v && (v.id ? YV.key : v.fileset) && !(v.lang === 'sv' && uiLang() === 'en')); }
+  function sweOk(k) { var v = SWE[k]; return !!(v && (v.local || (v.id ? YV.key : v.fileset)) && !(v.lang === 'sv' && uiLang() === 'en')); }
   var NT_BOOKS = 'MAT MRK LUK JHN ACT ROM 1CO 2CO GAL EPH PHP COL 1TH 2TH 1TI 2TI TIT PHM HEB JAS 1PE 2PE 1JN 2JN 3JN JUD REV';
   function fsFor(v, book) { var f = v.fileset; return typeof f === 'string' ? f : f[NT_BOOKS.indexOf(book) >= 0 ? 'N' : 'O']; }
   function sweVer() { return sweOk(settings.version) ? SWE[settings.version] : null; }
   function svText() { var v = useSfb() && sweVer(); return !!(v && v.lang === 'sv'); }   // Swedish book names follow a Swedish text
+  function heText() { var v = useSfb() && sweVer(); return !!(v && v.lang === 'he'); }   // the Hebrew Bible is the reading text
   function bbGet(path) {
     return fetch(BB + '?path=' + encodeURIComponent(path)).then(function (r) {
       if (!r.ok) throw new Error('Bible Brain ' + r.status);
@@ -670,6 +678,7 @@
   }
   var sfbMetaFor = {};
   function sfbMeta2(v) {   // the version's metadata (copyright line), once
+    if (v.local) return Promise.resolve(null);
     var k = v.id || fsFor(v, 'GEN');
     if (!sfbMetaFor[k]) sfbMetaFor[k] = (v.id ? yvGet('/bibles/' + v.id) : bbGet('/bibles/filesets/' + k + '/copyright').then(function (j) {
       var c = j && (j.copyright || j.data || j);
@@ -680,18 +689,19 @@
   }
   var sfbCache = {};
   function sfbChapter(book, c) {
-    var v = sweVer(), key = (v.id || fsFor(v, book.id)) + ':' + book.id + '.' + c;
+    var v = sweVer(), key = (v.local ? 'he-' + (isNT(book.id) ? settings.heNT : 'mam') : v.id || fsFor(v, book.id)) + ':' + book.id + '.' + c;
     if (!sfbCache[key]) {
       sfbCache[key] = Promise.all([
-        v.id ? yvGet('/bibles/' + v.id + '/passages/' + book.id + '.' + c + '?format=html&include_headings=true&include_notes=true')
+        v.local ? heChapter(book, c)
+          : v.id ? yvGet('/bibles/' + v.id + '/passages/' + book.id + '.' + c + '?format=html&include_headings=true&include_notes=true')
              : bbFetchChapter(v, book.id, c),
         v.flow ? loadBook(book.id).catch(function () { return null; }) : null,
         sfbMeta2(v)
       ]).then(function (res) {
-        var own = !v.id && res[0].own;   // structured text: the publisher's own paragraphs, no layout from the BSB
+        var own = !v.id && res[0].own;   // structured text (or the Masoretic paragraphs): its own layout, none from the BSB
         var ch = v.id ? yvChapter(res[0].content || '', c) : res[0].ch;
         if (!ch.b.length) throw new Error('no text for this chapter');
-        if (own) { book.chapters[c - 1] = ch; book.heads = true; return; }
+        if (own) { book.chapters[c - 1] = ch; if (!v.local) book.heads = true; return; }
         var en = res[1] && res[1].chapters[c - 1];
         book.chapters[c - 1] = v.flow && en ? sfbReflow(ch, en) : ch;
       });
@@ -738,6 +748,92 @@
     });
     return { b: out, n: ch.n };
   }
+  // ── The Hebrew Bible as the reading text (Hebrew edition) ──
+  // Book names as in the Hebrew Daily Bread journal "לחם חוקנו"
+  var HE_BOOKS = {
+    GEN: 'בראשית', EXO: 'שמות', LEV: 'ויקרא', NUM: 'במדבר', DEU: 'דברים', JOS: 'יהושע', JDG: 'שופטים', RUT: 'רות',
+    '1SA': 'שמואל א', '2SA': 'שמואל ב', '1KI': 'מלכים א', '2KI': 'מלכים ב', '1CH': 'דברי הימים א', '2CH': 'דברי הימים ב',
+    EZR: 'עזרא', NEH: 'נחמיה', EST: 'אסתר', JOB: 'איוב', PSA: 'תהילים', PRO: 'משלי', ECC: 'קהלת', SNG: 'שיר השירים',
+    ISA: 'ישעיה', JER: 'ירמיה', LAM: 'איכה', EZK: 'יחזקאל', DAN: 'דניאל', HOS: 'הושע', JOL: 'יואל', AMO: 'עמוס',
+    OBA: 'עובדיה', JON: 'יונה', MIC: 'מיכה', NAM: 'נחום', HAB: 'חבקוק', ZEP: 'צפניה', HAG: 'חגי', ZEC: 'זכריה', MAL: 'מלאכי',
+    MAT: 'מתי', MRK: 'מרקוס', LUK: 'לוקס', JHN: 'יוחנן', ACT: 'מעשי השליחים', ROM: 'אל הרומים',
+    '1CO': 'הראשונה אל הקורינתים', '2CO': 'השנייה אל הקורינתים', GAL: 'אל הגלטים', EPH: 'אל האפסים',
+    PHP: 'אל הפיליפים', COL: 'אל הקולוסים', '1TH': 'הראשונה אל התסלוניקים', '2TH': 'השנייה אל התסלוניקים',
+    '1TI': 'הראשונה אל טימותיאוס', '2TI': 'השנייה אל טימותיאוס', TIT: 'אל טיטוס', PHM: 'אל פילימון', HEB: 'אל העברים',
+    JAS: 'איגרת יעקב', '1PE': 'איגרת פטרוס הראשונה', '2PE': 'איגרת פטרוס השנייה', '1JN': 'איגרת יוחנן הראשונה',
+    '2JN': 'איגרת יוחנן השנייה', '3JN': 'איגרת יוחנן השלישית', JUD: 'איגרת יהודה', REV: 'ההתגלות'
+  };
+  // Chapter numbers in Hebrew letters, as in the journal (verses stay in digits): 15 טו, 16 טז, 150 קנ
+  function heNum(n) {
+    var ones = 'אבגדהוזחט', tens = 'יכלמנסעפצ', hund = 'קרשת', s = '';
+    while (n >= 400) { s += 'ת'; n -= 400; }
+    if (n >= 100) { s += hund.charAt(Math.floor(n / 100) - 1); n %= 100; }
+    if (n === 15) return s + 'טו';
+    if (n === 16) return s + 'טז';
+    if (n >= 10) { s += tens.charAt(Math.floor(n / 10) - 1); n %= 10; }
+    if (n) s += ones.charAt(n - 1);
+    return s;
+  }
+  // "בראשית לד 1–לה 11", "תהילים מח", "יהודה 5–25"
+  function heRef(r) {
+    var name = HE_BOOKS[r.book] || r.book;
+    var one = (bookIndex || []).filter(function (b) { return b.id === r.book; })[0];
+    if (one && one.chapters === 1 && r.c1 === 1 && r.c2 === 1 && !(r.v1 === 1 && r.v2 === null)) {
+      return name + ' ' + r.v1 + (r.v2 === null ? '–סוף' : r.v2 !== r.v1 ? '–' + r.v2 : '');
+    }
+    var s = name + ' ' + heNum(r.c1), whole = r.v1 === 1;
+    if (r.c1 === r.c2) {
+      if (r.v2 === null && whole) return s;
+      if (r.v2 === null) return s + ' ' + r.v1 + '–סוף';
+      return s + ' ' + r.v1 + (r.v2 !== r.v1 ? '–' + r.v2 : '');
+    }
+    if (whole && r.v2 === null) return s + '–' + heNum(r.c2);
+    return s + ' ' + r.v1 + '–' + heNum(r.c2) + ' ' + (r.v2 === null ? 'סוף' : r.v2);
+  }
+  var HE_POETIC = { PSA: 1, PRO: 1, JOB: 1, LAM: 1 };   // one verse per line (the DBV's poetry layout)
+  function heH95(id, c) {   // one chapter of the 1995 NT
+    return bbGet('/bibles/filesets/' + H95 + '/' + id + '/' + c).then(function (j) {
+      var d = { id: id, nt: true, v: {} };
+      (j.data || []).forEach(function (v) { if (v.verse_text) d.v[c + ':' + v.verse_start] = escText(String(v.verse_text).trim()); });
+      return d;
+    });
+  }
+  // A chapter of the Hebrew text in the shape of data/bsb. The Tanakh keeps the Masoretic paragraphs: a petucha (פ)
+  // ends a paragraph, a setuma (ס) leaves a gap in the line; the letters themselves are not shown. The poetic books and
+  // the Apostles (no such marks) are laid out in the DBV's paragraphs. The text is kept with all its marks and the
+  // divine name as written: heMarks() applies Hebrew Marks and the Divine Name setting when it is drawn.
+  function heChapter(book, c) {
+    var id = book.id, nt = isNT(id);
+    var src = !nt ? loadOrig(id) : settings.heNT === 'bs1995' && sfbOk ? heH95(id, c) : loadOrigHe(id);
+    return Promise.resolve(src).then(function (d) {
+      if (!d || !d.v) throw new Error('the Hebrew text could not be loaded');
+      var vs = Object.keys(d.v).filter(function (k) { return +k.split(':')[0] === c; })
+        .map(function (k) { return +k.split(':')[1]; }).sort(function (a, b) { return a - b; });
+      if (!vs.length) throw new Error('no Hebrew text for this chapter');
+      var own = !nt && !HE_POETIC[id];
+      var b = [], block = null;
+      vs.forEach(function (v) {
+        var key = c + ':' + v, raw = String(d.v[key]);
+        var pe = raw.indexOf('<span class="pe">') >= 0, se = raw.indexOf('<span class="se">') >= 0;
+        var t = raw.replace(/\s*<span class="(?:pe|se)">[^<]*<\/span>\s*/g, ' ').replace(/\s{2,}/g, ' ').trim();
+        if (!nt) t = wrapWords(t, 'he', id, key);   // the word study, as under the English verses
+        if (!block) { block = { k: v === 0 ? 'd' : 'p', c: [] }; b.push(block); }
+        block.c.push(v);
+        block.c.push(t + (own && se && !pe ? '<span class="se-gap" aria-hidden="true"></span>' : ' '));
+        if (v === 0 || (own && pe)) block = null;
+      });
+      return { ch: { b: b, n: [] }, own: own };
+    });
+  }
+  // Hebrew Marks (vowels only / with cantillation) and the Divine Name (with vowels / without / ה׳), when drawn
+  var HE_YHWH = /י[֑-ׇ]*ה[֑-ׇ]*ו[֑-ׇ]*ה[֑-ׇ]*/g;
+  function heMarks(t) {
+    if (!settings.cantillation) t = t.replace(/[֑-ֽ֯]/g, '').replace(/\s*׀\s*/g, ' ').replace(/ /g, '');
+    var dn = settings.heDivine || 'pointed';
+    if (dn !== 'pointed') t = t.replace(HE_YHWH, dn === 'hashem' ? 'ה׳' : 'יהוה');
+    return t;
+  }
+
   var sfbBooks = {};
   // The book to render a reading from: SFB98 (the chapters it needs) when chosen, else the BSB.
   // If YouVersion can't be reached, the BSB is shown with a short notice (see sfbDecorate).
@@ -748,7 +844,8 @@
       (r.parts || [r]).forEach(function (p) { for (var c = p.c1; c <= p.c2; c++) if (cs.indexOf(c) < 0) cs.push(c); });
     });
     var bk = settings.version + ':' + id;
-    var book = sfbBooks[bk] || (sfbBooks[bk] = { id: id, name: (sweVer().lang === 'sv' && SV_BOOKS[id]) || bookName(id), chapters: [], sfb: true });
+    var sv = sweVer();
+    var book = sfbBooks[bk] || (sfbBooks[bk] = { id: id, name: (sv.lang === 'sv' && SV_BOOKS[id]) || (sv.lang === 'he' && HE_BOOKS[id]) || bookName(id), chapters: [], sfb: true, he: sv.lang === 'he' });
     return Promise.all(cs.map(function (c) { return sfbChapter(book, c); })).then(function () { sfbFail = null; return book; },
       function (err) { sfbFail = err.message || 'not reachable'; return loadBook(id); });
   }
@@ -858,12 +955,12 @@
       sc.parentNode.insertBefore(p, sc.nextSibling);
     });
     if (ct) {
-      var lang = window.DBI18N && DBI18N.lang && DBI18N.lang() === 'sv' ? 'sv' : 'en';
+      var ul = window.DBI18N && DBI18N.lang ? DBI18N.lang() : 'en', lang = ul === 'sv' ? 'sv' : 'en';
       // The revised BSB's working title, "Daily Bread Version (DBV)", shows only to the readers who see the Translation menu for now
       var bsb = sfbOk ? (lang === 'sv' ? 'Bibeltexten är arbetsprojektet Daily Bread Version (DBV), som återges i en klassisk engelsk översättningsstil och bygger på den gedigna forskningen bakom Berean Standard Bible (BSB), med dess översättningsnoter.'
                                        : 'The biblical text is the Daily Bread Version (DBV) working project, presented in a classic English translation style and built on the solid scholarship of the Berean Standard Bible (BSB), with its translation notes.')
               : lang === 'sv' ? 'Bibeltexten återges i en klassisk engelsk översättningsstil, byggd på den gedigna forskningen bakom Berean Standard Bible (BSB), med dess översättningsnoter.' : ct.getAttribute('data-bsb');
-      ct.innerHTML = shown && v.foot ? (v.foot[lang] || v.foot.en) : bsb;
+      ct.innerHTML = shown && v.foot ? (v.foot[ul] || v.foot[lang] || v.foot.en) : bsb;
       if (heNT95() && settings.original !== 'off' && document.querySelector('#portions .vp-orig.he, #portions .orig-only .he, #portions [lang="he"]') &&
           Object.keys(current && current.books || {}).concat(current && current.book ? [current.book] : []).some(isNT)) {
         ct.innerHTML += lang === 'sv' ? ' Hebreiska Nya testamentet (1995): © 1995 Bible Society in Israel, via Bible Brain.' : ' Hebrew New Testament (1995): © 1995 Bible Society in Israel, via Bible Brain.';
@@ -880,6 +977,26 @@
       '<button type="button" data-hent="delitzsch" aria-pressed="true" title="Franz Delitzsch, 1885">Delitzsch</button>' +
       '<button type="button" data-hent="bs1995" aria-pressed="false" title="Bible Society in Israel, 1995 (modern Hebrew)">1995</button></div>';
     nt.parentNode.insertBefore(row, nt.nextSibling);
+  }
+  // Rows for the Hebrew text (Bible Text section): its divine name, its marks and which Hebrew NT; shown only with it
+  function heSettingsRows() {
+    var vr = document.querySelector('#settings-panel .sp-version-row');
+    if (!sfbOk || !vr || document.querySelector('.sp-he-row')) return;
+    var rows = [
+      ['Divine Name', 'Divine name in the Hebrew text', [['data-hediv', 'pointed', 'יְהוָה', 'With vowels'], ['data-hediv', 'plain', 'יהוה', 'Without vowels'], ['data-hediv', 'hashem', 'ה׳', 'HaShem']], ' sp-he-dn'],
+      ['Hebrew Marks', 'Hebrew marks', [['data-cant', 'off', 'Vowels', 'Vowels only'], ['data-cant', 'on', '+ Cantillation', 'Vowels and cantillation marks (te’amim)']], ''],
+      ['Hebrew NT', 'Hebrew New Testament', [['data-hent', 'delitzsch', 'Delitzsch', 'Franz Delitzsch, 1885'], ['data-hent', 'bs1995', '1995', 'Bible Society in Israel, 1995 (modern Hebrew)']], '']
+    ];
+    var note = vr.nextSibling && vr.nextSibling.classList && vr.nextSibling.classList.contains('sp-version-note') ? vr.nextSibling : vr;
+    rows.reverse().forEach(function (r) {
+      var row = document.createElement('div');
+      row.className = 'sp-row sp-he-row' + r[3];
+      row.innerHTML = '<span class="sp-label">' + r[0] + '</span><div class="sp-seg sp-ctl" role="group" aria-label="' + r[1] + '">' +
+        r[2].map(function (b) {
+          return '<button type="button" ' + b[0] + '="' + b[1] + '" aria-pressed="false" title="' + b[3] + '"' + (b[0] === 'data-hediv' ? ' lang="he"' : '') + '>' + b[2] + '</button>';
+        }).join('') + '</div>';
+      note.parentNode.insertBefore(row, note.nextSibling);
+    });
   }
   function sfbSettingsRow() {
     var sec = document.querySelector('#settings-panel .sp-sec .sp-switch[data-setting="verseNumbers"]');
@@ -953,6 +1070,11 @@
   }
 
   function displayRef(r) {
+    if (heText()) {
+      if (!r.parts) return heRef(r);
+      var hn = (HE_BOOKS[r.book] || r.book) + ' ';
+      return r.parts.map(function (p, i) { var t = heRef(p); return i ? t.replace(hn, '') : t; }).join('; ');
+    }
     if (r.parts) {
       var head = displayRef(r.parts[0]), name0 = head.replace(/\s\d.*$/, '');
       return head + r.parts.slice(1).map(function (p) { return '; ' + displayRef(p).replace(name0 + ' ', ''); }).join('');
@@ -1066,9 +1188,10 @@
             if (pendSub) { unit.sub = pendSub; if (!book.sfb || book.heads) inner += msubHtml(pendSub); pendSub = null; }   // no margin titles for the Swedish text: its one heading stays under the chapter title
             if (it === 0) continue;
             if (inner && !/\s$/.test(inner)) inner += ' ';   // space between verses
-            if (it === 1 && multiChapter) inner += '<span class="chapter-num">' + c + '</span>';
+            if (it === 1 && multiChapter) inner += '<span class="chapter-num"' + (book.he ? ' data-c="' + c + '">' + heNum(c) : '>' + c) + '</span>';
             else inner += '<sup class="verse-num" data-v="' + it + '">' + it + '</sup>';
           } else if (typeof it === 'string') {
+            if (book.he) it = heMarks(it);
             inner += it;
             if (unit) unit.html += it;
           } else if (it && typeof it.f === 'number') {
@@ -1088,7 +1211,7 @@
         html += '<p class="' + cls + '">' + inner + '</p>';
       }
     }
-    var origs = settings.original !== 'off' ? origsFor(book.id) : [];
+    var origs = settings.original !== 'off' && !book.he ? origsFor(book.id) : [];
     var orig = origs.length ? origs : null;
     var greek = origs.filter(function (o) { return o.n; })[0];
     var tnotes = [];
@@ -1101,10 +1224,14 @@
       });
       html = renderOriginal(units, orig, multiChapter, tnotes);
     }
-    return { html: html, notes: notes, titles: titles, originalOnly: !!orig && settings.original === 'only', textNotes: tnotes };
+    return { html: html, notes: notes, titles: titles, originalOnly: !!orig && settings.original === 'only', textNotes: tnotes, he: !!book.he };
   }
 
   // A reading in several parts: each part in turn, with its reference between them
+  // The Bible text's box: the Hebrew text reads right to left in its own type, whatever the interface
+  function scriptureDiv(passage) {
+    return passage.he ? '<div class="scripture he-text" dir="rtl" lang="he">' : '<div class="scripture">';
+  }
   function renderParts(book, r, pIndex) {
     if (!r.parts) return renderPassage(book, r, pIndex);
     var out = { html: '', notes: [], titles: [], originalOnly: false, textNotes: [] };
@@ -1116,6 +1243,7 @@
       one.titles.forEach(function (t) { if (out.titles.indexOf(t) < 0) out.titles.push(t); });
       out.textNotes = out.textNotes.concat(one.textNotes);
       out.originalOnly = one.originalOnly;
+      out.he = one.he;
     });
     return out;
   }
@@ -1615,8 +1743,8 @@
         sub = (sub ? sub + ' &middot; ' : '') + '<span class="sub-reading">' + READING_ORDINALS[p.reading] + ' reading from the Torah Portion</span>';
       }
       if (sub) html += '<p class="chapter-sub">' + sub + '</p>';
-      html += '<div class="scripture">' + passage.html + '</div>';
-      if (!passage.originalOnly) {
+      html += scriptureDiv(passage) + passage.html + '</div>';
+      if (!passage.originalOnly && !passage.he) {
         html += '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
           renderNotes(passage.notes, displayRef(r)) + '</div></div>';
       }
@@ -2691,6 +2819,12 @@
     hide(panel.querySelector('.sp-msub-row'), sw && !sw.json);   // texts with their own section titles keep margin titles
     var dn = panel.querySelector('.sp-seg-name'); hide(dn && dn.closest('.sp-row'), sw && !sw.divine);
     hide(panel.querySelector('[data-setting="hebrewNames"]'), sw);
+    // The Hebrew text: its own rows; no original-language lines under it and no wording filters
+    var he = heText();
+    panel.querySelectorAll('.sp-he-row').forEach(function (r) { r.hidden = !he; });
+    var oSec = panel.querySelector('[data-orig]'); hide(oSec && oSec.closest('.sp-sec'), he);
+    var nSec = panel.querySelector('[data-setting="messianic"]'); hide(nSec && nSec.closest('.sp-sec'), he);
+    pressed('data-hediv', settings.heDivine || 'pointed');
     var mf = panel.querySelector('[data-setting="messianic"]');
     hide(mf, sw && !sw.filter);
     var mfSub = mf && mf.querySelector('.sp-switch-sub');
@@ -2747,9 +2881,15 @@
     } else if (t.hasAttribute('data-ntorig')) {
       settings.ntOrig = t.getAttribute('data-ntorig');
       rerender();
+    } else if (t.hasAttribute('data-hediv')) {
+      settings.heDivine = t.getAttribute('data-hediv');
+      rerender();
     } else if (t.hasAttribute('data-hent')) {
       settings.heNT = t.getAttribute('data-hent');
-      rerender();
+      if (heText() && current) {   // another Hebrew NT as the reading text: fetch it
+        saveSettings();
+        if (current.bible) loadChapter(current.book, current.c, null, true); else loadDay(current.day.date, true);
+      } else rerender();
     } else if (t.hasAttribute('data-otorig')) {
       settings.otOrig = t.getAttribute('data-otorig');
       rerender();
@@ -3341,12 +3481,14 @@
     '1KI': '1 Melachim', '2KI': '2 Melachim', '1CH': '1 Divrei HaYamim', '2CH': '2 Divrei HaYamim', PSA: 'Tehillim',
     PRO: 'Mishlei', SNG: 'Shir HaShirim', ECC: 'Kohelet', LAM: 'Eichah' };
   function bookLabel(id) {
+    if (heText() && HE_BOOKS[id]) return HE_BOOKS[id];
     if (settings.hebrewNames && HEB_BOOKS[id]) return HEB_BOOKS[id];
     if (svText() && SV_BOOKS[id]) return SV_BOOKS[id];
     if (settings.messianic && MES_BOOKS[id]) return MES_BOOKS[id];
     return bookName(id);
   }
   function labelRef(book, c) {
+    if (heText() && HE_BOOKS[book]) return HE_BOOKS[book] + ' ' + heNum(c);
     var name = bookLabel(book);
     if (book === 'PSA' && name === 'Psalms') name = 'Psalm';
     return name + ' ' + c;
@@ -3561,8 +3703,8 @@
         '<span>' + ref + audioButton('bible:' + data.id + '.' + c, r, data) + '</span>' +
         '<button type="button" class="day-step" data-chapter="1"' + (next ? '' : ' disabled') + ' aria-label="Next chapter">&rsaquo;</button></h2>';
     if (passage.titles.length) html += '<p class="chapter-sub">' + passage.titles.join(' &middot; ') + '</p>';
-    html += '<div class="scripture">' + passage.html + '</div>' +
-      (passage.originalOnly ? '' : '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
+    html += scriptureDiv(passage) + passage.html + '</div>' +
+      (passage.originalOnly || passage.he ? '' : '<div class="apparatus"><div class="apparatus-title">Translation Notes</div><div class="footnote-list">' +
       renderNotes(passage.notes, ref) + '</div></div>') + renderTextNotes(passage.textNotes) +
       '<div class="chapter-done"><button type="button" class="done-btn" data-chapter-read aria-pressed="false">' + CHECK_SVG +
       '<span class="done-label">Mark ' + escapeAttr(ref) + ' Read</span></button><p class="chapter-done-note"></p></div>' +
@@ -3789,7 +3931,7 @@
   // ── Start ────────────────────────────────────────────────────
   Promise.all([getJSON(DAYS_DIR + 'index.json'), getJSON('data/bsb/index.json'),
                getJSON('data/hebrew-names.json').catch(function () { return {}; }),
-               sfbCheck().then(function () { sfbSettingsRow(); heNTRow(); })])
+               sfbCheck().then(function () { sfbSettingsRow(); heSettingsRows(); heNTRow(); })])
     .then(function (res) {
       planDays = res[0].days.slice().sort();
       fullPlan = res[0].plan || {};

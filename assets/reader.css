@@ -7,6 +7,18 @@
   src: url('fonts/SBL_Hbrw.ttf') format('truetype');
   font-display: swap;
 }
+/* Shofar (Yoram Gnat, Culmus; GPL 2 with the font exception, see assets/fonts/shofar/): the Hebrew Bible text
+   in the Hebrew edition. Only downloaded when that text is shown. */
+@font-face {
+  font-family: 'Shofar';
+  src: url('fonts/shofar/ShofarRegular.woff') format('woff');
+  font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: 'Shofar';
+  src: url('fonts/shofar/ShofarDemi-Bold.woff') format('woff');
+  font-weight: 600 700; font-display: swap;
+}
 @font-face {
   font-family: 'SBL Greek';
   src: url('fonts/SBL_grk.ttf') format('truetype');
@@ -147,6 +159,7 @@ html { font-size: 112.5%; }   /* 18px base: every size scales up together */
   --display: 'Merriweather', Georgia, serif;
   --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --hebrew: 'SBL Hebrew', 'Noto Serif Hebrew', 'Times New Roman', serif;
+  --bible-he: 'Shofar', 'SBL Hebrew', 'Noto Serif Hebrew', serif;   /* the Hebrew Bible as the reading text */
   --greek: 'SBL Greek', 'Times New Roman', serif;
 }
 
@@ -1416,6 +1429,8 @@ html.msub-on .scripture .msub-l { display: block; white-space: nowrap; }
 
 /* ── Right to left: the Hebrew interface (html[dir="rtl"], set from dbs-lang before the page paints) ──
    The layout mirrors by itself (start/end rules, tools/css_logical.py). What is added here: */
+/* Interface type: Heebo (OFL, Google Fonts) for Hebrew, Inter kept for Latin */
+html[data-rtl] { --sans: 'Heebo', 'Inter', 'Helvetica Neue', Arial, sans-serif; }
 /* A Bible text that is not Hebrew stays left to right as a whole (verses, margin titles, map pins). */
 html[dir="rtl"] .scripture:not([dir="rtl"]), html[dir="rtl"] .footnote-list:not([dir="rtl"]) { direction: ltr; }
 /* Mixed snippets take their direction from what they say ("1 Samuel 8", "26 Nov. / 16 Kislev", "18 min") */
@@ -1428,3 +1443,14 @@ html[dir="rtl"] .sp-switch[aria-checked="true"] .sp-thumb,
 html[dir="rtl"] .acct-switch input:checked + .acct-switch-track::after { transform: translateX(-16px); }
 /* Media players stay left to right, as in Hebrew apps (seek bar, times, skip buttons) */
 html[dir="rtl"] .pod-dock { direction: ltr; }
+
+/* ── The Hebrew Bible as the reading text (Hebrew edition: .scripture.he-text, dir="rtl") ──
+   Shofar for the biblical text; the Masoretic paragraphs (petucha = new paragraph, setuma = a gap in the line). */
+.scripture.he-text { font-family: var(--bible-he); font-size: 1.42rem; line-height: 2.05; }
+.scripture.he-text .verse-num { font-family: var(--sans); font-size: 0.5em; margin-inline-end: 0.25em; }
+.scripture.he-text .chapter-num { font-family: var(--bible-he); }
+.scripture.he-text .se-gap { display: inline-block; width: 2.2em; }
+.scripture.he-text .w { cursor: pointer; border-radius: 3px; transition: background 0.15s; }
+.scripture.he-text .w:hover { background: var(--tint); }
+.scripture.he-text .kt { font-family: var(--bible-he); }
+@media (max-width: 600px) { .scripture.he-text { font-size: 1.3rem; } }

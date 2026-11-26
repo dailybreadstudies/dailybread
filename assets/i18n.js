@@ -12,14 +12,14 @@
  *
  * Hebrew (he, Nov 2026 — in progress): the page turns right to left. A small script in the <head> of the pages
  * translated so far (index, progress) sets dir="rtl" before the page paints; this script removes it again if the
- * account may not use Hebrew. The Hebrew wording comes next (HE, from the journal "לחם חוקנו"), then the Hebrew
- * Bible text as Hebrew's default (until then the DBV).
+ * account may not use Hebrew. Hebrew's default Bible text is the Hebrew Bible (MAM + Delitzsch). The Hebrew wording
+ * comes next (HE, from the journal "לחם חוקנו").
  */
 (function () {
   'use strict';
   var READERS = ['301fb8e297be6804fe1d29bf3fc1c0cbc65e92409cb1a8578fc8f880398b1a80'];   // John
   var LKEY = 'dbs-lang';
-  var DEFAULT_TEXT = { en: 'bsb', sv: 'sfb98', he: 'bsb' };   // he → the Hebrew text once it is in
+  var DEFAULT_TEXT = { en: 'bsb', sv: 'sfb98', he: 'he' };   // he: the Hebrew Bible (MAM + Delitzsch), reader.js SWE.he
   var LANGS = [['en', 'English'], ['sv', 'Svenska'], ['he', 'עברית']];
   var LABEL_LANG = { en: 'Language', sv: 'Språk', he: 'שפה' }, LABEL_IFACE = { en: 'Interface language', sv: 'Gränssnittets språk', he: 'שפת הממשק' };
   var EXCLUDE = '.scripture, .chapter-sub, .footnote-list, .vp-orig, .history-box, .today-box, .calendar-intro, .bless-apparatus, ' +

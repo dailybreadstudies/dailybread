@@ -261,8 +261,26 @@ pixels; decide per panel (mirror, or keep the map itself `dir="ltr"`). Script-se
   kids/progress.html (the "Did you know?" credit ends up inside `#credit-text`, which the reader replaces for other
   translations). The committed Kids pages were kept; check that script before regenerating them.
 - Test: `tools/rtl-check/` (English unchanged: 139 states) plus forced-rtl screenshots.
-Next: step 3, the Hebrew Bible text (MAM + Delitzsch, 1995 as an option; divine name: with vowels / without / ה׳);
-then step 4, the Hebrew interface wording from *לחם חוקנו*.
+**Step 3 done (26 Nov 2026): the Hebrew Bible as a reading text** — Translation → "עברית · Hebrew" (`SWE.he`,
+`local: true`, only for SFB_READERS like the other translations); choosing the עברית interface selects it.
+- Built in the browser from the site's own data (`heChapter` in reader.js): Tanakh = MAM (data/orig) with its own
+  paragraphs — the petucha/setuma spans in the data: פ ends a paragraph, ס becomes a gap (`.se-gap`), the letters are
+  not shown; Psalms, Proverbs, Job, Lamentations (`HE_POETIC`) and the Apostles take the DBV's paragraphs/poetry
+  (`sfbReflow`). Apostles = Delitzsch (data/orig-hent) or the 1995 NT (Bible Brain, `heH95`); Hebrew NT row.
+  Versification follows the English (data/orig is aligned to the BSB; psalm titles are verse 0), so e.g. Joel/Malachi
+  and the psalm-title verses are numbered as in English.
+- Kept raw, applied when drawn (`heMarks`): Hebrew Marks (vowels / + cantillation) and the **Divine Name** setting
+  `heDivine`: `pointed` (as MAM writes it), `plain` (יהוה), `hashem` (ה׳, also inside words: לה׳). Regex `HE_YHWH`.
+- Book names from the journal (`HE_BOOKS`); references journal-style (`heRef`): chapter in letters, verse in digits
+  (בראשית לד 1–לה 11, תהילים מח); in-text chapter numbers in letters (`heNum`). Word study tap works on the Tanakh.
+- With the Hebrew text the settings show Divine Name (יְהוָה · יהוה · ה׳), Hebrew Marks, Hebrew NT in Bible Text and hide
+  Original Languages, Names & Terms (filters are moot), Margin Subtitles and the English divine-name row; no
+  Translation Notes box. Footer credit `SWE.he.foot` (en/sv/he).
+- Fonts: **Shofar** (Culmus, Yoram Gnat; GPL 2 + font exception; assets/fonts/shofar/ with LICENSE and README; WOFF
+  converted unchanged from the built .ttf in EzerIT/BibleOL, since the Culmus GitHub repo has only .sfd sources)
+  for the Hebrew reading text (`--bible-he`); **Heebo** (Google Fonts, OFL) as the interface sans when `html[data-rtl]`.
+  The Hebrew lines under the English verses still use SBL Hebrew (`--hebrew`) — switch them to Shofar too if wanted.
+- Not yet: "Parallel" (DBV under the Hebrew verses), Hebrew interface wording (step 4).
 
 ## Settings menu (A/א)
 Redesigned Nov 2026 (a live preview at the top was tried and removed at John's request): Display (Text Size, Appearance as colour swatches, Font row = typeface Aa/Aa + alignment icons, setting `justify`),
