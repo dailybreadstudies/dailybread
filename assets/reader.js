@@ -749,12 +749,15 @@
       if (!sc || sec.querySelector('.sfb-credit')) return;
       var p = document.createElement('p');
       p.className = 'sfb-credit sfb-off';
-      p.textContent = v.name + ' could not be loaded just now' + (sfbFail ? ' (' + sfbFail + ')' : '') + ', so this reading is shown in the BSB.';
+      p.textContent = v.name + ' could not be loaded just now' + (sfbFail ? ' (' + sfbFail + ')' : '') + ', so this reading is shown in the ' + (sfbOk ? 'DBV' : 'BSB') + '.';
       sc.parentNode.insertBefore(p, sc.nextSibling);
     });
     if (ct) {
       var lang = window.DBI18N && DBI18N.lang && DBI18N.lang() === 'sv' ? 'sv' : 'en';
-      var bsb = lang === 'sv' ? 'Bibeltexten återges i en klassisk engelsk översättningsstil, byggd på den gedigna forskningen bakom Berean Standard Bible (BSB), med dess översättningsnoter.' : ct.getAttribute('data-bsb');
+      // The revised BSB's working title, "Daily Bread Version (DBV)", shows only to the readers who see the Translation menu for now
+      var bsb = sfbOk ? (lang === 'sv' ? 'Bibeltexten är Daily Bread Version (DBV), bearbetad från Berean Standard Bible (BSB), med dess översättningsnoter.'
+                                       : 'The biblical text is the Daily Bread Version (DBV), adapted from the Berean Standard Bible (BSB), with its translation notes.')
+              : lang === 'sv' ? 'Bibeltexten återges i en klassisk engelsk översättningsstil, byggd på den gedigna forskningen bakom Berean Standard Bible (BSB), med dess översättningsnoter.' : ct.getAttribute('data-bsb');
       ct.innerHTML = shown && v.foot ? (v.foot[lang] || v.foot.en) : bsb;
     }
   }
@@ -765,13 +768,13 @@
     var row = document.createElement('div');
     row.className = 'sp-row sp-version-row';
     row.innerHTML = '<span class="sp-label">Translation</span><select class="sp-select sp-ctl" data-version-select aria-label="Bible translation">' +
-      '<option value="bsb">DBSB*</option>' +
+      '<option value="bsb">Daily Bread Version (DBV)</option>' +
       Object.keys(SWE).filter(sweOk).map(function (k) {
         return '<option value="' + k + '">' + SWE[k].name + '</option>';
       }).join('') + '</select>';
     var note = document.createElement('p');
     note.className = 'sp-note sp-version-note';
-    note.textContent = '*Adapted from the BSB.';
+    note.textContent = 'Adapted from the Berean Standard Bible (BSB).';
     sec.parentNode.insertBefore(row, sec);
     sec.parentNode.insertBefore(note, sec);
     note.hidden = sweOk(settings.version);
@@ -2558,7 +2561,7 @@
       mfSub.textContent = sw && sw.filter ? sw.filter : mfSub.getAttribute('data-en');
     }
     var vn = panel.querySelector('.sp-version-note');
-    if (vn) vn.hidden = !!(vs && vs.value !== 'bsb');   // "*Adapted from the BSB." only beside DBSB*
+    if (vn) vn.hidden = !!(vs && vs.value !== 'bsb');   // "Adapted from the BSB" only beside the DBV
     pressed('data-theme-opt', settings.theme);
     pressed('data-font', settings.font);
     pressed('data-justify', settings.justify ? 'on' : 'off');

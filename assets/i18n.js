@@ -7,7 +7,7 @@
  * (Ariel Media, 3rd Swedish edition 5778/2017–18) where it has it.
  *
  * Only the readers in READERS (SHA-256 of the account email, as in tracks.js) see the globe and the choice.
- * Choosing a language also chooses that language's default Bible text (English → DBSB, Swedish → Svenska Folkbibeln 98);
+ * Choosing a language also chooses that language's default Bible text (English → DBV, Swedish → Svenska Folkbibeln 98);
  * the reader can then pick another text in Reading settings → Translation.
  */
 (function () {
@@ -49,7 +49,7 @@
     // settings
     'Reading settings': 'Läsinställningar', 'Display': 'Visning', 'Text Size': 'Textstorlek', 'Font': 'Typsnitt',
     'Appearance': 'Utseende', 'Light': 'Ljust', 'Dark': 'Mörkt', 'Bible Text': 'Bibeltext', 'Translation': 'Översättning',
-    '*Adapted from the BSB.': '*Bearbetad från BSB.', 'Verse Numbers': 'Versnummer', 'Margin Subtitles': 'Rubriker i marginalen',
+    'Adapted from the Berean Standard Bible (BSB).': 'Bearbetad från Berean Standard Bible (BSB).', 'Verse Numbers': 'Versnummer', 'Margin Subtitles': 'Rubriker i marginalen',
     'Divine Name': 'Guds namn', 'Lord': 'Herren', 'Original Languages': 'Grundtext', 'Show': 'Visa', 'Off': 'Av', 'Below': 'Under',
     'Only': 'Endast', 'Hebrew Bible': 'Tanach', 'Hebrew': 'Hebreiska', 'Greek': 'Grekiska', 'Both': 'Båda',
     'Hebrew Marks': 'Hebreiska tecken', 'Vowels': 'Vokaler', '+ Cantillation': '+ Kantillation', 'Names & Terms': 'Namn och termer',

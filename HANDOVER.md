@@ -194,8 +194,8 @@ words scale as the Bible (index.json `uw` = words per unit), the Mishnah as its 
 
 - Globe next to the account button (top bar) and a Language/Språk row at the top of Reading settings. Only the
   accounts in `READERS` in assets/i18n.js see them (same SHA-256 check as the study tracks).
-- Choosing a language reloads the page and sets that language's default Bible text (English → DBSB, Swedish →
-  Svenska 1917); Reading settings → Translation (a dropdown: DBSB*, Svenska 1917, with "*Adapted from the BSB.")
+- Choosing a language reloads the page and sets that language's default Bible text (English → DBV, Swedish →
+  Svenska 1917); Reading settings → Translation (a dropdown: Daily Bread Version (DBV) — the working title of the revised BSB — with "Adapted from the Berean Standard Bible (BSB).", then the Swedish texts and the ESV)
   can then mix them. First visit follows the browser's language. Stored in localStorage `dbs-lang`.
 - How it works: the site stays written in English; with Swedish on, i18n.js swaps known interface texts (SV, SV_ATTR,
   SV_PATTERNS, SV_PARASHA) as they appear, via a MutationObserver. Unknown texts stay English. EXCLUDE keeps it out
