@@ -298,8 +298,9 @@ pixels; decide per panel (mirror, or keep the map itself `dir="ltr"`). Script-se
   letters only, `size-adjust: 115%` — John: Heebo runs ~15% small; Latin in the same text stays Inter); every serif keeps
   its Latin face for English words and sets Hebrew in **Shofar Demi-Bold** (`'Shofar'`). No letter-spacing or italics.
 - **Shofar Demi-Bold has no usable cantillation** (its te'amim glyphs are misplaced, an incomplete build: 16 GPOS lookups
-  against 60 in the Regular), so the Bible text and the blessings use **`'Shofar Text'` = the Regular file made bold by
-  the browser** (font-weight 700, synthetic bold): bold look, every vowel and cantillation mark drawn.
+  against 60 in the Regular). So: vowels only → **Demi-Bold** (`'Shofar'`, the real bold) for the Bible text, blessings
+  and the Hebrew under the verses; **cantillation on → Regular** (`'Shofar Text'`, html.cant-on). No synthetic bold
+  (tried 26 Nov 2026; John found it not good). Demi-Bold leaves out the meteg in the blessings (harmless).
 - **Hebrew Font setting** (`heFont`, html[data-hefont]): Shofar · SBL — in the Hebrew text's rows and beside Hebrew Marks
   under Original Languages (only SFB_READERS for now). Not chosen: Shofar for the Hebrew text and Hebrew blessings, SBL
   under the English verses (as before). A choice applies to all three.

@@ -256,6 +256,7 @@
     document.documentElement.classList.toggle('no-verses', settings.verseNumbers === false);
     document.documentElement.classList.toggle('orig-off', settings.original === 'off');   // Hebrew blessings only with Original Text on
     document.documentElement.classList.toggle('show-og', !!settings.showOG);   // Daniel: Old Greek under Theodotion
+    document.documentElement.classList.toggle('cant-on', !!settings.cantillation);   // Shofar: Regular with cantillation, Demi-Bold without
     if (settings.heFont === 'shofar' || settings.heFont === 'sbl') document.documentElement.setAttribute('data-hefont', settings.heFont);
     else document.documentElement.removeAttribute('data-hefont');   // not chosen: Shofar for the Hebrew text, SBL under English verses
     if (settings.theme === 'light' || settings.theme === 'dark' || settings.theme === 'sepia') document.documentElement.setAttribute('data-theme', settings.theme);
@@ -2915,6 +2916,7 @@
       rerender();
     } else if (t.hasAttribute('data-cant')) {
       settings.cantillation = t.getAttribute('data-cant') === 'on';
+      applyLook();
       rerender();
     } else if (t.hasAttribute('data-theme-opt')) {
       settings.theme = t.getAttribute('data-theme-opt');
